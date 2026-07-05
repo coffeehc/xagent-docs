@@ -2,7 +2,7 @@ import {themes as prismThemes} from 'prism-react-renderer';
 import type {Config} from '@docusaurus/types';
 import type * as Preset from '@docusaurus/preset-classic';
 
-const githubUrl = 'https://github.com/YOUR_ORG/xagent'; // TODO: 替换为 xAgent 官方仓库地址。
+const githubUrl = 'https://github.com/coffeehc/xagent';
 
 const config: Config = {
   title: 'xAgent Documentation',
@@ -15,7 +15,7 @@ const config: Config = {
 
   url: 'https://xagent-docs.pages.dev',
   baseUrl: '/',
-  organizationName: 'YOUR_ORG',
+  organizationName: 'coffeehc',
   projectName: 'xagent-docs',
 
   onBrokenLinks: 'throw',

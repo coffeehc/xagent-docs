@@ -52,4 +52,4 @@ xAgent 主程序的运行方式请以主仓库 `README.md` 为准。当前已知
 ## 相关文档
 
 - [核心概念](/docs/getting-started/core-concepts)
-- [文档贡献说明](https://github.com/YOUR_ORG/xagent)
+- [文档贡献说明](https://github.com/coffeehc/xagent)
