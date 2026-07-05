@@ -1,0 +1,140 @@
+.page {
+  background: var(--xagent-page-bg);
+  overflow-x: hidden;
+}
+
+.hero {
+  border-bottom: 1px solid var(--xagent-border);
+  box-sizing: border-box;
+  padding: 5rem 1.5rem 4rem;
+}
+
+.heroInner {
+  margin: 0 auto;
+  max-width: 960px;
+  width: 100%;
+}
+
+.title {
+  color: var(--ifm-heading-color);
+  font-size: 3.4rem;
+  line-height: 1.08;
+  margin-bottom: 1rem;
+  overflow-wrap: anywhere;
+}
+
+.subtitle {
+  color: var(--ifm-color-emphasis-700);
+  font-size: 1.25rem;
+  line-height: 1.7;
+  margin: 0;
+  max-width: 680px;
+  overflow-wrap: anywhere;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 2rem;
+}
+
+.actions :global(.button) {
+  box-sizing: border-box;
+  max-width: 100%;
+}
+
+.entries {
+  box-sizing: border-box;
+  overflow-x: hidden;
+  padding: 3rem 1.5rem 4rem;
+}
+
+.entryGrid {
+  box-sizing: border-box;
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  margin: 0 auto;
+  max-width: 1120px;
+  min-width: 0;
+  width: 100%;
+}
+
+.entryCard {
+  border: 1px solid var(--xagent-border);
+  border-radius: 8px;
+  box-sizing: border-box;
+  color: inherit;
+  display: block;
+  min-height: 170px;
+  min-width: 0;
+  padding: 1.25rem;
+  text-decoration: none;
+  transition:
+    border-color 160ms ease,
+    box-shadow 160ms ease,
+    transform 160ms ease;
+}
+
+.entryCard:hover {
+  border-color: var(--ifm-color-primary);
+  box-shadow: 0 10px 30px rgb(17 24 39 / 8%);
+  text-decoration: none;
+  transform: translateY(-2px);
+}
+
+.entryCard h2 {
+  font-size: 1.15rem;
+  margin-bottom: 0.7rem;
+}
+
+.entryCard p {
+  color: var(--ifm-color-emphasis-700);
+  font-size: 0.95rem;
+  line-height: 1.65;
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
+@media screen and (max-width: 996px) {
+  .hero {
+    padding: 3.5rem 1.25rem 3rem;
+  }
+
+  .title {
+    font-size: 2.5rem;
+  }
+
+  .entryGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media screen and (max-width: 640px) {
+  .heroInner {
+    max-width: calc(100vw - 2.5rem);
+  }
+
+  .title {
+    font-size: 2rem;
+  }
+
+  .subtitle {
+    font-size: 1rem;
+  }
+
+  .actions {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .actions :global(.button) {
+    width: 100%;
+  }
+
+  .entryGrid {
+    grid-template-columns: 1fr;
+    max-width: calc(100vw - 3rem);
+  }
+}

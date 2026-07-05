@@ -1,0 +1,40 @@
+:root {
+  --ifm-color-primary: #2563eb;
+  --ifm-color-primary-dark: #1d4ed8;
+  --ifm-color-primary-darker: #1e40af;
+  --ifm-color-primary-darkest: #1e3a8a;
+  --ifm-color-primary-light: #3b82f6;
+  --ifm-color-primary-lighter: #60a5fa;
+  --ifm-color-primary-lightest: #93c5fd;
+  --ifm-code-font-size: 95%;
+  --ifm-heading-font-weight: 700;
+  --ifm-navbar-shadow: none;
+  --xagent-border: #d9dee8;
+  --xagent-page-bg: #ffffff;
+  --docusaurus-highlighted-code-line-bg: rgba(37, 99, 235, 0.08);
+}
+
+[data-theme='dark'] {
+  --ifm-color-primary: #60a5fa;
+  --ifm-color-primary-dark: #3b82f6;
+  --ifm-color-primary-darker: #2563eb;
+  --ifm-color-primary-darkest: #1d4ed8;
+  --ifm-color-primary-light: #93c5fd;
+  --ifm-color-primary-lighter: #bfdbfe;
+  --ifm-color-primary-lightest: #dbeafe;
+  --xagent-border: #303747;
+  --xagent-page-bg: #151821;
+  --docusaurus-highlighted-code-line-bg: rgba(96, 165, 250, 0.16);
+}
+
+.navbar {
+  border-bottom: 1px solid var(--xagent-border);
+}
+
+.button {
+  border-radius: 8px;
+}
+
+.markdown h1:first-child {
+  margin-top: 0;
+}
