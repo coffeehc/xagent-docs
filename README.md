@@ -25,6 +25,34 @@ npm run build
 npm run serve
 ```
 
+## Cloudflare Workers 部署
+
+当前仓库按 Cloudflare Workers Static Assets 部署。
+
+Workers Git 构建配置：
+
+```text
+Build command: npm run build
+Deploy command: npx --yes wrangler@latest deploy
+Build output directory: build
+Root directory: /
+Node version: 20 或更高
+```
+
+仓库根目录的 `wrangler.jsonc` 声明了 Worker 名称和静态资源目录：
+
+```json
+{
+  "name": "xagent-docs",
+  "compatibility_date": "2026-07-07",
+  "assets": {
+    "directory": "./build"
+  }
+}
+```
+
+如果 Cloudflare 控制台中的 Worker 名称不是 `xagent-docs`，需要同步修改 `wrangler.jsonc` 中的 `name`。
+
 ## Cloudflare Pages 部署
 
 Cloudflare Pages 可使用以下配置：
