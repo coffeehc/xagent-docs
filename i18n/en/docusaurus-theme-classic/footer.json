@@ -1,0 +1,30 @@
+{
+  "link.title.Docs": {
+    "message": "Docs",
+    "description": "The title of the footer links column with title=Docs in the footer"
+  },
+  "link.title.Project": {
+    "message": "Project",
+    "description": "The title of the footer links column with title=Project in the footer"
+  },
+  "link.item.label.功能导览与菜单入口": {
+    "message": "Feature and Menu Overview",
+    "description": "The label of footer link with label=功能导览与菜单入口 linking to /docs/user-guide/menu-overview"
+  },
+  "link.item.label.什么是 xAgent": {
+    "message": "What is xAgent",
+    "description": "The label of footer link with label=什么是 xAgent linking to /docs/getting-started/what-is-xagent"
+  },
+  "link.item.label.生态合作": {
+    "message": "Ecosystem Partners",
+    "description": "The label of footer link with label=生态合作 linking to /docs/cooperation/partners"
+  },
+  "link.item.label.GitHub": {
+    "message": "GitHub",
+    "description": "The label of footer link with label=GitHub linking to https://github.com/coffeehc/xagent"
+  },
+  "copyright": {
+    "message": "Copyright © 2026 xAgent contributors.",
+    "description": "The footer copyright"
+  }
+}

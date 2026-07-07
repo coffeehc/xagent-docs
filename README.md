@@ -1,5 +1,7 @@
 # xAgent 使用手册
 
+English: [README.en.md](./README.en.md)
+
 这是 xAgent 官方使用手册项目，基于 Docusaurus、TypeScript 和 Markdown / MDX 构建。
 
 内容定位：先介绍 xAgent 是一个多用户智能工作门户，并说明免费二进制版本用于产品体验和评估；再从功能入手说明菜单、任务、文件、工具、技能、外部连接、触发器和常见问题。技术实现细节、命令和配置只作为维护和定制时的补充，不作为主阅读路径。

@@ -1,0 +1,94 @@
+{
+  "version.label": {
+    "message": "Next",
+    "description": "The label for version current"
+  },
+  "sidebar.docsSidebar.category.开始使用": {
+    "message": "Getting Started",
+    "description": "The label for category '开始使用' in sidebar 'docsSidebar'"
+  },
+  "sidebar.docsSidebar.category.使用手册": {
+    "message": "User Manual",
+    "description": "The label for category '使用手册' in sidebar 'docsSidebar'"
+  },
+  "sidebar.docsSidebar.category.附件": {
+    "message": "Attachments",
+    "description": "The label for category '附件' in sidebar 'docsSidebar'"
+  },
+  "sidebar.docsSidebar.category.FAQ": {
+    "message": "FAQ",
+    "description": "The label for category 'FAQ' in sidebar 'docsSidebar'"
+  },
+  "sidebar.docsSidebar.doc.什么是 xAgent": {
+    "message": "What is xAgent",
+    "description": "The label for the doc item '什么是 xAgent' in sidebar 'docsSidebar', linking to the doc getting-started/what-is-xagent"
+  },
+  "sidebar.docsSidebar.doc.功能导览与菜单入口": {
+    "message": "Feature and Menu Overview",
+    "description": "The label for the doc item '功能导览与菜单入口' in sidebar 'docsSidebar', linking to the doc user-guide/menu-overview"
+  },
+  "sidebar.docsSidebar.doc.第一个任务": {
+    "message": "First Task",
+    "description": "The label for the doc item '第一个任务' in sidebar 'docsSidebar', linking to the doc getting-started/first-task"
+  },
+  "sidebar.docsSidebar.doc.Agent 会话": {
+    "message": "Agent Session",
+    "description": "The label for the doc item 'Agent 会话' in sidebar 'docsSidebar', linking to the doc user-guide/agent-session"
+  },
+  "sidebar.docsSidebar.doc.任务": {
+    "message": "Tasks",
+    "description": "The label for the doc item '任务' in sidebar 'docsSidebar', linking to the doc user-guide/task"
+  },
+  "sidebar.docsSidebar.doc.工作区文件": {
+    "message": "Workspace Files",
+    "description": "The label for the doc item '工作区文件' in sidebar 'docsSidebar', linking to the doc user-guide/workspace"
+  },
+  "sidebar.docsSidebar.doc.长任务": {
+    "message": "Long-running Tasks",
+    "description": "The label for the doc item '长任务' in sidebar 'docsSidebar', linking to the doc user-guide/long-task"
+  },
+  "sidebar.docsSidebar.doc.触发器管理": {
+    "message": "Triggers",
+    "description": "The label for the doc item '触发器管理' in sidebar 'docsSidebar', linking to the doc user-guide/trigger"
+  },
+  "sidebar.docsSidebar.doc.智能体管理": {
+    "message": "Agent Management",
+    "description": "The label for the doc item '智能体管理' in sidebar 'docsSidebar', linking to the doc user-guide/agent-management"
+  },
+  "sidebar.docsSidebar.doc.Skill 管理": {
+    "message": "Skill Management",
+    "description": "The label for the doc item 'Skill 管理' in sidebar 'docsSidebar', linking to the doc user-guide/skill"
+  },
+  "sidebar.docsSidebar.doc.Tool 管理": {
+    "message": "Tool Management",
+    "description": "The label for the doc item 'Tool 管理' in sidebar 'docsSidebar', linking to the doc user-guide/tool"
+  },
+  "sidebar.docsSidebar.doc.连接器": {
+    "message": "Connectors",
+    "description": "The label for the doc item '连接器' in sidebar 'docsSidebar', linking to the doc user-guide/connector"
+  },
+  "sidebar.docsSidebar.doc.审批策略": {
+    "message": "Approval Policies",
+    "description": "The label for the doc item '审批策略' in sidebar 'docsSidebar', linking to the doc user-guide/approval-policy"
+  },
+  "sidebar.docsSidebar.doc.模型配置": {
+    "message": "Model Configuration",
+    "description": "The label for the doc item '模型配置' in sidebar 'docsSidebar', linking to the doc user-guide/model-config"
+  },
+  "sidebar.docsSidebar.doc.内置 Skill 文件": {
+    "message": "Built-in Skill Files",
+    "description": "The label for the doc item '内置 Skill 文件' in sidebar 'docsSidebar', linking to the doc user-guide/builtin-skills"
+  },
+  "sidebar.docsSidebar.doc.常见问题": {
+    "message": "Common Questions",
+    "description": "The label for the doc item '常见问题' in sidebar 'docsSidebar', linking to the doc faq/common"
+  },
+  "sidebar.docsSidebar.category.生态合作": {
+    "message": "Ecosystem Partners",
+    "description": "The label for category '生态合作' in sidebar 'docsSidebar'"
+  },
+  "sidebar.docsSidebar.doc.合作方向": {
+    "message": "Partnership Areas",
+    "description": "The label for the doc item '合作方向' in sidebar 'docsSidebar', linking to the doc cooperation/partners"
+  }
+}

@@ -3,10 +3,14 @@ import type {Config} from '@docusaurus/types';
 import type * as Preset from '@docusaurus/preset-classic';
 
 const githubUrl = 'https://github.com/coffeehc/xagent';
+const currentLocale = process.env.DOCUSAURUS_CURRENT_LOCALE ?? 'zh-CN';
+const isEnglish = currentLocale === 'en';
 
 const config: Config = {
-  title: 'xAgent 使用手册',
-  tagline: '面向团队与公司的多用户智能工作门户。',
+  title: isEnglish ? 'xAgent User Manual' : 'xAgent 使用手册',
+  tagline: isEnglish
+    ? 'A multi-user AI work portal for teams and companies.'
+    : '面向团队与公司的多用户智能工作门户。',
   favicon: 'img/favicon.ico',
 
   future: {
@@ -27,7 +31,17 @@ const config: Config = {
 
   i18n: {
     defaultLocale: 'zh-CN',
-    locales: ['zh-CN'],
+    locales: ['zh-CN', 'en'],
+    localeConfigs: {
+      'zh-CN': {
+        label: '中文',
+        htmlLang: 'zh-CN',
+      },
+      en: {
+        label: 'English',
+        htmlLang: 'en-US',
+      },
+    },
   },
 
   presets: [
@@ -78,6 +92,10 @@ const config: Config = {
           label: '使用手册',
         },
         {
+          type: 'localeDropdown',
+          position: 'right',
+        },
+        {
           href: githubUrl,
           label: 'GitHub',
           position: 'right',
@@ -97,6 +115,10 @@ const config: Config = {
             {
               label: '什么是 xAgent',
               to: '/docs/getting-started/what-is-xagent',
+            },
+            {
+              label: '生态合作',
+              to: '/docs/cooperation/partners',
             },
           ],
         },
