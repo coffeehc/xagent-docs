@@ -46,9 +46,9 @@ const capabilityCards = [
     to: '/docs/getting-started/what-is-xagent#会话事件总线与会话间通讯',
   },
   {
-    title: '密钥安全',
-    description: '密钥由系统独立管理，工具只使用占位符，实际值仅在内部调用工具时替换，不直接交给模型。',
-    to: '/docs/getting-started/what-is-xagent#密钥管理',
+    title: '安全治理',
+    description: '工作区按用户隔离，密钥使用占位符，敏感动作可由审批策略控制，外部连接和会话通讯都有边界。',
+    to: '/docs/getting-started/what-is-xagent#安全治理',
   },
   {
     title: '自定义智能体',
