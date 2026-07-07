@@ -7,7 +7,6 @@ const sidebars: SidebarsConfig = {
       label: '开始使用',
       items: [
         'getting-started/what-is-xagent',
-        'getting-started/quick-start',
         'user-guide/menu-overview',
         'getting-started/first-task',
       ],

@@ -56,9 +56,9 @@ const capabilityCards = [
     to: '/docs/getting-started/what-is-xagent#如何实现别的智能体功能',
   },
   {
-    title: '热切换配置',
-    description: '任务执行过程中可以切换提示词、Skill 和模型，方便试错、调优和沉淀稳定配置。',
-    to: '/docs/getting-started/what-is-xagent#开放与热切换',
+    title: '任务微调',
+    description: '任务执行过程中可以调整目标、提示词、Skill、Tool 和模型，让当前任务尽量达到最佳状态。',
+    to: '/docs/getting-started/what-is-xagent#任务微调',
   },
   {
     title: '私有化部署',
@@ -74,8 +74,8 @@ const guideCards = [
     to: '/docs/getting-started/what-is-xagent',
   },
   {
-    title: '菜单与功能入口',
-    description: '对照控制台菜单，了解每个页面能做什么、什么时候打开。',
+    title: '功能导览与菜单入口',
+    description: '按使用路径和控制台菜单，了解每个页面能做什么、什么时候打开。',
     to: '/docs/user-guide/menu-overview',
   },
   {

@@ -91,8 +91,8 @@ const config: Config = {
           title: 'Docs',
           items: [
             {
-              label: '功能导览',
-              to: '/docs/getting-started/quick-start',
+              label: '功能导览与菜单入口',
+              to: '/docs/user-guide/menu-overview',
             },
             {
               label: '什么是 xAgent',

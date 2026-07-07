@@ -22,7 +22,7 @@ updated: 2026-07-05
 
 ### 应该先读哪些页面？
 
-先读 [什么是 xAgent](/docs/getting-started/what-is-xagent)、[功能导览](/docs/getting-started/quick-start)、[菜单与功能入口](/docs/user-guide/menu-overview)，然后按需要进入 [第一个任务](/docs/getting-started/first-task) 或 [任务](/docs/user-guide/task)。
+先读 [什么是 xAgent](/docs/getting-started/what-is-xagent)、[功能导览与菜单入口](/docs/user-guide/menu-overview)，然后按需要进入 [第一个任务](/docs/getting-started/first-task) 或 [任务](/docs/user-guide/task)。
 
 ### 为什么有些页面标记为 experimental 或 planned？
 
@@ -42,5 +42,4 @@ updated: 2026-07-05
 
 ## 相关文档
 
-- [功能导览](/docs/getting-started/quick-start)
-- [菜单与功能入口](/docs/user-guide/menu-overview)
+- [功能导览与菜单入口](/docs/user-guide/menu-overview)
