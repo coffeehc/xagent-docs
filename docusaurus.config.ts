@@ -6,7 +6,7 @@ const githubUrl = 'https://github.com/coffeehc/xagent';
 
 const config: Config = {
   title: 'xAgent 使用手册',
-  tagline: '面向家庭、小团队和小公司的多用户智能体门户。',
+  tagline: '面向团队与公司的多用户智能工作门户。',
   favicon: 'img/favicon.ico',
 
   future: {
@@ -37,16 +37,7 @@ const config: Config = {
         docs: {
           sidebarPath: './sidebars.ts',
         },
-        blog: {
-          showReadingTime: true,
-          feedOptions: {
-            type: ['rss', 'atom'],
-            xslt: true,
-          },
-          onInlineTags: 'warn',
-          onInlineAuthors: 'warn',
-          onUntruncatedBlogPosts: 'warn',
-        },
+        blog: false,
         theme: {
           customCss: './src/css/custom.css',
         },
@@ -60,12 +51,11 @@ const config: Config = {
       {
         hashed: true,
         indexDocs: true,
-        indexBlog: true,
+        indexBlog: false,
         language: ['zh', 'en'],
         highlightSearchTermsOnTargetPage: true,
         explicitSearchResultPath: true,
         docsRouteBasePath: '/docs',
-        blogRouteBasePath: '/blog',
       },
     ],
   ],
@@ -87,8 +77,6 @@ const config: Config = {
           position: 'left',
           label: '使用手册',
         },
-        {to: '/blog', label: 'Blog', position: 'left'},
-        {to: '/docs/changelog', label: '更新日志', position: 'left'},
         {
           href: githubUrl,
           label: 'GitHub',
@@ -109,10 +97,6 @@ const config: Config = {
             {
               label: '什么是 xAgent',
               to: '/docs/getting-started/what-is-xagent',
-            },
-            {
-              label: '更新日志',
-              to: '/docs/changelog',
             },
           ],
         },

@@ -68,10 +68,6 @@ npm run start
 
 不是。CLI 是命令行入口，API 是程序化调用接口。
 
-### 命令变更是否需要更新 Changelog？
-
-需要。
-
 ## 相关文档
 
 - [Config](/docs/reference/config)

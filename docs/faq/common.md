@@ -40,10 +40,6 @@ updated: 2026-07-05
 
 不包含。文档站是静态手册。
 
-### Changelog 放在哪里？
-
-Changelog 位于 [docs/changelog](/docs/changelog)。
-
 ## 相关文档
 
 - [功能导览](/docs/getting-started/quick-start)

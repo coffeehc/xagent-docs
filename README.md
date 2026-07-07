@@ -71,8 +71,6 @@ Node version: 20
 - `docs/developer-guide/`：扩展开发和维护说明，默认不放入普通用户阅读路径。
 - `docs/architecture/`：技术参考和架构边界，默认不放入普通用户阅读路径。
 - `docs/reference/`：命令、配置、术语和排错参考。
-- `blog/`：技术文章、产品更新和社区运营内容。
-- `.codex/prompts/write-doc.md`：Codex 辅助写作规范。
 
 ## 搜索
 

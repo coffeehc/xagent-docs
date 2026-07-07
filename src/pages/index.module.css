@@ -15,6 +15,14 @@
   width: 100%;
 }
 
+.kicker {
+  color: var(--ifm-color-primary);
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  margin: 0 0 0.8rem;
+}
+
 .title {
   color: var(--ifm-heading-color);
   font-size: 3.4rem;
@@ -30,18 +38,6 @@
   margin: 0;
   max-width: 680px;
   overflow-wrap: anywhere;
-}
-
-.actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.75rem;
-  margin-top: 2rem;
-}
-
-.actions :global(.button) {
-  box-sizing: border-box;
-  max-width: 100%;
 }
 
 .entries {
@@ -82,6 +78,10 @@
   box-shadow: 0 10px 30px rgb(17 24 39 / 8%);
   text-decoration: none;
   transform: translateY(-2px);
+}
+
+.entryCard:hover {
+  transform: none;
 }
 
 .entryCard h2 {
@@ -134,9 +134,21 @@
   border: 1px solid var(--xagent-border);
   border-radius: 8px;
   box-sizing: border-box;
+  color: inherit;
+  display: block;
   min-height: 150px;
   min-width: 0;
   padding: 1.2rem;
+  text-decoration: none;
+  transition:
+    border-color 160ms ease,
+    box-shadow 160ms ease;
+}
+
+.capabilityCard:hover {
+  border-color: var(--ifm-color-primary);
+  box-shadow: 0 10px 30px rgb(17 24 39 / 7%);
+  text-decoration: none;
 }
 
 .capabilityCard h3 {
@@ -149,6 +161,75 @@
   font-size: 0.95rem;
   line-height: 1.65;
   margin: 0;
+}
+
+.guideGrid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.guideCard {
+  border: 1px solid var(--xagent-border);
+  border-radius: 8px;
+  box-sizing: border-box;
+  color: inherit;
+  display: block;
+  min-height: 145px;
+  min-width: 0;
+  padding: 1.2rem;
+  text-decoration: none;
+  transition:
+    border-color 160ms ease,
+    box-shadow 160ms ease;
+}
+
+.guideCard:hover {
+  border-color: var(--ifm-color-primary);
+  box-shadow: 0 10px 30px rgb(17 24 39 / 7%);
+  text-decoration: none;
+}
+
+.guideCard h3 {
+  font-size: 1.05rem;
+  margin: 0 0 0.65rem;
+}
+
+.guideCard p {
+  color: var(--ifm-color-emphasis-700);
+  font-size: 0.95rem;
+  line-height: 1.65;
+  margin: 0;
+}
+
+.roadmapList {
+  border: 1px solid var(--xagent-border);
+  border-radius: 8px;
+  box-sizing: border-box;
+  display: grid;
+  gap: 0.75rem;
+  list-style: none;
+  margin: 0;
+  max-width: 760px;
+  padding: 1.25rem;
+}
+
+.roadmapList li {
+  color: var(--ifm-color-emphasis-800);
+  line-height: 1.6;
+  padding-left: 1.1rem;
+  position: relative;
+}
+
+.roadmapList li::before {
+  background: var(--ifm-color-primary);
+  border-radius: 999px;
+  content: '';
+  height: 0.4rem;
+  left: 0;
+  position: absolute;
+  top: 0.62rem;
+  width: 0.4rem;
 }
 
 .pathList {
@@ -221,6 +302,10 @@
   .capabilityGrid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
+
+  .guideGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 }
 
 @media screen and (max-width: 640px) {
@@ -236,21 +321,16 @@
     font-size: 1rem;
   }
 
-  .actions {
-    align-items: stretch;
-    flex-direction: column;
-  }
-
-  .actions :global(.button) {
-    width: 100%;
-  }
-
   .entryGrid {
     grid-template-columns: 1fr;
     max-width: calc(100vw - 3rem);
   }
 
   .capabilityGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .guideGrid {
     grid-template-columns: 1fr;
   }
 

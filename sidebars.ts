@@ -34,7 +34,6 @@ const sidebars: SidebarsConfig = {
       label: 'FAQ',
       items: ['faq/common'],
     },
-    'changelog',
   ],
 };
 
