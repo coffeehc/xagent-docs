@@ -1,40 +1,68 @@
 ---
 title: CLI
-status: planned
+status: stable
 updated: 2026-07-05
 ---
 
 # CLI
 
-> 状态：规划中。
-
 ## 适用对象
 
-本文适合需要通过命令行运行或维护 xAgent 的用户。
+本文适合需要在本地启动、开发或构建 xAgent 的用户。
 
 ## 这是什么
 
-CLI 文档用于记录稳定命令、参数和示例。当前阶段只保留位置，不编造未验证命令。
+CLI 文档记录当前已核对的最小命令入口。
 
 ## 什么时候使用
 
-当命令入口和参数稳定后，再补充本文。
+当你需要启动后端服务、运行前端开发环境或构建生产 Web UI 时使用本文。
 
 ## 基本用法
 
-后续补充命令时必须说明：
+### 启动后端服务
 
-- 命令名称。
-- 参数和默认值。
-- 运行前置条件。
-- 预期输出。
-- 常见失败原因。
+在 xAgent 主仓库根目录运行：
+
+```bash
+go run ./cmd/xagent-server
+```
+
+### 启动 Web 前端开发环境
+
+```bash
+cd frontend
+pnpm install
+pnpm dev
+```
+
+开发态前端会把 `/api` 和 `/api/ws` 代理到后端服务。
+
+### 构建可嵌入 Web UI 的服务端
+
+```bash
+cd frontend
+pnpm build:webui-embed
+cd ..
+go build -tags webui_embed ./cmd/xagent-server
+```
+
+普通 `pnpm build` 只输出前端构建产物，不会嵌入 Go 服务端。
+
+### 运行文档站
+
+本文档站是独立项目：
+
+```bash
+npm install
+npm run start
+```
 
 ## 常见问题
 
-### 可以写主仓库 README 中已有命令吗？
+### 为什么这里只有少量命令？
 
-可以，但补充前应重新核对当前代码和 README。
+使用手册只记录已核对、用户常用的入口。测试、评估、迁移类命令应放到更具体的维护文档中。
 
 ### CLI 是否等同于 API？
 

@@ -5,8 +5,8 @@ import type * as Preset from '@docusaurus/preset-classic';
 const githubUrl = 'https://github.com/coffeehc/xagent';
 
 const config: Config = {
-  title: 'xAgent Documentation',
-  tagline: '构建、部署、使用和扩展 xAgent 的官方文档中心。',
+  title: 'xAgent 使用手册',
+  tagline: '面向家庭、小团队和小公司的多用户智能体门户。',
   favicon: 'img/favicon.ico',
 
   future: {
@@ -76,15 +76,19 @@ const config: Config = {
     },
     navbar: {
       title: 'xAgent',
+      logo: {
+        alt: 'xAgent Logo',
+        src: 'img/xagent-logo.png',
+      },
       items: [
         {
           type: 'docSidebar',
           sidebarId: 'docsSidebar',
           position: 'left',
-          label: 'Docs',
+          label: '使用手册',
         },
         {to: '/blog', label: 'Blog', position: 'left'},
-        {to: '/docs/changelog', label: 'Changelog', position: 'left'},
+        {to: '/docs/changelog', label: '更新日志', position: 'left'},
         {
           href: githubUrl,
           label: 'GitHub',
@@ -99,15 +103,15 @@ const config: Config = {
           title: 'Docs',
           items: [
             {
-              label: '快速开始',
+              label: '功能导览',
               to: '/docs/getting-started/quick-start',
             },
             {
-              label: '核心概念',
-              to: '/docs/getting-started/core-concepts',
+              label: '什么是 xAgent',
+              to: '/docs/getting-started/what-is-xagent',
             },
             {
-              label: 'Changelog',
+              label: '更新日志',
               to: '/docs/changelog',
             },
           ],

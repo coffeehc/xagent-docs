@@ -97,6 +97,114 @@
   overflow-wrap: anywhere;
 }
 
+.section {
+  border-top: 1px solid var(--xagent-border);
+  box-sizing: border-box;
+  padding: 3.5rem 1.5rem;
+}
+
+.sectionInner {
+  margin: 0 auto;
+  max-width: 1120px;
+  width: 100%;
+}
+
+.eyebrow {
+  color: var(--ifm-color-primary);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  margin: 0 0 0.55rem;
+  text-transform: uppercase;
+}
+
+.sectionTitle {
+  font-size: 2rem;
+  line-height: 1.2;
+  margin: 0 0 1.5rem;
+}
+
+.capabilityGrid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.capabilityCard {
+  border: 1px solid var(--xagent-border);
+  border-radius: 8px;
+  box-sizing: border-box;
+  min-height: 150px;
+  min-width: 0;
+  padding: 1.2rem;
+}
+
+.capabilityCard h3 {
+  font-size: 1.05rem;
+  margin: 0 0 0.65rem;
+}
+
+.capabilityCard p {
+  color: var(--ifm-color-emphasis-700);
+  font-size: 0.95rem;
+  line-height: 1.65;
+  margin: 0;
+}
+
+.pathList {
+  display: grid;
+  gap: 0.85rem;
+  grid-template-columns: 1fr;
+}
+
+.pathStep {
+  align-items: flex-start;
+  border: 1px solid var(--xagent-border);
+  border-radius: 8px;
+  box-sizing: border-box;
+  color: inherit;
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: auto minmax(0, 1fr);
+  padding: 1rem;
+  text-decoration: none;
+  transition:
+    border-color 160ms ease,
+    box-shadow 160ms ease;
+}
+
+.pathStep:hover {
+  border-color: var(--ifm-color-primary);
+  box-shadow: 0 10px 30px rgb(17 24 39 / 7%);
+  text-decoration: none;
+}
+
+.stepMark {
+  align-items: center;
+  background: color-mix(in srgb, var(--ifm-color-primary) 12%, transparent);
+  border: 1px solid color-mix(in srgb, var(--ifm-color-primary) 35%, transparent);
+  border-radius: 999px;
+  color: var(--ifm-color-primary);
+  display: inline-flex;
+  font-size: 0.85rem;
+  font-weight: 700;
+  height: 2rem;
+  justify-content: center;
+  width: 2rem;
+}
+
+.pathStep strong {
+  display: block;
+  font-size: 1rem;
+  margin-bottom: 0.25rem;
+}
+
+.pathStep span span {
+  color: var(--ifm-color-emphasis-700);
+  display: block;
+  line-height: 1.6;
+}
+
 @media screen and (max-width: 996px) {
   .hero {
     padding: 3.5rem 1.25rem 3rem;
@@ -107,6 +215,10 @@
   }
 
   .entryGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .capabilityGrid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
@@ -136,5 +248,13 @@
   .entryGrid {
     grid-template-columns: 1fr;
     max-width: calc(100vw - 3rem);
+  }
+
+  .capabilityGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .sectionTitle {
+    font-size: 1.45rem;
   }
 }
