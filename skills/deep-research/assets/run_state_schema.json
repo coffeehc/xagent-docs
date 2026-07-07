@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Research Run State",
+  "type": "object",
+  "required": [
+    "run_id",
+    "title",
+    "created_at",
+    "phase",
+    "depth"
+  ],
+  "properties": {
+    "run_id": {
+      "type": "string"
+    },
+    "title": {
+      "type": "string"
+    },
+    "created_at": {
+      "type": "string"
+    },
+    "updated_at": {
+      "type": "string"
+    },
+    "phase": {
+      "type": "string"
+    },
+    "depth": {
+      "type": "string",
+      "enum": [
+        "quick",
+        "standard",
+        "deep",
+        "exhaustive"
+      ]
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "active",
+        "drafting",
+        "auditing",
+        "complete",
+        "blocked"
+      ]
+    },
+    "notes": {
+      "type": "string"
+    }
+  }
+}

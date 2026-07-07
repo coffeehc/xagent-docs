@@ -1,0 +1,48 @@
+name: 文档问题
+description: 反馈使用手册中的错漏、过期内容或表达不清
+title: "[Docs] "
+labels: ["documentation"]
+body:
+  - type: input
+    id: page
+    attributes:
+      label: 文档页面
+      description: 请填写相关页面链接或文档路径。
+      placeholder: https://xagent-docs.pages.dev/docs/...
+    validations:
+      required: true
+  - type: dropdown
+    id: issue_type
+    attributes:
+      label: 问题类型
+      options:
+        - 内容过期
+        - 描述不清
+        - 链接错误
+        - 截图需要更新
+        - 缺少使用步骤
+        - 概念或边界说明不准确
+        - 其他
+    validations:
+      required: true
+  - type: textarea
+    id: current
+    attributes:
+      label: 当前问题
+      description: 当前文档哪里有问题？
+    validations:
+      required: true
+  - type: textarea
+    id: suggestion
+    attributes:
+      label: 建议改法
+      description: 如果你有建议文案或结构调整，请写在这里。
+    validations:
+      required: true
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: 提交前确认
+      options:
+        - label: 我已经确认反馈内容不包含真实密钥、客户数据、内部地址或其他敏感信息。
+          required: true

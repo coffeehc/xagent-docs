@@ -1,0 +1,66 @@
+name: Skill 改进建议
+description: 反馈或改进 docs 仓库中的内置 Skill 文件
+title: "[Skill] "
+labels: ["skill"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        这些 Skill 仍处于测试版共建阶段，欢迎围绕真实任务场景提出改进。
+
+        请注意：建议应尽量保持通用、可维护，不要把特定第三方 MCP、私有服务、外部账号或内部系统写成默认依赖。
+  - type: input
+    id: skill_path
+    attributes:
+      label: Skill 路径
+      description: 请填写要反馈的 Skill 目录或文件路径。
+      placeholder: skills/weekly-report/SKILL.md
+    validations:
+      required: true
+  - type: dropdown
+    id: change_type
+    attributes:
+      label: 建议类型
+      options:
+        - 适用场景描述不清
+        - 输入材料要求不清
+        - 工作流程需要优化
+        - 输出格式需要优化
+        - 质量检查或验收标准不足
+        - 风险边界或人工确认规则不足
+        - 模板 / 示例 / 参考资料需要调整
+        - 其他
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: 当前问题
+      description: 当前 Skill 在使用或阅读时有什么问题？
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: 建议修改
+      description: 请说明你建议如何修改。可以提供具体文案、流程、模板或示例。
+    validations:
+      required: true
+  - type: textarea
+    id: scenario
+    attributes:
+      label: 适用场景
+      description: 这个修改主要帮助哪类任务或用户？
+    validations:
+      required: true
+  - type: checkboxes
+    id: contribution_boundary
+    attributes:
+      label: 贡献边界确认
+      options:
+        - label: 这个建议不要求绑定特定第三方 MCP、私有服务、外部账号或内部系统。
+          required: true
+        - label: 如果涉及外部系统，我已经只描述业务目标、所需信息和授权边界，没有把具体接入写成 Skill 默认前提。
+          required: true
+        - label: 我没有提交真实密钥、客户数据、内部地址、token、验证码或一次性业务材料。
+          required: true

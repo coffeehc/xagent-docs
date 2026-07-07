@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: xAgent 使用手册
+    url: https://xagent-docs.pages.dev/docs/getting-started/what-is-xagent
+    about: 提交 issue 前，建议先阅读使用手册和相关页面。
+  - name: 内置 Skill 文件
+    url: https://github.com/coffeehc/xagent-docs/tree/main/skills
+    about: 如果要改进内置 Skill，请先查看当前 Skill 文件内容。

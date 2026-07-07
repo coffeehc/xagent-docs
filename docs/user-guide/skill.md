@@ -30,6 +30,8 @@ updated: 2026-07-07
 
 常见技能包括研究整理、报告生成、会议纪要、合同审查、数据分析、客服回复、投研分析、文档理解等。
 
+如果想查看或参与修改面向实际任务场景的内置 Skill，可以阅读 [内置 Skill 文件](/docs/user-guide/builtin-skills)。docs 仓库中提供了一份 `skills/` 副本，方便大家通过 GitHub 提交建议和改进。
+
 ## 页面怎么看
 
 Skill 管理 页面会展示技能卡片。常见信息包括：
@@ -142,6 +144,7 @@ Skill 管理 页面会展示技能卡片。常见信息包括：
 
 ## 相关文档
 
+- [内置 Skill 文件](/docs/user-guide/builtin-skills)
 - [Agent会话](/docs/user-guide/agent-session)
 - [智能体管理](/docs/user-guide/agent-management)
 - [工具](/docs/user-guide/tool)

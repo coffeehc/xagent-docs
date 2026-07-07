@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Base HTML Report</title>
+  <style>
+    :root{--font-sans:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei","Noto Sans CJK SC",sans-serif;--page-bg:#f6f8fb;--paper-bg:#fff;--text:#172033;--text-soft:#344054;--muted:#667085;--border:#d9e0ea;--border-soft:#edf1f7;--accent:#1f5eff;--accent-soft:#eef4ff;--success:#16835b;--warning:#b7791f;--danger:#b42318;--chart-1:#1f5eff;--chart-2:#16a3a3;--chart-3:#7c3aed;--chart-4:#f59e0b;--chart-5:#ef4444;--chart-muted:#94a3b8;--space-2:8px;--space-3:12px;--space-4:16px;--space-6:24px;--space-8:32px;--radius-sm:8px;--radius-md:12px;--radius-lg:16px;--shadow-card:0 8px 24px rgba(15,23,42,.08)}
+    @page{size:A4 portrait;margin:16mm}
+    html,*{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+    *{box-sizing:border-box}body{margin:0;background:var(--page-bg);color:var(--text);font-family:var(--font-sans);line-height:1.55}.report-shell{max-width:1080px;margin:0 auto;padding:32px}.report-paper{background:var(--paper-bg);border:1px solid var(--border);border-radius:var(--radius-lg);box-shadow:var(--shadow-card);padding:32px}.report-header{border-bottom:1px solid var(--border);padding-bottom:20px;margin-bottom:24px}.report-header h1{margin:0 0 8px;font-size:32px;line-height:1.15}.report-meta{display:flex;flex-wrap:wrap;gap:8px;color:var(--muted);font-size:13px}.executive-summary,.evidence-box,.caveat-box,.risk-box{border:1px solid var(--border);border-radius:var(--radius-md);padding:18px;background:#fff}.executive-summary{background:var(--accent-soft);border-color:#c8d9ff}.kpi-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}.kpi-card,.insight-card,.figure-card{border:1px solid var(--border);border-radius:var(--radius-md);padding:16px;background:#fff}.kpi-value{font-size:30px;font-weight:800;font-variant-numeric:tabular-nums}.report-section{margin-top:28px}.section-header h2{margin:0 0 6px;font-size:22px}.section-header p,.chart-header p,.chart-caption{color:var(--muted);font-size:13px}.chart-header{display:flex;justify-content:space-between;gap:16px}.chart-badge{align-self:flex-start;border-radius:999px;background:var(--accent-soft);color:var(--accent);padding:4px 10px;font-size:12px;font-weight:700}.svg-chart{display:block;width:100%;height:auto}.data-table{width:100%;border-collapse:collapse;font-size:13px}.data-table caption{text-align:left;font-weight:700;margin-bottom:8px}.data-table th{background:#f3f6fb;color:var(--text-soft);font-weight:700}.data-table th,.data-table td{padding:10px 12px;border-bottom:1px solid var(--border-soft);vertical-align:top}.data-table tbody tr:nth-child(even) td{background:#fafbfd}.data-table .num{text-align:right;font-variant-numeric:tabular-nums}.table-wrap{max-width:100%;overflow-x:auto}.report-footer{margin-top:30px;padding-top:16px;border-top:1px solid var(--border);color:var(--muted);font-size:12px}
+    @media(max-width:640px){.report-shell{padding:14px}.report-paper{padding:20px;border-radius:0}.kpi-grid{grid-template-columns:1fr}.chart-header{display:block}.report-header h1{font-size:26px}}
+    @media print{body{background:#fff}.report-shell{max-width:none;padding:0}.report-paper{border:0;box-shadow:none;padding:0}.report-section{break-inside:auto;page-break-inside:auto}.section-header{break-after:avoid;page-break-after:avoid}.kpi-card,.figure-card,.executive-summary,.evidence-box,.caveat-box,.risk-box,tr{break-inside:avoid;page-break-inside:avoid}.chart-badge{border:1px solid var(--border)}}
+  </style>
+</head>
+<body>
+  <main class="report-shell" data-skill="html-report-builder" data-report-preset="base-report">
+    <article class="report-paper">
+      <header class="report-header">
+        <h1>Report Title</h1>
+        <p>One-sentence scope and framing.</p>
+        <div class="report-meta"><span>Scope: provided content</span><span>PDF: Not verified</span></div>
+      </header>
+      <section class="executive-summary"><strong>Executive summary.</strong> Replace with provided conclusion or upstream summary.</section>
+      <section class="kpi-grid" aria-label="Key metrics">
+        <article class="kpi-card"><div>Metric</div><div class="kpi-value">42</div><small>Source: provided material</small></article>
+        <article class="kpi-card"><div>Metric</div><div class="kpi-value">18%</div><small>Basis: verified input</small></article>
+        <article class="kpi-card"><div>Metric</div><div class="kpi-value">7</div><small>Caveat: sample only</small></article>
+      </section>
+      <section class="report-section">
+        <div class="section-header"><h2>Section</h2><p>Short framing sentence.</p></div>
+        <figure class="figure-card">
+          <div class="chart-header"><div><h3>Figure title</h3><p>Unit and source.</p></div><span class="chart-badge">Chart</span></div>
+          <div class="chart-body"><svg class="svg-chart" viewBox="0 0 720 220" role="img" aria-labelledby="base-chart-title"><title id="base-chart-title">Example bar chart</title><rect x="60" y="60" width="180" height="120" fill="var(--chart-1)"/><rect x="270" y="90" width="180" height="90" fill="var(--chart-2)"/><rect x="480" y="40" width="180" height="140" fill="var(--chart-3)"/></svg></div>
+          <figcaption class="chart-caption">Caption states the interpretation, source, and caveat.</figcaption>
+        </figure>
+      </section>
+      <section class="report-section table-wrap">
+        <table class="data-table"><caption>Data table</caption><thead><tr><th>Item</th><th class="num">Value</th><th>Note</th></tr></thead><tbody><tr><td>A</td><td class="num">100</td><td>Provided</td></tr><tr><td>B</td><td class="num">80</td><td>Provided</td></tr></tbody></table>
+      </section>
+      <section class="report-section evidence-box"><strong>Evidence.</strong> List source refs, workspace refs, caveats, and verification status.</section>
+      <footer class="report-footer">Generated as a static HTML report. PDF conversion: Not verified.</footer>
+    </article>
+  </main>
+</body>
+</html>

@@ -1,0 +1,10 @@
+Apache License
+Version 2.0, January 2004
+
+This XAgent built-in Skill is adapted from:
+https://github.com/nexu-io/open-design
+
+Only Markdown Skill instructions and design guidance are bundled here. Open Design CLI, MCP server, daemon, apps, package manager files, runtime assets, templates, scripts, export pipeline, and deployment behavior are not bundled in this XAgent copy.
+
+Licensed under the Apache License, Version 2.0. See:
+http://www.apache.org/licenses/LICENSE-2.0

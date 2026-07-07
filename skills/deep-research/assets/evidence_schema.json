@@ -1,0 +1,104 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Evidence Ledger Entry",
+  "type": "object",
+  "required": [
+    "evidence_id",
+    "source_id",
+    "claim_supported",
+    "evidence_summary",
+    "location",
+    "strength",
+    "relevance"
+  ],
+  "properties": {
+    "evidence_id": {
+      "type": "string",
+      "pattern": "^E[0-9]{4,}$"
+    },
+    "source_id": {
+      "type": "string",
+      "pattern": "^S[0-9]{4,}$"
+    },
+    "sub_questions": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "claim_supported": {
+      "type": "string"
+    },
+    "evidence_summary": {
+      "type": "string"
+    },
+    "exact_quote": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "location": {
+      "type": "string"
+    },
+    "data_value": {
+      "type": [
+        "string",
+        "number",
+        "null"
+      ]
+    },
+    "data_unit": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "date_context": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "published_date": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "accessed_date": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "strength": {
+      "type": "string",
+      "enum": [
+        "strong",
+        "moderate",
+        "weak"
+      ]
+    },
+    "relevance": {
+      "type": "string",
+      "enum": [
+        "high",
+        "medium",
+        "low"
+      ]
+    },
+    "limitations": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "notes": {
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  }
+}

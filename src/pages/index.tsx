@@ -106,12 +106,12 @@ export default function Home(): ReactNode {
       <main className={styles.page}>
         <section className={styles.hero}>
           <div className={styles.heroInner}>
-            <p className={styles.kicker}>xAgent 使用手册</p>
+            <p className={styles.kicker}>xAgent 使用手册 · 测试版</p>
             <Heading as="h1" className={styles.title}>
               面向任务完成的多用户智能工作门户
             </Heading>
             <p className={styles.subtitle}>
-              xAgent 部署在服务器端，团队通过 Web 或连接器访问。管理员准备模型、Skill、工具、外部连接和安全策略后，用户只需要说明目标、提供材料、确认关键动作并查看结果，显著降低使用智能体完成工作的门槛。
+              xAgent 当前处于测试版阶段，部署在服务器端，团队通过 Web 或连接器访问。管理员准备模型、Skill、工具、外部连接和安全策略后，用户只需要说明目标、提供材料、确认关键动作并查看结果，显著降低使用智能体完成工作的门槛。
             </p>
           </div>
         </section>

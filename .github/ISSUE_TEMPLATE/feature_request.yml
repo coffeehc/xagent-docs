@@ -1,0 +1,55 @@
+name: 功能建议
+description: 建议 xAgent 或使用手册增加新的能力、页面或说明
+title: "[Feature] "
+labels: ["enhancement"]
+body:
+  - type: textarea
+    id: scenario
+    attributes:
+      label: 使用场景
+      description: 请说明你遇到的真实任务场景，而不是只写功能名。
+      placeholder: 例如：团队希望每天自动整理客户反馈，并在发送前人工确认。
+    validations:
+      required: true
+  - type: textarea
+    id: user_value
+    attributes:
+      label: 期望价值
+      description: 这个建议能帮用户减少什么操作、提升什么效果或降低什么风险？
+    validations:
+      required: true
+  - type: textarea
+    id: current_workaround
+    attributes:
+      label: 当前替代方式
+      description: 现在是否可以通过现有 Agent 会话、Skill、Tool、MCP、连接器或审批策略变通实现？
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: 建议方案
+      description: 你希望 xAgent 或文档如何支持这个场景？
+    validations:
+      required: true
+  - type: dropdown
+    id: integration
+    attributes:
+      label: 是否涉及外部系统
+      options:
+        - 不涉及外部系统
+        - 涉及 MCP
+        - 涉及连接器
+        - 涉及企业内部系统
+        - 不确定
+    validations:
+      required: true
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: 提交前确认
+      options:
+        - label: 我描述的是具体任务场景，不是泛泛的功能口号。
+          required: true
+        - label: 我没有提交真实密钥、客户数据、内部地址、token、验证码或业务敏感内容。
+          required: true

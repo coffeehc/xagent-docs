@@ -1,0 +1,117 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Source Registry Entry",
+  "type": "object",
+  "required": [
+    "source_id",
+    "status",
+    "title",
+    "source_type",
+    "tier",
+    "accessed_date"
+  ],
+  "properties": {
+    "source_id": {
+      "type": "string",
+      "pattern": "^S[0-9]{4,}$"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "candidate",
+        "approved",
+        "rejected",
+        "needs_review"
+      ]
+    },
+    "title": {
+      "type": "string"
+    },
+    "url": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "local_path": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "source_type": {
+      "type": "string",
+      "enum": [
+        "official",
+        "paper",
+        "filing",
+        "standard",
+        "data",
+        "media",
+        "blog",
+        "forum",
+        "vendor",
+        "unknown"
+      ]
+    },
+    "tier": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 4
+    },
+    "organization": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "author": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "published_date": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "updated_date": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "accessed_date": {
+      "type": "string"
+    },
+    "relevant_questions": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "quality_notes": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "bias_risk": {
+      "type": "string",
+      "enum": [
+        "low",
+        "medium",
+        "high",
+        "unknown"
+      ]
+    },
+    "reason": {
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  }
+}

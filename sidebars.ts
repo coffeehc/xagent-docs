@@ -30,6 +30,11 @@ const sidebars: SidebarsConfig = {
     },
     {
       type: 'category',
+      label: '附件',
+      items: ['user-guide/builtin-skills'],
+    },
+    {
+      type: 'category',
       label: 'FAQ',
       items: ['faq/common'],
     },
