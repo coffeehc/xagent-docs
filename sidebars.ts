@@ -21,6 +21,32 @@ const sidebars: SidebarsConfig = {
           id: 'getting-started/first-task',
           label: '第一个任务',
         },
+        {
+          type: 'doc',
+          id: 'getting-started/create-skill',
+          label: '创建 / 更新 Skill',
+        },
+      ],
+    },
+    {
+      type: 'category',
+      label: '部署安装',
+      items: [
+        {
+          type: 'doc',
+          id: 'deployment/server-install',
+          label: '服务端安装',
+        },
+        {
+          type: 'doc',
+          id: 'deployment/model-requirements',
+          label: '模型说明',
+        },
+        {
+          type: 'doc',
+          id: 'deployment/connector-install',
+          label: 'Connector 安装',
+        },
       ],
     },
     {

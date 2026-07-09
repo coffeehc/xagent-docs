@@ -118,6 +118,6 @@ updated: 2026-07-07
 
 - [智能体](/docs/user-guide/agent)
 - [Agent会话](/docs/user-guide/agent-session)
-- [技能](/docs/user-guide/skill)
-- [工具](/docs/user-guide/tool)
+- [Skill 管理](/docs/user-guide/skill)
+- [Tool 管理](/docs/user-guide/tool)
 - [审批策略](/docs/user-guide/approval-policy)

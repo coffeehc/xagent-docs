@@ -87,7 +87,7 @@ GitHub 目录：
 
 ## 相关文档
 
-- [技能](/docs/user-guide/skill)
+- [Skill 管理](/docs/user-guide/skill)
 - [Agent会话](/docs/user-guide/agent-session)
-- [工具](/docs/user-guide/tool)
+- [Tool 管理](/docs/user-guide/tool)
 - [什么是 xAgent](/docs/getting-started/what-is-xagent)

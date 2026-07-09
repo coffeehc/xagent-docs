@@ -124,4 +124,4 @@ updated: 2026-07-06
 - [Agent会话](/docs/user-guide/agent-session)
 - [任务](/docs/user-guide/task)
 - [长任务](/docs/user-guide/long-task)
-- [外部连接](/docs/user-guide/connector)
+- [连接器](/docs/user-guide/connector)

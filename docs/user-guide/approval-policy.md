@@ -109,5 +109,5 @@ updated: 2026-07-06
 
 - [Agent会话](/docs/user-guide/agent-session)
 - [工作区](/docs/user-guide/workspace)
-- [工具](/docs/user-guide/tool)
-- [外部连接](/docs/user-guide/connector)
+- [Tool 管理](/docs/user-guide/tool)
+- [连接器](/docs/user-guide/connector)

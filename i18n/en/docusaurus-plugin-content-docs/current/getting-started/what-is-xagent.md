@@ -278,11 +278,12 @@ xAgent will continue evolving around task completion capabilities. Priorities wi
 
 Start with this path:
 
-1. Read [Feature and Menu Overview](/docs/user-guide/menu-overview) to understand the main capabilities and console entry points.
-2. Use the left menu to find the page you need.
-3. If you are an ordinary user, go directly to Agent Session and describe the work to complete.
-4. If you are an administrator, prepare common tools, Skills, external connections, and safety policies first.
-5. If you have a fixed recurring process, read [Skills](/docs/user-guide/skill) and save that process.
+1. If the service is not deployed yet, read [Server Installation](/docs/deployment/server-install) first and prepare the xAgent service and basic dependencies.
+2. Read [Feature and Menu Overview](/docs/user-guide/menu-overview) to understand the main capabilities and console entry points.
+3. Use the left menu to find the page you need.
+4. If you are an ordinary user, go directly to Agent Session and describe the work to complete.
+5. If you are an administrator, prepare common tools, Skills, external connections, and safety policies first.
+6. If you have a fixed recurring process, read [Create / Update Skill](/docs/getting-started/create-skill), save that process, and keep improving it.
 
 ## FAQ
 
@@ -381,4 +382,7 @@ The main line is the user manual. Ordinary users should first read Getting Start
 ## Related Docs
 
 - [Feature and Menu Overview](/docs/user-guide/menu-overview)
+- [Server Installation](/docs/deployment/server-install)
+- [Connector Installation](/docs/deployment/connector-install)
 - [First Task](/docs/getting-started/first-task)
+- [Create / Update Skill](/docs/getting-started/create-skill)

@@ -46,4 +46,4 @@ npm run typecheck
 
 ## 相关文档
 
-- [贡献指南](https://github.com/coffeehc/xagent)
+- [贡献指南](https://github.com/coffeehc/xagent-docs)

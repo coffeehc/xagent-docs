@@ -56,4 +56,4 @@ unlisted: true
 
 - [智能体](/docs/user-guide/agent)
 - [会话](/docs/user-guide/session)
-- [工具](/docs/user-guide/tool)
+- [Tool 管理](/docs/user-guide/tool)

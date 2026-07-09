@@ -2,7 +2,7 @@ import {themes as prismThemes} from 'prism-react-renderer';
 import type {Config} from '@docusaurus/types';
 import type * as Preset from '@docusaurus/preset-classic';
 
-const githubUrl = 'https://github.com/coffeehc/xagent';
+const githubUrl = 'https://github.com/coffeehc/xagent-docs';
 const currentLocale = process.env.DOCUSAURUS_CURRENT_LOCALE ?? 'zh-CN';
 const isEnglish = currentLocale === 'en';
 
