@@ -194,12 +194,12 @@ const homeContent = {
       },
       {
         title: 'Agent Session',
-        description: 'Chinese fallback page for task submission, files, execution process, approvals, and result refinement.',
+        description: 'Submit tasks, upload files, inspect execution, confirm actions, and refine results.',
         to: '/docs/user-guide/agent-session',
       },
       {
         title: 'Menu Overview',
-        description: 'Chinese fallback page for the current menu and feature entry points.',
+        description: 'Understand the current console menus and the feature entry points behind them.',
         to: '/docs/user-guide/menu-overview',
       },
     ] satisfies Card[],

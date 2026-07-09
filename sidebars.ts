@@ -1,134 +1,137 @@
 import type {SidebarsConfig} from '@docusaurus/plugin-content-docs';
 
+const isEnglish = process.env.DOCUSAURUS_CURRENT_LOCALE === 'en';
+const label = (zh: string, en: string) => (isEnglish ? en : zh);
+
 const sidebars: SidebarsConfig = {
   docsSidebar: [
     {
       type: 'category',
-      label: '开始使用',
+      label: label('开始使用', 'Getting Started'),
       items: [
         {
           type: 'doc',
           id: 'getting-started/what-is-xagent',
-          label: '什么是 xAgent',
+          label: label('什么是 xAgent', 'What is xAgent'),
         },
         {
           type: 'doc',
           id: 'user-guide/menu-overview',
-          label: '功能导览与菜单入口',
+          label: label('功能导览与菜单入口', 'Feature and Menu Overview'),
         },
         {
           type: 'doc',
           id: 'getting-started/first-task',
-          label: '第一个任务',
+          label: label('第一个任务', 'First Task'),
         },
         {
           type: 'doc',
           id: 'getting-started/create-skill',
-          label: '创建 / 更新 Skill',
+          label: label('创建 / 更新 Skill', 'Create / Update Skill'),
         },
       ],
     },
     {
       type: 'category',
-      label: '部署安装',
+      label: label('部署安装', 'Deployment'),
       items: [
         {
           type: 'doc',
           id: 'deployment/server-install',
-          label: '服务端安装',
+          label: label('服务端安装', 'Server Installation'),
         },
         {
           type: 'doc',
           id: 'deployment/model-requirements',
-          label: '模型说明',
+          label: label('模型说明', 'Model Notes'),
         },
         {
           type: 'doc',
           id: 'deployment/connector-install',
-          label: 'Connector 安装',
+          label: label('Connector 安装', 'Connector Installation'),
         },
       ],
     },
     {
       type: 'category',
-      label: '使用手册',
+      label: label('使用手册', 'User Manual'),
       items: [
         {
           type: 'doc',
           id: 'user-guide/agent-session',
-          label: 'Agent 会话',
+          label: label('Agent 会话', 'Agent Session'),
         },
         {
           type: 'doc',
           id: 'user-guide/task',
-          label: '任务',
+          label: label('任务', 'Tasks'),
         },
         {
           type: 'doc',
           id: 'user-guide/workspace',
-          label: '工作区文件',
+          label: label('工作区文件', 'Workspace Files'),
         },
         {
           type: 'doc',
           id: 'user-guide/long-task',
-          label: '长任务',
+          label: label('长任务', 'Long-running Tasks'),
         },
         {
           type: 'doc',
           id: 'user-guide/trigger',
-          label: '触发器管理',
+          label: label('触发器管理', 'Triggers'),
         },
         {
           type: 'doc',
           id: 'user-guide/agent-management',
-          label: '智能体管理',
+          label: label('智能体管理', 'Agent Management'),
         },
         {
           type: 'doc',
           id: 'user-guide/skill',
-          label: 'Skill 管理',
+          label: label('Skill 管理', 'Skill Management'),
         },
         {
           type: 'doc',
           id: 'user-guide/tool',
-          label: 'Tool 管理',
+          label: label('Tool 管理', 'Tool Management'),
         },
         {
           type: 'doc',
           id: 'user-guide/connector',
-          label: '连接器',
+          label: label('连接器', 'Connectors'),
         },
         {
           type: 'doc',
           id: 'user-guide/approval-policy',
-          label: '审批策略',
+          label: label('审批策略', 'Approval Policies'),
         },
         {
           type: 'doc',
           id: 'user-guide/model-config',
-          label: '模型配置',
+          label: label('模型配置', 'Model Configuration'),
         },
       ],
     },
     {
       type: 'category',
-      label: '附件',
+      label: label('附件', 'Attachments'),
       items: [
         {
           type: 'doc',
           id: 'user-guide/builtin-skills',
-          label: '内置 Skill 文件',
+          label: label('内置 Skill 文件', 'Built-in Skill Files'),
         },
       ],
     },
     {
       type: 'category',
-      label: '生态合作',
+      label: label('生态合作', 'Ecosystem Partners'),
       items: [
         {
           type: 'doc',
           id: 'cooperation/partners',
-          label: '合作方向',
+          label: label('合作方向', 'Partnership Areas'),
         },
       ],
     },
@@ -139,7 +142,7 @@ const sidebars: SidebarsConfig = {
         {
           type: 'doc',
           id: 'faq/common',
-          label: '常见问题',
+          label: label('常见问题', 'Common Questions'),
         },
       ],
     },
