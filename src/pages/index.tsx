@@ -14,8 +14,9 @@ type Card = {
 
 const homeContent = {
   'zh-CN': {
-    layoutTitle: 'xAgent 使用手册',
-    layoutDescription: '面向团队与公司的多用户智能工作门户。',
+    layoutTitle: 'xAgent - 面向任务完成的多用户智能体工作门户',
+    layoutDescription:
+      'xAgent 是面向任务完成的多用户智能体工作门户，支持服务端部署、Skill、Tool、MCP、连接器、工作区隔离和私有化使用。',
     kicker: 'xAgent 使用手册 · v0.0.2.beta',
     title: '面向任务完成的多用户智能工作门户',
     subtitle:
@@ -118,8 +119,9 @@ const homeContent = {
     ],
   },
   en: {
-    layoutTitle: 'xAgent User Manual',
-    layoutDescription: 'A multi-user AI work portal for teams and companies.',
+    layoutTitle: 'xAgent - Task-first Multi-user AI Agent Portal',
+    layoutDescription:
+      'xAgent is a task-first multi-user AI agent portal for server-side deployment, Skills, Tools, MCP, connectors, workspace isolation, and private use.',
     kicker: 'xAgent User Manual · v0.0.2.beta',
     title: 'A Multi-User AI Work Portal Built for Task Completion',
     subtitle:
