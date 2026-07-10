@@ -16,10 +16,10 @@ const homeContent = {
   'zh-CN': {
     layoutTitle: 'xAgent 使用手册',
     layoutDescription: '面向团队与公司的多用户智能工作门户。',
-    kicker: 'xAgent 使用手册 · v0.0.1.beta',
+    kicker: 'xAgent 使用手册 · v0.0.2.beta',
     title: '面向任务完成的多用户智能工作门户',
     subtitle:
-      'xAgent 当前处于 v0.0.1.beta 测试版阶段，部署在服务器端，团队通过 Web 或连接器访问。管理员准备模型、Skill、工具、外部连接和安全策略后，用户只需要说明目标、提供材料、确认关键动作并查看结果，显著降低使用智能体完成工作的门槛。',
+      'xAgent 当前处于 v0.0.2.beta 测试版阶段，部署在服务器端，团队通过 Web 或连接器访问。管理员准备模型、Skill、工具、外部连接和安全策略后，用户只需要说明目标、提供材料、确认关键动作并查看结果，显著降低使用智能体完成工作的门槛。',
     entriesLabel: '核心定位',
     capabilityEyebrow: '能力概览',
     capabilityTitle: '先把能力组织起来，再让用户直接使用',
@@ -120,10 +120,10 @@ const homeContent = {
   en: {
     layoutTitle: 'xAgent User Manual',
     layoutDescription: 'A multi-user AI work portal for teams and companies.',
-    kicker: 'xAgent User Manual · v0.0.1.beta',
+    kicker: 'xAgent User Manual · v0.0.2.beta',
     title: 'A Multi-User AI Work Portal Built for Task Completion',
     subtitle:
-      'xAgent is currently in beta as v0.0.1.beta. It runs on a server and is accessed through the web UI or connectors. Admins prepare models, Skills, Tools, external connections, and safety rules; users describe goals, provide materials, confirm sensitive actions, and review results.',
+      'xAgent is currently in beta as v0.0.2.beta. It runs on a server and is accessed through the web UI or connectors. Admins prepare models, Skills, Tools, external connections, and safety rules; users describe goals, provide materials, confirm sensitive actions, and review results.',
     entriesLabel: 'Positioning',
     capabilityEyebrow: 'Capabilities',
     capabilityTitle: 'Organize capabilities first, then let users work directly',

@@ -30,7 +30,7 @@ No. xAgent runs on the server. Users access it through the web UI or IM connecto
 
 ### Is the current release stable?
 
-The current version is `v0.0.1.beta`. It is a beta release for deployment trials, scenario validation, and community feedback. Some features are incomplete or may change.
+The current version is `v0.0.2.beta`. It is a beta release for deployment trials, scenario validation, and community feedback. Some features are incomplete or may change.
 
 ### Where should I report issues?
 

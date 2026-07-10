@@ -22,6 +22,25 @@ const config: Config = {
   organizationName: 'coffeehc',
   projectName: 'xagent-docs',
 
+  scripts: [
+    {
+      src: 'https://www.googletagmanager.com/gtag/js?id=G-0J5ERRHMSE',
+      async: true,
+    },
+  ],
+  headTags: [
+    {
+      tagName: 'script',
+      attributes: {},
+      innerHTML: `
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-0J5ERRHMSE');
+`,
+    },
+  ],
+
   onBrokenLinks: 'throw',
   markdown: {
     hooks: {

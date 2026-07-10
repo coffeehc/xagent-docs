@@ -47,19 +47,19 @@ sudo chown -R xagent:xagent /opt/xagent /var/lib/xagent
 
 [xAgent Releases](https://github.com/coffeehc/xagent-releases/releases)
 
-当前版本示例使用 `v0.0.1.beta`。请按服务器系统和 CPU 架构选择对应文件：
+当前版本示例使用 `v0.0.2.beta`。请按服务器系统和 CPU 架构选择对应文件：
 
 | 系统 | 架构 | 文件 |
 | --- | --- | --- |
-| Linux | x86_64 / amd64 | `xagent-v0.0.1.beta-linux-amd64.tar.gz` |
-| Linux | arm64 / aarch64 | `xagent-v0.0.1.beta-linux-arm64.tar.gz` |
-| macOS | Intel | `xagent-v0.0.1.beta-darwin-amd64.tar.gz` |
-| macOS | Apple Silicon | `xagent-v0.0.1.beta-darwin-arm64.tar.gz` |
+| Linux | x86_64 / amd64 | `xagent-v0.0.2.beta-linux-amd64.tar.gz` |
+| Linux | arm64 / aarch64 | `xagent-v0.0.2.beta-linux-arm64.tar.gz` |
+| macOS | Intel | `xagent-v0.0.2.beta-darwin-amd64.tar.gz` |
+| macOS | Apple Silicon | `xagent-v0.0.2.beta-darwin-arm64.tar.gz` |
 
 Linux amd64 示例：
 
 ```bash
-VERSION=v0.0.1.beta
+VERSION=v0.0.2.beta
 ASSET=xagent-${VERSION}-linux-amd64.tar.gz
 
 curl -L -O "https://github.com/coffeehc/xagent-releases/releases/download/${VERSION}/${ASSET}"
@@ -71,7 +71,7 @@ tar -xzf "${ASSET}"
 macOS Apple Silicon 示例：
 
 ```bash
-VERSION=v0.0.1.beta
+VERSION=v0.0.2.beta
 ASSET=xagent-${VERSION}-darwin-arm64.tar.gz
 
 curl -L -O "https://github.com/coffeehc/xagent-releases/releases/download/${VERSION}/${ASSET}"
@@ -83,7 +83,7 @@ tar -xzf "${ASSET}"
 解压后，把发布包中的 xAgent 二进制文件放到固定目录，例如：
 
 ```bash
-sudo install -m 0755 ./xagent-v0.0.1.beta-linux-amd64/xagent /opt/xagent/xagent
+sudo install -m 0755 ./xagent-v0.0.2.beta-linux-amd64/xagent /opt/xagent/xagent
 ```
 
 如果你下载的是其他系统或架构的包，请把上面路径中的目录名替换为实际解压出来的目录。

@@ -6,7 +6,7 @@ xAgent is a server-side, multi-user AI work portal designed for task completion.
 
 ## Beta Notice
 
-xAgent is currently in beta as `v0.0.1.beta`. Many features, built-in Skills, and documentation pages are still being refined.
+xAgent is currently in beta as `v0.0.2.beta`. Many features, built-in Skills, and documentation pages are still being refined.
 
 If you find a problem, please open an issue:
 

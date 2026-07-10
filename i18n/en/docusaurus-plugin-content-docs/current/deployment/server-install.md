@@ -47,19 +47,19 @@ Binary releases are published at:
 
 [xAgent Releases](https://github.com/coffeehc/xagent-releases/releases)
 
-Current example version: `v0.0.1.beta`.
+Current example version: `v0.0.2.beta`.
 
 | System | Architecture | File |
 | --- | --- | --- |
-| Linux | x86_64 / amd64 | `xagent-v0.0.1.beta-linux-amd64.tar.gz` |
-| Linux | arm64 / aarch64 | `xagent-v0.0.1.beta-linux-arm64.tar.gz` |
-| macOS | Intel | `xagent-v0.0.1.beta-darwin-amd64.tar.gz` |
-| macOS | Apple Silicon | `xagent-v0.0.1.beta-darwin-arm64.tar.gz` |
+| Linux | x86_64 / amd64 | `xagent-v0.0.2.beta-linux-amd64.tar.gz` |
+| Linux | arm64 / aarch64 | `xagent-v0.0.2.beta-linux-arm64.tar.gz` |
+| macOS | Intel | `xagent-v0.0.2.beta-darwin-amd64.tar.gz` |
+| macOS | Apple Silicon | `xagent-v0.0.2.beta-darwin-arm64.tar.gz` |
 
 Linux amd64 example:
 
 ```bash
-VERSION=v0.0.1.beta
+VERSION=v0.0.2.beta
 ASSET=xagent-${VERSION}-linux-amd64.tar.gz
 
 curl -L -O "https://github.com/coffeehc/xagent-releases/releases/download/${VERSION}/${ASSET}"
@@ -71,7 +71,7 @@ tar -xzf "${ASSET}"
 Install the binary:
 
 ```bash
-sudo install -m 0755 ./xagent-v0.0.1.beta-linux-amd64/xagent /opt/xagent/xagent
+sudo install -m 0755 ./xagent-v0.0.2.beta-linux-amd64/xagent /opt/xagent/xagent
 ```
 
 If you downloaded a different system or architecture package, replace the extracted directory name accordingly.
