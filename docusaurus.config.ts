@@ -122,10 +122,6 @@ var _hmt = _hmt || [];
     image: 'img/xagent-og.png',
     metadata: [
       {
-        name: 'baidu-site-verification',
-        content: 'codeva-qEaC37bhLl',
-      },
-      {
         name: 'description',
         content: siteDescription,
       },
