@@ -2,8 +2,6 @@ import {themes as prismThemes} from 'prism-react-renderer';
 import type {Config} from '@docusaurus/types';
 import type * as Preset from '@docusaurus/preset-classic';
 
-import {untranslatedEnglishRoutes} from './src/seoRoutes';
-
 const githubUrl = 'https://github.com/coffeehc/xagent-docs';
 const siteUrl = 'https://xagent.xiagaogao.com';
 const zhDescription =
@@ -101,7 +99,6 @@ var _hmt = _hmt || [];
           ignorePatterns: [
             '/search/**',
             '/en/search/**',
-            ...untranslatedEnglishRoutes,
           ],
           lastmod: 'date',
           changefreq: null,
