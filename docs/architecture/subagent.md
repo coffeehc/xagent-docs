@@ -2,6 +2,7 @@
 title: SubAgent
 status: experimental
 updated: 2026-07-05
+unlisted: true
 ---
 
 # SubAgent

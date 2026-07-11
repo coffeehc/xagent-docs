@@ -2,6 +2,8 @@ import {themes as prismThemes} from 'prism-react-renderer';
 import type {Config} from '@docusaurus/types';
 import type * as Preset from '@docusaurus/preset-classic';
 
+import {untranslatedEnglishRoutes} from './src/seoRoutes';
+
 const githubUrl = 'https://github.com/coffeehc/xagent-docs';
 const siteUrl = 'https://xagent.xiagaogao.com';
 const zhDescription =
@@ -18,9 +20,7 @@ const siteDescription = isEnglish ? enDescription : zhDescription;
 const siteKeywords = isEnglish ? enKeywords : zhKeywords;
 
 const config: Config = {
-  title: isEnglish
-    ? 'xAgent - Task-first Multi-user AI Agent Portal'
-    : 'xAgent - 面向任务完成的多用户智能体工作门户',
+  title: 'xAgent',
   tagline: siteDescription,
   favicon: 'img/favicon.ico',
 
@@ -94,8 +94,19 @@ var _hmt = _hmt || [];
       {
         docs: {
           sidebarPath: './sidebars.ts',
+          showLastUpdateTime: true,
         },
         blog: false,
+        sitemap: {
+          ignorePatterns: [
+            '/search/**',
+            '/en/search/**',
+            ...untranslatedEnglishRoutes,
+          ],
+          lastmod: 'date',
+          changefreq: null,
+          priority: null,
+        },
         theme: {
           customCss: './src/css/custom.css',
         },

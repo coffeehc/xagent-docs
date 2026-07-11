@@ -1,7 +1,8 @@
 ---
 title: Connector 安装
+description: 了解如何下载、配置并运行 xAgent Connector，以及默认地址、API Key、config.yml 和服务端接入流程。
 status: beta
-updated: 2026-07-07
+updated: 2026-07-11
 ---
 
 # Connector 安装

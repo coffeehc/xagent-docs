@@ -1,7 +1,8 @@
 ---
 title: First Task
+description: Run your first xAgent task by defining a clear goal, providing source material, following execution, and reviewing verifiable outputs.
 status: stable
-updated: 2026-07-10
+updated: 2026-07-11
 ---
 
 # First Task

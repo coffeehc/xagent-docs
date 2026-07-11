@@ -1,11 +1,11 @@
 ---
-title: What is xAgent
+title: xAgent Product Overview and Core Capabilities
 description: Learn how xAgent helps teams run task-oriented AI agents with server deployment, dynamic capabilities, workspace isolation, and security governance.
 status: stable
 updated: 2026-07-11
 ---
 
-# What is xAgent
+# xAgent Product Overview and Core Capabilities
 
 ## Who This Is For
 
@@ -380,7 +380,7 @@ No. xAgent organizes task entry points and capability calls. Permissions, login 
 
 The main line is the user manual. Ordinary users should first read Getting Started and User Manual pages. Technical materials are only supplementary for maintenance and customization.
 
-## Related Docs
+## Continue Reading
 
 - [Feature and Menu Overview](/docs/user-guide/menu-overview)
 - [Server Installation](/docs/deployment/server-install)

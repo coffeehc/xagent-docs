@@ -1,7 +1,8 @@
 ---
 title: Connector Installation
+description: Learn how to download, configure, and run an xAgent Connector, including its address, API key, config file, and server connection workflow.
 status: beta
-updated: 2026-07-10
+updated: 2026-07-11
 ---
 
 # Connector Installation

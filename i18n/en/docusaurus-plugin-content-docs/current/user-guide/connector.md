@@ -1,11 +1,11 @@
 ---
-title: Connectors
+title: xAgent Connector Setup and Management
 description: Learn how xAgent Connectors differ from MCP, how administrators add Connector services, and how users create authenticated personal connections.
 status: experimental
 updated: 2026-07-11
 ---
 
-# Connectors
+# xAgent Connector Setup and Management
 
 > Status: experimental. Page structure and fields may change.
 
@@ -38,7 +38,7 @@ The documentation uses one **Connectors** page for both concepts. In the product
 
 **My Connections** manages external accounts and channels for the current user. Users only need to know whether the connection works, whether the account is authorized, and what object the task should process.
 
-![My Connections](/img/manual/xagent-connector-my-connections.png)
+![xAgent My Connections page showing WeChat Connector authentication, connection state, and tools](/img/manual/xagent-connector-my-connections.png)
 
 Typical flow:
 
@@ -69,7 +69,7 @@ If the page asks you to choose an account, channel, or connection, follow the UI
 
 Connector Management maintains the system-level connector catalog. Administrators add connector services, read Connector Card, check health, confirm login flows, review tool declarations, and inspect protocol state.
 
-![Add Connector](/img/manual/xagent-connector-add-dialog.png)
+![xAgent Add Connector dialog with Connector address and API key fields](/img/manual/xagent-connector-add-dialog.png)
 
 When adding a Connector, xAgent reads the Connector Card, checks health, and saves it as a system-level catalog entry.
 
@@ -84,7 +84,7 @@ If the Connector runs on another server, use HTTPS reverse proxy and fill the ad
 
 After a Connector is added, administrators can inspect identity, Connector Card ID, status, version, target system, profiles, auth flow, tools, and login flow.
 
-![Connector Details](/img/manual/xagent-connector-detail.png)
+![xAgent WeChat Connector details showing status, protocol, authentication flows, and tools](/img/manual/xagent-connector-detail.png)
 
 Administrators should check:
 
@@ -143,7 +143,7 @@ No. Follow the UI authorization flow. Do not write passwords, tokens, or verific
 
 Not necessarily. Availability depends on connector state, user authorization, connection state, local governance, and approval policies.
 
-## Related Docs
+## Continue Reading
 
 - [Agent Session](/docs/user-guide/agent-session)
 - [Connector Installation](/docs/deployment/connector-install)

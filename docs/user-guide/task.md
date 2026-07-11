@@ -1,7 +1,8 @@
 ---
 title: 任务
+description: 学习如何向 xAgent 清楚描述任务目标、输入材料、限制条件和验收标准，并在执行过程中持续补充与调整。
 status: stable
-updated: 2026-07-06
+updated: 2026-07-11
 ---
 
 # 任务

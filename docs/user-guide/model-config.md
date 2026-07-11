@@ -1,7 +1,8 @@
 ---
 title: 模型配置
+description: 了解 xAgent 当前模型配置页面、Provider 接入、模型能力、连接测试、热切换及未来统一模型路由方向。
 status: stable
-updated: 2026-07-06
+updated: 2026-07-11
 ---
 
 # 模型配置
@@ -20,7 +21,7 @@ updated: 2026-07-06
 
 xAgent 会根据持续测试和实际使用结果优化模型路由，结合任务类型、成本、速度、工具协作需求和上下文情况，选择更适合当前任务的模型组合，以更稳定、更高质量地完成工作。普通用户不需要关心具体该选哪个模型，只需要说明任务目标。
 
-![xAgent 模型配置](/img/manual/xagent-model-config.png)
+![xAgent 模型配置页面，显示模型列表、Provider、连接信息和能力选项](/img/manual/xagent-model-config.png)
 
 ## 什么时候使用
 

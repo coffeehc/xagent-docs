@@ -1,7 +1,8 @@
 ---
 title: 工具
+description: 了解 xAgent 个人工具与公共 Tool 的区别，以及工具的启用、查找、来源范围和任务调用方式。
 status: stable
-updated: 2026-07-10
+updated: 2026-07-11
 ---
 
 # 工具
@@ -16,7 +17,7 @@ updated: 2026-07-10
 
 你通常不需要记住工具名。只要把想完成的动作说清楚，xAgent 会根据当前可用能力处理。
 
-![xAgent 我的工具](/img/manual/xagent-my-tools.png)
+![xAgent 我的工具页面，显示个人可用工具、来源和启用状态](/img/manual/xagent-my-tools.png)
 
 ## 页面入口与范围
 

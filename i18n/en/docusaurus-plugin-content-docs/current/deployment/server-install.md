@@ -1,11 +1,11 @@
 ---
-title: Server Installation
+title: xAgent Server Installation and Deployment
 description: Download and install the xAgent server binary on macOS or Linux, configure system components, HTTPS proxying, and operational settings.
 status: beta
 updated: 2026-07-11
 ---
 
-# Server Installation
+# xAgent Server Installation and Deployment
 
 ## Who This Is For
 
@@ -200,7 +200,7 @@ xAgent includes capabilities for files, tables, PDF, images, OCR, web fetching, 
 
 After deployment, check the runtime environment page in the console.
 
-![xAgent Runtime Environment Check](/img/manual/xagent-system-components.png)
+![xAgent runtime environment page showing system component readiness and errors](/img/manual/xagent-system-components.png)
 
 Preinstall scripts are available in the [scripts/](https://github.com/coffeehc/xagent-docs/tree/main/scripts) directory, including [preinstall-system-components.sh](https://github.com/coffeehc/xagent-docs/blob/main/scripts/preinstall-system-components.sh):
 
@@ -229,7 +229,7 @@ Back up at least:
 - systemd service file.
 - Reverse proxy configuration.
 
-## Related Docs
+## Continue Reading
 
 - [Model Notes](/docs/deployment/model-requirements)
 - [Connector Installation](/docs/deployment/connector-install)

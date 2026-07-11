@@ -2,6 +2,7 @@
 title: Skill
 status: experimental
 updated: 2026-07-05
+unlisted: true
 ---
 
 # Skill

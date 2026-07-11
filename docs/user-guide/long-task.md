@@ -1,7 +1,8 @@
 ---
 title: 长任务
+description: 学习使用 xAgent 执行多步骤、长时间和阶段性交付任务，并通过会话、文件、确认和事件持续跟进。
 status: experimental
-updated: 2026-07-06
+updated: 2026-07-11
 ---
 
 # 长任务

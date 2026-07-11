@@ -1,7 +1,8 @@
 ---
 title: 工作区
+description: 了解 xAgent 工作区如何保存、隔离和管理任务材料、生成文件、中间结果与可下载产物。
 status: stable
-updated: 2026-07-06
+updated: 2026-07-11
 ---
 
 # 工作区

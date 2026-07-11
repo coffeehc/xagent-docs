@@ -1,7 +1,8 @@
 ---
 title: 内置 Skill 文件
+description: 查看 xAgent 测试版提供的内置 Skill 文件、适用范围、社区改进方式和不接入第三方 MCP 的贡献要求。
 status: stable
-updated: 2026-07-07
+updated: 2026-07-11
 ---
 
 # 内置 Skill 文件

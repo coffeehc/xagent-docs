@@ -1,7 +1,8 @@
 ---
 title: Ecosystem Partners
+description: Explore xAgent partnership opportunities for model API providers, token services, and MCP aggregators that can reduce cost and expand task scenarios.
 status: beta
-updated: 2026-07-10
+updated: 2026-07-11
 ---
 
 # Ecosystem Partners

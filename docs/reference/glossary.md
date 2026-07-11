@@ -2,6 +2,7 @@
 title: 术语表
 status: stable
 updated: 2026-07-05
+unlisted: true
 ---
 
 # 术语表

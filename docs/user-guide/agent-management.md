@@ -1,7 +1,8 @@
 ---
 title: 智能体管理
+description: 了解如何在 xAgent 中选择、创建和维护不同任务场景的智能体入口，以及主 Agent 与子 Agent 的使用区别。
 status: stable
-updated: 2026-07-07
+updated: 2026-07-11
 ---
 
 # 智能体管理
@@ -14,7 +15,7 @@ updated: 2026-07-07
 
 智能体管理用于维护不同场景下的工作入口。普通用户可以把它理解为“不同类型的工作助手列表”：有的适合通用问答，有的适合生成 Skill，有的适合处理某类固定业务。
 
-![xAgent 智能体管理](/img/manual/xagent-agent-management.png)
+![xAgent 智能体管理页面，显示可用智能体、能力数量和创建入口](/img/manual/xagent-agent-management.png)
 
 ## 什么时候使用
 

@@ -1,11 +1,11 @@
 ---
-title: Agent Session
+title: Using xAgent Agent Sessions
 description: Learn how to submit tasks, upload files, follow execution, handle approvals, use sub-agents, and refine work in an xAgent Agent Session.
 status: stable
 updated: 2026-07-11
 ---
 
-# Agent Session
+# Using xAgent Agent Sessions
 
 ## Who This Is For
 
@@ -17,7 +17,7 @@ Agent Session is the main work page in xAgent. You can think of it as the place 
 
 It is not a normal chat window. It also handles task submission, context continuation, tool execution, file processing, approvals, sub-session collaboration, and task tuning.
 
-![xAgent Agent Session](/img/manual/xagent-agent-session.png)
+![xAgent Agent Session page showing the session list, task execution, and message input](/img/manual/xagent-agent-session.png)
 
 ## When to Use It
 
@@ -167,7 +167,7 @@ Please check the latest customer message and draft a reply. Do not send it direc
 Please list the plan first. Wait for my confirmation before reading files and generating outputs.
 ```
 
-## Related Docs
+## Continue Reading
 
 - [First Task](/docs/getting-started/first-task)
 - [Tasks](/docs/user-guide/task)

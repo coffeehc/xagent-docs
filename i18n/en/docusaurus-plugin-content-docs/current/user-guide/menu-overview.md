@@ -1,7 +1,8 @@
 ---
 title: Feature and Menu Overview
+description: Explore the xAgent console through full-page screenshots, common user workflows, administrator entries, and current menu descriptions.
 status: stable
-updated: 2026-07-10
+updated: 2026-07-11
 ---
 
 # Feature and Menu Overview
@@ -18,19 +19,19 @@ Screenshots below come from a local example environment. Menus may differ by acc
 
 ## Screenshots
 
-![xAgent Agent Session](/img/manual/xagent-agent-session.png)
+![xAgent Agent Session page showing the session list, task execution, and message input](/img/manual/xagent-agent-session.png)
 
-![xAgent Triggers](/img/manual/xagent-triggers.png)
+![xAgent Trigger Management page showing scheduled task status and actions](/img/manual/xagent-triggers.png)
 
-![xAgent Agent Management](/img/manual/xagent-agent-management.png)
+![xAgent Agent Management page showing public agents and the create action](/img/manual/xagent-agent-management.png)
 
-![xAgent Skill Management](/img/manual/xagent-skill-management.png)
+![xAgent Skill Management page showing personal and public Skill lists](/img/manual/xagent-skill-management.png)
 
-![xAgent My Tools](/img/manual/xagent-my-tools.png)
+![xAgent My Tools page showing Tool sources and enabled states](/img/manual/xagent-my-tools.png)
 
-![xAgent Approval Policy](/img/manual/xagent-approval-policy.png)
+![xAgent Approval Policy page showing safety rules and risk decisions](/img/manual/xagent-approval-policy.png)
 
-![xAgent Model Configuration](/img/manual/xagent-model-config.png)
+![xAgent Model Configuration page showing models, connection settings, and capabilities](/img/manual/xagent-model-config.png)
 
 ## Common Entry Points
 

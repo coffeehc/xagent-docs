@@ -1,10 +1,13 @@
 import type {ReactNode} from 'react';
 import Link from '@docusaurus/Link';
+import Head from '@docusaurus/Head';
 import Layout from '@theme/Layout';
 import Heading from '@theme/Heading';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 
 import styles from './index.module.css';
+
+const siteUrl = 'https://xagent.xiagaogao.com';
 
 type Card = {
   title: string;
@@ -221,11 +224,28 @@ export default function Home(): ReactNode {
   const content =
     homeContent[i18n.currentLocale as keyof typeof homeContent] ??
     homeContent['zh-CN'];
+  const isEnglish = i18n.currentLocale === 'en';
+  const websiteStructuredData = {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: 'xAgent',
+    alternateName: isEnglish ? 'xAgent User Manual' : 'xAgent 使用手册',
+    url: isEnglish ? `${siteUrl}/en/` : `${siteUrl}/`,
+    description: content.layoutDescription,
+    inLanguage: isEnglish ? 'en-US' : 'zh-CN',
+  };
 
   return (
     <Layout
       title={content.layoutTitle}
       description={content.layoutDescription}>
+      <Head>
+        <title>{content.layoutTitle}</title>
+        <meta property="og:title" content={content.layoutTitle} />
+        <script type="application/ld+json">
+          {JSON.stringify(websiteStructuredData)}
+        </script>
+      </Head>
       <main className={styles.page}>
         <section className={styles.hero}>
           <div className={styles.heroInner}>

@@ -1,7 +1,8 @@
 ---
 title: 生态合作
+description: 了解 xAgent 面向模型 API、Token 与 MCP 聚合服务商的生态合作方向、能力要求和联系渠道。
 status: beta
-updated: 2026-07-07
+updated: 2026-07-11
 ---
 
 # 生态合作

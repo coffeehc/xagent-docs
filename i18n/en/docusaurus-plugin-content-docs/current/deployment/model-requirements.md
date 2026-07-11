@@ -65,7 +65,7 @@ The following parameters are development test parameters, not recommended defaul
 
 The development environment also validates prompt-prefix caching. In stable sessions, prefix cache hit rate can usually reach 90% or higher.
 
-![xAgent Prefix Cache Metrics](/img/manual/xagent-prefix-cache-metrics.png)
+![xAgent development model server logs showing a prefix cache hit rate above ninety percent](/img/manual/xagent-prefix-cache-metrics.png)
 
 ```json
 {

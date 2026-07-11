@@ -1,7 +1,8 @@
 ---
 title: Tool Management
+description: Understand personal and public xAgent Tools, their sources, availability controls, discovery, and use during task execution.
 status: stable
-updated: 2026-07-10
+updated: 2026-07-11
 ---
 
 # Tool Management

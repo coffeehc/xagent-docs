@@ -1,7 +1,8 @@
 ---
 title: 第一个任务
+description: 通过一个目标明确且结果可验收的任务，学习在 xAgent 中描述需求、提供材料、跟进执行并查看产物。
 status: stable
-updated: 2026-07-05
+updated: 2026-07-11
 ---
 
 # 第一个任务

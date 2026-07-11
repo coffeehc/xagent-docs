@@ -1,7 +1,8 @@
 ---
 title: 审批与审批策略
+description: 了解 xAgent 如何通过审批和审批策略控制敏感动作，以及普通用户确认操作和管理员配置规则的方法。
 status: stable
-updated: 2026-07-06
+updated: 2026-07-11
 ---
 
 # 审批与审批策略
@@ -16,7 +17,7 @@ updated: 2026-07-06
 
 普通用户只需要知道：当页面提示需要确认时，先看清楚动作和影响，再决定是否允许继续。
 
-![xAgent 审批策略](/img/manual/xagent-approval-policy.png)
+![xAgent 审批策略页面，显示规则类型、风险等级和审批判定配置](/img/manual/xagent-approval-policy.png)
 
 ## 什么时候使用
 

@@ -2,6 +2,7 @@
 title: Config
 status: stable
 updated: 2026-07-05
+unlisted: true
 ---
 
 # Config

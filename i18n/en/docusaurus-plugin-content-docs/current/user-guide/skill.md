@@ -1,11 +1,11 @@
 ---
-title: Skill Management
+title: Create, Publish, and Update xAgent Skills
 description: Understand public and personal xAgent Skills and the workflow for creating, importing, testing, updating, and publishing reusable capabilities.
 status: stable
 updated: 2026-07-11
 ---
 
-# Skill Management
+# Create, Publish, and Update xAgent Skills
 
 ## What It Is
 
@@ -84,7 +84,7 @@ No. Personal Skills are scoped to the current user.
 
 They should not. Public Skills are visible to all users and should be general, safe, and reusable.
 
-## Related Docs
+## Continue Reading
 
 - [Create / Update Skill](/docs/getting-started/create-skill)
 - [Agent Session](/docs/user-guide/agent-session)

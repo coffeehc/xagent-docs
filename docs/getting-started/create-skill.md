@@ -1,7 +1,8 @@
 ---
 title: 创建 / 更新 Skill
+description: 学习通过 Skill 管理或 Agent 会话创建、测试、发布和持续更新 xAgent Skill，并了解个人与公共 Skill 流程。
 status: beta
-updated: 2026-07-07
+updated: 2026-07-11
 ---
 
 # 创建 / 更新 Skill

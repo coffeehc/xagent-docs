@@ -1,7 +1,8 @@
 ---
 title: 触发器
+description: 了解如何使用 xAgent 触发器定时或按事件自动提交任务，以及创建、测试、启用和检查运行状态的方法。
 status: experimental
-updated: 2026-07-06
+updated: 2026-07-11
 ---
 
 # 触发器
@@ -18,7 +19,7 @@ updated: 2026-07-06
 
 触发器不等于任务结果。它负责启动任务，结果仍然要到会话和工作区查看。
 
-![xAgent 触发器管理](/img/manual/xagent-triggers.png)
+![xAgent 触发器管理页面，显示定时任务的状态、执行策略和运行信息](/img/manual/xagent-triggers.png)
 
 ## 什么时候使用
 

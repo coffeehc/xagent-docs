@@ -2,6 +2,7 @@
 title: Error Codes
 status: planned
 updated: 2026-07-05
+unlisted: true
 ---
 
 # Error Codes
