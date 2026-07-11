@@ -1,7 +1,8 @@
 ---
 title: 连接器
+description: 了解 xAgent 连接器与 MCP 的区别，以及管理员接入 Connector、用户创建个人连接和扩展外部系统的方式。
 status: experimental
-updated: 2026-07-09
+updated: 2026-07-11
 ---
 
 # 连接器

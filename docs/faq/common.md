@@ -1,7 +1,8 @@
 ---
 title: 常见问题
+description: 解答 xAgent 安装、使用、模型配置、免费版与商业版、数据安全、Skill、连接器和测试版相关常见问题。
 status: stable
-updated: 2026-07-05
+updated: 2026-07-11
 ---
 
 # 常见问题

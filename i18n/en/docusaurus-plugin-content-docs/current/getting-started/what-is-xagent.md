@@ -1,7 +1,8 @@
 ---
 title: What is xAgent
+description: Learn how xAgent helps teams run task-oriented AI agents with server deployment, dynamic capabilities, workspace isolation, and security governance.
 status: stable
-updated: 2026-07-07
+updated: 2026-07-11
 ---
 
 # What is xAgent

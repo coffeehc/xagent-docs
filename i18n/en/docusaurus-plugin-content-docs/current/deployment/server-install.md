@@ -1,7 +1,8 @@
 ---
 title: Server Installation
+description: Download and install the xAgent server binary on macOS or Linux, configure system components, HTTPS proxying, and operational settings.
 status: beta
-updated: 2026-07-10
+updated: 2026-07-11
 ---
 
 # Server Installation

@@ -1,7 +1,8 @@
 ---
 title: 服务端安装
+description: 下载并安装 xAgent 服务端二进制文件，了解 macOS、Linux 部署、系统组件、配置、HTTPS 代理和升级注意事项。
 status: beta
-updated: 2026-07-07
+updated: 2026-07-11
 ---
 
 # 服务端安装

@@ -1,7 +1,8 @@
 ---
 title: Agent Session
+description: Learn how to submit tasks, upload files, follow execution, handle approvals, use sub-agents, and refine work in an xAgent Agent Session.
 status: stable
-updated: 2026-07-10
+updated: 2026-07-11
 ---
 
 # Agent Session

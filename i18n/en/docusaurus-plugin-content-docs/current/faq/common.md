@@ -1,7 +1,8 @@
 ---
 title: Common Questions
+description: Answers to common questions about xAgent installation, models, security, Skills, Connectors, beta status, and free versus commercial editions.
 status: stable
-updated: 2026-07-10
+updated: 2026-07-11
 ---
 
 # Common Questions

@@ -1,7 +1,8 @@
 ---
 title: 什么是 xAgent
+description: 了解 xAgent 的产品定位、任务型智能体能力、服务端部署方式、安全治理、动态能力与适用场景。
 status: stable
-updated: 2026-07-07
+updated: 2026-07-11
 ---
 
 # 什么是 xAgent

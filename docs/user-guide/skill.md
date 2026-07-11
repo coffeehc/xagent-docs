@@ -1,7 +1,8 @@
 ---
 title: Skill 管理
+description: 了解 xAgent 公共与个人 Skill 的区别，以及创建、导入、测试、更新和提交公共 Skill 的完整使用流程。
 status: stable
-updated: 2026-07-10
+updated: 2026-07-11
 ---
 
 # Skill 管理

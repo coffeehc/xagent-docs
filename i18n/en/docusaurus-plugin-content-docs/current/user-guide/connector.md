@@ -1,7 +1,8 @@
 ---
 title: Connectors
+description: Learn how xAgent Connectors differ from MCP, how administrators add Connector services, and how users create authenticated personal connections.
 status: experimental
-updated: 2026-07-10
+updated: 2026-07-11
 ---
 
 # Connectors

@@ -1,7 +1,8 @@
 ---
 title: Skill Management
+description: Understand public and personal xAgent Skills and the workflow for creating, importing, testing, updating, and publishing reusable capabilities.
 status: stable
-updated: 2026-07-10
+updated: 2026-07-11
 ---
 
 # Skill Management

@@ -1,7 +1,8 @@
 ---
 title: Agent会话
+description: 学习在 xAgent Agent会话中提交任务、上传材料、查看执行过程、处理审批、使用子 Agent 并持续调整任务。
 status: stable
-updated: 2026-07-07
+updated: 2026-07-11
 ---
 
 # Agent会话

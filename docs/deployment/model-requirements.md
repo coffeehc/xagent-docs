@@ -1,7 +1,8 @@
 ---
 title: 模型说明
+description: 了解 xAgent 对模型工具调用、上下文长度和 API 协议的要求，以及测试环境参数与模型配置建议。
 status: beta
-updated: 2026-07-09
+updated: 2026-07-11
 ---
 # 模型说明
 

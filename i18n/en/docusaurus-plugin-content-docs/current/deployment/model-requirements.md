@@ -1,7 +1,8 @@
 ---
 title: Model Notes
+description: Review xAgent model requirements for tool calling, context length, API compatibility, test parameters, and stable long-running tasks.
 status: beta
-updated: 2026-07-10
+updated: 2026-07-11
 ---
 
 # Model Notes
