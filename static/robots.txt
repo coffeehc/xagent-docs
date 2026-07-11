@@ -2,3 +2,4 @@ User-agent: *
 Allow: /
 
 Sitemap: https://xagent.xiagaogao.com/sitemap.xml
+Sitemap: https://xagent.xiagaogao.com/en/sitemap.xml

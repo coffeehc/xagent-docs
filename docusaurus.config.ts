@@ -30,6 +30,7 @@ const config: Config = {
 
   url: siteUrl,
   baseUrl: '/',
+  trailingSlash: true,
   organizationName: 'coffeehc',
   projectName: 'xagent-docs',
 
