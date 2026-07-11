@@ -167,7 +167,9 @@ var _hmt = _hmt || [];
       title: 'xAgent',
       logo: {
         alt: 'xAgent Logo',
-        src: 'img/xagent-logo.png',
+        src: 'img/xagent-navbar-logo.png',
+        width: 32,
+        height: 32,
       },
       items: [
         {

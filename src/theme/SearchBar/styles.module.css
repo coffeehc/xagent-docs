@@ -1,0 +1,26 @@
+.searchTrigger {
+  align-items: center;
+  background: var(--ifm-background-surface-color);
+  border: 1px solid var(--ifm-color-emphasis-300);
+  border-radius: 4px;
+  color: var(--ifm-navbar-link-color);
+  cursor: pointer;
+  display: inline-flex;
+  font: inherit;
+  font-size: 0.875rem;
+  height: 32px;
+  justify-content: center;
+  min-width: 72px;
+  padding: 0 0.75rem;
+}
+
+.searchTrigger:hover,
+.searchTrigger:focus-visible {
+  border-color: var(--ifm-color-primary);
+  color: var(--ifm-color-primary);
+}
+
+.searchTrigger:focus-visible {
+  outline: 2px solid var(--ifm-color-primary-lightest);
+  outline-offset: 2px;
+}
