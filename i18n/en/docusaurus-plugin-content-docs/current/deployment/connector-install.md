@@ -2,14 +2,14 @@
 title: Connector Installation
 description: Learn how to download, configure, and run an xAgent Connector, including its address, API key, config file, and server connection workflow.
 status: beta
-updated: 2026-07-11
+updated: 2026-07-12
 ---
 
 # Connector Installation
 
 ## What It Is
 
-A Connector brings an external entry point into xAgent, such as WeChat, email, enterprise systems, or third-party services. It can receive messages from outside xAgent and actively deliver messages or events into xAgent sessions.
+A Connector brings an external entry point into xAgent, such as WeChat, Telegram, email, enterprise systems, or third-party services. It can receive messages from outside xAgent and actively deliver messages or events into xAgent sessions.
 
 If you only use the web UI, a Connector is optional. Deploy a Connector when you need external messages, IM access, enterprise system access, or third-party services to enter xAgent.
 
@@ -17,7 +17,7 @@ If you only use the web UI, a Connector is optional. Deploy a Connector when you
 
 Deploy a Connector when you want to:
 
-- Submit tasks remotely through WeChat, email, or other IM tools.
+- Submit tasks remotely through WeChat, Telegram, email, or other IM tools.
 - Let external-system messages enter xAgent sessions automatically.
 - Wrap enterprise systems or third-party services into a governed xAgent entry point.
 - Combine external capabilities with Skills to build reusable business scenarios.
@@ -38,20 +38,21 @@ Connector binaries are published at:
 
 [xAgent Connectors Releases](https://github.com/coffeehc/xagent-connectors/releases)
 
-Current WeChat Connector example version: `v0.0.1`.
+The current release is `v0.0.2` and contains both WeChat and Telegram Connector assets.
 
-| System | Architecture | File |
+| Connector | Linux amd64 asset | Linux arm64 asset |
 | --- | --- | --- |
-| Linux | x86_64 / amd64 | `xagent-wechat-connector-v0.0.1-linux-amd64.tar.gz` |
-| Linux | arm64 / aarch64 | `xagent-wechat-connector-v0.0.1-linux-arm64.tar.gz` |
-| macOS | Intel | `xagent-wechat-connector-v0.0.1-darwin-amd64.tar.gz` |
-| macOS | Apple Silicon | `xagent-wechat-connector-v0.0.1-darwin-arm64.tar.gz` |
+| WeChat | `xagent-wechat-connector-v0.0.2-linux-amd64.tar.gz` | `xagent-wechat-connector-v0.0.2-linux-arm64.tar.gz` |
+| Telegram | `xagent-telegram-connector-v0.0.2-linux-amd64.tar.gz` | `xagent-telegram-connector-v0.0.2-linux-arm64.tar.gz` |
 
-Linux amd64 example:
+Intel macOS uses `darwin-amd64`; Apple Silicon uses `darwin-arm64`.
+
+Linux amd64 example. Change `CONNECTOR=wechat` to `telegram` for Telegram:
 
 ```bash
-VERSION=v0.0.1
-ASSET=xagent-wechat-connector-${VERSION}-linux-amd64.tar.gz
+VERSION=v0.0.2
+CONNECTOR=wechat
+ASSET=xagent-${CONNECTOR}-connector-${VERSION}-linux-amd64.tar.gz
 
 curl -L -O "https://github.com/coffeehc/xagent-connectors/releases/download/${VERSION}/${ASSET}"
 curl -L -O "https://github.com/coffeehc/xagent-connectors/releases/download/${VERSION}/SHA256SUMS"
@@ -62,11 +63,9 @@ tar -xzf "${ASSET}"
 Install it:
 
 ```bash
-sudo mkdir -p /opt/xagent-connectors/wechat
-sudo mkdir -p /var/lib/xagent-connectors/wechat
-sudo useradd --system --home /var/lib/xagent-connectors/wechat --shell /usr/sbin/nologin xagent-wechat
-sudo chown -R xagent-wechat:xagent-wechat /opt/xagent-connectors/wechat /var/lib/xagent-connectors/wechat
-sudo install -m 0755 ./xagent-wechat-connector-v0.0.1-linux-amd64/xagent-wechat-connector /opt/xagent-connectors/wechat/xagent-wechat-connector
+sudo install -d -m 0755 "/opt/xagent-connectors/${CONNECTOR}"
+sudo install -m 0755 "./${ASSET%.tar.gz}/xagent-${CONNECTOR}-connector" \
+  "/opt/xagent-connectors/${CONNECTOR}/xagent-${CONNECTOR}-connector"
 ```
 
 ## WeChat Connector Options
@@ -149,6 +148,38 @@ View logs:
 journalctl -u xagent-wechat-connector -f
 ```
 
+## Telegram Connector Options
+
+Telegram Connector uses the Telegram Bot API. Its service configuration does not need a bot token. Each user binds their own `bot_token` and target `chat_id` in **My Connections**, and the connector keeps the token in its local state directory.
+
+| Config | CLI option | Default | Meaning |
+| --- | --- | --- | --- |
+| `telegram_connector.addr` | `--addr` | `127.0.0.1:19091` | Connector HTTP listen address |
+| `telegram_connector.api_key` | `--api-key` | `test-api` | Auth key used by xAgent when calling the Connector |
+| `telegram_connector.state_dir` | `--state-dir` | `~/.xagent/connectors/im-telegram` | User bindings, bot tokens, and message state |
+| `telegram_connector.api_base_url` | `--telegram-api-base-url` | Telegram official API endpoint | Change only for a compatible gateway |
+
+Example:
+
+```bash
+cd /opt/xagent-connectors/telegram
+sudo -u xagent-telegram ./xagent-telegram-connector \
+  --addr 0.0.0.0:19091 \
+  --api-key your-connector-api-key \
+  --state-dir /var/lib/xagent-connectors/telegram/state
+```
+
+You can also use `config.yml`:
+
+```yaml
+telegram_connector:
+  addr: 0.0.0.0:19091
+  api_key: your-connector-api-key
+  state_dir: /var/lib/xagent-connectors/telegram/state
+```
+
+When binding a private chat, the user must first send `/start` or another message to the bot before Telegram Bot API can read the chat.
+
 ## Connect to xAgent
 
 After the Connector starts:
@@ -160,10 +191,11 @@ After the Connector starts:
 5. In **My Connections**, confirm that the current user is authenticated and connected.
 6. Use the connector capability in Agent Session.
 
-The WeChat Connector provides a Connector Card endpoint:
+The default Connector Card endpoints are:
 
 ```text
-http://connector-address:19090/connector-card.json
+http://connector-address:19090/connector-card.json  # WeChat
+http://connector-address:19091/connector-card.json  # Telegram
 ```
 
 Use the reverse-proxy HTTPS address if one is configured.
@@ -180,4 +212,5 @@ Use the reverse-proxy HTTPS address if one is configured.
 
 - [Connectors](/docs/user-guide/connector)
 - [Server Installation](/docs/deployment/server-install)
+- [Telegram Connector source and release notes](https://github.com/coffeehc/xagent-connectors/tree/main/connectors/telegram)
 - [xAgent Connectors](https://github.com/coffeehc/xagent-connectors)

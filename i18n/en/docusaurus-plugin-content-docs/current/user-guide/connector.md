@@ -1,8 +1,8 @@
 ---
 title: xAgent Connector Setup and Management
-description: Learn how xAgent Connectors differ from MCP, how administrators add Connector services, and how users create authenticated personal connections.
+description: Learn how xAgent Connectors differ from MCP, and how to use WeChat, Telegram, and other external-system connections.
 status: experimental
-updated: 2026-07-11
+updated: 2026-07-12
 ---
 
 # xAgent Connector Setup and Management
@@ -19,11 +19,24 @@ Administrators mainly use **Connector Management** to add Connector services, re
 
 ## What It Is
 
-A Connector brings WeChat, email, enterprise systems, third-party services, or other external entry points into xAgent. It can actively receive external messages and deliver messages, account state, executable actions, or events into xAgent.
+A Connector brings WeChat, Telegram, email, enterprise systems, third-party services, or other external entry points into xAgent. It can actively receive external messages and deliver messages, account state, executable actions, or events into xAgent.
 
 For ordinary users, a Connector means "connect my external account." For administrators, it means "connect an external system entry point and turn it into a governed, authorized, callable capability."
 
 Compared with MCP, a Connector focuses more on external systems actively pushing messages into xAgent. MCP focuses more on xAgent calling external tools on demand during a task.
+
+## Currently Released Connectors
+
+The current `v0.0.2` Connector Release contains the following connectors:
+
+| Connector | How it is used | What the user completes |
+| --- | --- | --- |
+| WeChat Connector | Receives and sends WeChat messages | Follow the UI to scan, authorize, or bind in **My Connections** |
+| Telegram Connector | Receives and sends messages through a Telegram Bot | Submit the user's own `bot_token` and target `chat_id` in **My Connections** |
+
+Before binding a Telegram private chat, the user must send `/start` or another message to the bot. The connector keeps the bot token in its own local state directory. It is not written into Tool arguments, Skills, or session messages.
+
+See [Connector Installation](/docs/deployment/connector-install) for downloads and server deployment.
 
 ## Entry Points
 
@@ -104,7 +117,7 @@ xAgent Connector protocol is opened in [coffeehc/xagent-connectors](https://gith
 
 Possible directions:
 
-- Connect Feishu, DingTalk, Telegram, and other IM tools.
+- Connect Feishu, DingTalk, and other IM tools.
 - Connect internal enterprise systems for query, approval, writing, or business operations.
 - Connect third-party generation services such as video, image, audio, or media processing.
 - Connect other agent systems, so xAgent can send tasks to external agents or receive events from them.

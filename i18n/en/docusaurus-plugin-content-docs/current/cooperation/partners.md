@@ -2,12 +2,12 @@
 title: Ecosystem Partners
 description: Explore xAgent partnership opportunities for model API providers, token services, and MCP aggregators that can reduce cost and expand task scenarios.
 status: beta
-updated: 2026-07-11
+updated: 2026-07-12
 ---
 
 # Ecosystem Partners
 
-xAgent is currently in `v0.0.2.beta`. The free binary release is intended to let more users deploy, try, and provide feedback from real task scenarios.
+xAgent is currently in `v0.0.3.beta`. The free binary release is intended to let more users deploy, try, and provide feedback from real task scenarios.
 
 As xAgent is used for long-running tasks, file processing, tool calling, and automated collaboration, model cost and external capability ecosystems become important. We are looking for partners who can reduce long-task running cost and expand real-world scenario coverage.
 

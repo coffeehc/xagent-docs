@@ -2,7 +2,7 @@
 title: xAgent Server Installation and Deployment
 description: Download and install the xAgent server binary on macOS or Linux, configure system components, HTTPS proxying, and operational settings.
 status: beta
-updated: 2026-07-11
+updated: 2026-07-12
 ---
 
 # xAgent Server Installation and Deployment
@@ -48,19 +48,19 @@ Binary releases are published at:
 
 [xAgent Releases](https://github.com/coffeehc/xagent-releases/releases)
 
-Current example version: `v0.0.2.beta`.
+Current example version: `v0.0.3.beta`.
 
 | System | Architecture | File |
 | --- | --- | --- |
-| Linux | x86_64 / amd64 | `xagent-v0.0.2.beta-linux-amd64.tar.gz` |
-| Linux | arm64 / aarch64 | `xagent-v0.0.2.beta-linux-arm64.tar.gz` |
-| macOS | Intel | `xagent-v0.0.2.beta-darwin-amd64.tar.gz` |
-| macOS | Apple Silicon | `xagent-v0.0.2.beta-darwin-arm64.tar.gz` |
+| Linux | x86_64 / amd64 | `xagent-v0.0.3.beta-linux-amd64.tar.gz` |
+| Linux | arm64 / aarch64 | `xagent-v0.0.3.beta-linux-arm64.tar.gz` |
+| macOS | Intel | `xagent-v0.0.3.beta-darwin-amd64.tar.gz` |
+| macOS | Apple Silicon | `xagent-v0.0.3.beta-darwin-arm64.tar.gz` |
 
 Linux amd64 example:
 
 ```bash
-VERSION=v0.0.2.beta
+VERSION=v0.0.3.beta
 ASSET=xagent-${VERSION}-linux-amd64.tar.gz
 
 curl -L -O "https://github.com/coffeehc/xagent-releases/releases/download/${VERSION}/${ASSET}"
@@ -72,7 +72,7 @@ tar -xzf "${ASSET}"
 Install the binary:
 
 ```bash
-sudo install -m 0755 ./xagent-v0.0.2.beta-linux-amd64/xagent /opt/xagent/xagent
+sudo install -m 0755 ./xagent-v0.0.3.beta-linux-amd64/xagent /opt/xagent/xagent
 ```
 
 If you downloaded a different system or architecture package, replace the extracted directory name accordingly.

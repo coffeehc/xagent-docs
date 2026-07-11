@@ -1,8 +1,8 @@
 ---
 title: xAgent 连接器使用与管理
-description: 了解 xAgent 连接器与 MCP 的区别，以及管理员接入 Connector、用户创建个人连接和扩展外部系统的方式。
+description: 了解 xAgent 连接器与 MCP 的区别，以及微信、Telegram 等连接器的接入、个人连接和外部系统扩展方式。
 status: experimental
-updated: 2026-07-11
+updated: 2026-07-12
 ---
 
 # xAgent 连接器使用与管理
@@ -19,11 +19,24 @@ updated: 2026-07-11
 
 ## 这是什么
 
-连接器用于把微信、邮件、企业系统、第三方服务或其他外部入口接入 xAgent。它可以主动接收外部消息，并把消息、账号状态、可执行动作或事件投递到 xAgent。
+连接器用于把微信、Telegram、邮件、企业系统、第三方服务或其他外部入口接入 xAgent。它可以主动接收外部消息，并把消息、账号状态、可执行动作或事件投递到 xAgent。
 
 普通用户可以把连接器理解为“把我的外部账号接进来”。管理员可以把连接器理解为“把一个外部系统入口接入 xAgent，并让它变成可治理、可授权、可调用的能力”。
 
 和 MCP 相比，连接器更偏“外部系统主动把消息送进来”；MCP 更偏“xAgent 在任务中按需调用外部工具”。
+
+## 当前发布的连接器
+
+当前 `v0.0.2` Connector Release 包含下面两种连接器：
+
+| 连接器 | 使用方式 | 用户需要完成的操作 |
+| --- | --- | --- |
+| 微信 Connector | 在微信中接收和发送消息 | 在“我的连接”中按页面提示扫码、授权或绑定 |
+| Telegram Connector | 通过 Telegram Bot 接收和发送消息 | 在“我的连接”中提交自己的 `bot_token` 和目标 `chat_id` |
+
+Telegram 绑定私聊前，用户需要先向 Bot 发送 `/start` 或任意消息。连接器将 Bot Token 保存在自己的本地状态目录中，不会把 Token 写入 Tool 参数、Skill 或会话消息。
+
+连接器的下载与服务端部署步骤见 [Connector 安装](/docs/deployment/connector-install)。
 
 ## 页面入口
 
@@ -108,7 +121,7 @@ xAgent Connector 协议会在 [coffeehc/xagent-connectors](https://github.com/co
 
 常见扩展方向包括：
 
-- 接入飞书、钉钉、Telegram 等 IM 工具。
+- 接入飞书、钉钉等更多 IM 工具。
 - 接入企业内部系统，完成查询、审批、写入或业务操作。
 - 接入第三方模型或生成服务，例如视频生成、图片生成和音视频处理。
 - 连接其他智能体系统，让 xAgent 可以把任务投递给外部智能体，或接收外部智能体事件。
