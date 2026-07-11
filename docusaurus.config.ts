@@ -49,20 +49,8 @@ gtag('js', new Date());
 gtag('config', 'G-0J5ERRHMSE');
 `,
     },
-    {
-      tagName: 'script',
-      attributes: {},
-      innerHTML: `
-var _hmt = _hmt || [];
-(function() {
-  var hm = document.createElement('script');
-  hm.src = 'https://hm.baidu.com/hm.js?67e03b6132c917adc66312376aaba4f8';
-  var s = document.getElementsByTagName('script')[0];
-  s.parentNode.insertBefore(hm, s);
-})();
-`,
-    },
   ],
+  clientModules: ['./src/clientModules/analytics.ts'],
 
   onBrokenLinks: 'throw',
   markdown: {

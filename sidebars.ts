@@ -54,6 +54,22 @@ const sidebars: SidebarsConfig = {
     },
     {
       type: 'category',
+      label: label('场景指南', 'Scenario Guides'),
+      items: [
+        {
+          type: 'doc',
+          id: 'guides/self-hosted-ai-agent',
+          label: label('私有化部署 AI Agent', 'Self-host an AI Agent'),
+        },
+        {
+          type: 'doc',
+          id: 'guides/mcp-vs-connector',
+          label: label('MCP 与连接器的区别', 'MCP vs. Connectors'),
+        },
+      ],
+    },
+    {
+      type: 'category',
       label: label('使用手册', 'User Manual'),
       items: [
         {
