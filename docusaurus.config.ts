@@ -34,6 +34,17 @@ const config: Config = {
 
   clientModules: ['./src/clientModules/analytics.ts'],
 
+  headTags: [
+    {
+      tagName: 'script',
+      attributes: {
+        type: 'module',
+        src: 'https://static.cloudflareinsights.com/beacon.min.js',
+        'data-cf-beacon': '{"token":"b26d9221744c49c0ab0b5f0daa95e43b"}',
+      },
+    },
+  ],
+
   onBrokenLinks: 'throw',
   markdown: {
     hooks: {
