@@ -20,10 +20,10 @@ const homeContent = {
     layoutTitle: 'xAgent - 面向任务完成的多用户智能体工作门户',
     layoutDescription:
       'xAgent 是面向任务完成的多用户智能体工作门户，支持服务端部署、Skill、Tool、MCP、连接器、工作区隔离和私有化使用。',
-    kicker: 'xAgent 使用手册 · v0.0.2.beta',
+    kicker: 'xAgent 使用手册 · v0.0.3.beta',
     title: '面向任务完成的多用户智能工作门户',
     subtitle:
-      'xAgent 当前处于 v0.0.2.beta 测试版阶段，部署在服务器端，团队通过 Web 或连接器访问。管理员准备模型、Skill、工具、外部连接和安全策略后，用户只需要说明目标、提供材料、确认关键动作并查看结果，显著降低使用智能体完成工作的门槛。',
+      'xAgent 当前处于 v0.0.3.beta 测试版阶段，部署在服务器端，团队通过 Web 或连接器访问。管理员准备模型、Skill、工具、外部连接和安全策略后，用户只需要说明目标、提供材料、确认关键动作并查看结果，显著降低使用智能体完成工作的门槛。',
     entriesLabel: '核心定位',
     capabilityEyebrow: '能力概览',
     capabilityTitle: '先把能力组织起来，再让用户直接使用',
@@ -125,10 +125,10 @@ const homeContent = {
     layoutTitle: 'xAgent - Task-first Multi-user AI Agent Portal',
     layoutDescription:
       'xAgent is a task-first multi-user AI agent portal for server-side deployment, Skills, Tools, MCP, connectors, workspace isolation, and private use.',
-    kicker: 'xAgent User Manual · v0.0.2.beta',
+    kicker: 'xAgent User Manual · v0.0.3.beta',
     title: 'A Multi-User AI Work Portal Built for Task Completion',
     subtitle:
-      'xAgent is currently in beta as v0.0.2.beta. It runs on a server and is accessed through the web UI or connectors. Admins prepare models, Skills, Tools, external connections, and safety rules; users describe goals, provide materials, confirm sensitive actions, and review results.',
+      'xAgent is currently in beta as v0.0.3.beta. It runs on a server and is accessed through the web UI or connectors. Admins prepare models, Skills, Tools, external connections, and safety rules; users describe goals, provide materials, confirm sensitive actions, and review results.',
     entriesLabel: 'Positioning',
     capabilityEyebrow: 'Capabilities',
     capabilityTitle: 'Organize capabilities first, then let users work directly',
