@@ -73,10 +73,15 @@ The new model is read by a later execution round. The current implementation the
 - Configure approvals for external sending, deletion, and sensitive data actions.
 - Verify account permissions, connection state, and retry behavior before relying on external systems.
 
-## Continue Reading
+## Related Concepts
 
-- [Long-running Tasks User Manual](/docs/user-guide/long-task)
-- [Agent Session](/docs/user-guide/agent-session)
+- [Tasks](/docs/user-guide/task)
+- [Workspace Files](/docs/user-guide/workspace)
 - [Model Notes](/docs/deployment/model-requirements)
-- [Approvals and Approval Policies](/docs/user-guide/approval-policy)
 - [Connectors](/docs/user-guide/connector)
+
+## Next Steps
+
+- [Create and Follow an Agent Session](/docs/user-guide/agent-session)
+- [Organize Work as a Long-running Task](/docs/user-guide/long-task)
+- [Configure Approval Policies](/docs/user-guide/approval-policy)

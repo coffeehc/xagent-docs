@@ -55,6 +55,53 @@ If the result is close but not good enough, continue in the same session:
 Keep the original wording for key decisions, add a risk column, and save the final result as CSV.
 ```
 
+## Complete Example: Organize Meeting Notes
+
+### Input
+
+Upload a meeting record named `meeting-notes.md`. It contains discussion notes, decisions, owners, and timing requirements.
+
+### Task
+
+```text
+Read meeting-notes.md and extract decisions, action items, owners, due dates, and risks.
+Create a readable Markdown summary and also save the action items as CSV.
+Mark unclear information as "Needs confirmation" instead of filling it in yourself.
+```
+
+### What to Check During Execution
+
+1. xAgent reads the correct source file.
+2. Confirmed owners and dates remain faithful to the source.
+3. Missing information is labeled instead of guessed.
+4. Both Markdown and CSV outputs are generated.
+
+### Output
+
+The workspace can contain:
+
+```text
+meeting-summary.md
+meeting-actions.csv
+```
+
+`meeting-summary.md` may include:
+
+```markdown
+## Decisions
+
+- Release the new version to test users first, then expand based on feedback.
+
+## Action Items
+
+| Action | Owner | Due date | Risk |
+| --- | --- | --- | --- |
+| Organize the test issue list | Alex | July 18 | Some issues do not have reproduction steps |
+| Confirm the release scope | Needs confirmation | Needs confirmation | An owner must provide more information |
+```
+
+The acceptance criteria are clear: the correct source was used, key information is traceable, missing details were not invented, and both output files were saved.
+
 ## What to Include
 
 A good first task usually includes:

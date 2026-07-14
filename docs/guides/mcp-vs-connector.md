@@ -2,7 +2,7 @@
 title: MCP 与连接器有什么区别
 description: 了解 xAgent 中 MCP 和连接器的使用边界：MCP 为任务按需提供外部工具能力，连接器用于接入账号、消息、通道和主动事件入口。
 status: beta
-updated: 2026-07-11
+updated: 2026-07-14
 ---
 
 # MCP 与连接器有什么区别
@@ -84,11 +84,17 @@ MCP 服务接入后，xAgent 建立连接并把服务提供的能力注册为可
 - 涉及发送消息、修改数据、审批或敏感信息访问时，应配置[审批策略](/docs/user-guide/approval-policy)。
 - 连接器服务需要保存外部登录态时，应使用独立运行用户和数据目录，并避免直接暴露管理端口到公网。
 
-## 继续阅读
+## 相关概念
 
 - [连接器](/docs/user-guide/connector)
-- [Connector 安装](/docs/deployment/connector-install)
 - [Tool 管理](/docs/user-guide/tool)
+- [Skill 管理](/docs/user-guide/skill)
 - [审批策略](/docs/user-guide/approval-policy)
-- [xAgent Connectors](https://github.com/coffeehc/xagent-connectors)
 - [AI Agent 审批与安全控制](/docs/guides/agent-approval-security)
+
+## 下一步操作
+
+- [安装 Connector](/docs/deployment/connector-install)
+- [配置并使用连接器](/docs/user-guide/connector)
+- [检查工具与审批范围](/docs/user-guide/tool)
+- [xAgent Connectors](https://github.com/coffeehc/xagent-connectors)

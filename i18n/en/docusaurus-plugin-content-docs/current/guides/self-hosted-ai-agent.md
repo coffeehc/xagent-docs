@@ -2,7 +2,7 @@
 title: How to Self-host an AI Agent
 description: Learn how to deploy xAgent in your own server and data environment, then provide a persistent task-oriented AI Agent through the web UI or IM connectors.
 status: beta
-updated: 2026-07-11
+updated: 2026-07-14
 ---
 
 # How to Self-host an AI Agent
@@ -80,10 +80,15 @@ Use MCP when sessions need to call an external service on demand. Use [Connector
 - xAgent is currently beta. Before production use, validate models, external connections, approvals, and backups with real but non-sensitive tasks.
 - The current version does not support online upgrades. Upgrades require maintenance, backup, binary replacement, and checks. See [Server Installation](/docs/deployment/server-install).
 
-## Continue Reading
+## Related Concepts
 
 - [What is xAgent](/docs/getting-started/what-is-xagent)
-- [Server Installation](/docs/deployment/server-install)
 - [Model Notes](/docs/deployment/model-requirements)
-- [Agent Session](/docs/user-guide/agent-session)
 - [Connectors](/docs/user-guide/connector)
+- [MCP vs. Connectors](/docs/guides/mcp-vs-connector)
+
+## Next Steps
+
+- [Install the xAgent Server](/docs/deployment/server-install)
+- [Complete Your First Task](/docs/getting-started/first-task)
+- [Configure Approval Policies](/docs/user-guide/approval-policy)

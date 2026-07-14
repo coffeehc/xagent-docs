@@ -80,10 +80,15 @@ Enterprise deployments should also use:
 - HTTPS, network controls, and firewalls.
 - Real task validation for high-risk tools and external systems.
 
-## Continue Reading
+## Related Concepts
 
-- [Approvals and Approval Policies](/docs/user-guide/approval-policy)
-- [Agent Session](/docs/user-guide/agent-session)
 - [Tool Management](/docs/user-guide/tool)
+- [Skill Management](/docs/user-guide/skill)
 - [Connectors](/docs/user-guide/connector)
+- [MCP vs. Connectors](/docs/guides/mcp-vs-connector)
+
+## Next Steps
+
+- [Configure Approval Policies](/docs/user-guide/approval-policy)
+- [Validate Approval in an Agent Session](/docs/user-guide/agent-session)
 - [How to Self-host an AI Agent](/docs/guides/self-hosted-ai-agent)

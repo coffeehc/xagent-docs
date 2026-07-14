@@ -2,7 +2,7 @@
 title: "MCP vs. Connectors: What Is the Difference?"
 description: "Understand the boundary between MCP and Connectors in xAgent: MCP provides external tools on demand, while Connectors bring in accounts, messages, channels, and proactive events."
 status: beta
-updated: 2026-07-11
+updated: 2026-07-14
 ---
 
 # MCP vs. Connectors: What Is the Difference?
@@ -84,11 +84,17 @@ If an Agent only needs stable APIs for query or actions, start with MCP. If the 
 - Configure [Approval Policies](/docs/user-guide/approval-policy) for sending messages, changing data, approvals, and sensitive information access.
 - When a Connector stores external login state, run it with a dedicated user and data directory, and do not expose its management port directly to the public internet.
 
-## Continue Reading
+## Related Concepts
 
 - [Connectors](/docs/user-guide/connector)
-- [Connector Installation](/docs/deployment/connector-install)
 - [Tool Management](/docs/user-guide/tool)
+- [Skill Management](/docs/user-guide/skill)
 - [Approval Policies](/docs/user-guide/approval-policy)
-- [xAgent Connectors](https://github.com/coffeehc/xagent-connectors)
 - [AI Agent Approval and Safety](/docs/guides/agent-approval-security)
+
+## Next Steps
+
+- [Install a Connector](/docs/deployment/connector-install)
+- [Configure and Use Connectors](/docs/user-guide/connector)
+- [Review Tools and Approval Scope](/docs/user-guide/tool)
+- [xAgent Connectors](https://github.com/coffeehc/xagent-connectors)
