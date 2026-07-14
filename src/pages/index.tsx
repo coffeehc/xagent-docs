@@ -1,5 +1,4 @@
 import type {ReactNode} from 'react';
-import Link from '@docusaurus/Link';
 import Head from '@docusaurus/Head';
 import Layout from '@theme/Layout';
 import Heading from '@theme/Heading';
@@ -281,6 +280,7 @@ export default function Home(): ReactNode {
     homeContent['zh-CN'];
   const isEnglish = i18n.currentLocale === 'en';
   const localeUrl = isEnglish ? `${siteUrl}/en/` : `${siteUrl}/`;
+  const localHref = (path: string) => (isEnglish ? `/en${path}` : path);
   const structuredData = {
     '@context': 'https://schema.org',
     '@graph': [
@@ -366,15 +366,23 @@ export default function Home(): ReactNode {
               {content.subtitle}
             </p>
             <div className={styles.heroActions}>
-              <Link className={styles.primaryAction} to="/docs/deployment/server-install">
+              <a
+                className={styles.primaryAction}
+                href={localHref('/docs/deployment/server-install')}>
                 {content.primaryAction}
-              </Link>
-              <Link className={styles.secondaryAction} href={githubUrl}>
+              </a>
+              <a
+                className={styles.secondaryAction}
+                href={githubUrl}
+                rel="noopener noreferrer"
+                target="_blank">
                 {content.secondaryAction}
-              </Link>
-              <Link className={styles.learnAction} to="/docs/getting-started/what-is-xagent">
+              </a>
+              <a
+                className={styles.learnAction}
+                href={localHref('/docs/getting-started/what-is-xagent')}>
                 {content.learnAction}
-              </Link>
+              </a>
             </div>
           </div>
         </section>
@@ -398,10 +406,13 @@ export default function Home(): ReactNode {
             </Heading>
             <div className={styles.capabilityGrid}>
               {content.capabilityCards.map((card) => (
-                <Link className={styles.capabilityCard} to={card.to} key={card.title}>
+                <a
+                  className={styles.capabilityCard}
+                  href={localHref(card.to!)}
+                  key={card.title}>
                   <h3>{card.title}</h3>
                   <p>{card.description}</p>
-                </Link>
+                </a>
               ))}
             </div>
           </div>
@@ -439,10 +450,13 @@ export default function Home(): ReactNode {
             </Heading>
             <div className={styles.guideGrid}>
               {content.guideCards.map((card) => (
-                <Link className={styles.guideCard} to={card.to} key={card.title}>
+                <a
+                  className={styles.guideCard}
+                  href={localHref(card.to!)}
+                  key={card.title}>
                   <h3>{card.title}</h3>
                   <p>{card.description}</p>
-                </Link>
+                </a>
               ))}
             </div>
           </div>
