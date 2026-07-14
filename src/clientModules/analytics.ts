@@ -14,6 +14,42 @@ declare global {
 }
 
 let isTrackingInitialized = false;
+let isCloudflareAnalyticsLoaded = false;
+
+const cloudflareAnalyticsEvents: Array<keyof WindowEventMap> = [
+  'keydown',
+  'pointerdown',
+  'scroll',
+  'touchstart',
+];
+
+function loadCloudflareAnalytics(): void {
+  if (isCloudflareAnalyticsLoaded) {
+    return;
+  }
+
+  isCloudflareAnalyticsLoaded = true;
+  cloudflareAnalyticsEvents.forEach((eventName) => {
+    window.removeEventListener(eventName, loadCloudflareAnalytics);
+  });
+
+  const script = document.createElement('script');
+  script.type = 'module';
+  script.src = 'https://static.cloudflareinsights.com/beacon.min.js';
+  script.dataset.cfBeacon = JSON.stringify({
+    token: 'b26d9221744c49c0ab0b5f0daa95e43b',
+  });
+  document.head.appendChild(script);
+}
+
+function initializeCloudflareAnalytics(): void {
+  cloudflareAnalyticsEvents.forEach((eventName) => {
+    window.addEventListener(eventName, loadCloudflareAnalytics, {
+      once: true,
+      passive: true,
+    });
+  });
+}
 
 function getDestinationType(url: URL): OutboundDestinationType | undefined {
   if (url.hostname !== 'github.com') {
@@ -69,4 +105,5 @@ export function onRouteDidUpdate(): void {
 
   isTrackingInitialized = true;
   document.addEventListener('click', trackOutboundClick);
+  initializeCloudflareAnalytics();
 }

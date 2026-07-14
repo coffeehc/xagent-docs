@@ -14,6 +14,7 @@ const enKeywords =
   'xAgent, multi-user AI agent portal, self-hosted AI agent platform, task-oriented AI agent, AI agent skills, AI tools, MCP, connectors, private AI deployment';
 const currentLocale = process.env.DOCUSAURUS_CURRENT_LOCALE ?? 'zh-CN';
 const isEnglish = currentLocale === 'en';
+const localeSiteUrl = isEnglish ? `${siteUrl}/en` : siteUrl;
 const siteDescription = isEnglish ? enDescription : zhDescription;
 const siteKeywords = isEnglish ? enKeywords : zhKeywords;
 
@@ -33,17 +34,6 @@ const config: Config = {
   projectName: 'xagent-docs',
 
   clientModules: ['./src/clientModules/analytics.ts'],
-
-  headTags: [
-    {
-      tagName: 'script',
-      attributes: {
-        type: 'module',
-        src: 'https://static.cloudflareinsights.com/beacon.min.js',
-        'data-cf-beacon': '{"token":"b26d9221744c49c0ab0b5f0daa95e43b"}',
-      },
-    },
-  ],
 
   onBrokenLinks: 'throw',
   markdown: {
@@ -154,10 +144,10 @@ const config: Config = {
       },
       items: [
         {
-          type: 'docSidebar',
-          sidebarId: 'docsSidebar',
+          href: `${localeSiteUrl}/docs/getting-started/what-is-xagent/`,
           position: 'left',
           label: '使用手册',
+          target: '_self',
         },
         {
           type: 'localeDropdown',
@@ -178,15 +168,18 @@ const config: Config = {
           items: [
             {
               label: '功能导览与菜单入口',
-              to: '/docs/user-guide/menu-overview',
+              href: `${localeSiteUrl}/docs/user-guide/menu-overview/`,
+              target: '_self',
             },
             {
               label: '什么是 xAgent',
-              to: '/docs/getting-started/what-is-xagent',
+              href: `${localeSiteUrl}/docs/getting-started/what-is-xagent/`,
+              target: '_self',
             },
             {
               label: '生态合作',
-              to: '/docs/cooperation/partners',
+              href: `${localeSiteUrl}/docs/cooperation/partners/`,
+              target: '_self',
             },
           ],
         },
