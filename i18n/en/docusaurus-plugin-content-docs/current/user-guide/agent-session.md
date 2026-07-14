@@ -169,6 +169,7 @@ Please list the plan first. Wait for my confirmation before reading files and ge
 
 ## Continue Reading
 
+- [Shortcut Instructions](/docs/user-guide/shortcut-instructions)
 - [First Task](/docs/getting-started/first-task)
 - [Tasks](/docs/user-guide/task)
 - [Workspace Files](/docs/user-guide/workspace)

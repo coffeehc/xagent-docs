@@ -89,6 +89,11 @@ const sidebars: SidebarsConfig = {
         },
         {
           type: 'doc',
+          id: 'user-guide/shortcut-instructions',
+          label: label('快捷指令', 'Shortcut Instructions'),
+        },
+        {
+          type: 'doc',
           id: 'user-guide/task',
           label: label('任务', 'Tasks'),
         },
