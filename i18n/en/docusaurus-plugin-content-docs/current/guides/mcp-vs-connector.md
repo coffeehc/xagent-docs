@@ -86,6 +86,7 @@ If an Agent only needs stable APIs for query or actions, start with MCP. If the 
 
 ## Related Concepts
 
+- [How AI Agents Discover and Load Tools on Demand](/docs/guides/ai-agent-dynamic-tool-discovery)
 - [Connectors](/docs/user-guide/connector)
 - [Tool Management](/docs/user-guide/tool)
 - [Skill Management](/docs/user-guide/skill)

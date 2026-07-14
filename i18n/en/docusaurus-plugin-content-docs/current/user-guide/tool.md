@@ -77,6 +77,7 @@ Some tools are internal or loaded on demand. The number ordinary users see may b
 
 ## Related Docs
 
+- [How AI Agents Discover and Load Tools on Demand](/docs/guides/ai-agent-dynamic-tool-discovery)
 - [Agent Session](/docs/user-guide/agent-session)
 - [Skill Management](/docs/user-guide/skill)
 - [Connectors](/docs/user-guide/connector)

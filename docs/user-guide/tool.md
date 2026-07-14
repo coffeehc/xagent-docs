@@ -182,6 +182,7 @@ updated: 2026-07-11
 
 ## 相关文档
 
+- [AI Agent 如何按需发现和加载工具与 Skill](/docs/guides/ai-agent-dynamic-tool-discovery)
 - [Agent会话](/docs/user-guide/agent-session)
 - [工作区](/docs/user-guide/workspace)
 - [Skill 管理](/docs/user-guide/skill)

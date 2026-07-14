@@ -187,6 +187,7 @@ Skill 管理 页面会展示技能卡片。常见信息包括：
 
 ## 继续阅读
 
+- [AI Agent 如何按需发现和加载工具与 Skill](/docs/guides/ai-agent-dynamic-tool-discovery)
 - [创建 / 更新 Skill](/docs/getting-started/create-skill)
 - [内置 Skill 文件](/docs/user-guide/builtin-skills)
 - [Agent会话](/docs/user-guide/agent-session)

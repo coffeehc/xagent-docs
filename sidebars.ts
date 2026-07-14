@@ -68,6 +68,11 @@ const sidebars: SidebarsConfig = {
         },
         {
           type: 'doc',
+          id: 'guides/ai-agent-dynamic-tool-discovery',
+          label: label('AI Agent 动态发现能力', 'Dynamic Capability Discovery'),
+        },
+        {
+          type: 'doc',
           id: 'guides/agent-approval-security',
           label: label('AI Agent 审批与安全控制', 'AI Agent Approval and Safety'),
         },

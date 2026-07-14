@@ -86,6 +86,7 @@ They should not. Public Skills are visible to all users and should be general, s
 
 ## Continue Reading
 
+- [How AI Agents Discover and Load Tools on Demand](/docs/guides/ai-agent-dynamic-tool-discovery)
 - [Create / Update Skill](/docs/getting-started/create-skill)
 - [Agent Session](/docs/user-guide/agent-session)
 - [Tool Management](/docs/user-guide/tool)

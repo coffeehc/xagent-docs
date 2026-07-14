@@ -86,6 +86,7 @@ MCP 服务接入后，xAgent 建立连接并把服务提供的能力注册为可
 
 ## 相关概念
 
+- [AI Agent 如何按需发现和加载工具与 Skill](/docs/guides/ai-agent-dynamic-tool-discovery)
 - [连接器](/docs/user-guide/connector)
 - [Tool 管理](/docs/user-guide/tool)
 - [Skill 管理](/docs/user-guide/skill)
