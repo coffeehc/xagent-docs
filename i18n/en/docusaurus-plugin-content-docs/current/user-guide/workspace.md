@@ -118,6 +118,7 @@ Yes, but it usually needs a Tool, a connection, and approval. Check that the con
 
 ## Continue Reading
 
+- [How xAgent Isolates Workspaces with a Virtual File System](/docs/guides/multi-user-workspace-isolation)
 - [Agent Session](/docs/user-guide/agent-session)
 - [Tasks](/docs/user-guide/task)
 - [Tool Management](/docs/user-guide/tool)

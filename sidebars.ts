@@ -63,6 +63,11 @@ const sidebars: SidebarsConfig = {
         },
         {
           type: 'doc',
+          id: 'guides/multi-user-workspace-isolation',
+          label: label('虚拟文件系统与工作区隔离', 'Virtual Filesystem Isolation'),
+        },
+        {
+          type: 'doc',
           id: 'guides/agent-approval-security',
           label: label('AI Agent 审批与安全控制', 'AI Agent Approval and Safety'),
         },

@@ -83,6 +83,7 @@ Use MCP when sessions need to call an external service on demand. Use [Connector
 ## Related Concepts
 
 - [What is xAgent](/docs/getting-started/what-is-xagent)
+- [How xAgent Isolates Workspaces with a Virtual File System](/docs/guides/multi-user-workspace-isolation)
 - [Model Notes](/docs/deployment/model-requirements)
 - [Connectors](/docs/user-guide/connector)
 - [MCP vs. Connectors](/docs/guides/mcp-vs-connector)
