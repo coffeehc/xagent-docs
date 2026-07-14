@@ -169,7 +169,7 @@ Therefore, xAgent recommends using self-evolution for Skill improvement with cle
 
 xAgent is currently released as a binary, but it keeps an open attitude toward users. Within their permissions, users can adjust prompts, Skills, tools, external connections, and approval policies. Administrators can maintain models and system-level configuration without redeploying the service every time configuration changes.
 
-Most settings support hot switching. During task execution, you can also switch prompts, Skills, or models according to the actual situation. For example, the first half of a task can use a model better suited for organizing materials, and the second half can switch to a model better suited for writing reports. If the current Skill is not suitable, you can adjust or replace the Skill and continue the task.
+Most settings can be adjusted without restarting the service or rebuilding the session. During task progress, you can change prompts, Skills, or models for later execution rounds. For example, after the material-organizing stage, later work can use a model better suited for report writing. If the current Skill is unsuitable, it can be adjusted or replaced before continuing. A model-and-tool loop that is already running keeps its selected model and is not rewritten immediately by a newly saved setting.
 
 This freedom is not meant to shift configuration burden to ordinary users. The goal is for most users to directly use prepared capabilities, while experienced users can fine-tune personal capabilities and administrators can turn stable results into team-ready configuration.
 
@@ -261,7 +261,7 @@ Ordinary users do not need to understand the technical implementation. Administr
 - Keys are independently managed by xAgent. Tools reference keys through placeholders, and actual values are only replaced during internal tool calls.
 - Skills can be managed, edited, and loaded inside the system to capture stable task methods.
 - Sessions have Skill and Tool discovery and loading capabilities by default, allowing task execution capability to expand on demand while saving context.
-- Prompts, Skills, models, and other settings can be hot-switched, making it easier to adjust strategy during task execution.
+- Prompts, Skills, models, and other settings can be adjusted without rebuilding the session. The current execution round stays stable and later work uses the new settings.
 - Skills can be produced, tested, optimized, and published with xAgent's assistance, but self-evolution flows should have clear goals, acceptance criteria, and rollback.
 
 ## Roadmap
@@ -346,7 +346,7 @@ Not by default. xAgent can continuously optimize a specific Skill through prompt
 
 ### Does binary release limit configuration freedom?
 
-No. Although xAgent is released as a binary, models, prompts, Skills, tools, external connections, and approval policies can be maintained in the system. Many settings support hot switching, and prompts, Skills, or models can also be adjusted during task execution.
+No. Although xAgent is released as a binary, models, prompts, Skills, tools, external connections, and approval policies can be maintained in the system. Many settings do not require a service restart or a new session. A running execution round keeps its current configuration, while later work uses the saved changes.
 
 ### Do ordinary users need to configure tools and Skills themselves?
 

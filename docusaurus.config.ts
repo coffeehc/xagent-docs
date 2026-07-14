@@ -5,11 +5,11 @@ import type * as Preset from '@docusaurus/preset-classic';
 const githubUrl = 'https://github.com/coffeehc/xagent-docs';
 const siteUrl = 'https://xagent.xiagaogao.com';
 const zhDescription =
-  'xAgent 是面向任务完成的多用户智能体工作门户，支持服务端部署、Skill、Tool、MCP、连接器、工作区隔离和私有化使用。';
+  'xAgent 是面向任务完成、可私有化部署的多用户 AI Agent 工作门户，支持 Skill、Tool、MCP、连接器、工作区隔离和安全治理。';
 const enDescription =
-  'xAgent is a task-first multi-user AI agent portal for server-side deployment, Skills, Tools, MCP, connectors, workspace isolation, and private use.';
+  'xAgent is a task-first, self-hosted multi-user AI agent platform with Skills, Tools, MCP, connectors, workspace isolation, and safety governance.';
 const zhKeywords =
-  'xAgent, 多用户智能体, 智能体工作门户, AI Agent, 私有化部署, 企业智能体基座, Skill, Tool, MCP, Connector, 长任务智能体';
+  'xAgent, AI Agent 平台, 多用户 AI Agent, 私有化部署 AI Agent, 智能体工作门户, 团队智能体, Skill, Tool, MCP, Connector, 长任务智能体';
 const enKeywords =
   'xAgent, multi-user AI agent portal, self-hosted AI agent platform, task-oriented AI agent, AI agent skills, AI tools, MCP, connectors, private AI deployment';
 const currentLocale = process.env.DOCUSAURUS_CURRENT_LOCALE ?? 'zh-CN';
@@ -133,8 +133,8 @@ const config: Config = {
       {
         name: 'twitter:title',
         content: isEnglish
-          ? 'xAgent - Task-first Multi-user AI Agent Portal'
-          : 'xAgent - 面向任务完成的多用户智能体工作门户',
+          ? 'xAgent - Task-First Self-Hosted Multi-User AI Agent Platform'
+          : 'xAgent - 可私有化部署的多用户 AI Agent 工作门户',
       },
       {
         name: 'twitter:description',

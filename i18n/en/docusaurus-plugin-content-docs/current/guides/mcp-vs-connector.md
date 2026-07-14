@@ -25,6 +25,12 @@ Both MCP and Connectors extend xAgent, but they solve different problems. A simp
 
 This is the current division of responsibilities in xAgent, not an absolute statement about every external protocol. Choose based on whether the task needs accounts, message entry points, or proactive events.
 
+## Current Runtime Path
+
+After an MCP service is configured, xAgent connects to it and registers its capabilities as callable tools. Sessions discover, load, and invoke those tools on demand. The primary MCP path is a session actively calling a capability; it does not own xAgent user-account binding or proactive message entry.
+
+A Connector is an independent external bridge service that owns target-system protocol handling, login state, and channel state. It can actively push an external message to xAgent. xAgent then converts the message into a session event, uses an explicit session reference when one is provided, and otherwise routes it to the current user's main session. Session events remain within one user's scope and do not support cross-user session communication.
+
 ## When to Use MCP
 
 Use MCP when an external system is mainly a capability that should be called when needed. Examples include:
@@ -85,3 +91,4 @@ If an Agent only needs stable APIs for query or actions, start with MCP. If the 
 - [Tool Management](/docs/user-guide/tool)
 - [Approval Policies](/docs/user-guide/approval-policy)
 - [xAgent Connectors](https://github.com/coffeehc/xagent-connectors)
+- [AI Agent Approval and Safety](/docs/guides/agent-approval-security)

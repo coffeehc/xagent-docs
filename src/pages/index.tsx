@@ -8,6 +8,8 @@ import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import styles from './index.module.css';
 
 const siteUrl = 'https://xagent.xiagaogao.com';
+const releaseUrl =
+  'https://github.com/coffeehc/xagent-releases/releases/tag/v0.0.3.beta';
 
 type Card = {
   title: string;
@@ -17,13 +19,13 @@ type Card = {
 
 const homeContent = {
   'zh-CN': {
-    layoutTitle: 'xAgent - 面向任务完成的多用户智能体工作门户',
+    layoutTitle: 'xAgent - 可私有化部署的多用户 AI Agent 工作门户',
     layoutDescription:
-      'xAgent 是面向任务完成的多用户智能体工作门户，支持服务端部署、Skill、Tool、MCP、连接器、工作区隔离和私有化使用。',
+      'xAgent 是面向任务完成、可私有化部署的多用户 AI Agent 工作门户，支持 Skill、Tool、MCP、连接器、工作区隔离和安全治理。',
     kicker: 'xAgent 使用手册 · v0.0.3.beta',
-    title: '面向任务完成的多用户智能工作门户',
+    title: '可私有化部署的多用户 AI Agent 工作门户',
     subtitle:
-      'xAgent 当前处于 v0.0.3.beta 测试版阶段，部署在服务器端，团队通过 Web 或连接器访问。管理员准备模型、Skill、工具、外部连接和安全策略后，用户只需要说明目标、提供材料、确认关键动作并查看结果，显著降低使用智能体完成工作的门槛。',
+      'xAgent 当前处于 v0.0.3.beta 测试版阶段，部署在服务器端，团队通过 Web 或 IM 连接器访问。管理员准备模型、Skill、工具、外部连接和安全策略后，用户只需要说明目标、提供材料、确认关键动作并查看结果，显著降低使用 AI Agent 完成工作的门槛。',
     entriesLabel: '核心定位',
     capabilityEyebrow: '能力概览',
     capabilityTitle: '先把能力组织起来，再让用户直接使用',
@@ -87,7 +89,7 @@ const homeContent = {
       },
       {
         title: '私有化部署',
-        description: '暂无官方 SaaS 计划，推荐部署在自己的服务器和数据环境中；配合本地模型可提高数据私有化程度。',
+        description: '当前测试版支持 5 个用户免费使用，暂无官方 SaaS 计划；推荐部署在自己的服务器和数据环境中。',
         to: '/docs/getting-started/what-is-xagent#发布定位',
       },
     ] satisfies Card[],
@@ -122,11 +124,11 @@ const homeContent = {
     ],
   },
   en: {
-    layoutTitle: 'xAgent - Task-first Multi-user AI Agent Portal',
+    layoutTitle: 'xAgent - Task-First Self-Hosted Multi-User AI Agent Platform',
     layoutDescription:
-      'xAgent is a task-first multi-user AI agent portal for server-side deployment, Skills, Tools, MCP, connectors, workspace isolation, and private use.',
+      'xAgent is a task-first, self-hosted multi-user AI agent platform with Skills, Tools, MCP, connectors, workspace isolation, and safety governance.',
     kicker: 'xAgent User Manual · v0.0.3.beta',
-    title: 'A Multi-User AI Work Portal Built for Task Completion',
+    title: 'A Task-First, Self-Hosted Multi-User AI Agent Platform',
     subtitle:
       'xAgent is currently in beta as v0.0.3.beta. It runs on a server and is accessed through the web UI or connectors. Admins prepare models, Skills, Tools, external connections, and safety rules; users describe goals, provide materials, confirm sensitive actions, and review results.',
     entriesLabel: 'Positioning',
@@ -182,7 +184,7 @@ const homeContent = {
       },
       {
         title: 'Release positioning',
-        description: 'The current free binary is for evaluation, deployment trials, task workflow validation, and community feedback.',
+        description: 'The current beta is free for up to five users and is intended for evaluation, deployment trials, and task workflow validation.',
         to: '/docs/getting-started/what-is-xagent#release-positioning',
       },
     ] satisfies Card[],
@@ -225,14 +227,68 @@ export default function Home(): ReactNode {
     homeContent[i18n.currentLocale as keyof typeof homeContent] ??
     homeContent['zh-CN'];
   const isEnglish = i18n.currentLocale === 'en';
-  const websiteStructuredData = {
+  const localeUrl = isEnglish ? `${siteUrl}/en/` : `${siteUrl}/`;
+  const structuredData = {
     '@context': 'https://schema.org',
-    '@type': 'WebSite',
-    name: 'xAgent',
-    alternateName: isEnglish ? 'xAgent User Manual' : 'xAgent 使用手册',
-    url: isEnglish ? `${siteUrl}/en/` : `${siteUrl}/`,
-    description: content.layoutDescription,
-    inLanguage: isEnglish ? 'en-US' : 'zh-CN',
+    '@graph': [
+      {
+        '@type': 'WebSite',
+        '@id': `${localeUrl}#website`,
+        name: 'xAgent',
+        alternateName: isEnglish
+          ? 'xAgent Self-Hosted Multi-User AI Agent Platform'
+          : 'xAgent 多用户 AI Agent 工作门户',
+        url: localeUrl,
+        description: content.layoutDescription,
+        inLanguage: isEnglish ? 'en-US' : 'zh-CN',
+      },
+      {
+        '@type': 'SoftwareApplication',
+        '@id': `${siteUrl}/#software`,
+        name: 'xAgent',
+        alternateName: isEnglish
+          ? 'xAgent Task-First AI Agent Platform'
+          : 'xAgent 面向任务完成的 AI Agent 平台',
+        url: localeUrl,
+        image: `${siteUrl}/img/xagent-og.png`,
+        description: content.layoutDescription,
+        applicationCategory: 'BusinessApplication',
+        applicationSubCategory: isEnglish
+          ? 'Self-hosted multi-user AI agent platform'
+          : '可私有化部署的多用户 AI Agent 平台',
+        operatingSystem: 'Linux, macOS',
+        softwareVersion: '0.0.3.beta',
+        downloadUrl: releaseUrl,
+        inLanguage: isEnglish ? 'en-US' : 'zh-CN',
+        featureList: isEnglish
+          ? [
+              'Self-hosted server deployment',
+              'Multi-user workspace isolation',
+              'Shared Skills and Tools',
+              'MCP and Connector extensions',
+              'Long-running tasks and session events',
+              'Approval and secret safety governance',
+            ]
+          : [
+              '服务端私有化部署',
+              '多用户工作区隔离',
+              '共享 Skill 与 Tool',
+              'MCP 与连接器扩展',
+              '长任务与会话事件',
+              '审批与密钥安全治理',
+            ],
+        offers: {
+          '@type': 'Offer',
+          price: '0',
+          priceCurrency: 'USD',
+          availability: 'https://schema.org/InStock',
+          url: releaseUrl,
+          description: isEnglish
+            ? 'Free beta for up to five users'
+            : '5 个用户内免费使用的测试版',
+        },
+      },
+    ],
   };
 
   return (
@@ -243,7 +299,7 @@ export default function Home(): ReactNode {
         <title>{content.layoutTitle}</title>
         <meta property="og:title" content={content.layoutTitle} />
         <script type="application/ld+json">
-          {JSON.stringify(websiteStructuredData)}
+          {JSON.stringify(structuredData)}
         </script>
       </Head>
       <main className={styles.page}>

@@ -63,6 +63,16 @@ const sidebars: SidebarsConfig = {
         },
         {
           type: 'doc',
+          id: 'guides/agent-approval-security',
+          label: label('AI Agent 审批与安全控制', 'AI Agent Approval and Safety'),
+        },
+        {
+          type: 'doc',
+          id: 'guides/long-running-agent-task',
+          label: label('AI Agent 如何执行长任务', 'How AI Agents Run Long Tasks'),
+        },
+        {
+          type: 'doc',
           id: 'guides/mcp-vs-connector',
           label: label('MCP 与连接器的区别', 'MCP vs. Connectors'),
         },

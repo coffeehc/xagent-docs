@@ -2,7 +2,7 @@
 title: xAgent Long-running Tasks
 description: Learn how to use xAgent for multi-step, long-running, and staged deliverable tasks, and follow them through sessions, files, confirmations, and events.
 status: experimental
-updated: 2026-07-11
+updated: 2026-07-14
 ---
 
 # xAgent Long-running Tasks
@@ -18,6 +18,10 @@ This page is for users who need xAgent to handle multi-step, long-running, or st
 A long-running task cannot be completed reliably in one short reply. It may require reading a large amount of material, working in stages, waiting for confirmation, calling external systems, generating multiple files, or following up over a longer period.
 
 Ordinary users do not need to understand how the work is split internally. Clearly state the goal, materials, stages, and acceptance criteria.
+
+xAgent runs tasks on the server and does not depend on a browser or personal computer remaining online. A submitted task can continue after the page closes, but completion still depends on the model, tools, external systems, available materials, and approval state.
+
+When the estimated full model request exceeds 80% of the maximum context window, xAgent performs context compression. The result preserves the current goal, progress, constraints, decisions, working facts, and artifact references for continuation. It is not long-term memory and cannot guarantee preservation of every historical detail.
 
 ## When to Use It
 
@@ -107,6 +111,8 @@ Please save the intermediate analysis table as CSV and the final report as HTML.
 
 Do not create several identical long-running tasks. Continue in the original session whenever possible.
 
+After a service restart, xAgent attempts to resume sessions with valid running snapshots. A session waiting for approval remains waiting and does not bypass confirmation. Recovery does not guarantee lossless continuation of every external action; idempotency and duplicate-execution protection remain the responsibility of the corresponding tool and external service.
+
 ## Common Scenarios
 
 ### Weekly Report
@@ -141,6 +147,10 @@ Start with the original [Agent Session](/docs/user-guide/agent-session). Generat
 
 Yes. State which results to keep and which to discard. For example: “Keep the topic categories, but change the report structure to an executive briefing.”
 
+### Does switching models immediately affect a running execution loop?
+
+No. A running model-and-tool loop keeps its selected model. The new configuration is read by a later execution round. You do not need to create a new session, and existing history and files remain available.
+
 ### Why are there no command examples?
 
 Ordinary users submit long-running tasks through the web interface. Underlying APIs and internal organization are not the main focus of this user manual.
@@ -152,3 +162,4 @@ Ordinary users submit long-running tasks through the web interface. Underlying A
 - [Tasks](/docs/user-guide/task)
 - [Workspace Files](/docs/user-guide/workspace)
 - [Triggers](/docs/user-guide/trigger)
+- [How AI Agents Run Long Tasks](/docs/guides/long-running-agent-task)
