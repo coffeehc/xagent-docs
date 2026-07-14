@@ -1,11 +1,11 @@
 ---
-title: First Task
-description: Run your first xAgent task by defining a clear goal, providing source material, following execution, and reviewing verifiable outputs.
+title: How to Complete Your First AI Agent Task with xAgent
+description: Learn how to describe a task, provide source material, confirm tool actions, and review generated results through a clear, verifiable xAgent example.
 status: stable
-updated: 2026-07-11
+updated: 2026-07-14
 ---
 
-# First Task
+# Complete Your First Task with xAgent
 
 ## Who This Is For
 
@@ -18,6 +18,18 @@ A task is the goal you want xAgent to complete. The first task does not need to 
 xAgent is not only a chat box. A task may involve files, tools, confirmations, generated outputs, and follow-up changes in the same session.
 
 ## A Good First Task
+
+Use this structure when you need a clear task description:
+
+```text
+Goal:
+Input materials:
+Required constraints:
+Output format:
+Result location:
+```
+
+You do not need to fill every field mechanically. The more complex the task is, the more useful it is to define the material scope, constraints, and deliverable format.
 
 Start with something small and easy to verify:
 

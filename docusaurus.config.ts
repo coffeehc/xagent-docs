@@ -133,8 +133,8 @@ const config: Config = {
       {
         name: 'twitter:title',
         content: isEnglish
-          ? 'xAgent - Task-First Self-Hosted Multi-User AI Agent Platform'
-          : 'xAgent - 可私有化部署的多用户 AI Agent 工作门户',
+          ? 'xAgent: Self-Hosted Multi-User AI Agent Platform'
+          : 'xAgent：可私有化部署的多用户 AI Agent 工作门户',
       },
       {
         name: 'twitter:description',

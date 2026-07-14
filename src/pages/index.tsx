@@ -8,6 +8,7 @@ import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import styles from './index.module.css';
 
 const siteUrl = 'https://xagent.xiagaogao.com';
+const githubUrl = 'https://github.com/coffeehc/xagent-docs';
 const releaseUrl =
   'https://github.com/coffeehc/xagent-releases/releases/tag/v0.0.3.beta';
 
@@ -19,18 +20,44 @@ type Card = {
 
 const homeContent = {
   'zh-CN': {
-    layoutTitle: 'xAgent - 可私有化部署的多用户 AI Agent 工作门户',
+    layoutTitle: 'xAgent：可私有化部署的多用户 AI Agent 工作门户',
     layoutDescription:
       'xAgent 是面向任务完成、可私有化部署的多用户 AI Agent 工作门户，支持 Skill、Tool、MCP、连接器、工作区隔离和安全治理。',
     kicker: 'xAgent 使用手册 · v0.0.3.beta',
     title: '可私有化部署的多用户 AI Agent 工作门户',
     subtitle:
       'xAgent 当前处于 v0.0.3.beta 测试版阶段，部署在服务器端，团队通过 Web 或 IM 连接器访问。管理员准备模型、Skill、工具、外部连接和安全策略后，用户只需要说明目标、提供材料、确认关键动作并查看结果，显著降低使用 AI Agent 完成工作的门槛。',
+    primaryAction: '开始部署',
+    secondaryAction: '查看 GitHub',
+    learnAction: '了解 xAgent',
     entriesLabel: '核心定位',
     capabilityEyebrow: '能力概览',
     capabilityTitle: '先把能力组织起来，再让用户直接使用',
     guideEyebrow: '使用入口',
     guideTitle: '从这些页面开始',
+    workflowEyebrow: '运行方式',
+    workflowTitle: '从目标到结果',
+    workflowSteps: [
+      {
+        title: '提交目标与材料',
+        description: '说明要完成什么，并上传任务需要处理的文件。',
+      },
+      {
+        title: '按需加载能力',
+        description: 'xAgent 根据任务发现并加载合适的 Skill 与 Tool。',
+      },
+      {
+        title: '执行并确认关键动作',
+        description: '任务在服务端持续执行，遇到敏感动作时请求用户审批。',
+      },
+      {
+        title: '交付并保存结果',
+        description: '回复任务结论，并将生成的文件保存到用户工作区。',
+      },
+    ],
+    exampleLabel: '任务示例',
+    exampleText:
+      '上传会议记录 → 提取决策与待办 → 生成 Markdown 或 CSV → 保存到工作区',
     roadmapEyebrow: '后续计划',
     roadmapTitle: '根据真实使用反馈继续演进',
     highlightCards: [
@@ -124,18 +151,44 @@ const homeContent = {
     ],
   },
   en: {
-    layoutTitle: 'xAgent - Task-First Self-Hosted Multi-User AI Agent Platform',
+    layoutTitle: 'xAgent: Self-Hosted Multi-User AI Agent Platform',
     layoutDescription:
       'xAgent is a task-first, self-hosted multi-user AI agent platform with Skills, Tools, MCP, connectors, workspace isolation, and safety governance.',
     kicker: 'xAgent User Manual · v0.0.3.beta',
     title: 'A Task-First, Self-Hosted Multi-User AI Agent Platform',
     subtitle:
       'xAgent is currently in beta as v0.0.3.beta. It runs on a server and is accessed through the web UI or connectors. Admins prepare models, Skills, Tools, external connections, and safety rules; users describe goals, provide materials, confirm sensitive actions, and review results.',
+    primaryAction: 'Start Deployment',
+    secondaryAction: 'View GitHub',
+    learnAction: 'Learn About xAgent',
     entriesLabel: 'Positioning',
     capabilityEyebrow: 'Capabilities',
     capabilityTitle: 'Organize capabilities first, then let users work directly',
     guideEyebrow: 'Start Here',
     guideTitle: 'Core pages',
+    workflowEyebrow: 'How It Works',
+    workflowTitle: 'From goal to result',
+    workflowSteps: [
+      {
+        title: 'Provide a goal and materials',
+        description: 'Describe the work to complete and upload the files it needs.',
+      },
+      {
+        title: 'Load capabilities on demand',
+        description: 'xAgent discovers and loads suitable Skills and Tools for the task.',
+      },
+      {
+        title: 'Run and confirm key actions',
+        description: 'The task continues on the server and requests approval for sensitive actions.',
+      },
+      {
+        title: 'Deliver and save results',
+        description: 'xAgent returns the outcome and saves generated files in the user workspace.',
+      },
+    ],
+    exampleLabel: 'Example task',
+    exampleText:
+      'Upload meeting notes → extract decisions and action items → create Markdown or CSV → save to the workspace',
     roadmapEyebrow: 'Roadmap',
     roadmapTitle: 'Evolving with real user feedback',
     highlightCards: [
@@ -312,6 +365,17 @@ export default function Home(): ReactNode {
             <p className={styles.subtitle}>
               {content.subtitle}
             </p>
+            <div className={styles.heroActions}>
+              <Link className={styles.primaryAction} to="/docs/deployment/server-install">
+                {content.primaryAction}
+              </Link>
+              <Link className={styles.secondaryAction} href={githubUrl}>
+                {content.secondaryAction}
+              </Link>
+              <Link className={styles.learnAction} to="/docs/getting-started/what-is-xagent">
+                {content.learnAction}
+              </Link>
+            </div>
           </div>
         </section>
 
@@ -340,6 +404,30 @@ export default function Home(): ReactNode {
                 </Link>
               ))}
             </div>
+          </div>
+        </section>
+
+        <section className={styles.section} aria-labelledby="workflow-title">
+          <div className={styles.sectionInner}>
+            <p className={styles.eyebrow}>{content.workflowEyebrow}</p>
+            <Heading as="h2" id="workflow-title" className={styles.sectionTitle}>
+              {content.workflowTitle}
+            </Heading>
+            <ol className={styles.workflowGrid}>
+              {content.workflowSteps.map((step, index) => (
+                <li className={styles.workflowStep} key={step.title}>
+                  <span className={styles.workflowNumber}>{index + 1}</span>
+                  <div>
+                    <h3>{step.title}</h3>
+                    <p>{step.description}</p>
+                  </div>
+                </li>
+              ))}
+            </ol>
+            <p className={styles.workflowExample}>
+              <strong>{content.exampleLabel}</strong>
+              <span>{content.exampleText}</span>
+            </p>
           </div>
         </section>
 

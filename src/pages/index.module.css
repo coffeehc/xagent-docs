@@ -40,6 +40,60 @@
   overflow-wrap: anywhere;
 }
 
+.heroActions {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 1.75rem;
+}
+
+.primaryAction,
+.secondaryAction {
+  align-items: center;
+  border-radius: 6px;
+  display: inline-flex;
+  font-weight: 700;
+  justify-content: center;
+  min-height: 2.75rem;
+  padding: 0.65rem 1.1rem;
+  text-decoration: none;
+}
+
+.primaryAction {
+  background: var(--ifm-color-primary);
+  border: 1px solid var(--ifm-color-primary);
+  color: #fff;
+}
+
+.primaryAction:hover {
+  background: var(--ifm-color-primary-dark);
+  border-color: var(--ifm-color-primary-dark);
+  color: #fff;
+  text-decoration: none;
+}
+
+.secondaryAction {
+  border: 1px solid var(--xagent-border);
+  color: var(--ifm-heading-color);
+}
+
+.secondaryAction:hover {
+  border-color: var(--ifm-color-primary);
+  color: var(--ifm-color-primary);
+  text-decoration: none;
+}
+
+.learnAction {
+  color: var(--ifm-color-emphasis-700);
+  font-weight: 600;
+  padding: 0.65rem 0.35rem;
+}
+
+.learnAction:hover {
+  color: var(--ifm-color-primary);
+}
+
 .entries {
   box-sizing: border-box;
   overflow-x: hidden;
@@ -202,6 +256,63 @@
   margin: 0;
 }
 
+.workflowGrid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.workflowStep {
+  border: 1px solid var(--xagent-border);
+  border-radius: 8px;
+  display: grid;
+  gap: 0.8rem;
+  grid-template-columns: auto minmax(0, 1fr);
+  padding: 1.1rem;
+}
+
+.workflowNumber {
+  align-items: center;
+  background: color-mix(in srgb, var(--ifm-color-primary) 12%, transparent);
+  border: 1px solid color-mix(in srgb, var(--ifm-color-primary) 35%, transparent);
+  border-radius: 50%;
+  color: var(--ifm-color-primary);
+  display: inline-flex;
+  font-size: 0.85rem;
+  font-weight: 700;
+  height: 1.8rem;
+  justify-content: center;
+  width: 1.8rem;
+}
+
+.workflowStep h3 {
+  font-size: 1rem;
+  margin: 0 0 0.45rem;
+}
+
+.workflowStep p {
+  color: var(--ifm-color-emphasis-700);
+  font-size: 0.92rem;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.workflowExample {
+  border-left: 3px solid var(--ifm-color-primary);
+  color: var(--ifm-color-emphasis-700);
+  display: grid;
+  gap: 0.25rem;
+  margin: 1.25rem 0 0;
+  padding: 0.35rem 0 0.35rem 1rem;
+}
+
+.workflowExample strong {
+  color: var(--ifm-heading-color);
+}
+
 .roadmapList {
   border: 1px solid var(--xagent-border);
   border-radius: 8px;
@@ -306,6 +417,10 @@
   .guideGrid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
+
+  .workflowGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 }
 
 @media screen and (max-width: 640px) {
@@ -332,6 +447,19 @@
 
   .guideGrid {
     grid-template-columns: 1fr;
+  }
+
+  .workflowGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .heroActions {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .learnAction {
+    text-align: center;
   }
 
   .sectionTitle {
