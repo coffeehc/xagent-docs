@@ -1,6 +1,7 @@
 ---
 title: xAgent Skill 创建、发布与更新
 description: 了解 xAgent 公共与个人 Skill 的区别，以及创建、导入、测试、更新和提交公共 Skill 的完整使用流程。
+image: /img/share/zh/xagent-shared-skills.png
 status: stable
 updated: 2026-07-11
 ---
@@ -187,6 +188,7 @@ Skill 管理 页面会展示技能卡片。常见信息包括：
 
 ## 继续阅读
 
+- [AI Agent 如何在任务执行中动态切换模型、Skill 与提示词](/docs/guides/ai-agent-runtime-hot-switching)
 - [AI Agent 如何按需发现和加载工具与 Skill](/docs/guides/ai-agent-dynamic-tool-discovery)
 - [创建 / 更新 Skill](/docs/getting-started/create-skill)
 - [内置 Skill 文件](/docs/user-guide/builtin-skills)

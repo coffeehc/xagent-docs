@@ -2,7 +2,7 @@
 title: xAgent Approvals and Approval Policies
 description: Learn how xAgent uses approvals and approval policies to control sensitive actions, including user confirmations and administrator rule configuration.
 status: beta
-updated: 2026-07-14
+updated: 2026-07-15
 ---
 
 # xAgent Approvals and Approval Policies
@@ -133,7 +133,7 @@ No. A task starts normally. Only a specific tool operation that matches a policy
 
 ### Can I approve from WeChat or Telegram?
 
-Yes, for a task that originated from that IM connector. The original channel must be online, the user must be authenticated, and the connector must provide an available message-send tool. Follow the approval reference and reply format in the notification.
+Yes. Starting with `v0.0.4.beta`, when a session waits for approval, xAgent attempts to notify every currently available IM messaging channel owned by the user. The Connector must be online, the user must be authenticated, and the connection must provide an available message-send Tool. Reply with the notification's `@{approval:id}` and explicit approve or reject form.
 
 ### Can ordinary users edit system approval policies?
 
@@ -141,6 +141,7 @@ Usually not. Ordinary users may only configure personal approval policies, while
 
 ## Continue Reading
 
+- [Shortcut Protocol: Commands, Targets, and References](/docs/guides/shortcut-instruction-protocol)
 - [Agent Session](/docs/user-guide/agent-session)
 - [Workspace Files](/docs/user-guide/workspace)
 - [Tool Management](/docs/user-guide/tool)

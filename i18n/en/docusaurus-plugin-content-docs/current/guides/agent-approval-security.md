@@ -1,8 +1,9 @@
 ---
 title: How AI Agent Approval and Safety Controls Work
 description: Learn how xAgent reduces tool calls into file, network, data, session, and Skill operations, then pauses, approves, and resumes specific risky actions.
+image: /img/share/en/xagent-security.png
 status: beta
-updated: 2026-07-14
+updated: 2026-07-15
 ---
 
 # How AI Agent Approval and Safety Controls Work
@@ -37,7 +38,7 @@ Approval does not prevent users from submitting a task. The normal flow is:
 
 ## Current Default Policy
 
-In `v0.0.3.beta`, the default policy allows a main session to create sub-sessions and allows deletion inside the current session's artifact directory. These actions require one-time approval by default:
+In `v0.0.4.beta`, the default policy allows a main session to create sub-sessions and allows deletion inside the current session's artifact directory. These actions require one-time approval by default:
 
 - Deleting other workspace files.
 - Transferring personal data to an external system.
@@ -59,14 +60,15 @@ The current personal policy is therefore an override layer, not an add-only rest
 
 ## Handling Approval in Web and IM
 
-Users can inspect and decide approvals in the web session. `v0.0.3.beta` can also send approval notifications for tasks that originated from an IM connector back to the original connection channel:
+Users can inspect and decide approvals in the web session. Starting with `v0.0.4.beta`, when a session enters the approval-waiting state, xAgent also attempts to notify every currently available IM messaging channel owned by that user:
 
-- When the current task input came from an IM connector and the original channel is still connected and can send messages, xAgent attempts to send the approval notification back through that channel.
-- The notification includes the approval reference, action summary, and related tool information.
-- The user replies with the approval reference and the exact approve or reject wording shown by the notification.
-- After the first valid decision, later replies for the same approval do not change the result again.
+- The notification includes the target session, approval content, risk information, and a complete reply command.
+- Users can reply `@{approval:approval-id} approve` or `@{approval:approval-id} reject` from WeChat, Telegram, or another supported IM Connector.
+- Chinese notifications accept `@{approval:approval-id} 同意` and `@{approval:approval-id} 不同意`.
+- The approval ID routes the decision to the owning session, so users do not need to provide a Session ID.
+- The first valid decision resumes or rejects the target operation. Later decisions for the same approval receive an ignored acknowledgement and cannot change the state again.
 
-The current release does not broadcast approvals from web-originated tasks to every IM channel owned by the user. IM approval depends on the task originating from that connector, connector availability, user authentication, the original channel state, and an available message-send tool.
+IM delivery depends on Connector availability, completed user authentication, and an available message-send Tool for the connection. The same approval can still be handled on the Web; the first valid decision accepted by the system takes effect.
 
 ## Approval Does Not Replace External Authorization
 

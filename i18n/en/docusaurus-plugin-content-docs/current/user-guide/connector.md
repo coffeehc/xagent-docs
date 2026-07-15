@@ -1,6 +1,7 @@
 ---
 title: xAgent Connector Setup and Management
 description: Learn how xAgent Connectors differ from MCP, and how to use WeChat, Telegram, and other external-system connections.
+image: /img/share/en/xagent-connectors.png
 status: experimental
 updated: 2026-07-12
 ---
@@ -27,7 +28,7 @@ Compared with MCP, a Connector focuses more on external systems actively pushing
 
 ## Currently Released Connectors
 
-The current `v0.0.2` Connector Release contains the following connectors:
+The current `v0.0.3` Connector Release contains the following connectors:
 
 | Connector | How it is used | What the user completes |
 | --- | --- | --- |
@@ -158,6 +159,8 @@ Not necessarily. Availability depends on connector state, user authorization, co
 
 ## Continue Reading
 
+- [Shortcut Protocol: Commands, Targets, and References](/docs/guides/shortcut-instruction-protocol)
+- [How Multiple AI Agents Collaborate Through Session Events](/docs/guides/multi-agent-session-event-collaboration)
 - [Agent Session](/docs/user-guide/agent-session)
 - [Connector Installation](/docs/deployment/connector-install)
 - [xAgent Connectors](https://github.com/coffeehc/xagent-connectors)

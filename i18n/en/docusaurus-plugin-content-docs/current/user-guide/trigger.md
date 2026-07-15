@@ -122,6 +122,7 @@ Delete it only when it is no longer needed and will not be reused. Disable it fi
 
 ## Continue Reading
 
+- [How Multiple AI Agents Collaborate Through Session Events](/docs/guides/multi-agent-session-event-collaboration)
 - [Agent Session](/docs/user-guide/agent-session)
 - [Tasks](/docs/user-guide/task)
 - [Long-running Tasks](/docs/user-guide/long-task)

@@ -169,6 +169,9 @@ Please list the plan first. Wait for my confirmation before reading files and ge
 
 ## Continue Reading
 
+- [Shortcut Protocol: Commands, Targets, and References](/docs/guides/shortcut-instruction-protocol)
+- [How AI Agents Switch Models, Skills, and Prompts During a Task](/docs/guides/ai-agent-runtime-hot-switching)
+- [How Multiple AI Agents Collaborate Through Session Events](/docs/guides/multi-agent-session-event-collaboration)
 - [Shortcut Instructions](/docs/user-guide/shortcut-instructions)
 - [First Task](/docs/getting-started/first-task)
 - [Tasks](/docs/user-guide/task)

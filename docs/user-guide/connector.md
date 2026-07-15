@@ -1,6 +1,7 @@
 ---
 title: xAgent 连接器使用与管理
 description: 了解 xAgent 连接器与 MCP 的区别，以及微信、Telegram 等连接器的接入、个人连接和外部系统扩展方式。
+image: /img/share/zh/xagent-connectors.png
 status: experimental
 updated: 2026-07-12
 ---
@@ -27,7 +28,7 @@ updated: 2026-07-12
 
 ## 当前发布的连接器
 
-当前 `v0.0.2` Connector Release 包含下面两种连接器：
+当前 `v0.0.3` Connector Release 包含下面两种连接器：
 
 | 连接器 | 使用方式 | 用户需要完成的操作 |
 | --- | --- | --- |
@@ -162,6 +163,8 @@ Connector 可以主动接收外部消息并推送给 xAgent，例如微信收到
 
 ## 继续阅读
 
+- [快捷指令协议：命令、定向发送与对象引用](/docs/guides/shortcut-instruction-protocol)
+- [多 Agent 如何通过会话事件协作](/docs/guides/multi-agent-session-event-collaboration)
 - [Agent 会话](/docs/user-guide/agent-session)
 - [Connector 安装](/docs/deployment/connector-install)
 - [xAgent Connectors](https://github.com/coffeehc/xagent-connectors)

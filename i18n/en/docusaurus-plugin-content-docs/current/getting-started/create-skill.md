@@ -1,6 +1,7 @@
 ---
 title: Create / Update Skill
 description: Learn how to create, test, publish, and continuously improve xAgent Skills through Skill Management or an agent-assisted session.
+image: /img/share/en/xagent-shared-skills.png
 status: beta
 updated: 2026-07-11
 ---

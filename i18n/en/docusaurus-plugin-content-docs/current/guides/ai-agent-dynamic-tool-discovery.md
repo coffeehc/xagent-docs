@@ -1,6 +1,7 @@
 ---
 title: How AI Agents Discover and Load Tools on Demand
 description: Learn why AI Agents should not load every capability at startup and how summary discovery, candidate selection, and on-demand loading reduce context use and improve execution accuracy.
+image: /img/share/en/xagent-shared-skills.png
 status: beta
 updated: 2026-07-15
 ---

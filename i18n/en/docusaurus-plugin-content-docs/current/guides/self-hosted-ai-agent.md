@@ -1,15 +1,16 @@
 ---
-title: How to Self-host an AI Agent
-description: Learn how to deploy xAgent in your own server and data environment, then provide a persistent task-oriented AI Agent through the web UI or IM connectors.
+title: How to Host an AI Agent on Your Own Server
+description: A practical self-hosted AI agent setup guide covering server preparation, model access, HTTPS, workspace isolation, connectors, backups, and long-running tasks.
+image: /img/share/en/xagent-security.png
 status: beta
-updated: 2026-07-14
+updated: 2026-07-15
 ---
 
-# How to Self-host an AI Agent
+# How to Host an AI Agent on Your Own Server
 
 ## Who This Is For
 
-This guide is for teams and companies that want to run an AI Agent in their own servers, private network, or cloud account.
+This guide is for teams and companies that want to host an AI Agent on their own server, private network, or cloud account. It covers a complete self-hosted AI agent setup rather than only starting a binary.
 
 xAgent is not a chat application installed on every personal computer. It runs on a server, while users access it through the web UI or IM connectors. Administrators prepare models, Skills, tools, external connections, and security policies first. Users then submit tasks, provide materials, and review results.
 
@@ -19,7 +20,7 @@ Self-hosting means that you decide where xAgent runs, where runtime data is stor
 
 This does not mean all data automatically remains inside your environment. Model APIs, MCP services, connectors, and external business systems still process data according to their own integrations. Whether to use a local model, which external systems to allow, and who can access the service are deployment-owner decisions.
 
-## Why Run It on a Server
+## AI Agent Hosting Architecture
 
 | Capability | Practical meaning |
 | --- | --- |
@@ -30,9 +31,9 @@ This does not mean all data automatically remains inside your environment. Model
 | Support for your own model service | A local model or self-managed model gateway can keep task data in your own environment as much as possible. |
 | Centralized governance | Administrators configure models, Skills, tools, connectors, and approval policies once, then make them ready for users. |
 
-## Prepare Before Deployment
+## Self-Hosted AI Agent Setup Checklist
 
-Before the first deployment, clarify the following:
+A practical AI agent hosting setup must cover the runtime environment, model access, user entry points, security boundaries, and ongoing operations. Before the first deployment, clarify the following:
 
 1. Prepare an always-on Linux or macOS server. Windows is currently untested and not recommended for deployment trials.
 2. Decide on a model source. You can connect a model API or run a local model service, but the model must support tool calling reliably.

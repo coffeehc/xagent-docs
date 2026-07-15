@@ -126,6 +126,7 @@ They should not. Screenshots in public documentation or public channels should o
 
 ## Continue Reading
 
+- [How AI Agents Switch Models, Skills, and Prompts During a Task](/docs/guides/ai-agent-runtime-hot-switching)
 - [Agent Session](/docs/user-guide/agent-session)
 - [Agent Management](/docs/user-guide/agent-management)
 - [Tool Management](/docs/user-guide/tool)

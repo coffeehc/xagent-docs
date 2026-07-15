@@ -122,6 +122,7 @@ updated: 2026-07-11
 
 ## 相关文档
 
+- [多 Agent 如何通过会话事件协作](/docs/guides/multi-agent-session-event-collaboration)
 - [Agent会话](/docs/user-guide/agent-session)
 - [任务](/docs/user-guide/task)
 - [长任务](/docs/user-guide/long-task)

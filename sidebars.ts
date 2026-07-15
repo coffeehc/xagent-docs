@@ -73,6 +73,21 @@ const sidebars: SidebarsConfig = {
         },
         {
           type: 'doc',
+          id: 'guides/ai-agent-runtime-hot-switching',
+          label: label('任务执行中的动态切换', 'Runtime Model and Skill Switching'),
+        },
+        {
+          type: 'doc',
+          id: 'guides/multi-agent-session-event-collaboration',
+          label: label('多 Agent 会话事件协作', 'Multi-Agent Session Events'),
+        },
+        {
+          type: 'doc',
+          id: 'guides/shortcut-instruction-protocol',
+          label: label('快捷指令协议', 'Shortcut Instruction Protocol'),
+        },
+        {
+          type: 'doc',
           id: 'guides/agent-approval-security',
           label: label('AI Agent 审批与安全控制', 'AI Agent Approval and Safety'),
         },
@@ -175,6 +190,11 @@ const sidebars: SidebarsConfig = {
           label: label('合作方向', 'Partnership Areas'),
         },
       ],
+    },
+    {
+      type: 'doc',
+      id: 'changelog',
+      label: label('更新日志', 'Changelog'),
     },
     {
       type: 'category',

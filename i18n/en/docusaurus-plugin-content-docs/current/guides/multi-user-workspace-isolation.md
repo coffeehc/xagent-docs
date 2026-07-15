@@ -1,6 +1,7 @@
 ---
 title: How xAgent Isolates Workspaces with a Virtual File System
 description: Learn how xAgent builds a virtual file system above server storage to control file visibility, reads, and writes by user, session, and system rules.
+image: /img/share/en/xagent-security.png
 status: beta
 updated: 2026-07-14
 ---

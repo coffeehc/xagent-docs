@@ -1,8 +1,9 @@
 ---
 title: xAgent Product Overview and Core Capabilities
 description: Learn how xAgent helps teams run task-oriented AI agents with server deployment, dynamic capabilities, workspace isolation, and security governance.
+image: /img/share/en/xagent-overview.png
 status: stable
-updated: 2026-07-12
+updated: 2026-07-15
 ---
 
 # xAgent Product Overview and Core Capabilities
@@ -15,7 +16,7 @@ This page is for first-time users, administrators, and evaluators who want to un
 
 xAgent is a multi-user AI work portal for teams and companies. It brings common work entry points, files, tools, Skills, external connections, and safety policies into one web system, so a team can quickly build dedicated work assistants that users can use directly.
 
-The current version is `v0.0.3.beta` and is still a beta release. It is suitable for deployment trials, feature validation, scenario evaluation, and community feedback. It should not be treated as a fully stable enterprise release.
+The current version is `v0.0.4.beta` and is still a beta release. It is suitable for deployment trials, feature validation, scenario evaluation, and community feedback. It should not be treated as a fully stable enterprise release.
 
 Important note: many beta features are still incomplete. If you find a problem while using xAgent or reading the documentation, please open an issue on GitHub: [https://github.com/coffeehc/xagent-docs/issues](https://github.com/coffeehc/xagent-docs/issues).
 
@@ -190,7 +191,7 @@ Therefore, xAgent usage is not about freezing all configuration once. Ordinary u
 
 ## Release Positioning
 
-The current version is the `v0.0.3.beta` beta release and is distributed as a free binary. The goal is to let users deploy it, enter the product, experience the core flow, and judge whether xAgent fits their agent work scenarios.
+The current version is the `v0.0.4.beta` beta release and is distributed as a free binary. The goal is to let users deploy it, enter the product, experience the core flow, and judge whether xAgent fits their agent work scenarios.
 
 The free binary beta is suitable for understanding standard capabilities, validating common task flows, and evaluating team adoption. It is not the same as a stable enterprise release, free enterprise customization, free hosted service, free internal system integration, or long-term support commitment. When enterprise-grade identity, internal system connection, permission audit, dedicated external connections, and safety policies are involved, custom development and integration are usually needed based on the actual environment.
 
@@ -354,7 +355,7 @@ Usually not. Administrators can prepare common scenarios, dedicated agents, tool
 
 ### What does the free binary version mean?
 
-The free binary version is currently the `v0.0.3.beta` beta release and is an entry point for understanding and evaluating xAgent. Users can deploy the standard version first and experience core capabilities such as task submission, file workspace, tools, Skills, and external connections.
+The free binary version is currently the `v0.0.4.beta` beta release and is an entry point for understanding and evaluating xAgent. Users can deploy the standard version first and experience core capabilities such as task submission, file workspace, tools, Skills, and external connections.
 
 If enterprise internal system access, unified identity, complex permissions, audit and compliance, dedicated connectors, or deep business process changes are required, custom integration should usually be done based on actual needs.
 

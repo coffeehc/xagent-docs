@@ -1,6 +1,7 @@
 ---
 title: Create, Publish, and Update xAgent Skills
 description: Understand public and personal xAgent Skills and the workflow for creating, importing, testing, updating, and publishing reusable capabilities.
+image: /img/share/en/xagent-shared-skills.png
 status: stable
 updated: 2026-07-11
 ---
@@ -86,6 +87,7 @@ They should not. Public Skills are visible to all users and should be general, s
 
 ## Continue Reading
 
+- [How AI Agents Switch Models, Skills, and Prompts During a Task](/docs/guides/ai-agent-runtime-hot-switching)
 - [How AI Agents Discover and Load Tools on Demand](/docs/guides/ai-agent-dynamic-tool-discovery)
 - [Create / Update Skill](/docs/getting-started/create-skill)
 - [Agent Session](/docs/user-guide/agent-session)

@@ -2,7 +2,7 @@
 title: 审批与审批策略
 description: 了解 xAgent 如何通过审批和审批策略控制敏感动作，以及普通用户确认操作和管理员配置规则的方法。
 status: beta
-updated: 2026-07-14
+updated: 2026-07-15
 ---
 
 # 审批与审批策略
@@ -133,7 +133,7 @@ updated: 2026-07-14
 
 ### 可以从微信或 Telegram 处理审批吗？
 
-可以，但当前仅适用于由该 IM 连接器发起的任务。原连接通道需要在线、用户已完成认证，并提供可用的消息发送工具。按通知中的审批编号和回复格式操作。
+可以。自 `v0.0.4.beta` 起，会话进入审批等待状态时，xAgent 会尝试向当前用户全部可用的 IM 消息通道发送审批通知。连接器需要在线、用户已完成认证，并提供可用的消息发送工具。按通知中的 `@{approval:id}` 和明确的同意或不同意格式回复即可。
 
 ### 普通用户能改系统审批策略吗？
 
@@ -141,6 +141,7 @@ updated: 2026-07-14
 
 ## 相关文档
 
+- [快捷指令协议：命令、定向发送与对象引用](/docs/guides/shortcut-instruction-protocol)
 - [Agent会话](/docs/user-guide/agent-session)
 - [工作区](/docs/user-guide/workspace)
 - [Tool 管理](/docs/user-guide/tool)

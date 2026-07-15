@@ -1,6 +1,7 @@
 ---
 title: 多用户 AI Agent 如何通过虚拟文件系统隔离工作区
 description: 了解 xAgent 如何在服务器文件系统之上构建虚拟文件系统，按用户、会话和系统规则控制文件可见、读取与写入范围。
+image: /img/share/zh/xagent-security.png
 status: beta
 updated: 2026-07-14
 ---

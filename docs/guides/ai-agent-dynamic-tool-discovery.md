@@ -1,6 +1,7 @@
 ---
 title: AI Agent 如何按需发现和加载工具与 Skill
 description: 了解 AI Agent 为什么不应一次加载全部能力，以及如何通过摘要发现、候选筛选和按需加载减少上下文占用并提高任务执行准确性。
+image: /img/share/zh/xagent-shared-skills.png
 status: beta
 updated: 2026-07-15
 ---

@@ -1,6 +1,7 @@
 ---
 title: Connector 安装
 description: 了解如何下载、配置并运行 xAgent Connector，以及默认地址、API Key、config.yml 和服务端接入流程。
+image: /img/share/zh/xagent-connectors.png
 status: beta
 updated: 2026-07-12
 ---
@@ -60,19 +61,19 @@ sudo chown -R xagent-wechat:xagent-wechat /opt/xagent-connectors/wechat /var/lib
 
 [xAgent Connectors Releases](https://github.com/coffeehc/xagent-connectors/releases)
 
-当前发布版本为 `v0.0.2`，同一个 Release 包含微信和 Telegram 两种连接器。请按连接器、服务器系统和 CPU 架构选择对应文件：
+当前发布版本为 `v0.0.3`，同一个 Release 包含微信和 Telegram 两种连接器。请按连接器、服务器系统和 CPU 架构选择对应文件：
 
 | 连接器 | Linux amd64 示例文件 | Linux arm64 示例文件 |
 | --- | --- | --- |
-| 微信 | `xagent-wechat-connector-v0.0.2-linux-amd64.tar.gz` | `xagent-wechat-connector-v0.0.2-linux-arm64.tar.gz` |
-| Telegram | `xagent-telegram-connector-v0.0.2-linux-amd64.tar.gz` | `xagent-telegram-connector-v0.0.2-linux-arm64.tar.gz` |
+| 微信 | `xagent-wechat-connector-v0.0.3-linux-amd64.tar.gz` | `xagent-wechat-connector-v0.0.3-linux-arm64.tar.gz` |
+| Telegram | `xagent-telegram-connector-v0.0.3-linux-amd64.tar.gz` | `xagent-telegram-connector-v0.0.3-linux-arm64.tar.gz` |
 
 macOS 同样提供 Intel 的 `darwin-amd64` 与 Apple Silicon 的 `darwin-arm64` 附件。
 
 Linux amd64 下载示例。把 `CONNECTOR=wechat` 改为 `telegram`，即可下载 Telegram Connector：
 
 ```bash
-VERSION=v0.0.2
+VERSION=v0.0.3
 CONNECTOR=wechat
 ASSET=xagent-${CONNECTOR}-connector-${VERSION}-linux-amd64.tar.gz
 

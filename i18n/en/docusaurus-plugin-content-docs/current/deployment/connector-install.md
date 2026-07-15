@@ -1,6 +1,7 @@
 ---
 title: Connector Installation
 description: Learn how to download, configure, and run an xAgent Connector, including its address, API key, config file, and server connection workflow.
+image: /img/share/en/xagent-connectors.png
 status: beta
 updated: 2026-07-12
 ---
@@ -38,19 +39,19 @@ Connector binaries are published at:
 
 [xAgent Connectors Releases](https://github.com/coffeehc/xagent-connectors/releases)
 
-The current release is `v0.0.2` and contains both WeChat and Telegram Connector assets.
+The current release is `v0.0.3` and contains both WeChat and Telegram Connector assets.
 
 | Connector | Linux amd64 asset | Linux arm64 asset |
 | --- | --- | --- |
-| WeChat | `xagent-wechat-connector-v0.0.2-linux-amd64.tar.gz` | `xagent-wechat-connector-v0.0.2-linux-arm64.tar.gz` |
-| Telegram | `xagent-telegram-connector-v0.0.2-linux-amd64.tar.gz` | `xagent-telegram-connector-v0.0.2-linux-arm64.tar.gz` |
+| WeChat | `xagent-wechat-connector-v0.0.3-linux-amd64.tar.gz` | `xagent-wechat-connector-v0.0.3-linux-arm64.tar.gz` |
+| Telegram | `xagent-telegram-connector-v0.0.3-linux-amd64.tar.gz` | `xagent-telegram-connector-v0.0.3-linux-arm64.tar.gz` |
 
 Intel macOS uses `darwin-amd64`; Apple Silicon uses `darwin-arm64`.
 
 Linux amd64 example. Change `CONNECTOR=wechat` to `telegram` for Telegram:
 
 ```bash
-VERSION=v0.0.2
+VERSION=v0.0.3
 CONNECTOR=wechat
 ASSET=xagent-${CONNECTOR}-connector-${VERSION}-linux-amd64.tar.gz
 

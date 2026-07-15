@@ -9,7 +9,7 @@ import styles from './index.module.css';
 const siteUrl = 'https://xagent.xiagaogao.com';
 const githubUrl = 'https://github.com/coffeehc/xagent-docs';
 const releaseUrl =
-  'https://github.com/coffeehc/xagent-releases/releases/tag/v0.0.3.beta';
+  'https://github.com/coffeehc/xagent-releases/releases/tag/v0.0.4.beta';
 
 type Card = {
   title: string;
@@ -22,10 +22,10 @@ const homeContent = {
     layoutTitle: 'xAgent：可私有化部署的多用户 AI Agent 工作门户',
     layoutDescription:
       'xAgent 是面向任务完成、可私有化部署的多用户 AI Agent 工作门户，支持 Skill、Tool、MCP、连接器、工作区隔离和安全治理。',
-    kicker: 'xAgent 使用手册 · v0.0.3.beta',
+    kicker: 'xAgent 使用手册 · v0.0.4.beta',
     title: '可私有化部署的多用户 AI Agent 工作门户',
     subtitle:
-      'xAgent 当前处于 v0.0.3.beta 测试版阶段，部署在服务器端，团队通过 Web 或 IM 连接器访问。管理员准备模型、Skill、工具、外部连接和安全策略后，用户只需要说明目标、提供材料、确认关键动作并查看结果，显著降低使用 AI Agent 完成工作的门槛。',
+      'xAgent 当前处于 v0.0.4.beta 测试版阶段，部署在服务器端，团队通过 Web 或 IM 连接器访问。管理员准备模型、Skill、工具、外部连接和安全策略后，用户只需要说明目标、提供材料、确认关键动作并查看结果，显著降低使用 AI Agent 完成工作的门槛。',
     primaryAction: '开始部署',
     secondaryAction: '查看 GitHub',
     learnAction: '了解 xAgent',
@@ -153,10 +153,10 @@ const homeContent = {
     layoutTitle: 'xAgent: Self-Hosted Multi-User AI Agent Platform',
     layoutDescription:
       'xAgent is a task-first, self-hosted multi-user AI agent platform with Skills, Tools, MCP, connectors, workspace isolation, and safety governance.',
-    kicker: 'xAgent User Manual · v0.0.3.beta',
+    kicker: 'xAgent User Manual · v0.0.4.beta',
     title: 'A Task-First, Self-Hosted Multi-User AI Agent Platform',
     subtitle:
-      'xAgent is currently in beta as v0.0.3.beta. It runs on a server and is accessed through the web UI or connectors. Admins prepare models, Skills, Tools, external connections, and safety rules; users describe goals, provide materials, confirm sensitive actions, and review results.',
+      'xAgent is currently in beta as v0.0.4.beta. It runs on a server and is accessed through the web UI or connectors. Admins prepare models, Skills, Tools, external connections, and safety rules; users describe goals, provide materials, confirm sensitive actions, and review results.',
     primaryAction: 'Start Deployment',
     secondaryAction: 'View GitHub',
     learnAction: 'Learn About xAgent',
@@ -303,14 +303,14 @@ export default function Home(): ReactNode {
           ? 'xAgent Task-First AI Agent Platform'
           : 'xAgent 面向任务完成的 AI Agent 平台',
         url: localeUrl,
-        image: `${siteUrl}/img/xagent-og.png`,
+        image: `${siteUrl}/img/share/${isEnglish ? 'en' : 'zh'}/xagent-overview.png`,
         description: content.layoutDescription,
         applicationCategory: 'BusinessApplication',
         applicationSubCategory: isEnglish
           ? 'Self-hosted multi-user AI agent platform'
           : '可私有化部署的多用户 AI Agent 平台',
         operatingSystem: 'Linux, macOS',
-        softwareVersion: '0.0.3.beta',
+        softwareVersion: '0.0.4.beta',
         downloadUrl: releaseUrl,
         inLanguage: isEnglish ? 'en-US' : 'zh-CN',
         featureList: isEnglish

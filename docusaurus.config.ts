@@ -119,7 +119,9 @@ const config: Config = {
   ],
 
   themeConfig: {
-    image: 'img/xagent-og.png',
+    image: isEnglish
+      ? 'img/share/en/xagent-overview.png'
+      : 'img/share/zh/xagent-overview.png',
     metadata: [
       {
         name: 'description',

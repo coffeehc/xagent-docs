@@ -1,11 +1,14 @@
 ---
 title: xAgent Server Installation and Deployment
 description: Download and install the xAgent server binary on macOS or Linux, configure system components, HTTPS proxying, and operational settings.
+image: /img/share/en/xagent-server-deployment.png
 status: beta
-updated: 2026-07-12
+updated: 2026-07-15
 ---
 
 # xAgent Server Installation and Deployment
+
+If you are still planning the server, model access, HTTPS, security boundaries, and external connections, start with [How to Host an AI Agent on Your Own Server](/docs/guides/self-hosted-ai-agent). This page focuses on installing and running the binary.
 
 ## Who This Is For
 
@@ -44,23 +47,25 @@ Adjust user creation commands for your operating system.
 
 ## Install the Binary
 
-Binary releases are published at:
+The current binary release is published at:
 
-[xAgent Releases](https://github.com/coffeehc/xagent-releases/releases)
+[xAgent v0.0.4.beta Release](https://github.com/coffeehc/xagent-releases/releases/tag/v0.0.4.beta)
 
-Current example version: `v0.0.3.beta`.
+The current version is `v0.0.4.beta`.
 
 | System | Architecture | File |
 | --- | --- | --- |
-| Linux | x86_64 / amd64 | `xagent-v0.0.3.beta-linux-amd64.tar.gz` |
-| Linux | arm64 / aarch64 | `xagent-v0.0.3.beta-linux-arm64.tar.gz` |
-| macOS | Intel | `xagent-v0.0.3.beta-darwin-amd64.tar.gz` |
-| macOS | Apple Silicon | `xagent-v0.0.3.beta-darwin-arm64.tar.gz` |
+| Linux | x86_64 / amd64 | `xagent-v0.0.4.beta-linux-amd64.tar.gz` |
+| Linux | arm64 / aarch64 | `xagent-v0.0.4.beta-linux-arm64.tar.gz` |
+| macOS | Intel | `xagent-v0.0.4.beta-darwin-amd64.tar.gz` |
+| macOS | Apple Silicon | `xagent-v0.0.4.beta-darwin-arm64.tar.gz` |
+
+The Release also provides `SHA256SUMS`. Each archive contains only the xAgent executable, README, and version metadata. Source code is not included.
 
 Linux amd64 example:
 
 ```bash
-VERSION=v0.0.3.beta
+VERSION=v0.0.4.beta
 ASSET=xagent-${VERSION}-linux-amd64.tar.gz
 
 curl -L -O "https://github.com/coffeehc/xagent-releases/releases/download/${VERSION}/${ASSET}"
@@ -72,7 +77,7 @@ tar -xzf "${ASSET}"
 Install the binary:
 
 ```bash
-sudo install -m 0755 ./xagent-v0.0.3.beta-linux-amd64/xagent /opt/xagent/xagent
+sudo install -m 0755 ./xagent-v0.0.4.beta-linux-amd64/xagent /opt/xagent/xagent
 ```
 
 If you downloaded a different system or architecture package, replace the extracted directory name accordingly.

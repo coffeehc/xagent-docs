@@ -1,11 +1,14 @@
 ---
 title: xAgent 服务端安装与部署
 description: 下载并安装 xAgent 服务端二进制文件，了解 macOS、Linux 部署、系统组件、配置、HTTPS 代理和升级注意事项。
+image: /img/share/zh/xagent-server-deployment.png
 status: beta
-updated: 2026-07-12
+updated: 2026-07-15
 ---
 
 # xAgent 服务端安装与部署
+
+如果你还在规划服务器、模型、HTTPS、安全边界和外部连接，请先阅读[如何在自己的服务器上部署 AI Agent](/docs/guides/self-hosted-ai-agent)。本页聚焦二进制文件的实际安装与运行。
 
 ## 适用对象
 
@@ -46,21 +49,23 @@ sudo chown -R xagent:xagent /opt/xagent /var/lib/xagent
 
 当前测试版二进制发布在：
 
-[xAgent Releases](https://github.com/coffeehc/xagent-releases/releases)
+[xAgent v0.0.4.beta Release](https://github.com/coffeehc/xagent-releases/releases/tag/v0.0.4.beta)
 
-当前版本示例使用 `v0.0.3.beta`。请按服务器系统和 CPU 架构选择对应文件：
+当前版本为 `v0.0.4.beta`。请按服务器系统和 CPU 架构选择对应文件：
 
 | 系统 | 架构 | 文件 |
 | --- | --- | --- |
-| Linux | x86_64 / amd64 | `xagent-v0.0.3.beta-linux-amd64.tar.gz` |
-| Linux | arm64 / aarch64 | `xagent-v0.0.3.beta-linux-arm64.tar.gz` |
-| macOS | Intel | `xagent-v0.0.3.beta-darwin-amd64.tar.gz` |
-| macOS | Apple Silicon | `xagent-v0.0.3.beta-darwin-arm64.tar.gz` |
+| Linux | x86_64 / amd64 | `xagent-v0.0.4.beta-linux-amd64.tar.gz` |
+| Linux | arm64 / aarch64 | `xagent-v0.0.4.beta-linux-arm64.tar.gz` |
+| macOS | Intel | `xagent-v0.0.4.beta-darwin-amd64.tar.gz` |
+| macOS | Apple Silicon | `xagent-v0.0.4.beta-darwin-arm64.tar.gz` |
+
+Release 同时提供 `SHA256SUMS`。每个压缩包仅包含 xAgent 可执行文件、README 和版本元数据，不包含源代码。
 
 Linux amd64 示例：
 
 ```bash
-VERSION=v0.0.3.beta
+VERSION=v0.0.4.beta
 ASSET=xagent-${VERSION}-linux-amd64.tar.gz
 
 curl -L -O "https://github.com/coffeehc/xagent-releases/releases/download/${VERSION}/${ASSET}"
@@ -72,7 +77,7 @@ tar -xzf "${ASSET}"
 macOS Apple Silicon 示例：
 
 ```bash
-VERSION=v0.0.3.beta
+VERSION=v0.0.4.beta
 ASSET=xagent-${VERSION}-darwin-arm64.tar.gz
 
 curl -L -O "https://github.com/coffeehc/xagent-releases/releases/download/${VERSION}/${ASSET}"
@@ -84,7 +89,7 @@ tar -xzf "${ASSET}"
 解压后，把发布包中的 xAgent 二进制文件放到固定目录，例如：
 
 ```bash
-sudo install -m 0755 ./xagent-v0.0.3.beta-linux-amd64/xagent /opt/xagent/xagent
+sudo install -m 0755 ./xagent-v0.0.4.beta-linux-amd64/xagent /opt/xagent/xagent
 ```
 
 如果你下载的是其他系统或架构的包，请把上面路径中的目录名替换为实际解压出来的目录。
