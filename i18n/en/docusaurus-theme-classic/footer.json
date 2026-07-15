@@ -19,6 +19,10 @@
     "message": "Ecosystem Partners",
     "description": "The label of footer link with label=生态合作 linking to /docs/cooperation/partners"
   },
+  "link.item.label.行业观察": {
+    "message": "Insights",
+    "description": "The label of footer link with label=行业观察 linking to /insights"
+  },
   "link.item.label.GitHub": {
     "message": "GitHub",
     "description": "The label of footer link with label=GitHub linking to https://github.com/coffeehc/xagent-docs"

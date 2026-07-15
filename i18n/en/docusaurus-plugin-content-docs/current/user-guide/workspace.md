@@ -1,11 +1,11 @@
 ---
-title: xAgent Workspace Files
+title: "xAgent Workspace Files: Materials, Results, and Downloads"
 description: Learn how xAgent Workspaces save, isolate, and manage task materials, generated files, intermediate results, and downloadable outputs.
 status: stable
-updated: 2026-07-11
+updated: 2026-07-15
 ---
 
-# xAgent Workspace Files
+# xAgent Workspace Files: Materials, Results, and Downloads
 
 ## Who This Is For
 
@@ -123,3 +123,9 @@ Yes, but it usually needs a Tool, a connection, and approval. Check that the con
 - [Tasks](/docs/user-guide/task)
 - [Tool Management](/docs/user-guide/tool)
 - [Approval Policies](/docs/user-guide/approval-policy)
+
+## Next Steps
+
+- [Upload and process files in Agent Session](/docs/user-guide/agent-session)
+- [Describe a file-processing task](/docs/user-guide/task)
+- [Install a Connector before sending external results](/docs/deployment/connector-install)

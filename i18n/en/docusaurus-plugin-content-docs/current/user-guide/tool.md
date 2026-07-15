@@ -1,11 +1,11 @@
 ---
-title: Tool Management
-description: Understand personal and public xAgent Tools, their sources, availability controls, discovery, and use during task execution.
+title: "xAgent Tool Management: Personal, Public, MCP, and Connector Tools"
+description: Understand personal and public xAgent Tools, MCP and Connector sources, availability, on-demand discovery, and task execution.
 status: stable
-updated: 2026-07-11
+updated: 2026-07-15
 ---
 
-# Tool Management
+# xAgent Tool Management: Personal, Public, MCP, and Connector Tools
 
 ## What It Is
 
@@ -75,10 +75,15 @@ As of July 7, 2026, the current version includes about 79 built-in Tool IDs cove
 
 Some tools are internal or loaded on demand. The number ordinary users see may be smaller and depends on configuration and permissions.
 
-## Related Docs
+## Related Concepts
 
 - [How AI Agents Discover and Load Tools on Demand](/docs/guides/ai-agent-dynamic-tool-discovery)
-- [Agent Session](/docs/user-guide/agent-session)
 - [Skill Management](/docs/user-guide/skill)
 - [Connectors](/docs/user-guide/connector)
 - [Approval Policies](/docs/user-guide/approval-policy)
+
+## Next Steps
+
+- [Use Tools in an Agent Session](/docs/user-guide/agent-session)
+- [Manage Workspace Files](/docs/user-guide/workspace)
+- [Find MCP configuration in the menu overview](/docs/user-guide/menu-overview)

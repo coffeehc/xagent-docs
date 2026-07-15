@@ -66,7 +66,13 @@ const config: Config = {
           sidebarPath: './sidebars.ts',
           showLastUpdateTime: true,
         },
-        blog: false,
+        blog: {
+          blogTitle: 'Blog',
+          blogDescription: isEnglish
+            ? 'Product updates, practical lessons, and release notes from xAgent.'
+            : 'xAgent 的产品进展、实践记录与版本说明。',
+          showReadingTime: true,
+        },
         sitemap: {
           ignorePatterns: [
             '/search/**',
@@ -84,6 +90,19 @@ const config: Config = {
   ],
 
   plugins: [
+    [
+      '@docusaurus/plugin-content-blog',
+      {
+        id: 'insights',
+        path: './insights',
+        routeBasePath: 'insights',
+        blogTitle: isEnglish ? 'Insights' : '行业观察',
+        blogDescription: isEnglish
+          ? 'Practical perspectives on AI agents, deployment, governance, and the evolving ecosystem.'
+          : '围绕 AI Agent、部署、治理与生态变化的实践观察。',
+        showReadingTime: true,
+      },
+    ],
     function noPrefetchLinks() {
       return {
         name: 'no-prefetch-links',
@@ -109,7 +128,7 @@ const config: Config = {
       {
         hashed: true,
         indexDocs: true,
-        indexBlog: false,
+        indexBlog: true,
         language: ['zh', 'en'],
         highlightSearchTermsOnTargetPage: true,
         explicitSearchResultPath: true,
@@ -173,6 +192,18 @@ const config: Config = {
           target: '_self',
         },
         {
+          href: `${localeSiteUrl}/blog/`,
+          position: 'left',
+          label: 'Blog',
+          target: '_self',
+        },
+        {
+          href: `${localeSiteUrl}/insights/`,
+          position: 'left',
+          label: '行业观察',
+          target: '_self',
+        },
+        {
           type: 'localeDropdown',
           position: 'right',
         },
@@ -202,6 +233,16 @@ const config: Config = {
             {
               label: '生态合作',
               href: `${localeSiteUrl}/docs/cooperation/partners/`,
+              target: '_self',
+            },
+            {
+              label: 'Blog',
+              href: `${localeSiteUrl}/blog/`,
+              target: '_self',
+            },
+            {
+              label: '行业观察',
+              href: `${localeSiteUrl}/insights/`,
               target: '_self',
             },
           ],

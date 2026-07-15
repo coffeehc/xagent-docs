@@ -1,11 +1,11 @@
 ---
-title: xAgent Triggers
+title: "xAgent Triggers: Scheduled and Event-Driven Tasks"
 description: Learn how to use xAgent Triggers to submit tasks on a schedule or in response to events, including creation, testing, enabling, and run-state checks.
 status: experimental
-updated: 2026-07-11
+updated: 2026-07-15
 ---
 
-# xAgent Triggers
+# xAgent Triggers: Scheduled and Event-Driven Tasks
 
 > Status: Experimental. The page and its fields may change.
 
@@ -127,3 +127,9 @@ Delete it only when it is no longer needed and will not be reused. Disable it fi
 - [Tasks](/docs/user-guide/task)
 - [Long-running Tasks](/docs/user-guide/long-task)
 - [Connectors](/docs/user-guide/connector)
+
+## Next Steps
+
+- [Validate a task in Agent Session](/docs/user-guide/agent-session)
+- [Write the Trigger task](/docs/user-guide/task)
+- [Configure approval policies for risky actions](/docs/user-guide/approval-policy)

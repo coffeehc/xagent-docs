@@ -1,11 +1,11 @@
 ---
-title: Model Notes
-description: Review xAgent model requirements for tool calling, context length, API compatibility, test parameters, and stable long-running tasks.
+title: "AI Agent Model Requirements: Tool Calling, Context, and API Compatibility"
+description: Learn which tool-calling, context-length, and API compatibility requirements an xAgent model needs, and how to validate it for long-running tasks.
 status: beta
-updated: 2026-07-11
+updated: 2026-07-15
 ---
 
-# Model Notes
+# AI Agent Model Requirements: Tool Calling, Context, and API Compatibility
 
 ## What It Is
 
@@ -118,9 +118,14 @@ It can be a minimum starting point, but it is not enough for all tasks. xAgent's
 
 xAgent is built for task completion, not just chat. It needs tools to read files, write outputs, call MCP, use connectors, process triggers, and generate deliverables.
 
-## Related Docs
+## Related Concepts
 
 - [Server Installation](/docs/deployment/server-install)
-- [Model Configuration](/docs/user-guide/model-config)
-- [Agent Session](/docs/user-guide/agent-session)
-- [Create / Update Skill](/docs/getting-started/create-skill)
+- [How AI Agents Run Long Tasks](/docs/guides/long-running-agent-task)
+- [How AI Agents Discover and Load Tools on Demand](/docs/guides/ai-agent-dynamic-tool-discovery)
+
+## Next Steps
+
+- [Add and test a model in Model Configuration](/docs/user-guide/model-config)
+- [Validate tool calling in an Agent Session](/docs/user-guide/agent-session)
+- [Create or update a Skill](/docs/getting-started/create-skill)

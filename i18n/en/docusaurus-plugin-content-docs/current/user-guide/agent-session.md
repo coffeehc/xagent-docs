@@ -1,11 +1,11 @@
 ---
-title: Using xAgent Agent Sessions
-description: Learn how to submit tasks, upload files, follow execution, handle approvals, use sub-agents, and refine work in an xAgent Agent Session.
+title: "xAgent Agent Sessions: Tasks, Files, and Approvals"
+description: Learn how to submit tasks, upload files, follow execution, handle approvals, use sub-agents, and refine work in xAgent Agent Sessions.
 status: stable
-updated: 2026-07-11
+updated: 2026-07-15
 ---
 
-# Using xAgent Agent Sessions
+# xAgent Agent Sessions: Tasks, Files, and Approvals
 
 ## Who This Is For
 
@@ -167,13 +167,16 @@ Please check the latest customer message and draft a reply. Do not send it direc
 Please list the plan first. Wait for my confirmation before reading files and generating outputs.
 ```
 
-## Continue Reading
+## Related Concepts
 
 - [Shortcut Protocol: Commands, Targets, and References](/docs/guides/shortcut-instruction-protocol)
 - [How AI Agents Switch Models, Skills, and Prompts During a Task](/docs/guides/ai-agent-runtime-hot-switching)
 - [How Multiple AI Agents Collaborate Through Session Events](/docs/guides/multi-agent-session-event-collaboration)
+
+## Next Steps
+
+- [Complete your first task](/docs/getting-started/first-task)
 - [Shortcut Instructions](/docs/user-guide/shortcut-instructions)
-- [First Task](/docs/getting-started/first-task)
 - [Tasks](/docs/user-guide/task)
 - [Workspace Files](/docs/user-guide/workspace)
 - [Tool Management](/docs/user-guide/tool)

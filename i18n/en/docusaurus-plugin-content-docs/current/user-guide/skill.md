@@ -1,12 +1,12 @@
 ---
-title: Create, Publish, and Update xAgent Skills
-description: Understand public and personal xAgent Skills and the workflow for creating, importing, testing, updating, and publishing reusable capabilities.
+title: "xAgent Skill Management: Create, Test, Publish, and Update"
+description: Understand personal and public xAgent Skills and the workflow for creating, importing, testing, publishing, and updating reusable capabilities.
 image: /img/share/en/xagent-shared-skills.png
 status: stable
-updated: 2026-07-11
+updated: 2026-07-15
 ---
 
-# Create, Publish, and Update xAgent Skills
+# xAgent Skill Management: Create, Test, Publish, and Update
 
 ## What It Is
 
@@ -85,11 +85,15 @@ No. Personal Skills are scoped to the current user.
 
 They should not. Public Skills are visible to all users and should be general, safe, and reusable.
 
-## Continue Reading
+## Related Concepts
 
 - [How AI Agents Switch Models, Skills, and Prompts During a Task](/docs/guides/ai-agent-runtime-hot-switching)
 - [How AI Agents Discover and Load Tools on Demand](/docs/guides/ai-agent-dynamic-tool-discovery)
-- [Create / Update Skill](/docs/getting-started/create-skill)
-- [Agent Session](/docs/user-guide/agent-session)
 - [Tool Management](/docs/user-guide/tool)
 - [Built-in Skill Files](/docs/user-guide/builtin-skills)
+
+## Next Steps
+
+- [Create or update a Skill](/docs/getting-started/create-skill)
+- [Validate a Skill in Agent Session](/docs/user-guide/agent-session)
+- [Choose an Agent that can use the Skill](/docs/user-guide/agent-management)

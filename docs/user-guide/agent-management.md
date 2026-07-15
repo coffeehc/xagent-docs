@@ -1,11 +1,11 @@
 ---
-title: 智能体管理
+title: xAgent 智能体管理：主 Agent 与子 Agent
 description: 了解如何在 xAgent 中选择、创建和维护不同任务场景的智能体入口，以及主 Agent 与子 Agent 的使用区别。
 status: stable
-updated: 2026-07-11
+updated: 2026-07-15
 ---
 
-# 智能体管理
+# xAgent 智能体管理：主 Agent 与子 Agent
 
 ## 适用对象
 
@@ -122,3 +122,9 @@ updated: 2026-07-11
 - [Skill 管理](/docs/user-guide/skill)
 - [Tool 管理](/docs/user-guide/tool)
 - [审批策略](/docs/user-guide/approval-policy)
+
+## 下一步操作
+
+- [选择智能体并在 Agent 会话中执行任务](/docs/user-guide/agent-session)
+- [创建或更新可复用 Skill](/docs/getting-started/create-skill)
+- [调整模型配置](/docs/user-guide/model-config)

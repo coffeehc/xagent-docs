@@ -1,12 +1,12 @@
 ---
-title: Connector Installation
-description: Learn how to download, configure, and run an xAgent Connector, including its address, API key, config file, and server connection workflow.
+title: Install xAgent Connectors for WeChat and Telegram
+description: Download, configure, and run xAgent Connectors for WeChat and Telegram, including default addresses, API keys, config files, and server integration.
 image: /img/share/en/xagent-connectors.png
 status: beta
-updated: 2026-07-12
+updated: 2026-07-15
 ---
 
-# Connector Installation
+# Install xAgent Connectors for WeChat and Telegram
 
 ## What It Is
 
@@ -209,9 +209,14 @@ Use the reverse-proxy HTTPS address if one is configured.
 - Keep `--api-key` and similar credentials out of task messages and prompts.
 - External-system permissions are still controlled by the external system and the connector, not by xAgent alone.
 
-## Related Docs
+## Related Concepts
 
 - [Connectors](/docs/user-guide/connector)
 - [Server Installation](/docs/deployment/server-install)
+- [MCP vs. Connectors: What Is the Difference?](/docs/guides/mcp-vs-connector)
+
+## Next Steps
+
+- [Bind and manage an external account](/docs/user-guide/connector)
+- [Use a Connector capability in Agent Session](/docs/user-guide/agent-session)
 - [Telegram Connector source and release notes](https://github.com/coffeehc/xagent-connectors/tree/main/connectors/telegram)
-- [xAgent Connectors](https://github.com/coffeehc/xagent-connectors)

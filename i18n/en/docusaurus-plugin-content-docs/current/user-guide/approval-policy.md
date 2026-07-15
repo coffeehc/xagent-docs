@@ -1,11 +1,11 @@
 ---
-title: xAgent Approvals and Approval Policies
-description: Learn how xAgent uses approvals and approval policies to control sensitive actions, including user confirmations and administrator rule configuration.
+title: "xAgent Approval Policies: Controlling Sensitive Tool Actions"
+description: Learn how xAgent uses approvals and approval policies to control sensitive Tool actions, including user confirmations and administrator rule configuration.
 status: beta
 updated: 2026-07-15
 ---
 
-# xAgent Approvals and Approval Policies
+# xAgent Approval Policies: Controlling Sensitive Tool Actions
 
 ## Who This Is For
 
@@ -147,3 +147,9 @@ Usually not. Ordinary users may only configure personal approval policies, while
 - [Tool Management](/docs/user-guide/tool)
 - [Connectors](/docs/user-guide/connector)
 - [AI Agent Approval and Safety](/docs/guides/agent-approval-security)
+
+## Next Steps
+
+- [Handle approvals in Agent Session](/docs/user-guide/agent-session)
+- [Manage Workspace file risks](/docs/user-guide/workspace)
+- [Install a Connector for IM approval notices](/docs/deployment/connector-install)

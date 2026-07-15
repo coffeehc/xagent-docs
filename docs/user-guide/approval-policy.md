@@ -1,11 +1,11 @@
 ---
-title: 审批与审批策略
-description: 了解 xAgent 如何通过审批和审批策略控制敏感动作，以及普通用户确认操作和管理员配置规则的方法。
+title: xAgent 审批策略：控制敏感工具动作
+description: 了解 xAgent 如何通过审批和审批策略控制敏感工具动作，以及普通用户确认操作和管理员配置规则的方法。
 status: beta
 updated: 2026-07-15
 ---
 
-# 审批与审批策略
+# xAgent 审批策略：控制敏感工具动作
 
 ## 适用对象
 
@@ -147,3 +147,9 @@ updated: 2026-07-15
 - [Tool 管理](/docs/user-guide/tool)
 - [连接器](/docs/user-guide/connector)
 - [AI Agent 审批与安全控制](/docs/guides/agent-approval-security)
+
+## 下一步操作
+
+- [在 Agent 会话中处理审批](/docs/user-guide/agent-session)
+- [管理工作区文件风险](/docs/user-guide/workspace)
+- [安装连接器接收 IM 审批通知](/docs/deployment/connector-install)

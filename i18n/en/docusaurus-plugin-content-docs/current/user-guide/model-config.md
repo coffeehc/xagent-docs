@@ -1,11 +1,11 @@
 ---
-title: xAgent Model Configuration
-description: Learn about the current xAgent model configuration page, Provider integration, model capabilities, connection testing, hot switching, and the future direction of unified model routing.
+title: "xAgent Model Configuration: Providers, Tool Calling, and Task Routing"
+description: Learn about xAgent Provider integration, tool-calling capabilities, connection testing, hot switching, and the future direction of unified task routing.
 status: stable
-updated: 2026-07-11
+updated: 2026-07-15
 ---
 
-# xAgent Model Configuration
+# xAgent Model Configuration: Providers, Tool Calling, and Task Routing
 
 ## Who This Is For
 
@@ -131,3 +131,9 @@ They should not. Screenshots in public documentation or public channels should o
 - [Agent Management](/docs/user-guide/agent-management)
 - [Tool Management](/docs/user-guide/tool)
 - [Approval Policies](/docs/user-guide/approval-policy)
+
+## Next Steps
+
+- [Test a model and tool calling in Agent Session](/docs/user-guide/agent-session)
+- [Configure Agent capabilities](/docs/user-guide/agent-management)
+- [Validate the model with a real task](/docs/getting-started/first-task)

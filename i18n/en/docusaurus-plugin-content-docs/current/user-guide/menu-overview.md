@@ -2,7 +2,7 @@
 title: Feature and Menu Overview
 description: Explore the xAgent console through full-page screenshots, common user workflows, administrator entries, and current menu descriptions.
 status: stable
-updated: 2026-07-11
+updated: 2026-07-15
 ---
 
 # Feature and Menu Overview
@@ -128,3 +128,9 @@ Start with **Agent Session**. Use **Workspace Files** for files, **Trigger Manag
 - [Tool Management](/docs/user-guide/tool)
 - [Connectors](/docs/user-guide/connector)
 - [Model Configuration](/docs/user-guide/model-config)
+
+## Next Steps
+
+- [Complete your first task in Agent Session](/docs/getting-started/first-task)
+- [Upload and manage Workspace Files](/docs/user-guide/workspace)
+- [Create or update a personal Skill](/docs/getting-started/create-skill)

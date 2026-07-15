@@ -1,11 +1,11 @@
 ---
-title: 任务
-description: 学习如何向 xAgent 清楚描述任务目标、输入材料、限制条件和验收标准，并在执行过程中持续补充与调整。
+title: xAgent 任务：目标、材料与验收标准
+description: 学习如何向 xAgent 描述任务目标、输入材料、限制条件和验收标准，并在执行过程中持续补充与调整。
 status: stable
-updated: 2026-07-11
+updated: 2026-07-15
 ---
 
-# 任务
+# xAgent 任务：目标、材料与验收标准
 
 ## 适用对象
 
@@ -157,3 +157,9 @@ updated: 2026-07-11
 - [工作区](/docs/user-guide/workspace)
 - [长任务](/docs/user-guide/long-task)
 - [触发器](/docs/user-guide/trigger)
+
+## 下一步操作
+
+- [在 Agent 会话中提交任务](/docs/user-guide/agent-session)
+- [准备工作区材料](/docs/user-guide/workspace)
+- [创建定时或事件触发器](/docs/user-guide/trigger)

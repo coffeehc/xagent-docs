@@ -1,12 +1,12 @@
 ---
-title: xAgent Skill 创建、发布与更新
-description: 了解 xAgent 公共与个人 Skill 的区别，以及创建、导入、测试、更新和提交公共 Skill 的完整使用流程。
+title: xAgent Skill 管理：创建、测试、发布与更新
+description: 了解 xAgent 个人与公共 Skill 的区别，以及创建、导入、测试、发布、更新和提交公共 Skill 的完整流程。
 image: /img/share/zh/xagent-shared-skills.png
 status: stable
-updated: 2026-07-11
+updated: 2026-07-15
 ---
 
-# xAgent Skill 创建、发布与更新
+# xAgent Skill 管理：创建、测试、发布与更新
 
 ## 适用对象
 
@@ -186,13 +186,15 @@ Skill 管理 页面会展示技能卡片。常见信息包括：
 
 草稿修改只影响当前草稿测试。发布到私人库后，后续任务可以使用新的个人 Skill。公共库 Skill 需要经过管理员审批和维护流程，已经运行中的任务是否采用新内容，以当前页面和会话行为为准。
 
-## 继续阅读
+## 相关概念
 
 - [AI Agent 如何在任务执行中动态切换模型、Skill 与提示词](/docs/guides/ai-agent-runtime-hot-switching)
 - [AI Agent 如何按需发现和加载工具与 Skill](/docs/guides/ai-agent-dynamic-tool-discovery)
-- [创建 / 更新 Skill](/docs/getting-started/create-skill)
-- [内置 Skill 文件](/docs/user-guide/builtin-skills)
-- [Agent会话](/docs/user-guide/agent-session)
-- [智能体管理](/docs/user-guide/agent-management)
 - [Tool 管理](/docs/user-guide/tool)
-- [任务](/docs/user-guide/task)
+- [内置 Skill 文件](/docs/user-guide/builtin-skills)
+
+## 下一步操作
+
+- [创建 / 更新 Skill](/docs/getting-started/create-skill)
+- [在 Agent 会话中验证 Skill](/docs/user-guide/agent-session)
+- [智能体管理](/docs/user-guide/agent-management)

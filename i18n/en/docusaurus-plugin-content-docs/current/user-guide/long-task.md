@@ -1,11 +1,11 @@
 ---
-title: xAgent Long-running Tasks
+title: "xAgent Long-running Tasks: Continuous Execution and Staged Delivery"
 description: Learn how to use xAgent for multi-step, long-running, and staged deliverable tasks, and follow them through sessions, files, confirmations, and events.
 status: experimental
-updated: 2026-07-14
+updated: 2026-07-15
 ---
 
-# xAgent Long-running Tasks
+# xAgent Long-running Tasks: Continuous Execution and Staged Delivery
 
 > Status: Experimental. The page and its fields may change.
 
@@ -163,3 +163,10 @@ Ordinary users submit long-running tasks through the web interface. Underlying A
 - [Workspace Files](/docs/user-guide/workspace)
 - [Triggers](/docs/user-guide/trigger)
 - [How AI Agents Run Long Tasks](/docs/guides/long-running-agent-task)
+
+## Next Steps
+
+- [Create a long-running task in Agent Session](/docs/user-guide/agent-session)
+- [Describe the task goal and staged delivery](/docs/user-guide/task)
+- [Review staged Workspace outputs](/docs/user-guide/workspace)
+- [Use a Trigger to start a task automatically](/docs/user-guide/trigger)

@@ -1,11 +1,11 @@
 ---
-title: xAgent Agent Management
+title: "xAgent Agent Management: Main Agents and Sub-Agents"
 description: Learn how to select, create, and maintain xAgent entry points for different task scenarios, including the difference between main Agents and sub-agents.
 status: stable
-updated: 2026-07-11
+updated: 2026-07-15
 ---
 
-# xAgent Agent Management
+# xAgent Agent Management: Main Agents and Sub-Agents
 
 ## Who This Is For
 
@@ -122,3 +122,9 @@ Your account may not yet have personal Agents, or your permissions may only allo
 - [Skill Management](/docs/user-guide/skill)
 - [Tool Management](/docs/user-guide/tool)
 - [Approval Policies](/docs/user-guide/approval-policy)
+
+## Next Steps
+
+- [Choose an Agent and run a task in Agent Session](/docs/user-guide/agent-session)
+- [Create or update a reusable Skill](/docs/getting-started/create-skill)
+- [Adjust Model Configuration](/docs/user-guide/model-config)

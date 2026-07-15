@@ -1,10 +1,10 @@
 ---
-title: 模型说明
-description: 了解 xAgent 对模型工具调用、上下文长度和 API 协议的要求，以及测试环境参数与模型配置建议。
+title: AI Agent 模型要求：工具调用、上下文与 API 兼容性
+description: 了解 xAgent 可用模型应具备的工具调用、上下文长度和 API 兼容性，以及如何验证长任务与模型配置。
 status: beta
-updated: 2026-07-11
+updated: 2026-07-15
 ---
-# 模型说明
+# AI Agent 模型要求：工具调用、上下文与 API 兼容性
 
 ## 这是什么
 
@@ -128,9 +128,14 @@ xAgent 不是聊天的系统。它需要读取文件、写入工作区、调用 
 
 可能会。上下文压缩用于让长任务继续执行，但压缩后的内容是摘要，不等同于完整原文。因此长上下文模型更适合复杂任务，可以减少过早压缩带来的信息损失。
 
-## 相关文档
+## 相关概念
 
 - [服务端安装](/docs/deployment/server-install)
-- [模型配置](/docs/user-guide/model-config)
-- [Agent 会话](/docs/user-guide/agent-session)
+- [AI Agent 如何执行长任务](/docs/guides/long-running-agent-task)
+- [AI Agent 如何按需发现和加载工具与 Skill](/docs/guides/ai-agent-dynamic-tool-discovery)
+
+## 下一步操作
+
+- [在模型配置中添加和测试模型](/docs/user-guide/model-config)
+- [创建 Agent 会话验证工具调用](/docs/user-guide/agent-session)
 - [创建 / 更新 Skill](/docs/getting-started/create-skill)

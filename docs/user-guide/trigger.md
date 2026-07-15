@@ -1,11 +1,11 @@
 ---
-title: 触发器
+title: xAgent 触发器：定时任务与事件自动执行
 description: 了解如何使用 xAgent 触发器定时或按事件自动提交任务，以及创建、测试、启用和检查运行状态的方法。
 status: experimental
-updated: 2026-07-11
+updated: 2026-07-15
 ---
 
-# 触发器
+# xAgent 触发器：定时任务与事件自动执行
 
 > 状态：实验性能力，页面和字段可能变化。
 
@@ -127,3 +127,9 @@ updated: 2026-07-11
 - [任务](/docs/user-guide/task)
 - [长任务](/docs/user-guide/long-task)
 - [连接器](/docs/user-guide/connector)
+
+## 下一步操作
+
+- [在 Agent 会话中验证任务](/docs/user-guide/agent-session)
+- [编写触发器任务内容](/docs/user-guide/task)
+- [配置审批策略控制风险动作](/docs/user-guide/approval-policy)

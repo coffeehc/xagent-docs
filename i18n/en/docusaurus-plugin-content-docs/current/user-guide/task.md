@@ -1,11 +1,11 @@
 ---
-title: xAgent Tasks
-description: Learn how to clearly describe task goals, input materials, constraints, and acceptance criteria to xAgent, then refine the work as it runs.
+title: "xAgent Tasks: Goals, Materials, and Acceptance Criteria"
+description: Learn how to describe task goals, input materials, constraints, and acceptance criteria to xAgent, then refine the work as it runs.
 status: stable
-updated: 2026-07-11
+updated: 2026-07-15
 ---
 
-# xAgent Tasks
+# xAgent Tasks: Goals, Materials, and Acceptance Criteria
 
 ## Who This Is For
 
@@ -157,3 +157,9 @@ Yes. State the format explicitly, such as “save as a Markdown / CSV / HTML rep
 - [Workspace Files](/docs/user-guide/workspace)
 - [Long-running Tasks](/docs/user-guide/long-task)
 - [Triggers](/docs/user-guide/trigger)
+
+## Next Steps
+
+- [Submit a task in Agent Session](/docs/user-guide/agent-session)
+- [Prepare Workspace materials](/docs/user-guide/workspace)
+- [Create a scheduled or event-driven Trigger](/docs/user-guide/trigger)

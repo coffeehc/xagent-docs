@@ -1,12 +1,12 @@
 ---
-title: Connector 安装
-description: 了解如何下载、配置并运行 xAgent Connector，以及默认地址、API Key、config.yml 和服务端接入流程。
+title: xAgent Connector 安装：接入微信与 Telegram
+description: 下载、配置并运行 xAgent Connector，了解微信与 Telegram 的默认地址、API Key、config.yml 和服务端接入流程。
 image: /img/share/zh/xagent-connectors.png
 status: beta
-updated: 2026-07-12
+updated: 2026-07-15
 ---
 
-# Connector 安装
+# xAgent Connector 安装：接入微信与 Telegram
 
 ## 这是什么
 
@@ -285,8 +285,15 @@ MCP 更像是 xAgent 在任务过程中按需调用的外部工具入口；Conne
 
 需要。Connector 可能保存登录态、绑定状态、缓存或外部系统会话信息。升级或迁移前应备份对应状态目录。
 
-## 相关文档
+## 相关概念
 
 - [服务端安装](/docs/deployment/server-install)
+- [MCP 与连接器有什么区别](/docs/guides/mcp-vs-connector)
 - [连接器](/docs/user-guide/connector)
+
+## 下一步操作
+
+- [在连接器页面完成账号绑定和管理](/docs/user-guide/connector)
+- [在 Agent 会话中使用连接器能力](/docs/user-guide/agent-session)
+- [Telegram Connector 源码与发布说明](https://github.com/coffeehc/xagent-connectors/tree/main/connectors/telegram)
 - [Telegram Connector 源码与发布说明](https://github.com/coffeehc/xagent-connectors/tree/main/connectors/telegram)

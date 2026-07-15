@@ -239,3 +239,10 @@ Back up at least:
 - [Model Notes](/docs/deployment/model-requirements)
 - [Connector Installation](/docs/deployment/connector-install)
 - [Feature and Menu Overview](/docs/user-guide/menu-overview)
+
+## Next Steps
+
+- [Review AI Agent model requirements](/docs/deployment/model-requirements)
+- [Add and test a model in Model Configuration](/docs/user-guide/model-config)
+- [Complete your first Agent task](/docs/getting-started/first-task)
+- [Install a WeChat or Telegram Connector when needed](/docs/deployment/connector-install)

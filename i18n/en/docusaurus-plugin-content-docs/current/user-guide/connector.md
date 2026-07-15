@@ -1,12 +1,12 @@
 ---
-title: xAgent Connector Setup and Management
-description: Learn how xAgent Connectors differ from MCP, and how to use WeChat, Telegram, and other external-system connections.
+title: "xAgent Connector Management: WeChat, Telegram, and External Systems"
+description: Learn how xAgent Connectors differ from MCP, and how to connect WeChat, Telegram, personal accounts, and other external systems.
 image: /img/share/en/xagent-connectors.png
 status: experimental
-updated: 2026-07-12
+updated: 2026-07-15
 ---
 
-# xAgent Connector Setup and Management
+# xAgent Connector Management: WeChat, Telegram, and External Systems
 
 > Status: experimental. Page structure and fields may change.
 
@@ -157,12 +157,15 @@ No. Follow the UI authorization flow. Do not write passwords, tokens, or verific
 
 Not necessarily. Availability depends on connector state, user authorization, connection state, local governance, and approval policies.
 
-## Continue Reading
+## Related Concepts
 
 - [Shortcut Protocol: Commands, Targets, and References](/docs/guides/shortcut-instruction-protocol)
 - [How Multiple AI Agents Collaborate Through Session Events](/docs/guides/multi-agent-session-event-collaboration)
-- [Agent Session](/docs/user-guide/agent-session)
-- [Connector Installation](/docs/deployment/connector-install)
 - [xAgent Connectors](https://github.com/coffeehc/xagent-connectors)
 - [Tool Management](/docs/user-guide/tool)
 - [Approval Policies](/docs/user-guide/approval-policy)
+
+## Next Steps
+
+- [Install a WeChat or Telegram Connector](/docs/deployment/connector-install)
+- [Use a Connector capability in Agent Session](/docs/user-guide/agent-session)

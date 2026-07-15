@@ -1,11 +1,11 @@
 ---
-title: 工具
-description: 了解 xAgent 个人工具与公共 Tool 的区别，以及工具的启用、查找、来源范围和任务调用方式。
+title: xAgent Tool 管理：个人、公共、MCP 与连接器工具
+description: 了解 xAgent 个人与公共 Tool、MCP 和连接器工具的来源、可用状态、按需发现及任务调用方式。
 status: stable
-updated: 2026-07-11
+updated: 2026-07-15
 ---
 
-# 工具
+# xAgent Tool 管理：个人、公共、MCP 与连接器工具
 
 ## 适用对象
 
@@ -180,11 +180,15 @@ updated: 2026-07-11
 
 工具会受账号权限、管理员配置、连接状态、个人 MCP 配置、连接器授权状态和个人开关影响。
 
-## 相关文档
+## 相关概念
 
 - [AI Agent 如何按需发现和加载工具与 Skill](/docs/guides/ai-agent-dynamic-tool-discovery)
-- [Agent会话](/docs/user-guide/agent-session)
-- [工作区](/docs/user-guide/workspace)
 - [Skill 管理](/docs/user-guide/skill)
 - [连接器](/docs/user-guide/connector)
 - [审批策略](/docs/user-guide/approval-policy)
+
+## 下一步操作
+
+- [在 Agent 会话中使用 Tool](/docs/user-guide/agent-session)
+- [管理工作区文件](/docs/user-guide/workspace)
+- [查看个人 MCP 入口](/docs/user-guide/menu-overview)
