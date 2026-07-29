@@ -138,7 +138,7 @@ Dynamic capability loading helps an Agent obtain the right capability when neede
 
 - [Tool Management](/docs/user-guide/tool)
 - [Skill Management](/docs/user-guide/skill)
-- [MCP vs. Connectors](/docs/guides/mcp-vs-connector)
+- [What Is a Connector?](/docs/getting-started/what-is-connector#how-is-it-different-from-mcp)
 - [AI Agent Approval and Safety Controls](/docs/guides/agent-approval-security)
 
 ## Next Steps

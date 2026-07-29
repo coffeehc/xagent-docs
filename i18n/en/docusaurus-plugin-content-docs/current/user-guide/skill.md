@@ -67,24 +67,6 @@ As of July 7, 2026, the current version includes about 49 built-in Skills coveri
 
 The repository also includes a copy of selected built-in Skill files. They are currently simple beta-stage examples prepared for testing and community improvement. Contributions are welcome, but Skills involving third-party MCP-specific behavior should be handled carefully.
 
-## Common Questions
-
-### Should every repeated task become a Skill?
-
-Not immediately. First run it in Agent Session. If the workflow repeats and the result format becomes stable, then turn it into a Skill.
-
-### Can I update a published Skill?
-
-Yes. Updates should be drafted and tested first. For public Skills, follow the review process again when necessary.
-
-### Can other users see my personal Skills?
-
-No. Personal Skills are scoped to the current user.
-
-### Can public Skills contain private business instructions?
-
-They should not. Public Skills are visible to all users and should be general, safe, and reusable.
-
 ## Related Concepts
 
 - [How AI Agents Switch Models, Skills, and Prompts During a Task](/docs/guides/ai-agent-runtime-hot-switching)

@@ -8,9 +8,9 @@ xAgent is a server-side, multi-user AI work portal designed for task completion.
 
 xAgent is currently in beta as `v0.0.2.beta`. Many features, built-in Skills, and documentation pages are still being refined.
 
-If you find a problem, please open an issue:
+If you find a problem, use the public feedback page:
 
-https://github.com/coffeehc/xagent-docs/issues
+https://xagent.xiagaogao.com/en/docs/cooperation/idea/
 
 ## English Entry
 
@@ -29,7 +29,7 @@ This repository includes selected built-in Skill file copies under:
 skills/
 ```
 
-These files are provided so the community can review and improve early built-in Skills through pull requests. Contributions should focus on general task workflows, inputs, outputs, quality checks, and safety boundaries.
+These files are provided so the community can review early built-in Skills and propose improvements through the feedback page. Feedback should focus on general task workflows, inputs, outputs, quality checks, and safety boundaries.
 
 Please do not make a Skill depend on a specific third-party MCP, private service, external account, internal URL, or non-public business system. If an external system is needed, describe the business goal, required information, and authorization boundary; leave the concrete integration to xAgent Tools, MCP, or connectors.
 

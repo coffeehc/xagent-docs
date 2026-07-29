@@ -2,7 +2,7 @@
 title: xAgent 工作区文件：材料、结果与下载产物
 description: 了解 xAgent 工作区如何保存、隔离和管理任务材料、生成文件、中间结果与可下载产物。
 status: stable
-updated: 2026-07-15
+updated: 2026-07-27
 ---
 
 # xAgent 工作区文件：材料、结果与下载产物
@@ -15,7 +15,7 @@ updated: 2026-07-15
 
 工作区是 xAgent 保存任务材料和结果的地方。你上传的文件、任务生成的 Markdown、CSV、HTML 报告和中间结果，通常都会出现在工作区文件中。
 
-xAgent 会按用户和任务范围隔离文件。日常使用时，只需要关注页面里能看到的文件。
+xAgent 会按用户和任务范围隔离文件。需要运行外部命令时，Execution Lease 会生成最小文件视图，再由 ProcessSandbox 只挂载本次任务获得授权的路径。日常使用时，只需要关注页面里能看到的文件。
 
 ## 什么时候使用
 
@@ -98,27 +98,9 @@ xAgent 会按用户和任务范围隔离文件。日常使用时，只需要关�
 - 需要长期使用的材料，应使用稳定文件名和目录。
 - 临时文件不一定适合作为正式交付结果。
 
-## 常见问题
-
-### 工作区是否等同于本机任意目录？
-
-不是。工作区有明确可见性和权限边界。用户只能看到授权范围内的文件。
-
-### 上传后的文件会自动被处理吗？
-
-不一定。上传只是提供材料。你还需要在任务里说明“请阅读这个文件”或“请分析这个表格”。
-
-### 为什么找不到生成的文件？
-
-可能任务只在会话里回复了结果，没有保存文件。可以继续要求“请把结果保存为 Markdown 文件”。
-
-### 可以把工作区文件发给外部系统吗？
-
-可以，但通常需要工具、连接和审批。发送前应检查内容是否适合外发。
-
 ## 相关文档
 
-- [xAgent 如何通过虚拟文件系统隔离工作区](/docs/guides/multi-user-workspace-isolation)
+- [xAgent 如何隔离多用户工作区与任务进程](/docs/guides/multi-user-workspace-isolation)
 - [Agent会话](/docs/user-guide/agent-session)
 - [任务](/docs/user-guide/task)
 - [Tool 管理](/docs/user-guide/tool)
@@ -128,4 +110,4 @@ xAgent 会按用户和任务范围隔离文件。日常使用时，只需要关�
 
 - [在 Agent 会话中上传和处理文件](/docs/user-guide/agent-session)
 - [描述文件处理任务](/docs/user-guide/task)
-- [安装连接器后发送外部结果](/docs/deployment/connector-install)
+- [安装连接器后发送外部结果](/docs/user-guide/connector)

@@ -87,7 +87,7 @@ AI Agent 不只是生成文字，还可能读取或删除文件、执行命令�
 - [Tool 管理](/docs/user-guide/tool)
 - [Skill 管理](/docs/user-guide/skill)
 - [连接器](/docs/user-guide/connector)
-- [MCP 与连接器有什么区别](/docs/guides/mcp-vs-connector)
+- [什么是连接器](/docs/getting-started/what-is-connector#它和-mcp-有什么区别)
 
 ## 下一步操作
 

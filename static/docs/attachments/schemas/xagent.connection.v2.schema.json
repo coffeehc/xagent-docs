@@ -1,0 +1,141 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:xagent:schema:xagent.connection:v2",
+  "title": "xAgent Connection Descriptor v2",
+  "type": "object",
+  "required": [
+    "schema",
+    "connection",
+    "target"
+  ],
+  "properties": {
+    "schema": {
+      "const": "xagent.connection/v2"
+    },
+    "connection": {
+      "$ref": "#/$defs/connection"
+    },
+    "target": {
+      "$ref": "#/$defs/target"
+    },
+    "tools": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/tool"
+      }
+    }
+  },
+  "$defs": {
+    "nonEmptyString": {
+      "type": "string",
+      "minLength": 1
+    },
+    "targetType": {
+      "enum": [
+        "im",
+        "email",
+        "calendar",
+        "ticket",
+        "device"
+      ]
+    },
+    "connection": {
+      "type": "object",
+      "required": [
+        "connector_card_id",
+        "connector_id",
+        "connector_channel_id",
+        "target_type",
+        "profiles",
+        "status"
+      ],
+      "properties": {
+        "connector_card_id": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "connector_id": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "connector_channel_id": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "target_type": {
+          "$ref": "#/$defs/targetType"
+        },
+        "profiles": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/nonEmptyString"
+          }
+        },
+        "status": {
+          "enum": [
+            "created",
+            "authenticating",
+            "connected",
+            "degraded",
+            "offline",
+            "expired",
+            "revoked",
+            "error"
+          ]
+        }
+      }
+    },
+    "target": {
+      "type": "object",
+      "required": [
+        "provider",
+        "display_name"
+      ],
+      "properties": {
+        "provider": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "label": {
+          "type": "string"
+        },
+        "display_name": {
+          "type": "string"
+        },
+        "account_hint": {
+          "type": "string"
+        }
+      }
+    },
+    "tool": {
+      "type": "object",
+      "required": [
+        "tool_id",
+        "status"
+      ],
+      "properties": {
+        "tool_id": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "status": {
+          "enum": [
+            "available",
+            "unavailable",
+            "denied_by_target",
+            "requires_reauth",
+            "not_supported"
+          ]
+        },
+        "target_permission_state": {
+          "enum": [
+            "unknown",
+            "granted",
+            "denied",
+            "requires_reauth"
+          ]
+        },
+        "reason": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

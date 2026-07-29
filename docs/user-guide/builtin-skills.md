@@ -13,7 +13,7 @@ updated: 2026-07-11
 
 ## 这是什么
 
-仓库中提供了一套 xAgent 内置 Skill 文件副本，放在 `skills/` 目录下。目前这些 Skill 主要是为了测试版先覆盖一批常见场景，内容还比较早期，欢迎大家通过 PR 一起完善。
+文档项目中提供了一套 xAgent 内置 Skill 文件副本，放在 `skills/` 目录下。目前这些 Skill 主要是为了测试版先覆盖一批常见场景，内容还比较早期，欢迎大家提出改进建议。
 
 这些 Skill 随测试版一起提供，目的是先覆盖常见工作场景，并尽早让真实用户看到、试用和提出改进意见。当前内容还处在早期整理阶段，部分描述、流程、模板和边界仍需要继续打磨。把它们放到 docs 仓库中，是希望借助社区反馈逐步完善，而不是把当前版本视为最终定稿。
 
@@ -23,7 +23,7 @@ updated: 2026-07-11
 skills/
 ```
 
-它的用途是让大家能直接查看和修改内置 Skill 的文本、模板、参考资料和示例，再通过 GitHub 提交 issue 或 pull request 讨论改进。
+它的用途是让大家能直接查看内置 Skill 的文本、模板、参考资料和示例，并基于真实使用场景讨论改进。
 
 ## 重要说明
 
@@ -34,15 +34,7 @@ skills/
 - 对企业和团队来说，安全始终是第一位的。后续会根据 Skill 安全风险的实际情况，评估是否开发统一的 Skill Marker 或类似机制，用于更集中地标记、审查和管理 Skill。
 - Skill 不应绑定特定第三方 MCP、私有服务或外部账号能力。需要外部系统参与时，建议只描述业务目标、所需信息和授权边界，把具体接入留给 xAgent 的工具、MCP 或连接器配置。
 - 不要把真实密钥、客户数据、内部地址、token、验证码或一次性业务材料写进 Skill。
-- 如果只是反馈问题，也可以直接提交 issue。
-
-GitHub 目录：
-
-[https://github.com/coffeehc/xagent-docs/tree/main/skills](https://github.com/coffeehc/xagent-docs/tree/main/skills)
-
-提交问题：
-
-[https://github.com/coffeehc/xagent-docs/issues](https://github.com/coffeehc/xagent-docs/issues)
+- 反馈问题或改进建议时，请通过[我有一个想法](/docs/cooperation/idea)页面选择合适的联系渠道。
 
 ## 如何修改
 
@@ -56,7 +48,7 @@ GitHub 目录：
 4. 确认 `SKILL.md` 中提到的资源文件都真实存在。
 5. 不要加入真实业务敏感信息。
 6. 如果这次修改准备进入产品版本，更新 `SKILL.md` 里的 `meta.version`。
-7. 通过 GitHub 提交 pull request，或先提交 issue 说明问题。
+7. 通过[我有一个想法](/docs/cooperation/idea)页面说明问题、真实场景和建议改法。
 
 ## 当前包含范围
 

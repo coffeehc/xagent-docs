@@ -1,5 +1,4 @@
 type OutboundDestinationType =
-  | 'connector_repository'
   | 'documentation_repository'
   | 'release_download_intent';
 
@@ -52,19 +51,15 @@ function initializeCloudflareAnalytics(): void {
 }
 
 function getDestinationType(url: URL): OutboundDestinationType | undefined {
+  if (url.hostname === 'downloads.xagent.xiagaogao.com') {
+    return 'release_download_intent';
+  }
+
   if (url.hostname !== 'github.com') {
     return undefined;
   }
 
-  if (url.pathname.startsWith('/coffeehc/xagent-releases/releases')) {
-    return 'release_download_intent';
-  }
-
-  if (url.pathname.startsWith('/coffeehc/xagent-connectors')) {
-    return 'connector_repository';
-  }
-
-  if (url.pathname.startsWith('/coffeehc/xagent-docs')) {
+  if (url.pathname === '/coffeehc/xagent-releases/issues/new') {
     return 'documentation_repository';
   }
 

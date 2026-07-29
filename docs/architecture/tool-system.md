@@ -30,20 +30,6 @@ Tool System 负责把可执行能力投影给 Agent，并在运行时完成 sche
 - Session 级上下文和权限。
 - Tool 结果如何返回给 Agent 和用户。
 
-## 常见问题
-
-### Tool 是否可以绕过 Session 执行？
-
-不应这样设计。Tool 调用应在明确上下文和治理边界内发生。
-
-### Tool 是否应保存业务事实？
-
-通常不应。业务事实应归属于明确 owner。
-
-### Tool 错误码在哪里定义？
-
-未稳定前不在本文编造错误码。后续应在 [Error Codes](/docs/reference/error-codes) 中维护。
-
 ## 相关文档
 
 - [Tool](/docs/user-guide/tool)

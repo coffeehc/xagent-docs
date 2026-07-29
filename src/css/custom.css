@@ -1,30 +1,47 @@
 :root {
-  --ifm-color-primary: #2563eb;
-  --ifm-color-primary-dark: #1d4ed8;
-  --ifm-color-primary-darker: #1e40af;
-  --ifm-color-primary-darkest: #1e3a8a;
-  --ifm-color-primary-light: #3b82f6;
-  --ifm-color-primary-lighter: #60a5fa;
-  --ifm-color-primary-lightest: #93c5fd;
+  --xagent-ink: oklch(0.278 0.033 256.8);
+  --xagent-blue: #2f6bff;
+  --xagent-orange: #ff8a00;
+  --xagent-brand: var(--xagent-blue);
+  --xagent-brand-secondary: var(--xagent-orange);
+  --xagent-brand-tertiary: var(--xagent-ink);
+  --xagent-brand-foreground: #ffffff;
+  --ifm-color-primary: var(--xagent-brand);
+  --ifm-color-primary-dark: #2a60e6;
+  --ifm-color-primary-darker: #2656cc;
+  --ifm-color-primary-darkest: #1f46a6;
+  --ifm-color-primary-light: #4e81ff;
+  --ifm-color-primary-lighter: #6d97ff;
+  --ifm-color-primary-lightest: #97b5ff;
   --ifm-code-font-size: 95%;
+  --ifm-font-color-base: var(--xagent-ink);
   --ifm-heading-font-weight: 700;
   --ifm-navbar-shadow: none;
-  --xagent-border: #d9dee8;
+  --ifm-background-color: #ffffff;
+  --ifm-navbar-background-color: #ffffff;
+  --xagent-border: oklch(0.915 0.006 255);
   --xagent-page-bg: #ffffff;
-  --docusaurus-highlighted-code-line-bg: rgba(37, 99, 235, 0.08);
+  --docusaurus-highlighted-code-line-bg: rgba(47, 107, 255, 0.08);
 }
 
 [data-theme='dark'] {
-  --ifm-color-primary: #60a5fa;
-  --ifm-color-primary-dark: #3b82f6;
-  --ifm-color-primary-darker: #2563eb;
-  --ifm-color-primary-darkest: #1d4ed8;
-  --ifm-color-primary-light: #93c5fd;
-  --ifm-color-primary-lighter: #bfdbfe;
-  --ifm-color-primary-lightest: #dbeafe;
-  --xagent-border: #303747;
-  --xagent-page-bg: #151821;
-  --docusaurus-highlighted-code-line-bg: rgba(96, 165, 250, 0.16);
+  --xagent-ink: oklch(0.14 0.035 257);
+  --xagent-blue: #5f85ff;
+  --xagent-orange: #ff9a2e;
+  --xagent-brand-foreground: var(--xagent-ink);
+  --ifm-color-primary: var(--xagent-brand);
+  --ifm-color-primary-dark: #5678e6;
+  --ifm-color-primary-darker: #4c6acc;
+  --ifm-color-primary-darkest: #3e56a6;
+  --ifm-color-primary-light: #7797ff;
+  --ifm-color-primary-lighter: #8faaff;
+  --ifm-color-primary-lightest: #afc2ff;
+  --ifm-font-color-base: oklch(0.985 0 0);
+  --ifm-background-color: oklch(0.145 0.012 255);
+  --ifm-navbar-background-color: oklch(0.145 0.012 255);
+  --xagent-border: oklch(0.3 0.018 255);
+  --xagent-page-bg: oklch(0.145 0.012 255);
+  --docusaurus-highlighted-code-line-bg: rgba(95, 133, 255, 0.16);
 }
 
 .navbar {

@@ -1,136 +1,139 @@
 ---
 title: Feature and Menu Overview
-description: Explore the xAgent console through full-page screenshots, common user workflows, administrator entries, and current menu descriptions.
+description: Understand the v0.0.5.beta console structure, simple and advanced modes, and the main user and administrator menus.
 status: stable
-updated: 2026-07-15
+updated: 2026-07-27
 ---
 
 # Feature and Menu Overview
 
+For page-by-page paths, visibility, actions, and current English UI examples, use the [xAgent User Manual](/en/docs/manual/overview).
+
 ## Who This Is For
 
-This page is for users who open the xAgent console for the first time and want to know what each menu does.
+This page is for users and administrators who are opening xAgent for the first time and want to understand the available features, where to find them, and why some menus may be hidden.
 
-## What It Is
+## What Changed in v0.0.5.beta
 
-xAgent's usage path is simple: administrators prepare common entry points and reusable capabilities; users enter the web console, submit tasks, provide materials, confirm important actions, and review results.
+`v0.0.5.beta` reorganizes the console branding, typography, density, page hierarchy, and responsive layout. Lists, dialogs, and drawers now use shared interaction patterns. Agent Sessions also have a revised message timeline, attachments, Tool status, and workspace access for more consistent desktop and narrow-screen use.
 
-Screenshots below come from a local example environment. Menus may differ by account permissions.
+Preferences, theme settings, and email management are no longer separate sidebar entries. Account information, interface theme, and display density are consolidated under **Account management**. Multiple interface color palettes have been removed.
 
-## Screenshots
+> Pre-redesign screenshots have been removed from this page because their page structure and button positions no longer match `v0.0.5.beta`.
 
-![xAgent Agent Session page showing the session list, task execution, and message input](/img/manual/xagent-agent-session.png)
+## Simple and Advanced Modes
 
-![xAgent Trigger Management page showing scheduled task status and actions](/img/manual/xagent-triggers.png)
+An administrator can enable advanced features for each user. Simple mode keeps the entries needed for daily tasks. Advanced mode adds orchestration and capability-management pages.
 
-![xAgent Agent Management page showing public agents and the create action](/img/manual/xagent-agent-management.png)
+| Mode | Visible entries |
+| --- | --- |
+| Simple | Dashboard, Agent sessions, Workspace files, Approvals, My connections, Secrets, Account management |
+| Advanced | Everything in simple mode, plus Session list, Triggers, Agents, Skills, My tools, My MCP, and Personal approval policy |
 
-![xAgent Skill Management page showing personal and public Skill lists](/img/manual/xagent-skill-management.png)
+Administrator-only groups depend on the administrator role, not the user's advanced-mode setting.
 
-![xAgent My Tools page showing Tool sources and enabled states](/img/manual/xagent-my-tools.png)
-
-![xAgent Approval Policy page showing safety rules and risk decisions](/img/manual/xagent-approval-policy.png)
-
-![xAgent Model Configuration page showing models, connection settings, and capabilities](/img/manual/xagent-model-config.png)
-
-## Common Entry Points
+## Common Paths
 
 | What you want to do | Menu | Notes |
 | --- | --- | --- |
-| Submit tasks, upload materials, view execution | [Agent Session](/docs/user-guide/agent-session) | Main work page. This page has the richest logic and should be read separately |
-| View uploaded files and generated outputs | Workspace Files | Preview Markdown, HTML, tables, reports, and download outputs |
-| Find historical sessions | Session List | Search sessions, enter main or sub-sessions, view status |
-| Review sensitive actions | Approval | Check actions that require human confirmation |
-| Run tasks on a schedule or from external events | Trigger Management | Create timed checks, scheduled reports, or event-driven tasks |
-| Select or adjust work assistant entries | Agent Management | View personal and public agents, create personal entries |
-| Reuse stable work methods | Skill Management | Use public Skills, create personal Skills, and submit stable Skills for public review |
-| View executable capabilities | My Tools | View available tools, personal MCP tools, connector tools, and tool status |
-| Connect personal MCP services | My MCP | Add MCP services and discover tools |
-| Bind external accounts or channels | Connectors | Connect WeChat, email, or other connector-backed services |
-| Save personal secrets | Key Management | Save API keys, email passwords, and external tokens as secret references |
+| Submit tasks, upload materials, and follow execution | [Agent sessions](/docs/user-guide/agent-session) | Main daily workspace |
+| Review uploaded files and generated outputs | [Workspace files](/docs/user-guide/workspace) | Preview, download, or reference workspace files |
+| Find and manage historical sessions | Session list | Advanced mode; searches main and sub-sessions |
+| Review actions that require confirmation | Approvals | Shows approval details, risk, and related sessions |
+| Start tasks on a schedule or external event | [Triggers](/docs/user-guide/trigger) | Advanced mode |
+| Manage personal Agents, Skills, Tools, or MCP | Agents, Skills, My tools, My MCP | Advanced mode |
+| Bind WeChat, Telegram, Feishu, or other channels | [My connections](/docs/user-guide/connector) | Available in simple mode |
+| Store API keys and external tokens | Secrets | Available in simple mode |
 
-## Workbench
-
-These menus are used most often by ordinary users:
+## Workspace
 
 | Menu | Purpose |
 | --- | --- |
-| Dashboard | View token usage, session status, pending approvals, and recent sessions |
-| Agent Session | Submit requirements, upload files, confirm tool actions, and continue asking follow-up questions |
-| Workspace Files | Browse business space, session files, and personal Skill files |
-| Session List | Manage main sessions and sub-sessions |
+| Dashboard | Review Token usage, session status, pending approvals, and recent sessions |
+| [Agent sessions](/docs/user-guide/agent-session) | Submit tasks, upload attachments, follow execution, and ask follow-up questions |
+| [Workspace files](/docs/user-guide/workspace) | Browse business spaces, session outputs, uploads, and personal Skill files |
+| Session list | Search and manage main and sub-sessions in advanced mode |
 
-Start with **Agent Session**. If a task uses files, open **Workspace Files**. If you need history, open **Session List**.
+Start with **Agent sessions**. Use **Workspace files** when a task works with files and **Session list** when you need to find history.
 
-## Runtime Governance
+## Operations
 
-These menus manage risks, automation, reusable capabilities, and external connections:
+| Menu | Visibility | Purpose |
+| --- | --- | --- |
+| Approvals | All users | Review sensitive actions related to the current user |
+| [Triggers](/docs/user-guide/trigger) | Advanced | Create, enable, disable, or manually run long-term triggers |
+| [Agents](/docs/user-guide/agent-management) | Advanced | Manage personal and public Agent entries |
+| [Skills](/docs/user-guide/skill) | Advanced | Use public Skills and maintain personal Skills |
+| [My tools](/docs/user-guide/tool) | Advanced | Review available tools, sources, and status |
+| My MCP | Advanced | Connect personal MCP services and discover tools |
+| [My connections](/docs/user-guide/connector) | All users | Bind external accounts and review authentication, channel, and tool status |
+| Secrets | All users | Store workspace secrets for the current user |
 
-| Menu | Purpose |
-| --- | --- |
-| Approval | Review sensitive actions related to the current user |
-| Trigger Management | Create, enable, disable, or manually run long-term triggers |
-| Agent Management | Manage available agent definitions |
-| Skill Management | View public/personal Skills, edit drafts, publish to personal library, and submit for public review |
-| My Tools | View system tools, personal MCP tools, connector tools, source, and availability |
-| My MCP | Manage the current user's MCP services |
-| Connectors | Manage user-side connections and administrator-side connector catalog |
-| Key Management | Save workspace secrets used by tools |
-
-Ordinary users do not need to understand the underlying protocols. Approvals control risk, triggers start tasks automatically, Skills and Tools extend capability, and connectors/keys connect external systems.
+Users do not need to understand the underlying protocols. Approvals control risk, Triggers start work automatically, Skills and Tools extend execution, and connections and secrets provide access to external systems.
 
 ## Personal Settings
 
-These settings only affect the current user:
+| Menu | Visibility | Purpose |
+| --- | --- | --- |
+| Account management | All users | Manage profile, interaction preferences, interface theme, and display density |
+| [Personal approval policy](/docs/user-guide/approval-policy) | Advanced | Maintain approval overrides for the current account |
+
+## Users
+
+These entries are visible only to administrators:
 
 | Menu | Purpose |
 | --- | --- |
-| Account Management | View or update current account information |
-| Preferences | Set reply language, detail level, and workflow preference |
-| Personal Approval Policy | Maintain personal approval override rules |
-| Theme Settings | Change light/dark mode, colors, and display density |
-| Email Management | Add email accounts, test sending, and choose the default email |
+| User accounts | Manage local accounts, roles, groups, and each user's advanced-feature setting |
+| User groups | Manage local groups used for authorization and isolation |
 
-## Administrator Menus
+The Enterprise accounts entry remains hidden and is not a `v0.0.5.beta` user-facing feature.
 
-Administrators may also see:
+## Analytics
+
+These entries are visible only to administrators:
 
 | Menu | Purpose |
 | --- | --- |
-| User Accounts | Manage local users, roles, groups, and account-level runtime environment |
-| User Groups | Manage local user groups for authorization and isolation |
-| External Systems | View external capability governance facts |
-| Approval Policy | Manage system-level approval rules |
-| Tool Management | Manage all tool governance information returned by the system |
-| MCP Configuration | Manage global MCP services |
-| System Components | Check server-side runtime components |
-| Model Configuration | Manage model and provider connection information |
-| System Configuration | Manage system-level configuration fields |
-| Software License | View version, user limit, and license state |
-| Agent Role Configuration | Manage fixed role configuration for execution, sub-agent completion, indexing, summary, and compression |
+| Token usage | Review model Token usage by user |
+| System monitoring | Review service and resource status |
 
-The enterprise account integration entry is not completed in the current version.
+## Agent Governance
 
-## Common Questions
+These administrator-only entries manage system capabilities:
 
-### Why do I see fewer menus than the screenshots?
+| Menu | Purpose |
+| --- | --- |
+| [Agent definitions](/docs/user-guide/agent-management) | Manage system-level Agent definitions |
+| [Approval policy](/docs/user-guide/approval-policy) | Manage system-level approval rules |
+| [Skill admin](/docs/user-guide/skill) | Manage public Skills and submission reviews |
+| [Tool admin](/docs/user-guide/tool) | Manage tools, sources, status, and input/output contracts |
+| [Connectors](/docs/user-guide/connector) | Manage the Connector catalog, Cards, health, and tool declarations |
+| MCP config | Manage global MCP services |
+| Execution environment | Inspect Runtime Assets and server execution components |
 
-Menus are filtered by account permissions. Ordinary users usually do not see user management, agent governance, or system configuration.
+## System Config
 
-### Where should I start?
+These entries are visible only to administrators:
 
-Start with **Agent Session**. Use **Workspace Files** for files, **Trigger Management** for automation, and **Skill Management**, **My Tools**, **Connectors**, or **Key Management** for personal capabilities.
+| Menu | Purpose |
+| --- | --- |
+| [Model config](/docs/user-guide/model-config) | Manage models and provider connections |
+| System config | Manage system-level configuration fields |
+| Software license | Review the version, user limit, and license state |
+| Agent role config | Configure fixed roles for primary execution, sub-agents, indexing, summaries, and compression |
 
 ## Related Docs
 
-- [Agent Session](/docs/user-guide/agent-session)
-- [Skill Management](/docs/user-guide/skill)
-- [Tool Management](/docs/user-guide/tool)
+- [Agent sessions](/docs/user-guide/agent-session)
+- [Workspace files](/docs/user-guide/workspace)
 - [Connectors](/docs/user-guide/connector)
-- [Model Configuration](/docs/user-guide/model-config)
+- [Skill management](/docs/user-guide/skill)
+- [Tool management](/docs/user-guide/tool)
+- [Approval policy](/docs/user-guide/approval-policy)
 
 ## Next Steps
 
-- [Complete your first task in Agent Session](/docs/getting-started/first-task)
+- [Complete your first task in Agent Sessions](/docs/getting-started/first-task)
 - [Upload and manage Workspace Files](/docs/user-guide/workspace)
 - [Create or update a personal Skill](/docs/getting-started/create-skill)

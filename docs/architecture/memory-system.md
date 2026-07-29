@@ -30,20 +30,6 @@ Memory System 面向长期上下文。当前已知架构重点是：从当前 hi
 - Candidate 必须可追溯来源。
 - 未稳定字段不写成公共契约。
 
-## 常见问题
-
-### Memory 是否可以从压缩摘要中提取？
-
-当前架构基线不应这样描述。Memory extraction source 应来自当前 history 的冻结切片。
-
-### Memory 是否直接写最终长期事实？
-
-不应写成直接写入。候选和过滤阶段需要保持清晰。
-
-### Memory 是否会影响所有 Agent？
-
-作用范围取决于实现和权限边界，未稳定前不做承诺。
-
 ## 相关文档
 
 - [Memory](/docs/user-guide/memory)

@@ -2,7 +2,7 @@
 title: "xAgent Workspace Files: Materials, Results, and Downloads"
 description: Learn how xAgent Workspaces save, isolate, and manage task materials, generated files, intermediate results, and downloadable outputs.
 status: stable
-updated: 2026-07-15
+updated: 2026-07-27
 ---
 
 # xAgent Workspace Files: Materials, Results, and Downloads
@@ -15,7 +15,7 @@ This page is for users who need to upload files, view outputs, preview reports, 
 
 The workspace is where xAgent saves task materials and results. Files you upload, generated Markdown, CSV files, HTML reports, and intermediate results will usually appear in Workspace Files.
 
-xAgent isolates files by user and task scope. In everyday use, focus on the files visible on the page.
+xAgent isolates files by user and task scope. When an external command runs, an Execution Lease creates the minimum file view and ProcessSandbox mounts only paths authorized for that task. In everyday use, focus on the files visible on the page.
 
 ## When to Use It
 
@@ -98,27 +98,9 @@ Keep the following in mind:
 - Use stable filenames and directories for materials that need long-term use.
 - Temporary files may not be suitable as formal deliverables.
 
-## Common Questions
-
-### Is the workspace the same as any local directory on my computer?
-
-No. A workspace has explicit visibility and permission boundaries. Users can only see files in their authorized scope.
-
-### Are uploaded files processed automatically?
-
-Not necessarily. Uploading only provides the material. You still need to say “read this file” or “analyze this spreadsheet” in a task.
-
-### Why can I not find a generated file?
-
-The task may have only returned the result in the session without saving a file. Ask it to “save the result as a Markdown file,” for example.
-
-### Can I send a workspace file to an external system?
-
-Yes, but it usually needs a Tool, a connection, and approval. Check that the content is appropriate before sending it.
-
 ## Continue Reading
 
-- [How xAgent Isolates Workspaces with a Virtual File System](/docs/guides/multi-user-workspace-isolation)
+- [How xAgent Isolates Multi-user Workspaces and Task Processes](/docs/guides/multi-user-workspace-isolation)
 - [Agent Session](/docs/user-guide/agent-session)
 - [Tasks](/docs/user-guide/task)
 - [Tool Management](/docs/user-guide/tool)
@@ -128,4 +110,4 @@ Yes, but it usually needs a Tool, a connection, and approval. Check that the con
 
 - [Upload and process files in Agent Session](/docs/user-guide/agent-session)
 - [Describe a file-processing task](/docs/user-guide/task)
-- [Install a Connector before sending external results](/docs/deployment/connector-install)
+- [Install a Connector before sending external results](/docs/user-guide/connector)

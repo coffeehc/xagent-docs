@@ -133,24 +133,6 @@ When the result is not satisfactory, give a concrete revision request. For examp
 | Use the previous approach | A new session may lack the context | Briefly restate the rules to retain |
 | Analyze everything | The scope is too broad | Analyze the most recent 30 days and output the top 10 anomalies |
 
-## Common Questions
-
-### Must a task be completed in one go?
-
-No. Complex tasks can move forward in stages. You can ask xAgent to show a plan first and execute after confirmation.
-
-### Is a task the same as a Tool call?
-
-No. Tools are only a means to complete a task. Ordinary users do not need to specify Tool names; state the action you want completed.
-
-### When should I split a task?
-
-Split it when there is a lot of material, complex steps, a need to wait for an external result, or multiple confirmations.
-
-### Can xAgent save results automatically?
-
-Yes. State the format explicitly, such as “save as a Markdown / CSV / HTML report.”
-
 ## Continue Reading
 
 - [Agent Session](/docs/user-guide/agent-session)

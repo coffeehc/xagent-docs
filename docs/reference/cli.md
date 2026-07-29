@@ -59,16 +59,6 @@ npm install
 npm run start
 ```
 
-## 常见问题
-
-### 为什么这里只有少量命令？
-
-使用手册只记录已核对、用户常用的入口。测试、评估、迁移类命令应放到更具体的维护文档中。
-
-### CLI 是否等同于 API？
-
-不是。CLI 是命令行入口，API 是程序化调用接口。
-
 ## 相关文档
 
 - [Config](/docs/reference/config)

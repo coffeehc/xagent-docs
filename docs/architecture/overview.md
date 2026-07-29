@@ -35,20 +35,6 @@ xAgent 的架构围绕 Session、Agent、Tool、Skill、Memory、Workspace、Con
 
 架构文档只描述当前已知边界和方向。涉及具体接口时必须回查代码。
 
-## 常见问题
-
-### 是否可以把所有能力都写成 Agent 的职责？
-
-不可以。Agent 是执行主体，但不同事实有各自 owner。
-
-### 架构文档是否等同于当前实现？
-
-不一定。标记为 experimental 的内容可能包含目标架构或仍在收口的边界。
-
-### 新增架构术语要做什么？
-
-必须同步 [术语表](/docs/reference/glossary)。
-
 ## 相关文档
 
 - [Runtime](/docs/architecture/runtime)

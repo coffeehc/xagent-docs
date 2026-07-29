@@ -3,7 +3,7 @@ title: How to Host an AI Agent on Your Own Server
 description: A practical self-hosted AI agent setup guide covering server preparation, model access, HTTPS, workspace isolation, connectors, backups, and long-running tasks.
 image: /img/share/en/xagent-security.png
 status: beta
-updated: 2026-07-15
+updated: 2026-07-27
 ---
 
 # How to Host an AI Agent on Your Own Server
@@ -28,6 +28,7 @@ This does not mean all data automatically remains inside your environment. Model
 | One access point | Users can enter through the web UI or start and follow tasks from external entry points such as WeChat through IM connectors. |
 | Centralized task files | Materials, intermediate files, and results remain in server-side workspaces for continued work and later review. |
 | User workspace isolation | Each user accesses only their own workspace files, preventing task materials from different users being mixed together. |
+| Task process isolation | ProcessSandbox mounts only authorized files and read-only Runtime Assets, then limits the process tree and resources. |
 | Support for your own model service | A local model or self-managed model gateway can keep task data in your own environment as much as possible. |
 | Centralized governance | Administrators configure models, Skills, tools, connectors, and approval policies once, then make them ready for users. |
 
@@ -35,7 +36,7 @@ This does not mean all data automatically remains inside your environment. Model
 
 A practical AI agent hosting setup must cover the runtime environment, model access, user entry points, security boundaries, and ongoing operations. Before the first deployment, clarify the following:
 
-1. Prepare an always-on Linux or macOS server. Windows is currently untested and not recommended for deployment trials.
+1. Prepare an always-on Linux or macOS server. Windows is not recommended for deployment for now because its current sandbox support is not sufficient to provide safe and controllable execution of xAgent-managed scripts.
 2. Decide on a model source. You can connect a model API or run a local model service, but the model must support tool calling reliably.
 3. Plan the access path. Internal users can access the server directly; public or domain access should use Nginx, Caddy, or another reverse proxy for HTTPS.
 4. Define the first users and task scenarios. Start with low-risk work such as document organization, material analysis, or report generation.
@@ -47,7 +48,7 @@ The current version uses embedded SQLite by default, so the first deployment doe
 
 ### 1. Install and Start the Server
 
-Download the correct binary for your system and architecture by following [Server Installation](/docs/deployment/server-install). For long-running Linux deployments, register it as a systemd service.
+Run the [official installer](/docs/getting-started/install). It detects the system and architecture, verifies release packages, and installs `v0.0.5.beta`. On Linux it configures and starts a systemd service; on macOS it installs under the current user.
 
 ### 2. Configure and Validate a Model
 
@@ -59,13 +60,15 @@ Do not expose the xAgent port directly to the public internet. Use a reverse pro
 
 xAgent isolates user workspaces. Keys are also managed independently: tool configuration uses placeholders, and real values are substituted only when a tool call is made inside the system. Do not put passwords, tokens, or verification codes into session messages or task materials.
 
+Confirm that ProcessSandbox and Runtime Assets are ready on the administrator **Execution environment** page. If the sandbox is unavailable, do not bypass the gate by running Tools directly on the host.
+
 ### 4. Validate with a Small Real Task
 
 Create an [Agent Session](/docs/user-guide/agent-session), upload a small non-sensitive file, and complete a task with a clear, reviewable result. Confirm that model access, workspace read/write, file handling, and approvals work before opening the system to more users.
 
 ### 5. Add External Capabilities Only as Needed
 
-Use MCP when sessions need to call an external service on demand. Use [Connectors](/docs/user-guide/connector) when accounts, messages, or events from WeChat, email, or enterprise systems need to enter xAgent proactively. See [MCP vs. Connectors](/docs/guides/mcp-vs-connector) for the difference.
+Use MCP when sessions need to call an external service on demand. Use [Connectors](/docs/user-guide/connector) when accounts, messages, or events from WeChat, email, or enterprise systems need to enter xAgent proactively. See [What Is a Connector?](/docs/getting-started/what-is-connector#how-is-it-different-from-mcp) for the difference.
 
 ## Common Use Cases
 
@@ -79,18 +82,18 @@ Use MCP when sessions need to call an external service on demand. Use [Connector
 - Self-hosted xAgent is not an offline desktop application. The server needs to stay online to receive and execute ongoing tasks.
 - A local model can improve data privacy, but MCP services, connectors, and external APIs still follow the data boundaries of the services you choose and authorize.
 - xAgent is currently beta. Before production use, validate models, external connections, approvals, and backups with real but non-sensitive tasks.
-- The current version does not support online upgrades. Upgrades require maintenance, backup, binary replacement, and checks. See [Server Installation](/docs/deployment/server-install).
+- The installer supports pinned-version upgrades while preserving configuration and runtime data. If Linux activation fails, it attempts to restore the previous version. Back up first and verify the service, models, files, and Connectors after every upgrade.
 
 ## Related Concepts
 
 - [What is xAgent](/docs/getting-started/what-is-xagent)
-- [How xAgent Isolates Workspaces with a Virtual File System](/docs/guides/multi-user-workspace-isolation)
+- [How xAgent Isolates Multi-user Workspaces and Task Processes](/docs/guides/multi-user-workspace-isolation)
 - [Model Notes](/docs/deployment/model-requirements)
 - [Connectors](/docs/user-guide/connector)
-- [MCP vs. Connectors](/docs/guides/mcp-vs-connector)
+- [What Is a Connector?](/docs/getting-started/what-is-connector#how-is-it-different-from-mcp)
 
 ## Next Steps
 
-- [Install the xAgent Server](/docs/deployment/server-install)
+- [Start xAgent Installation](/docs/getting-started/install)
 - [Complete Your First Task](/docs/getting-started/first-task)
 - [Configure Approval Policies](/docs/user-guide/approval-policy)

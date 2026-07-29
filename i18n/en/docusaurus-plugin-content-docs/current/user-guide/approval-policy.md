@@ -19,7 +19,7 @@ Users can submit a task normally. The session enters `waiting_approval` only whe
 
 Ordinary users only need to remember one thing: when the page asks for confirmation, check the action and its effect before allowing it to continue.
 
-![xAgent Approval Policy page showing rule types, risk levels, and approval decisions](/img/manual/xagent-approval-policy.png)
+![xAgent Approval Policy page showing rule types, risk levels, and approval decisions](/img/manual/v005/en/admin-approval-policy.webp)
 
 ## When to Use It
 
@@ -117,28 +117,6 @@ After saving, use a low-risk test task to verify that the policy takes effect.
 - Keep human confirmation for high-risk actions even when they are technically executable.
 - If you are unsure about a rule's scope, begin with a stricter rule and relax it gradually.
 
-## Common Questions
-
-### Will approvals block every dangerous action?
-
-Approvals reduce risk, but they do not replace account permissions, external system permissions, or administrator management. Sensitive connections should still follow least-privilege configuration.
-
-### Why does the same action sometimes require approval and sometimes not?
-
-It may match a different resource scope, session type, or personal rule. The effective result is calculated from the current tool arguments together with the personal and system policies.
-
-### Does approval block the whole task before it starts?
-
-No. A task starts normally. Only a specific tool operation that matches a policy pauses for approval.
-
-### Can I approve from WeChat or Telegram?
-
-Yes. Starting with `v0.0.4.beta`, when a session waits for approval, xAgent attempts to notify every currently available IM messaging channel owned by the user. The Connector must be online, the user must be authenticated, and the connection must provide an available message-send Tool. Reply with the notification's `@{approval:id}` and explicit approve or reject form.
-
-### Can ordinary users edit system approval policies?
-
-Usually not. Ordinary users may only configure personal approval policies, while administrators maintain system-wide policies.
-
 ## Continue Reading
 
 - [Shortcut Protocol: Commands, Targets, and References](/docs/guides/shortcut-instruction-protocol)
@@ -152,4 +130,4 @@ Usually not. Ordinary users may only configure personal approval policies, while
 
 - [Handle approvals in Agent Session](/docs/user-guide/agent-session)
 - [Manage Workspace file risks](/docs/user-guide/workspace)
-- [Install a Connector for IM approval notices](/docs/deployment/connector-install)
+- [Install a Connector for IM approval notices](/docs/user-guide/connector)

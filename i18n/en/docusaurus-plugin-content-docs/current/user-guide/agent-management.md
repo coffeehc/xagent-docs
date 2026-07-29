@@ -15,7 +15,7 @@ This page is for users and administrators who need to select, view, or maintain 
 
 Agent Management maintains entry points for different work scenarios. Ordinary users can think of it as a list of different work assistants: some are suitable for general questions, some for creating Skills, and others for a specific business workflow.
 
-![xAgent Agent Management page showing available Agents, capability counts, and the create entry point](/img/manual/xagent-agent-management.png)
+![xAgent Agent Management page showing available Agents, capability counts, and the create entry point](/img/manual/v005/en/agent-management.webp)
 
 ## When to Use It
 
@@ -100,20 +100,6 @@ When permissions allow, ordinary users can also create personal entry points to 
 - Changes to public entry points affect multiple users; confirm the purpose before editing.
 - Tool and key use remains controlled by permissions, connections, and approval policies.
 - Do not use unfinished or unstable entry points as the main entry point for ordinary users.
-
-## Common Questions
-
-### What is the difference between an Agent and a Skill?
-
-An Agent is a work entry point; a Skill is a method for completing a type of task. One Agent can associate multiple Skills.
-
-### Do ordinary users need to create Agents?
-
-Usually not. Once administrators prepare public entry points, ordinary users can use them directly. Users who are familiar with a recurring workflow can also create or adjust an Agent in their personal scope.
-
-### Why can I only see public Agents?
-
-Your account may not yet have personal Agents, or your permissions may only allow viewing public entries. Use what the page shows as the source of truth.
 
 ## Continue Reading
 
