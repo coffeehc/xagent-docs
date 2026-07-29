@@ -1,69 +1,56 @@
 ---
-title: xAgent 连接器管理：微信、Telegram 与外部系统
-description: 了解 xAgent 连接器与 MCP 的区别，以及如何接入微信、Telegram、个人连接和其他外部系统。
-image: /img/share/zh/xagent-connectors.png
+title: xAgent 连接器管理：微信、Telegram、飞书与浏览器
+description: 了解 v0.0.5.beta 的 Connector 管理、IM 双向消息、文件传输、健康状态与扩展协议。
 status: experimental
-updated: 2026-07-15
+updated: 2026-07-27
 ---
 
-# xAgent 连接器管理：微信、Telegram 与外部系统
+# xAgent 连接器管理：微信、Telegram、飞书与浏览器
 
-> 状态：实验性能力，页面和字段可能变化。
+> 状态：实验性能力，页面、协议和认证流程仍可能调整。
 
 ## 适用对象
 
-本文适合普通用户和管理员。
-
-普通用户主要关注“我的连接”：绑定自己的外部账号，确认认证状态和可用工具。
-
-管理员主要关注“Connector 管理”：接入连接器服务，检查 Connector Card、health、登录流程和工具声明。
+- 普通用户通过“我的连接”绑定外部账号，检查认证、通道和可用工具。
+- 管理员通过“Connector 管理”接入 Connector 服务，检查 Connector Card、health、协议和工具声明。
 
 ## 这是什么
 
-连接器用于把微信、Telegram、邮件、企业系统、第三方服务或其他外部入口接入 xAgent。它可以主动接收外部消息，并把消息、账号状态、可执行动作或事件投递到 xAgent。
+Connector 是 xAgent 与外部系统之间的协议桥。它既可以把微信、Telegram、飞书等渠道的消息主动送入 xAgent，也可以把 xAgent 的回复、执行状态和文件发送回原渠道。
 
-普通用户可以把连接器理解为“把我的外部账号接进来”。管理员可以把连接器理解为“把一个外部系统入口接入 xAgent，并让它变成可治理、可授权、可调用的能力”。
+与 MCP 相比，Connector 更强调外部事件、用户连接和双向通道；MCP 更偏向任务执行时按需调用外部工具。详细区别见[什么是连接器](/docs/getting-started/what-is-connector#它和-mcp-有什么区别)。
 
-和 MCP 相比，连接器更偏“外部系统主动把消息送进来”；MCP 更偏“xAgent 在任务中按需调用外部工具”。
+## v0.0.5.beta 的连接器版本
 
-## 当前发布的连接器
+服务端版本与 Connector 版本独立发布。`v0.0.5.beta` 文档对应的当前 Connector 版本是：
 
-当前 `v0.0.3` Connector Release 包含下面两种连接器：
-
-| 连接器 | 使用方式 | 用户需要完成的操作 |
+| Connector | 版本 | 主要用途 |
 | --- | --- | --- |
-| 微信 Connector | 在微信中接收和发送消息 | 在“我的连接”中按页面提示扫码、授权或绑定 |
-| Telegram Connector | 通过 Telegram Bot 接收和发送消息 | 在“我的连接”中提交自己的 `bot_token` 和目标 `chat_id` |
+| WeChat Connector | `0.0.8` | 微信消息、媒体发送与接收，以及连接上下文续期 |
+| Telegram Connector | `0.0.9` | Telegram Bot 私聊和群聊消息 |
+| Feishu Connector | `0.0.8` | 国内飞书单聊和群聊 @ 机器人消息 |
 
-Telegram 绑定私聊前，用户需要先向 Bot 发送 `/start` 或任意消息。连接器将 Bot Token 保存在自己的本地状态目录中，不会把 Token 写入 Tool 参数、Skill 或会话消息。
+二进制统一从 `https://downloads.xagent.xiagaogao.com/connector/` 下的 `weixin/`、`telegram/` 和 `feishu/` 目录下载。安装步骤见[开始安装](/docs/getting-started/install)。
 
-连接器的下载与服务端部署步骤见 [Connector 安装](/docs/deployment/connector-install)。
+xAgent 还提供 Browser Connector，让受控浏览器扩展把页面交互能力接入当前用户。它由 xAgent 内部管理，不使用上述三个 IM Connector 的独立安装包。
 
 ## 页面入口
 
-连接器相关入口分为两类：
-
 | 页面 | 面向对象 | 作用 |
 | --- | --- | --- |
-| 我的连接 | 普通用户 | 管理当前用户自己的外部账号、认证状态、通道状态和可用工具 |
-| Connector 管理 | 管理员 | 管理系统级 Connector catalog，添加连接器、读取 Connector Card、探测 health 和查看工具声明 |
+| 我的连接 | 普通用户 | 管理当前用户的账号认证、通道状态和可用工具 |
+| Connector 管理 | 管理员 | 管理系统级 Connector catalog、Card、health、协议和工具声明 |
 
-文档菜单中统一放在“连接器”页面说明。实际产品界面里，普通用户通常进入“我的连接”，管理员再进入“Connector 管理”。
+“我的连接”在简洁模式下仍然可见；“Connector 管理”只对管理员显示。
 
-## 我的连接
-
-“我的连接”用于管理当前用户自己的外部账号和连接通道。你只需要确认连接是否可用、账号是否授权、任务里要处理什么对象，不需要理解连接器协议。
-
-![xAgent 我的连接页面，显示微信 Connector 的认证状态、连接状态和可用工具](/img/manual/xagent-connector-my-connections.png)
-
-### 普通用户连接账号
+## 连接外部账号
 
 1. 打开“我的连接”。
-2. 找到要连接的外部系统。
-3. 点击创建连接或进入连接详情。
-4. 按页面提示完成扫码、授权或绑定。
+2. 选择要连接的外部系统。
+3. 创建连接或打开已有连接详情。
+4. 按页面提示完成扫码、授权或参数绑定。
 5. 确认认证状态和通道状态正常。
-6. 回到 Agent 会话，说明要处理的外部任务。
+6. 回到 Agent会话，用自然语言说明要处理的消息或对象。
 
 示例：
 
@@ -71,105 +58,81 @@ Telegram 绑定私聊前，用户需要先向 Bot 发送 `/start` 或任意消�
 请查看最近一条客户微信消息，先整理回复草稿，不要直接发送。
 ```
 
-### 在任务中描述外部对象
+### 微信
 
-普通用户用自然语言描述即可：
+按页面提示扫码并完成连接。微信连接使用收件人范围的 `context_token` 维持可回复上下文；xAgent 会在到期前提醒并尝试续期。上下文已经失效时，发送动作会被阻止，需要先重新建立有效连接。
 
-- “最近一条客户消息”
-- “今天收到的新邮件”
-- “某个客户的订单”
-- “这个群里的待办”
-- “我绑定的默认邮箱”
+### Telegram
 
-如果页面要求选择账号、渠道或连接，按页面提示选择。
+提交自己的 `bot_token` 和目标 `chat_id`。绑定私聊前，先向 Bot 发送 `/start` 或任意消息。Connector 把 Bot Token 保存在自己的状态目录，不会把它写入 Tool 参数、Skill 或会话消息。
+
+### 飞书
+
+当前支持国内飞书，暂不支持 Lark。按页面扫码确认创建预设名称的 `xAgent助手` 应用，不需要手工填写 App ID 或 App Secret。若要让 xAgent 处理飞书图片，需要在[飞书开放平台](https://open.feishu.cn/app)为对应应用开通 `im:resource` 权限。
+
+## 双向消息与文件
+
+当前公共 Connector 协议版本为 `3.0`，IM 通道使用 `xagent.im.v2` 数据协议。它支持：
+
+- 外部消息进入 xAgent，并把最终回复发回原通道。
+- 回复增量、确认消息和执行活动状态。
+- 文件引用随消息传递。
+- 文件内容通过独立传输平面上传或下载，不在 WebSocket 消息中直接传输 base64 文件内容。
+
+这意味着 Connector 不只负责“收到一条文本”，还要维护消息确认、执行状态、文件引用和最终回复之间的完整链路。
+
+## 健康状态
+
+xAgent 会连续探测 Connector health，并按连续失败次数更新状态：
+
+| 连续探测结果 | 状态含义 |
+| --- | --- |
+| 成功 | 在线；此前失败计数被清除 |
+| 失败 1 到 2 次 | 不稳定，连接可能暂时抖动 |
+| 失败 3 次及以上 | 离线，当前不应继续依赖该通道 |
+
+后续探测成功时会恢复在线。排查“消息没有到达”时，应同时检查 Connector health、用户认证状态、外部平台权限和消息发送日志。
 
 ## Connector 管理
 
-Connector 管理用于维护系统级连接器目录。管理员在这里接入连接器服务、读取 Connector Card、检查 health、确认登录流程、工具声明和协议状态。
-
-![xAgent 添加 Connector 对话框，填写连接器地址和 API Key](/img/manual/xagent-connector-add-dialog.png)
-
-添加 Connector 时，系统会读取 Connector Card、探测 health，并保存为系统级 Connector catalog。通常需要填写：
+管理员添加 Connector 时，xAgent 会读取 Connector Card、探测 health，并保存到系统级 catalog。
 
 | 字段 | 说明 |
 | --- | --- |
-| Connector 地址 | xAgent 服务端可以访问到的连接器服务地址 |
-| API Key | 可选；填写后会作为 Bearer Token 访问 Connector Server |
+| Connector 地址 | xAgent 服务端可以访问的 Connector 服务地址 |
+| API Key | 可选；设置后作为 Bearer Token 访问 Connector Server |
 
-连接器地址应填写 xAgent 服务端能访问到的地址。如果连接器部署在另一台服务器上，建议通过 HTTPS 反向代理暴露给 xAgent。
+接入后重点确认：
 
-### 检查连接器详情
+- health 正常，连续探测能够恢复状态。
+- Card 中的名称、版本、协议和目标系统符合预期。
+- 登录流程真实可用，例如扫码、Bot 参数绑定或账号授权。
+- 工具声明只包含当前可以执行的动作。
+- Connector Skill 和可能触达的数据类型声明完整。
 
-连接器接入后，管理员可以进入详情页查看连接器身份、Connector Card ID、状态、版本、目标系统、profiles、认证流程、工具和登录流程。
-
-![xAgent WeChat Connector 详情页面，显示状态、协议、认证流程和工具信息](/img/manual/xagent-connector-detail.png)
-
-管理员重点确认：
-
-- health 是否正常。
-- Connector Card 是否能读取。
-- 连接器名称、版本、协议是否符合预期。
-- 登录流程是否存在，例如扫码登录、OAuth 或账号授权。
-- 工具列表是否真实可用。
-- 是否提供 Connector Skill。
-- 连接器是否声明了可能触达的数据类型。
-
-不要把未来可能支持、但当前还不可用的能力放进连接器工具声明里。工具一旦被声明，就可能被 Agent 在任务中调用。
+不要把未来可能支持、但当前不可用的能力写进工具声明。工具一旦被公开，就可能被 Agent 在任务中选择。
 
 ## 开放协议与扩展
 
-xAgent Connector 协议会在 [coffeehc/xagent-connectors](https://github.com/coffeehc/xagent-connectors) 中开放。具备开发能力的团队可以按协议自行扩展连接器。
-
-常见扩展方向包括：
-
-- 接入飞书、钉钉等更多 IM 工具。
-- 接入企业内部系统，完成查询、审批、写入或业务操作。
-- 接入第三方模型或生成服务，例如视频生成、图片生成和音视频处理。
-- 连接其他智能体系统，让 xAgent 可以把任务投递给外部智能体，或接收外部智能体事件。
-- 把已有内部服务包装成 xAgent 可以治理和调用的外部入口。
-
-开发自己的连接器时，可以先阅读 [xAgent Connectors](https://github.com/coffeehc/xagent-connectors) 中的协议文档。实现完成后，只要连接器服务能提供 Connector Card、health、WebSocket 数据通道和必要工具，就可以通过 Connector 管理接入。
+自定义 Connector 需要提供 Connector Card、health、认证流程、WebSocket 数据通道和必要工具。协议适合扩展新的 IM 渠道、企业内部系统、生成服务或其他智能体入口。当前协议仍处于测试阶段，开发前应先确认目标 xAgent 版本支持的协议和能力边界。
 
 ## 安全注意
 
-- 不要把真实密码、token、验证码写进会话。
-- API Key 只用于 xAgent 后端与 Connector 服务之间，不要写入会话、提示词或任务材料。
-- Connector 服务通常保存外部系统登录态，应使用独立运行用户和独立数据目录。
-- 不建议把 Connector 管理端口直接暴露到公网。
-- 发送消息、修改外部数据或访问敏感信息时，应配合审批策略使用。
-- 外部系统的数据权限仍由外部系统和连接器控制，xAgent 不替代外部系统的账号权限体系。
+- 不要把密码、token、验证码写进会话。
+- Connector API Key 只用于 xAgent 后端与 Connector Server 之间的认证。
+- Connector 应使用独立运行用户和独立状态目录，管理端口不应直接暴露到公网。
+- 发送消息、修改外部数据或读取敏感信息时，应结合审批策略。
+- 外部数据权限仍由外部系统账号和 Connector 控制，xAgent 不替代其权限体系。
 
-## 常见问题
+## 相关文档
 
-### 我的连接和 Connector 管理有什么区别？
-
-我的连接是普通用户绑定自己外部账号的地方。Connector 管理是管理员维护系统级连接器服务的地方。
-
-### Connector 和 MCP 有什么区别？
-
-Connector 可以主动接收外部消息并推送给 xAgent，例如微信收到消息后主动投递到会话。MCP 通常是 xAgent 在任务执行过程中按需调用的外部工具服务。
-
-### 外部连接和工具有什么关系？
-
-外部连接提供账号和通道，工具执行具体动作。例如连接微信后，工具才能在授权范围内发送消息或发送媒体。
-
-### 我需要把外部系统密码告诉 xAgent 吗？
-
-不需要。按页面授权流程操作，不要把密码、token 或验证码写进任务消息。
-
-### 连接器提供的工具会自动对所有用户可用吗？
-
-不一定。工具是否可用取决于连接器接入状态、用户是否完成授权、连接器返回的连接状态，以及 xAgent 本地治理和审批策略。
-
-## 相关概念
-
-- [快捷指令协议：命令、定向发送与对象引用](/docs/guides/shortcut-instruction-protocol)
-- [多 Agent 如何通过会话事件协作](/docs/guides/multi-agent-session-event-collaboration)
-- [xAgent Connectors](https://github.com/coffeehc/xagent-connectors)
+- [开始安装](/docs/getting-started/install)
+- [什么是连接器](/docs/getting-started/what-is-connector#它和-mcp-有什么区别)
+- [快捷指令协议](/docs/guides/shortcut-instruction-protocol)
 - [Tool 管理](/docs/user-guide/tool)
 - [审批策略](/docs/user-guide/approval-policy)
 
 ## 下一步操作
 
-- [安装微信或 Telegram Connector](/docs/deployment/connector-install)
+- [安装微信、Telegram 或飞书 Connector](/docs/getting-started/install)
 - [在 Agent 会话中使用连接器能力](/docs/user-guide/agent-session)

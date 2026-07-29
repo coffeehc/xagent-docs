@@ -139,4 +139,4 @@ A Connector is an event and message entry point. What the external system allows
 
 - [Create and Use an Agent Session](/docs/user-guide/agent-session)
 - [Configure a Trigger](/docs/user-guide/trigger)
-- [Install a Connector](/docs/deployment/connector-install)
+- [Connector user guide](/docs/user-guide/connector)

@@ -1,171 +1,138 @@
 ---
-title: "xAgent Connector Management: WeChat, Telegram, and External Systems"
-description: Learn how xAgent Connectors differ from MCP, and how to connect WeChat, Telegram, personal accounts, and other external systems.
-image: /img/share/en/xagent-connectors.png
+title: xAgent Connectors for WeChat, Telegram, Feishu, and Browsers
+description: Learn about v0.0.5.beta Connector management, bidirectional IM messages, file transfer, health state, and extension protocols.
 status: experimental
-updated: 2026-07-15
+updated: 2026-07-27
 ---
 
-# xAgent Connector Management: WeChat, Telegram, and External Systems
+# xAgent Connectors for WeChat, Telegram, Feishu, and Browsers
 
-> Status: experimental. Page structure and fields may change.
+> Status: experimental. Pages, protocols, and authentication flows may still change.
 
 ## Who This Is For
 
-This page is for both ordinary users and administrators.
+- Users bind external accounts under **My connections** and review authentication, channel, and tool status.
+- Administrators add Connector services under **Connectors** and inspect Connector Cards, health, protocols, and tool declarations.
 
-Ordinary users mainly use **My Connections** to bind their own external accounts and check authentication, channel state, and available tools.
+## What a Connector Is
 
-Administrators mainly use **Connector Management** to add Connector services, read Connector Card, check health, and review declared tools.
+A Connector is the protocol bridge between xAgent and an external system. It can deliver messages from WeChat, Telegram, or Feishu into xAgent and send xAgent replies, execution activity, and files back to the originating channel.
 
-## What It Is
+Compared with MCP, a Connector focuses on external events, user connections, and bidirectional channels. MCP is generally an external tool service called on demand during task execution. See [What Is a Connector?](/docs/getting-started/what-is-connector#how-is-it-different-from-mcp).
 
-A Connector brings WeChat, Telegram, email, enterprise systems, third-party services, or other external entry points into xAgent. It can actively receive external messages and deliver messages, account state, executable actions, or events into xAgent.
+## Connector Versions for v0.0.5.beta
 
-For ordinary users, a Connector means "connect my external account." For administrators, it means "connect an external system entry point and turn it into a governed, authorized, callable capability."
+The server and Connectors are released independently. The current Connector versions documented with `v0.0.5.beta` are:
 
-Compared with MCP, a Connector focuses more on external systems actively pushing messages into xAgent. MCP focuses more on xAgent calling external tools on demand during a task.
-
-## Currently Released Connectors
-
-The current `v0.0.3` Connector Release contains the following connectors:
-
-| Connector | How it is used | What the user completes |
+| Connector | Version | Main use |
 | --- | --- | --- |
-| WeChat Connector | Receives and sends WeChat messages | Follow the UI to scan, authorize, or bind in **My Connections** |
-| Telegram Connector | Receives and sends messages through a Telegram Bot | Submit the user's own `bot_token` and target `chat_id` in **My Connections** |
+| WeChat Connector | `0.0.8` | WeChat messages, media, and connection-context renewal |
+| Telegram Connector | `0.0.9` | Telegram Bot direct and group messages |
+| Feishu Connector | `0.0.8` | Feishu direct messages and group @mentions in mainland China |
 
-Before binding a Telegram private chat, the user must send `/start` or another message to the bot. The connector keeps the bot token in its own local state directory. It is not written into Tool arguments, Skills, or session messages.
+Binaries are downloaded from the `weixin/`, `telegram/`, and `feishu/` directories under `https://downloads.xagent.xiagaogao.com/connector/`. See [Start Installation](/docs/getting-started/install).
 
-See [Connector Installation](/docs/deployment/connector-install) for downloads and server deployment.
+xAgent also includes a Browser Connector that lets the managed browser extension expose page interaction to the current user. It is managed by xAgent and does not use the three standalone IM Connector packages above.
 
-## Entry Points
+## Page Entries
 
 | Page | Audience | Purpose |
 | --- | --- | --- |
-| My Connections | Ordinary users | Manage the current user's external accounts, authentication state, channel state, and available tools |
-| Connector Management | Administrators | Manage system-level Connector catalog, add connectors, read Connector Card, check health, and review tool declarations |
+| My connections | Users | Manage account authentication, channel state, and available tools |
+| Connectors | Administrators | Manage the system Connector catalog, Cards, health, protocols, and tool declarations |
 
-The documentation uses one **Connectors** page for both concepts. In the product UI, ordinary users usually enter **My Connections**, while administrators also use **Connector Management**.
+**My connections** remains available in simple mode. The administrator Connector catalog requires the administrator role.
 
-## My Connections
+## Connect an External Account
 
-**My Connections** manages external accounts and channels for the current user. Users only need to know whether the connection works, whether the account is authorized, and what object the task should process.
-
-![xAgent My Connections page showing WeChat Connector authentication, connection state, and tools](/img/manual/xagent-connector-my-connections.png)
-
-Typical flow:
-
-1. Open **My Connections**.
-2. Find the external system to connect.
-3. Create a connection or open connection details.
-4. Complete QR login, authorization, or binding.
-5. Confirm authentication state and channel state.
-6. Return to Agent Session and describe the external task.
+1. Open **My connections**.
+2. Select the external system.
+3. Create a connection or open an existing one.
+4. Complete the QR-code, authorization, or parameter flow shown on the page.
+5. Confirm that authentication and channel state are healthy.
+6. Return to Agent Sessions and describe the message or object to process.
 
 Example:
 
 ```text
-Please check the latest customer WeChat message and draft a reply. Do not send it directly.
+Review the most recent customer message in WeChat and prepare a reply draft. Do not send it yet.
 ```
 
-Use natural language to describe external objects:
+### WeChat
 
-- "the latest customer message"
-- "emails received today"
-- "this customer's order"
-- "the to-do items in this group"
-- "my default connected mailbox"
+Scan the QR code and complete the connection flow. WeChat uses a recipient-scoped `context_token` to maintain a valid reply context. xAgent reminds the user and attempts renewal before expiry. Sending is blocked after the context expires until a valid context is established again.
 
-If the page asks you to choose an account, channel, or connection, follow the UI.
+### Telegram
 
-## Connector Management
+Provide your `bot_token` and target `chat_id`. Before binding a direct chat, send `/start` or any message to the Bot. The Connector stores the Bot Token in its own state directory and does not place it in Tool arguments, Skills, or session messages.
 
-Connector Management maintains the system-level connector catalog. Administrators add connector services, read Connector Card, check health, confirm login flows, review tool declarations, and inspect protocol state.
+### Feishu
 
-![xAgent Add Connector dialog with Connector address and API key fields](/img/manual/xagent-connector-add-dialog.png)
+The current Connector supports Feishu in mainland China, not Lark. Scan the QR code to confirm creation of the predefined `xAgent Assistant` app; users do not enter an App ID or App Secret manually. To process Feishu images, grant the app the `im:resource` permission in the [Feishu Open Platform](https://open.feishu.cn/app).
 
-When adding a Connector, xAgent reads the Connector Card, checks health, and saves it as a system-level catalog entry.
+## Bidirectional Messages and Files
 
-| Field | Meaning |
+The current public Connector protocol is `3.0`, and IM channels use the `xagent.im.v2` data protocol. It supports:
+
+- External messages entering xAgent and final replies returning to the source channel.
+- Reply deltas, acknowledgements, and execution activity.
+- File references carried with messages.
+- File bytes uploaded or downloaded through a separate transfer plane instead of base64 content inside WebSocket messages.
+
+A Connector therefore maintains the complete relationship between message acknowledgements, execution activity, file references, and final replies, not just incoming text.
+
+## Health State
+
+xAgent probes Connector health continuously and derives state from consecutive failures:
+
+| Probe result | Meaning |
 | --- | --- |
-| Connector Address | Address reachable by the xAgent server |
-| API Key | Optional; used as Bearer Token when xAgent calls the Connector Server |
+| Success | Online; any previous failure count is cleared |
+| 1-2 consecutive failures | Degraded; the connection may be temporarily unstable |
+| 3 or more consecutive failures | Offline; the channel should not be relied on |
 
-If the Connector runs on another server, use HTTPS reverse proxy and fill the address that xAgent can reach.
+A later successful probe restores the online state. When a message does not arrive, inspect Connector health, user authentication, platform permissions, and send logs together.
 
-## Connector Details
+## Administrator Connector Management
 
-After a Connector is added, administrators can inspect identity, Connector Card ID, status, version, target system, profiles, auth flow, tools, and login flow.
+When an administrator adds a Connector, xAgent reads its Connector Card, probes health, and saves it to the system catalog.
 
-![xAgent WeChat Connector details showing status, protocol, authentication flows, and tools](/img/manual/xagent-connector-detail.png)
+| Field | Description |
+| --- | --- |
+| Connector address | Address reachable by the xAgent server |
+| API Key | Optional Bearer Token for the Connector Server |
 
-Administrators should check:
+After adding it, verify that:
 
-- Whether health is normal.
-- Whether Connector Card can be read.
-- Whether name, version, and protocol match expectation.
-- Whether login flow exists, such as QR login, OAuth, or account authorization.
-- Whether declared tools are actually available.
-- Whether connector-provided Skills are declared.
-- Which data types the connector may touch.
+- Health is normal and later successful probes recover state.
+- The Card name, version, protocol, and target system are correct.
+- Authentication flows such as QR scanning, Bot parameters, or account authorization work.
+- Tool declarations contain only actions that are currently executable.
+- Connector Skill and data-contact declarations are complete.
 
-Do not declare future or unavailable capabilities as tools. Once a tool is declared, an Agent may try to call it during a task.
+Do not declare planned but unavailable tools. Once a tool is exposed, an Agent may select it during a task.
 
-## Open Protocol and Extension
+## Open Protocol and Extensions
 
-xAgent Connector protocol is opened in [coffeehc/xagent-connectors](https://github.com/coffeehc/xagent-connectors). Teams with development capability can extend connectors by protocol.
-
-Possible directions:
-
-- Connect Feishu, DingTalk, and other IM tools.
-- Connect internal enterprise systems for query, approval, writing, or business operations.
-- Connect third-party generation services such as video, image, audio, or media processing.
-- Connect other agent systems, so xAgent can send tasks to external agents or receive events from them.
-- Wrap existing internal services into governed and callable xAgent entry points.
-
-Developers can start from the protocol documents in [xAgent Connectors](https://github.com/coffeehc/xagent-connectors). A connector can be added through Connector Management when it provides Connector Card, health, WebSocket data channel, and required tools.
+A custom Connector provides a Connector Card, health endpoint, authentication flow, WebSocket data channel, and required tools. The protocol can support additional IM channels, internal systems, generation services, or other agent systems. The protocol is still in beta, so confirm the protocol version and capability boundaries supported by the target xAgent release before development.
 
 ## Security Notes
 
-- Do not write real passwords, tokens, or verification codes into a session.
-- API Key is used between the xAgent backend and Connector service. Do not put it in task messages, prompts, or user materials.
-- A Connector may store external login state. Use a dedicated runtime user and data directory.
-- Do not expose Connector management ports directly to the public internet.
-- Use approval policies for sending messages, modifying external data, or accessing sensitive information.
-- External-system data permissions are still controlled by the external system and Connector. xAgent does not replace those permission systems.
+- Do not place passwords, tokens, or verification codes in a session.
+- A Connector API Key is only for authentication between the xAgent backend and Connector Server.
+- Run each Connector with a dedicated operating-system user and state directory, and do not expose its management port directly to the public internet.
+- Use approval policies for message sends, external writes, and sensitive reads.
+- External account permissions remain controlled by the external system and Connector.
 
-## Common Questions
+## Related Docs
 
-### What is the difference between My Connections and Connector Management?
-
-My Connections is where ordinary users bind their own external accounts. Connector Management is where administrators maintain system-level connector services.
-
-### What is the difference between Connector and MCP?
-
-A Connector can actively receive external messages and push them into xAgent. For example, after WeChat receives a message, the connector can deliver it to a session. MCP is usually called by xAgent on demand during task execution.
-
-### What is the relationship between connections and tools?
-
-A connection provides account and channel state. Tools perform concrete actions. After a WeChat connection is authorized, tools can send messages or media within the authorized scope.
-
-### Do I need to give xAgent my external-system password?
-
-No. Follow the UI authorization flow. Do not write passwords, tokens, or verification codes into task messages.
-
-### Are connector tools available to all users automatically?
-
-Not necessarily. Availability depends on connector state, user authorization, connection state, local governance, and approval policies.
-
-## Related Concepts
-
-- [Shortcut Protocol: Commands, Targets, and References](/docs/guides/shortcut-instruction-protocol)
-- [How Multiple AI Agents Collaborate Through Session Events](/docs/guides/multi-agent-session-event-collaboration)
-- [xAgent Connectors](https://github.com/coffeehc/xagent-connectors)
+- [Start Installation](/docs/getting-started/install)
+- [What Is a Connector?](/docs/getting-started/what-is-connector#how-is-it-different-from-mcp)
+- [Shortcut Instruction Protocol](/docs/guides/shortcut-instruction-protocol)
 - [Tool Management](/docs/user-guide/tool)
-- [Approval Policies](/docs/user-guide/approval-policy)
+- [Approval Policy](/docs/user-guide/approval-policy)
 
 ## Next Steps
 
-- [Install a WeChat or Telegram Connector](/docs/deployment/connector-install)
-- [Use a Connector capability in Agent Session](/docs/user-guide/agent-session)
+- [Install a WeChat, Telegram, or Feishu Connector](/docs/getting-started/install)
+- [Use Connector capabilities in Agent Sessions](/docs/user-guide/agent-session)

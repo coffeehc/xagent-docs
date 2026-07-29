@@ -32,20 +32,6 @@ Connector 是连接外部系统的协议桥和能力声明来源。它负责把�
 
 具体 wire schema 仍以实现和协议文档为准。
 
-## 常见问题
-
-### xAgent 是否保存目标系统登录态？
-
-不应这样设计。目标系统登录态属于 Connector 或目标系统。
-
-### Agent 是否能看到 connector_channel_id？
-
-不应让 Agent 看到系统级和通道级内部 ID。
-
-### Connector 是否就是 Skill？
-
-不是。Connector 可以提供 Skill，但 Connector 本身是外部系统协议桥。
-
 ## 相关文档
 
 - [Connector System](/docs/architecture/connector-system)

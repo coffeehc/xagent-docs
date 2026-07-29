@@ -1,120 +1,137 @@
 ---
-title: How xAgent Isolates Workspaces with a Virtual File System
-description: Learn how xAgent builds a virtual file system above server storage to control file visibility, reads, and writes by user, session, and system rules.
+title: How xAgent Isolates Multi-user Workspaces and Task Processes
+description: Learn how xAgent combines virtual workspaces, Execution Leases, ProcessSandbox, and Runtime Assets to isolate files and process execution.
 image: /img/share/en/xagent-security.png
 status: beta
-updated: 2026-07-14
+updated: 2026-07-27
 ---
 
-# How xAgent Isolates Workspaces with a Virtual File System
+# How xAgent Isolates Multi-user Workspaces and Task Processes
 
-When multiple people share one AI Agent service, creating a separate directory for each user is not sufficient isolation. The platform must also control what users and Agents can see, read, and write, and which internal files must remain inaccessible under all circumstances.
+Separate user directories are not sufficient when multiple users share an AI Agent service. The platform must independently control file ownership, Session write scope, operating-system process mounts, and resource consumption.
 
-xAgent provides a built-in virtual file system above the server's underlying filesystem. The web UI, Agent Sessions, and file tools do not access server directories directly. They receive a filtered and authorized workspace view through this virtual filesystem.
+`v0.0.5.beta` combines four boundaries:
 
-## Why Workspace Isolation Matters
+1. User and Session authorization establish file ownership.
+2. The virtual workspace determines what a page or Tool can see.
+3. An Execution Lease creates the minimum file view for one process and coordinates commits.
+4. ProcessSandbox executes the command with operating-system file, environment, process-tree, and resource limits.
 
-A chat application mainly handles messages. A task-oriented AI Agent also works with files over time. For example, users may:
+## What Each Boundary Owns
 
-- Upload contracts, spreadsheets, meeting notes, or source code.
-- Generate Markdown, CSV, HTML, PDF, or image outputs.
-- Save intermediate materials during a long-running task.
-- Let tools read, modify, move, or delete task files.
+| Layer | Responsibility | Not its responsibility |
+| --- | --- | --- |
+| User and Session authorization | File ownership and readable/writable roots | Starting operating-system processes |
+| Virtual workspace | Business paths shown to pages and file Tools | Operating-system sandboxing |
+| Execution Lease | Minimum file snapshot, overlapping-write coordination, and file-change commit | Platform process isolation |
+| ProcessSandbox | File mounts, clean environment, process-tree cleanup, and resource limits | Business file ownership |
 
-If isolation relies only on physical directories, a file that exists may still be scanned, read, or modified by mistake. A virtual file system separates physical existence from whether the current user or session is allowed to see the file.
+External-system authorization is separate. A Connector or MCP service can access only the CRM, mailbox, or messaging data permitted by its external account.
 
-For example, a user's physical workspace may contain 1,000 files, while the web UI or a particular Agent Session sees only the subset exposed by the virtual filesystem. A file does not become accessible merely because its name or server path is known.
+## User and Virtual Workspace Isolation
 
-## How xAgent Applies Isolation
+Every file operation carries the current user identity and resolves within that user's Workspace. Workspace pages and file Tools receive an authorized business view, not the server's physical directory tree.
 
-xAgent applies several layers of workspace rules rather than relying on one directory boundary:
+Current business entries include:
 
-1. **User scope:** Every file operation carries the current user identity and is resolved inside that user's workspace.
-2. **Virtual visibility:** Workspace pages and file tools return only the business entries and files that are visible in the current context, not the physical directory tree.
-3. **Session access:** Each Agent Session has its own readable and writable scope. A task can operate only inside the boundaries granted by the virtual filesystem.
-4. **Hard-coded protection:** Internal indexes, runtime state, session metadata, and private system directories are protected in code. Requests to include hidden files or grant additional access cannot bypass these rules.
-
-Physical file existence therefore does not directly determine visibility. Browsing, reading, writing, moving, deleting, uploading, and downloading must all pass path normalization, visibility filtering, and access checks in the virtual filesystem.
-
-When a user browses or downloads a file through the web UI, the API reads the workspace of the currently authenticated user. Before opening a session directory, xAgent also verifies that the session belongs to that user.
-
-As a result, two users can both upload a file named `report.xlsx` without creating one shared file. Each copy remains in its owner's workspace.
-
-## Business Directory Categories
-
-xAgent does not present a user's workspace as a server directory tree. Its virtual filesystem organizes files into task-oriented business entry points. The current categories are:
-
-| Business directory | Primary purpose |
+| Business directory | Purpose |
 | --- | --- |
-| Business Spaces | Stores formal business materials, reusable documents, and confirmed results that should remain available beyond one session. |
-| Project Files | Keeps files that a user creates and maintains for a specific project, including source materials, working documents, and outputs. |
-| Uploaded Files | Stores local materials uploaded from the Workspace Files page. Uploading makes a file available in the workspace, but the user still needs to tell the Agent how to process it. |
-| Agent Sessions | Presents task outputs by session. When a user opens a session, the workspace primarily shows its formal results rather than every runtime file created during execution. |
-| Personal Skills | Stores private Skill files created, imported, or continuously improved by the current user. Other users cannot see them in their own workspaces. |
+| Business Spaces | Long-lived business material, reusable documents, and confirmed outputs |
+| Project Files | Material, working documents, and outputs maintained for a project |
+| Uploaded Files | Local material uploaded through the Workspace page |
+| Agent Sessions | Formal task outputs organized by Session |
+| Personal Skills | Private Skill files owned by the current user |
 
-These entry points are business categories in the virtual workspace. They do not mean that every physically stored file inside a category is readable. xAgent still evaluates the user identity, current entry point, session access scope, and hard-coded protection rules before displaying a file or allowing it to be read or written.
+System indexes, internal state, Session metadata, and private system directories are protected in code. Requests to include hidden files or expand ordinary authorization cannot turn them into task files.
 
-If a business directory has not been created or contains nothing that can be displayed, its entry may not appear on the Workspace Files page.
+File Tools accept Workspace-relative paths rather than server absolute paths, URLs, or parent traversal. A Session can write only to explicitly authorized roots. Approval policies can still govern deletion, external delivery, and other sensitive operations.
 
-## How Sessions Limit File Operations
+## How an Execution Lease Protects Writes
 
-User isolation establishes whose data is being accessed. The virtual filesystem determines what is visible in the current entry point, and session access rules further define what the current task can read or modify.
+Before an external process starts, WorkspaceFileService creates an Execution Lease:
 
-During task execution, xAgent gives file tools explicit readable and writable scopes:
+- It derives the minimum read-only, writable, and immutable projections from the current user and Session permissions.
+- It creates an exclusive scratch directory and a pre-execution snapshot.
+- Overlapping writable roots for the same user are serialized so two processes cannot overwrite the same files concurrently. Disjoint roots and different users can still execute in parallel.
+- After the process exits, writable roots are scanned safely and additions, changes, and deletions are committed as one fact batch.
+- If commit fails, repair input is persisted so file facts can be recovered idempotently.
 
-- File tools accept paths relative to the virtual workspace, not server absolute paths, URLs, or parent-directory traversal.
-- Directory listings are virtual views and do not reveal every file that physically exists on the server.
-- System-maintained directories, internal indexes, and session metadata are hard-hidden from Agents.
-- A session can write only to explicitly allowed directories. Being inside the same user's physical workspace does not make every file writable.
-- Additional authorization may expand access to ordinary business files, but it cannot unlock hard-hidden system paths.
-- Deletion, external delivery, and other sensitive actions can still be controlled by approval policies.
+A host-file write therefore does not by itself complete a Workspace commit. The Execution Lease reconciles process changes back into xAgent's file facts and indexes.
 
-The Agent therefore operates on an authorized virtual filesystem view, not the server filesystem itself.
+## How ProcessSandbox Isolates Processes
 
-## Uploaded Files and Session Attachments
+ProcessSandbox is the common boundary for untrusted process execution. Each run uses an independent file view, process tree, scratch directory, and platform resources. Undeclared host environment variables are not inherited.
 
-Files uploaded from Workspace Files enter the current user's upload area and are registered as files owned by that user. If a file with the same name already exists, xAgent uses a distinct display path instead of overwriting the original.
+Only explicit mounts are accepted:
 
-Attachments uploaded in an Agent Session are bound to both the current user and the current session. xAgent verifies that relationship before allowing the file to be previewed, downloaded, or processed by a task. The visible file inside the session workspace is an access point for the task, while xAgent keeps a stable file record so a page path is not treated as the file's only identity.
+| Sandbox path | Purpose |
+| --- | --- |
+| `/workspace` | Authorized read-only or writable Session Workspace projections |
+| `/input` | Exact inputs for system processing tasks |
+| `/output` | Exact outputs for system processing tasks |
+| `/runtime` | Read-only Runtime Assets and execution dependencies |
+| `/tmp` | Scratch directory exclusive to this command |
+
+The working directory must be under `/workspace`, `/input`, `/output`, or `/tmp`. Undeclared host paths and environment variables do not become accessible merely because a process knows their names.
+
+ProcessSandbox also limits execution time, process count, memory, CPU, and retained stdout/stderr. Timeout or cancellation cleans up the complete process tree and platform resources.
+
+### Linux
+
+Linux uses `bubblewrap` for mount and namespace boundaries, cgroup v2 for process-tree resources, and seccomp to restrict system calls. If a required isolation component is unavailable, ProcessSandbox returns an unavailable error instead of falling back to unrestricted host execution.
+
+### macOS
+
+macOS uses a `sandbox-exec` profile and a private file view for each run. Allowed paths are projected to stable logical sandbox paths, while system-owned files remain inaccessible through explicit deny rules.
+
+## Runtime Assets
+
+Runtime Assets are xAgent-managed Python, Node, and helper-binary dependencies. They are installed and verified independently, do not live in a user's Workspace, and are mounted read-only at `/runtime` during execution.
+
+If required Runtime Assets are missing or fail readiness checks, the corresponding Tool is unavailable. xAgent does not bypass that gate by using an interpreter or binary that happens to exist on the host.
+
+Administrators can inspect ProcessSandbox and Runtime Assets readiness under **Agent governance > Execution environment**.
+
+## Uploads and Session Attachments
+
+Files uploaded from the Workspace page belong to the current user. A distinct display path is generated for a duplicate name instead of overwriting the existing file.
+
+Agent Session attachments are bound to both user and Session. xAgent verifies ownership before preview, download, or task processing. The visible Session path is an access point, while xAgent keeps the stable file record.
 
 ## A Simple Example
 
-Assume Alice and Bob share the same xAgent server:
+Assume Alice and Bob share one xAgent server:
 
-1. Alice uploads `customer-list.xlsx` in her session and asks for a customer follow-up plan.
-2. Bob uploads a different file with the same name and asks for sales statistics.
-3. The files belong to different users and enter different session scopes.
-4. Alice's Agent cannot browse Bob's file through workspace tools, and Bob cannot open Alice's session output.
-5. Both tasks may generate `summary.md`, but each result remains under its own user and session scope.
-6. Even if Alice's physical workspace contains additional system or unauthorized files, the current session sees only the subset exposed by the virtual filesystem.
+1. Each uploads a different file named `report.xlsx`.
+2. The files enter separate user and Session scopes and cannot be browsed across users.
+3. Alice's task receives only her authorized projection; ProcessSandbox cannot see Bob's directory.
+4. If Alice starts two commands that modify the same output root, the second Execution Lease waits for the first commit.
+5. Both tasks may create `summary.md`, while each output remains in its owner's Workspace facts.
 
-## What Workspace Isolation Does Not Replace
+## What These Boundaries Do Not Replace
 
-Workspace isolation protects task files inside xAgent. It is not a complete enterprise data authorization system.
+- **External permissions:** Connector and MCP data scope still depends on the external account.
+- **Model data boundaries:** Data sent to an external model API remains subject to that provider's terms.
+- **Deployment security:** HTTPS, firewalls, disk encryption, backups, and server-account permissions remain deployment responsibilities.
+- **Business approvals:** File and process isolation cannot decide whether deletion or external delivery is appropriate.
 
-- **External system permissions:** When MCP services or connectors access a CRM, mailbox, database, or other system, the external account still determines which data can be read or changed.
-- **Model data boundaries:** Data sent to an external model API remains subject to that provider's terms. Use a local model or self-managed model gateway when the data must remain fully private.
-- **Deployment security:** Server accounts, disk encryption, backups, HTTPS, firewalls, and network controls remain the deployment owner's responsibility.
-- **Business approvals:** File isolation cannot decide whether a deletion or external delivery is appropriate. Sensitive actions should also use approval policies.
+## Deployment Checks
 
-## Deployment Checklist
+1. Create an individual account for every user instead of sharing an xAgent account.
+2. Confirm ProcessSandbox and Runtime Assets readiness under **Execution environment**.
+3. Use two test users to verify that same-name uploads, Session outputs, previews, and downloads do not cross boundaries.
+4. Configure approval policies for deletion, external delivery, and external writes.
+5. Back up runtime data and test recovery regularly.
 
-1. Create an individual xAgent account for each person instead of sharing one account.
-2. Protect authentication and file transfers with a reverse proxy and HTTPS.
-3. Back up xAgent runtime data and test the recovery process.
-4. Give MCP services, connectors, and external accounts only the permissions they need.
-5. Use two test users to verify that same-name uploads, session outputs, previews, and downloads do not cross user boundaries.
-6. Configure approval policies for file deletion, external delivery, and other sensitive actions.
-
-## Related Concepts
+## Related Docs
 
 - [Workspace Files](/docs/user-guide/workspace)
-- [Agent Session](/docs/user-guide/agent-session)
-- [AI Agent Approval and Safety Controls](/docs/guides/agent-approval-security)
-- [MCP vs. Connectors](/docs/guides/mcp-vs-connector)
+- [Agent Sessions](/docs/user-guide/agent-session)
+- [Runtime Architecture](/docs/architecture/runtime)
+- [Approval and Safety Controls](/docs/guides/agent-approval-security)
 
 ## Next Steps
 
-- [Complete Your First Task](/docs/getting-started/first-task)
+- [Install and check Runtime Assets](/docs/getting-started/install)
 - [Configure Approval Policies](/docs/user-guide/approval-policy)
 - [Self-host xAgent](/docs/guides/self-hosted-ai-agent)

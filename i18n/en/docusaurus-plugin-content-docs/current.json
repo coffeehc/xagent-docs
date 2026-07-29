@@ -95,20 +95,8 @@
     "message": "Partnership Areas",
     "description": "The label for the doc item '合作方向' in sidebar 'docsSidebar', linking to the doc cooperation/partners"
   },
-  "sidebar.docsSidebar.category.部署安装": {
-    "message": "Deployment",
-    "description": "The label for category '部署安装' in sidebar 'docsSidebar'"
-  },
-  "sidebar.docsSidebar.doc.服务端安装": {
-    "message": "Server Installation",
-    "description": "The label for the doc item '服务端安装' in sidebar 'docsSidebar', linking to the doc deployment/server-install"
-  },
   "sidebar.docsSidebar.doc.模型说明": {
     "message": "Model Notes",
     "description": "The label for the doc item '模型说明' in sidebar 'docsSidebar', linking to the doc deployment/model-requirements"
-  },
-  "sidebar.docsSidebar.doc.Connector 安装": {
-    "message": "Connector Installation",
-    "description": "The label for the doc item 'Connector 安装' in sidebar 'docsSidebar', linking to the doc deployment/connector-install"
   }
 }

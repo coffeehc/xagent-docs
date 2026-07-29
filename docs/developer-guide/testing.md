@@ -31,20 +31,6 @@ npm run build
 npm run typecheck
 ```
 
-## 常见问题
-
-### 是否需要为 Markdown 写单元测试？
-
-当前不要求。构建和链接检查是最低要求。
-
-### 搜索插件如何验证？
-
-先确认 `npm run build` 通过，再在本地启动或预览页面中验证搜索框可用。
-
-### 文档内容正确性如何验证？
-
-涉及功能行为、命令、配置或 API 时，应回查 xAgent 主仓库代码或已有文档。
-
 ## 相关文档
 
-- [贡献指南](https://github.com/coffeehc/xagent-docs)
+- [反馈文档问题](/docs/cooperation/idea)

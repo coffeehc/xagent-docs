@@ -2,7 +2,7 @@
 title: "xAgent Agent Sessions: Tasks, Files, and Approvals"
 description: Learn how to submit tasks, upload files, follow execution, handle approvals, use sub-agents, and refine work in xAgent Agent Sessions.
 status: stable
-updated: 2026-07-15
+updated: 2026-07-27
 ---
 
 # xAgent Agent Sessions: Tasks, Files, and Approvals
@@ -17,7 +17,9 @@ Agent Session is the main work page in xAgent. You can think of it as the place 
 
 It is not a normal chat window. It also handles task submission, context continuation, tool execution, file processing, approvals, sub-session collaboration, and task tuning.
 
-![xAgent Agent Session page showing the session list, task execution, and message input](/img/manual/xagent-agent-session.png)
+`v0.0.5.beta` reorganizes the message timeline, attachments, Tool-call blocks, execution state, and workspace entry, with improved narrow-screen and mobile layouts.
+
+![xAgent Agent Session page showing the session list, execution timeline, approval card, and message input](/img/manual/v005/en/agent-session.webp)
 
 ## When to Use It
 

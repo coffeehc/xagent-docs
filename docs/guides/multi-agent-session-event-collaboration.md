@@ -141,4 +141,4 @@ xAgent 内置了持久化会话事件队列：
 
 - [创建并使用 Agent 会话](/docs/user-guide/agent-session)
 - [配置触发器](/docs/user-guide/trigger)
-- [安装 Connector](/docs/deployment/connector-install)
+- [连接器使用手册](/docs/user-guide/connector)

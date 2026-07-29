@@ -1,3 +1,4 @@
+import {useEffect, useState} from 'react';
 import type {ReactNode} from 'react';
 import Head from '@docusaurus/Head';
 import Layout from '@theme/Layout';
@@ -7,9 +8,9 @@ import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import styles from './index.module.css';
 
 const siteUrl = 'https://xagent.xiagaogao.com';
-const githubUrl = 'https://github.com/coffeehc/xagent-docs';
-const releaseUrl =
-  'https://github.com/coffeehc/xagent-releases/releases/tag/v0.0.4.beta';
+const installerUrl =
+  'https://downloads.xagent.xiagaogao.com/scripts/install.sh';
+const installerCommand = `curl -fsSL ${installerUrl} | bash`;
 
 type Card = {
   title: string;
@@ -17,18 +18,63 @@ type Card = {
   to?: string;
 };
 
+type FeatureStory = Card & {
+  image?: string;
+  imageAlt?: string;
+  visual?: 'installer';
+};
+
+type SlideHeadingProps = {
+  eyebrow: string;
+  id: string;
+  index: number;
+  title: string;
+};
+
+function SlideHeading({eyebrow, id, index, title}: SlideHeadingProps) {
+  return (
+    <header className={styles.slideHeading}>
+      <span className={styles.slideIndex} aria-hidden="true">
+        {String(index).padStart(2, '0')}
+      </span>
+      <div>
+        <p className={styles.eyebrow}>{eyebrow}</p>
+        <Heading as="h2" id={id} className={styles.sectionTitle}>
+          {title}
+        </Heading>
+      </div>
+    </header>
+  );
+}
+
 const homeContent = {
   'zh-CN': {
     layoutTitle: 'xAgent：可私有化部署的多用户 AI Agent 工作门户',
     layoutDescription:
       'xAgent 是面向任务完成、可私有化部署的多用户 AI Agent 工作门户，支持 Skill、Tool、MCP、连接器、工作区隔离和安全治理。',
-    kicker: 'xAgent 使用手册 · v0.0.4.beta',
+    kicker: 'xAgent 产品介绍 · v0.0.5.beta',
     title: '可私有化部署的多用户 AI Agent 工作门户',
     subtitle:
-      'xAgent 当前处于 v0.0.4.beta 测试版阶段，部署在服务器端，团队通过 Web 或 IM 连接器访问。管理员准备模型、Skill、工具、外部连接和安全策略后，用户只需要说明目标、提供材料、确认关键动作并查看结果，显著降低使用 AI Agent 完成工作的门槛。',
+      'xAgent 是企业统一的 AI 工作平台。服务端部署，快速接入现有系统，权限与成本集中管控、操作全程审计；员工打开网页或手机，即可使用 AI 完成工作。实现企业可管、员工好用。',
     primaryAction: '开始部署',
-    secondaryAction: '查看 GitHub',
+    secondaryAction: '打开使用手册',
     learnAction: '了解 xAgent',
+    showcaseLabel: 'xAgent 中文控制台界面',
+    showcaseImage: '/img/home/v005/xagent-dashboard-zh.webp',
+    showcaseAlt: 'xAgent v0.0.5.beta 中文控制台仪表板',
+    showcaseWidth: 3486,
+    showcaseHeight: 2158,
+    zoomImageLabel: '点击放大图片',
+    featureAction: '查看功能详情',
+    featureVisualAlts: [
+      'xAgent 中文 Agent 会话界面',
+      'xAgent 中文智能体管理界面',
+      'xAgent 中文 Skill 管理界面',
+      'xAgent 中文连接器管理界面',
+      'xAgent 中文审批策略界面',
+    ],
+    installerVisualTitle: '自动安装与升级流程',
+    installerSteps: ['检测系统与架构', '校验版本与文件', '安装或升级服务', '启动并检查状态'],
     entriesLabel: '核心定位',
     capabilityEyebrow: '能力概览',
     capabilityTitle: '先把能力组织起来，再让用户直接使用',
@@ -66,7 +112,7 @@ const homeContent = {
       },
       {
         title: '服务端部署',
-        description: '一个二进制文件运行在服务器端，用户通过 Web 或 IM 连接器访问，任务执行不依赖个人电脑在线。',
+        description: '使用自动安装脚本完成版本检测、校验、安装或升级；任务在服务器端运行，不依赖个人电脑持续在线。',
       },
       {
         title: '能力可扩展',
@@ -74,9 +120,15 @@ const homeContent = {
       },
       {
         title: '安全边界清晰',
-        description: '工作区按用户隔离，密钥使用占位符，敏感动作由审批策略控制。',
+        description: '工作区按用户隔离，命令由 ProcessSandbox 执行，密钥使用占位符，敏感动作由审批策略控制。',
       },
     ] satisfies Card[],
+    agentFeature: {
+      title: '智能体，既能直接使用，也能持续沉淀',
+      description:
+        '管理员可以预先准备面向不同场景的智能体，用户直接选择使用；也可以从已有会话中提炼目标、提示词、Skill 和 Tool，沉淀为可复用的智能体入口。',
+      to: '/docs/user-guide/agent-management',
+    } satisfies Card,
     capabilityCards: [
       {
         title: 'Skill 与 Tool',
@@ -90,7 +142,7 @@ const homeContent = {
       },
       {
         title: '连接器',
-        description: '连接器用于接入微信、邮件、企业系统或第三方服务，并能主动向 xAgent 投递消息和事件。',
+        description: '微信、Telegram 与飞书连接器支持双向文本、文件、流式状态和活动提示；浏览器也可以作为受控连接入口。',
         to: '/docs/getting-started/what-is-xagent#连接器',
       },
       {
@@ -100,7 +152,7 @@ const homeContent = {
       },
       {
         title: '安全治理',
-        description: '工作区按用户隔离，密钥使用占位符，敏感动作可由审批策略控制，外部连接和会话通讯都有边界。',
+        description: '工作区和命令执行使用分层隔离，密钥使用占位符，敏感动作可由审批策略控制，外部连接和会话通讯都有边界。',
         to: '/docs/getting-started/what-is-xagent#安全治理',
       },
       {
@@ -126,9 +178,9 @@ const homeContent = {
         to: '/docs/getting-started/what-is-xagent',
       },
       {
-        title: '功能导览与菜单入口',
-        description: '按使用路径和控制台菜单，了解每个页面能做什么、什么时候打开。',
-        to: '/docs/user-guide/menu-overview',
+        title: '使用手册',
+        description: '按当前控制台菜单逐页查看用途、可见范围、常用操作和中文界面图例。',
+        to: '/docs/manual/overview',
       },
       {
         title: 'Agent 会话',
@@ -136,9 +188,9 @@ const homeContent = {
         to: '/docs/user-guide/agent-session',
       },
       {
-        title: 'Skill 与工具',
-        description: '了解如何复用任务方法，以及工具如何完成读取、生成、发送和查询等动作。',
-        to: '/docs/user-guide/skill',
+        title: '智能体功能与文档处理',
+        description: '查看 50 个内置 Skill 能完成的任务，以及图片、PDF、Office、表格和代码文件的处理边界。',
+        to: '/docs/manual/capabilities',
       },
     ] satisfies Card[],
     roadmapItems: [
@@ -153,13 +205,29 @@ const homeContent = {
     layoutTitle: 'xAgent: Self-Hosted Multi-User AI Agent Platform',
     layoutDescription:
       'xAgent is a task-first, self-hosted multi-user AI agent platform with Skills, Tools, MCP, connectors, workspace isolation, and safety governance.',
-    kicker: 'xAgent User Manual · v0.0.4.beta',
+    kicker: 'xAgent Product Overview · v0.0.5.beta',
     title: 'A Task-First, Self-Hosted Multi-User AI Agent Platform',
     subtitle:
-      'xAgent is currently in beta as v0.0.4.beta. It runs on a server and is accessed through the web UI or connectors. Admins prepare models, Skills, Tools, external connections, and safety rules; users describe goals, provide materials, confirm sensitive actions, and review results.',
+      'xAgent is the unified AI work platform for the enterprise. Deploy on your own servers, connect existing systems quickly, centralize access and cost controls, and audit every action. Employees can get work done with AI from the web or mobile app, giving enterprises control and employees an effortless experience.',
     primaryAction: 'Start Deployment',
-    secondaryAction: 'View GitHub',
+    secondaryAction: 'Open User Manual',
     learnAction: 'Learn About xAgent',
+    showcaseLabel: 'xAgent English console interface',
+    showcaseImage: '/img/home/v005/xagent-dashboard-en.webp',
+    showcaseAlt: 'xAgent v0.0.5.beta English console dashboard',
+    showcaseWidth: 3484,
+    showcaseHeight: 2164,
+    zoomImageLabel: 'Click to enlarge image',
+    featureAction: 'Explore this feature',
+    featureVisualAlts: [
+      'xAgent English agent session interface',
+      'xAgent English Agent management interface',
+      'xAgent English Skill management interface',
+      'xAgent English connector management interface',
+      'xAgent English approval policy interface',
+    ],
+    installerVisualTitle: 'Automated install and upgrade flow',
+    installerSteps: ['Detect system and architecture', 'Verify version and files', 'Install or upgrade service', 'Start and check status'],
     entriesLabel: 'Positioning',
     capabilityEyebrow: 'Capabilities',
     capabilityTitle: 'Organize capabilities first, then let users work directly',
@@ -197,7 +265,7 @@ const homeContent = {
       },
       {
         title: 'Server-side deployment',
-        description: 'One binary runs on the server. Users access it through the web UI or IM connectors, and tasks do not depend on a personal computer staying online.',
+        description: 'The installer detects, verifies, installs, or upgrades xAgent. Tasks run on the server and do not depend on a personal computer staying online.',
       },
       {
         title: 'Extensible capabilities',
@@ -205,9 +273,15 @@ const homeContent = {
       },
       {
         title: 'Clear safety boundaries',
-        description: 'Workspaces are isolated by user, keys use placeholders, and sensitive actions can be controlled by approval rules.',
+        description: 'Workspaces are isolated by user, commands run through ProcessSandbox, keys use placeholders, and sensitive actions can be controlled by approval rules.',
       },
     ] satisfies Card[],
+    agentFeature: {
+      title: 'Agents you can use now and refine over time',
+      description:
+        'Admins can prepare Agents for different scenarios so users can select them directly. Effective goals, prompts, Skills, and Tools from an existing session can also be distilled into a reusable Agent entry point.',
+      to: '/docs/user-guide/agent-management',
+    } satisfies Card,
     capabilityCards: [
       {
         title: 'Skills and Tools',
@@ -216,12 +290,12 @@ const homeContent = {
       },
       {
         title: 'Connectors and MCP',
-        description: 'Connectors bring external messages and systems into xAgent. MCP exposes callable external capabilities for task execution.',
+        description: 'WeChat, Telegram, and Feishu connectors support bidirectional text, files, streaming updates, and activity state. Browser connections provide another governed entry point.',
         to: '/docs/getting-started/what-is-xagent#connectors',
       },
       {
         title: 'Safety model',
-        description: 'xAgent focuses on workspace isolation, key placeholders, approval rules, connector boundaries, and no cross-user session communication.',
+        description: 'xAgent combines workspace isolation, ProcessSandbox execution, key placeholders, approval rules, connector boundaries, and no cross-user session communication.',
         to: '/docs/getting-started/what-is-xagent#safety-governance',
       },
       {
@@ -231,7 +305,7 @@ const homeContent = {
       },
       {
         title: 'Built-in Skill files',
-        description: 'Selected built-in Skill files are available for community review and pull requests.',
+        description: 'Selected built-in Skill files are available for community review and improvement proposals.',
         to: '/docs/user-guide/builtin-skills',
       },
       {
@@ -247,9 +321,9 @@ const homeContent = {
         to: '/docs/getting-started/what-is-xagent',
       },
       {
-        title: 'Built-in Skill Files',
-        description: 'Review the editable built-in Skill file copies and contribution boundaries.',
-        to: '/docs/user-guide/builtin-skills',
+        title: 'User Manual',
+        description: 'Walk through every console page with visibility notes, common actions, and English UI examples.',
+        to: '/docs/manual/overview',
       },
       {
         title: 'Agent Session',
@@ -257,9 +331,9 @@ const homeContent = {
         to: '/docs/user-guide/agent-session',
       },
       {
-        title: 'Menu Overview',
-        description: 'Understand the current console menus and the feature entry points behind them.',
-        to: '/docs/user-guide/menu-overview',
+        title: 'Agent Capabilities',
+        description: 'Explore 50 built-in Skills and the current boundaries for images, PDF, Office, spreadsheet, and source files.',
+        to: '/docs/manual/capabilities',
       },
     ] satisfies Card[],
     roadmapItems: [
@@ -267,13 +341,18 @@ const homeContent = {
       'A small brain model for summaries, routing, intent pre-understanding, OCR, vectorization, and stability monitoring',
       'Stronger memory capabilities',
       'Knowledge base support',
-      'Ecosystem integrations such as video generation frameworks and Feishu',
+      'Ecosystem integrations such as video generation frameworks and additional enterprise messaging systems',
       'More adjustments based on community feedback',
     ],
   },
 };
 
 export default function Home(): ReactNode {
+  const [copiedInstaller, setCopiedInstaller] = useState(false);
+  const [expandedImage, setExpandedImage] = useState<{
+    src: string;
+    alt: string;
+  } | null>(null);
   const {i18n} = useDocusaurusContext();
   const content =
     homeContent[i18n.currentLocale as keyof typeof homeContent] ??
@@ -281,6 +360,65 @@ export default function Home(): ReactNode {
   const isEnglish = i18n.currentLocale === 'en';
   const localeUrl = isEnglish ? `${siteUrl}/en/` : `${siteUrl}/`;
   const localHref = (path: string) => (isEnglish ? `/en${path}` : path);
+  const manualLocale = isEnglish ? 'en' : 'zh';
+  const connectorCard = content.capabilityCards[isEnglish ? 1 : 2];
+  const featureStories: FeatureStory[] = [
+    {
+      ...content.highlightCards[0],
+      to: '/docs/user-guide/agent-session',
+      image: `/img/home/v005/xagent-task-session-${manualLocale === 'zh' ? 'zh' : 'en'}.webp`,
+      imageAlt: content.featureVisualAlts[0],
+    },
+    {
+      ...content.highlightCards[1],
+      to: '/docs/getting-started/install',
+      visual: 'installer',
+    },
+    {
+      ...content.agentFeature,
+      image: `/img/home/v005/xagent-agent-management-${manualLocale}.webp`,
+      imageAlt: content.featureVisualAlts[1],
+    },
+    {
+      ...content.capabilityCards[0],
+      to: '/docs/manual/capabilities',
+      image: `/img/home/v005/xagent-skill-tool-${manualLocale}.webp`,
+      imageAlt: content.featureVisualAlts[2],
+    },
+    {
+      ...connectorCard,
+      to: '/docs/user-guide/connector',
+      image: `/img/home/v005/xagent-connectors-${manualLocale}.webp`,
+      imageAlt: content.featureVisualAlts[3],
+    },
+    {
+      ...content.highlightCards[3],
+      to: isEnglish
+        ? '/docs/getting-started/what-is-xagent#safety-governance'
+        : '/docs/getting-started/what-is-xagent#安全治理',
+      image: `/img/home/v005/xagent-security-policy-${manualLocale}.webp`,
+      imageAlt: content.featureVisualAlts[4],
+    },
+  ];
+
+  useEffect(() => {
+    if (!expandedImage) {
+      return undefined;
+    }
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        setExpandedImage(null);
+      }
+    };
+
+    document.addEventListener('keydown', handleKeyDown);
+    document.body.style.overflow = 'hidden';
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+      document.body.style.overflow = '';
+    };
+  }, [expandedImage]);
   const structuredData = {
     '@context': 'https://schema.org',
     '@graph': [
@@ -310,13 +448,16 @@ export default function Home(): ReactNode {
           ? 'Self-hosted multi-user AI agent platform'
           : '可私有化部署的多用户 AI Agent 平台',
         operatingSystem: 'Linux, macOS',
-        softwareVersion: '0.0.4.beta',
-        downloadUrl: releaseUrl,
+        softwareVersion: '0.0.5.beta',
+        downloadUrl: installerUrl,
         inLanguage: isEnglish ? 'en-US' : 'zh-CN',
         featureList: isEnglish
           ? [
               'Self-hosted server deployment',
               'Multi-user workspace isolation',
+              'ProcessSandbox command isolation',
+              'Automated installation and upgrades',
+              'Reusable Agent entry points',
               'Shared Skills and Tools',
               'MCP and Connector extensions',
               'Long-running tasks and session events',
@@ -325,6 +466,9 @@ export default function Home(): ReactNode {
           : [
               '服务端私有化部署',
               '多用户工作区隔离',
+              'ProcessSandbox 命令隔离',
+              '自动安装与升级',
+              '可复用的智能体入口',
               '共享 Skill 与 Tool',
               'MCP 与连接器扩展',
               '长任务与会话事件',
@@ -335,7 +479,7 @@ export default function Home(): ReactNode {
           price: '0',
           priceCurrency: 'USD',
           availability: 'https://schema.org/InStock',
-          url: releaseUrl,
+          url: installerUrl,
           description: isEnglish
             ? 'Free beta for up to five users'
             : '5 个用户内免费使用的测试版',
@@ -358,123 +502,292 @@ export default function Home(): ReactNode {
       <main className={styles.page}>
         <section className={styles.hero}>
           <div className={styles.heroInner}>
-            <p className={styles.kicker}>{content.kicker}</p>
-            <Heading as="h1" className={styles.title}>
-              {content.title}
-            </Heading>
-            <p className={styles.subtitle}>
-              {content.subtitle}
-            </p>
-            <div className={styles.heroActions}>
-              <a
-                className={styles.primaryAction}
-                href={localHref('/docs/deployment/server-install')}>
-                {content.primaryAction}
-              </a>
-              <a
-                className={styles.secondaryAction}
-                href={githubUrl}
-                rel="noopener noreferrer"
-                target="_blank">
-                {content.secondaryAction}
-              </a>
-              <a
-                className={styles.learnAction}
-                href={localHref('/docs/getting-started/what-is-xagent')}>
-                {content.learnAction}
-              </a>
+            <div className={styles.heroMeta}>
+              <p className={styles.kicker}>{content.kicker}</p>
+              <span className={styles.coverIndex} aria-hidden="true">00</span>
+            </div>
+            <div className={styles.heroCopy}>
+              <Heading as="h1" className={styles.title}>
+                {content.title}
+              </Heading>
+              <p className={styles.subtitle}>{content.subtitle}</p>
+              <div className={styles.heroActions}>
+                <a
+                  className={styles.primaryAction}
+                  href={localHref('/docs/getting-started/install')}>
+                  {content.primaryAction}
+                </a>
+                <a
+                  className={styles.secondaryAction}
+                  href={localHref('/docs/manual/overview')}>
+                  {content.secondaryAction}
+                </a>
+                <a
+                  className={styles.learnAction}
+                  href={localHref('/docs/getting-started/what-is-xagent')}>
+                  {content.learnAction}
+                </a>
+              </div>
+            </div>
+            <div className={styles.heroMedia} aria-label={content.showcaseLabel}>
+              <button
+                type="button"
+                className={styles.imageButton}
+                aria-label={`${content.zoomImageLabel}: ${content.showcaseAlt}`}
+                onClick={() =>
+                  setExpandedImage({
+                    src: content.showcaseImage,
+                    alt: content.showcaseAlt,
+                  })
+                }>
+                <img
+                  src={content.showcaseImage}
+                  alt=""
+                  width={content.showcaseWidth}
+                  height={content.showcaseHeight}
+                  decoding="async"
+                  fetchPriority="high"
+                />
+              </button>
             </div>
           </div>
         </section>
 
-        <section className={styles.entries} aria-label={content.entriesLabel}>
-          <div className={styles.entryGrid}>
-            {content.highlightCards.map((card) => (
-              <article className={styles.entryCard} key={card.title}>
-                <h2>{card.title}</h2>
-                <p>{card.description}</p>
-              </article>
-            ))}
-          </div>
-        </section>
+        <div className={styles.featureDeck} aria-label={content.entriesLabel}>
+          {featureStories.map((story, index) => (
+            <section
+              className={`${styles.featureSlide} ${index % 2 === 1 ? styles.featureSlideReverse : ''}`}
+              key={story.title}>
+              <div className={styles.featureInner}>
+                <div className={styles.featureCopy}>
+                  <span className={styles.featureIndex} aria-hidden="true">
+                    {String(index + 1).padStart(2, '0')}
+                  </span>
+                  <Heading as="h2">{story.title}</Heading>
+                  <p>{story.description}</p>
+                  <a href={localHref(story.to!)}>{content.featureAction}</a>
+                </div>
+                <div
+                  className={`${styles.featureVisual} ${story.visual === 'installer' ? styles.installerFeatureVisual : ''}`}>
+                  {story.visual === 'installer' ? (
+                    <div
+                      className={styles.installerVisual}
+                      role="img"
+                      aria-label={content.installerVisualTitle}>
+                      <div className={styles.installerHeader}>
+                        <span aria-hidden="true" />
+                        <strong>{content.installerVisualTitle}</strong>
+                      </div>
+                      <div className={styles.installerCommand}>
+                        <code>{installerCommand}</code>
+                        <button
+                          type="button"
+                          className={styles.copyButton}
+                          aria-label={
+                            copiedInstaller
+                              ? isEnglish
+                                ? 'Install command copied'
+                                : '安装命令已复制'
+                              : isEnglish
+                                ? 'Copy install command'
+                                : '复制安装命令'
+                          }
+                          title={
+                            copiedInstaller
+                              ? isEnglish
+                                ? 'Copied'
+                                : '已复制'
+                              : isEnglish
+                                ? 'Copy command'
+                                : '复制命令'
+                          }
+                          onClick={() => {
+                            void navigator.clipboard
+                              .writeText(installerCommand)
+                              .then(() => {
+                                setCopiedInstaller(true);
+                                window.setTimeout(
+                                  () => setCopiedInstaller(false),
+                                  1800,
+                                );
+                              });
+                          }}>
+                          <svg viewBox="0 0 24 24" aria-hidden="true">
+                            <rect x="9" y="9" width="10" height="10" rx="1.5" />
+                            <path d="M6 15H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v1" />
+                          </svg>
+                        </button>
+                      </div>
+                      <ol>
+                        {content.installerSteps.map((step, stepIndex) => (
+                          <li key={step}>
+                            <span>{String(stepIndex + 1).padStart(2, '0')}</span>
+                            <strong>{step}</strong>
+                          </li>
+                        ))}
+                      </ol>
+                    </div>
+                  ) : (
+                    <button
+                      type="button"
+                      className={styles.imageButton}
+                      aria-label={`${content.zoomImageLabel}: ${story.imageAlt}`}
+                      onClick={() =>
+                        setExpandedImage({
+                          src: story.image!,
+                          alt: story.imageAlt!,
+                        })
+                      }>
+                      <img
+                        src={story.image}
+                        alt=""
+                        width="1600"
+                        height="1000"
+                        loading="lazy"
+                        decoding="async"
+                      />
+                    </button>
+                  )}
+                </div>
+              </div>
+            </section>
+          ))}
+        </div>
 
-        <section className={styles.section} aria-labelledby="capabilities-title">
+        <section className={styles.deckSection} aria-labelledby="capabilities-title">
           <div className={styles.sectionInner}>
-            <p className={styles.eyebrow}>{content.capabilityEyebrow}</p>
-            <Heading as="h2" id="capabilities-title" className={styles.sectionTitle}>
-              {content.capabilityTitle}
-            </Heading>
-            <div className={styles.capabilityGrid}>
-              {content.capabilityCards.map((card) => (
+            <SlideHeading
+              eyebrow={content.capabilityEyebrow}
+              id="capabilities-title"
+              index={7}
+              title={content.capabilityTitle}
+            />
+            <div className={styles.capabilityIndex}>
+              {content.capabilityCards.map((card, index) => (
                 <a
-                  className={styles.capabilityCard}
+                  className={styles.capabilityItem}
                   href={localHref(card.to!)}
                   key={card.title}>
-                  <h3>{card.title}</h3>
-                  <p>{card.description}</p>
-                </a>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        <section className={styles.section} aria-labelledby="workflow-title">
-          <div className={styles.sectionInner}>
-            <p className={styles.eyebrow}>{content.workflowEyebrow}</p>
-            <Heading as="h2" id="workflow-title" className={styles.sectionTitle}>
-              {content.workflowTitle}
-            </Heading>
-            <ol className={styles.workflowGrid}>
-              {content.workflowSteps.map((step, index) => (
-                <li className={styles.workflowStep} key={step.title}>
-                  <span className={styles.workflowNumber}>{index + 1}</span>
+                  <span aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
                   <div>
-                    <h3>{step.title}</h3>
-                    <p>{step.description}</p>
+                    <h3>{card.title}</h3>
+                    <p>{card.description}</p>
                   </div>
-                </li>
-              ))}
-            </ol>
-            <p className={styles.workflowExample}>
-              <strong>{content.exampleLabel}</strong>
-              <span>{content.exampleText}</span>
-            </p>
-          </div>
-        </section>
-
-        <section className={styles.section} aria-labelledby="guides-title">
-          <div className={styles.sectionInner}>
-            <p className={styles.eyebrow}>{content.guideEyebrow}</p>
-            <Heading as="h2" id="guides-title" className={styles.sectionTitle}>
-              {content.guideTitle}
-            </Heading>
-            <div className={styles.guideGrid}>
-              {content.guideCards.map((card) => (
-                <a
-                  className={styles.guideCard}
-                  href={localHref(card.to!)}
-                  key={card.title}>
-                  <h3>{card.title}</h3>
-                  <p>{card.description}</p>
                 </a>
               ))}
             </div>
           </div>
         </section>
 
-        <section className={styles.section} aria-labelledby="roadmap-title">
+        <section className={`${styles.deckSection} ${styles.deckSectionMuted}`} aria-labelledby="workflow-title">
           <div className={styles.sectionInner}>
-            <p className={styles.eyebrow}>{content.roadmapEyebrow}</p>
-            <Heading as="h2" id="roadmap-title" className={styles.sectionTitle}>
-              {content.roadmapTitle}
-            </Heading>
-            <ul className={styles.roadmapList}>
-              {content.roadmapItems.map((item) => (
-                <li key={item}>{item}</li>
-              ))}
-            </ul>
+            <SlideHeading
+              eyebrow={content.workflowEyebrow}
+              id="workflow-title"
+              index={8}
+              title={content.workflowTitle}
+            />
+            <div className={styles.workflowLayout}>
+              <p className={styles.workflowExample}>
+                <strong>{content.exampleLabel}</strong>
+                <span>{content.exampleText}</span>
+              </p>
+              <ol className={styles.workflowList}>
+                {content.workflowSteps.map((step, index) => (
+                  <li key={step.title}>
+                    <span className={styles.workflowNumber}>{String(index + 1).padStart(2, '0')}</span>
+                    <div>
+                      <h3>{step.title}</h3>
+                      <p>{step.description}</p>
+                    </div>
+                  </li>
+                ))}
+              </ol>
+            </div>
           </div>
         </section>
+
+        <section className={styles.deckSection} aria-labelledby="guides-title">
+          <div className={styles.sectionInner}>
+            <SlideHeading
+              eyebrow={content.guideEyebrow}
+              id="guides-title"
+              index={9}
+              title={content.guideTitle}
+            />
+            <div className={styles.guideList}>
+              {content.guideCards.map((card, index) => (
+                <a
+                  className={styles.guideItem}
+                  href={localHref(card.to!)}
+                  key={card.title}>
+                  <span aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
+                  <div>
+                    <h3>{card.title}</h3>
+                    <p>{card.description}</p>
+                  </div>
+                </a>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className={`${styles.deckSection} ${styles.roadmapSection}`} aria-labelledby="roadmap-title">
+          <div className={styles.sectionInner}>
+            <SlideHeading
+              eyebrow={content.roadmapEyebrow}
+              id="roadmap-title"
+              index={10}
+              title={content.roadmapTitle}
+            />
+            <div className={styles.roadmapLayout}>
+              <ul className={styles.roadmapList}>
+                {content.roadmapItems.map((item, index) => (
+                  <li key={item}>
+                    <span aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+              <div className={styles.roadmapActions}>
+                <a
+                  className={styles.primaryAction}
+                  href={localHref('/docs/getting-started/install')}>
+                  {content.primaryAction}
+                </a>
+                <a
+                  className={styles.learnAction}
+                  href={localHref('/docs/getting-started/what-is-xagent')}>
+                  {content.learnAction}
+                </a>
+              </div>
+            </div>
+          </div>
+        </section>
+        {expandedImage ? (
+          <div
+            className={styles.imageLightbox}
+            role="dialog"
+            aria-modal="true"
+            aria-label={expandedImage.alt}
+            onClick={(event) => {
+              if (event.target === event.currentTarget) {
+                setExpandedImage(null);
+              }
+            }}>
+            <button
+              type="button"
+              className={styles.lightboxClose}
+              aria-label={isEnglish ? 'Close enlarged image' : '关闭放大图片'}
+              title={isEnglish ? 'Close' : '关闭'}
+              onClick={() => setExpandedImage(null)}>
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M6 6l12 12M18 6L6 18" />
+              </svg>
+            </button>
+            <img src={expandedImage.src} alt={expandedImage.alt} />
+          </div>
+        ) : null}
       </main>
     </Layout>
   );

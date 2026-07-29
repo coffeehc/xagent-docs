@@ -3,7 +3,6 @@ import path from 'node:path';
 import type {Config} from '@docusaurus/types';
 import type * as Preset from '@docusaurus/preset-classic';
 
-const githubUrl = 'https://github.com/coffeehc/xagent-docs';
 const siteUrl = 'https://xagent.xiagaogao.com';
 const zhDescription =
   'xAgent 是面向任务完成、可私有化部署的多用户 AI Agent 工作门户，支持 Skill、Tool、MCP、连接器、工作区隔离和安全治理。';
@@ -26,6 +25,10 @@ const config: Config = {
 
   future: {
     v4: true,
+    faster: {
+      rspackBundler: false,
+      rspackPersistentCache: false,
+    },
   },
 
   url: siteUrl,
@@ -64,7 +67,7 @@ const config: Config = {
       {
         docs: {
           sidebarPath: './sidebars.ts',
-          showLastUpdateTime: true,
+          showLastUpdateTime: false,
         },
         blog: {
           blogTitle: 'Blog',
@@ -186,10 +189,14 @@ const config: Config = {
       },
       items: [
         {
-          href: `${localeSiteUrl}/docs/getting-started/what-is-xagent/`,
+          to: '/docs/getting-started/what-is-xagent/',
+          position: 'left',
+          label: '产品介绍',
+        },
+        {
+          to: '/docs/manual/overview/',
           position: 'left',
           label: '使用手册',
-          target: '_self',
         },
         {
           href: `${localeSiteUrl}/blog/`,
@@ -207,11 +214,6 @@ const config: Config = {
           type: 'localeDropdown',
           position: 'right',
         },
-        {
-          href: githubUrl,
-          label: 'GitHub',
-          position: 'right',
-        },
       ],
     },
     footer: {
@@ -221,9 +223,12 @@ const config: Config = {
           title: 'Docs',
           items: [
             {
-              label: '功能导览与菜单入口',
-              href: `${localeSiteUrl}/docs/user-guide/menu-overview/`,
-              target: '_self',
+              label: '使用手册',
+              to: '/docs/manual/overview/',
+            },
+            {
+              label: '开始安装',
+              to: '/docs/getting-started/install/',
             },
             {
               label: '什么是 xAgent',
@@ -248,11 +253,15 @@ const config: Config = {
           ],
         },
         {
-          title: 'Project',
+          title: '交流',
           items: [
             {
-              label: 'GitHub',
-              href: githubUrl,
+              label: '我有一个想法',
+              to: '/docs/cooperation/idea/',
+            },
+            {
+              label: '联系我们',
+              href: 'mailto:data@yaoankeji.com',
             },
           ],
         },

@@ -30,20 +30,6 @@ RuntimeConnection 是可运行的外部执行环境或执行体。它用于把�
 - 执行权限、文件访问和结果归档规则。
 - 失败、中断和恢复行为。
 
-## 常见问题
-
-### RuntimeConnection 是否等同于 Connector？
-
-不等同。Connector 连接外部系统，RuntimeConnection 更关注执行环境。
-
-### 是否可以先写接入协议？
-
-不可以。协议未稳定前只保留概念边界。
-
-### RuntimeConnection 是否一定暴露给 Agent？
-
-不一定。Agent 通常看到 Tool，而不是底层执行环境。
-
 ## 相关文档
 
 - [Runtime](/docs/architecture/runtime)

@@ -138,7 +138,7 @@ Agent 可以分阶段处理：
 
 - [Tool 管理](/docs/user-guide/tool)
 - [Skill 管理](/docs/user-guide/skill)
-- [MCP 与连接器有什么区别](/docs/guides/mcp-vs-connector)
+- [什么是连接器](/docs/getting-started/what-is-connector#它和-mcp-有什么区别)
 - [AI Agent 审批与安全控制](/docs/guides/agent-approval-security)
 
 ## 下一步操作

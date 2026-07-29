@@ -11,12 +11,12 @@
     "message": "User Manual",
     "description": "Navbar item with label 使用手册"
   },
+  "item.label.产品介绍": {
+    "message": "Product Overview",
+    "description": "Navbar item with label 产品介绍"
+  },
   "item.label.行业观察": {
     "message": "Insights",
     "description": "Navbar item with label 行业观察"
-  },
-  "item.label.GitHub": {
-    "message": "GitHub",
-    "description": "Navbar item with label GitHub"
   }
 }

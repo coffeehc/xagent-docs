@@ -3,7 +3,7 @@ title: 如何在自己的服务器上部署 AI Agent
 description: 一份实用的私有化 AI Agent 部署指南，介绍服务器准备、模型接入、HTTPS、工作区隔离、外部连接、备份与持续运行。
 image: /img/share/zh/xagent-security.png
 status: beta
-updated: 2026-07-15
+updated: 2026-07-27
 ---
 
 # 如何在自己的服务器上部署 AI Agent
@@ -28,6 +28,7 @@ xAgent 不是安装在每台个人电脑上的聊天程序。它部署在服务�
 | 统一访问入口 | 用户可从 Web 进入，也可通过 IM 连接器从微信等外部入口发起或跟进任务。 |
 | 集中保存任务文件 | 材料、过程文件和结果保存在服务端工作区，便于持续任务和后续查看。 |
 | 用户工作区隔离 | 每位用户只访问自己的工作区文件，避免不同用户的任务材料混在一起。 |
+| 任务进程隔离 | ProcessSandbox 只向外部命令挂载授权文件和只读 Runtime Assets，并限制进程树和资源。 |
 | 可使用自有模型服务 | 接入本地模型或自有模型网关时，任务数据可以尽量留在自有环境。 |
 | 统一治理能力 | 管理员可以集中配置模型、Skill、工具、连接器和审批策略，再交给用户直接使用。 |
 
@@ -35,7 +36,7 @@ xAgent 不是安装在每台个人电脑上的聊天程序。它部署在服务�
 
 一套可长期使用的 AI Agent 服务需要同时考虑运行环境、模型、访问入口、安全边界和运维方式。首次部署前，建议先明确下面几件事：
 
-1. 准备长期在线的 Linux 或 macOS 服务器。Windows 当前未经过测试，不建议用于部署体验。
+1. 准备长期在线的 Linux 或 macOS 服务器。Windows 对 xAgent 所需的沙箱能力支持不足，暂时无法为受控脚本执行提供安全、可控的运行保障，因此不建议用于部署。
 2. 确定模型来源。可以接入模型 API，也可以准备本地模型服务；模型需要稳定支持工具调用。
 3. 规划访问方式。内网使用可以直接访问服务端口；公网或域名访问应使用 Nginx、Caddy 等反向代理提供 HTTPS。
 4. 确定首批用户和任务场景。先从文件整理、资料分析、报告生成等低风险任务开始验证。
@@ -47,7 +48,7 @@ xAgent 不是安装在每台个人电脑上的聊天程序。它部署在服务�
 
 ### 1. 安装并启动服务端
 
-按[服务端安装](/docs/deployment/server-install)下载对应系统和架构的二进制文件，在服务器上启动 xAgent。Linux 长期运行时，建议注册为 systemd 服务。
+运行[官方安装脚本](/docs/getting-started/install)。脚本会识别系统与架构、校验发布包并安装 `v0.0.5.beta`；Linux 会配置并启动 systemd 服务，macOS 安装到当前用户目录。
 
 ### 2. 配置并验证模型
 
@@ -59,13 +60,15 @@ xAgent 不是安装在每台个人电脑上的聊天程序。它部署在服务�
 
 用户工作区由 xAgent 隔离。密钥也由系统独立管理，工具配置中使用的是占位符，只有在系统内部实际调用工具时才会替换为真实值。不要把密码、Token 或验证码写进会话消息和任务材料。
 
+在管理员的“执行环境”页面确认 ProcessSandbox 和 Runtime Assets 已就绪。沙箱不可用时，不应绕过门禁直接让 Tool 在宿主环境运行。
+
 ### 4. 用真实的小任务验证
 
 先创建一个[Agent 会话](/docs/user-guide/agent-session)，上传少量非敏感材料，完成一个目标清晰、结果可检查的任务。确认模型、工作区读写、文件处理和审批流程都正常后，再逐步开放给更多用户。
 
 ### 5. 按需接入外部能力
 
-需要让会话按需调用外部服务时，配置 MCP；需要把微信、邮件或企业系统中的账号、消息和事件主动送入 xAgent 时，配置[连接器](/docs/user-guide/connector)。两者的选择可参考 [MCP 与连接器的区别](/docs/guides/mcp-vs-connector)。
+需要让会话按需调用外部服务时，配置 MCP；需要把微信、邮件或企业系统中的账号、消息和事件主动送入 xAgent 时，配置[连接器](/docs/user-guide/connector)。两者的选择可参考[什么是连接器](/docs/getting-started/what-is-connector#它和-mcp-有什么区别)。
 
 ## 常见使用场景
 
@@ -79,18 +82,18 @@ xAgent 不是安装在每台个人电脑上的聊天程序。它部署在服务�
 - xAgent 的私有化部署不是个人电脑离线单机软件。服务端需要长期在线，才能持续接收和执行任务。
 - 使用本地模型可以提高数据私有化程度，但连接器、MCP 和外部 API 的数据边界仍取决于你选择并授权的服务。
 - xAgent 当前为测试版。上线前应使用真实但非敏感的任务验证模型、外部连接、审批和备份流程。
-- 当前版本不支持在线升级。升级需要停机备份、替换二进制文件并完成检查，详见[服务端安装](/docs/deployment/server-install)。
+- 当前安装脚本支持固定版本升级，并保留配置与运行数据。Linux 新版本激活失败时会尝试恢复上一版本；升级前仍应备份并完成服务、模型、文件和 Connector 检查。
 
 ## 相关概念
 
 - [什么是 xAgent](/docs/getting-started/what-is-xagent)
-- [xAgent 如何通过虚拟文件系统隔离工作区](/docs/guides/multi-user-workspace-isolation)
+- [xAgent 如何隔离多用户工作区与任务进程](/docs/guides/multi-user-workspace-isolation)
 - [模型说明](/docs/deployment/model-requirements)
 - [连接器](/docs/user-guide/connector)
-- [MCP 与连接器有什么区别](/docs/guides/mcp-vs-connector)
+- [什么是连接器](/docs/getting-started/what-is-connector#它和-mcp-有什么区别)
 
 ## 下一步操作
 
-- [安装 xAgent 服务端](/docs/deployment/server-install)
+- [开始安装 xAgent](/docs/getting-started/install)
 - [完成第一个任务](/docs/getting-started/first-task)
 - [配置审批策略](/docs/user-guide/approval-policy)

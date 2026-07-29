@@ -133,28 +133,6 @@ Please organize materials around this topic. Show a source list and analysis fra
 Please summarize customer messages from the past week. List items needing replies, at-risk customers, and suggested actions. Do not send messages automatically.
 ```
 
-## Common Questions
-
-### Will xAgent split a long-running task automatically?
-
-Not always. Ask it to list a plan and wait for confirmation before continuing when you need more control over the process.
-
-### Where can I see long-running task status?
-
-Start with the original [Agent Session](/docs/user-guide/agent-session). Generated files are usually available in [Workspace Files](/docs/user-guide/workspace).
-
-### Can I change direction midway through?
-
-Yes. State which results to keep and which to discard. For example: “Keep the topic categories, but change the report structure to an executive briefing.”
-
-### Does switching models immediately affect a running execution loop?
-
-No. A running model-and-tool loop keeps its selected model. The new configuration is read by a later execution round. You do not need to create a new session, and existing history and files remain available.
-
-### Why are there no command examples?
-
-Ordinary users submit long-running tasks through the web interface. Underlying APIs and internal organization are not the main focus of this user manual.
-
 ## Continue Reading
 
 - [Agent Session](/docs/user-guide/agent-session)

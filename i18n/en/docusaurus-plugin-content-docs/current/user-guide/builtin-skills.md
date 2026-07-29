@@ -13,7 +13,7 @@ This page is for users and contributors who want to view, modify, discuss, or su
 
 ## What It Is
 
-The repository contains a copy of xAgent built-in Skill files in the `skills/` directory. These Skills currently cover a set of common scenarios for the beta release. They are still early in development, and pull requests are welcome.
+The documentation project contains a copy of xAgent built-in Skill files in the `skills/` directory. These Skills currently cover a set of common scenarios for the beta release. They are still early in development, and improvement proposals are welcome.
 
 These Skills ship with the beta release to cover common work scenarios early and let real users view, try, and improve them. Their descriptions, workflows, templates, and boundaries are still being refined. They live in the documentation repository so community feedback can improve them over time, not because the current version is final.
 
@@ -23,7 +23,7 @@ Their location in the documentation repository is:
 skills/
 ```
 
-You can view and edit built-in Skill text, templates, references, and examples there, then use GitHub issues or pull requests to discuss an improvement.
+You can review built-in Skill text, templates, references, and examples there, then discuss improvements based on real usage.
 
 ## Important Notes
 
@@ -34,15 +34,7 @@ You can view and edit built-in Skill text, templates, references, and examples t
 - Safety comes first for teams and companies. Depending on the actual severity of Skill security risks, xAgent may later evaluate a unified Skill Marker or similar mechanism for centralized marking, review, and management.
 - A Skill should not depend on a particular third-party MCP, private service, or external account capability. When an external system is needed, describe the business goal, required information, and authorization boundary; leave the concrete integration to xAgent Tool, MCP, or Connector configuration.
 - Do not put real keys, customer data, internal addresses, tokens, verification codes, or one-off business material into a Skill.
-- You can also submit an issue when you only want to report a problem.
-
-GitHub directory:
-
-[https://github.com/coffeehc/xagent-docs/tree/main/skills](https://github.com/coffeehc/xagent-docs/tree/main/skills)
-
-Report an issue:
-
-[https://github.com/coffeehc/xagent-docs/issues](https://github.com/coffeehc/xagent-docs/issues)
+- Use the [Share an Idea](/docs/cooperation/idea) page to choose the appropriate channel for a problem report or improvement proposal.
 
 ## How to Modify a Skill
 
@@ -56,7 +48,7 @@ Use this order when editing:
 4. Confirm that every resource mentioned in `SKILL.md` exists.
 5. Do not add real sensitive business information.
 6. If the change is intended for a product release, update `meta.version` in `SKILL.md`.
-7. Submit a pull request on GitHub, or create an issue first to explain the problem.
+7. Use the [Share an Idea](/docs/cooperation/idea) page to explain the problem, real scenario, and proposed change.
 
 ## Current Coverage
 

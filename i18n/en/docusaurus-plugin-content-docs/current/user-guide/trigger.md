@@ -19,7 +19,7 @@ A Trigger automatically submits a task. Think of it as “when a scheduled time 
 
 A Trigger is not the task result. It starts the task; use the session and workspace to view results.
 
-![xAgent Trigger Management page showing scheduled task status, execution policies, and run information](/img/manual/xagent-triggers.png)
+![xAgent Trigger Management page showing scheduled task status, execution policies, and run information](/img/manual/v005/en/triggers.webp)
 
 ## When to Use It
 
@@ -101,24 +101,6 @@ Full example:
 ```text
 Please check today's new email, filter the items I need to handle, and sort them by urgency. For messages requiring a reply, generate drafts only and do not send them directly.
 ```
-
-## Common Questions
-
-### Does a Trigger wait until the task finishes?
-
-No. A Trigger starts the task. The execution progress and results remain in the session.
-
-### Why did a Trigger not run?
-
-Possible reasons include: it is disabled, the scheduled time has not arrived, an external connection is unavailable, the task was blocked by an approval policy, or the configuration did not save successfully.
-
-### Can a scheduled task send messages directly?
-
-Whether it can send depends on Tools, connections, and approval policies. By default, generate a draft first and send only after confirmation.
-
-### When should I delete a Trigger?
-
-Delete it only when it is no longer needed and will not be reused. Disable it first when you only need to pause the task.
 
 ## Continue Reading
 

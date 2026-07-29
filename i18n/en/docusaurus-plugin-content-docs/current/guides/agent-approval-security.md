@@ -87,7 +87,7 @@ Enterprise deployments should also use:
 - [Tool Management](/docs/user-guide/tool)
 - [Skill Management](/docs/user-guide/skill)
 - [Connectors](/docs/user-guide/connector)
-- [MCP vs. Connectors](/docs/guides/mcp-vs-connector)
+- [What Is a Connector?](/docs/getting-started/what-is-connector#how-is-it-different-from-mcp)
 
 ## Next Steps
 

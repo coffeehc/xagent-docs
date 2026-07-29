@@ -16,29 +16,13 @@ const sidebars: SidebarsConfig = {
         },
         {
           type: 'doc',
-          id: 'user-guide/menu-overview',
-          label: label('功能导览与菜单入口', 'Feature and Menu Overview'),
+          id: 'getting-started/install',
+          label: label('开始安装', 'Start Installation'),
         },
         {
           type: 'doc',
-          id: 'getting-started/first-task',
-          label: label('第一个任务', 'First Task'),
-        },
-        {
-          type: 'doc',
-          id: 'getting-started/create-skill',
-          label: label('创建 / 更新 Skill', 'Create / Update Skill'),
-        },
-      ],
-    },
-    {
-      type: 'category',
-      label: label('部署安装', 'Deployment'),
-      items: [
-        {
-          type: 'doc',
-          id: 'deployment/server-install',
-          label: label('服务端安装', 'Server Installation'),
+          id: 'getting-started/what-is-connector',
+          label: label('什么是连接器', 'What Is a Connector'),
         },
         {
           type: 'doc',
@@ -47,65 +31,75 @@ const sidebars: SidebarsConfig = {
         },
         {
           type: 'doc',
-          id: 'deployment/connector-install',
-          label: label('Connector 安装', 'Connector Installation'),
-        },
-      ],
-    },
-    {
-      type: 'category',
-      label: label('场景指南', 'Scenario Guides'),
-      items: [
-        {
-          type: 'doc',
-          id: 'guides/self-hosted-ai-agent',
-          label: label('私有化部署 AI Agent', 'Self-host an AI Agent'),
-        },
-        {
-          type: 'doc',
-          id: 'guides/multi-user-workspace-isolation',
-          label: label('虚拟文件系统与工作区隔离', 'Virtual Filesystem Isolation'),
-        },
-        {
-          type: 'doc',
-          id: 'guides/ai-agent-dynamic-tool-discovery',
-          label: label('AI Agent 动态发现能力', 'Dynamic Capability Discovery'),
-        },
-        {
-          type: 'doc',
-          id: 'guides/ai-agent-runtime-hot-switching',
-          label: label('任务执行中的动态切换', 'Runtime Model and Skill Switching'),
-        },
-        {
-          type: 'doc',
-          id: 'guides/multi-agent-session-event-collaboration',
-          label: label('多 Agent 会话事件协作', 'Multi-Agent Session Events'),
+          id: 'getting-started/first-task',
+          label: label('第一个任务', 'First Task'),
         },
         {
           type: 'doc',
           id: 'guides/shortcut-instruction-protocol',
           label: label('快捷指令协议', 'Shortcut Instruction Protocol'),
         },
-        {
-          type: 'doc',
-          id: 'guides/agent-approval-security',
-          label: label('AI Agent 审批与安全控制', 'AI Agent Approval and Safety'),
-        },
-        {
-          type: 'doc',
-          id: 'guides/long-running-agent-task',
-          label: label('AI Agent 如何执行长任务', 'How AI Agents Run Long Tasks'),
-        },
-        {
-          type: 'doc',
-          id: 'guides/mcp-vs-connector',
-          label: label('MCP 与连接器的区别', 'MCP vs. Connectors'),
-        },
       ],
     },
     {
       type: 'category',
       label: label('使用手册', 'User Manual'),
+      items: [
+        {
+          type: 'doc',
+          id: 'manual/overview',
+          label: label('手册总览', 'Manual Overview'),
+        },
+        {
+          type: 'doc',
+          id: 'manual/capabilities',
+          label: label('支持的智能体功能', 'Agent Capabilities'),
+        },
+        {
+          type: 'doc',
+          id: 'getting-started/create-skill',
+          label: label('创建 / 更新 Skill', 'Create / Update Skill'),
+        },
+        {
+          type: 'doc',
+          id: 'manual/workspace',
+          label: label('工作台', 'Workspace'),
+        },
+        {
+          type: 'doc',
+          id: 'manual/operations',
+          label: label('运行治理', 'Operations'),
+        },
+        {
+          type: 'doc',
+          id: 'manual/personal-settings',
+          label: label('个人设置', 'Personal Settings'),
+        },
+        {
+          type: 'doc',
+          id: 'manual/user-management',
+          label: label('用户管理', 'User Management'),
+        },
+        {
+          type: 'doc',
+          id: 'manual/analytics',
+          label: label('统计分析', 'Analytics'),
+        },
+        {
+          type: 'doc',
+          id: 'manual/agent-governance',
+          label: label('Agent 治理', 'Agent Governance'),
+        },
+        {
+          type: 'doc',
+          id: 'manual/system-configuration',
+          label: label('系统配置', 'System Configuration'),
+        },
+      ],
+    },
+    {
+      type: 'category',
+      label: label('功能详解', 'Feature Guides'),
       items: [
         {
           type: 'doc',
@@ -171,12 +165,63 @@ const sidebars: SidebarsConfig = {
     },
     {
       type: 'category',
+      label: label('场景指南', 'Scenario Guides'),
+      items: [
+        {
+          type: 'doc',
+          id: 'guides/self-hosted-ai-agent',
+          label: label('私有化部署 AI Agent', 'Self-host an AI Agent'),
+        },
+        {
+          type: 'doc',
+          id: 'guides/multi-user-workspace-isolation',
+          label: label('虚拟文件系统与工作区隔离', 'Virtual Filesystem Isolation'),
+        },
+        {
+          type: 'doc',
+          id: 'guides/ai-agent-dynamic-tool-discovery',
+          label: label('AI Agent 动态发现能力', 'Dynamic Capability Discovery'),
+        },
+        {
+          type: 'doc',
+          id: 'guides/ai-agent-runtime-hot-switching',
+          label: label('任务执行中的动态切换', 'Runtime Model and Skill Switching'),
+        },
+        {
+          type: 'doc',
+          id: 'guides/multi-agent-session-event-collaboration',
+          label: label('多 Agent 会话事件协作', 'Multi-Agent Session Events'),
+        },
+        {
+          type: 'doc',
+          id: 'guides/agent-approval-security',
+          label: label('AI Agent 审批与安全控制', 'AI Agent Approval and Safety'),
+        },
+        {
+          type: 'doc',
+          id: 'guides/long-running-agent-task',
+          label: label('AI Agent 如何执行长任务', 'How AI Agents Run Long Tasks'),
+        },
+      ],
+    },
+    {
+      type: 'category',
       label: label('附件', 'Attachments'),
       items: [
         {
           type: 'doc',
           id: 'user-guide/builtin-skills',
           label: label('内置 Skill 文件', 'Built-in Skill Files'),
+        },
+        {
+          type: 'doc',
+          id: 'attachments/xagent_connection_architecture',
+          label: label('xAgent Connector 架构', 'xAgent Connector Architecture'),
+        },
+        {
+          type: 'doc',
+          id: 'attachments/xagent_connector_protocol',
+          label: label('xAgent Connector 协议', 'xAgent Connector Protocol'),
         },
       ],
     },
@@ -188,6 +233,11 @@ const sidebars: SidebarsConfig = {
           type: 'doc',
           id: 'cooperation/partners',
           label: label('合作方向', 'Partnership Areas'),
+        },
+        {
+          type: 'doc',
+          id: 'cooperation/idea',
+          label: label('我有一个想法', 'Share an Idea'),
         },
       ],
     },

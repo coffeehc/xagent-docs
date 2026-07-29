@@ -65,7 +65,7 @@ The following parameters are development test parameters, not recommended defaul
 
 The development environment also validates prompt-prefix caching. In stable sessions, prefix cache hit rate can usually reach 90% or higher.
 
-![xAgent development model server logs showing a prefix cache hit rate above ninety percent](/img/manual/xagent-prefix-cache-metrics.png)
+![xAgent development model server logs showing a prefix cache hit rate above ninety percent](/img/manual/v005/en/prefix-cache-metrics.webp)
 
 ```json
 {
@@ -100,27 +100,9 @@ When adding a model:
 
 Only make a model available to ordinary users after it can reliably read files, call tools, generate results, and handle confirmations.
 
-## Common Questions
-
-### Must I use Qwen3.6-27B?
-
-No. It is only one model used in the current development environment.
-
-### Can small models be used?
-
-Yes. `Gemma4-12B` has been tested and can execute long tasks, but smaller models need more careful validation for complex reasoning, multi-tool planning, long context, and Skill creation.
-
-### Is 64k context enough?
-
-It can be a minimum starting point, but it is not enough for all tasks. xAgent's initial context may be near 20k, and task materials, tool results, session history, and user additions will continue to consume context.
-
-### Why is tool calling required?
-
-xAgent is built for task completion, not just chat. It needs tools to read files, write outputs, call MCP, use connectors, process triggers, and generate deliverables.
-
 ## Related Concepts
 
-- [Server Installation](/docs/deployment/server-install)
+- [Start Installation](/docs/getting-started/install)
 - [How AI Agents Run Long Tasks](/docs/guides/long-running-agent-task)
 - [How AI Agents Discover and Load Tools on Demand](/docs/guides/ai-agent-dynamic-tool-discovery)
 

@@ -21,7 +21,7 @@ As the built-in Agent “brain” capability matures, model selection will gradu
 
 xAgent will keep optimizing model routing through ongoing testing and real usage. It will consider task type, cost, speed, Tool collaboration requirements, and context when choosing a better model combination for the current task. Ordinary users do not need to choose a specific model; they only need to state the task goal.
 
-![xAgent Model Configuration page showing the model list, Provider, connection details, and capability options](/img/manual/xagent-model-config.png)
+![xAgent Model Configuration page showing the model list, Provider, connection details, and capability options](/img/manual/v005/en/admin-models.webp)
 
 ## When to Use It
 
@@ -103,26 +103,6 @@ A model without Tool calling is not appropriate for tasks that need file reading
 - Write model descriptions for administrators and users, not only with Provider-internal details.
 - Never expose an API Key in screenshots, documentation, chat messages, or commit history.
 - Before changing a public model, confirm whether it will affect active sessions.
-
-## Common Questions
-
-### Do ordinary users need to configure models themselves?
-
-Usually not. Once an administrator configures them, ordinary users can use them directly in a session.
-
-When unified model management and task routing mature, ordinary users will notice model selection even less and will only need to state their task goal.
-
-### Does a successful connection test mean every task will work?
-
-No. It only confirms that the model service is available. Successful task completion also depends on capability switches, Tools, Skills, external connections, and approval policies.
-
-### Why switch models in a session?
-
-Different models suit different tasks. Some are better at fast summaries, some at complex reasoning, and some at Tool collaboration. Switching models does not mean restarting the entire session.
-
-### Can screenshots include a Base URL and API Key?
-
-They should not. Screenshots in public documentation or public channels should obscure internal addresses, keys, and accounts.
 
 ## Continue Reading
 

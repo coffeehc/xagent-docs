@@ -29,20 +29,6 @@ SubAgent 是面向长任务的独立执行单元。它用于把复杂目标拆�
 - SubAgent 与 Session、Workspace、Memory 的关系需要以实现为准。
 - SubAgent 的生命周期、状态和结果归档需要明确 owner。
 
-## 常见问题
-
-### SubAgent 是否一定是新的 Session？
-
-不在当前文档中承诺。具体实现应以代码为准。
-
-### SubAgent 是否可以直接绕过主 Agent？
-
-不应这样描述。长任务拆分仍需受平台治理。
-
-### SubAgent 是否稳定？
-
-当前仍按实验性能力处理。
-
 ## 相关文档
 
 - [长任务](/docs/user-guide/long-task)

@@ -7,16 +7,6 @@ updated: 2026-07-14
 
 # Complete Your First Task with xAgent
 
-## Who This Is For
-
-This page is for users who are ready to run their first real task in xAgent.
-
-## What It Is
-
-A task is the goal you want xAgent to complete. The first task does not need to be complex. It only needs a clear goal, clear input material, and an output format that you can judge.
-
-xAgent is not only a chat box. A task may involve files, tools, confirmations, generated outputs, and follow-up changes in the same session.
-
 ## A Good First Task
 
 Use this structure when you need a clear task description:
@@ -114,20 +104,6 @@ A good first task usually includes:
 | Output | Save as Markdown and show me a short summary |
 
 The clearer the input and output are, the easier it is for xAgent to complete the task without repeated clarification.
-
-## Common Questions
-
-### Is a task always split into many steps?
-
-No. Simple tasks are usually completed directly. xAgent only needs staged execution when the task has many files, many steps, external actions, or human confirmations.
-
-### Is one user message the same as one task?
-
-No. A user message may start a new task, add material, revise requirements, or confirm an action in an existing task.
-
-### When should I start a new session?
-
-Start a new session when the goal becomes a different piece of work, or when you do not want the previous context to affect the next task. If you are still refining the same result, stay in the same session.
 
 ## Related Docs
 

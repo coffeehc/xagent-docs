@@ -29,20 +29,6 @@ Connector System 负责连接外部系统，并把外部能力、消息和认证
 - Connector Server 管目标系统登录态、目标权限、Connection Descriptor 和媒体引用。
 - Agent 不应看到系统 API key、目标系统 token 或内部 channel ID。
 
-## 常见问题
-
-### Connector 是否由 xAgent 保存目标系统 token？
-
-不应这样描述。目标系统 token 属于 Connector 或目标系统边界。
-
-### Connector 是否必须提供 Skill？
-
-可以提供，但不是唯一职责。
-
-### Connector 的协议是否已经完全稳定？
-
-当前标记为实验性，接口可能变化。
-
 ## 相关文档
 
 - [Connector](/docs/developer-guide/connector)
