@@ -2,7 +2,7 @@
 title: Share an Idea
 description: Share product ideas, documentation feedback, Skill improvements, or partnership inquiries with the xAgent team.
 status: stable
-updated: 2026-07-27
+updated: 2026-07-29
 ---
 
 # Share an Idea
@@ -14,7 +14,7 @@ We welcome feedback from real tasks, including problems you encountered, capabil
 | Suitable for public discussion | Better for direct contact |
 | --- | --- |
 | Product issues, feature requests, documentation corrections, Skill improvements | Partnership inquiries, non-public scenarios, or discussions with internal context |
-| [Open the docs issue tracker](https://github.com/coffeehc/xagent-docs/issues) | [Send an email](mailto:data@yaoankeji.com) |
+| [Open a new issue](https://github.com/coffeehc/xagent-releases/issues/new) | [Send an email](mailto:data@yaoankeji.com) |
 
 Public feedback makes discussion and progress easier to track. Email is better for context that should not be public. Do not send real keys, tokens, verification codes, customer data, or other unnecessary sensitive information through either channel.
 

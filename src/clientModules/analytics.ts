@@ -59,7 +59,7 @@ function getDestinationType(url: URL): OutboundDestinationType | undefined {
     return undefined;
   }
 
-  if (url.pathname.startsWith('/coffeehc/xagent-docs/issues')) {
+  if (url.pathname === '/coffeehc/xagent-releases/issues/new') {
     return 'documentation_repository';
   }
 
