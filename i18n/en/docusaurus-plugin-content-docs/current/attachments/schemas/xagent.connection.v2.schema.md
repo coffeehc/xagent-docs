@@ -1,6 +1,7 @@
 ---
 title: Connection Descriptor JSON Schema
 description: Complete JSON Schema for the xAgent Connection Descriptor xagent.connection/v2.
+updated: 2026-07-29
 ---
 
 ```json

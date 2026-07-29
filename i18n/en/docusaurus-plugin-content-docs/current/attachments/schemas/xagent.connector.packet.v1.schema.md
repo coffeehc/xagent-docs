@@ -1,6 +1,7 @@
 ---
 title: Connector Packet JSON Schema
 description: Complete JSON Schema for the xAgent Connector Packet Envelope xagent.connector.packet/v1.
+updated: 2026-07-29
 ---
 
 ```json

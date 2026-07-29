@@ -1,6 +1,7 @@
 ---
 title: xAgent Connector Architecture
 description: xAgent Connector 的架构边界、事实归属、生命周期、事件投递和工具投影设计。
+updated: 2026-07-29
 ---
 
 # xAgent Connector Architecture

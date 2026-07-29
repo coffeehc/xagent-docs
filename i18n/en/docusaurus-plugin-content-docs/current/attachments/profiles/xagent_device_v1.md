@@ -1,6 +1,7 @@
 ---
 title: xAgent Device Profile v1
 description: Device binding, capability declarations, operation boundaries, and media result delivery for xAgent Device Profile v1.
+updated: 2026-07-29
 ---
 
 # xAgent Device Profile v1

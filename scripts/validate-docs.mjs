@@ -121,6 +121,12 @@ chineseFiles
       path.join(englishRoot, relativePath),
       'utf8',
     );
+    if (!/^updated:\s+\d{4}-\d{2}-\d{2}$/m.test(chineseContent)) {
+      errors.push(`${relativePath}: Chinese page is missing an updated date`);
+    }
+    if (!/^updated:\s+\d{4}-\d{2}-\d{2}$/m.test(englishContent)) {
+      errors.push(`${relativePath}: English page is missing an updated date`);
+    }
     const chineseStructure = getStructure(chineseContent);
     const englishStructure = getStructure(englishContent);
     if (JSON.stringify(chineseStructure) !== JSON.stringify(englishStructure)) {

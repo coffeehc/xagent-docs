@@ -25,6 +25,7 @@ const config: Config = {
 
   future: {
     v4: true,
+    experimental_vcs: 'disabled',
     faster: {
       rspackBundler: false,
       rspackPersistentCache: false,
@@ -41,6 +42,27 @@ const config: Config = {
 
   onBrokenLinks: 'throw',
   markdown: {
+    parseFrontMatter: async (params) => {
+      const result = await params.defaultParseFrontMatter(params);
+      const updated = result.frontMatter.updated;
+      const updatedDate =
+        updated instanceof Date
+          ? updated.toISOString().slice(0, 10)
+          : typeof updated === 'string'
+            ? updated
+            : undefined;
+      if (!updatedDate || result.frontMatter.last_update) {
+        return result;
+      }
+      return {
+        ...result,
+        // Keep timestamps deterministic when the deployment uses a shallow clone.
+        frontMatter: {
+          ...result.frontMatter,
+          last_update: {date: updatedDate},
+        },
+      };
+    },
     hooks: {
       onBrokenMarkdownLinks: 'warn',
     },

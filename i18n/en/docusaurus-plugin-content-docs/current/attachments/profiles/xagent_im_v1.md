@@ -1,6 +1,7 @@
 ---
 title: xAgent IM Profile v1
 description: Legacy instant-messaging capabilities, inbound messages, delivery semantics, and compatibility boundaries for xAgent IM Profile v1.
+updated: 2026-07-29
 ---
 
 # xAgent IM Profile v1

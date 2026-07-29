@@ -1,6 +1,7 @@
 ---
 title: xAgent Connector Architecture
 description: Architecture boundaries, fact ownership, lifecycle, event delivery, and Tool projection for xAgent Connectors.
+updated: 2026-07-29
 ---
 
 # xAgent Connector Architecture

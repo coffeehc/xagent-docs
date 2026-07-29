@@ -1,6 +1,7 @@
 ---
 title: xAgent Connector Common Protocol
 description: xAgent Connector Protocol 3.0 的连接、认证、通道、消息、文件传输、工具调用和错误协议。
+updated: 2026-07-29
 ---
 
 # xAgent Connector Common Protocol

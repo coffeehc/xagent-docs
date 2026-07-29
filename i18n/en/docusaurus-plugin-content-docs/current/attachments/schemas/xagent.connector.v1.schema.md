@@ -1,6 +1,7 @@
 ---
 title: Connector Card JSON Schema
 description: Complete JSON Schema for the xAgent Connector Card xagent.connector/v1.
+updated: 2026-07-29
 ---
 
 ```json

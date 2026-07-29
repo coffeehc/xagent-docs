@@ -1,6 +1,7 @@
 ---
 title: xAgent Connector Common Protocol
 description: Connection, authentication, channel, message, file transfer, Tool invocation, and error protocol for xAgent Connector Protocol 3.0.
+updated: 2026-07-29
 ---
 
 # xAgent Connector Common Protocol

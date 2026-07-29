@@ -1,6 +1,7 @@
 ---
 title: xAgent Device Profile v1
 description: xAgent Device Profile v1 的设备绑定、能力声明、操作边界和媒体结果交付规范。
+updated: 2026-07-29
 ---
 
 # xAgent Device Profile v1

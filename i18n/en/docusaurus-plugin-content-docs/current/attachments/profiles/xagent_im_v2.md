@@ -1,6 +1,7 @@
 ---
 title: xAgent IM Profile v2
 description: Bidirectional messages, file transfer, text deltas, delivery acknowledgments, and activity state for xAgent IM Profile v2.
+updated: 2026-07-29
 ---
 
 # xAgent IM Profile v2

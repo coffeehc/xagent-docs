@@ -1,6 +1,7 @@
 ---
 title: xAgent IM Profile v2
 description: xAgent IM Profile v2 的双向消息、文件传输、文本增量、接收确认和活动状态规范。
+updated: 2026-07-29
 ---
 
 # xAgent IM Profile v2
