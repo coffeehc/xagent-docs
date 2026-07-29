@@ -1,3 +1,8 @@
+---
+title: xAgent Device Profile v1
+description: xAgent Device Profile v1 的设备绑定、能力声明、操作边界和媒体结果交付规范。
+---
+
 # xAgent Device Profile v1
 
 本文档定义 `xagent.device.v1` 的设备绑定、能力声明和设备操作边界。

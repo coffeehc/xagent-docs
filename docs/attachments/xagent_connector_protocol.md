@@ -1,3 +1,8 @@
+---
+title: xAgent Connector Common Protocol
+description: xAgent Connector Protocol 3.0 的连接、认证、通道、消息、文件传输、工具调用和错误协议。
+---
+
 # xAgent Connector Common Protocol
 
 本文档定义 xAgent Connector 通用协议。第三方开发者实现 Connector Server 时，应以本文档作为 wire contract。

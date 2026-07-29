@@ -1,3 +1,8 @@
+---
+title: xAgent Connector Architecture
+description: xAgent Connector 的架构边界、事实归属、生命周期、事件投递和工具投影设计。
+---
+
 # xAgent Connector Architecture
 
 本文档定义 xAgent Connector 的架构边界、事实归属和生命周期。HTTP endpoint、WebSocket packet、JSON 字段、状态枚举和第三方实现要求见

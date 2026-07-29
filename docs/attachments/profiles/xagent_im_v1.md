@@ -1,3 +1,8 @@
+---
+title: xAgent IM Profile v1
+description: xAgent IM Profile v1 的旧版即时通讯能力、入站消息、投递语义和兼容边界规范。
+---
+
 # xAgent IM Profile v1
 
 本文档定义 `xagent.im.v1` 的旧版即时通讯能力、入站消息语义和可观察投递要求。它是保留的旧 Profile 语义，不代表 Connector Protocol 旧版本仍可接入；当前 catalog 只接受 Protocol `3.0`，当前 IM Connector 应实现 [`xagent.im.v2`](xagent_im_v2.md)。

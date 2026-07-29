@@ -450,6 +450,12 @@ export default function Home(): ReactNode {
         operatingSystem: 'Linux, macOS',
         softwareVersion: '0.0.5.beta',
         downloadUrl: installerUrl,
+        releaseNotes: `${localeUrl}docs/changelog/`,
+        softwareHelp: {
+          '@type': 'WebPage',
+          url: `${localeUrl}docs/manual/overview/`,
+        },
+        sameAs: 'https://github.com/coffeehc/xagent-releases',
         inLanguage: isEnglish ? 'en-US' : 'zh-CN',
         featureList: isEnglish
           ? [

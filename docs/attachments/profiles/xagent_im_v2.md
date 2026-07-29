@@ -1,3 +1,8 @@
+---
+title: xAgent IM Profile v2
+description: xAgent IM Profile v2 的双向消息、文件传输、文本增量、接收确认和活动状态规范。
+---
+
 # xAgent IM Profile v2
 
 本文档定义 `xagent.im.v2` 的双向完整文本/文件消息、assistant 文本增量、接收确认、活动状态和 IM 工具归属。
