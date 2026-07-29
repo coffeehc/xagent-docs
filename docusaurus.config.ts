@@ -214,6 +214,11 @@ const config: Config = {
           type: 'localeDropdown',
           position: 'right',
         },
+        {
+          href: 'https://github.com/coffeehc/xagent-releases',
+          label: 'GitHub',
+          position: 'right',
+        },
       ],
     },
     footer: {
