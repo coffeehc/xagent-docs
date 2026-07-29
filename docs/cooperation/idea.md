@@ -3,6 +3,7 @@ title: 我有一个想法
 description: 向 xAgent 提交产品想法、文档建议、Skill 改进或合作意向，并选择合适的公开反馈或邮件渠道。
 status: stable
 updated: 2026-07-29
+schemaType: ContactPage
 ---
 
 # 我有一个想法

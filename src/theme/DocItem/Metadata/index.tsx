@@ -20,14 +20,23 @@ export default function DocItemMetadata(): ReactNode {
     typeof metadata.frontMatter.updated === 'string'
       ? metadata.frontMatter.updated
       : undefined;
+  const configuredSchemaType = metadata.frontMatter.schemaType;
+  const schemaType =
+    configuredSchemaType === 'WebPage' ||
+    configuredSchemaType === 'ContactPage' ||
+    configuredSchemaType === 'CollectionPage'
+      ? configuredSchemaType
+      : 'TechArticle';
+  const isTechArticle = schemaType === 'TechArticle';
   const structuredData = {
     '@context': 'https://schema.org',
-    '@type': 'TechArticle',
-    '@id': `${pageUrl}#article`,
-    headline: metadata.title,
+    '@type': schemaType,
+    '@id': `${pageUrl}#${isTechArticle ? 'article' : 'webpage'}`,
+    ...(isTechArticle
+      ? {headline: metadata.title, mainEntityOfPage: pageUrl}
+      : {name: metadata.title}),
     description: metadata.description,
     url: pageUrl,
-    mainEntityOfPage: pageUrl,
     inLanguage: i18n.currentLocale === 'en' ? 'en-US' : 'zh-CN',
     ...(updated ? {dateModified: updated} : {}),
     isPartOf: {

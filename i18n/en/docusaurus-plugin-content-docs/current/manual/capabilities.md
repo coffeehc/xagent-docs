@@ -84,4 +84,4 @@ The bundled Skills do **not promise native DOCX or PPTX generation or editing**.
 - A scanned PDF with no extractable text may produce no useful content through the current native parser. OCR is a future enhancement area.
 - Encrypted, damaged, or oversized files may fail processing. A long document may show partial completion while prepared content remains available through indexed reads.
 - Contract, compliance, finance, investment, and people-related Skills support analysis and preparation. They do not replace final judgment by qualified legal, accounting, audit, or other professionals.
-- The bundled set may change by release. Use **Operations → Skills** for the live deployment state, and use [Workspace](/en/docs/manual/workspace) for task files and outputs.
+- The bundled set may change by release. Use **Operations → Skills** for the live deployment state, and use [Workspace](/docs/manual/workspace) for task files and outputs.

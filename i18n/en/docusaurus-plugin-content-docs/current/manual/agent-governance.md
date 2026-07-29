@@ -1,83 +1,111 @@
 ---
 title: Agent Governance Pages
-description: Page-by-page guidance and English UI examples for global Agents, approvals, Skills, Tools, Connectors, MCP, and execution environments.
+description: Guide and screenshots for xAgent administrator pages covering Agents, approvals, Skills, Tools, Connectors, MCP, and execution environments.
 status: beta
-updated: 2026-07-27
+updated: 2026-07-29
 ---
 
 # Agent Governance Pages
 
-Agent Governance is available only to administrators. These pages own global capabilities, execution boundaries, and public resources.
+Agent Governance pages are visible only to administrators and manage global capabilities, execution boundaries, and public resources.
 
-## Agent Definitions
+## Agent Management
 
-**Menu:** Agent Governance > Agent Definitions
+**Menu path:** Agent Governance > Agent Management
 
-**Visibility:** Administrators
+**Visible to:** Administrators
 
-![xAgent administrator Agent Definitions showing source, description, and actions](/img/manual/v005/en/admin-agent-definitions.webp)
+![xAgent administrator Agent Management page showing definition sources, descriptions, and actions](/img/manual/v005/en/admin-agent-definitions.webp)
 
-Review definition sources and dependencies, create or edit system-wide Agents, and control which public Agents users can select. Personal Agents remain user-owned.
+Administrators maintain built-in, public, and system-scoped Agent definitions here:
+
+- View definition sources, role descriptions, and capability dependencies.
+- Create, edit, capture, or inspect Agent definitions.
+- Public Agents are available for users to select, while personal Agents remain managed by their respective users.
 
 ## Approval Policy
 
-**Menu:** Agent Governance > Approval Policy
+**Menu path:** Agent Governance > Approval Policy
 
-**Visibility:** Administrators
+**Visible to:** Administrators
 
-![xAgent administrator Approval Policy showing risk rules and policy configuration](/img/home/v005/xagent-security-policy-en.webp)
+![xAgent administrator Approval Policy page showing risk rules and policy settings](/img/home/v005/xagent-security-policy-en.webp)
 
-Set the system-wide allow, confirm, or deny baseline for risk levels and specific actions. Mandatory administrator rules take precedence over personal policy.
+Approval Policy defines the system-wide baseline for action control:
 
-## Skill Admin
+- Configure allow, confirmation, or deny policies by risk level.
+- Set global rules for specific Tools and actions.
+- Mandatory administrator rules take precedence over personal user policies.
 
-**Menu:** Agent Governance > Skill Admin
+## Skill Management
 
-**Visibility:** Administrators
+**Menu path:** Agent Governance > Skill Management
 
-![xAgent Skill Admin showing global Skills, sources, and state](/img/manual/v005/en/admin-skills.webp)
+**Visible to:** Administrators
 
-Search, inspect, validate, and maintain built-in and public Skills; manage publication and review state; and verify declared tools, resources, and safety boundaries.
+![xAgent administrator Skill Management page showing global Skills, sources, and status](/img/home/v005/xagent-skill-tool-en.webp)
 
-## Tool Admin
+Administrator Skill Management governs built-in and public Skills:
 
-**Menu:** Agent Governance > Tool Admin
+- Search, inspect, validate, and maintain Skill resources.
+- Manage public publishing, review status, and updates.
+- Check whether a Skill declares the Tools, resources, and safety boundaries it requires.
 
-**Visibility:** Administrators
+## Tool Management
 
-![xAgent Tool Admin showing source, risk, state, and governance actions](/img/home/v005/xagent-skill-tool-en.webp)
+**Menu path:** Agent Governance > Tool Management
 
-Search all discoverable tools by name, source, risk, and state. Inspect schemas, permissions, approval requirements, and unavailable reasons before exposing tools to users.
+**Visible to:** Administrators
 
-## Connectors
+![xAgent Tool Management page showing Tool sources, risks, status, and governance actions](/img/manual/v005/en/admin-tools.webp)
 
-**Menu:** Agent Governance > Connectors
+Tool Management brings together every Tool the system can discover:
 
-**Visibility:** Administrators
+- Filter by Tool name, source, risk, and status.
+- View parameter contracts, permissions, approval requirements, and reasons for unavailability.
+- Control whether a Tool enters the user-visible discovery and execution scope.
 
-![xAgent Connectors showing software version, protocol, online state, and actions](/img/home/v005/xagent-connectors-en.webp)
+## Connector Management
 
-Review software and protocol versions, online state, and updates; add or edit Connector instances; refresh health; and remove unused instances. See the [Connector user guide](/en/docs/user-guide/connector).
+**Menu path:** Agent Governance > Connector Management
 
-## MCP Config
+**Visible to:** Administrators
 
-**Menu:** Agent Governance > MCP Config
+![xAgent Connector Management page showing software versions, protocol versions, online status, and actions](/img/home/v005/xagent-connectors-en.webp)
 
-**Visibility:** Administrators
+Connector Management maintains Connector instances installed in the system:
 
-![xAgent MCP Config showing service, protocol, tool count, and address](/img/manual/v005/en/admin-mcp.webp)
+- View software versions, protocol versions, online status, and update notices.
+- Add a Connector and edit its address and authentication configuration.
+- Refresh runtime status, inspect details, or remove instances that are no longer used.
 
-Create system-wide MCP services, select transports, review health and discovered tool counts, and confirm that changes propagate to My MCP and the tool catalog.
+See [Connector User Guide](/docs/user-guide/connector) for installation instructions.
+
+## MCP Configuration
+
+**Menu path:** Agent Governance > MCP Configuration
+
+**Visible to:** Administrators
+
+![xAgent MCP Configuration page showing services, protocols, Tool counts, and addresses](/img/manual/v005/en/admin-mcp.webp)
+
+MCP Configuration maintains system-scoped MCP services:
+
+- Create a service and choose its transport protocol.
+- View health status, discovered Tool count, and service address.
+- After editing or deleting a configuration, check whether My MCP and the user-side Tool list have synchronized.
 
 ## Execution Environment
 
-**Menu:** Agent Governance > Execution Environment
+**Menu path:** Agent Governance > Execution Environment
 
-**Visibility:** Administrators
+**Visible to:** Administrators
 
-![xAgent Execution Environment showing sandbox backends, managed runtimes, and host adapters](/img/manual/v005/en/admin-file-processing.webp)
+![xAgent Execution Environment page showing sandbox backends, managed runtimes, and host adapter status](/img/manual/v005/en/admin-file-processing.webp)
 
-- Review sandbox backend, managed runtime, and host-adapter readiness.
-- Inspect Python, Node.js, and CLI isolation sources and requirements.
-- Use **Refresh detection** to recheck ProcessSandbox and Runtime Assets.
-- Required execution capabilities stay unavailable when isolation is not ready; they do not fall back to unisolated execution.
+The Execution Environment page shows the runtime conditions that task processes actually depend on:
+
+- The summary shows counts for sandbox backends, managed runtimes, and host adapters.
+- The list shows the source and readiness of Python, Node.js, CLI isolation, and other capabilities.
+- **Refresh Probe** checks ProcessSandbox and Runtime Assets again.
+- When a required execution environment is not ready, dependent capabilities remain unavailable and do not fall back to unisolated execution.

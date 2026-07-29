@@ -1,90 +1,133 @@
 ---
 title: Operations Pages
-description: Page-by-page guidance and UI examples for xAgent Approvals, Triggers, Agents, Skills, Tools, MCP, Connections, and Secrets.
+description: Guide and interface screenshots for xAgent Approvals, Triggers, Agents, Skills, Tools, MCP, connections, and Secrets pages.
 status: beta
-updated: 2026-07-27
+updated: 2026-07-29
 ---
 
 # Operations Pages
 
-Operations contains user-side task controls and capability configuration. Approvals, My Connections, and Secrets are available to all users; the other pages require advanced mode.
+Operations covers user-side task control and capability configuration. Approvals, connections, and Secrets are visible to all users. The remaining pages require an administrator to enable advanced mode for the account.
 
 ## Approvals
 
-**Menu:** Operations > Approvals
+**Menu path:** Operations > Approvals
 
-**Visibility:** All users
+**Visible to:** All users
 
-![xAgent Approvals page](/img/manual/v005/en/approvals.webp)
+![xAgent Approvals page showing pending and historical approvals](/img/manual/v005/en/approvals.webp)
 
-Review pending and historical requests, inspect the source session, tool, risk, parameter summary, and reason, then approve or reject the action. The decision is returned to the originating session. Every connected IM channel also receives the approval notification, so you can approve or reject it directly from your phone.
+The Approvals page centralizes sensitive actions requested during tasks:
 
-## Triggers
+- View pending, approved, and rejected requests.
+- Check the originating Session, Tool, risk level, parameter summary, and reason.
+- After approval or rejection, the result returns to the original Session so execution can continue.
+- Every connected IM channel also receives approval notifications, allowing approval directly from a phone.
 
-**Menu:** Operations > Triggers
+## Trigger Management
 
-**Visibility:** Advanced-mode users
+**Menu path:** Operations > Trigger Management
 
-![xAgent Triggers showing state, type, schedule, next run, and actions](/img/manual/v005/en/triggers.webp)
+**Visible to:** Users with advanced mode enabled
 
-Search and filter triggers, review schedule and next-run state, then create, run now, enable, disable, edit, or delete a trigger. See [Triggers](/docs/user-guide/trigger).
+![xAgent Trigger Management page showing status, type, policy, next run time, and actions](/img/manual/v005/en/triggers.webp)
 
-## Agents
+Triggers start tasks automatically based on time or events:
 
-**Menu:** Operations > Agents
+- Search Triggers and filter by type.
+- View enabled status, scheduling policy, next run time, and stable key.
+- Create, run manually, enable or disable, edit, and delete Triggers.
 
-**Visibility:** Advanced-mode users
+See [Trigger Management](/docs/user-guide/trigger) for the complete workflow.
 
-![xAgent user-side Agents page](/img/home/v005/xagent-agent-management-en.webp)
+## Agent Management
 
-Browse built-in, public, and personal Agents; search definitions and dependencies; create personal Agents or inspect public definitions. See [Agent Management](/docs/user-guide/agent-management).
+**Menu path:** Operations > Agent Management
 
-## Skills
+**Visible to:** Users with advanced mode enabled
 
-**Menu:** Operations > Skills
+![xAgent user-side Agent Management page showing available Agents and their sources](/img/home/v005/xagent-agent-management-en.webp)
 
-**Visibility:** Advanced-mode users
+The user-side Agent page is used to select and maintain task entry points available to the current user:
 
-![xAgent user-side Skills page](/img/manual/v005/en/skills.webp)
+- View built-in, public, and personal Agents.
+- Search names, prompts, Skills, Tools, or Secret dependencies.
+- Create a personal Agent or inspect a public Agent definition.
 
-Browse built-in, public, and personal Skills; inspect resource files; and create, validate, edit, or publish personal Skills. See [Skill Management](/docs/user-guide/skill).
+See [Agent Management](/docs/user-guide/agent-management) for the complete concepts.
+
+## Skill Management
+
+**Menu path:** Operations > Skill Management
+
+**Visible to:** Users with advanced mode enabled
+
+![xAgent user-side Skill Management page showing Skill sources, status, and actions](/img/home/v005/xagent-skill-tool-en.webp)
+
+Skill Management is used to reuse task methods and maintain personal Skills:
+
+- View summaries and status for built-in, public, and personal Skills.
+- Search Skills, inspect resource files, and load them on demand in a Session.
+- Create, validate, edit, and publish personal Skills.
+
+See [Skill Management](/docs/user-guide/skill) for the complete workflow.
 
 ## My Tools
 
-**Menu:** Operations > My Tools
+**Menu path:** Operations > My Tools
 
-**Visibility:** Advanced-mode users
+**Visible to:** Users with advanced mode enabled
 
-![xAgent My Tools showing source, risk, readiness, and actions](/img/manual/v005/en/tools.webp)
+![xAgent My Tools page showing Tool sources, risks, readiness, and actions](/img/manual/v005/en/tools.webp)
 
-Filter native, MCP, and Connector tools by source, risk, and readiness. Open details for schemas, approval requirements, or unavailable reasons. See [Tool Management](/docs/user-guide/tool).
+My Tools brings together the native, MCP, and Connector Tools available to the current account:
+
+- Search or filter by name, source, risk, and readiness.
+- View Tool descriptions, parameters, approval requirements, and reasons for unavailability.
+- Whether a Tool can be invoked also depends on system status, account scope, and approval policies.
+
+See [Tool Management](/docs/user-guide/tool) for details.
 
 ## My MCP
 
-**Menu:** Operations > My MCP
+**Menu path:** Operations > My MCP
 
-**Visibility:** Advanced-mode users
+**Visible to:** Users with advanced mode enabled
 
-![xAgent My MCP showing user-visible services and connection state](/img/manual/v005/en/mcp.webp)
+![xAgent My MCP page showing MCP services available to the current user and their connection status](/img/manual/v005/en/mcp.webp)
 
-Review service state, protocol, tool count, and source; add or edit a user-scoped service; and check address, authentication, or global configuration when a service is unavailable.
+My MCP is used to view and manage MCP services connected for the current account:
+
+- View service status, protocol, Tool count, and source.
+- Create or edit user-scoped MCP connections.
+- If a service is unhealthy, first check its address, authentication, and the administrator-side global configuration.
 
 ## My Connections
 
-**Menu:** Operations > My Connections
+**Menu path:** Operations > My Connections
 
-**Visibility:** All users
+**Visible to:** All users
 
-![xAgent My Connections showing Connector channels, authentication, and dedicated sessions](/img/manual/v005/en/connections.webp)
+![xAgent My Connections page showing Connector channels, authentication status, and dedicated Sessions](/img/manual/v005/en/connections.webp)
 
-Create a connection, complete QR, bot, or app authorization, check channel and authentication state, and open the dedicated session. See [Connectors](/docs/user-guide/connector).
+My Connections binds personal external accounts to installed Connectors:
 
-## Secrets
+- View channel connection status, authentication status, bound targets, and dedicated Sessions.
+- Create a connection and complete QR code, bot, or application authorization.
+- Enter the dedicated Session, or reauthenticate and reopen the channel when a connection expires.
 
-**Menu:** Operations > Secrets
+See [Connectors](/docs/user-guide/connector) for the complete workflow.
 
-**Visibility:** All users
+## Secret Management
 
-![xAgent Secrets showing stable keys, masked previews, purpose, and update time](/img/manual/v005/en/secrets.webp)
+**Menu path:** Operations > Secret Management
 
-Create stable Secret Keys for tools and external systems. Full values are never displayed again; Skills, Tools, and configuration should reference placeholders instead of embedding secrets in prompts or files.
+**Visible to:** All users
+
+![xAgent Secret Management page showing Secret names, masked value previews, purposes, and update times](/img/manual/v005/en/secrets.webp)
+
+Secret Management stores sensitive values required by tasks and external services:
+
+- Create a stable Secret Key and describe its purpose.
+- The page shows only a masked preview and never displays the complete Secret again.
+- Skills, Tools, and configuration reference Secrets through placeholders. Do not put real values in prompts or Workspace files.

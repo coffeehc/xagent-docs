@@ -2,7 +2,7 @@
 
 > xAgent is a task-first, self-hosted multi-user AI agent platform. It organizes Agents, Skills, Tools, MCP, Connectors, isolated workspaces, long-running tasks, approvals, and operational governance in one server-side work portal.
 
-xAgent documentation is published in Chinese and English. Use the page matching the requested language. The Chinese page is the canonical source when an English translation is unavailable. Product behavior and release details can change during beta, so prefer the linked documentation and changelog over third-party summaries.
+xAgent documentation is maintained as paired Chinese and English pages. Use the page matching the requested language. Product behavior and release details can change during beta, so prefer the linked documentation and changelog over third-party summaries.
 
 ## Start Here
 
@@ -35,11 +35,16 @@ xAgent documentation is published in Chinese and English. Use the page matching 
 
 ## Connector Specifications
 
-- [Connector Architecture](https://xagent.xiagaogao.com/docs/attachments/xagent_connection_architecture/): Ownership, lifecycle, connection, event, and Tool projection boundaries. Chinese canonical source.
-- [Connector Common Protocol 3.0](https://xagent.xiagaogao.com/docs/attachments/xagent_connector_protocol/): HTTP endpoints, WebSocket packets, authentication, channels, transfers, errors, and third-party implementation requirements. Chinese canonical source with protocol identifiers in English.
-- [Connector Card JSON Schema](https://xagent.xiagaogao.com/docs/attachments/schemas/xagent.connector.v1.schema/): Machine-readable Connector capability declaration.
-- [Connection Descriptor JSON Schema](https://xagent.xiagaogao.com/docs/attachments/schemas/xagent.connection.v2.schema/): Machine-readable connection and target descriptor.
-- [Connector Packet JSON Schema](https://xagent.xiagaogao.com/docs/attachments/schemas/xagent.connector.packet.v1.schema/): Machine-readable data-plane packet envelope.
+- [Connector Architecture (English)](https://xagent.xiagaogao.com/en/docs/attachments/xagent_connection_architecture/): Ownership, lifecycle, connection, event, and Tool projection boundaries.
+- [Connector 架构（中文）](https://xagent.xiagaogao.com/docs/attachments/xagent_connection_architecture/): Connector 所有权、生命周期、连接、事件与 Tool 投影边界。
+- [Connector Common Protocol 3.0 (English)](https://xagent.xiagaogao.com/en/docs/attachments/xagent_connector_protocol/): HTTP endpoints, WebSocket packets, authentication, channels, transfers, errors, and third-party implementation requirements.
+- [Connector 公共协议 3.0（中文）](https://xagent.xiagaogao.com/docs/attachments/xagent_connector_protocol/): HTTP 端点、WebSocket 数据包、认证、通道、文件传输、错误与第三方实现要求。
+- [Connector Card JSON Schema (English)](https://xagent.xiagaogao.com/en/docs/attachments/schemas/xagent.connector.v1.schema/): Machine-readable Connector capability declaration.
+- [Connector Card JSON Schema（中文）](https://xagent.xiagaogao.com/docs/attachments/schemas/xagent.connector.v1.schema/): 机器可读的 Connector 能力声明。
+- [Connection Descriptor JSON Schema (English)](https://xagent.xiagaogao.com/en/docs/attachments/schemas/xagent.connection.v2.schema/): Machine-readable connection and target descriptor.
+- [Connection Descriptor JSON Schema（中文）](https://xagent.xiagaogao.com/docs/attachments/schemas/xagent.connection.v2.schema/): 机器可读的连接与目标描述。
+- [Connector Packet JSON Schema (English)](https://xagent.xiagaogao.com/en/docs/attachments/schemas/xagent.connector.packet.v1.schema/): Machine-readable data-plane packet envelope.
+- [Connector Packet JSON Schema（中文）](https://xagent.xiagaogao.com/docs/attachments/schemas/xagent.connector.packet.v1.schema/): 机器可读的数据面数据包封装。
 
 ## Releases and Site Indexes
 

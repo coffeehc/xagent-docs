@@ -3,6 +3,7 @@ title: Share an Idea
 description: Share product ideas, documentation feedback, Skill improvements, or partnership inquiries with the xAgent team.
 status: stable
 updated: 2026-07-29
+schemaType: ContactPage
 ---
 
 # Share an Idea

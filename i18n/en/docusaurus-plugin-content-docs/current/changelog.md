@@ -4,6 +4,7 @@ description: Review important user-facing changes, binary release contents, and 
 image: /img/share/en/xagent-overview.png
 status: stable
 updated: 2026-07-27
+schemaType: CollectionPage
 ---
 
 # Changelog

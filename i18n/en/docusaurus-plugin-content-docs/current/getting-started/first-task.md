@@ -7,7 +7,7 @@ updated: 2026-07-14
 
 # Complete Your First Task with xAgent
 
-## A Good First Task
+## Basic Usage
 
 Use this structure when you need a clear task description:
 
@@ -39,11 +39,7 @@ After submitting the task, watch for three things:
 2. Whether a tool call or approval request needs your confirmation.
 3. Whether the result is returned in the message, saved as a workspace file, or both.
 
-If the result is close but not good enough, continue in the same session:
-
-```text
-Keep the original wording for key decisions, add a risk column, and save the final result as CSV.
-```
+If the result does not meet expectations, continue in the same page with requirements such as "keep the original wording," "add a risk column," or "save the result as CSV."
 
 ## Complete Example: Organize Meeting Notes
 
@@ -92,21 +88,8 @@ meeting-actions.csv
 
 The acceptance criteria are clear: the correct source was used, key information is traceable, missing details were not invented, and both output files were saved.
 
-## What to Include
-
-A good first task usually includes:
-
-| Item | Example |
-| --- | --- |
-| Goal | Summarize this document |
-| Material | Use the file I just uploaded |
-| Constraints | Keep evidence from the original text |
-| Output | Save as Markdown and show me a short summary |
-
-The clearer the input and output are, the easier it is for xAgent to complete the task without repeated clarification.
-
 ## Related Docs
 
-- [Agent Session](/docs/user-guide/agent-session)
 - [Tasks](/docs/user-guide/task)
+- [Long-running Tasks](/docs/user-guide/long-task)
 - [Workspace Files](/docs/user-guide/workspace)

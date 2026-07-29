@@ -67,7 +67,7 @@ const config: Config = {
       {
         docs: {
           sidebarPath: './sidebars.ts',
-          showLastUpdateTime: false,
+          showLastUpdateTime: true,
         },
         blog: {
           blogTitle: 'Blog',

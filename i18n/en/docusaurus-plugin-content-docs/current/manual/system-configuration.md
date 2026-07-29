@@ -22,7 +22,7 @@ System Configuration is available only to administrators. Changes affect all use
 - Declare chat, streaming, tool-call, vision, audio, and file capabilities.
 - Test the connection before saving and keep one default model.
 
-See [Model Configuration](/en/docs/user-guide/model-config) for details.
+See [Model Configuration](/docs/user-guide/model-config) for details.
 
 ## System Config
 

@@ -3,6 +3,7 @@ title: 常见问题
 description: 解答 xAgent 安装、使用、模型配置、数据安全、Skill、Connector、架构、开发维护和测试版相关常见问题。
 status: stable
 updated: 2026-07-28
+schemaType: WebPage
 ---
 
 # 常见问题

@@ -1,83 +1,170 @@
 ---
 title: "xAgent Tool Management: Personal, Public, MCP, and Connector Tools"
-description: Understand personal and public xAgent Tools, MCP and Connector sources, availability, on-demand discovery, and task execution.
+description: Understand the sources, availability, on-demand discovery, and task invocation of personal and public xAgent Tools, MCP Tools, and Connector Tools.
 status: stable
-updated: 2026-07-15
+updated: 2026-07-29
 ---
 
 # xAgent Tool Management: Personal, Public, MCP, and Connector Tools
 
+## Who This Is For
+
+This page is for users who need xAgent to read files, access web pages, process spreadsheets, send messages, or use external capabilities.
+
 ## What It Is
 
-Tools perform concrete actions for xAgent. A Tool may read files, write outputs, fetch web pages, process PDF or Excel files, call MCP services, send messages through connectors, or handle triggers.
+A Tool is a capability that lets xAgent perform a concrete action. Ordinary users can think of Tools as the function buttons available to a work assistant: reading files, searching the web, processing spreadsheets, generating reports, calling external systems, and sending messages can all be performed through Tools.
 
-Users do not need to remember tool names. In normal use, describe the task goal in Agent Session and xAgent will choose tools when needed.
+You usually do not need to remember Tool names. Describe the action you want to complete, and xAgent will use the capabilities currently available.
 
-## My Tools and Tool Management
+![xAgent My Tools page showing Tools available to the current user, their sources, and enabled status](/img/manual/v005/en/tools.webp)
 
-Tool-related UI has two common views:
+## Entry Points and Scope
+
+Tool-related entry points are divided between user and administrator pages:
 
 | Page | Audience | Purpose |
 | --- | --- | --- |
-| My Tools | Ordinary users | View tools visible to the current user, including system tools, personal MCP tools, connector tools, and personal switches |
-| Tool Management | Administrators | Review system-level tool governance information, source, schema, availability, and risk boundaries |
+| My Tools | Ordinary users | View Tools visible to the current user, personal MCP Tools, and personal Tool switches |
+| Tool Management | Administrators | View all Tool governance information returned by the system and manage enablement, disablement, deregistration, input schemas, and output contracts |
 
-## Tool Sources
+Ordinary users mainly use **My Tools**. Administrators use **Tool Management** when they need to govern system-level capabilities.
 
-Tools may come from:
+## Public, Personal, and Connector Tools
 
-- Built-in system capabilities.
-- Personal MCP services.
-- Global MCP services configured by administrators.
-- Connectors, such as WeChat or email connectors.
-- Internal runtime capabilities loaded on demand.
+Tool visibility depends on source, connection state, user authorization, and administrator policy.
 
-The tools visible to a user depend on account permissions, MCP configuration, connector authorization, personal switches, and administrator policies.
+| Type | Common Source | Visibility Scope |
+| --- | --- | --- |
+| System / public Tool | Built-in xAgent Tools, global MCP configured by administrators, and system-level Connector Tools | Displayed according to administrator policy and current user state |
+| Personal MCP Tool | An MCP Server configured by the current user | Affects only the current user's Tool view |
+| Personal Tool switch | The current user's enable or disable choice for a visible Tool | Affects only the current user's experience |
+| Connector Tool | Tools declared by Connectors such as WeChat, email, or enterprise systems | Usually requires an installed Connector and authorization or binding by the current user |
 
-## Public and Personal Capability Boundaries
+Seeing a Tool as available does not mean it can bypass approval or access all data in an external system. External permissions, Connector state, Secrets, and approval policies still apply.
 
-Tools are not managed exactly like Skills. A Skill is a reusable method; a Tool is an executable capability.
+## When to Use It
 
-Important boundaries:
+The following tasks usually require Tools:
 
-- Public or system tools can be visible to many users, but actual execution may still depend on user authorization, keys, connector state, and approval policies.
-- Personal MCP tools belong to the current user's MCP configuration.
-- Connector tools may require the current user to complete authentication in **My Connections**.
-- Sensitive actions should be controlled by approval policies.
+- Reading Workspace files.
+- Accessing web pages or external sources.
+- Analyzing CSV, Excel, PDF, and other files.
+- Generating and saving reports.
+- Sending content to email, WeChat, or other external channels.
+- Querying external systems or handling events through Connectors.
 
-## What Administrators Should Check
+A Tool may not be necessary when the task only rewrites or summarizes text already provided in the message.
 
-For a tool to be safely available, administrators should check:
+## Reading the Page
 
-- Whether the tool source is trusted.
-- Whether input schema is clear.
-- Whether ToolResult output is understandable and does not leak secrets.
-- Whether risky actions require confirmation or approval.
-- Whether unavailable tools are shown as unavailable instead of silently failing.
-- Whether connector and MCP tools match actual external permissions.
+My Tools shows Tools visible to the current user. Tool Management shows Tool governance information from the administrator's perspective. Common information includes:
 
-## Tool Use in Agent Session
+| Information | Meaning |
+| --- | --- |
+| Tool name | The Tool's name in the system |
+| Availability | Whether the current user can use it |
+| Source | Whether the Tool comes from the system, personal MCP, a Connector, or another source |
+| Switch | Whether the Tool is enabled |
+| Description | The action the Tool can perform |
+| Details | More complete parameter and usage information |
+| Input Schema | The parameters required by the Tool |
+| ToolResult output contract | The structure and fields returned by the Tool |
+| Governance constraints | Default approval, allowed hosts, sensitive actions, connection scope, and other restrictions |
 
-In Agent Session, tool calls may appear in the timeline. They show that xAgent is performing concrete work, such as reading a file or calling an external system.
+Ordinary users should focus on availability and description, then ask xAgent to invoke the Tool directly. Advanced users can also inspect source, parameters, and risk level to fine-tune personal capabilities, while administrators manage system-level governance.
 
-Users should pay attention when a tool call:
+## Basic Usage
 
-- Sends messages externally.
-- Deletes or overwrites files.
-- Calls an internal or third-party system.
-- Uses keys, connector authorization, or sensitive data.
+### Use a Tool in a Task
 
-If an approval request appears, check the action, target, and impact before allowing it.
+Do not force an internal Tool name. Describe the action directly:
 
-## Current Built-in Tools
+```text
+Read the Excel file I just uploaded, calculate the order amount for each customer, and save the result as CSV.
+```
 
-As of July 7, 2026, the current version includes about 79 built-in Tool IDs covering session collaboration, task planning, file read/write, Excel, PDF, SQLite, web fetching, HTTP requests, email, triggers, and dynamic Skill/Tool discovery and loading.
+If you know a Tool can complete the task, you may ask xAgent to use an available Tool, but ordinary users should not need to specify internal Tool names.
 
-Some tools are internal or loaded on demand. The number ordinary users see may be smaller and depends on configuration and permissions.
+### Check Whether a Tool Is Available
+
+If a task cannot proceed, open **My Tools** and check:
+
+1. Whether the Tool appears in the list.
+2. Whether the Tool is enabled.
+3. Whether the Tool requires an external connection or Secret.
+4. Whether the current account has permission to use it.
+5. Whether an administrator disabled the capability.
+
+If the Tool is not listed, contact an administrator to enable or connect it.
+
+### Govern Tools as an Administrator
+
+In **Tool Management**, administrators should confirm:
+
+- Whether the Tool source is trusted.
+- Whether the Tool is actually available or is missing a runtime.
+- Whether the input Schema lets the model fill in parameters correctly.
+- Whether the ToolResult output contract is clear.
+- Whether it performs sensitive actions such as sending, deleting, overwriting, or making external requests.
+- Whether the default approval policy is appropriate.
+- Whether unavailable Tool projections should be disabled or deregistered.
+
+Do not assume a Tool is suitable for every user merely because it appears in the list. Tools that interact with external systems, write files, send messages, or access internal addresses should use approval policies and least-privilege configuration.
+
+### Review Tool Call Results
+
+In an Agent Session, Tool calls may appear as process cards. Check:
+
+- Whether the call succeeded.
+- Whether approval is required.
+- Whether it produced a file.
+- Whether it accessed or sent data to the correct target.
+- Which reason was reported if it failed.
+
+A Tool result is not always the final answer. xAgent usually organizes the Tool result into a user-readable response.
+
+## Common Scenarios
+
+### Read a File
+
+```text
+Read contract.pdf in the Workspace and identify risks related to payment, delivery, and breach.
+```
+
+### Generate a File
+
+```text
+Save the previous analysis as Markdown and create the file in the Workspace.
+```
+
+### Access a Web Page
+
+```text
+Open this web page, summarize the product pricing information, and list the source links.
+```
+
+### Confirm Before Sending
+
+```text
+Draft a reply based on the customer's message. Ask for confirmation before sending it.
+```
+
+## Risks and Approvals
+
+Some Tool actions may affect external systems or data security, including:
+
+- Deleting, overwriting, or moving files.
+- Sending messages to external channels.
+- Accessing internal addresses or third-party APIs.
+- Using Secrets to call external systems.
+- Creating long-running tasks or automatically triggered tasks.
+
+Approval policies may intercept these actions. When an approval appears, review the action, target, and outcome before deciding whether to allow it.
 
 ## Related Concepts
 
-- [How AI Agents Discover and Load Tools on Demand](/docs/guides/ai-agent-dynamic-tool-discovery)
+- [How AI Agents Discover and Load Tools and Skills on Demand](/docs/guides/ai-agent-dynamic-tool-discovery)
 - [Skill Management](/docs/user-guide/skill)
 - [Connectors](/docs/user-guide/connector)
 - [Approval Policies](/docs/user-guide/approval-policy)
@@ -86,4 +173,4 @@ Some tools are internal or loaded on demand. The number ordinary users see may b
 
 - [Use Tools in an Agent Session](/docs/user-guide/agent-session)
 - [Manage Workspace Files](/docs/user-guide/workspace)
-- [Find MCP configuration in the menu overview](/docs/user-guide/menu-overview)
+- [Find the Personal MCP Entry](/docs/user-guide/menu-overview)

@@ -34,4 +34,4 @@ Personal Settings affect only the current account. Global policies and service c
 - Add stricter user rules for specific tools or actions.
 - Personal rules cannot relax mandatory administrator approval boundaries.
 
-See [Approval Policies](/en/docs/user-guide/approval-policy) for the full workflow.
+See [Approval Policies](/docs/user-guide/approval-policy) for the full workflow.

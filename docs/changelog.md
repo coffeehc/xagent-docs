@@ -4,6 +4,7 @@ description: 查看 xAgent 各二进制版本面向用户的重要变化、下�
 image: /img/share/zh/xagent-overview.png
 status: stable
 updated: 2026-07-27
+schemaType: CollectionPage
 ---
 
 # 更新日志

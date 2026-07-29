@@ -55,7 +55,7 @@ If you are an ordinary user, focus on the name and description, then choose the 
 
 ### Choose an Entry Point for a Task
 
-Open [Agent Session](/docs/user-guide/agent-session), select an appropriate Agent, and then submit the task. The following rules can help:
+Open Agent Session, select an appropriate Agent, and then submit the task. The following rules can help:
 
 | Task type | Suggested choice |
 | --- | --- |

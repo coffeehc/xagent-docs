@@ -3,6 +3,7 @@ title: xAgent 使用手册
 description: 按当前 xAgent 控制台菜单查找页面说明、权限范围、关键区域和常用操作，覆盖普通用户、高级模式与管理员页面。
 status: beta
 updated: 2026-07-27
+schemaType: CollectionPage
 ---
 
 # xAgent 使用手册

@@ -7,7 +7,7 @@ updated: 2026-07-27
 
 # Feature and Menu Overview
 
-For page-by-page paths, visibility, actions, and current English UI examples, use the [xAgent User Manual](/en/docs/manual/overview).
+For page-by-page paths, visibility, actions, and current English UI examples, use the [xAgent User Manual](/docs/manual/overview).
 
 ## Who This Is For
 
