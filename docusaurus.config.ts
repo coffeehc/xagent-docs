@@ -38,8 +38,6 @@ const config: Config = {
   organizationName: 'coffeehc',
   projectName: 'xagent-docs',
 
-  clientModules: ['./src/clientModules/analytics.ts'],
-
   onBrokenLinks: 'throw',
   markdown: {
     parseFrontMatter: async (params) => {

@@ -18,7 +18,7 @@ const featureImageSizes =
 
 function responsiveImageSrcSet(source: string): string {
   const base = source.slice(0, -'.webp'.length);
-  return `${base}-720.webp 720w, ${base}-1040.webp 1040w, ${source} 1600w`;
+  return `${base}-720.webp 720w, ${base}-768.webp 768w, ${base}-1040.webp 1040w, ${source} 1600w`;
 }
 
 type Card = {
