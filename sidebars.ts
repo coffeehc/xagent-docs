@@ -206,6 +206,27 @@ const sidebars: SidebarsConfig = {
     },
     {
       type: 'category',
+      label: label('技术参考', 'Technical Reference'),
+      items: [
+        {
+          type: 'doc',
+          id: 'architecture/runtime',
+          label: label('Runtime 与 ProcessSandbox', 'Runtime and ProcessSandbox'),
+        },
+        {
+          type: 'doc',
+          id: 'user-guide/memory',
+          label: label('长期记忆', 'Long-Term Memory'),
+        },
+        {
+          type: 'doc',
+          id: 'reference/glossary',
+          label: label('术语表', 'Glossary'),
+        },
+      ],
+    },
+    {
+      type: 'category',
       label: label('附件', 'Attachments'),
       items: [
         {

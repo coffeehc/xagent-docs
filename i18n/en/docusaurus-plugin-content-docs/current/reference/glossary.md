@@ -1,8 +1,8 @@
 ---
 title: Glossary
+description: Find the standard meanings of core xAgent terms including Agent, Task, Skill, Tool, Connector, Memory, Session, Workspace, and Runtime.
 status: stable
-updated: 2026-07-27
-unlisted: true
+updated: 2026-07-30
 ---
 
 # Glossary
@@ -24,7 +24,6 @@ The glossary is the source of standardized terminology for xAgent documentation.
 | Tool | The smallest external capability an Agent can invoke |
 | Skill | A reusable set of task methods, constraints, and Tool usage guidance |
 | Connector | A protocol bridge to an external system and the source of its capability declarations |
-| RuntimeConnection | An external execution environment or executable runtime |
 | ProcessSandbox | The platform isolation boundary for untrusted processes, responsible for file mounts, environment, process trees, and resource limits |
 | Runtime Assets | Execution dependencies independently installed and verified by xAgent, then provided read-only to ProcessSandbox |
 | Execution Lease | The minimal file view, overlapping-write coordination, and file-change commit capability that WorkspaceFileService provides for one process execution |
@@ -49,4 +48,6 @@ When writing documentation:
 
 ## Related Documentation
 
-- [Terminology](/docs/getting-started/core-concepts)
+- [What Is xAgent](/docs/getting-started/what-is-xagent)
+- [Long-Term Memory](/docs/user-guide/memory)
+- [Runtime and ProcessSandbox](/docs/architecture/runtime)

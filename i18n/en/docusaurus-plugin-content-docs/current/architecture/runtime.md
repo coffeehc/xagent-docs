@@ -1,8 +1,8 @@
 ---
 title: Runtime and ProcessSandbox
+description: Learn how xAgent isolates local commands, file projections, and execution dependencies with Execution Leases, ProcessSandbox, and Runtime Assets.
 status: beta
-updated: 2026-07-27
-unlisted: true
+updated: 2026-07-30
 ---
 
 # Runtime and ProcessSandbox
@@ -87,5 +87,4 @@ ProcessSandbox Service supports concurrent calls. Each call uses an independent 
 
 - [Multi-user Workspace and Task Process Isolation](/docs/guides/multi-user-workspace-isolation)
 - [Start Installing xAgent](/docs/getting-started/install)
-- [RuntimeConnection](/docs/developer-guide/runtime-connection)
 - [Tool](/docs/user-guide/tool)

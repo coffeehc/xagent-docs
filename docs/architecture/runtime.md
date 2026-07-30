@@ -1,8 +1,8 @@
 ---
 title: Runtime 与 ProcessSandbox
+description: 了解 xAgent 如何通过 Execution Lease、ProcessSandbox 和 Runtime Assets 隔离本地命令、文件投影与执行依赖。
 status: beta
-updated: 2026-07-27
-unlisted: true
+updated: 2026-07-30
 ---
 
 # Runtime 与 ProcessSandbox
@@ -87,5 +87,4 @@ ProcessSandbox Service 支持并发调用，每次调用使用独立文件视图
 
 - [多用户工作区与任务进程隔离](/docs/guides/multi-user-workspace-isolation)
 - [开始安装](/docs/getting-started/install)
-- [RuntimeConnection](/docs/developer-guide/runtime-connection)
 - [Tool](/docs/user-guide/tool)

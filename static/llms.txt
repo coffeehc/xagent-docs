@@ -17,6 +17,7 @@ xAgent documentation is maintained as paired Chinese and English pages. Use the 
 
 - [Agent Sessions](https://xagent.xiagaogao.com/en/docs/user-guide/agent-session/): Submit goals and files, follow execution, handle approvals, and refine results.
 - [Long-running Tasks](https://xagent.xiagaogao.com/en/docs/user-guide/long-task/): Continuous server-side execution and staged delivery.
+- [Long-Term Memory](https://xagent.xiagaogao.com/en/docs/user-guide/memory/): Explicitly retain durable preferences, decisions, and boundaries across sessions, then recall them with source and freshness checks.
 - [Skills](https://xagent.xiagaogao.com/en/docs/user-guide/skill/): Create, test, publish, and update reusable task methods.
 - [Tools](https://xagent.xiagaogao.com/en/docs/user-guide/tool/): Personal and public Tools, MCP, Connector tools, discovery, and execution.
 - [Connectors](https://xagent.xiagaogao.com/en/docs/user-guide/connector/): WeChat, Telegram, Feishu, browser connections, messages, files, and health state.
@@ -30,8 +31,10 @@ xAgent documentation is maintained as paired Chinese and English pages. Use the 
 - [Dynamic Capability Discovery](https://xagent.xiagaogao.com/en/docs/guides/ai-agent-dynamic-tool-discovery/): Discover and load Skills and Tools on demand instead of loading everything into context.
 - [Approval and Safety Controls](https://xagent.xiagaogao.com/en/docs/guides/agent-approval-security/): Reduce Tool calls to governed actions, pause risky operations, approve, and resume.
 - [Workspace and Process Isolation](https://xagent.xiagaogao.com/en/docs/guides/multi-user-workspace-isolation/): Virtual workspaces, Execution Leases, ProcessSandbox, and Runtime Assets.
+- [Runtime and ProcessSandbox](https://xagent.xiagaogao.com/en/docs/architecture/runtime/): Runtime ownership, sandbox file views, resource limits, platform backends, and Runtime Assets.
 - [Multi-Agent Session Events](https://xagent.xiagaogao.com/en/docs/guides/multi-agent-session-event-collaboration/): Exchange status, tasks, and file references without crossing user boundaries.
 - [Runtime Model and Skill Switching](https://xagent.xiagaogao.com/en/docs/guides/ai-agent-runtime-hot-switching/): Change later model calls, Skills, Tools, and prompts while preserving task state.
+- [Glossary](https://xagent.xiagaogao.com/en/docs/reference/glossary/): Standard meanings for Agent, Task, Skill, Tool, Connector, Memory, Session, Workspace, and Runtime terminology.
 
 ## Connector Specifications
 

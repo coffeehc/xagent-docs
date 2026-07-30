@@ -103,7 +103,6 @@ updated: 2026-07-15
 
 ## 相关文档
 
-- [智能体](/docs/user-guide/agent)
 - [Agent会话](/docs/user-guide/agent-session)
 - [Skill 管理](/docs/user-guide/skill)
 - [Tool 管理](/docs/user-guide/tool)

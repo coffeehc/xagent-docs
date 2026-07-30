@@ -2,7 +2,7 @@
 title: 常见问题
 description: 解答 xAgent 安装、使用、模型配置、数据安全、Skill、Connector、架构、开发维护和测试版相关常见问题。
 status: stable
-updated: 2026-07-28
+updated: 2026-07-30
 schemaType: WebPage
 ---
 
@@ -76,17 +76,17 @@ curl -fsSL https://downloads.xagent.xiagaogao.com/scripts/install.sh | bash
 
 当前标记为实验性，接口可能变化。
 
-### Memory 是否可以从压缩摘要中提取？
+### 长期记忆和会话历史、上下文压缩一样吗？
 
-当前架构基线不应这样描述。Memory extraction source 应来自当前 history 的冻结切片。
+不一样。长期记忆用于跨会话延续明确保留的偏好、决策和边界；会话历史记录当前交互，上下文压缩用于让长会话继续执行。
 
-### Memory 是否直接写最终长期事实？
+### xAgent 会自动把聊天内容写入长期记忆吗？
 
-不应写成直接写入。候选和过滤阶段需要保持清晰。
+不会。只有当前用户消息明确要求记住、保存或长期保留某项信息时，xAgent 才会登记后台写入任务。完整用法见[长期记忆](/docs/user-guide/memory)。
 
-### Memory 是否会影响所有 Agent？
+### 旧记忆会覆盖当前要求吗？
 
-作用范围取决于实现和权限边界，未稳定前不做承诺。
+不会。当前用户输入、工具结果、权限和系统规则优先于旧记忆；过期、冲突或低置信度记忆也不能直接当作已确认事实。
 
 ### 是否可以把所有能力都写成 Agent 的职责？
 
@@ -100,9 +100,9 @@ curl -fsSL https://downloads.xagent.xiagaogao.com/scripts/install.sh | bash
 
 必须同步 [术语表](/docs/reference/glossary)。
 
-### SubAgent 是否一定是新的 Session？
+### SubAgent 是否使用独立 Session？
 
-不在当前文档中承诺。具体实现应以代码为准。
+当前实现通过独立子会话承载 SubAgent 的目标、状态、工具和结果，并由主会话按任务需要创建和收束。
 
 ### SubAgent 是否可以直接绕过主 Agent？
 
@@ -120,9 +120,9 @@ curl -fsSL https://downloads.xagent.xiagaogao.com/scripts/install.sh | bash
 
 通常不应。业务事实应归属于明确 owner。
 
-### Tool 错误码在哪里定义？
+### Tool 错误应该在哪里查看？
 
-未稳定前不在本文编造错误码。后续应在 [Error Codes](/docs/reference/error-codes) 中维护。
+先查看当前会话中的 Tool 结果和错误提示；部署维护者还可以结合服务日志定位。当前没有稳定的公共错误码表。
 
 ### 是否必须使用 Qwen3.6-27B？
 

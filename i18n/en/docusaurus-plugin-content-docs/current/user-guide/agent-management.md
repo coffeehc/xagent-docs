@@ -103,7 +103,6 @@ When permissions allow, ordinary users can also create personal entry points to 
 
 ## Continue Reading
 
-- [Agents](/docs/user-guide/agent)
 - [Agent Session](/docs/user-guide/agent-session)
 - [Skill Management](/docs/user-guide/skill)
 - [Tool Management](/docs/user-guide/tool)

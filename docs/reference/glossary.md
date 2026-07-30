@@ -1,8 +1,8 @@
 ---
 title: 术语表
+description: 查阅 xAgent 中 Agent、Task、Skill、Tool、Connector、Memory、Session、Workspace 和 Runtime 等核心术语的固定含义。
 status: stable
-updated: 2026-07-27
-unlisted: true
+updated: 2026-07-30
 ---
 
 # 术语表
@@ -24,7 +24,6 @@ unlisted: true
 | Tool | 可被 Agent 调用的最小外部能力 |
 | Skill | 一组可复用的任务方法、约束和工具使用规范 |
 | Connector | 连接外部系统的协议桥和能力声明来源 |
-| RuntimeConnection | 可运行的外部执行环境或执行体 |
 | ProcessSandbox | 执行不受信任进程的平台隔离边界，负责文件挂载、环境、进程树和资源限制 |
 | Runtime Assets | 由 xAgent 独立安装和校验、以只读方式提供给 ProcessSandbox 的执行依赖 |
 | Execution Lease | WorkspaceFileService 为一次进程执行提供的最小文件视图、重叠写入协调和文件变化提交能力 |
@@ -49,4 +48,6 @@ unlisted: true
 
 ## 相关文档
 
-- [核心概念](/docs/getting-started/core-concepts)
+- [什么是 xAgent](/docs/getting-started/what-is-xagent)
+- [长期记忆](/docs/user-guide/memory)
+- [Runtime 与 ProcessSandbox](/docs/architecture/runtime)

@@ -2,7 +2,7 @@
 title: Common Questions
 description: Answers to common questions about xAgent installation, usage, model configuration, data security, Skills, Connectors, architecture, development, maintenance, and beta status.
 status: stable
-updated: 2026-07-29
+updated: 2026-07-30
 schemaType: WebPage
 ---
 
@@ -76,17 +76,17 @@ It may provide one, but that is not its only responsibility.
 
 It is currently marked experimental and may change.
 
-### Can Memory be extracted from a compressed summary?
+### Is long-term Memory the same as Session history or context compression?
 
-The current architecture baseline should not be described that way. The Memory extraction source should come from a frozen slice of the current history.
+No. Long-term Memory carries explicitly retained preferences, decisions, and boundaries across Sessions. Session history records the current interaction, while context compression allows a long Session to continue.
 
-### Does Memory write final long-term facts directly?
+### Does xAgent automatically write chat content to long-term Memory?
 
-It should not be described as a direct write. Candidate generation and filtering must remain distinct stages.
+No. xAgent registers a background write only when the current user message explicitly asks it to remember, store, or retain something across Sessions. See [Long-Term Memory](/docs/user-guide/memory) for the complete usage boundaries.
 
-### Does Memory affect every Agent?
+### Can older Memory override the current request?
 
-Its scope depends on implementation and permission boundaries. No commitment is made before those boundaries stabilize.
+No. Current user input, Tool results, permissions, and system rules take priority. Stale, conflicting, or low-confidence Memory also cannot be treated directly as a confirmed fact.
 
 ### Can every capability be treated as an Agent responsibility?
 
@@ -100,9 +100,9 @@ Not necessarily. Content marked experimental may describe a target architecture 
 
 Update the [Glossary](/docs/reference/glossary) at the same time.
 
-### Is a SubAgent always a new Session?
+### Does a SubAgent use a separate Session?
 
-The current documentation does not make that commitment. Use the code as the source of truth for implementation details.
+The current implementation uses a separate sub-Session to hold a SubAgent's goal, state, Tools, and results. The main Session creates and consolidates it when the Task requires delegation.
 
 ### Can a SubAgent bypass the main Agent directly?
 
@@ -120,9 +120,9 @@ It should not be designed that way. Tool calls should occur within an explicit c
 
 Usually not. Business facts should belong to an explicit owner.
 
-### Where are Tool error codes defined?
+### Where should I inspect a Tool error?
 
-This page does not invent error codes before they stabilize. They should eventually be maintained in [Error Codes](/docs/reference/error-codes).
+Start with the Tool result and error message in the current Session. Deployment maintainers can also use service logs for diagnosis. There is no stable public error-code table yet.
 
 ### Must I use Qwen3.6-27B?
 
