@@ -11,6 +11,15 @@ const siteUrl = 'https://xagent.xiagaogao.com';
 const installerUrl =
   'https://downloads.xagent.xiagaogao.com/scripts/install.sh';
 const installerCommand = `curl -fsSL ${installerUrl} | bash`;
+const heroImageSizes =
+  '(max-width: 760px) calc(100vw - 2rem), (max-width: 1088px) calc(100vw - 3rem), 1040px';
+const featureImageSizes =
+  '(max-width: 760px) calc(100vw - 2rem), (max-width: 996px) calc(60vw - 2rem), 740px';
+
+function responsiveImageSrcSet(source: string): string {
+  const base = source.slice(0, -'.webp'.length);
+  return `${base}-720.webp 720w, ${base}-1040.webp 1040w, ${source} 1600w`;
+}
 
 type Card = {
   title: string;
@@ -62,8 +71,8 @@ const homeContent = {
     showcaseLabel: 'xAgent 中文控制台界面',
     showcaseImage: '/img/home/v005/xagent-dashboard-zh.webp',
     showcaseAlt: 'xAgent v0.0.5.beta 中文控制台仪表板',
-    showcaseWidth: 3486,
-    showcaseHeight: 2158,
+    showcaseWidth: 1600,
+    showcaseHeight: 991,
     zoomImageLabel: '点击放大图片',
     featureAction: '查看功能详情',
     featureVisualAlts: [
@@ -215,8 +224,8 @@ const homeContent = {
     showcaseLabel: 'xAgent English console interface',
     showcaseImage: '/img/home/v005/xagent-dashboard-en.webp',
     showcaseAlt: 'xAgent v0.0.5.beta English console dashboard',
-    showcaseWidth: 3484,
-    showcaseHeight: 2164,
+    showcaseWidth: 1600,
+    showcaseHeight: 994,
     zoomImageLabel: 'Click to enlarge image',
     featureAction: 'Explore this feature',
     featureVisualAlts: [
@@ -548,6 +557,8 @@ export default function Home(): ReactNode {
                 }>
                 <img
                   src={content.showcaseImage}
+                  srcSet={responsiveImageSrcSet(content.showcaseImage)}
+                  sizes={heroImageSizes}
                   alt=""
                   width={content.showcaseWidth}
                   height={content.showcaseHeight}
@@ -646,6 +657,8 @@ export default function Home(): ReactNode {
                       }>
                       <img
                         src={story.image}
+                        srcSet={responsiveImageSrcSet(story.image!)}
+                        sizes={featureImageSizes}
                         alt=""
                         width="1600"
                         height="1000"
