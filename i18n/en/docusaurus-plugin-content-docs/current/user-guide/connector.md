@@ -1,8 +1,8 @@
 ---
 title: xAgent Connectors for WeChat, Telegram, Feishu, and Browsers
-description: Learn about v0.0.5.beta Connector management, bidirectional IM messages, file transfer, health state, and extension protocols.
+description: Learn about v0.0.6.beta Connector management, bidirectional IM messages, file transfer, health state, and extension protocols.
 status: experimental
-updated: 2026-07-27
+updated: 2026-08-01
 ---
 
 # xAgent Connectors for WeChat, Telegram, Feishu, and Browsers
@@ -20,9 +20,9 @@ A Connector is the protocol bridge between xAgent and an external system. It can
 
 Compared with MCP, a Connector focuses on external events, user connections, and bidirectional channels. MCP is generally an external tool service called on demand during task execution. See [What Is a Connector?](/docs/getting-started/what-is-connector#how-is-it-different-from-mcp).
 
-## Connector Versions for v0.0.5.beta
+## Connector Versions for v0.0.6.beta
 
-The server and Connectors are released independently. The current Connector versions documented with `v0.0.5.beta` are:
+The server and Connectors are released independently. The current Connector versions documented with `v0.0.6.beta` are:
 
 | Connector | Version | Main use |
 | --- | --- | --- |

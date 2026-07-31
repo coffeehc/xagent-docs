@@ -2,7 +2,7 @@
 title: Common Questions
 description: Answers to common questions about xAgent installation, usage, model configuration, data security, Skills, Connectors, architecture, development, maintenance, and beta status.
 status: stable
-updated: 2026-07-30
+updated: 2026-08-01
 schemaType: WebPage
 ---
 
@@ -44,7 +44,7 @@ No. The documentation site is a static manual.
 
 ### Is the current release stable?
 
-The current version is `v0.0.5.beta`. It is still a beta release intended for deployment trials, scenario validation, and community feedback. The interface, Connectors, and some experimental capabilities may still change.
+The current version is `v0.0.6.beta`. It is still a beta release intended for deployment trials, scenario validation, and community feedback. The interface, Connectors, and some experimental capabilities may still change.
 
 ### How should I install or upgrade xAgent?
 
@@ -308,7 +308,7 @@ Usually not. Administrators can prepare common scenarios, dedicated Agents, Tool
 
 ### What does the free binary release mean?
 
-The free binary release is currently the `v0.0.5.beta` beta and serves as an entry point for understanding and evaluating xAgent. Users can deploy the standard version first and experience core capabilities such as Task submission, the file Workspace, Tools, Skills, and external connections.
+The free binary release is currently the `v0.0.6.beta` beta and serves as an entry point for understanding and evaluating xAgent. Users can deploy the standard version first and experience core capabilities such as Task submission, the file Workspace, Tools, Skills, and external connections.
 
 A free binary release is not the same as an open-source release. xAgent will evaluate whether to open the source or expand ecosystem collaboration based on product maturity, community feedback, security boundaries, and commercial sustainability.
 

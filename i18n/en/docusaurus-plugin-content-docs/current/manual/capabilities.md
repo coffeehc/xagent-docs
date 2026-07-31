@@ -1,22 +1,21 @@
 ---
 title: Supported Agent Capabilities
-description: See what xAgent v0.0.5.beta can do through its 50 built-in Skills, together with current file upload, parsing, preview, and output boundaries.
+description: See what xAgent v0.0.6.beta can do through its 51 built-in Skills, together with current file upload, parsing, preview, and output boundaries.
 status: beta
-updated: 2026-07-27
+updated: 2026-08-01
 ---
 
 # Supported Agent Capabilities
 
-The `v0.0.5.beta` package includes **50 built-in Skills**. They are not 50 isolated chatbots. They are reusable task methods that xAgent can discover and load dynamically. One task may combine several Skills and then use Tools, MCP, or Connectors for file processing, computation, and external actions.
+The `v0.0.6.beta` package includes **51 built-in Skills**. They are not isolated chatbots. They are reusable task methods that xAgent can discover and load dynamically. One task may combine several Skills and then use Tools, MCP, or Connectors for file processing, computation, and external actions.
 
 Use **Operations → Skills** as the source for a specific deployment. Administrators can disable bundled Skills and add personal or shared Skills.
 
 | Current measure | Value | Scope |
 | --- | ---: | --- |
-| Bundled Skills | 50 | Built-in Skill directories in `v0.0.5.beta` |
+| Bundled Skills | 51 | Built-in Skill directories in `v0.0.6.beta` |
 | Manual capability groups | 6 | A navigation aid, not a system permission model |
-| Attachments per Web session message | Up to 4 | Combined size cannot exceed 40 MB |
-| Per-file limit | Images 8 MB; text 2 MB; Office/PDF 20 MB; spreadsheets 15 MB | Current Web session upload limits |
+| Web session attachment count and size | Determined by server file capabilities | Validated by file type and upload entry point; the console shows the limit before saving |
 
 ![Agent management page in the English xAgent interface](/img/home/v005/xagent-agent-management-en.webp)
 
@@ -26,12 +25,12 @@ Use **Operations → Skills** as the source for a specific deployment. Administr
 
 ## What Tasks Are Supported
 
-The table covers all 50 currently bundled Skills. Users do not need to memorize Skill IDs. State the goal, source material, constraints, and delivery format; xAgent can discover and load suitable capabilities for the task.
+The table covers all 51 currently bundled Skills. Users do not need to memorize Skill IDs. State the goal, source material, constraints, and delivery format; xAgent can discover and load suitable capabilities for the task.
 
 | Capability area | What it can help with | Built-in Skills |
 | --- | --- | --- |
 | Research, analysis, and decision support | Deep research, multi-source synthesis, market and policy analysis, business-model and pricing analysis, investment and financial-statement research, data visualization, and football analysis | `deep-research`, `research-synthesis`, `market-research`, `policy-analysis`, `business-model-analysis`, `pricing-strategy`, `investment-research`, `financial-statement-analysis`, `data-visual-report-builder`, `football-match-analysis` |
-| Document understanding and content production | Read and compare material; create articles, official documents, knowledge-base content, meeting material, weekly reports, internal communications, SEO and social content, self-contained HTML reports, and HTML slide decks | `document-understanding`, `writing-and-editing`, `blog-writing-workflow`, `official-document-drafting`, `knowledge-base-article`, `meeting-brief`, `meeting-recap`, `weekly-report`, `internal-comms`, `seo-content-strategy`, `social-media-content`, `html-report-builder`, `html-slide-builder`, `visual-design-selector` |
+| Document understanding and content production | Read and compare material; create articles, official documents, knowledge-base content, meeting material, weekly reports, internal communications, SEO and social content, self-contained HTML reports, slide decks, and template-based Word documents | `document-understanding`, `writing-and-editing`, `blog-writing-workflow`, `official-document-drafting`, `knowledge-base-article`, `meeting-brief`, `meeting-recap`, `weekly-report`, `internal-comms`, `seo-content-strategy`, `social-media-content`, `html-report-builder`, `html-slide-builder`, `visual-design-selector`, `word-document-builder` |
 | Product, project, and process work | Product discovery, requirements, solution briefs, project plans, process improvement, AI workflow design, training material, and personal productivity planning | `product-discovery`, `product-requirements`, `solution-brief`, `project-management`, `operations-process-improvement`, `ai-workflow-automation`, `learning-and-training`, `personal-productivity` |
 | Marketing, sales, and customer operations | Campaign planning, sales outreach, CRM pipeline review, customer success, customer support, ecommerce operations, and growth experiments | `marketing-campaign`, `sales-outreach`, `crm-pipeline-management`, `customer-success`, `customer-support`, `ecommerce-operations`, `growth-experimentation` |
 | Finance, legal, procurement, and people work | Receivables follow-up, budgeting, contract and compliance review, procurement and vendor evaluation, RFP responses, recruiting, performance material, and job-search preparation | `accounts-receivable-collections`, `budget-and-forecasting`, `contract-review`, `compliance-review`, `procurement-and-vendor-management`, `rfp-proposal-response`, `recruiting-and-hiring`, `performance-review`, `resume-and-interview-prep` |
@@ -54,7 +53,7 @@ The Web session upload control currently accepts these formats:
 
 | File category | Upload formats | How xAgent handles them |
 | --- | --- | --- |
-| Images | `.png`, `.jpg`, `.jpeg`, `.webp`, `.gif` | Creates a preview and uses the image for recognition or analysis when the model supports vision input |
+| Images | `.png`, `.jpg`, `.jpeg`, `.webp` | Creates a preview and uses the image for recognition or analysis when the model supports vision input |
 | PDF | `.pdf` | Extracts readable content by page and builds an index; Workspace supports PDF preview |
 | Word | `.docx` | Extracts headings, paragraphs, and tables; the preview shows extracted text, not native Word layout |
 | PowerPoint | `.pptx` | Extracts slide titles, body text, tables, and notes; this is not native slide rendering |
@@ -74,9 +73,10 @@ The Web session upload control currently accepts these formats:
 | XLSX | Created or modified through spreadsheet Tools; availability depends on the Tools and runtime visible to the account |
 | Self-contained HTML reports | `html-report-builder` creates responsive, offline reports designed for printing |
 | HTML slide decks | `html-slide-builder` creates browser-based presentations; it is not a PPTX editor or exporter |
+| DOCX | `word-document-builder` can create a new Word document from a built-in or user-provided template and render it for validation before delivery; availability depends on the capabilities visible to the account |
 | PDF | Current Tools can inspect, validate, merge, extract pages from, and optimize PDFs; converting an HTML artifact into a final PDF still depends on an available conversion tool and actual validation |
 
-The bundled Skills do **not promise native DOCX or PPTX generation or editing**. Use a dedicated Office toolchain and inspect the final file when the task must preserve complex layout, macros, comments, tracked changes, animation, or formula recalculation.
+`word-document-builder` supports creating a new DOCX from a template, replacing a template body, or filling existing placeholders, with rendering checks before delivery. It does not promise arbitrary native DOCX/PPTX in-place editing, tracked changes, comments, macros, automatic tables of contents, embedded fonts, or pixel-identical rendering across systems. Use a dedicated Office toolchain and inspect the final file when those capabilities are required.
 
 ## Boundaries
 

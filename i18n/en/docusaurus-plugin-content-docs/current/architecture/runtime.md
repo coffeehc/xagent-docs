@@ -13,7 +13,7 @@ This page is for developers and deployment administrators who need to understand
 
 ## Current Implementation
 
-`v0.0.5.beta` includes a local Runtime execution chain; it is no longer only a planned concept. Three owners collaborate on each command execution:
+`v0.0.6.beta` includes a local Runtime execution chain; it is no longer only a planned concept. Three owners collaborate on each command execution:
 
 | Owner | Responsibility |
 | --- | --- |

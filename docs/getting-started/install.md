@@ -1,9 +1,9 @@
 ---
 title: 开始安装 xAgent
-description: 从服务器运行安装脚本到完成首次系统初始化，按步骤安装并验证 xAgent v0.0.5.beta。
+description: 从服务器运行安装脚本到完成首次系统初始化，按步骤安装并验证 xAgent v0.0.6.beta。
 image: /img/getting-started/v005/install-terminal.webp
 status: beta
-updated: 2026-07-28
+updated: 2026-08-01
 ---
 
 # 开始安装 xAgent
@@ -51,7 +51,7 @@ curl -fsSL https://downloads.xagent.xiagaogao.com/scripts/install.sh \
 xagent version
 ```
 
-当前目标版本应为 `0.0.5.beta`。Linux 还可以检查服务状态：
+当前目标版本应为 `0.0.6.beta`。安装命令保持不变，安装器会读取当前发布目录。Linux 还可以检查服务状态：
 
 ```bash
 sudo systemctl status xagent-server

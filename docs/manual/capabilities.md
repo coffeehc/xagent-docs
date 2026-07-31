@@ -1,22 +1,21 @@
 ---
 title: 支持的智能体功能
-description: 了解 xAgent v0.0.5.beta 根据 50 个内置 Skill 可以完成的任务，以及文件上传、解析、预览和产物格式的当前边界。
+description: 了解 xAgent v0.0.6.beta 根据 51 个内置 Skill 可以完成的任务，以及文件上传、解析、预览和产物格式的当前边界。
 status: beta
-updated: 2026-07-27
+updated: 2026-08-01
 ---
 
 # 支持的智能体功能
 
-`v0.0.5.beta` 源码随包内置 **50 个 Skill**。它们不是 50 个彼此隔离的聊天机器人，而是 50 套可按任务动态发现和加载的工作方法。一个任务可以组合多个 Skill，再调用 Tool、MCP 或 Connector 完成文件处理、数据计算和外部动作。
+`v0.0.6.beta` 源码随包内置 **51 个 Skill**。它们不是彼此隔离的聊天机器人，而是可按任务动态发现和加载的工作方法。一个任务可以组合多个 Skill，再调用 Tool、MCP 或 Connector 完成文件处理、数据计算和外部动作。
 
 实际部署中的可用列表以“运行治理 → Skill”页面为准。管理员可以停用内置 Skill，也可以增加个人或公共 Skill。
 
 | 当前数据 | 数值 | 口径 |
 | --- | ---: | --- |
-| 随包内置 Skill | 50 个 | `v0.0.5.beta` 内置 Skill 目录 |
+| 随包内置 Skill | 51 个 | `v0.0.6.beta` 内置 Skill 目录 |
 | 手册能力分组 | 6 类 | 为便于查找而归纳，不是系统权限分类 |
-| 单条 Web 会话消息附件 | 最多 4 个 | 所有附件合计不超过 40 MB |
-| 单文件上限 | 图片 8 MB；文本 2 MB；Office/PDF 20 MB；表格 15 MB | Web 会话上传界面的当前限制 |
+| Web 会话附件数量与大小 | 以服务端文件能力为准 | 按文件类型和上传入口校验，控制台会在保存前提示限制 |
 
 ![xAgent 中文界面的智能体管理图例](/img/home/v005/xagent-agent-management-zh.webp)
 
@@ -26,12 +25,12 @@ updated: 2026-07-27
 
 ## 可以完成哪些任务
 
-下表完整覆盖当前 50 个内置 Skill。用户不需要记住 Skill ID，直接说明目标、材料、约束和交付格式即可；xAgent 会按任务发现和加载合适能力。
+下表完整覆盖当前 51 个内置 Skill。用户不需要记住 Skill ID，直接说明目标、材料、约束和交付格式即可；xAgent 会按任务发现和加载合适能力。
 
 | 能力方向 | 可以做什么 | 内置 Skill |
 | --- | --- | --- |
 | 研究、分析与决策支持 | 深度调研、多来源证据综合、市场与政策分析、商业模式和定价分析、投研与财务报表分析、数据可视化、足球赛事分析 | `deep-research`、`research-synthesis`、`market-research`、`policy-analysis`、`business-model-analysis`、`pricing-strategy`、`investment-research`、`financial-statement-analysis`、`data-visual-report-builder`、`football-match-analysis` |
-| 文档理解与内容生产 | 阅读和比较材料，生成文章、公文、知识库、会议材料、周报、内部沟通、SEO 与社交内容，以及自包含 HTML 报告和幻灯片 | `document-understanding`、`writing-and-editing`、`blog-writing-workflow`、`official-document-drafting`、`knowledge-base-article`、`meeting-brief`、`meeting-recap`、`weekly-report`、`internal-comms`、`seo-content-strategy`、`social-media-content`、`html-report-builder`、`html-slide-builder`、`visual-design-selector` |
+| 文档理解与内容生产 | 阅读和比较材料，生成文章、公文、知识库、会议材料、周报、内部沟通、SEO 与社交内容，以及自包含 HTML 报告、幻灯片和模板化 Word 文档 | `document-understanding`、`writing-and-editing`、`blog-writing-workflow`、`official-document-drafting`、`knowledge-base-article`、`meeting-brief`、`meeting-recap`、`weekly-report`、`internal-comms`、`seo-content-strategy`、`social-media-content`、`html-report-builder`、`html-slide-builder`、`visual-design-selector`、`word-document-builder` |
 | 产品、项目与流程 | 产品探索、需求文档、方案简报、项目计划、流程改进、AI 工作流设计、培训材料和个人效率规划 | `product-discovery`、`product-requirements`、`solution-brief`、`project-management`、`operations-process-improvement`、`ai-workflow-automation`、`learning-and-training`、`personal-productivity` |
 | 市场、销售与客户运营 | 营销活动、销售触达、CRM 管道梳理、客户成功、客户支持、电商运营和增长实验 | `marketing-campaign`、`sales-outreach`、`crm-pipeline-management`、`customer-success`、`customer-support`、`ecommerce-operations`、`growth-experimentation` |
 | 财务、法务、采购与人才 | 应收跟进、预算预测、合同与合规审查、采购与供应商评估、RFP 响应、招聘、绩效材料和求职准备 | `accounts-receivable-collections`、`budget-and-forecasting`、`contract-review`、`compliance-review`、`procurement-and-vendor-management`、`rfp-proposal-response`、`recruiting-and-hiring`、`performance-review`、`resume-and-interview-prep` |
@@ -54,7 +53,7 @@ Web 会话的上传入口当前接受以下格式：
 
 | 文件类别 | 当前可上传格式 | xAgent 的处理方式 |
 | --- | --- | --- |
-| 图片 | `.png`、`.jpg`、`.jpeg`、`.webp`、`.gif` | 生成可预览图片，并在模型支持视觉输入时用于识别和分析 |
+| 图片 | `.png`、`.jpg`、`.jpeg`、`.webp` | 生成可预览图片，并在模型支持视觉输入时用于识别和分析 |
 | PDF | `.pdf` | 按页提取可读文本并建立索引；工作区支持 PDF 预览 |
 | Word | `.docx` | 提取标题、段落和表格为可读内容；预览的是提取文本，不是 Word 原版式 |
 | PowerPoint | `.pptx` | 按幻灯片提取标题、正文、表格和备注；不等同于原版幻灯片渲染 |
@@ -74,9 +73,10 @@ Web 会话的上传入口当前接受以下格式：
 | XLSX | 由表格 Tool 创建或修改；是否可用取决于当前账号可见 Tool 和执行环境 |
 | 自包含 HTML 报告 | `html-report-builder` 生成可离线打开、响应式且适合打印的报告 |
 | HTML 幻灯片 | `html-slide-builder` 生成浏览器演示文稿；它不是 PPTX 编辑器或 PPTX 导出器 |
+| DOCX | `word-document-builder` 可基于内置或用户提供模板创建新的 Word 文档，并在交付前渲染验证；具体可用性取决于当前账号可见能力 |
 | PDF | 当前 Tool 可检查、验证、合并、抽取页面和优化 PDF；把 HTML 产物转换成最终 PDF 仍取决于当前可用转换工具和实际验证 |
 
-当前内置 Skill **不承诺生成或编辑原生 DOCX/PPTX 文件**。需要保留复杂 Office 版式、宏、批注、修订记录、动画或公式重算时，应使用专门的 Office 工具链并检查最终文件。
+`word-document-builder` 支持基于模板创建新的 DOCX、替换模板正文或填充已有占位符，并在交付前进行渲染检查；它不承诺任意原生 DOCX/PPTX 的就地编辑、修订记录、批注、宏、自动目录、嵌入字体或跨系统像素级一致渲染。需要这些能力时，应使用专门的 Office 工具链并检查最终文件。
 
 ## 使用边界
 

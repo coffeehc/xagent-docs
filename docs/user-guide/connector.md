@@ -1,8 +1,8 @@
 ---
 title: xAgent 连接器管理：微信、Telegram、飞书与浏览器
-description: 了解 v0.0.5.beta 的 Connector 管理、IM 双向消息、文件传输、健康状态与扩展协议。
+description: 了解 v0.0.6.beta 的 Connector 管理、IM 双向消息、文件传输、健康状态与扩展协议。
 status: experimental
-updated: 2026-07-27
+updated: 2026-08-01
 ---
 
 # xAgent 连接器管理：微信、Telegram、飞书与浏览器
@@ -20,9 +20,9 @@ Connector 是 xAgent 与外部系统之间的协议桥。它既可以把微信�
 
 与 MCP 相比，Connector 更强调外部事件、用户连接和双向通道；MCP 更偏向任务执行时按需调用外部工具。详细区别见[什么是连接器](/docs/getting-started/what-is-connector#它和-mcp-有什么区别)。
 
-## v0.0.5.beta 的连接器版本
+## v0.0.6.beta 的连接器版本
 
-服务端版本与 Connector 版本独立发布。`v0.0.5.beta` 文档对应的当前 Connector 版本是：
+服务端版本与 Connector 版本独立发布。`v0.0.6.beta` 文档对应的当前 Connector 版本是：
 
 | Connector | 版本 | 主要用途 |
 | --- | --- | --- |

@@ -3,7 +3,7 @@ title: How to Host an AI Agent on Your Own Server
 description: A practical self-hosted AI agent setup guide covering server preparation, model access, HTTPS, workspace isolation, connectors, backups, and long-running tasks.
 image: /img/share/en/xagent-security.png
 status: beta
-updated: 2026-07-27
+updated: 2026-08-01
 ---
 
 # How to Host an AI Agent on Your Own Server
@@ -48,7 +48,7 @@ The current version uses embedded SQLite by default, so the first deployment doe
 
 ### 1. Install and Start the Server
 
-Run the [official installer](/docs/getting-started/install). It detects the system and architecture, verifies release packages, and installs `v0.0.5.beta`. On Linux it configures and starts a systemd service; on macOS it installs under the current user.
+Run the [official installer](/docs/getting-started/install). It detects the system and architecture, verifies release packages, and installs `v0.0.6.beta`. On Linux it configures and starts a systemd service; on macOS it installs under the current user.
 
 ### 2. Configure and Validate a Model
 

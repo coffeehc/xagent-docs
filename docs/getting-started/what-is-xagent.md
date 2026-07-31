@@ -3,7 +3,7 @@ title: xAgent 产品介绍与核心能力
 description: 用大白话了解 xAgent 是什么、能做什么，以及它和普通聊天助手有什么不同。
 image: /img/share/zh/xagent-overview.png
 status: stable
-updated: 2026-07-29
+updated: 2026-08-01
 ---
 
 # xAgent 产品介绍与核心能力
@@ -16,7 +16,7 @@ xAgent 更像一个**AI 门户和 AI 基座**：它为员工提供统一的 AI �
 
 xAgent 不要求团队更换原有系统，也不会凭空扩大用户权限。它负责理解任务、组织执行和汇总结果；每个系统能访问什么，仍由该系统的账号和授权决定。
 
-当前版本是 `v0.0.5.beta` 测试版，适合部署体验、场景验证和反馈。
+当前版本是 `v0.0.6.beta` 测试版，适合部署体验、场景验证和反馈。
 
 ## 为什么要用 xAgent
 

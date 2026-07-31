@@ -10,7 +10,7 @@ updated: 2026-07-27
 
 Separate user directories are not sufficient when multiple users share an AI Agent service. The platform must independently control file ownership, Session write scope, operating-system process mounts, and resource consumption.
 
-`v0.0.5.beta` combines four boundaries:
+`v0.0.6.beta` combines four boundaries:
 
 1. User and Session authorization establish file ownership.
 2. The virtual workspace determines what a page or Tool can see.

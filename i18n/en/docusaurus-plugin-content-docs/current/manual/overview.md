@@ -2,13 +2,13 @@
 title: xAgent User Manual
 description: Find page guidance, permission scopes, key areas, and common operations by following the current xAgent console menu, covering ordinary users, advanced mode, and administrator pages.
 status: beta
-updated: 2026-07-29
+updated: 2026-08-01
 schemaType: CollectionPage
 ---
 
 # xAgent User Manual
 
-This manual corresponds to the `v0.0.5.beta` console and is organized by page rather than by concept. Each page explains its menu entry, visibility scope, key areas, and common operations, with screenshots from the current interface.
+This manual corresponds to the `v0.0.6.beta` console and is organized by page rather than by concept. Each page explains its menu entry, visibility scope, key areas, and common operations, with screenshots from the current interface.
 
 ## How to Use This Manual
 
@@ -18,7 +18,7 @@ This manual corresponds to the `v0.0.5.beta` console and is organized by page ra
 | User with advanced mode enabled | [Operations](/docs/manual/operations) | Manage Triggers, Agents, Skills, Tools, MCP, connections, and Secrets |
 | Administrator | [User Management](/docs/manual/user-management), [Analytics](/docs/manual/analytics), [Agent Governance](/docs/manual/agent-governance), and [System Configuration](/docs/manual/system-configuration) | Manage global resources, execution environments, and system configuration |
 
-![xAgent v0.0.5.beta console dashboard example](/img/home/v005/xagent-dashboard-en.webp)
+![xAgent current console dashboard example](/img/home/v005/xagent-dashboard-en.webp)
 
 > **About the screenshots**
 >
@@ -30,7 +30,7 @@ This manual corresponds to the `v0.0.5.beta` console and is organized by page ra
 
 ### Agent Capabilities
 
-- [50 built-in Skills, supported tasks, and document-processing scope](/docs/manual/capabilities)
+- [51 built-in Skills, supported tasks, and document-processing scope](/docs/manual/capabilities)
 
 ### Workspace
 

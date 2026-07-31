@@ -3,13 +3,49 @@ title: Changelog
 description: Review important user-facing changes, binary release contents, and upgrade notes for each xAgent release.
 image: /img/share/en/xagent-overview.png
 status: stable
-updated: 2026-07-27
+updated: 2026-08-01
 schemaType: CollectionPage
 ---
 
 # Changelog
 
 This page records important installation, usage, and safety-governance changes in xAgent binary releases. xAgent remains in beta, and features, interfaces, and protocols may continue to change.
+
+## `v0.0.6.beta` - 2026-08-01
+
+[View installation instructions](/docs/getting-started/install)
+
+### Files and Attachments
+
+- Session attachments and Workspace files now use one receive flow. Files that fail format, size, or content parsing checks do not leave unusable records behind.
+- Supported uploads include DOCX, text-extractable PDF, PPTX, XLSX, CSV, TSV, static HTML, Markdown, common text and source files, and PNG, JPEG, and WebP images.
+- Server-side capabilities determine upload limits by file type and entry point, with clear errors before saving. The console no longer relies on fixed client-side limits or one universal maximum.
+- Small text can be read directly. Large documents expose page, worksheet, slide, or section locations so a task can read only what it needs instead of filling the context at once.
+- Word and HTML retain semantic structure where possible; PDFs, spreadsheets, and presentations retain page, worksheet, and slide locations.
+- Fixed Workspace files that appeared to exist but could not be read, plus downloads with Chinese characters or spaces in their filenames.
+- GIF, legacy Office files, encrypted documents, and scanned PDFs without a text layer are not supported for upload yet.
+
+### Word Documents and Fonts
+
+- Added a built-in Word template catalog and default template. `.docx` files can use built-in or user-provided templates while retaining template styles, headers, footers, and placeholders.
+- Document creation completes the full content before creating the file, then validates delivery through DOCX-to-PDF and page rendering checks for pagination, fonts, spacing, tables, and clipping.
+- Added shared font resources, initially including Noto Sans SC, Noto Serif SC, and Noto Sans Mono CJK SC. Administrators can add local fonts or register internal online fonts with integrity checks.
+
+### Sub-sessions, Models, and Runtime
+
+- New sub-sessions now initialize orchestration and capability selection automatically without an extra approval. The release also avoids duplicate capability loads, repeated delegated work, and duplicate result delivery.
+- Improved model request-cache stability in ongoing sessions, configuration compatibility for OpenAI, Anthropic, and Gemini, and configuration change activation.
+- Python dependencies are installed in a user-shared location while built-in runtime resources remain read-only. CLI output hides host and temporary paths and enables pipeline failure detection by default.
+
+### Updates and Stability
+
+- Supported managed installations can download, switch, and restart from the console after a new version is detected, with automatic rollback after a failed health check.
+- Older OpenAI model configurations are adapted during upgrade, and one damaged or unrecognized legacy file no longer blocks startup.
+- User-data formatting more completely removes triggers, sessions, attachments, Workspaces, and related runtime data. Accounts, model usage, and explicitly retained external connections are unaffected.
+
+### Upgrade Notes
+
+Back up the xAgent runtime directory, configuration, database, and Connector state before upgrading. Run the existing installer command to check for and install `v0.0.6.beta`; it preserves configuration and state and records the active and previous binary versions. See [Start Installation](/docs/getting-started/install).
 
 ## `v0.0.5.beta` - 2026-07-27
 
@@ -59,7 +95,7 @@ This release upgrades the console experience, real-time Connector interaction, t
 
 ### Upgrade Notes
 
-Back up the xAgent runtime directory, configuration, database, and Connector state before upgrading. Run the installer again to check for and install `v0.0.5.beta`; it preserves configuration and state and records the active and previous binary versions. See [Start Installation](/docs/getting-started/install).
+When this release shipped, rerunning the installer checked for and installed `v0.0.5.beta`. For current upgrades, use the `v0.0.6.beta` [Upgrade Notes](#upgrade-notes).
 
 ## `v0.0.4.beta` - 2026-07-15
 
@@ -117,10 +153,10 @@ Each archive contains only the xAgent executable, README, and version metadata. 
 
 ### Upgrade Method at the Time
 
-`v0.0.4.beta` required a stopped service, backup, and manual binary replacement. The current `v0.0.5.beta` installer provides automated installation, upgrades, and rollback after failed activation. See [Start Installation](/docs/getting-started/install).
+`v0.0.4.beta` required a stopped service, backup, and manual binary replacement. The current installer provides automated installation, upgrades, and rollback after failed activation. See [Start Installation](/docs/getting-started/install).
 
 ## `v0.0.3.beta`
 
 This earlier public beta improved Connector integration, added the Telegram Connector, expanded the user manual, and established the initial safety-governance workflow.
 
-New deployments and upgrades should use the current installer and the `v0.0.5.beta` release catalog.
+New deployments and upgrades should use the current installer and the `v0.0.6.beta` release catalog.
