@@ -142,42 +142,42 @@ const homeContent = {
       {
         title: 'Skill 与 Tool',
         description: '内置 Skill 覆盖报告、研究、写作、合规、财务、客服、项目管理等场景；Tool 覆盖文件、表格、PDF、网页、邮件、触发器等动作。',
-        to: '/docs/getting-started/what-is-xagent#skill-与-tool',
+        to: '/docs/manual/capabilities',
       },
       {
         title: '动态加载能力',
         description: '会话默认具备发现和加载 Skill、Tool 的能力，按需补齐上下文，避免一次性加载全部能力。',
-        to: '/docs/getting-started/what-is-xagent#动态能力',
+        to: '/docs/guides/ai-agent-dynamic-tool-discovery',
       },
       {
         title: '连接器',
         description: '微信、Telegram 与飞书连接器支持双向文本、文件、流式状态和活动提示；浏览器也可以作为受控连接入口。',
-        to: '/docs/getting-started/what-is-xagent#连接器',
+        to: '/docs/user-guide/connector',
       },
       {
         title: '会话事件总线',
         description: '外部接口、触发器、连接器和会话都可以发起事件，经队列投递到目标智能体会话。',
-        to: '/docs/getting-started/what-is-xagent#会话事件总线与会话间通讯',
+        to: '/docs/guides/multi-agent-session-event-collaboration',
       },
       {
         title: '安全治理',
         description: '工作区和命令执行使用分层隔离，密钥使用占位符，敏感动作可由审批策略控制，外部连接和会话通讯都有边界。',
-        to: '/docs/getting-started/what-is-xagent#安全治理',
+        to: '/docs/guides/agent-approval-security',
       },
       {
         title: '自定义智能体',
         description: '可以按任务场景创建专用入口，组合 Skill、Tool、连接器和审批策略，沉淀团队自己的工作助手。',
-        to: '/docs/getting-started/what-is-xagent#如何实现别的智能体功能',
+        to: '/docs/user-guide/agent-management',
       },
       {
         title: '任务微调',
         description: '任务执行过程中可以调整目标、提示词、Skill、Tool 和模型，让当前任务尽量达到最佳状态。',
-        to: '/docs/getting-started/what-is-xagent#任务微调',
+        to: '/docs/user-guide/agent-session#高级设置与任务微调',
       },
       {
         title: '私有化部署',
         description: '当前测试版支持 5 个用户免费使用，暂无官方 SaaS 计划；推荐部署在自己的服务器和数据环境中。',
-        to: '/docs/getting-started/what-is-xagent#发布定位',
+        to: '/docs/guides/self-hosted-ai-agent',
       },
     ] satisfies Card[],
     guideCards: [
@@ -295,22 +295,22 @@ const homeContent = {
       {
         title: 'Skills and Tools',
         description: 'Skills capture reusable task methods. Tools perform concrete actions such as file processing, web fetching, report creation, messaging, and triggers.',
-        to: '/docs/getting-started/what-is-xagent#skills-and-tools',
+        to: '/docs/manual/capabilities',
       },
       {
         title: 'Connectors and MCP',
         description: 'WeChat, Telegram, and Feishu connectors support bidirectional text, files, streaming updates, and activity state. Browser connections provide another governed entry point.',
-        to: '/docs/getting-started/what-is-xagent#connectors',
+        to: '/docs/user-guide/connector',
       },
       {
         title: 'Safety model',
         description: 'xAgent combines workspace isolation, ProcessSandbox execution, key placeholders, approval rules, connector boundaries, and no cross-user session communication.',
-        to: '/docs/getting-started/what-is-xagent#safety-governance',
+        to: '/docs/guides/agent-approval-security',
       },
       {
         title: 'User model',
         description: 'The current user model is flat. External business data permissions should remain with the systems that own that data.',
-        to: '/docs/getting-started/what-is-xagent#user-model',
+        to: '/docs/getting-started/what-is-xagent#what-it-does-not-replace',
       },
       {
         title: 'Built-in Skill files',
@@ -320,7 +320,7 @@ const homeContent = {
       {
         title: 'Release positioning',
         description: 'The current beta is free for up to five users and is intended for evaluation, deployment trials, and task workflow validation.',
-        to: '/docs/getting-started/what-is-xagent#release-positioning',
+        to: '/docs/getting-started/what-is-xagent#the-short-version',
       },
     ] satisfies Card[],
     guideCards: [
@@ -402,9 +402,7 @@ export default function Home(): ReactNode {
     },
     {
       ...content.highlightCards[3],
-      to: isEnglish
-        ? '/docs/getting-started/what-is-xagent#safety-governance'
-        : '/docs/getting-started/what-is-xagent#安全治理',
+      to: '/docs/guides/agent-approval-security',
       image: `/img/home/v005/xagent-security-policy-${manualLocale}.webp`,
       imageAlt: content.featureVisualAlts[4],
     },
@@ -559,7 +557,7 @@ export default function Home(): ReactNode {
                   src={content.showcaseImage}
                   srcSet={responsiveImageSrcSet(content.showcaseImage)}
                   sizes={heroImageSizes}
-                  alt=""
+                  alt={content.showcaseAlt}
                   width={content.showcaseWidth}
                   height={content.showcaseHeight}
                   decoding="async"
@@ -659,7 +657,7 @@ export default function Home(): ReactNode {
                         src={story.image}
                         srcSet={responsiveImageSrcSet(story.image!)}
                         sizes={featureImageSizes}
-                        alt=""
+                        alt={story.imageAlt}
                         width="1600"
                         height="1000"
                         loading="lazy"

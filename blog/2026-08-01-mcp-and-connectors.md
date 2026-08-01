@@ -11,6 +11,8 @@ image: /img/share/zh/xagent-connectors.png
 
 简单说，MCP 更接近“任务执行时可调用的工具”；连接器更接近“带着用户身份、消息和事件进入系统的双向通道”。把两者区分清楚，才能避免把账号授权、消息入口和工具调用混在同一层。
 
+![xAgent 连接器管理界面，显示外部通道、连接状态和管理入口](/img/home/v005/xagent-connectors-zh.webp)
+
 {/* truncate */}
 
 ## 先看一个实际任务

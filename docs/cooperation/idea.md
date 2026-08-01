@@ -14,10 +14,10 @@ schemaType: ContactPage
 
 | 适合公开讨论的内容 | 需要直接联系的内容 |
 | --- | --- |
-| 产品问题、功能建议、文档错漏、Skill 改进 | 合作意向、非公开场景、包含内部背景的沟通 |
-| [提交 Issue](https://github.com/coffeehc/xagent-releases/issues/new) | [发送邮件](mailto:data@yaoankeji.com) |
+| 使用交流、功能建议、文档错漏、Skill 改进 | Bug、合作意向、非公开场景或包含内部背景的沟通 |
+| [前往社区讨论](/docs/community/discussions) | [提交 Issue](https://github.com/coffeehc/xagent-releases/issues/new) 或 [发送邮件](mailto:data@yaoankeji.com) |
 
-公开反馈便于持续跟踪讨论和处理进度。邮件适合不便公开的背景说明，但请不要在任何渠道发送真实密钥、token、验证码、客户数据或其他不必要的敏感信息。
+社区讨论适合沉淀使用经验和产品建议；Issue 只用于可复现的问题和发布包、安装故障。邮件适合不便公开的背景说明，但请不要在任何渠道发送真实密钥、token、验证码、客户数据或其他不必要的敏感信息。
 
 ## 提交建议时请说明
 

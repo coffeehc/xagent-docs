@@ -34,7 +34,7 @@ You can review built-in Skill text, templates, references, and examples there, t
 - Safety comes first for teams and companies. Depending on the actual severity of Skill security risks, xAgent may later evaluate a unified Skill Marker or similar mechanism for centralized marking, review, and management.
 - A Skill should not depend on a particular third-party MCP, private service, or external account capability. When an external system is needed, describe the business goal, required information, and authorization boundary; leave the concrete integration to xAgent Tool, MCP, or Connector configuration.
 - Do not put real keys, customer data, internal addresses, tokens, verification codes, or one-off business material into a Skill.
-- Use the [Share an Idea](/docs/cooperation/idea) page to choose the appropriate channel for a problem report or improvement proposal.
+- Use [Community Discussions](/docs/community/discussions) to describe the real scenario and proposed improvement.
 
 ## How to Modify a Skill
 
@@ -48,7 +48,7 @@ Use this order when editing:
 4. Confirm that every resource mentioned in `SKILL.md` exists.
 5. Do not add real sensitive business information.
 6. If the change is intended for a product release, update `meta.version` in `SKILL.md`.
-7. Use the [Share an Idea](/docs/cooperation/idea) page to explain the problem, real scenario, and proposed change.
+7. Use [Community Discussions](/docs/community/discussions) to explain the problem, real scenario, and proposed change.
 
 ## Current Coverage
 

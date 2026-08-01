@@ -35,6 +35,10 @@
     "message": "Share an Idea",
     "description": "The label of footer link with label=我有一个想法 linking to /docs/cooperation/idea"
   },
+  "link.item.label.社区讨论": {
+    "message": "Community",
+    "description": "The label of footer link with label=社区讨论 linking to /docs/community/discussions"
+  },
   "link.item.label.联系我们": {
     "message": "Contact Us",
     "description": "The label of footer mail link with label=联系我们"

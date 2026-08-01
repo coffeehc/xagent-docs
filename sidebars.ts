@@ -263,6 +263,17 @@ const sidebars: SidebarsConfig = {
       ],
     },
     {
+      type: 'category',
+      label: label('社区讨论', 'Community'),
+      items: [
+        {
+          type: 'doc',
+          id: 'community/discussions',
+          label: label('参与讨论', 'Join the Discussion'),
+        },
+      ],
+    },
+    {
       type: 'doc',
       id: 'changelog',
       label: label('更新日志', 'Changelog'),

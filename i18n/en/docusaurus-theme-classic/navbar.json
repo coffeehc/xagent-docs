@@ -18,5 +18,9 @@
   "item.label.行业观察": {
     "message": "Insights",
     "description": "Navbar item with label 行业观察"
+  },
+  "item.label.社区讨论": {
+    "message": "Community",
+    "description": "Navbar item with label 社区讨论"
   }
 }

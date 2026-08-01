@@ -11,6 +11,8 @@ Many people first try an AI Agent as a desktop tool. That works well for experim
 
 This article is not about choosing a particular model. It explains when a personal computer is sufficient, when a server-side deployment is the better fit, and why teams that depend on Agents for ongoing work usually need a long-running service.
 
+![The xAgent server-side dashboard showing centralized model usage, Sessions, and Tool calls](/img/home/v005/xagent-dashboard-en.webp)
+
 {/* truncate */}
 
 ## The Core Difference Between the Two Models

@@ -3,6 +3,8 @@ import path from 'node:path';
 
 const chineseRoot = 'docs';
 const englishRoot = 'i18n/en/docusaurus-plugin-content-docs/current';
+const chineseBlogRoot = 'blog';
+const englishBlogRoot = 'i18n/en/docusaurus-plugin-content-blog';
 
 function listMarkdownFiles(root) {
   return fs
@@ -16,6 +18,60 @@ function listMarkdownFiles(root) {
 
 function stripFrontMatter(content) {
   return content.replace(/^---\n[\s\S]*?\n---\n/, '');
+}
+
+function getFrontMatter(content) {
+  return content.match(/^---\n([\s\S]*?)\n---\n/)?.[1] ?? '';
+}
+
+function getFrontMatterString(content, field) {
+  const value = getFrontMatter(content).match(
+    new RegExp(`^${field}:\\s*(.+)$`, 'm'),
+  )?.[1];
+  if (!value) {
+    return undefined;
+  }
+  const trimmed = value.trim();
+  if (
+    (trimmed.startsWith('"') && trimmed.endsWith('"')) ||
+    (trimmed.startsWith("'") && trimmed.endsWith("'"))
+  ) {
+    return trimmed.slice(1, -1);
+  }
+  return trimmed;
+}
+
+function validateFrontMatter(filePath, content, errors) {
+  ['title', 'description'].forEach((field) => {
+    if (!getFrontMatterString(content, field)) {
+      errors.push(`${filePath}: missing ${field} front matter`);
+    }
+  });
+  getFrontMatter(content)
+    .split('\n')
+    .filter((line) => /^[A-Za-z_][\w-]*:\s+/.test(line))
+    .forEach((line) => {
+      const value = line.slice(line.indexOf(':') + 1).trim();
+      if (!value.startsWith('"') && !value.startsWith("'")) {
+        if (/\s#/.test(value)) {
+          errors.push(
+            `${filePath}: quote front matter values containing a # character`,
+          );
+        }
+        if (/:\s/.test(value)) {
+          errors.push(
+            `${filePath}: quote front matter values containing a colon followed by whitespace`,
+          );
+        }
+      }
+    });
+  const image = getFrontMatterString(content, 'image');
+  if (image?.startsWith('/')) {
+    const imagePath = path.join('static', image.slice(1));
+    if (!fs.existsSync(imagePath)) {
+      errors.push(`${filePath}: missing front matter image ${image}`);
+    }
+  }
 }
 
 function extractCodeBlocks(content) {
@@ -121,6 +177,8 @@ chineseFiles
       path.join(englishRoot, relativePath),
       'utf8',
     );
+    validateFrontMatter(relativePath, chineseContent, errors);
+    validateFrontMatter(relativePath, englishContent, errors);
     if (!/^updated:\s+\d{4}-\d{2}-\d{2}$/m.test(chineseContent)) {
       errors.push(`${relativePath}: Chinese page is missing an updated date`);
     }
@@ -133,6 +191,41 @@ chineseFiles
       errors.push(`${relativePath}: Chinese and English structures differ`);
     }
     validateJsonBlocks(relativePath, chineseContent, englishContent, errors);
+  });
+
+const chineseBlogFiles = listMarkdownFiles(chineseBlogRoot)
+  .map((filePath) => path.relative(chineseBlogRoot, filePath))
+  .sort();
+const englishBlogFiles = listMarkdownFiles(englishBlogRoot)
+  .map((filePath) => path.relative(englishBlogRoot, filePath))
+  .sort();
+
+chineseBlogFiles
+  .filter((relativePath) => !englishBlogFiles.includes(relativePath))
+  .forEach((relativePath) =>
+    errors.push(`blog/${relativePath}: missing English post`),
+  );
+englishBlogFiles
+  .filter((relativePath) => !chineseBlogFiles.includes(relativePath))
+  .forEach((relativePath) =>
+    errors.push(`blog/${relativePath}: missing Chinese post`),
+  );
+
+chineseBlogFiles
+  .filter((relativePath) => englishBlogFiles.includes(relativePath))
+  .forEach((relativePath) => {
+    const chinesePath = path.join(chineseBlogRoot, relativePath);
+    const englishPath = path.join(englishBlogRoot, relativePath);
+    const chineseContent = fs.readFileSync(chinesePath, 'utf8');
+    const englishContent = fs.readFileSync(englishPath, 'utf8');
+    validateFrontMatter(chinesePath, chineseContent, errors);
+    validateFrontMatter(englishPath, englishContent, errors);
+    if (
+      JSON.stringify(getStructure(chineseContent)) !==
+      JSON.stringify(getStructure(englishContent))
+    ) {
+      errors.push(`blog/${relativePath}: Chinese and English structures differ`);
+    }
   });
 
 const hardcodedEnglishLinks = listMarkdownFiles(englishRoot).filter((filePath) =>
@@ -149,5 +242,6 @@ if (errors.length > 0) {
 } else {
   console.log(
     `Validated ${chineseFiles.length} Chinese pages, ${englishFiles.length} English pages, and llms.txt links.`,
+    `Validated ${chineseBlogFiles.length} Chinese posts and ${englishBlogFiles.length} English posts.`,
   );
 }

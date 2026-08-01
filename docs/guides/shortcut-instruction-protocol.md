@@ -1,6 +1,6 @@
 ---
 title: AI Agent 快捷指令协议：命令、定向发送与对象引用
-description: 了解 xAgent 如何使用 /command、@{type:id} 和 #{type:id} 区分确定性命令、消息路由、对象引用与审批回复，避免模型误解控制操作。
+description: "了解 xAgent 如何使用 /command、@{type:id} 和 #{type:id} 区分确定性命令、消息路由、对象引用与审批回复，避免模型误解控制操作。"
 status: beta
 updated: 2026-07-15
 ---

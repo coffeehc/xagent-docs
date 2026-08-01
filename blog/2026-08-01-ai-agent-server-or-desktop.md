@@ -11,6 +11,8 @@ image: /img/share/zh/xagent-deployment.png
 
 本文不讨论某个具体模型，而是解释个人电脑和服务器部署分别适合什么场景，以及为什么团队长期使用 Agent 时通常需要服务端运行方式。
 
+![xAgent 服务端控制台仪表板，集中显示模型用量、会话和工具调用](/img/home/v005/xagent-dashboard-zh.webp)
+
 {/* truncate */}
 
 ## 两种部署方式的核心区别

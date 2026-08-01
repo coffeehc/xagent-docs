@@ -1,7 +1,7 @@
 ---
 slug: mcp-and-connectors
-title: MCP vs. Connectors: Two Paths for an AI Agent to Reach External Systems
-description: Learn the distinct roles of MCP and Connectors in an AI Agent system: tool calls, user identity, active events, two-way messaging, and external-system authorization.
+title: "MCP vs. Connectors: Two Paths for an AI Agent to Reach External Systems"
+description: "Learn the distinct roles of MCP and Connectors in an AI Agent system: tool calls, user identity, active events, two-way messaging, and external-system authorization."
 authors: [xagent]
 tags: [mcp, connectors, integrations, ai-agent]
 image: /img/share/en/xagent-connectors.png
@@ -10,6 +10,8 @@ image: /img/share/en/xagent-connectors.png
 MCP and Connectors are often mentioned together when an AI Agent needs to work with external systems. Both can expose capabilities beyond the Agent itself, but they solve different problems.
 
 In short, MCP is closer to a set of tools an Agent can call while doing work. A Connector is closer to a two-way channel that carries a user's identity, messages, and events into and back out of the system. Keeping those responsibilities separate prevents account authorization, message entry points, and tool calls from becoming one indistinct layer.
+
+![The xAgent Connector management page showing external channels, connection status, and management actions](/img/home/v005/xagent-connectors-en.webp)
 
 {/* truncate */}
 

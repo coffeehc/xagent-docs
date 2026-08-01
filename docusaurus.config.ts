@@ -8,15 +8,10 @@ const zhDescription =
   'xAgent 是面向任务完成、可私有化部署的多用户 AI Agent 工作门户，支持 Skill、Tool、MCP、连接器、工作区隔离和安全治理。';
 const enDescription =
   'xAgent is a task-first, self-hosted multi-user AI agent platform with Skills, Tools, MCP, connectors, workspace isolation, and safety governance.';
-const zhKeywords =
-  'xAgent, AI Agent 平台, 多用户 AI Agent, 私有化部署 AI Agent, 智能体工作门户, 团队智能体, Skill, Tool, MCP, Connector, 长任务智能体';
-const enKeywords =
-  'xAgent, multi-user AI agent portal, self-hosted AI agent platform, task-oriented AI agent, AI agent skills, AI tools, MCP, connectors, private AI deployment';
 const currentLocale = process.env.DOCUSAURUS_CURRENT_LOCALE ?? 'zh-CN';
 const isEnglish = currentLocale === 'en';
 const localeSiteUrl = isEnglish ? `${siteUrl}/en` : siteUrl;
 const siteDescription = isEnglish ? enDescription : zhDescription;
-const siteKeywords = isEnglish ? enKeywords : zhKeywords;
 
 const config: Config = {
   title: 'xAgent',
@@ -100,6 +95,12 @@ const config: Config = {
           ignorePatterns: [
             '/search/**',
             '/en/search/**',
+            '/blog/archive/**',
+            '/en/blog/archive/**',
+            '/blog/authors/**',
+            '/en/blog/authors/**',
+            '/blog/tags/**',
+            '/en/blog/tags/**',
           ],
           lastmod: 'date',
           changefreq: null,
@@ -170,10 +171,6 @@ const config: Config = {
         content: siteDescription,
       },
       {
-        name: 'keywords',
-        content: siteKeywords,
-      },
-      {
         property: 'og:site_name',
         content: 'xAgent',
       },
@@ -231,6 +228,12 @@ const config: Config = {
           target: '_self',
         },
         {
+          href: `${localeSiteUrl}/docs/community/discussions/`,
+          position: 'left',
+          label: '社区讨论',
+          target: '_self',
+        },
+        {
           type: 'localeDropdown',
           position: 'right',
         },
@@ -280,6 +283,11 @@ const config: Config = {
         {
           title: '交流',
           items: [
+            {
+              label: '社区讨论',
+              href: `${localeSiteUrl}/docs/community/discussions/`,
+              target: '_self',
+            },
             {
               label: '我有一个想法',
               to: '/docs/cooperation/idea/',
