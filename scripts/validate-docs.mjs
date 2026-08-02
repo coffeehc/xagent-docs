@@ -3,10 +3,25 @@ import path from 'node:path';
 
 const chineseRoot = 'docs';
 const englishRoot = 'i18n/en/docusaurus-plugin-content-docs/current';
-const chineseBlogRoot = 'blog';
-const englishBlogRoot = 'i18n/en/docusaurus-plugin-content-blog';
+const translatedPostCollections = [
+  {
+    label: 'blog',
+    chineseRoot: 'blog',
+    englishRoot: 'i18n/en/docusaurus-plugin-content-blog',
+    compareStructure: true,
+  },
+  {
+    label: 'insights',
+    chineseRoot: 'insights',
+    englishRoot: 'i18n/en/docusaurus-plugin-content-blog-insights',
+    compareStructure: false,
+  },
+];
 
 function listMarkdownFiles(root) {
+  if (!fs.existsSync(root)) {
+    return [];
+  }
   return fs
     .readdirSync(root, {withFileTypes: true})
     .flatMap((entry) => {
@@ -193,44 +208,58 @@ chineseFiles
     validateJsonBlocks(relativePath, chineseContent, englishContent, errors);
   });
 
-const chineseBlogFiles = listMarkdownFiles(chineseBlogRoot)
-  .map((filePath) => path.relative(chineseBlogRoot, filePath))
-  .sort();
-const englishBlogFiles = listMarkdownFiles(englishBlogRoot)
-  .map((filePath) => path.relative(englishBlogRoot, filePath))
-  .sort();
+const translatedPostCounts = translatedPostCollections.map((collection) => {
+  const chineseFiles = listMarkdownFiles(collection.chineseRoot)
+    .map((filePath) => path.relative(collection.chineseRoot, filePath))
+    .sort();
+  const englishFiles = listMarkdownFiles(collection.englishRoot)
+    .map((filePath) => path.relative(collection.englishRoot, filePath))
+    .sort();
 
-chineseBlogFiles
-  .filter((relativePath) => !englishBlogFiles.includes(relativePath))
-  .forEach((relativePath) =>
-    errors.push(`blog/${relativePath}: missing English post`),
-  );
-englishBlogFiles
-  .filter((relativePath) => !chineseBlogFiles.includes(relativePath))
-  .forEach((relativePath) =>
-    errors.push(`blog/${relativePath}: missing Chinese post`),
-  );
+  chineseFiles
+    .filter((relativePath) => !englishFiles.includes(relativePath))
+    .forEach((relativePath) =>
+      errors.push(`${collection.label}/${relativePath}: missing English post`),
+    );
+  englishFiles
+    .filter((relativePath) => !chineseFiles.includes(relativePath))
+    .forEach((relativePath) =>
+      errors.push(`${collection.label}/${relativePath}: missing Chinese post`),
+    );
 
-chineseBlogFiles
-  .filter((relativePath) => englishBlogFiles.includes(relativePath))
-  .forEach((relativePath) => {
-    const chinesePath = path.join(chineseBlogRoot, relativePath);
-    const englishPath = path.join(englishBlogRoot, relativePath);
-    const chineseContent = fs.readFileSync(chinesePath, 'utf8');
-    const englishContent = fs.readFileSync(englishPath, 'utf8');
-    validateFrontMatter(chinesePath, chineseContent, errors);
-    validateFrontMatter(englishPath, englishContent, errors);
-    if (
-      JSON.stringify(getStructure(chineseContent)) !==
-      JSON.stringify(getStructure(englishContent))
-    ) {
-      errors.push(`blog/${relativePath}: Chinese and English structures differ`);
-    }
-  });
+  chineseFiles
+    .filter((relativePath) => englishFiles.includes(relativePath))
+    .forEach((relativePath) => {
+      const chinesePath = path.join(collection.chineseRoot, relativePath);
+      const englishPath = path.join(collection.englishRoot, relativePath);
+      const chineseContent = fs.readFileSync(chinesePath, 'utf8');
+      const englishContent = fs.readFileSync(englishPath, 'utf8');
+      validateFrontMatter(chinesePath, chineseContent, errors);
+      validateFrontMatter(englishPath, englishContent, errors);
+      if (
+        collection.compareStructure &&
+        JSON.stringify(getStructure(chineseContent)) !==
+          JSON.stringify(getStructure(englishContent))
+      ) {
+        errors.push(
+          `${collection.label}/${relativePath}: Chinese and English structures differ`,
+        );
+      }
+    });
 
-const hardcodedEnglishLinks = listMarkdownFiles(englishRoot).filter((filePath) =>
-  fs.readFileSync(filePath, 'utf8').includes('/en/docs/'),
-);
+  return {
+    label: collection.label,
+    chinese: chineseFiles.length,
+    english: englishFiles.length,
+  };
+});
+
+const hardcodedEnglishLinks = [
+  englishRoot,
+  ...translatedPostCollections.map((collection) => collection.englishRoot),
+]
+  .flatMap(listMarkdownFiles)
+  .filter((filePath) => fs.readFileSync(filePath, 'utf8').includes('/en/docs/'));
 hardcodedEnglishLinks.forEach((filePath) =>
   errors.push(`${filePath}: use /docs/ links and let Docusaurus add the locale`),
 );
@@ -242,6 +271,11 @@ if (errors.length > 0) {
 } else {
   console.log(
     `Validated ${chineseFiles.length} Chinese pages, ${englishFiles.length} English pages, and llms.txt links.`,
-    `Validated ${chineseBlogFiles.length} Chinese posts and ${englishBlogFiles.length} English posts.`,
+    translatedPostCounts
+      .map(
+        (count) =>
+          `Validated ${count.chinese} Chinese and ${count.english} English ${count.label} posts.`,
+      )
+      .join(' '),
   );
 }
