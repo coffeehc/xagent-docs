@@ -4,6 +4,9 @@ import {load} from 'cheerio';
 
 const buildRoot = path.resolve('build');
 const siteOrigin = 'https://xagent.xiagaogao.com';
+const googleAnalyticsTrackingID = 'G-0J5ERRHMSE';
+const googleAnalyticsScript =
+  `https://www.googletagmanager.com/gtag/js?id=${googleAnalyticsTrackingID}`;
 const errors = [];
 
 function listFiles(root, predicate) {
@@ -161,6 +164,18 @@ pages.forEach((page) => {
   }
   if (page.$('meta[name="keywords"]').length > 0) {
     errors.push(`${page.route}: meta keywords are not allowed`);
+  }
+  if (page.$(`script[src="${googleAnalyticsScript}"]`).length !== 1) {
+    errors.push(`${page.route}: missing Google Analytics loader`);
+  }
+  const hasGoogleAnalyticsConfig = page
+    .$(`script:not([src])`)
+    .toArray()
+    .some((element) =>
+      (page.$(element).html() ?? '').includes(googleAnalyticsTrackingID),
+    );
+  if (!hasGoogleAnalyticsConfig) {
+    errors.push(`${page.route}: missing Google Analytics configuration`);
   }
   if (locale === 'en' && !page.lang.toLowerCase().startsWith('en')) {
     errors.push(`${page.route}: expected an English html lang value`);

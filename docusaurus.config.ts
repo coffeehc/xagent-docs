@@ -91,6 +91,9 @@ const config: Config = {
             : 'xAgent 的产品进展、实践记录与版本说明。',
           showReadingTime: true,
         },
+        gtag: {
+          trackingID: 'G-0J5ERRHMSE',
+        },
         sitemap: {
           ignorePatterns: [
             '/search/**',
