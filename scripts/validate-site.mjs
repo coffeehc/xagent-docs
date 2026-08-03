@@ -4,7 +4,7 @@ import {load} from 'cheerio';
 
 const buildRoot = path.resolve('build');
 const siteOrigin = 'https://xagent.xiagaogao.com';
-const googleAnalyticsTrackingID = 'G-0J5ERRHMSE';
+const googleAnalyticsTrackingID = 'G-P1WT74PKR0';
 const googleAnalyticsScript =
   `https://www.googletagmanager.com/gtag/js?id=${googleAnalyticsTrackingID}`;
 const errors = [];

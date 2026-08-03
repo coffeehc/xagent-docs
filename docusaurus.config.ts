@@ -92,7 +92,7 @@ const config: Config = {
           showReadingTime: true,
         },
         gtag: {
-          trackingID: 'G-0J5ERRHMSE',
+          trackingID: 'G-P1WT74PKR0',
         },
         sitemap: {
           ignorePatterns: [
