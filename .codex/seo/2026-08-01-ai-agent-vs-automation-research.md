@@ -2,9 +2,9 @@
 
 - 日期：2026-08-01
 - 目标查询：`AI agent vs AI automation`
-- 目标页面：待建 `insights/ai-agents-vs-ai-automation`
+- 目标页面：`/insights/ai-agents-vs-ai-automation/`
 - 执行方式：由 Codex 完成实时搜索、结果页结构审计、候选词筛选、内容框架和站点检查
-- 结论：进入英文内容写作；中文版本在英文事实与案例稳定后单独组织表达
+- 结论：中英文独立稿、第一手执行证据与本地发布前校验已完成；当前状态为待发布
 - 执行协议：[xAgent 文档站 SEO / GEO 执行协议](./seo-geo-protocol.md)
 
 ## 一、执行结论
@@ -166,3 +166,23 @@ Ahrefs 官方也说明 KD 主要基于当前前十页面的引用域数量，只
 4. 有展示但低点击：修改标题、Description 和首段答案。
 5. 平均排名 8 至 20：补充真实执行证据和相关指南内链。
 6. 没有展示：先查收录和意图匹配，不创建近义页面。
+
+## 九、第一手执行与发布前验收
+
+2026-08-02 使用本地 xAgent Web UI 完成受控项目周报任务。证据目录为 `evidence/ai-agents-vs-ai-automation/`，保留了三轮执行、最终持久化计划、删除审批、原始缺陷产物、独立检查、修复提示词、新的持久化修复计划和修复后产物。
+
+关键发现：最终执行链路成功展示 `plan_create`、任务状态推进、`waiting_approval`、审批后恢复与 `task_complete`；但首次产物仍包含 CSV 错列、错误日期、无依据摘要和缺失行动项表。使用真实 CSV 解析器发现问题后，同一会话建立修复计划，最终 CSV 解析为 `A1:G6`，Markdown 也通过日期、摘要、冲突和行动项复验。
+
+发布前检查结果：
+
+| 检查项 | 结果 |
+| --- | --- |
+| 中英文内容 | 1 个中文 Insights 与 1 个英文 Insights，slug 配对一致，表达分别组织。 |
+| 第一手图片 | 4 张 1600 像素宽 WebP，覆盖持久化计划、审批、修复计划和修复完成。 |
+| 文档校验 | 53 对 Docs、4 对 Blog、1 对 Insights 全部通过。 |
+| 类型检查 | `npm run typecheck` 通过。 |
+| 生产构建 | 中英文 Docusaurus 构建通过。 |
+| 站点检查 | 168 个 HTML、122 个 sitemap URL、46 个 noindex 页面通过。 |
+| 结构化数据 | 中英文页面均生成 `BlogPosting`、`datePublished`、`headline` 与 `mainEntityOfPage`。 |
+| 浏览器 QA | 中文桌面 1440x900 与英文移动 390x844 无横向溢出、缺图、控制台警告或错误；目录锚点交互通过。 |
+| sitemap | `/insights/ai-agents-vs-ai-automation/` 与 `/en/insights/ai-agents-vs-ai-automation/` 均已进入生成结果。 |
