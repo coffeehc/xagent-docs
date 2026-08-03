@@ -1,12 +1,14 @@
 ---
-title: How to Host an AI Agent on Your Own Server
-description: A practical self-hosted AI agent setup guide covering server preparation, model access, HTTPS, workspace isolation, connectors, backups, and long-running tasks.
+title: "Self-Hosted AI Agent Platform: Host xAgent on Your Own Server"
+description: A practical guide to hosting a self-hosted AI agent platform, covering server preparation, model access, HTTPS, workspace isolation, connectors, backups, and long-running tasks.
 image: /img/share/en/xagent-security.png
 status: beta
-updated: 2026-08-01
+updated: 2026-08-03
 ---
 
-# How to Host an AI Agent on Your Own Server
+# Self-Hosted AI Agent Platform: Host xAgent on Your Own Server
+
+To host an AI agent with xAgent, run it as a long-lived server application in your own server, private network, or cloud account; then configure a usable model, HTTPS, access controls, and approval policies, and validate the setup with a small non-sensitive task. Self-hosting gives the deployment owner control over the runtime location and access boundaries, while model APIs, MCP services, connectors, and external systems still follow their own authorization and data boundaries.
 
 ## Who This Is For
 

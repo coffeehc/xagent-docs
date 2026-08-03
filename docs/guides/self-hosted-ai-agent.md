@@ -1,12 +1,14 @@
 ---
-title: 如何在自己的服务器上部署 AI Agent
-description: 一份实用的私有化 AI Agent 部署指南，介绍服务器准备、模型接入、HTTPS、工作区隔离、外部连接、备份与持续运行。
+title: "AI Agent 私有化部署：如何在自己的服务器上部署 xAgent"
+description: 一份实用的 AI Agent 私有化部署指南，介绍服务器准备、模型接入、HTTPS、工作区隔离、外部连接、备份与持续运行。
 image: /img/share/zh/xagent-security.png
 status: beta
-updated: 2026-08-01
+updated: 2026-08-03
 ---
 
-# 如何在自己的服务器上部署 AI Agent
+# AI Agent 私有化部署：如何在自己的服务器上部署 xAgent
+
+要部署 AI Agent，先把 xAgent 作为长期运行的服务端应用安装到自己的服务器、内网或云账号中；再配置可用模型、HTTPS、访问控制和审批策略，并用一个非敏感的小任务验证文件、工具和外部连接。这种私有化部署让部署方决定运行位置和访问边界，但模型 API、MCP、连接器和外部系统仍按各自的授权和数据边界工作。
 
 ## 适用对象
 
