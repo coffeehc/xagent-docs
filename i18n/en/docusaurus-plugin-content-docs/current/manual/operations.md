@@ -62,8 +62,6 @@ See [Agent Management](/docs/user-guide/agent-management) for the complete conce
 
 **Visible to:** Users with advanced mode enabled
 
-![xAgent user-side Skill Management page showing Skill sources, status, and actions](/img/home/v005/xagent-skill-tool-en.webp)
-
 Skill Management is used to reuse task methods and maintain personal Skills:
 
 - View summaries and status for built-in, public, and personal Skills.

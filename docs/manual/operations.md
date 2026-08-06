@@ -62,8 +62,6 @@ updated: 2026-07-27
 
 **可见范围：** 开启高级模式的用户
 
-![xAgent 用户侧 Skill 管理页面，显示 Skill 来源、状态和操作入口](/img/home/v005/xagent-skill-tool-zh.webp)
-
 Skill 管理用于复用任务方法和维护个人 Skill：
 
 - 查看内置、公共和个人 Skill 的摘要与状态。

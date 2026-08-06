@@ -78,7 +78,7 @@ const homeContent = {
     featureVisualAlts: [
       'xAgent 中文 Agent 会话界面',
       'xAgent 中文智能体管理界面',
-      'xAgent 中文 Skill 管理界面',
+      'xAgent 中文智能体默认模型、Skill 与 Tool 选择界面',
       'xAgent 中文连接器管理界面',
       'xAgent 中文审批策略界面',
     ],
@@ -231,7 +231,7 @@ const homeContent = {
     featureVisualAlts: [
       'xAgent English agent session interface',
       'xAgent English Agent management interface',
-      'xAgent English Skill management interface',
+      'xAgent English Agent default model, Skill, and Tool selection interface',
       'xAgent English connector management interface',
       'xAgent English approval policy interface',
     ],
@@ -391,7 +391,7 @@ export default function Home(): ReactNode {
     {
       ...content.capabilityCards[0],
       to: '/docs/manual/capabilities',
-      image: `/img/home/v005/xagent-skill-tool-${manualLocale}.webp`,
+      image: `/img/home/current/xagent-agent-capabilities-${manualLocale}.webp`,
       imageAlt: content.featureVisualAlts[2],
     },
     {

@@ -43,8 +43,6 @@ Agent 治理页面仅管理员可见，负责全局能力、执行边界和公�
 
 **可见范围：** 管理员
 
-![xAgent 管理员 Skill 管理页面，显示全局 Skill、来源和状态](/img/home/v005/xagent-skill-tool-zh.webp)
-
 管理员 Skill 管理用于治理内置和公共 Skill：
 
 - 搜索、查看、校验和维护 Skill 资源。
@@ -86,8 +84,6 @@ Connector 管理维护系统安装的连接器实例：
 **菜单路径：** Agent 治理 > MCP 配置
 
 **可见范围：** 管理员
-
-![xAgent MCP 配置页面，显示服务、协议、工具数和地址](/img/manual/v005/zh/admin-mcp.webp)
 
 MCP 配置维护系统范围的 MCP 服务：
 

@@ -40,6 +40,8 @@ xAgent documentation is maintained as paired Chinese and English pages. Use the 
 
 - [AI Agents vs. AI Automation (English)](https://xagent.xiagaogao.com/en/insights/ai-agents-vs-ai-automation/): A decision guide with a controlled xAgent workflow, approval boundary, artifact failure, repair plan, and independent verification.
 - [AI Agent 与 AI 自动化（中文）](https://xagent.xiagaogao.com/insights/ai-agents-vs-ai-automation/): 基于一次受控 xAgent 任务，对比执行路径、适用场景、审批边界与产物复验。
+- [AI Agent Skills vs. Tools vs. MCP (English)](https://xagent.xiagaogao.com/en/insights/ai-agent-tools-vs-skills/): Compare responsibilities, loading behavior, permissions, and selection criteria, then see how Skills, Tools, and MCP work together in one task.
+- [AI Agent Skill、Tool 与 MCP（中文）](https://xagent.xiagaogao.com/insights/ai-agent-tools-vs-skills/): 对比三者的职责、加载方式、权限与选型标准，并说明它们如何在一个任务中组合。
 
 ## Connector Specifications
 

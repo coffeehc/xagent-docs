@@ -43,8 +43,6 @@ Approval Policy defines the system-wide baseline for action control:
 
 **Visible to:** Administrators
 
-![xAgent administrator Skill Management page showing global Skills, sources, and status](/img/home/v005/xagent-skill-tool-en.webp)
-
 Administrator Skill Management governs built-in and public Skills:
 
 - Search, inspect, validate, and maintain Skill resources.
@@ -86,8 +84,6 @@ See [Connector User Guide](/docs/user-guide/connector) for installation instruct
 **Menu path:** Agent Governance > MCP Configuration
 
 **Visible to:** Administrators
-
-![xAgent MCP Configuration page showing services, protocols, Tool counts, and addresses](/img/manual/v005/en/admin-mcp.webp)
 
 MCP Configuration maintains system-scoped MCP services:
 
