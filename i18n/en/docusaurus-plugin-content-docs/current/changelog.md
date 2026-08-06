@@ -3,13 +3,52 @@ title: Changelog
 description: Review important user-facing changes, binary release contents, and upgrade notes for each xAgent release.
 image: /img/share/en/xagent-overview.png
 status: stable
-updated: 2026-08-01
+updated: 2026-08-06
 schemaType: CollectionPage
 ---
 
 # Changelog
 
 This page records important installation, usage, and safety-governance changes in xAgent binary releases. xAgent remains in beta, and features, interfaces, and protocols may continue to change.
+
+## `v0.0.7.beta` - 2026-08-06
+
+[View installation instructions](/docs/getting-started/install)
+
+This release focuses on file storage and team sharing, introduces the first Desktop Client release, and continues to improve model request caching, Provider compatibility, and image recognition.
+
+### File Storage and Team Sharing
+
+- Added unified Local and S3 file storage Providers for AWS S3 and S3-compatible object stores, with connectivity and read/write checks before activation.
+- Added managed migration between Local and S3. A failed migration does not replace the active Provider; if S3 becomes temporarily unavailable, xAgent can fall back to local storage, upload content after recovery, and switch back to S3.
+- Added an instance-wide `share` directory. Administrators can create directories and upload, move, rename, download, and delete shared content.
+- Unified file ACLs across `workspace`, `upload`, and `share`. Shared directories support inherited read-only `R` and read-write `RW` grants for users and groups.
+
+### Image Recognition and OCR
+
+- Added a configurable OCR model role so administrators can select a vision-capable model and manage OCR-specific model policy.
+- When text is needed from an image attachment, xAgent can create canonical Markdown containing visible text, necessary visual description, and the primary language.
+- OCR in this release applies to image attachments. Scanned PDFs without a text layer remain unsupported.
+
+### Desktop Client `v0.0.1`
+
+- First xAgent Desktop Client release, with packages for macOS Apple Silicon and Windows AMD64.
+- The Client can discover a newer package for the current platform, then download it after confirmation, verify SHA-256, replace the installation, and restart automatically. If replacement fails, it retains the previous installation and attempts to restart it.
+
+### Model Context and Providers
+
+- Improved the organization of stable context and changing runtime state within a turn, increasing the overall Token Cache hit rate by 13% and reducing repeated request latency and cost.
+- Improved LLM Provider compatibility across different model service configurations.
+- Normalized cached-token reporting across OpenAI, Anthropic, and Gemini, and included system usage from model connectivity tests in usage statistics.
+
+### UI and Stability
+
+- Added administration UI and localized copy for shared files, storage runtime status, and S3 migration progress.
+- Fixed Session Timeline compatibility for some legacy messages and thinking-block state.
+
+### Upgrade Notes
+
+Back up configuration, database, workspaces, shared files, and Connector state before upgrading. Before enabling S3, save and test the configuration, then start Provider migration; the current Provider remains active until migration succeeds. Run the existing installer command to check for and install `v0.0.7.beta`.
 
 ## `v0.0.6.beta` - 2026-08-01
 
