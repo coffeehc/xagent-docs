@@ -273,49 +273,6 @@
   width: 100%;
 }
 
-.imageLightbox {
-  align-items: center;
-  background: rgb(9 15 28 / 88%);
-  display: flex;
-  inset: 0;
-  justify-content: center;
-  padding: 2.5rem;
-  position: fixed;
-  z-index: 1000;
-}
-
-.imageLightbox img {
-  display: block;
-  max-height: calc(100vh - 5rem);
-  max-width: calc(100vw - 5rem);
-  object-fit: contain;
-}
-
-.lightboxClose {
-  align-items: center;
-  background: var(--deck-accent);
-  border: 0;
-  border-radius: 50%;
-  color: #fff;
-  cursor: pointer;
-  display: inline-flex;
-  height: 2.5rem;
-  justify-content: center;
-  position: absolute;
-  right: 1.25rem;
-  top: 1.25rem;
-  width: 2.5rem;
-}
-
-.lightboxClose svg {
-  fill: none;
-  height: 1.25rem;
-  stroke: currentColor;
-  stroke-linecap: round;
-  stroke-width: 2;
-  width: 1.25rem;
-}
-
 .installerVisual {
   background: var(--xagent-page-bg);
   border: 1px solid var(--xagent-border);

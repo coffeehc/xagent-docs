@@ -97,7 +97,7 @@ MCP 配置维护系统范围的 MCP 服务：
 
 **可见范围：** 管理员
 
-![xAgent 执行环境页面，显示沙箱后端、托管运行时和宿主适配器状态](/img/manual/v005/zh/admin-file-processing.webp)
+![xAgent 执行环境页面，显示沙箱后端、托管运行时和宿主适配器状态](/img/manual/v005/zh/execution-environment.webp)
 
 执行环境页展示任务进程实际依赖的运行条件：
 

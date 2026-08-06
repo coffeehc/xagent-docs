@@ -2,6 +2,8 @@ import {useEffect} from 'react';
 import type {ReactNode} from 'react';
 import type {Props} from '@theme/Root';
 
+import {ImageLightboxProvider} from '@site/src/components/ImageLightbox';
+
 const releaseRepositoryPath = '/coffeehc/xagent-releases';
 const contactEmail = 'data@yaoankeji.com';
 const installerScriptFragment =
@@ -95,5 +97,5 @@ export default function Root({children}: Props): ReactNode {
     return () => document.removeEventListener('click', handleClick);
   }, []);
 
-  return children;
+  return <ImageLightboxProvider>{children}</ImageLightboxProvider>;
 }

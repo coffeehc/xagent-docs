@@ -15,7 +15,7 @@ updated: 2026-07-27
 
 **可见范围：** 所有用户
 
-![xAgent 审批页面，显示待处理和历史审批](/img/manual/v005/zh/approvals.webp)
+![xAgent Agent 会话中的高风险 Tool 审批卡片，显示风险等级、资源范围和同意操作](/img/manual/v005/zh/agent-session.webp)
 
 审批页集中处理任务中的敏感动作：
 

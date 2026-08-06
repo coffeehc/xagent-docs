@@ -1,9 +1,11 @@
-import {useEffect, useState} from 'react';
+import {useState} from 'react';
 import type {ReactNode} from 'react';
 import Head from '@docusaurus/Head';
 import Layout from '@theme/Layout';
 import Heading from '@theme/Heading';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
+
+import {useImageLightbox} from '@site/src/components/ImageLightbox';
 
 import styles from './index.module.css';
 
@@ -78,7 +80,7 @@ const homeContent = {
     featureVisualAlts: [
       'xAgent 中文 Agent 会话界面',
       'xAgent 中文智能体管理界面',
-      'xAgent 中文智能体默认模型、Skill 与 Tool 选择界面',
+      'xAgent 中文会话创建执行计划并加载 deep-research Skill 的运行界面',
       'xAgent 中文连接器管理界面',
       'xAgent 中文审批策略界面',
     ],
@@ -231,7 +233,7 @@ const homeContent = {
     featureVisualAlts: [
       'xAgent English agent session interface',
       'xAgent English Agent management interface',
-      'xAgent English Agent default model, Skill, and Tool selection interface',
+      'xAgent English session creating a plan and loading the deep-research Skill',
       'xAgent English connector management interface',
       'xAgent English approval policy interface',
     ],
@@ -358,10 +360,7 @@ const homeContent = {
 
 export default function Home(): ReactNode {
   const [copiedInstaller, setCopiedInstaller] = useState(false);
-  const [expandedImage, setExpandedImage] = useState<{
-    src: string;
-    alt: string;
-  } | null>(null);
+  const {openImage} = useImageLightbox();
   const {i18n} = useDocusaurusContext();
   const content =
     homeContent[i18n.currentLocale as keyof typeof homeContent] ??
@@ -391,7 +390,9 @@ export default function Home(): ReactNode {
     {
       ...content.capabilityCards[0],
       to: '/docs/manual/capabilities',
-      image: `/img/home/current/xagent-agent-capabilities-${manualLocale}.webp`,
+      image: `/img/insights/ai-agent-tools-vs-skills/plan-and-skill-load${
+        isEnglish ? '-en' : ''
+      }.webp`,
       imageAlt: content.featureVisualAlts[2],
     },
     {
@@ -408,24 +409,6 @@ export default function Home(): ReactNode {
     },
   ];
 
-  useEffect(() => {
-    if (!expandedImage) {
-      return undefined;
-    }
-
-    const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') {
-        setExpandedImage(null);
-      }
-    };
-
-    document.addEventListener('keydown', handleKeyDown);
-    document.body.style.overflow = 'hidden';
-    return () => {
-      document.removeEventListener('keydown', handleKeyDown);
-      document.body.style.overflow = '';
-    };
-  }, [expandedImage]);
   const structuredData = {
     '@context': 'https://schema.org',
     '@graph': [
@@ -547,11 +530,14 @@ export default function Home(): ReactNode {
                 type="button"
                 className={styles.imageButton}
                 aria-label={`${content.zoomImageLabel}: ${content.showcaseAlt}`}
-                onClick={() =>
-                  setExpandedImage({
-                    src: content.showcaseImage,
-                    alt: content.showcaseAlt,
-                  })
+                onClick={(event) =>
+                  openImage(
+                    {
+                      src: content.showcaseImage,
+                      alt: content.showcaseAlt,
+                    },
+                    event.currentTarget,
+                  )
                 }>
                 <img
                   src={content.showcaseImage}
@@ -647,11 +633,14 @@ export default function Home(): ReactNode {
                       type="button"
                       className={styles.imageButton}
                       aria-label={`${content.zoomImageLabel}: ${story.imageAlt}`}
-                      onClick={() =>
-                        setExpandedImage({
-                          src: story.image!,
-                          alt: story.imageAlt!,
-                        })
+                      onClick={(event) =>
+                        openImage(
+                          {
+                            src: story.image!,
+                            alt: story.imageAlt!,
+                          },
+                          event.currentTarget,
+                        )
                       }>
                       <img
                         src={story.image}
@@ -781,30 +770,6 @@ export default function Home(): ReactNode {
             </div>
           </div>
         </section>
-        {expandedImage ? (
-          <div
-            className={styles.imageLightbox}
-            role="dialog"
-            aria-modal="true"
-            aria-label={expandedImage.alt}
-            onClick={(event) => {
-              if (event.target === event.currentTarget) {
-                setExpandedImage(null);
-              }
-            }}>
-            <button
-              type="button"
-              className={styles.lightboxClose}
-              aria-label={isEnglish ? 'Close enlarged image' : '关闭放大图片'}
-              title={isEnglish ? 'Close' : '关闭'}
-              onClick={() => setExpandedImage(null)}>
-              <svg viewBox="0 0 24 24" aria-hidden="true">
-                <path d="M6 6l12 12M18 6L6 18" />
-              </svg>
-            </button>
-            <img src={expandedImage.src} alt={expandedImage.alt} />
-          </div>
-        ) : null}
       </main>
     </Layout>
   );

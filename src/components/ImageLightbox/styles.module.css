@@ -1,0 +1,62 @@
+.overlay {
+  align-items: center;
+  background: rgb(9 15 28 / 90%);
+  display: flex;
+  inset: 0;
+  justify-content: center;
+  padding: 2.5rem;
+  position: fixed;
+  z-index: 2000;
+}
+
+.previewImage {
+  display: block;
+  max-height: calc(100dvh - 5rem);
+  max-width: calc(100vw - 5rem);
+  object-fit: contain;
+}
+
+.closeButton {
+  align-items: center;
+  background: var(--ifm-color-primary);
+  border: 0;
+  border-radius: 50%;
+  color: #fff;
+  cursor: pointer;
+  display: inline-flex;
+  height: 2.5rem;
+  justify-content: center;
+  position: absolute;
+  right: max(1.25rem, env(safe-area-inset-right));
+  top: max(1.25rem, env(safe-area-inset-top));
+  width: 2.5rem;
+}
+
+.closeButton:hover {
+  background: var(--ifm-color-primary-dark);
+}
+
+.closeButton:focus-visible {
+  outline: 3px solid #fff;
+  outline-offset: 3px;
+}
+
+.closeButton svg {
+  fill: none;
+  height: 1.25rem;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-width: 2;
+  width: 1.25rem;
+}
+
+@media (max-width: 760px) {
+  .overlay {
+    padding: 1rem;
+  }
+
+  .previewImage {
+    max-height: calc(100dvh - 2rem);
+    max-width: calc(100vw - 2rem);
+  }
+}

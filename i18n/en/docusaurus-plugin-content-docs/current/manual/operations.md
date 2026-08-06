@@ -15,7 +15,7 @@ Operations covers user-side task control and capability configuration. Approvals
 
 **Visible to:** All users
 
-![xAgent Approvals page showing pending and historical approvals](/img/manual/v005/en/approvals.webp)
+![A high-risk Tool approval card in an xAgent Session showing the risk level, resource scope, and approval action](/img/manual/v005/en/agent-session.webp)
 
 The Approvals page centralizes sensitive actions requested during tasks:
 

@@ -97,7 +97,7 @@ MCP Configuration maintains system-scoped MCP services:
 
 **Visible to:** Administrators
 
-![xAgent Execution Environment page showing sandbox backends, managed runtimes, and host adapter status](/img/manual/v005/en/admin-file-processing.webp)
+![xAgent Execution Environment page showing sandbox backends, managed runtimes, and host adapter status](/img/manual/v005/en/execution-environment.webp)
 
 The Execution Environment page shows the runtime conditions that task processes actually depend on:
 
