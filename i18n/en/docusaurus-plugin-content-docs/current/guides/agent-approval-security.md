@@ -1,14 +1,27 @@
 ---
-title: How AI Agent Approval and Safety Controls Work
-description: Learn how xAgent reduces tool calls into file, network, data, session, and Skill operations, then pauses, approves, and resumes specific risky actions.
+title: "AI Agent Security Risks: How xAgent Approval and Safety Controls Work"
+description: "Learn how xAgent currently handles AI Agent security risks that reach a tool call: it identifies file, network, data, session, and Skill operations, then pauses, approves, or resumes specific risky actions."
 image: /img/share/en/xagent-security.png
 status: beta
-updated: 2026-07-15
+updated: 2026-08-06
 ---
 
-# How AI Agent Approval and Safety Controls Work
+# AI Agent Security Risks: How xAgent Approval and Safety Controls Work
 
 An AI Agent may do more than generate text. It can read or delete files, execute commands, access networks, send data, modify external systems, or publish team-visible Skills. Approval does not review an entire conversation before a task starts. It pauses the task when execution reaches a specific risky action.
+
+## Which AI Agent Security Risks xAgent Currently Controls
+
+xAgent approval handles concrete operations an Agent is about to execute. It is not a complete defense for every security risk. This table defines the scope this page can accurately cover:
+
+| Risky action | Current control | What it does not prove |
+| --- | --- | --- |
+| Deleting or writing workspace files | xAgent derives operation facts from the Tool and its arguments, then lets approval policy allow, deny, or pause the action | It does not give every file, host, or external system the same protection |
+| Sending personal data to an external system | xAgent identifies a personal-data transfer operation; the default policy can require one-time approval | It does not replace external data permissions, data-processing agreements, or egress controls |
+| Network requests or process execution | xAgent identifies network and process operations; administrators can configure stricter rules for their environment | It does not prove coverage of prompt injection, supply-chain risk, or every malicious input |
+| Activating a Skill draft or submitting a public Skill | xAgent identifies Skill-publication operations and can pause or deny them by policy | It does not replace review of Skill content, dependencies, or third-party sources |
+
+Prompt injection, excessive permissions, model and Provider data boundaries, third-party Skill or MCP supply-chain risk, and security testing each need their own design and validation. This approval page describes only the action-approval boundary; it is not a substitute for a complete AI Agent security framework.
 
 ## How xAgent Decides Whether Approval Is Required
 

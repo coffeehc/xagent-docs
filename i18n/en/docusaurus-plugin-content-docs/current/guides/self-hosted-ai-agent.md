@@ -1,12 +1,12 @@
 ---
-title: "Self-Hosted AI Agent Platform: Host xAgent on Your Own Server"
-description: A practical guide to hosting a self-hosted AI agent platform, covering server preparation, model access, HTTPS, workspace isolation, connectors, backups, and long-running tasks.
+title: "Self-Hosted AI Agent Platform: Deploy xAgent on Your Own Server"
+description: A practical guide to deploying a self-hosted AI agent platform, covering server preparation, model access, HTTPS, workspace isolation, connectors, backups, and long-running tasks.
 image: /img/share/en/xagent-security.png
 status: beta
-updated: 2026-08-03
+updated: 2026-08-06
 ---
 
-# Self-Hosted AI Agent Platform: Host xAgent on Your Own Server
+# Self-Hosted AI Agent Platform: Deploy xAgent on Your Own Server
 
 To host an AI agent with xAgent, run it as a long-lived server application in your own server, private network, or cloud account; then configure a usable model, HTTPS, access controls, and approval policies, and validate the setup with a small non-sensitive task. Self-hosting gives the deployment owner control over the runtime location and access boundaries, while model APIs, MCP services, connectors, and external systems still follow their own authorization and data boundaries.
 
@@ -16,11 +16,13 @@ This guide is for teams and companies that want to host an AI Agent on their own
 
 xAgent is not a chat application installed on every personal computer. It runs on a server, while users access it through the web UI or IM connectors. Administrators prepare models, Skills, tools, external connections, and security policies first. Users then submit tasks, provide materials, and review results.
 
-## What Self-hosting Means for xAgent
+## What a Self-Hosted AI Agent Platform Means
 
-Self-hosting means that you decide where xAgent runs, where runtime data is stored, how users access it, and which external services it connects to. xAgent currently has no official SaaS release plan, so task files and workspace data do not need to be hosted on an official platform.
+With a self-hosted AI Agent platform, the deployment owner decides where xAgent runs, where runtime data is stored, how users access it, and which external services it connects to. xAgent currently has no official SaaS release plan, so task files and workspace data do not need to be hosted on an official platform.
 
 This does not mean all data automatically remains inside your environment. Model APIs, MCP services, connectors, and external business systems still process data according to their own integrations. Whether to use a local model, which external systems to allow, and who can access the service are deployment-owner decisions.
+
+If you are comparing self-hosting with a cloud service, separate runtime location from data flow: xAgent can run on your own server, private network, or cloud account, but a model Provider, MCP server, Connector, or external business system handles material only according to its actual configuration and authorization. Self-hosting is not synonymous with every byte staying local.
 
 ## AI Agent Hosting Architecture
 

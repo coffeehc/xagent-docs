@@ -1,11 +1,11 @@
 ---
-title: "xAgent Agent Management: Main Agents and Sub-Agents"
-description: Learn how to select, create, and maintain xAgent entry points for different task scenarios, including the difference between main Agents and sub-agents.
+title: "xAgent AI Agent Setup and Management: Main Agents and Sub-Agents"
+description: Learn how to set up, select, and maintain xAgent AI Agent entry points for different task scenarios, including the difference between main Agents and sub-agents.
 status: stable
-updated: 2026-07-15
+updated: 2026-08-06
 ---
 
-# xAgent Agent Management: Main Agents and Sub-Agents
+# xAgent AI Agent Setup and Management: Main Agents and Sub-Agents
 
 ## Who This Is For
 
@@ -16,6 +16,20 @@ This page is for users and administrators who need to select, view, or maintain 
 Agent Management maintains entry points for different work scenarios. Ordinary users can think of it as a list of different work assistants: some are suitable for general questions, some for creating Skills, and others for a specific business workflow.
 
 ![xAgent Agent Management page showing available Agents, capability counts, and the create entry point](/img/manual/v005/en/agent-management.webp)
+
+## How to Set Up an AI Agent
+
+In xAgent, setting up an AI Agent means preparing one entry point for a repeatable task: define its purpose, default model, available Skills, Tools, and safety boundaries, then let users create Sessions from that entry point. It is not copying a prompt for every task, and it does not mean an Agent acts without controls.
+
+An administrator, or a user with the relevant permission, can prepare an entry point as follows:
+
+1. Create or copy a personal or public Agent in Agent Management.
+2. Use its name and short description to state the intended task, such as contract-material organization or confidential-material handling.
+3. Select a default model configuration that fits the task. For restricted material, first confirm the model service and data boundary.
+4. Select only the Skills and Tools needed for the work. High-risk Tools remain subject to approval policies.
+5. Save the entry point and validate its output, file handling, and approval behavior with a real but non-sensitive task before sharing it as a public entry point.
+
+For a one-off task, start with the general Agent and state the goal in the Session. Create a dedicated Agent only when its task boundary, default capabilities, or safety requirements need to be reused.
 
 ## When to Use It
 
@@ -78,6 +92,8 @@ Before creating an Agent, prepare the following:
 - **Security boundaries:** Let approval policies control sensitive actions.
 
 Do not put temporary accounts, passwords, tokens, or one-off task content into an Agent description.
+
+The default model comes from the administrator-configured model list. Its Provider, Base URL, key, and capabilities stay in server-managed Model Configuration and should not be written into an Agent prompt. See [Model Configuration](/docs/user-guide/model-config) for the fields and connection checks.
 
 ## Common Scenarios
 
