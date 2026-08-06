@@ -61,7 +61,7 @@ const homeContent = {
     layoutTitle: 'xAgent：可私有化部署的多用户 AI Agent 工作门户',
     layoutDescription:
       'xAgent 是面向任务完成、可私有化部署的多用户 AI Agent 工作门户，支持 Skill、Tool、MCP、连接器、工作区隔离和安全治理。',
-    kicker: 'xAgent 产品介绍 · v0.0.5.beta',
+    kicker: 'xAgent 产品介绍 · v0.0.7.beta',
     title: '可私有化部署的多用户 AI Agent 工作门户',
     subtitle:
       'xAgent 是企业统一的 AI 工作平台。服务端部署，快速接入现有系统，权限与成本集中管控、操作全程审计；员工打开网页或手机，即可使用 AI 完成工作。实现企业可管、员工好用。',
@@ -70,7 +70,7 @@ const homeContent = {
     learnAction: '了解 xAgent',
     showcaseLabel: 'xAgent 中文控制台界面',
     showcaseImage: '/img/home/v005/xagent-dashboard-zh.webp',
-    showcaseAlt: 'xAgent v0.0.5.beta 中文控制台仪表板',
+    showcaseAlt: 'xAgent v0.0.7.beta 中文控制台仪表板',
     showcaseWidth: 1600,
     showcaseHeight: 991,
     zoomImageLabel: '点击放大图片',
@@ -214,7 +214,7 @@ const homeContent = {
     layoutTitle: 'xAgent: Self-Hosted Multi-User AI Agent Platform',
     layoutDescription:
       'xAgent is a task-first, self-hosted multi-user AI agent platform with Skills, Tools, MCP, connectors, workspace isolation, and safety governance.',
-    kicker: 'xAgent Product Overview · v0.0.5.beta',
+    kicker: 'xAgent Product Overview · v0.0.7.beta',
     title: 'A Task-First, Self-Hosted Multi-User AI Agent Platform',
     subtitle:
       'xAgent is the unified AI work platform for the enterprise. Deploy on your own servers, connect existing systems quickly, centralize access and cost controls, and audit every action. Employees can get work done with AI from the web or mobile app, giving enterprises control and employees an effortless experience.',
@@ -223,7 +223,7 @@ const homeContent = {
     learnAction: 'Learn About xAgent',
     showcaseLabel: 'xAgent English console interface',
     showcaseImage: '/img/home/v005/xagent-dashboard-en.webp',
-    showcaseAlt: 'xAgent v0.0.5.beta English console dashboard',
+    showcaseAlt: 'xAgent v0.0.7.beta English console dashboard',
     showcaseWidth: 1600,
     showcaseHeight: 994,
     zoomImageLabel: 'Click to enlarge image',
@@ -455,7 +455,7 @@ export default function Home(): ReactNode {
           ? 'Self-hosted multi-user AI agent platform'
           : '可私有化部署的多用户 AI Agent 平台',
         operatingSystem: 'Linux, macOS',
-        softwareVersion: '0.0.5.beta',
+        softwareVersion: '0.0.7.beta',
         downloadUrl: installerUrl,
         releaseNotes: `${localeUrl}docs/changelog/`,
         softwareHelp: {
