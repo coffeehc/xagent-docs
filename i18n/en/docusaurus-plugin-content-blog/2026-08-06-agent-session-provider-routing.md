@@ -12,6 +12,8 @@ An organization does not need to choose between running every task on an interna
 
 This is a specific way to configure an Agent around a data boundary. It complements the general [Agent Management](/docs/user-guide/agent-management) workflow; it is not, by itself, an absolute claim that every byte of data stays inside the company. This article explains how to establish the boundary, verify it, and understand what else must be controlled.
 
+![Copying an xAgent as a personal Agent, with the default model selector in Advanced settings](/img/blog/agent-session-provider-routing/agent-default-model-en.png)
+
 ![The xAgent Model Configuration page showing the model list, Provider, connection details, and capability options](/img/manual/v005/en/admin-models.webp)
 
 {/* truncate */}
@@ -48,8 +50,6 @@ Agents and Sessions in xAgent do not store a raw Provider URL or API key. They s
 When a Session is created from an Agent that has a model configuration, xAgent expands that configuration into the new Session's runtime metadata. Later model requests use the Session's current model configuration. A Session can also select a model configuration independently, which is useful for a one-off confidential task that does not justify a new Agent.
 
 This allows capability isolation and model-path isolation to be designed together. A confidential-material Agent can use an internal model by default and expose only the Skills and Tools needed for that job, while a general Agent can retain an external model and its own working capabilities.
-
-![The xAgent Agent Management page showing available Agents, capability counts, and creation entry points](/img/manual/v005/en/agent-management.webp)
 
 ## A Configuration Flow You Can Review
 
