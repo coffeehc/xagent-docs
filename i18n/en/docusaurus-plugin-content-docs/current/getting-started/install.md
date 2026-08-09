@@ -172,6 +172,7 @@ Connectors are not required for basic Web console access. If the installer insta
 
 ## Next Steps
 
+- [Install the Desktop Client and Browser Extension](/docs/getting-started/install-client-and-browser-extension)
 - [Complete Your First Task](/docs/getting-started/first-task)
 - [Agent Session](/docs/user-guide/agent-session)
 - [Model Configuration](/docs/user-guide/model-config)

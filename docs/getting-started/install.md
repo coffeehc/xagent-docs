@@ -172,6 +172,7 @@ Connector 不影响 Web 控制台的基本使用。安装器已经安装 Connect
 
 ## 下一步
 
+- [安装桌面客户端与浏览器插件](/docs/getting-started/install-client-and-browser-extension)
 - [完成第一个任务](/docs/getting-started/first-task)
 - [Agent 会话](/docs/user-guide/agent-session)
 - [模型配置](/docs/user-guide/model-config)

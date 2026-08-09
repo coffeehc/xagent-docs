@@ -21,6 +21,11 @@ const sidebars: SidebarsConfig = {
         },
         {
           type: 'doc',
+          id: 'getting-started/install-client-and-browser-extension',
+          label: label('安装客户端与浏览器插件', 'Install Client and Browser Extension'),
+        },
+        {
+          type: 'doc',
           id: 'getting-started/what-is-connector',
           label: label('什么是连接器', 'What Is a Connector'),
         },

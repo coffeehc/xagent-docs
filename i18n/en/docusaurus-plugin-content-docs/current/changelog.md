@@ -3,13 +3,49 @@ title: Changelog
 description: Review important user-facing changes, binary release contents, and upgrade notes for each xAgent release.
 image: /img/share/en/xagent-overview.png
 status: stable
-updated: 2026-08-09
+updated: 2026-08-10
 schemaType: CollectionPage
 ---
 
 # Changelog
 
 This page records important installation, usage, and safety-governance changes in xAgent binary releases. xAgent remains in beta, and features, interfaces, and protocols may continue to change.
+
+## `v0.0.9.beta` - 2026-08-10
+
+[View installation instructions](/docs/getting-started/install) · [Full release notes](/blog/xagent-0-0-9-beta)
+
+This release separates the administration console from the user workspace, unifies the Web and desktop session layout, and makes per-session prompts directly editable and effective from the next model turn.
+
+### Administration Console and User Workspace
+
+- Added dedicated `/admin/login` and `/admin` entry points. Administration menus, authentication redirects, sign-out, release notices, and upgrades now remain inside the administration console.
+- `/app` is always the user entry point. Administrators opening it receive the same personal sessions and workspace experience as regular users, without system-governance menus.
+- The user workspace and administration console no longer link to each other, keeping personal work separate from organization administration.
+
+### Session Workspace
+
+- Web and desktop now share a two-column layout with the session sidebar on the left and the active conversation on the right.
+- The main session is pinned above search, while sub-sessions remain ordered by recent activity.
+- Conversation content scales with the available width and remains centered. Empty states, messages, and the composer now share one content axis.
+- The toolbar no longer exposes the internal Session identifier. Advanced settings use an icon entry, and the sidebar account menu provides personal settings and sign-out.
+
+### Session Prompts and Configuration
+
+- The prompt editor remains available when a session has no existing prompt.
+- The prompt section opens by default with a larger editing area. Long content scrolls inside the editor without hiding the actual configuration.
+- A saved session prompt applies from the next model turn for main sessions, Connector sessions, and regular sub-sessions.
+- Configuration drawers no longer close after an accidental backdrop click, reducing loss of unsaved changes. Read-only information drawers may still use backdrop dismissal.
+
+### Usage Statistics and Stability
+
+- The user dashboard is now Usage Statistics and shows only the current user's Token, model-call, and Tool-call data. The administration console retains organization-wide reporting.
+- Model usage details are visible by default without another expand action.
+- Fixed legacy Memory data being rewritten during reads or list queries, and consolidated database checks, schema creation, and migrations into the storage startup sequence.
+
+### Upgrade Notes
+
+Update administrator bookmarks and reverse-proxy rules from `/app/admin/...` to `/admin/...`; the administration login page is now `/admin/login`. `/app` opens the user session workspace, and personal usage statistics are available at `/app/dashboard`. Before upgrading, back up configuration, the database, user workspaces, Memory, Skills, Tool packages, and Connector state.
 
 ## `v0.0.8.beta` - 2026-08-09
 
