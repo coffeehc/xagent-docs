@@ -3,13 +3,52 @@ title: Changelog
 description: Review important user-facing changes, binary release contents, and upgrade notes for each xAgent release.
 image: /img/share/en/xagent-overview.png
 status: stable
-updated: 2026-08-06
+updated: 2026-08-09
 schemaType: CollectionPage
 ---
 
 # Changelog
 
 This page records important installation, usage, and safety-governance changes in xAgent binary releases. xAgent remains in beta, and features, interfaces, and protocols may continue to change.
+
+## `v0.0.8.beta` - 2026-08-09
+
+[View installation instructions](/docs/getting-started/install) · [Full release notes](/blog/xagent-0-0-8-beta) · [Backup and restore guide](/blog/xagent-backup-and-disaster-recovery)
+
+This release adds online incremental backup and disaster recovery, clarifies the boundary between formal local files and external cloud storage, and improves session file reuse, multilingual Skill governance, and local storage cleanup.
+
+### Online Backup and Disaster Recovery
+
+- Configure S3, an S3-compatible object store, or WebDAV as a backup repository, with connection testing and repository initialization before use.
+- Run backups manually or on a schedule. Every completed snapshot is independently restorable, while only new or changed encrypted content is uploaded.
+- Download, verify, and prepare the selected or latest snapshot online, then perform formal directory cutover after stopping xAgent.
+- Validate and confirm a cutover, roll back after a failed validation, or resume an interrupted restore from its durable journal.
+- Download a self-contained `recovery.yml` to list complete snapshots and prepare recovery even when the original database is unavailable.
+
+### Cloud Storage and Public Files
+
+- Mount S3, S3-compatible storage, and WebDAV into Public Files, with an independent prefix for each integration.
+- Existing user and group ACLs continue to apply. Administrators can create directories and upload files; authorized users can browse, preview, and download.
+- Static credentials are stored encrypted. TLS certificate verification can be skipped per integration for controlled internal storage using a self-signed certificate.
+- An unavailable remote remains visible and is marked unavailable instead of appearing as an empty directory.
+
+### Sessions, Skills, and Production Capabilities
+
+- Attach visible Workspace, Public Files, and cloud-storage files directly from the message composer.
+- Remote public files are processed into model-readable content on demand while originals remain in external storage. Failed imports leave no invalid attachment.
+- Skill lists, search, and runtime capabilities are projected in the response language and use the canonical name from `SKILL.md`.
+- Connector cards use the service-declared version and validate their associated Skill IDs.
+- Production mode hides development-only Tool administration pages and mutation APIs without affecting Tool selection, approval policy, or personal MCP.
+
+### Local Storage and Upgrade Boundaries
+
+- Background cleanup watches disk space and inode usage and reclaims only expired staging, terminal diagnostics, temporary data, and unreferenced content. Formal user data is not deleted by age.
+- Starting with `0.0.8.beta`, formal file storage is fixed to the local data directory. Older S3 formal storage is migrated back only after integrity validation; failure stops startup and preserves the original configuration.
+- S3 and WebDAV are cloud storage integrations under Public Files, not formal file-storage Providers.
+
+### Upgrade Notes
+
+Back up configuration, the database, Workspaces, Memory, Skills, Tool packages, and Connector state before upgrading. After repository initialization, immediately download and store `recovery.yml` offline; it contains sensitive repository access and decryption information. Third-party cloud content mounted in Public Files is outside xAgent backup and needs its own provider-side protection.
 
 ## `v0.0.7.beta` - 2026-08-06
 
