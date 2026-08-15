@@ -38,6 +38,10 @@ xAgent documentation is maintained as paired Chinese and English pages. Use the 
 
 ## Insights
 
+- [How xAgent Sessions Understand Task Changes (English)](https://xagent.xiagaogao.com/en/insights/xagent-agent-harness-task-alignment/): A DeepSeek Harness task orchestration comparison that explains xAgent's outer loop for original input, task phases, Session-wide goals, Skills, and Tools.
+- [xAgent 会话如何理解任务变化（中文）](https://xagent.xiagaogao.com/insights/xagent-agent-harness-task-alignment/): 从 DeepSeek Harness 任务编排出发，对照 xAgent 如何保存原始输入、区分任务阶段，并按需调整 Skill 和 Tool。
+- [How xAgent Tasks Run, Pause, and Resume (English)](https://xagent.xiagaogao.com/en/insights/xagent-agent-harness-execution-loop/): A DeepSeek Harness Agent Loop and tool loop comparison covering xAgent's Session runner, context assembly, Tool Calls, approvals, compression, and recovery.
+- [xAgent 任务如何持续执行、暂停与恢复（中文）](https://xagent.xiagaogao.com/insights/xagent-agent-harness-execution-loop/): 对照 DeepSeek Harness Agent Loop 与 Tool Loop，解释 xAgent 的 Session runner、上下文、Tool Call、审批、压缩和恢复。
 - [AI Agents vs. AI Automation (English)](https://xagent.xiagaogao.com/en/insights/ai-agents-vs-ai-automation/): A decision guide with a controlled xAgent workflow, approval boundary, artifact failure, repair plan, and independent verification.
 - [AI Agent 与 AI 自动化（中文）](https://xagent.xiagaogao.com/insights/ai-agents-vs-ai-automation/): 基于一次受控 xAgent 任务，对比执行路径、适用场景、审批边界与产物复验。
 - [AI Agent Skills vs. Tools vs. MCP (English)](https://xagent.xiagaogao.com/en/insights/ai-agent-tools-vs-skills/): Compare responsibilities, loading behavior, permissions, and selection criteria, then see how Skills, Tools, and MCP work together in one task.

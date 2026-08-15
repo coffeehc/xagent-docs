@@ -1,6 +1,6 @@
 # xAgent SEO 候选关键词池
 
-- 最近更新：2026-08-02
+- 最近更新：2026-08-15
 - 维护范围：Google 全球英文搜索与中文搜索机会
 - 执行协议：[xAgent 文档站 SEO / GEO 执行协议](./seo-geo-protocol.md)
 - 当前依据：[2026-07-15 关键词研究快照](./2026-07-15-keyword-research.md)、[2026-08-01 `AI agent vs AI automation` 实跑记录](./2026-08-01-ai-agent-vs-automation-research.md)、[2026-08-02 热词与长尾词扩池](./2026-08-02-hot-and-long-tail-keywords.md)、Search Console、Google Trends、用户问题与 xAgent 当前产品文档
@@ -63,6 +63,10 @@
 | `agent task delegation` | EN | 会话协作 | 任务委派 | Agent 开发者、自动化负责人 | xAgent 支持主会话与子会话通过协作事件分派任务和回传结果 | `guides/multi-agent-session-event-collaboration` | 产品能力与现有页面 | 优化现有页 |
 | `agent to agent communication example` | EN | 会话协作 | Agent 间通信示例 | Agent 开发者、自动化负责人 | xAgent 有通知、协作事件、持久队列和同用户会话边界的完整案例 | `guides/multi-agent-session-event-collaboration` | Google Autocomplete、SERP 2026-08-02 | 优化现有页 |
 | `AI agent memory management` | EN | 长期记忆 | 记忆保存、召回与治理 | Agent 使用者、平台管理员 | xAgent 只在用户明确要求时保存长期记忆，并区分当前输入、来源、时效与用户边界 | `user-guide/memory` | Google Trends、Autocomplete 2026-08-02 | 优化现有页 |
+| `DeepSeek Harness task orchestration` | EN | Agent Harness | 架构比较与任务编排 | Agent 开发者、平台工程师 | xAgent 有阶段目标、会话全局目标、任务相关度和按需能力编排的当前实现，可与 DeepSeek Harness 的插件式运行边界做事实对照 | `/en/insights/xagent-agent-harness-task-alignment/` | DeepSeek 官方页面、官方 GitHub 与 SERP 2026-08-15 | 优化现有页 |
+| `DeepSeek Harness 任务编排` | zh-CN | Agent Harness | 架构比较与任务编排 | Agent 开发者、平台工程师 | xAgent 有阶段目标、会话全局目标、任务相关度和按需能力编排的当前实现，可与 DeepSeek Harness 的插件式运行边界做事实对照 | `/insights/xagent-agent-harness-task-alignment/` | DeepSeek 官方页面、官方 GitHub 与 SERP 2026-08-15 | 优化现有页 |
+| `DeepSeek Harness agent loop` | EN | Agent Harness | 执行循环与运行时架构 | Agent 开发者、平台工程师 | xAgent 有 Session runner、动态上下文、Tool loop、审批、压缩和恢复的当前实现，可与 DeepSeek Harness 的 Turn、Step 和事件日志做事实对照 | `/en/insights/xagent-agent-harness-execution-loop/` | DeepSeek 官方架构文档与 SERP 2026-08-15 | 优化现有页 |
+| `DeepSeek Harness Agent Loop` | zh-CN | Agent Harness | 执行循环与运行时架构 | Agent 开发者、平台工程师 | xAgent 有 Session runner、动态上下文、Tool loop、审批、压缩和恢复的当前实现，可与 DeepSeek Harness 的 Turn、Step 和事件日志做事实对照 | `/insights/xagent-agent-harness-execution-loop/` | DeepSeek 官方架构文档与 SERP 2026-08-15 | 优化现有页 |
 
 ### 候选
 
@@ -112,3 +116,4 @@
 | 2026-08-01 | 完成 114 份中英文 Docs/Blog 源内容责任审计；相近页面意图边界清楚，本轮不合并页面、不新增近义落地页、不调整关键词状态 | 全站内容清单与生成站点审计 | 部署后按页面检查 Search Console 查询落点 |
 | 2026-08-02 | 扩展 6 个产品主题集群；新增 Tools/Skills/MCP 已选题，并补充部署、安全、记忆、会话协作、工作流和中文平台候选 | Search Console、4 组 Google Trends、15 个 Autocomplete 种子、4 组 SERP 意图抽查 | 先完成 Agent 与自动化文章，再制作 Tools/Skills/MCP 内容简报 |
 | 2026-08-02 | 完成 Agent 与自动化中英文 Insights、真实计划与审批截图、失败产物复验、持久化修复计划和发布前站点校验 | xAgent 受控实跑、真实 CSV 解析器、双语生产构建、浏览器桌面与移动 QA | 人工审阅后发布；发布 2 至 4 周后按页面复盘 Search Console |
+| 2026-08-15 | DeepSeek Harness 开发者预览发布后复核官方页面、GitHub 和当前 SERP；将任务编排与 Agent Loop 两组比较意图分配给已有双语 Harness Insights，保留 xAgent 标题与 slug，避免误导和页面竞争 | DeepSeek 官方页面、官方 GitHub、官方架构文档与 SERP 2026-08-15 | 发布后 2 至 4 周按四个页面分别复盘 Search Console 查询落点 |
