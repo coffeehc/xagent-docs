@@ -2,167 +2,180 @@
 slug: xagent-agent-harness-execution-loop
 title: "Inside the xAgent Agent Harness, Part 2: How Tasks Run, Pause, and Resume"
 date: 2026-08-15
-description: "Compare the DeepSeek Harness Agent Loop with xAgent's inner execution loop: one Session runner, dynamic context, Tools, approvals, compression, and recovery."
+description: "Compare the DeepSeek Harness Agent Loop with xAgent's AI agent context management: one Session runner, request assembly, Tools, approvals, compression, and recovery."
 authors: [xagent]
 tags: [ai-agent, architecture, runtime, approvals, long-running]
 image: /img/share/en/xagent-overview.png
 ---
 
-After task goals and the capability environment are aligned, xAgent enters what is usually called the Agent Loop. This loop is not a model process running alone until it finishes. Brain controls Session-level scheduling, SessionEngine owns runtime state and assembles every request, and AgentService owns only the fixed model and Tool execution flow.
+After outer task control prepares the goals and capability environment, xAgent enters what is usually called the Agent Loop. Brain controls Session-level scheduling, SessionEngine coordinates Session facts and runtime state, AgentService runs the fixed model and Tool loop, and ToolService governs each call.
 
-This division allows one task to continue after a Tool Call, wait before a high-impact action, compress a growing context, exit when the user interrupts it, and resume after a service restart when valid recovery material exists.
+This path lets one task continue after Tool Calls, wait before a high-impact action, compress a growing context, exit when the user interrupts it, and resume after a service restart when valid persisted facts exist.
+
+This AI agent context-management and execution loop was further improved in [`0.0.10.beta`](/docs/changelog#v0010beta---2026-08-16). This article focuses on how each request is assembled, suspended, compressed, and recovered.
 
 {/* truncate */}
 
-## The DeepSeek Harness Agent Loop and xAgent's Inner Loop
+## Comparison Baseline and Scope
 
-In the [official DeepSeek Harness architecture](https://github.com/deepseek-ai/deepseek-harness/blob/master/docs/architecture.md), a Turn contains zero or more Steps, and each Step covers a model request and its Tool execution. The loop assembles the Prompt and Tool schemas, calls the model, runs the Tool pipeline, and appends the resulting events to the Session log. This is why searches for `DeepSeek Harness agent loop` and `DeepSeek Harness tool loop` point to the same runtime question: after a model returns a Tool Call, how are durable facts preserved so the next Step can start reliably?
+For an architecture-level decision and use-case comparison, start with [DeepSeek Harness vs. xAgent: Choosing an Agent Harness Architecture](/insights/deepseek-harness-vs-xagent). This article continues with runtime execution, pausing, and recovery.
 
-xAgent's inner loop follows a similar principle while using different execution units and fact owners:
+This article continues to use xAgent `82f3a1f6` on August 16, 2026, and [DeepSeek Harness `47f94385`](https://github.com/deepseek-ai/deepseek-harness/tree/47f943859bef60e4160492346772ded9b24f765a) on August 13, 2026, as its factual baseline. DeepSeek Harness was still a developer preview at that commit. The comparison covers published code and documentation, not inferred future stability.
 
-| Dimension | DeepSeek Harness | xAgent |
+Both systems implement a Harness layer, but their fact models differ:
+
+- DeepSeek is composition-first and event-log-first.
+- xAgent is fact ownership-first and owner-state-first.
+
+These are not two names for the same implementation. DeepSeek composes capabilities through a Cordis plugin tree and uses one event log for reconstruction and replay. xAgent divides state across a fixed owner spine and persists long-task facts for recovery across requests.
+
+## Side-by-Side: Similar Loops, Different Fact Boundaries
+
+| Dimension | DeepSeek Harness `47f94385` | xAgent `82f3a1f6` |
 | --- | --- | --- |
-| Execution unit | A Turn contains one or more model-and-Tool Steps | Brain drives a Session task turn while AgentService runs the fixed LLM / Tool loop |
-| Durable history | An append-only Session event log supplies later context | SessionEngine commits History, pending state, checkpoints, and recovery material |
-| After a Tool | The Tool pipeline runs and appends result events | A committed Tool result triggers assembly of the next model request |
-| Extension boundary | Plugins can replace model, Tool, Session, and Agent Loop components | Brain, SessionEngine, AgentService, and Tool fact owners divide responsibilities |
+| Serialization | `ReactLoopAgent` inbox and phase control one Agent's activity | Brain serializes a Session through SessionEngine's single runner |
+| Execution unit | Durable `Turn -> Step -> Model + Tools` | Brain organizes a task turn; AgentService runs the inner model / Tool loop |
+| Session facts | One append-only `SessionEvent` log is the main fact carrier | Chat, SessionMeta, recovery snapshots, SessionEvent, and Memory are divided by owner |
+| Context assembly | Plugins assemble each step and log request header, prompt, tools, and model config | SessionEngine assembles each request dynamically from current owner facts |
+| Tool pipeline | Plugin seams for `pre-execute -> guards -> execute -> post-execute -> finalize` | A fixed linear ToolService governance chain centralizes validation and execution facts |
+| Tool concurrency | `parallel` / `exclusive` modes with model-order result commit | Tool Calls currently execute serially in model order |
+| Approval | An active-turn Promise waits while `asked` / `decided` enter the log | `RuntimeAuditUnit` and recovery snapshots can wait across requests and restarts |
+| Compaction | A provider replaces the model-visible surface while retaining the raw log | Structured continuity summary, checkpoint, and pending promotion |
+| Crash recovery | Synthetic closers balance open calls, steps, and turns; partial turns do not resume | Valid snapshots restore guidance, approval, compaction, and other runtime facts |
+| Subagent | Spawn, fork, and replaceable providers, including ACP, Codex, and Claude Code | Main / Sub Sessions, SessionEvent, and Workgroup; the receiver understands its own task |
+| Sandbox | Replaceable FS, Subprocess, and Sandbox provider seams | ProcessSandbox, workspace execution lease, and file-change reconciliation |
 
-The shared principle matters more than a specific API: one model response is not a Harness, and one successful Tool Call is not task completion. The Harness must own deterministic boundaries for the loop, context, and continuation. DeepSeek Harness currently exposes these plugin contracts as an [open-source developer preview](https://github.com/deepseek-ai/deepseek-harness); the rest of this article describes execution, waiting, compression, and recovery in xAgent's current implementation.
+Both designs recognize that one model response is not a complete Harness and one successful Tool result does not complete the user's objective. Their main disagreement is what counts as a recoverable fact and where extensions attach.
 
-## The Outer Task Loop and Inner Execution Loop
+## Why DeepSeek Has Stronger Exact Replay
 
-The previous article, [Inside the xAgent Agent Harness, Part 1: How Sessions Understand Task Changes](/insights/xagent-agent-harness-task-alignment), introduced the outer task-control loop. It determines which task phase owns the current message and whether Skills and Tools need to change.
+The DeepSeek [architecture documentation](https://github.com/deepseek-ai/deepseek-harness/blob/47f943859bef60e4160492346772ded9b24f765a/docs/architecture.md) states a direct invariant: `Model-visible means logged`. User messages, stream chunks, assistant messages, Tool calls and results, request headers, and the effective prompt, tools, and model config can be reconstructed from the Session log.
 
-The inner execution loop starts from that aligned task state:
+Fork, resume, transcripts, telemetry, and UI replay can therefore derive from one event stream. Compaction does not delete the original facts. It replaces a range on the model-visible surface with a summary while retaining the raw log and replacement evidence.
+
+xAgent does not depend on one exact event stream to reconstruct every request. It assembles current context from several fact owners. This gives DDD responsibilities a clearer shape and allows an owner to correct its own state, but the evidence for exactly which prompt, Tool schema, and owner fact versions entered a historical request is less direct than in DeepSeek.
+
+That is an architecture judgment. It does not mean xAgent lacks persistence, or that a single-log model automatically fits every business fact.
+
+## Current xAgent: One Runner per Session
+
+User messages, Connector events, Session collaboration input, and approval decisions can arrive close together. Brain first acquires SessionEngine's single runner, then consumes input, events, guidance, and pending state in order. If a runner already exists, a new entry records a wake request. When the old runner releases and executable work remains, Brain acquires it again and continues draining.
+
+| Owner | Current responsibility | Explicitly does not own |
+| --- | --- | --- |
+| Brain | Input scheduling, single runner, deterministic task transitions, recovery, and interruption boundaries | Model-request assembly or Tool business facts |
+| SessionEngine | Business actions over queues, History, goals, pending state, compression, and recovery material | Direct business-model calls |
+| AgentService | Fixed LLM / Tool loop, retries, loop guards, and result progression | Cross-request waiting facts |
+| ToolService | Tool path, enabled/readiness, schema, approval, secrets, execution lease, and result normalization | Task relationships or Session goals |
+
+This serialization targets the same class of problem as DeepSeek's inbox and phase, but the implementations are not equivalent.
+
+## Every Model Call Is Reassembled from Owner Facts
+
+AgentService does not keep a private, mutable copy of Session History. Before each model call, SessionEngine assembles the request from current facts, including:
+
+- Session-wide and current-phase goals;
+- raw History, checkpoints, and the current compression boundary;
+- loaded Skills, Tool schemas, and call policy;
+- Memory, resource references, attachments, and workspace context;
+- current model configuration, Prompt, and runtime policy.
+
+After a Tool result becomes stable, the next model call is assembled again. Newly committed Tool results, capability changes, pending consumption, and context maintenance enter the next round without creating a second drifting state inside AgentService.
+
+This differs from DeepSeek's strategy of deriving model History from the log and recording a complete request header. DeepSeek prioritizes exact request replay; xAgent prioritizes assembling the next request from each owner's latest facts.
+
+## A Fixed ToolService Governance Chain Is Not Missing Capability
+
+A model call can produce final text or multiple Tool Calls. xAgent currently executes those calls one by one in model order. Each call passes through centralized governance, and only stable assistant/Tool pairs are committed:
 
 ```text
-Brain schedules the current Session
-  -> SessionEngine assembles the model request
-  -> AgentService calls the model
-  -> The model returns text or a Tool Call
-  -> Execute, govern, or suspend the Tool Call
-  -> SessionEngine commits assistant / tool history
-  -> Reassemble the next model request
-  -> Final response, waiting, interruption, or failure
+Model emits a Tool Call
+  -> Resolve the Tool available to this Session
+  -> enabled / readiness / schema checks
+  -> approval and secret handling
+  -> workspace execution lease / runtime execution
+  -> result normalization and secret redaction
+  -> commit assistant tool_call + tool_result as a pair
+  -> reassemble the next model request
 ```
 
-The two loops cannot be collapsed into one. Task control needs stable goals, responsibility routing, and a capability environment. The model and Tool loop consumes the execution context already prepared for it. Otherwise, each Tool result could be mistaken for a new task input, while each user refinement could bypass task-state evaluation.
+DeepSeek's [Tool pipeline](https://github.com/deepseek-ai/deepseek-harness/blob/47f943859bef60e4160492346772ded9b24f765a/docs/tool-execution-pipeline.md) provides waterfalls, monotonic guards, wrappers, post hooks, and finalization. `parallel` calls may overlap in a bounded pool while results still commit in the model's original order. Its Tool extension model is more flexible.
 
-## One Session Has One Runner
+xAgent has a more fixed extension shape but more centralized governance facts. A non-plugin pipeline does not imply missing path, approval, secret, workspace, or result-normalization controls. Serial-safe execution is also a reasonable default. A concurrency-safe classifier and model-order result commit become worthwhile only when real performance evidence shows Tool concurrency is a bottleneck.
 
-User messages, Connector events, Session collaboration inputs, and approval decisions can arrive close together. xAgent does not allow them to modify one Session's runtime state concurrently. Brain acquires the single runner through SessionEngine, then advances the current input, pending state, events, and guidance serially.
-
-| Owner | Responsibility in the execution path | What it does not own |
-| --- | --- | --- |
-| Brain | Input scheduling, the single runner, continued draining, recovery, and interruption boundaries | It does not build model requests or write Tool business facts |
-| SessionEngine | Queues, task goals, runtime status, history, context assembly, pending state, and recovery material | It does not call the business model directly |
-| AgentService | The fixed LLM / Tool loop, model retries, loop guard, and Tool-result progression | It does not own waiting facts across requests |
-
-If another input arrives while the runner is being released, SessionEngine records a wake request. Brain reacquires the runner when executable work remains, preventing a continuation opportunity from being lost during the old runner's exit window. Ordinary concurrent input is therefore queued instead of failing with “Session busy, try again.”
-
-## Context Is Reassembled for Every Model Call
-
-AgentService does not keep a private History or SessionMeta that it modifies over time. Before each model call, it asks SessionEngine to assemble a request from current facts, including:
-
-- the current task and execution goals;
-- usable Session history or compressed continuation state;
-- currently loaded Skills, Tool schemas, and calling boundaries;
-- Memory, resource references, attachments, and Workspace context;
-- the current model configuration, Prompt, and runtime policy.
-
-After a Tool result is committed, the next model call goes through SessionEngine assembly again. The latest Tool result, newly applied capability changes, and committed runtime state all enter the next request, while AgentService never develops a second, drifting copy of Session facts.
-
-When a user saves a new model or Skill configuration during execution, the change affects later model calls that have not yet been assembled. It does not rewrite a request already sent or a Tool Call already in progress. See [Runtime Model and Skill Switching](/docs/guides/ai-agent-runtime-hot-switching) for the exact boundary.
-
-## How the Model and Tools Form a Fixed Loop
-
-A model call can produce final text or one or more Tool Calls. For a Tool Call, the Harness advances these steps:
-
-1. Preserve the assistant message and Tool Call identity produced by the model.
-2. Validate the call against the Tool schema, current user, Session, resources, and governance policy.
-3. Suspend the call when approval is required; otherwise dispatch it to the Tool fact owner and runtime.
-4. Append the stable Tool result to the same Session history.
-5. Reassemble context and call the model again.
-
-A successful Tool result means that one action completed; it does not mean that the user's goal is complete. The model still needs to inspect files, data, external state, or other acceptance evidence and decide whether to call another capability, repair the output, or produce a final response.
-
-The Harness also tracks repeated failures and no-progress calls to prevent the model from repeating one Tool pattern indefinitely. This loop guard is an execution safeguard. It does not replace the task method in a Prompt or Skill, and it cannot present an unfinished objective as success.
-
-In the customer-support reporting run, the timeline records plan creation, task transitions, file writes, file inspection, and progress updates as consecutive rounds of one task rather than unrelated conversations:
+In the customer-support reporting run, the timeline records model output, file writes, task completion, and the next task start as consecutive rounds of one long task:
 
 ![The xAgent timeline shows planning, task transitions, file writes, and inspection progressing inside one execution loop](/img/insights/agent-harness/agent-tool-loop-en.webp)
 
-The generated HTML remains independently inspectable as a task artifact. Users can validate the KPI values and presentation itself instead of treating one successful file-write call as proof that the deliverable is complete:
+The final HTML remains independently inspectable. Users validate the KPI values, charts, and conclusions rather than treating one successful file-write call as proof of completion:
 
 ![The xAgent file preview shows the English customer-support report and its five independently calculated KPIs](/img/insights/agent-harness/html-report-preview-en.webp)
 
-## Approval Is a Suspended Tool Call, Not a New Task
+## Approval: Live Promise Versus Durable Pending State
 
-When a Tool Call matches an approval policy, xAgent preserves the original call and waiting facts, and the Session enters `waiting_approval`. AgentService leaves the current execution stack, while SessionEngine owns the waiting state across requests.
+DeepSeek's approval seam asks inside an active turn, waits for an answerer to return a closed outcome, and appends `approval/asked` and `approval/decided` as an audit pair. A missing or invalid answerer fails closed.
 
-After approval, Brain reacquires the runner and AgentService consumes the confirmed pending state, then continues from the original Tool Call. On rejection or cancellation, the action is not executed and the rejection returns to the same task context. The approval decision does not enter the task-relevance Agent and is not interpreted as a new task goal.
+When xAgent requires approval, AgentService hands the blocked Tool Call, preallocated result identity, and `PendingRequest` to SessionEngine as a `RuntimeAuditUnit`. The Session waits and the current execution stack exits. After Brain validates and binds the user's decision, AgentService consumes that durable pending state under a later runner and either continues the original call or commits a rejection result.
 
-This separates “what the model proposes” from “what the system permits.” The model proposes an action, Tool governance reduces the call to inspectable facts, and the approval policy allows, rejects, or suspends it. See [AI Agent Approval and Safety Controls](/docs/guides/agent-approval-security) for the current scope.
+An xAgent approval is therefore neither a new task message nor only a Promise in an active stack. It is designed for long waits across requests and restarts. DeepSeek's asked/decided pair provides a more direct single-stream audit trail.
 
-## Guidance and Interruption During Execution
+## The Two Compaction Models Are Not Equivalent
 
-New user input or a Session event that arrives during a task enters a queue managed by SessionEngine and is consumed by the single runner at an explicit boundary. It does not mutate a model request already in progress or write runtime state concurrently with the current Tool Call.
+DeepSeek implements compaction as an optional capability seam. A provider generates a summary, and a replacement operation changes what later model requests see on the Session surface. The raw events, shadowed range, summary result, and model-call evidence remain in the append-only log. This design prioritizes audit, replay, and reconstruction of the model-visible surface.
 
-When the user explicitly interrupts execution, SessionEngine cancels the current Agent context, and Brain normalizes runtime state after the execution stack returns. An interruption is not presented as a successful model response. If later work remains in the queue, it can enter a new processing turn after the old execution stack exits.
+xAgent Context Compression prioritizes semantic continuity and crash-safe commit. SessionEngine freezes real History and selects a legal message boundary. SummaryService produces an intermediate structured result, and SessionEngine validates and commits the checkpoint. The continuity summary preserves execution facts such as Goal, Artifact, Decision, ActiveUserRequest, constraints, open questions, and next actions.
 
-This keeps “refine the task,” “stop current execution,” and “approve one specific action” as three distinct signals. They can affect the same Session without sharing an ambiguous chat message as a runtime-control mechanism.
+A Tool Call and Tool Result cannot be split by a compression boundary. Session-wide and current-phase goals still come from SessionMeta; a model-generated summary cannot overwrite their owner.
 
-## Context Compression Preserves Executable State
+## Active-Turn Compaction and Restart Recovery
 
-A long task accumulates user messages, model output, Tool Calls, Tool results, and capability definitions. As it approaches the model's context budget, xAgent uses Context Compression to release space, but it does not treat this as an ordinary conversation summary.
+One user request can produce many model and Tool rounds and exhaust context inside the same active turn. xAgent can compact sealed earlier material while retaining a continuity anchor for the current request. A checkpoint and pending compaction form a verifiable commit state before `ContextStartMessageId` advances; restart recovery then promotes a valid pending state or discards one whose preconditions never committed.
 
-SessionEngine freezes the real History snapshot, selects a legal message boundary, and maintains the checkpoint. SummaryService generates only an intermediate semantic compression result. SessionEngine then validates and commits the final executable continuation state. Compression preserves what later execution needs most:
+DeepSeek persistence preserves flushed events from a crashed turn and appends synthetic `unknown` / `interrupted` closers for unanswered Tools, an open step, and the turn, restoring a valid transcript. Its [persistence documentation](https://github.com/deepseek-ai/deepseek-harness/blob/47f943859bef60e4160492346772ded9b24f765a/packages/session/session-persistence/README.md#known-limitations-and-deferred-work) explicitly states that the current crash story closes an interrupted turn instead of resuming a partial turn.
 
-- the current goal, deliverable, and progress;
-- constraints, decisions, and working facts that still apply;
-- open questions and next actions;
-- stable artifact references needed to continue.
+xAgent focuses on a different recovery unit. After dependencies become ready, Brain reads valid recovery snapshots and uses the same runner and AgentService path to restore guidance, pending approval, active-turn compaction, and related runtime facts. It does not promise lossless replay of every external Tool. Idempotency, duplicate-request protection, and result lookup remain with the Tool and external system.
 
-A Tool Call and its Tool Result cannot be split by a compression boundary. The Session-wide and current-phase goals still come from SessionMeta; model-generated compression cannot become their owner. A phase change may trigger compression evaluation, but it reuses the same checkpoint, pending, and finalize path instead of creating a second “semantic compression” state machine.
+The precise comparison is: DeepSeek is stronger at log balancing, exact replay evidence, and interrupted transcripts; xAgent is stronger at resuming durable long-task business state across requests and restarts.
 
-## Active-Turn Compression Keeps One Long Turn Running
+## Subagents and Sandboxes: Adjacent Capabilities, Different Priorities
 
-Some tasks receive one user message and then require many model and Tool rounds, reaching the context budget inside the same turn. xAgent can compress sealed earlier execution material during that active turn while preserving a continuity anchor for the current user request.
+DeepSeek exposes Subagents through replaceable providers for in-process spawn, fork, ACP, Codex, Claude Code, and other backends. xAgent uses Main / Sub Sessions, SessionEvent, and Workgroup collaboration. A receiving sub-Session gets the original request and resource references, then understands the task and prepares its own capabilities. The parent does not preselect its Skills or Tools.
 
-This does not fabricate a new user message or treat a compressed summary as original history. SessionEngine still uses real message boundaries and checkpoints, clearly separating backend-owned continuity fields from model-generated semantic state. After compression, the next model request continues from the new context starting point.
-
-For users, the important result is that a long task does not need to end automatically merely because one model context is becoming full. Compression can still omit low-value detail, so important source material, decisions, and intermediate artifacts should be preserved as stable files.
-
-## How Execution Recovers After a Service Restart
-
-xAgent does not promise exact recovery from every interruption. Recovery depends on valid persisted runtime snapshots, pending state, checkpoints, and Session status. After service dependencies are ready, Brain scans resumable Sessions and uses the same runner and AgentService path to continue; it does not start a separate “recovery Agent Loop.”
-
-A Session waiting for approval continues waiting instead of bypassing confirmation after restart. An unfinished context compression is committed or normalized from its pending state. An abnormal running status without valid recovery material is not blindly treated as a resumable task.
-
-The accurate claim is therefore “execution recovery based on valid persisted state,” not “every Tool can be replayed without loss.” Idempotency, duplicate-request protection, and result lookup in an external system remain responsibilities of the corresponding Tool and external service.
-
-## Agent Harness Is Not ProcessSandbox
-
-The Agent Harness decides when to call the model, when to execute a Tool, how to wait, and how to continue. ProcessSandbox handles process, file-view, resource, and platform isolation when a local command actually starts. They occupy different layers of the same task path.
+Sandbox design shows the same difference. DeepSeek uses FS, Subprocess, and Sandbox seams to replace the execution world. xAgent uses:
 
 ```text
 Agent Harness
-  -> Tool governance and Tool runtime
+  -> ToolService governance
   -> Workspace Execution Lease
   -> ProcessSandbox
-  -> Constrained local process and file-change commit
+  -> file-change reconciliation
 ```
 
-Not every Tool passes through ProcessSandbox. Remote MCP and Connector Tools, for example, have their own execution boundaries. Every Tool Call still passes through the Harness for history, governance, waiting, and result progression. See [Runtime and ProcessSandbox](/docs/architecture/runtime) for sandbox file projections and resource limits.
+Not every Tool passes through ProcessSandbox. Remote MCP and Connector Tools have their own execution boundaries, while every Tool Call still passes through Harness history, governance, waiting, and result progression. DeepSeek is stronger in provider replaceability; xAgent is stronger in workspace fact governance. See [Runtime and ProcessSandbox](/docs/architecture/runtime).
 
-## Users See Different Runtime States of One Task
+## Architecture Conclusions and Optional Improvements
 
-These internal boundaries ultimately project into states users can understand: preparing context, running, waiting for approval, compressing, interrupted, failed, or idle. State changes come from committed runtime facts owned by the responsible service, not from guesses based on chat text.
+Four conclusions follow from the current implementations:
 
-Users can close the browser and return later, or receive notifications and handle approvals through a Connector. As long as the server is running and the task has not entered a waiting or failure boundary, Brain continues advancing the same Session. See [How AI Agents Run Long Tasks](/docs/guides/long-running-agent-task) for organizing source material, acceptance checks, and staged delivery.
+1. xAgent has a complete Harness layer even without a package named `harness`.
+2. DeepSeek has stronger exact-request replay and Tool extensibility; xAgent has stronger durable approval, active-turn compaction, and owner-state recovery.
+3. Their Session facts, compaction, and crash recovery cannot be called equivalent merely because adjacent concepts share names.
+4. xAgent should not copy everything-is-a-plugin for formal symmetry.
 
-At completion, the final response, Session file tree, and explicit validation results form one delivery record. This run preserved the CSV, exposed the HTML report, summarized data-backed findings, and reported each acceptance check:
+Optional future improvements include:
+
+- formally define outer task control, Session runtime, inner Agent loop, Tool governance, and execution isolation as the xAgent Harness boundary;
+- project read-only evidence for prompts, Tool schemas, model config, and owner fact versions to improve request reconstruction;
+- add Tool concurrency classification and model-order result commit only when real performance demand exists;
+- preserve the task relation enum, receiver self-understanding, durable approval, active-turn compaction, and owner-state correction;
+- reduce SessionEngine dependency pressure through clearer owner business actions and fewer pass-through or cross-owner operations, not by turning the entire core into plugins.
+
+These are architecture recommendations, not features claimed as already implemented.
+
+## The User Ultimately Sees Delivery Evidence
+
+Internal owner boundaries project into runtime states users can understand: preparing context, running, waiting for approval, compressing, interrupted, failed, or idle. At completion, the final response, Session file tree, and explicit validation results form one delivery record:
 
 ![xAgent displays the final English report conclusions, generated files, and itemized validation results](/img/insights/agent-harness/task-artifacts-validation-en.webp)
 
-Taken together, the two articles describe the xAgent Agent Harness as two loops: the outer loop understands tasks and prepares the environment; the inner loop executes, waits, compresses, and recovers. Models provide semantic judgments and action proposals, while deterministic owners control facts, permissions, and state transitions.
+Together, the two articles describe the xAgent Agent Harness as two coordinated layers. Outer control classifies task relationships and adds capabilities; the inner loop executes, waits, compresses, and recovers. Models provide constrained semantic judgment and action proposals, while deterministic owners control facts, permissions, and state transitions.

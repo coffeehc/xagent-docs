@@ -38,6 +38,8 @@ xAgent documentation is maintained as paired Chinese and English pages. Use the 
 
 ## Insights
 
+- [DeepSeek Harness vs. xAgent (English)](https://xagent.xiagaogao.com/en/insights/deepseek-harness-vs-xagent/): An architecture decision guide comparing plugin composition, Session facts, task semantics, Tool governance, recovery, Subagents, and sandboxes.
+- [DeepSeek Harness 与 xAgent（中文）](https://xagent.xiagaogao.com/insights/deepseek-harness-vs-xagent/): 对比插件组合、会话事实、任务语义、Tool 治理、恢复、Subagent 与 Sandbox，说明两种 Agent Harness 路线分别适合什么场景。
 - [How xAgent Sessions Understand Task Changes (English)](https://xagent.xiagaogao.com/en/insights/xagent-agent-harness-task-alignment/): A DeepSeek Harness task orchestration comparison that explains xAgent's outer loop for original input, task phases, Session-wide goals, Skills, and Tools.
 - [xAgent 会话如何理解任务变化（中文）](https://xagent.xiagaogao.com/insights/xagent-agent-harness-task-alignment/): 从 DeepSeek Harness 任务编排出发，对照 xAgent 如何保存原始输入、区分任务阶段，并按需调整 Skill 和 Tool。
 - [How xAgent Tasks Run, Pause, and Resume (English)](https://xagent.xiagaogao.com/en/insights/xagent-agent-harness-execution-loop/): A DeepSeek Harness Agent Loop and tool loop comparison covering xAgent's Session runner, context assembly, Tool Calls, approvals, compression, and recovery.

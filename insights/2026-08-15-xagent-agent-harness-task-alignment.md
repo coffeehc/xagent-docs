@@ -2,160 +2,184 @@
 slug: xagent-agent-harness-task-alignment
 title: "xAgent Agent Harness（上）：会话如何理解任务变化并调整执行环境"
 date: 2026-08-15
-description: 从 DeepSeek Harness 任务编排的关注点出发，了解 xAgent 如何保存原始输入、比较当前阶段与会话长期目标，并仅在必要时调整 Skill 和 Tool。
+description: 对照 DeepSeek Harness 任务编排，了解 xAgent 如何判断任务阶段、选择 Skill、Tool 与长期记忆，并按目标变化调整执行环境。
 authors: [xagent]
 tags: [ai-agent, architecture, sessions, skills, tools]
 image: /img/share/zh/xagent-overview.png
 ---
 
-很多 Agent 系统把 Harness 描述成一个循环：把用户消息交给模型，执行模型返回的 Tool Call，再把结果送回模型。这个循环很重要，但它还没有回答另一个更早的问题：当用户继续发消息时，这条消息是在延续当前任务、进入同一任务的新阶段，还是已经超出当前会话的职责？
+很多 Agent 系统把 Harness 描述成一个循环：把用户消息交给模型，执行模型返回的 Tool Call，再把结果送回模型。这个循环很重要，但它还没有回答一个更早的问题：用户继续发来的消息，是在延续当前任务、改变同一会话内的阶段，还是已经超出当前专业会话的职责？
 
-xAgent 把这部分放在业务 Agent 执行之前处理。原始输入先进入会话并成为稳定事实，系统再判断任务关系、维护会话目标，并在确有需要时调整 Skill 和 Tool。业务 Agent 看到的是已经对齐的任务状态和执行环境，而不是一组在会话创建时永久固定的能力。
+xAgent 在业务 Agent loop 之前处理这个问题。原始输入先成为会话事实；一次受约束的语义调用再输出任务关系，以及 Skill、Tool、Memory 三类召回词；Brain 根据枚举执行确定性状态转换；只有首次建立任务或阶段变化时，Orchestrator 才增量补充能力。
+
+这套任务理解、AI Agent 能力选择与环境准备链路已随 [`0.0.10.beta`](/docs/changelog#v0010beta---2026-08-16) 发布；本文继续说明它在 Harness 中的责任边界和执行顺序。
 
 {/* truncate */}
 
-## DeepSeek Harness 任务编排与 xAgent 的共同边界
+## 对照基线：两个 Harness，同一层、不同优化方向
 
-[DeepSeek Harness 官方页面](https://deepseek.com/harness/)将 Agent 概括为 Model 与 Harness 的组合，并把模型、Tool、Skill、Session、Sandbox、Storage、Loop、Scheduling 和 UI 都放进可组合的插件体系。其[官方架构文档](https://github.com/deepseek-ai/deepseek-harness/blob/master/docs/architecture.md)进一步把 Session 表达为追加式事件日志，把 Agent Loop 拆成可替换的模型适配、Tool 注册、Session 和循环组件。
+如果你需要先从整体架构和适用场景做选择，可先阅读[《DeepSeek Harness 与 xAgent：两种 Agent Harness 架构路线怎么选》](/insights/deepseek-harness-vs-xagent)。本文继续深入外层任务控制的当前实现。
 
-因此，`DeepSeek Harness 任务编排` 不是“给 DeepSeek 模型接几个 Tool”的同义词。它讨论的是模型调用之外，谁负责保存会话事实、装配能力并让任务连续推进。xAgent 解决的是同一层问题，但采用了自己的责任划分：
+本文以 2026 年 8 月 16 日的 xAgent `82f3a1f6`，以及 2026 年 8 月 13 日的 [DeepSeek Harness `47f94385`](https://github.com/deepseek-ai/deepseek-harness/tree/47f943859bef60e4160492346772ded9b24f765a) 为事实基线。后者在该提交的 [README](https://github.com/deepseek-ai/deepseek-harness/blob/47f943859bef60e4160492346772ded9b24f765a/README.md) 中仍明确标为 developer preview，并提示会有破坏兼容性的变化，因此本文不把它的接口稳定性或生产完整性写成既定承诺。
 
-| 对照维度 | DeepSeek Harness | xAgent |
+两者都位于模型 API 之外，负责会话、上下文、工具、执行、恢复和多 Agent 协作。xAgent 没有名为 `harness` 的独立包，但这不等于没有 Harness 层。真正的区别是核心抽象：
+
+| 维度 | DeepSeek Harness | xAgent |
 | --- | --- | --- |
-| 运行时组合 | 通过插件树和 Profile 组合模型、Tool、Skill 与运行组件 | 为每个 Session 维护实际加载的 Skill、Tool 与运行策略 |
-| 会话连续性 | 追加式 Session 事件日志是上下文来源 | SessionEngine 持有历史、阶段目标、全局目标和运行状态 |
-| 任务编排入口 | Agent、Session 与插件共同构成可替换的运行路径 | 先判断新输入与当前阶段、会话目标的关系，再决定是否调整能力 |
-| 主要边界 | 强调插件和核心运行组件之间的契约 | 强调 Brain、SessionEngine 与业务 Agent 之间的事实责任 |
+| 优化方向 | composition-first：运行时能力由 Cordis 插件树组合 | fact ownership-first：固定责任骨架围绕 Session 动态装配 |
+| 核心抽象 | plugin tree、effect、scope 与 capability seam | Brain、SessionEngine、AgentService 等 service owner 与 Session aggregate |
+| 会话事实 | append-only `SessionEvent` log 是模型上下文与回放的核心来源 | Chat DB、`session_meta.json`、恢复快照、SessionEvent 与 Memory 按 owner 分层持有 |
+| 扩展方式 | Profile、Bundle、patch、hook、waterfall、guard 与 provider | 明确的业务动作、固定治理链和按 Session 选择的 Skill、Tool |
 
-两者的共同原则是：模型只是执行参与者，Harness 才负责连续性和能力装配。区别在于，DeepSeek 的公开设计重点是插件化运行时；本文聚焦 xAgent 如何在业务 Agent 启动前理解一次任务变化。xAgent 不是 DeepSeek Harness 的分支或前端，这里只做同一架构问题下的事实对照。
+DeepSeek 的[架构文档](https://github.com/deepseek-ai/deepseek-harness/blob/47f943859bef60e4160492346772ded9b24f765a/docs/architecture.md)强调“几乎所有部分都是插件”，没有必须修改的特权核心。xAgent 则保留明确的责任骨架：
+
+```text
+DeepSeek: Profile / Bundle -> Cordis Plugin Tree -> Agent Loop
+          -> append-only SessionLog -> Tool Pipeline -> LLM / Sandbox / Subagent
+
+xAgent:   Channel / Connector / Trigger -> Brain -> SessionEngine
+          -> AgentService -> LLMProvider / ToolService
+```
+
+这两套实现解决的是同一层问题，但并不等价。xAgent 也不是 DeepSeek Harness 的 fork、前端或简单封装。
 
 ## 为什么普通 Tool Loop 不够
 
-假设一个会话正在“研究 ComfyUI 并交付 Markdown 指南”，用户接下来可能发送三种消息：
+假设一个子会话正在“研究 ComfyUI 并交付 Markdown 指南”，用户接下来可能发送：
 
-- `继续`：仍然是当前阶段。
-- `把刚才的 Markdown 转成 Word`：长期目标仍然相关，但进入了新的交付阶段。
-- `顺便帮我查一下明天的天气`：已经超出这个专业会话的职责。
+- `继续`：延续当前阶段；
+- `把刚才的 Markdown 转成 Word`：仍在会话职责内，但交付阶段或能力需求发生变化；
+- `顺便帮我查明天的天气`：超出这个专业会话的职责。
 
-如果系统只对最新一句话提取关键词，`继续` 几乎没有可用语义；如果每条消息都重新选择全部能力，普通补充也会造成不必要的环境抖动；如果直接用新消息覆盖旧目标，专业会话又会逐渐失去原来的责任边界。
+如果系统只从最新一句提取关键词，`继续` 几乎没有可用语义；如果每条消息都重建环境，普通补充也会造成能力抖动；如果直接让模型重写目标，语义判断又会变成新的事实 owner。
 
-因此，xAgent 将“这条消息与当前任务是什么关系”和“这个任务需要什么能力”拆成两个问题。
+xAgent 因此把外层任务控制拆成两件事：先判断消息与当前任务边界的关系，再在确有需要时召回和增加能力。
 
-## 两级目标描述会话任务
+## 当前代码事实：一条输入怎样进入业务 Agent
 
-执行会话保留两个不同层级的目标：
+截至 `82f3a1f6`，子会话的真实链路是：
 
-| 目标 | 表达什么 | 何时变化 |
+```text
+子会话收到原始消息和稳定资源引用
+  -> SessionEngine.AppendToHistory 持久化原始输入
+  -> 一次无状态语义调用
+  -> task_relation + 三类 recall terms
+  -> Brain 执行确定性任务状态转换
+  -> [仅 initialize / reconcile] Orchestrator 并行召回与能力选择
+  -> SessionEngine.AddSelectedCapabilities
+  -> AgentService 进入模型 / Tool loop
+```
+
+原始消息先通过 `AppendToHistory` 写入 Chat 事实并同步到 Session 上下文缓存，语义预处理随后才开始。这样，即使辅助模型、召回或编排失败，用户输入也不会消失。
+
+这条预处理只作用于 sub session。MainSession 保持协调与路由职责，不运行这套 task relevance preprocess；审批决定、系统通知和只有附件而没有明确任务文本的输入也会绕过它。
+
+## 一次语义调用只输出四个字段
+
+任务相关度 Agent 是无状态的非流式 JSON 调用。输入只包含：
+
+- 当前消息正文；
+- 稳定资源引用，例如 `ref_id`、`protocol`、`filename`、`media_type`；
+- `current_task_goal`；
+- `session_goal`。
+
+它不读取完整 History，不接收候选 Skill、Tool 或 Memory，不生成 Plan，也不承担 Orchestrator 的候选选择。输出必须严格包含四个字段：
+
+```json
+{
+  "task_relation": "continue_current",
+  "skill_recall_terms": [],
+  "tool_recall_terms": [],
+  "memory_recall_terms": []
+}
+```
+
+三组召回词都必须是非 `null` 数组，每组最多 16 项，使用简洁、去重的英文 term，并以 role 表达用途。Skill 与 Tool term 可以表示 method、action、evidence、quality、domain 或 artifact；Memory term 可以表示 entity、topic、context、preference、constraint 或 decision。
+
+这里没有第二次“任务要点提取”模型调用。界面上看到的任务语义理解和后续能力发现，分别对应一次语义预处理与 Orchestrator 阶段。
+
+## 任务关系是枚举，不是两个分数
+
+`task_relation` 只能是下面五个值：
+
+| 枚举 | 语义 | Brain 的确定性行为 |
 | --- | --- | --- |
-| 会话全局任务目标 | 这个会话长期负责的业务范围和预期结果 | 会话职责真正变化时 |
-| 当前阶段任务目标 | 全局目标下正在推进的当前步骤或交付阶段 | 进入新阶段、补充或修正当前工作时 |
+| `establish_task` | 当前消息用于建立任务 | 当前阶段目标为空时，直接用已经持久化的原始消息建立目标 |
+| `continue_current` | 延续、澄清或修正当前任务 | 保持目标和能力，继续执行 |
+| `change_within_session` | 仍在会话职责内，但阶段或能力需求变化 | 原始消息成为新的阶段目标，进入 reconcile |
+| `outside_session_scope` | 不属于当前子会话的全局职责 | 不覆盖已有目标和能力，交给当前 Agent 结合上下文处理 |
+| `uncertain` | 现有事实不足以稳定判断 | 保持现状，不自动改变任务事实 |
 
-例如，“研究 ComfyUI 并交付完整指南”可以是会话全局目标，“整理节点连接关系”是当前阶段。转为 Word 交付时，当前阶段可以变化，但会话仍然属于同一个研究任务。
+Brain 不使用 score threshold，也不让模型生成一段“改写后的目标”。当当前阶段目标为空时，原始用户消息就是任务目标；当关系为 `change_within_session` 时，原始消息成为新的阶段目标；其他关系都保留已有 goal。
 
-这两个目标是会话运行态的稳定事实。上下文摘要可以引用它们来保持连续性，但摘要不能反向覆盖目标；Plan 和 Task 的完整结构也继续由各自的事实责任方维护，不会复制进会话目标。
+Session 仍区分全局目标与当前阶段目标。全局目标表达长期职责，阶段目标表达正在推进的工作。摘要、Plan 和 Task 可以引用它们，但不能反向成为 goal owner。
 
-## 原始输入必须先成为事实
+## 只有两种状态会触发 Orchestrator
 
-xAgent 不会在消息刚到达 Channel 时立即做相关度判断。消息先进入 Session 队列，Brain 取得该 Session 的唯一执行权，SessionEngine 按实际消费顺序绑定下一条输入并写入历史，然后才开始语义判断。
+只有任务首次初始化的 `initialize`，或 `change_within_session` 产生的 `reconcile`，会进入能力环境准备。继续当前任务、职责外输入和不确定输入不会重新选择能力。
 
-```text
-用户或会话协作输入
-  -> SessionEngine 排队并保存原始输入
-  -> Brain 取得当前 Session 的唯一 runner
-  -> SessionEngine 绑定下一条任务输入
-  -> 判断任务关系
-  -> 对齐任务状态与能力环境
-  -> 进入业务 Agent loop
-```
+Orchestrator 并行召回三类上下文：
 
-这个顺序解决了两个问题。第一，任何辅助模型失败都不能让用户原始消息消失。第二，同一会话快速收到多条消息时，每条消息都基于前一条已经提交的最新任务状态判断，而不是读取消息到达瞬间的过期状态。
+- Skill 候选；
+- ToolSet 与已启用单 Tool 候选；
+- 当前用户的长期 Memory。
 
-审批结果、Tool 结果、系统通知和确定性命令不会进入这条任务相关度链。它们各自沿已有的审批、执行或控制路径处理，避免被误判成新任务。
+召回 score 只用于候选截断、排序和调试日志，不进入最终编排 Prompt，也不驱动 Brain 的任务关系转换。候选在进入模型前按稳定引用排序，避免同一输入因并发完成顺序不同而产生随机排列。
 
-## 相关度 Agent 只提供信号
+下面这次客服运营周报运行展示了语义理解、能力发现和编排阶段。它不是“三种模型角色”的串联，也不是两次任务语义提取：
 
-xAgent 使用一个内部、无状态的任务相关度 Agent。它只接收：
+![xAgent 在接收客服运营周报任务后显示任务语义理解、能力查找和任务编排状态](/img/insights/agent-harness/task-environment-orchestration-zh.webp)
 
-- 当前用户原始消息及稳定资源引用；
-- 当前阶段任务目标；
-- 会话全局任务目标。
+## 编排只增加能力，不建立第二个事实中心
 
-它不接收完整 History、候选 Skill、候选 Tool、Memory、执行步骤或已有编排结果。输出也只有两个分数：当前消息与当前阶段的相关度，以及与会话全局目标的相关度。
+Orchestrator 消费已经对齐的任务、三类 recall terms、当前能力和召回候选，输出需要新增的 ToolSet、Tool 与 Skill。SessionEngine 通过 `AddSelectedCapabilities` 原子合并这些选择：
 
-相关度 Agent 不生成新目标，不推荐 Skill，不决定是否压缩，也不直接修改会话。它只是把一个难以用字符串规则完成的语义比较，转换成受约束的运行时信号。真正的状态变化仍由 Brain 根据分数和确定性运行状态选择，并通过 SessionEngine 的业务动作提交。
+- 保留已经加载的能力；
+- 补齐默认 discovery 能力；
+- 只增加，不隐式删除；
+- 不创建 Session；
+- 不改写 task goal；
+- 不选择或修改模型、AgentDefinition 和特殊角色。
 
-## 两个维度如何选择后续流程
+删除能力必须走显式卸载流程。模型配置与 Agent 身份也继续由各自 owner 解析，不能因为能力编排而被顺手替换。
 
-对外理解这套逻辑时，不需要依赖具体阈值。高、低和不确定三个区间形成以下决策边界：
-
-| 当前阶段相关度 | 全局目标相关度 | 默认解释 | 系统行为 |
-| --- | --- | --- | --- |
-| 高 | 高 | 当前工作的继续、补充或修正 | 保持任务和能力环境，继续执行 |
-| 低 | 高 | 同一职责内的新阶段 | 更新阶段目标，按需调整能力，并评估是否压缩上一阶段 |
-| 低 | 低 | 新任务或职责范围外请求 | 不覆盖当前会话目标和能力，保留给责任路由重新判断 |
-| 高 | 低 | 阶段与全局目标可能冲突 | 保留现状，不自动替换目标 |
-| 不确定 | 任意 | 信号不足以支持状态变化 | 保留上下文和能力，由业务 Agent 判断或询问用户 |
-
-分数不是业务事实，也不会默认写入会话目标或上下文摘要。这样可以调整评分模型和阈值，而不把一次模型判断变成永久状态。
-
-## 任务状态与能力环境分开变化
-
-任务发生变化，不代表执行环境一定要重建。用户修正文案、补充一个约束或要求继续当前工作时，现有 Skill 和 Tool 通常仍然适用，xAgent 会直接保留它们。
-
-任务首次初始化或进入新阶段时，才进入环境准备链：
-
-```text
-已经对齐的完整任务
-  -> 提取用于召回的任务要点
-  -> 召回 Skill、ToolSet 和 Memory 候选
-  -> Orchestrator 从候选中选择目标能力
-  -> SessionEngine 差异更新当前 Skill 和 Tool
-```
-
-下面是一条客服运营周报任务在环境准备阶段的真实状态。任务要点提取、相关 Skill、Tool 与 Memory 查找，以及能力编排被投影为彼此独立的阶段：
-
-![xAgent 在接收客服运营周报任务后显示任务要点提取、能力查找和任务编排状态](/img/insights/agent-harness/task-environment-orchestration-zh.webp)
-
-任务要点只用于候选召回，不会和完整任务一起重复进入 Orchestrator。调整模式会同时携带当前能力，Orchestrator 可以保留仍然适用的选择，只对目标环境做差异调整。它只消费一份规范化任务、当前能力和已经召回的候选集合，也不创建 Session、不改写任务目标、不选择模型或 Agent 身份。
-
-这种拆分避免了三个模型角色互相覆盖：相关度 Agent 判断消息关系，任务语义提取负责召回，Orchestrator 负责能力选择。会话事实仍由 SessionEngine 维护。
-
-编排完成后，实际加载到会话中的能力仍然可以检查。这个任务最终选中了数据可视化与周报 Skill，并加载了计划、能力发现和文件读写工具：
+编排完成后，用户仍可检查当前会话实际加载的 Skill 和 Tool：
 
 ![xAgent 会话高级配置显示任务编排后实际选中的数据可视化、周报 Skill 与计划和文件工具](/img/insights/agent-harness/selected-capability-environment-zh.webp)
 
-## 接收任务的会话自己准备环境
+## 接收任务的子会话自己理解任务
 
-新版链路也改变了子会话的创建方式。主会话负责判断是否已有合适的责任会话；确实需要新会话时，`session_create_sub` 只创建一个具备确定性默认配置和最小能力的可运行会话，并原样移交任务消息与资源引用。
+MainSession 可以判断由哪个子会话承担工作，但发送方只传递原始 request 和稳定资源引用，不替接收方预选 Skill、Tool 或执行 Prompt。接收方把协作请求当作自己的真实输入，自己运行任务理解和能力准备。
 
-创建方不再提前替子会话解释任务、选择业务 Skill 和 Tool，或者生成一套执行 Prompt。子会话收到任务后，和普通用户输入一样进入统一的任务控制循环，由实际承担工作的会话初始化自己的目标和能力环境。
+这条边界可以概括为“谁执行，谁理解”。它避免父会话把自己的候选空间、过期能力或推断结果变成子会话事实，也让创建、移交与实际执行保持解耦。多会话协作方式见[多 Agent 会话事件协作](/docs/guides/multi-agent-session-event-collaboration)。
 
-这让“谁执行任务，谁理解任务”成为稳定边界，也让环境编排失败不再阻止会话创建和原始任务移交。多会话之间如何传递任务与材料，可继续阅读[多 Agent 会话事件协作](/docs/guides/multi-agent-session-event-collaboration)。
+## 外层增强失败时继续执行
 
-## 辅助判断失败不能接管主流程
+语义预处理失败时，xAgent 保留已经持久化的输入、现有 goal、能力和压缩边界，然后继续进入业务 Agent。Orchestrator 或 Memory 召回失败时也不会先清空环境；已有能力与默认 discovery 工具仍然可用，Agent 可以在执行中按需发现能力。
 
-任务相关度判断是一项可退化的前置能力。调用失败、输出不合法或模型暂时不可用时，xAgent 按“没有足够证据改变任务”处理：保留现有目标、能力环境和压缩状态，并继续处理已经保存的用户消息。
+这不是忽略错误，而是明确外层增强的失败边界：它可以少提供一次预选能力，但不能夺走原始输入、既有任务事实或主执行链。
 
-环境调整失败与相关度失败是不同问题。已经提交的原始消息和任务状态不能因此丢失，现有能力也不能先被清空再等待一次可能失败的全量重建。系统应保留可恢复事实，让失败在自己的责任边界内收束。
-
-## 用户可以观察到什么
-
-当消息只是延续当前工作时，用户通常只会短暂看到任务语义理解，然后任务继续执行。当消息进入新阶段并需要不同能力时，时间线会依次显示类似状态：
+用户通常会看到类似状态：
 
 ```text
 正在理解任务语义
-  -> 正在提取任务要点
-  -> 正在发现任务能力
-  -> 正在编排任务
+  -> 正在发现 Skill、Tool 与 Memory
+  -> 正在编排任务能力
   -> 正在应用任务环境
 ```
 
-这些状态表达当前 Harness 正在推进的阶段，不是模型生成的聊天内容。它们也不意味着每条消息都会走完全部步骤。
+继续当前任务时，后面三个阶段不会发生。能力如何进入会话，可继续阅读[AI Agent 如何按需发现和加载工具与 Skill](/docs/guides/ai-agent-dynamic-tool-discovery)。
 
-能力如何按需进入会话，可阅读[AI Agent 如何按需发现和加载工具与 Skill](/docs/guides/ai-agent-dynamic-tool-discovery)；任务进行中哪些设置从后续模型调用生效，可阅读[任务执行中的动态切换](/docs/guides/ai-agent-runtime-hot-switching)。
+## 架构判断：xAgent 不应照搬 everything-is-plugin
+
+DeepSeek Harness 的插件树为替换模型适配、工具管线、持久化、Sandbox 和 Subagent provider 提供了很强的组合能力。xAgent 的优势则来自稳定 owner：Brain 负责调度与任务状态转换，SessionEngine 协调会话事实，AgentService 负责内层循环，ToolService 负责治理。
+
+因此，值得借鉴的是清晰的 capability seam 和可观察证据，而不是把 xAgent 的每个核心责任都改成插件。后者会让已经建立的事实 owner 重新变得模糊。
+
+作为未来改进，xAgent 可以在文档中正式定义 Harness 边界，并补充 prompt、tool schema、model config 与各 owner fact version 的请求证据投影；但这些证据只能用于审计和重建，不能成为第二套事实 owner。这些是架构建议，不是本文声称已经实现的能力。
 
 ## 下一篇：对齐之后怎样持续执行
 
-任务控制循环解决的是“当前消息属于什么任务，以及需要什么环境”。环境准备完成后，业务 Agent 才进入固定的模型与 Tool 执行循环。
+外层任务控制解决的是“这条消息与当前任务是什么关系，以及是否需要补充能力”。接下来，业务 Agent 才进入模型和 Tool 的固定执行循环。
 
-下一篇[《xAgent Agent Harness（下）：一次任务如何持续执行、暂停与恢复》](/insights/xagent-agent-harness-execution-loop)将继续说明唯一 runner、上下文装配、Tool Call、审批等待、上下文压缩和重启恢复怎样组成同一条执行链。长任务的用户侧组织方式也可先参考[AI Agent 如何执行长任务](/docs/guides/long-running-agent-task)。
+下一篇[《xAgent Agent Harness（下）：一次任务如何持续执行、暂停与恢复》](/insights/xagent-agent-harness-execution-loop)将对照 DeepSeek 的 Agent Loop、SessionLog、Tool pipeline 和 crash repair，说明 xAgent 的唯一 runner、审批、上下文压缩与恢复为什么属于另一种事实模型。

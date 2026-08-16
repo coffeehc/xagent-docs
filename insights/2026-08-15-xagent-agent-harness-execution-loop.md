@@ -2,167 +2,180 @@
 slug: xagent-agent-harness-execution-loop
 title: "xAgent Agent Harness（下）：一次任务如何持续执行、暂停与恢复"
 date: 2026-08-15
-description: 对照 DeepSeek Harness Agent Loop，了解 xAgent 如何用唯一 Session runner、动态上下文、Tool loop、审批、压缩和恢复持续执行任务。
+description: 对照 DeepSeek Harness Agent Loop，了解 xAgent 如何通过唯一 Session runner、AI Agent 上下文管理、Tool loop、审批、压缩与恢复持续执行任务。
 authors: [xagent]
 tags: [ai-agent, architecture, runtime, approvals, long-running]
 image: /img/share/zh/xagent-overview.png
 ---
 
-任务目标与能力环境完成对齐后，xAgent 才进入通常所说的 Agent Loop。但这个循环并不是一个模型进程独自运行到底：Brain 控制会话级调度，SessionEngine 持有运行状态并装配每次请求，AgentService 只负责固定的模型与 Tool 执行流。
+外层任务控制完成目标与能力准备后，xAgent 才进入通常所说的 Agent Loop。Brain 控制 Session 级调度，SessionEngine 协调会话事实和运行状态，AgentService 执行固定的模型与 Tool 循环，ToolService 负责调用治理。
 
-这种分工让同一个任务可以在 Tool 调用后继续、在高风险操作前等待审批、在上下文变长时压缩、在用户中断时退出，也可以在具备有效恢复材料时从服务重启中恢复。
+这条链路让同一任务可以在 Tool 调用后继续、在高风险动作前等待审批、在上下文变长时压缩、在用户中断时退出，并在具备有效持久化事实时从服务重启中恢复。
+
+这条 AI Agent 上下文管理与执行循环已在 [`0.0.10.beta`](/docs/changelog#v0010beta---2026-08-16) 继续完善；本文聚焦每轮请求如何装配、等待、压缩和恢复。
 
 {/* truncate */}
 
-## DeepSeek Harness Agent Loop 与 xAgent 内层循环
+## 对照基线与判断范围
 
-在 [DeepSeek Harness 官方架构](https://github.com/deepseek-ai/deepseek-harness/blob/master/docs/architecture.md)中，一个 Turn 可以包含零个或多个 Step，每个 Step 包含一次模型请求及其 Tool 执行；循环会装配 Prompt 和 Tool schema、调用模型、运行 Tool pipeline，并把结果追加到 Session 事件日志。这使 `DeepSeek Harness Agent Loop` 和 `DeepSeek Harness Tool Loop` 指向同一个核心问题：一次模型返回 Tool Call 后，运行时如何保存事实并可靠地开始下一步。
+如果你需要先从整体架构和适用场景做选择，可先阅读[《DeepSeek Harness 与 xAgent：两种 Agent Harness 架构路线怎么选》](/insights/deepseek-harness-vs-xagent)。本文继续深入运行时执行、暂停与恢复。
 
-xAgent 的内层循环与它遵循相近原则，但执行单元和事实 Owner 不同：
+本文继续使用 2026 年 8 月 16 日的 xAgent `82f3a1f6`，以及 2026 年 8 月 13 日的 [DeepSeek Harness `47f94385`](https://github.com/deepseek-ai/deepseek-harness/tree/47f943859bef60e4160492346772ded9b24f765a) 作为事实基线。DeepSeek Harness 在该提交仍是 developer preview；这里对比的是已经公开的代码与文档，不推断未来稳定接口。
 
-| 对照维度 | DeepSeek Harness | xAgent |
+两者都实现了 Harness 层，但采用不同的事实模型：
+
+- DeepSeek 是 composition-first、event-log-first；
+- xAgent 是 fact ownership-first、owner-state-first。
+
+这不是同一实现的两种命名。DeepSeek 通过 Cordis 插件树组合能力，并以统一事件日志支持重建与回放；xAgent 通过固定 owner 骨架分层持有状态，以持久化的长任务事实支持跨请求恢复。
+
+## 逐项对齐：执行循环相似，事实边界不同
+
+| 维度 | DeepSeek Harness `47f94385` | xAgent `82f3a1f6` |
 | --- | --- | --- |
-| 执行单元 | Turn 由一个或多个模型与 Tool Step 构成 | Brain 驱动 Session task turn，AgentService 执行固定 LLM / Tool loop |
-| 持久历史 | 追加式 Session 事件日志提供后续上下文 | SessionEngine 提交 History、pending、checkpoint 和恢复材料 |
-| Tool 后续 | Tool pipeline 运行并追加结果事件 | Tool 结果提交后重新装配下一次模型请求 |
-| 扩展边界 | 插件可替换模型、Tool、Session 和 Agent Loop 组件 | Brain、SessionEngine、AgentService 与 Tool 事实责任方分工 |
+| 串行化 | `ReactLoopAgent` 的 inbox 与 phase 控制单 Agent 活动 | Brain 通过 SessionEngine 唯一 runner 串行推进 Session |
+| 执行单位 | 持久化 `Turn -> Step -> Model + Tools` | Brain 组织 task turn，AgentService 运行内部模型 / Tool loop |
+| Session 事实 | 单一 append-only `SessionEvent` log 是主要事实载体 | Chat、SessionMeta、恢复快照、SessionEvent、Memory 按 owner 分层 |
+| 上下文装配 | 每个 step 由插件组装，并记录 request header、prompt、tools 与 model config | SessionEngine 从当前 owner facts 动态装配每次请求 |
+| Tool 管线 | `pre-execute -> guards -> execute -> post-execute -> finalize` 等插件扩展点 | ToolService 固定线性治理链集中校验和执行事实 |
+| Tool 并发 | 支持 `parallel` / `exclusive`，结果按模型原始顺序提交 | 当前按模型返回顺序串行执行 Tool Calls |
+| 审批 | active-turn 请求由 Promise 等待，`asked` / `decided` 进入日志 | `RuntimeAuditUnit` 与恢复快照可跨请求、跨重启等待 |
+| 压缩 | provider 替换模型可见 surface，原始日志仍保留 | 结构化 continuity summary、checkpoint、pending promotion |
+| 崩溃恢复 | 为未闭合调用、step、turn 写 synthetic closer；不续跑 partial turn | 从有效 snapshot 恢复 guidance、approval、compaction 等运行事实 |
+| Subagent | spawn、fork 与可替换 provider，可连接进程内、ACP、Codex、Claude Code 等 | Main / Sub Session、SessionEvent 与 Workgroup；接收方自行理解任务 |
+| Sandbox | FS、Subprocess、Sandbox provider seam 强调可替换执行世界 | ProcessSandbox、workspace execution lease 与文件变更 reconciliation |
 
-共同点比具体 API 更重要：一次模型响应不是 Harness，一次 Tool 成功也不是任务完成。Harness 必须拥有循环、上下文和继续执行的确定性边界。DeepSeek Harness 目前以[开源开发者预览](https://github.com/deepseek-ai/deepseek-harness)提供这些插件契约；下文只描述 xAgent 当前实现中的执行、等待、压缩与恢复逻辑。
+共同点是：一次模型响应不是完整 Harness，一次 Tool 成功也不等于用户目标完成。差别主要在“什么是可恢复事实”以及“扩展应该挂在哪里”。
 
-## 外层任务循环与内层执行循环
+## DeepSeek 的精确回放为什么更强
 
-上一篇[《xAgent Agent Harness（上）：会话如何理解任务变化并调整执行环境》](/insights/xagent-agent-harness-task-alignment)介绍了外层任务控制循环。它决定当前消息属于哪个任务阶段，以及是否需要调整 Skill 和 Tool。
+DeepSeek 的[架构文档](https://github.com/deepseek-ai/deepseek-harness/blob/47f943859bef60e4160492346772ded9b24f765a/docs/architecture.md)给出一个很明确的约束：`Model-visible means logged`。user message、流式 chunk、assistant message、tool call/result、request header，以及当时的 prompt、tools 和 model config 都能从 Session log 重建。
 
-内层执行循环从已经对齐的任务状态开始：
+因此，fork、resume、transcript、telemetry 和 UI replay 可以围绕同一事件流工作。Compaction 也不是删除原始事实，而是在模型可见 surface 上用 summary 替换一段范围，同时保留原始日志和替换证据。
 
-```text
-Brain 调度当前 Session
-  -> SessionEngine 装配本次模型请求
-  -> AgentService 调用模型
-  -> 模型返回文本或 Tool Call
-  -> 执行、治理或挂起 Tool Call
-  -> SessionEngine 提交 assistant / tool 历史
-  -> 重新装配下一次模型请求
-  -> 最终回复、等待、中断或失败
-```
+xAgent 不依赖一条精确事件流重建所有请求。它从多个事实 owner 装配当前上下文，这让 DDD 责任更清楚，也便于纠正某个 owner 的状态；代价是“过去某次模型请求究竟看到了哪份 prompt、tool schema 和 owner fact version”的证据不如 DeepSeek 直接。
 
-两层循环不能合并。任务控制需要稳定的目标、责任路由和能力环境；模型与 Tool loop 只消费已经准备好的执行上下文。否则每一次 Tool 结果都可能被误当成新的任务输入，每一次用户补充又可能绕开任务状态判断。
+这是架构判断，不表示 xAgent 缺少持久化，也不表示 DeepSeek 的单日志模型自动适合所有业务事实。
 
-## 同一 Session 只有一个 runner
+## 当前 xAgent：同一 Session 只有一个 runner
 
-用户消息、Connector 事件、会话协作输入和审批结果可能在相近时间到达。xAgent 不会让它们并发修改同一个 Session 的运行状态。Brain 通过 SessionEngine 取得唯一 runner，串行推进当前输入、pending、事件和补充信息。
+用户消息、Connector 事件、会话协作输入和审批结果可能在相近时间到达。Brain 先通过 SessionEngine 抢占唯一 runner，再顺序消费 input、event、guidance 与 pending。已有 runner 时，新入口只登记唤醒；旧 runner 释放后仍有可执行工作，Brain 再次抢占并继续 drain。
 
-| Owner | 在执行链中的责任 | 不负责什么 |
+| Owner | 当前责任 | 明确不负责 |
 | --- | --- | --- |
-| Brain | 输入调度、唯一 runner、继续 drain、恢复和中断边界 | 不构造模型请求，不写 Tool 业务事实 |
-| SessionEngine | 队列、任务目标、运行状态、历史、上下文装配、pending 和恢复材料 | 不直接调用业务模型 |
-| AgentService | 固定的 LLM / Tool loop、模型重试、loop guard 和 Tool 结果推进 | 不拥有跨请求等待事实 |
+| Brain | 输入调度、唯一 runner、确定性任务转换、恢复和中断边界 | 不构造模型请求，不拥有 Tool 业务事实 |
+| SessionEngine | 会话队列、History、goals、pending、compression 和恢复材料的业务动作 | 不直接调用业务模型 |
+| AgentService | 固定 LLM / Tool loop、重试、loop guard 和结果推进 | 不拥有跨请求等待事实 |
+| ToolService | Tool path、enabled/readiness、schema、approval、secret、execution lease 与结果归一化 | 不决定任务关系和 Session goal |
 
-runner 释放期间如果又有输入到达，SessionEngine 会记录唤醒请求。Brain 在仍有可执行工作时重新取得 runner，避免旧 runner 退出窗口丢掉一次续跑机会。普通并发输入因此表现为排队，而不是“会话忙碌，请稍后重试”。
+这里的串行化与 DeepSeek inbox / phase 的目标相近，但实现不等价。
 
-## 每次模型调用都重新装配上下文
+## 每次模型调用都从 owner facts 重新装配
 
-AgentService 不长期保存一份可自行修改的 History 或 SessionMeta。每次准备调用模型时，它要求 SessionEngine 根据当前事实装配请求，主要包括：
+AgentService 不长期持有一份可自行修改的 Session History。每次调用模型前，SessionEngine 根据当前事实装配请求，主要包括：
 
-- 当前任务目标与执行目标；
-- 可继续使用的会话历史或压缩状态；
-- 当前加载的 Skill、Tool schema 和调用边界；
-- Memory、资源引用、附件和工作区上下文；
+- Session goal 与当前阶段 goal；
+- raw History、checkpoint 和当前压缩边界；
+- 已加载 Skill、Tool schema 与调用策略；
+- Memory、资源引用、附件和 workspace 上下文；
 - 当前模型配置、Prompt 与运行策略。
 
-Tool 结果稳定写入后，下一次模型调用再次经过 SessionEngine 装配。这样，刚完成的 Tool 结果、刚应用的能力变化和已经提交的运行状态都会进入下一次请求，而 AgentService 不会持有第二份逐渐漂移的会话事实。
+Tool 结果稳定写入后，下一次模型调用重新装配。刚提交的 Tool 结果、能力变化、pending 消费和上下文维护因此进入下一轮，而 AgentService 不建立第二份漂移状态。
 
-用户在任务运行中保存新的模型或 Skill 配置时，变化只影响后续尚未装配的模型调用，不会改写已经发出的请求或已经开始的 Tool Call。具体边界见[任务执行中的动态切换](/docs/guides/ai-agent-runtime-hot-switching)。
+这与 DeepSeek “从 log 派生模型 history 并记录完整 request header”的方向不同：DeepSeek 优先保证 exact request replay，xAgent 优先保证当前请求由各 owner 的最新事实产生。
 
-## 模型与 Tool 如何形成固定循环
+## ToolService 是固定治理链，不是能力缺失
 
-一次模型调用可能产生最终文本，也可能产生一个或多个 Tool Call。对于 Tool Call，Harness 会执行以下步骤：
+模型可能返回最终文本，也可能返回多个 Tool Call。xAgent 当前按模型顺序逐个执行调用；每个调用经过统一治理后，稳定的 assistant/tool 配对历史才会提交：
 
-1. 保留模型生成的 assistant 消息和 Tool Call 身份。
-2. 根据 Tool schema、当前用户、Session、资源与治理策略校验调用。
-3. 需要审批时挂起；允许执行时交给 Tool 的事实责任方和 runtime。
-4. 把稳定 Tool 结果写入同一会话历史。
-5. 重新装配上下文并再次调用模型。
+```text
+模型生成 Tool Call
+  -> 解析并匹配当前可用 Tool
+  -> enabled / readiness / schema 校验
+  -> approval 与 secret 处理
+  -> workspace execution lease / runtime 执行
+  -> result normalization 与敏感信息清理
+  -> assistant tool_call + tool_result 成对落盘
+  -> 重新装配下一次模型请求
+```
 
-Tool 返回成功只代表一个动作执行完成，不代表用户目标已经完成。模型仍需检查文件、数据、外部状态或其他验收事实，决定继续调用能力、修复结果，还是给出最终答复。
+DeepSeek 的[工具管线](https://github.com/deepseek-ai/deepseek-harness/blob/47f943859bef60e4160492346772ded9b24f765a/docs/tool-execution-pipeline.md)有 waterfall、monotonic guard、wrapper、post hook 和 finalize，并可让 `parallel` 调用在受限池中重叠执行，再按模型原始顺序提交结果。它的工具扩展性更强。
 
-Harness 也会记录重复失败和无进展调用，阻止模型无限重复同一个 Tool 模式。这个 loop guard 是执行保护，不替代 Prompt、Skill 中的任务方法，也不能把尚未完成的目标伪装成成功。
+xAgent 的扩展形式更固定，但治理事实更集中。不能因为它不是插件式 pipeline，就写成 path、approval、secret、workspace 或结果规范化能力缺失。当前 serial-safe 也是合理默认；只有真实性能数据证明 Tool 并发是瓶颈时，才值得增加 concurrency-safe 分类和 model-order result commit。
 
-在客服运营周报任务中，时间线连续记录了模型输出、文件写入、子任务完成和下一子任务开始。它们属于同一个任务的多轮执行，而不是多个互不相关的对话：
+客服运营周报任务的时间线连续记录模型输出、文件写入、子任务完成和下一任务开始。它们属于一个长任务的多轮执行：
 
 ![xAgent 会话时间线展示模型调用、文件写入和计划任务在同一执行循环中连续推进](/img/insights/agent-harness/agent-tool-loop-zh.webp)
 
-最终生成的 HTML 也可以作为独立产物直接预览。用户检查的是指标、图表和结论是否正确，而不是某一次文件写入调用是否返回成功：
+最终 HTML 作为稳定产物直接预览。用户验收的是指标、图表与结论，而不是某一次文件写入是否返回成功：
 
 ![xAgent 文件预览展示 Agent 生成的客服运营周报 HTML、核心指标和渠道对比图表](/img/insights/agent-harness/html-report-preview-zh.webp)
 
-## 审批是挂起的 Tool Call，不是新任务
+## 审批：live Promise 与 durable pending 的差别
 
-当 Tool Call 命中审批策略时，xAgent 会保留原始调用和等待事实，Session 进入 `waiting_approval`。AgentService 退出当前执行栈，跨请求等待状态由 SessionEngine 持有。
+DeepSeek 的 approval seam 在 active turn 内发起一次请求，等待 answerer 返回 closed outcome，并把 `approval/asked` 与 `approval/decided` 作为 audit pair 写入 Session log。缺少 answerer 或结果不合法时 fail closed。
 
-用户同意后，Brain 重新取得 runner，AgentService 消费已经确认的 pending，并从原始 Tool Call 继续；拒绝或取消时，该动作不会执行，拒绝结果回到同一任务上下文。审批意见不会进入任务相关度 Agent，也不会被理解成新的任务目标。
+xAgent 命中审批时，AgentService 把阻塞的 Tool Call、预分配结果身份与 `PendingRequest` 交给 SessionEngine 的 `RuntimeAuditUnit`。Session 进入等待，当前执行栈退出；用户决定经 Brain 校验并绑定后，AgentService 在下一次 runner 中消费这个 durable pending，再继续原始调用或写入拒绝结果。
 
-这种设计把“模型想做什么”和“系统是否允许执行”分开。模型负责提出动作，Tool governance 把调用归约为可检查事实，审批策略决定放行、拒绝或等待。详细范围见[AI Agent 审批与安全控制](/docs/guides/agent-approval-security)。
+因此，xAgent 的审批不是一条新任务消息，也不是仅存于活动调用栈的 Promise。它更适合跨请求、跨重启的长任务等待。DeepSeek 的 asked/decided 日志则提供更直接的单流审计。
 
-## 运行中的补充信息与中断
+## 两边的压缩不是同一个模型
 
-任务运行时到达的新用户消息或会话事件会进入 SessionEngine 管理的队列，由唯一 runner 在明确边界消费。它们不会直接修改正在执行的模型请求，也不会和当前 Tool Call 并发写同一份运行状态。
+DeepSeek 把 compaction 设计成可选 capability seam。provider 生成 summary，Session surface 用替换操作改变后续模型看到的内容；原始事件、shadowed range、summary 结果和模型调用证据仍保留在 append-only log 中。这一设计偏向审计、回放与模型表面重建。
 
-如果用户明确中断，SessionEngine 会取消当前 Agent context，Brain 在执行栈返回后统一回正运行状态。中断不会被伪装成模型成功回复；队列里后续存在的新任务时，可以在旧执行栈退出后进入新的处理轮次。
+xAgent 的 Context Compression 偏向语义连续性和崩溃安全提交。SessionEngine 冻结真实 History，选择合法消息边界，SummaryService 生成结构化中间结果，SessionEngine 再校验并提交 checkpoint。continuity summary 关注 Goal、Artifact、Decision、ActiveUserRequest、约束、开放问题和下一步等继续执行事实。
 
-这使“补充要求”“停止当前执行”和“审批一个具体动作”保持为三种不同信号。它们可以影响同一 Session，但不会共用一段含糊的聊天文本来控制运行状态。
+Tool Call 与 Tool Result 不能被压缩边界切断。Session goal 与阶段 goal 仍由 SessionMeta 持有，模型生成的 summary 不能反向覆盖它们。
 
-## 上下文压缩保存的是继续执行状态
+## active-turn compaction 与重启恢复
 
-长任务会积累用户消息、模型输出、Tool Call、Tool 结果和能力定义。接近模型上下文预算时，xAgent 通过 Context Compression 释放空间，但不会把它当作普通聊天摘要。
+单次用户请求可能产生很多轮模型与 Tool 调用，并在同一个 active turn 内耗尽上下文。xAgent 可以压缩已经封口的早期材料，保留当前请求的 continuity anchor；checkpoint 与 pending compaction 先形成可验证提交态，再推进 `ContextStartMessageId`，重启后由 promotion 逻辑完成或丢弃未成立的 pending。
 
-SessionEngine 负责冻结真实 History 快照、选择合法消息边界并维护 checkpoint；SummaryService 只生成语义压缩中间结果；SessionEngine 再校验并提交最终的可继续执行状态。压缩重点保留：
+DeepSeek 的 persistence 在冷加载时保留已经落盘的事件，为未闭合的 Tool、step 和 turn 追加 synthetic `unknown` / `interrupted` closer，使日志重新成为合法 transcript。其[持久化说明](https://github.com/deepseek-ai/deepseek-harness/blob/47f943859bef60e4160492346772ded9b24f765a/packages/session/session-persistence/README.md#known-limitations-and-deferred-work)也明确：当前 crash story 是关闭中断 turn，而不是继续 partial turn。
 
-- 当前目标、交付物和进度；
-- 仍然有效的约束、决定与工作事实；
-- 开放问题和下一步；
-- 继续执行需要的稳定产物引用。
+xAgent 的恢复重点不同。Brain 在依赖就绪后读取有效 recovery snapshot，通过同一个 runner 与 AgentService 主链恢复 guidance、pending approval、active-turn compaction 等状态。它不承诺任何外部 Tool 都可无损重放；幂等、重复请求保护和结果查询仍属于 Tool 与外部系统。
 
-Tool Call 与 Tool Result 不能被压缩边界切断。当前会话的全局目标和阶段目标仍来自 SessionMeta，模型生成的压缩结果不能反向成为任务目标 owner。阶段变化可以触发压缩评估，但仍复用同一套 checkpoint、pending 和 finalize 链，不建立第二套“语义压缩”状态机。
+所以，更准确的比较是：DeepSeek 更强于日志平衡、精确回放证据和 interrupted transcript；xAgent 更强于长任务业务状态的跨请求、跨重启续跑。
 
-## active-turn 压缩让单轮长执行继续
+## Subagent 与 Sandbox：相邻能力，不同责任重点
 
-有些任务在用户只发送一次消息后，就会经历很多轮模型和 Tool 调用，甚至在同一个 turn 内达到上下文预算。xAgent 可以对已经封口的早期执行材料做 active-turn 压缩，同时保留当前用户请求的连续性锚点。
+DeepSeek 把 Subagent 做成可替换 provider seam，支持进程内 spawn、fork、ACP，以及 Codex、Claude Code 等外部实现。xAgent 使用 Main / Sub Session、SessionEvent 与 Workgroup 协作；接收子会话拿到原始 request 和资源引用后，自己理解任务并准备能力，父会话不替它预选 Skill 或 Tool。
 
-这不等于伪造一条新的用户消息，也不把压缩摘要当成原始历史。SessionEngine 仍然使用真实消息边界和 checkpoint，明确区分后端维护的连续性字段与模型生成的语义状态。压缩完成后，下一次模型请求从新的上下文起点继续执行。
-
-对使用者来说，重要结果是长任务不需要因为一次模型上下文即将装满就自动结束；但压缩仍可能损失低价值细节，因此关键材料、决定和中间产物应保存为稳定文件。
-
-## 服务重启后怎样恢复
-
-xAgent 不承诺任何中断都能精确恢复。恢复依赖已经持久化的有效运行快照、pending、checkpoint 和会话状态。服务依赖准备完成后，Brain 扫描可以续跑的 Session，再通过同一条 runner 和 AgentService 主链恢复，而不是启动另一套“恢复版 Agent Loop”。
-
-等待审批的 Session 继续等待，不会因为服务重启绕过确认。未完成的上下文压缩会根据 pending 状态完成提交或回正；缺少有效恢复材料的异常运行态也不会被盲目当作可续跑任务。
-
-因此，准确的说法是“基于有效持久化状态恢复执行”，而不是“任何 Tool 都能无损重放”。外部系统是否支持幂等、重复请求保护和结果查询，仍由对应 Tool 和外部服务决定。
-
-## Agent Harness 不等于 ProcessSandbox
-
-Agent Harness 决定什么时候调用模型、什么时候执行 Tool、怎样等待和怎样继续。ProcessSandbox 解决的是本地命令真正启动时的进程、文件视图、资源和平台隔离。两者位于同一任务链的不同层。
+Sandbox 也体现同样差异。DeepSeek 通过 FS、Subprocess 与 Sandbox seam 替换执行世界，强调 provider 组合；xAgent 的路径是：
 
 ```text
 Agent Harness
-  -> Tool governance 与 Tool runtime
+  -> ToolService governance
   -> Workspace Execution Lease
   -> ProcessSandbox
-  -> 受约束的本地进程与文件变化提交
+  -> 文件变化 reconciliation
 ```
 
-不是所有 Tool 都经过 ProcessSandbox，例如远程 MCP 或 Connector Tool 有自己的执行边界；所有 Tool Call 仍然需要经过 Harness 的历史、治理、等待和结果推进。沙箱的文件投影与资源限制见[Runtime 与 ProcessSandbox](/docs/architecture/runtime)。
+不是所有 Tool 都经过 ProcessSandbox，例如远程 MCP 和 Connector Tool 有各自的执行边界；所有 Tool Call 仍经过 Harness 的历史、治理、等待与结果推进。DeepSeek 强在 provider 可替换性，xAgent 强在 workspace 事实治理。详见[Runtime 与 ProcessSandbox](/docs/architecture/runtime)。
 
-## 用户看到的是同一任务的不同运行状态
+## 架构结论与可选改进
 
-这套内部边界最终会投影成用户能理解的状态：正在准备上下文、正在运行、等待审批、正在压缩、已中断、失败或空闲。状态变化来自 owner 已经提交的运行事实，而不是根据聊天文本猜测。
+当前实现可以得出四个结论：
 
-用户可以关闭浏览器后再回来，也可以通过 Connector 接收通知和处理审批。只要服务端仍在运行且任务没有进入等待或失败边界，Brain 会继续推进同一个 Session。如何组织材料、验收和阶段交付，可继续阅读[AI Agent 如何执行长任务](/docs/guides/long-running-agent-task)。
+1. xAgent 已经具备完整 Harness 层，即使没有一个名为 `harness` 的包。
+2. DeepSeek 的精确请求回放与工具扩展性更强；xAgent 的 durable approval、active-turn compaction 和 owner-state recovery 更强。
+3. 两边的 Session facts、compaction 和 crash recovery 不能用相同术语直接判定实现等价。
+4. xAgent 不应为了形式统一而照搬 everything-is-plugin。
 
-任务结束时，文件树、最终答复和验收结果会共同构成交付证据。下面这次运行同时保留了原始 CSV、HTML 报告、核心指标、主要发现和逐项验收结果：
+可选的未来改进包括：
+
+- 正式把 outer task control、Session runtime、inner Agent loop、Tool governance 和 execution isolation 定义为 xAgent Harness 边界；
+- 为 prompt、tool schema、model config 和各 owner fact version 增加只读 evidence projection，提升请求可重建性；
+- 只有出现真实性能需求时，再引入 Tool 并发分类与按模型顺序提交结果；
+- 继续保留 task relation enum、receiver self-understanding、durable approval、active-turn compaction 和 owner-state correction；
+- 收敛 SessionEngine 的 dependency pressure，让事实 owner 暴露更明确的业务动作，减少 passthrough 与跨 owner 操作，而不是把核心全部插件化。
+
+这些是架构建议，不是已经实现的功能。
+
+## 用户最终看到的是交付证据
+
+内部 owner 边界最终投影为用户可理解的运行状态：准备上下文、运行、等待审批、压缩、中断、失败或空闲。任务完成时，最终答复、Session 文件树和显式验收结果共同构成交付证据：
 
 ![xAgent 完成客服运营周报后展示 CSV 与 HTML 产物、核心结论和逐项验收结果](/img/insights/agent-harness/task-artifacts-validation-zh.webp)
 
-把两篇文章放在一起看，xAgent Agent Harness 可以概括为：外层循环负责理解任务和准备环境，内层循环负责执行、等待、压缩与恢复；模型提供语义判断和行动建议，确定性 owner 负责事实、权限和状态转移。
+把两篇文章放在一起看，xAgent Agent Harness 可以概括为：外层控制理解任务关系并增量准备能力，内层循环执行、等待、压缩与恢复；模型提供受约束的语义判断和行动建议，确定性 owner 负责事实、权限和状态转移。

@@ -2,160 +2,184 @@
 slug: xagent-agent-harness-task-alignment
 title: "Inside the xAgent Agent Harness, Part 1: How Sessions Understand Task Changes"
 date: 2026-08-15
-description: "Compare DeepSeek Harness task orchestration with xAgent's outer loop: preserve original input, distinguish task phases, and reconcile Skills and Tools only when needed."
+description: "Compare DeepSeek Harness task orchestration with xAgent's AI agent tool selection: align task phases, Skills, Tools, and long-term memory as goals change."
 authors: [xagent]
 tags: [ai-agent, architecture, sessions, skills, tools]
 image: /img/share/en/xagent-overview.png
 ---
 
-Many Agent systems describe a harness as one loop: send a user message to a model, execute the Tool Call returned by the model, and send the result back. That loop matters, but it does not answer an earlier question. When the user sends another message, does it continue the current task, begin a new phase of the same task, or fall outside the responsibility of the current Session?
+Many Agent systems describe a harness as one loop: send a user message to a model, execute the Tool Call returned by the model, and send the result back. That loop matters, but it does not answer an earlier question. Does the user's next message continue the current task, change the phase within the same Session, or fall outside the responsibility of this specialist Session?
 
-xAgent handles this before the business Agent runs. The original input first enters the Session as a stable fact. The system then evaluates the task relationship, maintains Session goals, and adjusts Skills and Tools only when the change actually requires it. The business Agent receives an aligned task state and execution environment instead of a capability set permanently fixed when the Session was created.
+xAgent handles that question before the business Agent loop. The original input first becomes a Session fact. One constrained semantic call then returns a task relationship together with Skill, Tool, and Memory recall terms. Brain applies a deterministic state transition, and Orchestrator adds capabilities only when the task is first established or its phase changes.
+
+This task-understanding, AI agent tool selection, and environment-preparation path shipped in [`0.0.10.beta`](/docs/changelog#v0010beta---2026-08-16). This article explains its responsibility boundaries and execution order inside the Harness.
 
 {/* truncate */}
 
-## DeepSeek Harness Task Orchestration and xAgent's Boundary
+## Comparison Baseline: Two Harnesses, One Layer, Different Priorities
 
-The [official DeepSeek Harness site](https://deepseek.com/harness/) describes an Agent as the combination of a Model and a Harness, with models, Tools, Skills, Sessions, sandboxes, storage, loops, scheduling, and UI composed through plugins. Its [official architecture documentation](https://github.com/deepseek-ai/deepseek-harness/blob/master/docs/architecture.md) further describes the Session as an append-only event log and separates replaceable model adapters, Tool registries, Session components, and Agent Loops.
+For an architecture-level decision and use-case comparison, start with [DeepSeek Harness vs. xAgent: Choosing an Agent Harness Architecture](/insights/deepseek-harness-vs-xagent). This article continues with the current outer task-control implementation.
 
-That means `DeepSeek Harness task orchestration` is not another name for attaching a few Tools to a DeepSeek model. It concerns the runtime that preserves Session facts, assembles capabilities, and keeps work moving across model calls. xAgent addresses the same system layer with a different ownership model:
+The factual baseline for this article is xAgent `82f3a1f6` on August 16, 2026, and [DeepSeek Harness `47f94385`](https://github.com/deepseek-ai/deepseek-harness/tree/47f943859bef60e4160492346772ded9b24f765a) on August 13, 2026. At that commit, the DeepSeek Harness [README](https://github.com/deepseek-ai/deepseek-harness/blob/47f943859bef60e4160492346772ded9b24f765a/README.md) still labels the project a developer preview and warns about compatibility-breaking changes. This article therefore does not treat interface stability or complete production readiness as a promise.
+
+Both systems sit outside the model API and coordinate Sessions, context, Tools, execution, recovery, and multi-Agent work. xAgent has no package literally named `harness`, but that does not mean it lacks a Harness layer. Their core abstractions differ:
 
 | Dimension | DeepSeek Harness | xAgent |
 | --- | --- | --- |
-| Runtime composition | Plugin trees and profiles compose models, Tools, Skills, and runtime components | Each Session keeps the Skills, Tools, and runtime policy actually loaded for its work |
-| Session continuity | An append-only Session event log supplies context | SessionEngine owns history, phase and Session-wide goals, and runtime state |
-| Orchestration entry | Agent, Session, and plugins form a replaceable execution path | A new input is compared with the current phase and Session goal before capabilities change |
-| Primary boundary | Contracts between plugins and core runtime components | Fact ownership across Brain, SessionEngine, and the business Agent |
+| Optimization direction | Composition-first: Cordis composes runtime capabilities as a plugin tree | Fact ownership-first: a fixed responsibility spine assembles each Session dynamically |
+| Core abstraction | Plugin tree, reversible effects, scopes, and capability seams | Service owners such as Brain, SessionEngine, and AgentService around a Session aggregate |
+| Session facts | An append-only `SessionEvent` log drives model context and replay | Chat DB, `session_meta.json`, recovery snapshots, SessionEvent, and Memory are divided by owner |
+| Extension model | Profiles, bundles, patches, hooks, waterfalls, guards, and providers | Explicit business actions, a fixed governance chain, and Session-selected Skills and Tools |
 
-Both designs treat the model as a participant while the Harness owns continuity and capability assembly. The difference is emphasis: DeepSeek's public design centers on a plugin-composed runtime, while this article explains how xAgent interprets a task change before its business Agent starts. xAgent is not a DeepSeek Harness fork or frontend; this is a factual comparison of how two systems approach the same architecture problem.
+The DeepSeek [architecture documentation](https://github.com/deepseek-ai/deepseek-harness/blob/47f943859bef60e4160492346772ded9b24f765a/docs/architecture.md) emphasizes that almost everything is a plugin and that there is no privileged core that extensions must patch. xAgent retains an explicit responsibility spine:
+
+```text
+DeepSeek: Profile / Bundle -> Cordis Plugin Tree -> Agent Loop
+          -> append-only SessionLog -> Tool Pipeline -> LLM / Sandbox / Subagent
+
+xAgent:   Channel / Connector / Trigger -> Brain -> SessionEngine
+          -> AgentService -> LLMProvider / ToolService
+```
+
+These implementations address the same system layer, but they are not equivalent. xAgent is not a DeepSeek Harness fork, frontend, or thin wrapper.
 
 ## Why a Tool Loop Is Not Enough
 
-Suppose a Session is working on “research ComfyUI and deliver a Markdown guide.” The user's next message could take three forms:
+Suppose a sub-Session is working on “research ComfyUI and deliver a Markdown guide.” The next message might be:
 
-- `Continue`: it is still the current phase.
-- `Convert the Markdown we just created to Word`: the long-term goal remains relevant, but the delivery phase has changed.
-- `Also check tomorrow's weather`: the request is outside the responsibility of this specialist Session.
+- `Continue`: continue the current phase.
+- `Convert the Markdown we just created to Word`: remain within the Session's responsibility, but change the delivery phase or capability needs.
+- `Also check tomorrow's weather`: fall outside the responsibility of this specialist Session.
 
-If the system extracts keywords only from the latest sentence, `Continue` contains almost no useful semantics. If every message causes a complete capability reselection, ordinary refinements create unnecessary environment churn. If the latest message simply overwrites the old goal, a specialist Session gradually loses its original responsibility.
+Keyword extraction from only the newest sentence yields almost nothing for `Continue`. Rebuilding the environment for every message causes capability churn. Letting a model rewrite the goal directly would also turn semantic judgment into a second fact owner.
 
-xAgent therefore separates two questions: “How does this message relate to the current task?” and “What capabilities does the resulting task require?”
+xAgent therefore separates the outer task-control problem into two decisions: classify the message against the current task boundary, then recall and add capabilities only when required.
 
-## Two Goal Levels Describe Session Work
+## Current Code Fact: How One Input Reaches the Business Agent
 
-An execution Session keeps two distinct goal levels:
+At `82f3a1f6`, the actual sub-Session path is:
 
-| Goal | What it represents | When it changes |
+```text
+Sub-Session receives the original message and stable resource references
+  -> SessionEngine.AppendToHistory persists the original input
+  -> One stateless semantic call
+  -> task_relation + three recall-term groups
+  -> Brain applies a deterministic task-state transition
+  -> [initialize / reconcile only] Orchestrator recalls and selects capabilities
+  -> SessionEngine.AddSelectedCapabilities
+  -> AgentService enters the model / Tool loop
+```
+
+The original message is appended to Chat facts and synchronized into the Session context cache before semantic preprocessing begins. A supporting-model, retrieval, or orchestration failure therefore cannot make the user's input disappear.
+
+This preprocess applies only to sub-Sessions. MainSession retains its coordination and routing role and bypasses task-relevance preprocessing. Approval decisions, system notifications, and attachment-only inputs with no explicit task text also bypass it.
+
+## One Semantic Call Returns Exactly Four Fields
+
+The task-relevance Agent is a stateless, non-streaming JSON call. Its input contains only:
+
+- the current message text;
+- stable resource references such as `ref_id`, `protocol`, `filename`, and `media_type`;
+- `current_task_goal`;
+- `session_goal`.
+
+It does not read full History, receive candidate Skills, Tools, or Memory, generate a Plan, or select Orchestrator candidates. Its output must contain exactly four fields:
+
+```json
+{
+  "task_relation": "continue_current",
+  "skill_recall_terms": [],
+  "tool_recall_terms": [],
+  "memory_recall_terms": []
+}
+```
+
+All three recall-term fields must be non-null arrays with at most 16 items each. Terms are concise, deduplicated English phrases with a role that describes intended use. Skill and Tool terms can represent method, action, evidence, quality, domain, or artifact. Memory terms can represent entity, topic, context, preference, constraint, or decision.
+
+There is no second model call that “extracts task essentials.” The task-understanding notice and later capability-discovery notice correspond to one semantic preprocess and the separate Orchestrator stage.
+
+## Task Relationship Is an Enum, Not Two Scores
+
+`task_relation` accepts only five values:
+
+| Enum | Meaning | Deterministic Brain behavior |
 | --- | --- | --- |
-| Session-wide goal | The business scope and expected result this Session owns over time | When the Session's responsibility truly changes |
-| Current-phase goal | The step or delivery phase currently being advanced under the wider goal | When work enters a new phase or the current work is refined |
+| `establish_task` | The message establishes a task | When the current-phase goal is empty, use the persisted original message as the goal |
+| `continue_current` | Continue, clarify, or correct the current task | Keep goals and capabilities, then continue |
+| `change_within_session` | Stay inside the Session scope but change phase or capability needs | Use the original message as the new phase goal and enter reconcile mode |
+| `outside_session_scope` | The message does not belong to this sub-Session's global responsibility | Preserve goals and capabilities; let the current Agent handle it with context |
+| `uncertain` | Current facts are insufficient for a stable classification | Preserve state instead of changing task facts automatically |
 
-For example, “research ComfyUI and deliver a complete guide” can be the Session-wide goal, while “document node connections” is the current phase. When delivery changes to Word, the current phase can change while the Session remains responsible for the same research task.
+Brain uses no score threshold, and the model does not generate a rewritten goal. When no current-phase goal exists, the original user message becomes the task goal. On `change_within_session`, that original message becomes the new phase goal. Every other relationship preserves the existing goal.
 
-These goals are stable Session runtime facts. A context summary may refer to them to preserve continuity, but it cannot overwrite them. Complete Plan and Task structures also remain with their own fact owners instead of being copied into Session goals.
+The Session still distinguishes a Session-wide goal from a current-phase goal. The first represents durable responsibility; the second represents current work. Summaries, Plans, and Tasks may refer to these facts, but they do not become their owner.
 
-## The Original Input Must Become a Fact First
+## Only Two Modes Invoke Orchestrator
 
-xAgent does not evaluate relevance as soon as a message reaches a Channel. The message first enters the Session queue. Brain acquires the single execution right for that Session, SessionEngine binds the next input in actual consumption order and appends it to history, and only then does semantic evaluation begin.
+Only initial task setup in `initialize` mode or a `change_within_session` transition into `reconcile` mode enters capability preparation. Continuing, out-of-scope, and uncertain inputs do not reselect capabilities.
 
-```text
-User or Session collaboration input
-  -> SessionEngine queues and preserves the original input
-  -> Brain acquires the Session's single runner
-  -> SessionEngine binds the next task input
-  -> Evaluate the task relationship
-  -> Align task state and the capability environment
-  -> Enter the business Agent loop
-```
+Orchestrator recalls three independent context groups in parallel:
 
-This order solves two problems. First, a supporting-model failure cannot make the user's original message disappear. Second, when several messages reach one Session quickly, each one is evaluated against the task state committed by the previous input rather than the stale state that existed when the message first arrived.
+- Skill candidates;
+- ToolSet and enabled standalone Tool candidates;
+- long-term Memory for the current user.
 
-Approval decisions, Tool results, system notifications, and deterministic commands do not enter this relevance path. They continue through their existing approval, execution, or control paths instead of being misclassified as new tasks.
+Recall scores are used only for candidate truncation, ordering, and debug logs. They do not enter the final orchestration Prompt and do not drive Brain's task transition. Candidates are sorted by stable references before the model sees them, so concurrent completion order cannot randomize the input.
 
-## The Relevance Agent Produces Signals Only
+The following customer-support reporting run shows semantic understanding, capability discovery, and orchestration. It is not a chain of three model roles or two task-semantic extraction calls:
 
-xAgent uses an internal, stateless task-relevance Agent. It receives only:
+![xAgent displays task understanding, capability discovery, and orchestration for a customer-support reporting task](/img/insights/agent-harness/task-environment-orchestration-en.webp)
 
-- the current original user message and stable resource references;
-- the current-phase goal;
-- the Session-wide goal.
+## Orchestration Adds Capabilities Without Creating a Second Fact Center
 
-It does not receive the full History, candidate Skills, candidate Tools, Memory, execution steps, or an existing orchestration result. Its output contains only two scores: relevance to the current phase and relevance to the Session-wide goal.
+Orchestrator consumes the aligned task, three recall-term groups, current capabilities, and recalled candidates. It returns ToolSets, Tools, and Skills to add. SessionEngine merges them atomically through `AddSelectedCapabilities`:
 
-The relevance Agent does not generate a new goal, recommend Skills, decide whether to compress context, or modify the Session directly. It converts a semantic comparison that string rules cannot handle reliably into a constrained runtime signal. Brain still selects the state transition using the scores and deterministic runtime state, and SessionEngine commits the resulting business action.
+- keep capabilities already loaded;
+- retain default discovery capabilities;
+- add only, never remove implicitly;
+- do not create a Session;
+- do not rewrite task goals;
+- do not select or modify the model, AgentDefinition, or a special role.
 
-## How Two Dimensions Select the Next Path
+Capability removal requires an explicit unload path. Model configuration and Agent identity remain with their own owners instead of changing as a side effect of capability orchestration.
 
-Readers do not need to depend on exact numeric thresholds. High, low, and uncertain bands create the following decision boundary:
+The resulting environment stays inspectable in Session settings:
 
-| Current-phase relevance | Session-goal relevance | Default interpretation | System behavior |
-| --- | --- | --- | --- |
-| High | High | Continue, refine, or correct the current work | Keep the task and capabilities, then continue |
-| Low | High | A new phase within the same responsibility | Update the phase, reconcile capabilities when needed, and evaluate whether the previous phase can be compressed |
-| Low | Low | A new task or an out-of-scope request | Do not overwrite the current goal or capabilities; preserve the request for responsibility routing |
-| High | Low | The phase and Session-wide goal may conflict | Preserve the current state instead of replacing the goal automatically |
-| Uncertain | Any | The signal is not strong enough for a state change | Preserve context and capabilities; let the business Agent reason or ask the user |
+![xAgent runtime settings show the planning, discovery, Session, and file tools loaded after orchestration](/img/insights/agent-harness/selected-tool-environment-en.webp)
 
-The scores are not business facts and are not written into Session goals or context summaries by default. This allows the scoring model and thresholds to evolve without turning one model judgment into permanent state.
+## The Receiving Sub-Session Understands Its Own Task
 
-## Task State and the Capability Environment Change Separately
+MainSession can decide which sub-Session should own work, but the sender transfers only the original request and stable resource references. It does not preselect Skills, Tools, or an execution Prompt for the receiver. The receiving Session treats the collaboration request as its own real input and runs task understanding and capability preparation itself.
 
-A task change does not necessarily require the execution environment to be rebuilt. If the user corrects wording, adds a constraint, or asks the Agent to continue, the existing Skills and Tools usually remain appropriate, so xAgent keeps them.
+The rule is simple: the Session that executes the task is the Session that understands it. This prevents a parent Session's candidate space, stale capabilities, or inference from becoming child facts. See [Multi-Agent Session Event Collaboration](/docs/guides/multi-agent-session-event-collaboration) for the transport path.
 
-Only initial task setup or entry into a new phase enters the environment-preparation path:
+## Outer Enhancements Fail Without Blocking Execution
 
-```text
-Aligned complete task
-  -> Extract task terms for retrieval
-  -> Recall Skill, ToolSet, and Memory candidates
-  -> Orchestrator selects the target capabilities
-  -> SessionEngine applies a differential Skill and Tool update
-```
+If semantic preprocessing fails, xAgent preserves the persisted input, current goals, capabilities, and compression boundary, then continues into the business Agent. Orchestrator or Memory recall failure also does not clear the environment first. Existing capabilities and default discovery Tools remain available, allowing the Agent to discover more capabilities during execution.
 
-The following customer-support reporting run shows the environment-preparation stages as separate runtime states: task-essential extraction, Skill, Tool, and Memory discovery, and orchestration.
+This does not hide failures. It gives the outer enhancement a precise failure boundary: it may miss one capability preselection, but it cannot take away original input, existing task facts, or the main execution path.
 
-![xAgent displays task-essential extraction, capability discovery, and orchestration for a customer-support reporting task](/img/insights/agent-harness/task-environment-orchestration-en.webp)
-
-Task terms are used only for candidate retrieval. They are not passed into Orchestrator beside the complete task as a competing task description. Reconcile mode also carries the current capabilities, so Orchestrator can retain selections that still apply and change only the target environment difference. It consumes one normalized task, the current capabilities, and the retrieved candidates. It does not create Sessions, rewrite task goals, or select the model or Agent identity.
-
-This separation prevents three model roles from overwriting one another. The relevance Agent compares message relationships, task-semantic extraction supports retrieval, and Orchestrator selects capabilities. SessionEngine remains the owner of Session facts.
-
-The resulting runtime environment remains inspectable after orchestration. In this run, the Session loaded planning, capability-discovery, Session-collaboration, and file tools needed to execute and verify the report:
-
-![xAgent runtime settings show the planning, capability-discovery, Session, and file tools loaded after orchestration](/img/insights/agent-harness/selected-tool-environment-en.webp)
-
-## The Receiving Session Prepares Its Own Environment
-
-The newer path also changes sub-Session creation. The main Session determines whether an appropriate responsibility Session already exists. When a new Session is needed, `session_create_sub` creates a minimally runnable Session with deterministic defaults and transfers the original task message and resource references.
-
-The creating Session no longer interprets the task on behalf of the receiving Session, selects its business Skills and Tools, or generates an execution Prompt before creation. The sub-Session receives the task through the same task-control loop as an ordinary user input, then initializes its own goals and capability environment.
-
-This establishes a stable rule: the Session that executes the task is the Session that understands it. It also prevents an orchestration failure from blocking Session creation and transfer of the original task. To learn how Sessions exchange tasks and materials, read [Multi-Agent Session Event Collaboration](/docs/guides/multi-agent-session-event-collaboration).
-
-## Supporting Judgment Must Not Take Over the Main Path
-
-Task-relevance evaluation is a degradable pre-execution capability. If the call fails, the output is invalid, or the scoring model is temporarily unavailable, xAgent treats the situation as “not enough evidence to change the task.” It preserves the goals, capability environment, and compression state, then continues processing the saved user message.
-
-Capability reconciliation failure is a different problem from relevance failure. The original input and committed task state must not disappear, and existing capabilities must not be cleared before a replacement environment has been selected successfully. Each failure remains inside its own responsibility boundary while recoverable facts stay intact.
-
-## What Users Can Observe
-
-When a message simply continues the current work, users may briefly see task-semantic understanding before execution continues. When a message starts a new phase and requires different capabilities, the timeline can show a sequence similar to this:
+Users typically see a sequence like:
 
 ```text
-Understanding the task meaning
-  -> Extracting task terms
-  -> Discovering task capabilities
-  -> Orchestrating the task
+Understanding task semantics
+  -> Discovering Skills, Tools, and Memory
+  -> Orchestrating task capabilities
   -> Applying the task environment
 ```
 
-These notices describe the stages currently advanced by the Harness. They are not model-generated chat content, and they do not imply that every message runs every stage.
+The final three stages do not run for a simple continuation. See [How AI Agents Discover and Load Tools and Skills on Demand](/docs/guides/ai-agent-dynamic-tool-discovery) for runtime capability discovery.
 
-To learn how capabilities enter a Session on demand, read [How AI Agents Discover and Load Tools and Skills on Demand](/docs/guides/ai-agent-dynamic-tool-discovery). For the boundary at which model, Skill, and Tool changes affect later calls, read [Runtime Model and Skill Switching](/docs/guides/ai-agent-runtime-hot-switching).
+## Architecture Judgment: xAgent Should Not Copy Everything-Is-a-Plugin
+
+DeepSeek Harness provides strong composition for replacing model adapters, Tool pipelines, persistence, sandboxes, and Subagent providers. xAgent's strength comes from stable owners: Brain controls scheduling and task transitions, SessionEngine coordinates Session facts, AgentService owns the inner loop, and ToolService owns governance.
+
+The useful lesson is a clear capability seam and reconstructable evidence, not converting every xAgent core responsibility into a plugin. Doing so would blur the fact owners the architecture already established.
+
+As a future improvement, xAgent can formally document its Harness boundary and project request evidence for prompts, Tool schemas, model config, and owner fact versions. Those projections should support audit and reconstruction, never become a second source of truth. These are architecture recommendations, not features claimed as implemented here.
 
 ## Next: How Aligned Work Keeps Running
 
-The task-control loop answers “What task does this message belong to, and what environment does it need?” Once that environment is ready, the business Agent enters the fixed model and Tool execution loop.
+Outer task control answers “How does this message relate to the current task, and does the Session need additional capabilities?” The business Agent then enters its fixed model and Tool loop.
 
-The next article, [Inside the xAgent Agent Harness, Part 2: How Tasks Run, Pause, and Resume](/insights/xagent-agent-harness-execution-loop), explains how the single runner, context assembly, Tool Calls, approval waiting, context compression, and restart recovery form one execution path. For the user-side workflow, you can also read [How AI Agents Run Long Tasks](/docs/guides/long-running-agent-task).
+The next article, [Inside the xAgent Agent Harness, Part 2: How Tasks Run, Pause, and Resume](/insights/xagent-agent-harness-execution-loop), compares DeepSeek's Agent Loop, SessionLog, Tool pipeline, and crash repair with xAgent's single runner, approval state, context compression, and recovery model.
