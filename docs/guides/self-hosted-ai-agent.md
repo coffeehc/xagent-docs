@@ -3,7 +3,7 @@ title: "AI Agent 私有化部署：在自己的服务器搭建智能体平台"
 description: 一份实用的私有化部署智能体平台指南，介绍服务器准备、模型接入、HTTPS、工作区隔离、外部连接、备份与持续运行。
 image: /img/share/zh/xagent-security.png
 status: beta
-updated: 2026-08-06
+updated: 2026-08-17
 ---
 
 # AI Agent 私有化部署：在自己的服务器搭建智能体平台
@@ -52,7 +52,7 @@ xAgent 不是安装在每台个人电脑上的聊天程序。它部署在服务�
 
 ### 1. 安装并启动服务端
 
-运行[官方安装脚本](/docs/getting-started/install)。脚本会识别系统与架构、校验发布包并安装 `v0.0.6.beta`；Linux 会配置并启动 systemd 服务，macOS 安装到当前用户目录。
+运行[官方安装脚本](/docs/getting-started/install)。脚本会识别系统与架构、校验发布包并安装当前版本 `v0.0.10.beta`；Linux 会配置并启动 systemd 服务，macOS 安装到当前用户目录。
 
 ### 2. 配置并验证模型
 

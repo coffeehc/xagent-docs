@@ -62,8 +62,8 @@ const homeContent = {
   'zh-CN': {
     layoutTitle: 'xAgent：可私有化部署的多用户 AI Agent 工作门户',
     layoutDescription:
-      'xAgent 是面向任务完成、可私有化部署的多用户 AI Agent 工作门户，支持 Skill、Tool、MCP、连接器、工作区隔离和安全治理。',
-    kicker: 'xAgent 产品介绍 · v0.0.7.beta',
+      'xAgent 是可私有化部署的多用户 AI Agent 工作门户，能够理解任务变化，按需准备 Skill、Tool 与长期记忆，并通过项目化会话、连接器、隔离工作区和安全治理持续完成任务。',
+    kicker: 'xAgent 产品介绍 · v0.0.10.beta',
     title: '可私有化部署的多用户 AI Agent 工作门户',
     subtitle:
       'xAgent 是企业统一的 AI 工作平台。服务端部署，快速接入现有系统，权限与成本集中管控、操作全程审计；员工打开网页或手机，即可使用 AI 完成工作。实现企业可管、员工好用。',
@@ -99,8 +99,8 @@ const homeContent = {
         description: '说明要完成什么，并上传任务需要处理的文件。',
       },
       {
-        title: '按需加载能力',
-        description: 'xAgent 根据任务发现并加载合适的 Skill 与 Tool。',
+        title: '理解任务并准备能力',
+        description: 'xAgent 判断目标是否延续，并按需准备合适的 Skill、Tool 与长期记忆。',
       },
       {
         title: '执行并确认关键动作',
@@ -215,8 +215,8 @@ const homeContent = {
   en: {
     layoutTitle: 'xAgent: Self-Hosted Multi-User AI Agent Platform',
     layoutDescription:
-      'xAgent is a task-first, self-hosted multi-user AI agent platform with Skills, Tools, MCP, connectors, workspace isolation, and safety governance.',
-    kicker: 'xAgent Product Overview · v0.0.7.beta',
+      'xAgent is a self-hosted multi-user AI agent platform that adapts Skills, Tools, and memory to each task across projects, connectors, and governed workspaces.',
+    kicker: 'xAgent Product Overview · v0.0.10.beta',
     title: 'A Task-First, Self-Hosted Multi-User AI Agent Platform',
     subtitle:
       'xAgent is the unified AI work platform for the enterprise. Deploy on your own servers, connect existing systems quickly, centralize access and cost controls, and audit every action. Employees can get work done with AI from the web or mobile app, giving enterprises control and employees an effortless experience.',
@@ -252,8 +252,8 @@ const homeContent = {
         description: 'Describe the work to complete and upload the files it needs.',
       },
       {
-        title: 'Load capabilities on demand',
-        description: 'xAgent discovers and loads suitable Skills and Tools for the task.',
+        title: 'Understand the task and prepare capabilities',
+        description: 'xAgent checks whether the goal continues, then prepares the relevant Skills, Tools, and long-term memory.',
       },
       {
         title: 'Run and confirm key actions',
@@ -438,7 +438,7 @@ export default function Home(): ReactNode {
           ? 'Self-hosted multi-user AI agent platform'
           : '可私有化部署的多用户 AI Agent 平台',
         operatingSystem: 'Linux, macOS',
-        softwareVersion: '0.0.7.beta',
+        softwareVersion: '0.0.10.beta',
         downloadUrl: installerUrl,
         releaseNotes: `${localeUrl}docs/changelog/`,
         softwareHelp: {

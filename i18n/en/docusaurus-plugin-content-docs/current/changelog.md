@@ -3,13 +3,74 @@ title: Changelog
 description: Review important user-facing changes, binary release contents, and upgrade notes for each xAgent release.
 image: /img/share/en/xagent-overview.png
 status: stable
-updated: 2026-08-10
+updated: 2026-08-16
 schemaType: CollectionPage
 ---
 
 # Changelog
 
 This page records important installation, usage, and safety-governance changes in xAgent binary releases. xAgent remains in beta, and features, interfaces, and protocols may continue to change.
+
+## `v0.0.10.beta` - 2026-08-16
+
+[View installation instructions](/docs/getting-started/install) · [Task understanding and tool selection](/insights/xagent-agent-harness-task-alignment) · [Agent Loop and context management](/insights/xagent-agent-harness-execution-loop)
+
+This release improves task understanding, capability preparation, and cross-session collaboration so Agents can select Skills, Tools, and long-term memory around the active task and adjust the execution environment when the goal changes. It also adds platform capability self-awareness, project-oriented session navigation, context diagnostics, more reliable file delivery, localized Skill presentation, and local administrator recovery.
+
+### Task Understanding, Capability Preparation, and Long-Term Memory
+
+- Before processing a new message in a sub-session, xAgent evaluates its relationship to the current task goal and the overall session goal. Continuing goals keep the current environment, while changed goals trigger capability reconciliation.
+- Capability retrieval derives separate search phrases for Skills, Tools, and Memory from the task objective, covering methods, actions, evidence, quality, domains, deliverables, and reusable knowledge topics.
+- Skills, Tools, and ToolSets use a shared capability summary for candidate retrieval, followed by task-capability orchestration. Standalone Tools can enter the candidate set directly.
+- xAgent now tells Agents about stable platform capability domains, including Skill and Tool discovery, long-term memory, managed secret references, external Connectors, and signals from external entry points or scheduled triggers. Runtime facts and permissions still determine what is available for each request.
+- The session UI reports preparation stages such as understanding task meaning, extracting essentials, discovering capabilities, orchestrating the task, and applying the environment.
+- Providing Tools no longer forces a Tool call. When Tools are available, the model decides whether the task needs one; when no Tools are available, Tool use is explicitly disabled.
+- Short-request, planning, and capability-use guidance has been strengthened so the Agent checks whether a task is executable before acting, asking for missing information, or loading capabilities.
+
+### Project Sessions and Cross-Session Collaboration
+
+- The session sidebar groups regular sessions, projects, teams, and Connectors. Users can create projects and add separate sessions within a project.
+- Sub-session creation uses an explicit session goal and first task message. Original attachments follow the assignment without turning routing wrappers into duplicate instructions.
+- Collaboration requests between main and sub-sessions are persisted, and results return to the exact source session. Refreshes and service recovery no longer depend on an in-memory waiting relationship.
+- A session can send a one-way message to another existing internal session using an exact session reference.
+- When a plan step becomes too large during execution, the Agent can split it into consecutive checkpoints while preserving plan order and completed progress.
+- Long-history loading, runtime-state recovery, and timeline rendering have been improved. Failures to load earlier messages now surface an explicit state.
+
+### Skill Presentation and Context Management
+
+- Skills can provide localized names, descriptions, and icons. Administration lists, detail views, and session capability pickers use the same Skill Card presentation.
+- Advanced settings show the Skills and Tools actually loaded by the session and preserve unavailable-but-selected capability state for accurate runtime inspection.
+- A read-only context-cache snapshot is available from the session toolbar. It reports History, System Prompt, loaded Skills, execution context, turn context, and long-term memory sizes and cache state, and its summary can be copied for diagnostics.
+- Administration now exposes Task Relevance as a separate Agent role alongside Session, Task Capability Orchestration, Summary, and OCR roles.
+- Skill summary generation and retrieval material now share a versioned boundary. Older derived summaries refresh when required instead of remaining out of sync with current capability descriptions.
+
+### File Preview and Delivery
+
+- Markdown files now have a rendered preview with Preview and Source modes. Tables, code blocks, lists, and line breaks follow the document structure.
+- Spreadsheet preview supports switching worksheets within a file and uses an independent scrolling area for larger tables.
+- Workspace files have a stable standalone download page with direct links, retry, and download-again actions. Paths containing special filename characters retain their original identity.
+- Agent sessions, project files, shared files, business spaces, uploads, and team materials use localized names and descriptions in the Workspace browser.
+
+### Preferences and Administrator Recovery
+
+- Response language is now an explicit Chinese or English choice and stays aligned with the console language. Changing it updates both the interface and subsequent Agent responses.
+- Reply detail and Direct Execution / Plan First workflow preferences remain centrally stored and apply consistently to new task turns.
+- Formatting user data now also clears long-term memory, memory summaries, and background extraction state. The account, Skills, secrets, Connector and model configuration, and Token statistics are retained, and the confirmation dialog describes the expanded scope.
+- A local administrator password-recovery command is available on the server. Passwords are accepted only through an interactive terminal, and all existing sign-in sessions for that administrator are revoked after a successful reset.
+
+### Stability Improvements
+
+- OpenAI and compatible Providers no longer execute truncated Tool arguments as an empty object when output limits interrupt the stream. The response is treated as output-limited and handed back to the runtime for recovery.
+- Streaming and non-streaming Tool argument validation, finish reasons, and history replay are aligned, reducing repeated Tool calls after a model response has already ended.
+- Tool Schemas preserve input property order while continuing to adapt to Provider-specific structural constraints, improving complex file-write and multi-parameter Tool calls.
+- Session replies, Prompt assembly, file access, and storage compatibility now use one runtime path, removing older flows that could interpret or execute the same instruction twice.
+
+### Upgrade Notes
+
+- Storage changes for session collaboration are migrated automatically; no manual database migration is required.
+- Formatting user data now includes long-term memory and background memory jobs. Review the updated confirmation scope before running it.
+- If an administrator cannot sign in, stop the service and run `xagent admin reset-password --username <admin-name> --config <path-to-config.yml>` locally on the server.
+- Before upgrading, back up the xAgent configuration, database, user workspaces, Memory, Skills, Tool packages, and Connector state.
 
 ## `v0.0.9.beta` - 2026-08-10
 
@@ -209,7 +270,7 @@ This release upgrades the console experience, real-time Connector interaction, t
 
 ### Upgrade Notes
 
-When this release shipped, rerunning the installer checked for and installed `v0.0.5.beta`. For current upgrades, use the `v0.0.6.beta` [Upgrade Notes](#upgrade-notes).
+When this release shipped, rerunning the installer checked for and installed `v0.0.5.beta`. For current upgrades, use the `v0.0.10.beta` [Upgrade Notes](#upgrade-notes).
 
 ## `v0.0.4.beta` - 2026-07-15
 
@@ -273,4 +334,4 @@ Each archive contains only the xAgent executable, README, and version metadata. 
 
 This earlier public beta improved Connector integration, added the Telegram Connector, expanded the user manual, and established the initial safety-governance workflow.
 
-New deployments and upgrades should use the current installer and the `v0.0.6.beta` release catalog.
+New deployments and upgrades should use the current installer and the `v0.0.10.beta` release catalog.

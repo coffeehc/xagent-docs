@@ -1,6 +1,6 @@
 # xAgent
 
-> xAgent is a task-first, self-hosted multi-user AI agent platform. It organizes Agents, Skills, Tools, MCP, Connectors, isolated workspaces, long-running tasks, approvals, and operational governance in one server-side work portal.
+> xAgent is a task-first, self-hosted multi-user AI agent platform. It adapts Skills, Tools, and long-term memory to each task and organizes project sessions, Connectors, isolated workspaces, long-running execution, approvals, and operational governance in one server-side work portal.
 
 xAgent documentation is maintained as paired Chinese and English pages. Use the page matching the requested language. Product behavior and release details can change during beta, so prefer the linked documentation and changelog over third-party summaries.
 

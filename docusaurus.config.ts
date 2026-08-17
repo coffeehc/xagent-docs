@@ -5,9 +5,9 @@ import type * as Preset from '@docusaurus/preset-classic';
 
 const siteUrl = 'https://xagent.xiagaogao.com';
 const zhDescription =
-  'xAgent 是面向任务完成、可私有化部署的多用户 AI Agent 工作门户，支持 Skill、Tool、MCP、连接器、工作区隔离和安全治理。';
+  'xAgent 是可私有化部署的多用户 AI Agent 工作门户，能够理解任务变化，按需准备 Skill、Tool 与长期记忆，并通过项目化会话、连接器、隔离工作区和安全治理持续完成任务。';
 const enDescription =
-  'xAgent is a task-first, self-hosted multi-user AI agent platform with Skills, Tools, MCP, connectors, workspace isolation, and safety governance.';
+  'xAgent is a self-hosted multi-user AI agent platform that adapts Skills, Tools, and memory to each task across projects, connectors, and governed workspaces.';
 const currentLocale = process.env.DOCUSAURUS_CURRENT_LOCALE ?? 'zh-CN';
 const isEnglish = currentLocale === 'en';
 const localeSiteUrl = isEnglish ? `${siteUrl}/en` : siteUrl;
