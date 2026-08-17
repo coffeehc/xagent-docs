@@ -1,8 +1,8 @@
 ---
 title: Feature and Menu Overview
-description: Understand the v0.0.5.beta console structure, simple and advanced modes, and the main user and administrator menus.
+description: Understand the current xAgent console structure, simple and advanced modes, and the main user and administrator menus.
 status: stable
-updated: 2026-07-27
+updated: 2026-08-17
 ---
 
 # Feature and Menu Overview
@@ -13,13 +13,13 @@ For page-by-page paths, visibility, actions, and current English UI examples, us
 
 This page is for users and administrators who are opening xAgent for the first time and want to understand the available features, where to find them, and why some menus may be hidden.
 
-## What Changed in v0.0.5.beta
+## Current Interface Structure
 
-`v0.0.5.beta` reorganizes the console branding, typography, density, page hierarchy, and responsive layout. Lists, dialogs, and drawers now use shared interaction patterns. Agent Sessions also have a revised message timeline, attachments, Tool status, and workspace access for more consistent desktop and narrow-screen use.
+The current console continues to evolve the information architecture introduced in `v0.0.5.beta`: consistent branding, typography, density, page hierarchy, responsive layouts, and shared interaction patterns for lists, dialogs, and drawers. Agent Sessions bring the message timeline, attachments, Tool status, and Workspace access together for consistent desktop and narrow-screen use.
 
 Preferences, theme settings, and email management are no longer separate sidebar entries. Account information, interface theme, and display density are consolidated under **Account management**. Multiple interface color palettes have been removed.
 
-> Pre-redesign screenshots have been removed from this page because their page structure and button positions no longer match `v0.0.5.beta`.
+> Pre-redesign screenshots have been removed because their page structure and button positions can mislead users of the current release. Use the deployed interface and the [xAgent User Manual](/docs/manual/overview) as the current references.
 
 ## Simple and Advanced Modes
 
@@ -87,7 +87,7 @@ These entries are visible only to administrators:
 | User accounts | Manage local accounts, roles, groups, and each user's advanced-feature setting |
 | User groups | Manage local groups used for authorization and isolation |
 
-The Enterprise accounts entry remains hidden and is not a `v0.0.5.beta` user-facing feature.
+The Enterprise accounts entry remains hidden and is not a user-facing feature in the current release.
 
 ## Analytics
 

@@ -1,8 +1,8 @@
 ---
 title: xAgent 连接器管理：微信、Telegram、飞书与浏览器
-description: 了解 v0.0.6.beta 的 Connector 管理、IM 双向消息、文件传输、健康状态与扩展协议。
+description: 了解当前 xAgent 的 Connector 管理、IM 双向消息、文件传输、健康状态与扩展协议。
 status: experimental
-updated: 2026-08-01
+updated: 2026-08-17
 ---
 
 # xAgent 连接器管理：微信、Telegram、飞书与浏览器
@@ -20,15 +20,15 @@ Connector 是 xAgent 与外部系统之间的协议桥。它既可以把微信�
 
 与 MCP 相比，Connector 更强调外部事件、用户连接和双向通道；MCP 更偏向任务执行时按需调用外部工具。详细区别见[什么是连接器](/docs/getting-started/what-is-connector#它和-mcp-有什么区别)。
 
-## v0.0.6.beta 的连接器版本
+## 当前连接器版本
 
-服务端版本与 Connector 版本独立发布。`v0.0.6.beta` 文档对应的当前 Connector 版本是：
+服务端版本与 Connector 版本独立发布。当前服务端版本为 `v0.0.10.beta`，公开版本目录中的 Connector 版本是：
 
 | Connector | 版本 | 主要用途 |
 | --- | --- | --- |
-| WeChat Connector | `0.0.8` | 微信消息、媒体发送与接收，以及连接上下文续期 |
-| Telegram Connector | `0.0.9` | Telegram Bot 私聊和群聊消息 |
-| Feishu Connector | `0.0.8` | 国内飞书单聊和群聊 @ 机器人消息 |
+| WeChat Connector | `0.0.9` | 微信消息、媒体发送与接收，以及连接上下文续期 |
+| Telegram Connector | `0.0.10` | Telegram Bot 私聊和群聊消息 |
+| Feishu Connector | `0.0.9` | 国内飞书单聊和群聊 @ 机器人消息 |
 
 二进制统一从 `https://downloads.xagent.xiagaogao.com/connector/` 下的 `weixin/`、`telegram/` 和 `feishu/` 目录下载。安装步骤见[开始安装](/docs/getting-started/install)。
 

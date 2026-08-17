@@ -2,13 +2,13 @@
 title: xAgent User Manual
 description: Find page guidance, permission scopes, key areas, and common operations by following the current xAgent console menu, covering ordinary users, advanced mode, and administrator pages.
 status: beta
-updated: 2026-08-01
+updated: 2026-08-17
 schemaType: CollectionPage
 ---
 
 # xAgent User Manual
 
-This manual corresponds to the `v0.0.6.beta` console and is organized by page rather than by concept. Each page explains its menu entry, visibility scope, key areas, and common operations, with screenshots from the current interface.
+This manual corresponds to the `v0.0.10.beta` console and is organized by page rather than by concept. Each page explains its menu entry, visibility scope, key areas, and common operations, with interface examples.
 
 ## How to Use This Manual
 
@@ -22,7 +22,7 @@ This manual corresponds to the `v0.0.6.beta` console and is organized by page ra
 
 > **About the screenshots**
 >
-> The screenshots come from the current console. Environment-specific data such as email addresses, Session identifiers, task titles, connection targets, internal addresses, runtime directories, and authorization details has been redacted. Menus vary by role and advanced-mode settings.
+> The screenshots come from a real console and illustrate page functions and information structure. Environment-specific data such as email addresses, Session identifiers, task titles, connection targets, internal addresses, runtime directories, and authorization details has been redacted. Exact layouts may vary by version, role, and advanced-mode settings.
 >
 > The Chinese manual uses Chinese interface screenshots, while the English manual uses separate English interface screenshots. The two versions do not reuse the same images.
 

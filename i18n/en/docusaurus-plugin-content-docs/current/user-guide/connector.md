@@ -1,8 +1,8 @@
 ---
 title: xAgent Connectors for WeChat, Telegram, Feishu, and Browsers
-description: Learn about v0.0.6.beta Connector management, bidirectional IM messages, file transfer, health state, and extension protocols.
+description: Learn about current xAgent Connector management, bidirectional IM messages, file transfer, health state, and extension protocols.
 status: experimental
-updated: 2026-08-01
+updated: 2026-08-17
 ---
 
 # xAgent Connectors for WeChat, Telegram, Feishu, and Browsers
@@ -20,15 +20,15 @@ A Connector is the protocol bridge between xAgent and an external system. It can
 
 Compared with MCP, a Connector focuses on external events, user connections, and bidirectional channels. MCP is generally an external tool service called on demand during task execution. See [What Is a Connector?](/docs/getting-started/what-is-connector#how-is-it-different-from-mcp).
 
-## Connector Versions for v0.0.6.beta
+## Current Connector Versions
 
-The server and Connectors are released independently. The current Connector versions documented with `v0.0.6.beta` are:
+The server and Connectors are released independently. The current server version is `v0.0.10.beta`, and the public release catalog lists these Connector versions:
 
 | Connector | Version | Main use |
 | --- | --- | --- |
-| WeChat Connector | `0.0.8` | WeChat messages, media, and connection-context renewal |
-| Telegram Connector | `0.0.9` | Telegram Bot direct and group messages |
-| Feishu Connector | `0.0.8` | Feishu direct messages and group @mentions in mainland China |
+| WeChat Connector | `0.0.9` | WeChat messages, media, and connection-context renewal |
+| Telegram Connector | `0.0.10` | Telegram Bot direct and group messages |
+| Feishu Connector | `0.0.9` | Feishu direct messages and group @mentions in mainland China |
 
 Binaries are downloaded from the `weixin/`, `telegram/`, and `feishu/` directories under `https://downloads.xagent.xiagaogao.com/connector/`. See [Start Installation](/docs/getting-started/install).
 

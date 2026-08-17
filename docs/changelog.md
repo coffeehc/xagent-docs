@@ -244,7 +244,7 @@ schemaType: CollectionPage
 - Connector health 连续失败一至两次显示为“不稳定”，第三次起显示为“断开”；恢复成功后可以重新回到在线状态。
 - 微信 Connector 增加按接收人维护的凭据续期和到期提醒，凭据过期后停止无效发送。
 - 浏览器扩展通过内置 Browser Connector 建立受控连接，用于浏览器消息、页面上下文和工具调用。
-- 当前独立 Connector 版本为微信 `0.0.8`、Telegram `0.0.9`、飞书 `0.0.8`。
+- 该版本发布时，独立 Connector 版本为微信 `0.0.8`、Telegram `0.0.9`、飞书 `0.0.8`；当前版本以[连接器管理](/docs/user-guide/connector#当前连接器版本)为准。
 
 ### ProcessSandbox 与运行环境
 

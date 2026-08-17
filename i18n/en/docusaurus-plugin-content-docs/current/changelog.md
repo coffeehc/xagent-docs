@@ -244,7 +244,7 @@ This release upgrades the console experience, real-time Connector interaction, t
 - One or two consecutive health failures are shown as degraded; the third failure marks the Connector offline. A successful probe can restore it to online.
 - WeChat Connector adds recipient-scoped credential renewal and expiration reminders and stops invalid sends after expiration.
 - Browser extensions connect through the built-in Browser Connector for governed browser messaging, page context, and tool calls.
-- Current independent Connector versions are WeChat `0.0.8`, Telegram `0.0.9`, and Feishu `0.0.8`.
+- When this release shipped, the independent Connector versions were WeChat `0.0.8`, Telegram `0.0.9`, and Feishu `0.0.8`. See [Connector Management](/docs/user-guide/connector#current-connector-versions) for current versions.
 
 ### ProcessSandbox and Runtime Environment
 

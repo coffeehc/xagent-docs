@@ -1,19 +1,19 @@
 ---
 title: Supported Agent Capabilities
-description: See what xAgent v0.0.6.beta can do through its 51 built-in Skills, together with current file upload, parsing, preview, and output boundaries.
+description: See what xAgent v0.0.10.beta can do through its 51 built-in Skills, together with current file upload, parsing, preview, and output boundaries.
 status: beta
-updated: 2026-08-01
+updated: 2026-08-17
 ---
 
 # Supported Agent Capabilities
 
-The `v0.0.6.beta` package includes **51 built-in Skills**. They are not isolated chatbots. They are reusable task methods that xAgent can discover and load dynamically. One task may combine several Skills and then use Tools, MCP, or Connectors for file processing, computation, and external actions.
+The `v0.0.10.beta` package includes **51 built-in Skills**. They are not isolated chatbots. They are reusable task methods that xAgent can discover and load dynamically. One task may combine several Skills and then use Tools, MCP, or Connectors for file processing, computation, and external actions.
 
 Use **Operations → Skills** as the source for a specific deployment. Administrators can disable bundled Skills and add personal or shared Skills.
 
 | Current measure | Value | Scope |
 | --- | ---: | --- |
-| Bundled Skills | 51 | Built-in Skill directories in `v0.0.6.beta` |
+| Bundled Skills | 51 | Built-in Skill directories in `v0.0.10.beta` |
 | Manual capability groups | 6 | A navigation aid, not a system permission model |
 | Web session attachment count and size | Determined by server file capabilities | Validated by file type and upload entry point; the console shows the limit before saving |
 
