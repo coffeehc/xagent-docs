@@ -1,19 +1,19 @@
 ---
 title: Supported Agent Capabilities
-description: See what xAgent v0.0.10.beta can do through its 51 built-in Skills, together with current file upload, parsing, preview, and output boundaries.
+description: See what xAgent v0.0.11.beta can do through its 51 built-in Skills, together with current file upload, parsing, preview, and output boundaries.
 status: beta
-updated: 2026-08-17
+updated: 2026-08-19
 ---
 
 # Supported Agent Capabilities
 
-The `v0.0.10.beta` package includes **51 built-in Skills**. They are not isolated chatbots. They are reusable task methods that xAgent can discover and load dynamically. One task may combine several Skills and then use Tools, MCP, or Connectors for file processing, computation, and external actions.
+The `v0.0.11.beta` package includes **51 built-in Skills**. They are not isolated chatbots. They are reusable task methods that xAgent can discover and load dynamically. One task may combine several Skills and then use Tools, MCP, or Connectors for file processing, computation, and external actions.
 
 Use **Operations → Skills** as the source for a specific deployment. Administrators can disable bundled Skills and add personal or shared Skills.
 
 | Current measure | Value | Scope |
 | --- | ---: | --- |
-| Bundled Skills | 51 | Built-in Skill directories in `v0.0.10.beta` |
+| Bundled Skills | 51 | Built-in Skill directories in `v0.0.11.beta` |
 | Manual capability groups | 6 | A navigation aid, not a system permission model |
 | Web session attachment count and size | Determined by server file capabilities | Validated by file type and upload entry point; the console shows the limit before saving |
 
@@ -70,6 +70,7 @@ The Web session upload control currently accepts these formats:
 | Output | Current path |
 | --- | --- |
 | Markdown, TXT, JSON, CSV, and source files | Written directly into the Workspace for summaries, checklists, structured data, and code changes |
+| PNG, JPEG, and WebP images | An image-generation-enabled OpenAI-compatible model can create them through `image_generate`; results are stored as immutable Session artifacts and can be previewed |
 | XLSX | Created or modified through spreadsheet Tools; availability depends on the Tools and runtime visible to the account |
 | Self-contained HTML reports | `html-report-builder` creates responsive, offline reports designed for printing |
 | HTML slide decks | `html-slide-builder` creates browser-based presentations; it is not a PPTX editor or exporter |

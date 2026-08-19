@@ -1,9 +1,9 @@
 ---
 title: 开始安装 xAgent
-description: 从服务器运行安装脚本到完成首次系统初始化，按步骤安装并验证 xAgent v0.0.10.beta。
+description: 从服务器运行安装脚本到完成首次系统初始化，按步骤安装并验证 xAgent v0.0.11.beta。
 image: /img/getting-started/v005/install-terminal.webp
 status: beta
-updated: 2026-08-16
+updated: 2026-08-19
 ---
 
 # 开始安装 xAgent
@@ -51,7 +51,7 @@ curl -fsSL https://downloads.xagent.xiagaogao.com/scripts/install.sh \
 xagent version
 ```
 
-当前目标版本应为 `0.0.10.beta`。安装命令保持不变，安装器会读取当前发布目录。Linux 还可以检查服务状态：
+当前目标版本应为 `0.0.11.beta`。安装命令保持不变，安装器会读取当前发布目录。Linux 还可以检查服务状态：
 
 ```bash
 sudo systemctl status xagent-server
@@ -118,7 +118,7 @@ http://服务器地址:18888/
 - **真实模型名**：发送给模型服务的实际模型 ID，例如 `qwen3.6-27b`。
 - **Base URL**：模型服务的兼容 API 地址，按服务要求填写 `/v1` 等路径。
 - **API Key**：模型服务的认证密钥，保存后不要写入文档、截图或公共日志。
-- **模型能力**：按模型实际能力选择 Chat、流式、工具调用、视觉、音频和文件。
+- **模型能力**：按模型实际能力选择聊天、生成图片、工具调用、视觉、音频和文件。生成图片当前只对支持该能力的 OpenAI-compatible 配置开放。
 - **高级选项**：需要时再配置超时和其他请求参数。
 
 模型连接测试只说明服务可访问，后续仍建议执行一个真实任务验证工具调用、文件处理和输出保存。模型字段说明见[模型配置](/docs/user-guide/model-config)。

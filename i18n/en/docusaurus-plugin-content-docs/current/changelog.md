@@ -3,13 +3,68 @@ title: Changelog
 description: Review important user-facing changes, binary release contents, and upgrade notes for each xAgent release.
 image: /img/share/en/xagent-overview.png
 status: stable
-updated: 2026-08-16
+updated: 2026-08-19
 schemaType: CollectionPage
 ---
 
 # Changelog
 
 This page records important installation, usage, and safety-governance changes in xAgent binary releases. xAgent remains in beta, and features, interfaces, and protocols may continue to change.
+
+## `v0.0.11.beta` - 2026-08-19
+
+[View installation instructions](/docs/getting-started/install) · [View the Connector guide](/docs/user-guide/connector)
+
+This release upgrades the Connector runtime, introduces the Database and SSH Connector Servers, and unifies Connector Skills, file capabilities, authentication, and multi-resource routing under shared protocol boundaries. It also adds image generation, ephemeral Session working state, stable Skill identities, and streamlined model and Connector administration.
+
+### Connector Protocol and Runtime
+
+- Connector Protocol is now `4.3`. xAgent remains compatible with `3.0`, `4.0`, `4.1`, and `4.2` Connectors and negotiates the actual data-plane version during the handshake.
+- `target_type` has been removed. xAgent accepts Connectors through the Card, Profile, Tool, authentication-flow, and Channel contracts without a business-category allowlist.
+- One user establishes one real Connector Channel to one Connector Server. Multi-resource mode routes business VChannels by `resource_key` on that Channel without exposing the internal `connector_channel_id` to the model.
+- Tools declared by a Connector Card are registered as global runtimes. Model visibility depends on Card registration and runtime health, not user authentication or Connection Descriptor state.
+- File transfer is separated from IM into the independent `xagent.file.v1` Profile.
+- Connector Skills now support directories: `/skill.json` exposes a revisioned file manifest, and xAgent downloads and atomically replaces the local directory. Script files are ignored, while legacy `/skill.md` remains compatible.
+- Connector and built-in Skills use stable English IDs with localized Skill Cards for Chinese and English presentation.
+
+### Database Connector Server
+
+- The first public Database Connector release supports administrator-defined MySQL and PostgreSQL resources with stable user-facing resource IDs.
+- User authentication, database credentials, and native database authorization stay inside the Connector Server. xAgent stores only Channel ownership and routing facts.
+- SQL tools enforce row, result-size, and timeout limits and expose actual execution errors.
+- Configuration reloads dynamically and revalidates changed database resources without restarting the Connector.
+
+### SSH Connector Server
+
+- The first public SSH Connector release supports multiple administrator-defined targets. Models see only the `resource_key` and label, never the host address.
+- Private keys are loaded by filename from the `keys` directory beside `config.yml`. A successful first connection records the host fingerprint, and later host-key changes are rejected.
+- Users authenticate inside the Connector with a principal and access token for audit attribution. xAgent user IDs are never sent to the Connector Server.
+- Bounded command execution and SSH/PTTY shell tools cover open, incremental read, write, resize, signal, close, and idle-session reclamation.
+- Target changes trigger hash-based reprobes. Authentication and execution failures are logged with actionable context, while successful tool calls no longer occupy info logs.
+
+### Image Generation and Model Configuration
+
+- Added the native `image_generate` Tool using either the OpenAI Responses image tool or the Images API of the active model.
+- Generated PNG, JPEG, and WebP results are validated, stored as immutable Session artifacts, and rendered directly in the conversation.
+- `default_policy.image_generation` explicitly enables image generation and carries upstream defaults. Models without that policy do not expose the capability.
+- Removed the non-decision-bearing `supports_streaming` capability field from model configuration and administration.
+
+### Sessions, Skills, and Tools
+
+- Added ephemeral Session working-state tools for structured long-running task state that follows Session cleanup.
+- Built-in Skill IDs now use stable English identifiers while localized Skill Cards continue to provide user-facing names.
+- Connector Session names show only the Connector name instead of appending dynamic connected-resource counts.
+- Connector authentication forms follow Card-declared resources and fields. The SSH access-token flow also requires a principal for unambiguous auditing.
+
+### Upgrade Notes
+
+- Upgrade xAgent and Connector Servers separately. Current public versions are WeChat `0.0.10`, Telegram `0.0.11`, Feishu `0.0.10`, Database `0.0.3`, and SSH `0.0.4`.
+- Database `0.0.3` and SSH `0.0.4` fix first-install startup with the empty resource lists generated by the installer. An unconfigured Connector stays online without declaring a login flow and activates resources through dynamic reload after configuration.
+- When the version string is unchanged, the installer now also compares the platform binary digest. A republished build is offered as an update, with the previous binary preserved for rollback before replacement.
+- Directory Skills and the file Profile are incremental Protocol 4.3 capabilities. Older Connectors remain usable through compatibility paths but do not gain these features.
+- After installing SSH, create a `keys` directory beside the Connector configuration, add the private key, and configure targets, principals, and access tokens. Never commit real keys, tokens, or runtime fingerprints.
+- Database and SSH target credentials remain in their Connector Servers. Back up Connector configuration, state directories, and SSH keys before upgrading.
+- Before upgrading xAgent, back up its configuration, database, user workspaces, Memory, Skills, Tool packages, and Connector state.
 
 ## `v0.0.10.beta` - 2026-08-16
 
@@ -270,7 +325,7 @@ This release upgrades the console experience, real-time Connector interaction, t
 
 ### Upgrade Notes
 
-When this release shipped, rerunning the installer checked for and installed `v0.0.5.beta`. For current upgrades, use the `v0.0.10.beta` [Upgrade Notes](#upgrade-notes).
+When this release shipped, rerunning the installer checked for and installed `v0.0.5.beta`. For current upgrades, use the [`v0.0.11.beta`](#v0011beta---2026-08-19) release notes.
 
 ## `v0.0.4.beta` - 2026-07-15
 
@@ -334,4 +389,4 @@ Each archive contains only the xAgent executable, README, and version metadata. 
 
 This earlier public beta improved Connector integration, added the Telegram Connector, expanded the user manual, and established the initial safety-governance workflow.
 
-New deployments and upgrades should use the current installer and the `v0.0.10.beta` release catalog.
+New deployments and upgrades should use the current installer and the `v0.0.11.beta` release catalog.

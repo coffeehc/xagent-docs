@@ -63,7 +63,7 @@ const homeContent = {
     layoutTitle: 'xAgent：可私有化部署的多用户 AI Agent 工作门户',
     layoutDescription:
       'xAgent 是可私有化部署的多用户 AI Agent 工作门户，能够理解任务变化，按需准备 Skill、Tool 与长期记忆，并通过项目化会话、连接器、隔离工作区和安全治理持续完成任务。',
-    kicker: 'xAgent 产品介绍 · v0.0.10.beta',
+    kicker: 'xAgent 产品介绍 · v0.0.11.beta',
     title: '可私有化部署的多用户 AI Agent 工作门户',
     subtitle:
       'xAgent 是企业统一的 AI 工作平台。服务端部署，快速接入现有系统，权限与成本集中管控、操作全程审计；员工打开网页或手机，即可使用 AI 完成工作。实现企业可管、员工好用。',
@@ -143,7 +143,7 @@ const homeContent = {
     capabilityCards: [
       {
         title: 'Skill 与 Tool',
-        description: '内置 Skill 覆盖报告、研究、写作、合规、财务、客服、项目管理等场景；Tool 覆盖文件、表格、PDF、网页、邮件、触发器等动作。',
+        description: '内置 Skill 覆盖报告、研究、写作、合规、财务、客服、项目管理等场景；Tool 覆盖文件、表格、PDF、网页、图片生成、邮件和触发器等动作。',
         to: '/docs/manual/capabilities',
       },
       {
@@ -153,7 +153,7 @@ const homeContent = {
       },
       {
         title: '连接器',
-        description: '微信、Telegram 与飞书连接器支持双向文本、文件、流式状态和活动提示；浏览器也可以作为受控连接入口。',
+        description: '微信、Telegram 与飞书连接器支持双向消息和文件；Database 与 SSH Connector 提供受管的数据库和远程主机能力，浏览器也可以作为受控连接入口。',
         to: '/docs/user-guide/connector',
       },
       {
@@ -216,7 +216,7 @@ const homeContent = {
     layoutTitle: 'xAgent: Self-Hosted Multi-User AI Agent Platform',
     layoutDescription:
       'xAgent is a self-hosted multi-user AI agent platform that adapts Skills, Tools, and memory to each task across projects, connectors, and governed workspaces.',
-    kicker: 'xAgent Product Overview · v0.0.10.beta',
+    kicker: 'xAgent Product Overview · v0.0.11.beta',
     title: 'A Task-First, Self-Hosted Multi-User AI Agent Platform',
     subtitle:
       'xAgent is the unified AI work platform for the enterprise. Deploy on your own servers, connect existing systems quickly, centralize access and cost controls, and audit every action. Employees can get work done with AI from the web or mobile app, giving enterprises control and employees an effortless experience.',
@@ -296,12 +296,12 @@ const homeContent = {
     capabilityCards: [
       {
         title: 'Skills and Tools',
-        description: 'Skills capture reusable task methods. Tools perform concrete actions such as file processing, web fetching, report creation, messaging, and triggers.',
+        description: 'Skills capture reusable task methods. Tools perform concrete actions such as file processing, web fetching, image generation, report creation, messaging, and triggers.',
         to: '/docs/manual/capabilities',
       },
       {
         title: 'Connectors and MCP',
-        description: 'WeChat, Telegram, and Feishu connectors support bidirectional text, files, streaming updates, and activity state. Browser connections provide another governed entry point.',
+        description: 'WeChat, Telegram, and Feishu Connectors provide bidirectional messages and files. Database and SSH Connectors expose governed database and remote-host capabilities, while Browser provides another controlled entry point.',
         to: '/docs/user-guide/connector',
       },
       {
@@ -438,7 +438,7 @@ export default function Home(): ReactNode {
           ? 'Self-hosted multi-user AI agent platform'
           : '可私有化部署的多用户 AI Agent 平台',
         operatingSystem: 'Linux, macOS',
-        softwareVersion: '0.0.10.beta',
+        softwareVersion: '0.0.11.beta',
         downloadUrl: installerUrl,
         releaseNotes: `${localeUrl}docs/changelog/`,
         softwareHelp: {

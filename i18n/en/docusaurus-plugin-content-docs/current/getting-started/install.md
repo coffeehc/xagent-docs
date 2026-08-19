@@ -1,9 +1,9 @@
 ---
 title: Start Installing xAgent
-description: Install and verify xAgent v0.0.10.beta from the server installer through the first system setup flow.
+description: Install and verify xAgent v0.0.11.beta from the server installer through the first system setup flow.
 image: /img/getting-started/v005/install-terminal.webp
 status: beta
-updated: 2026-08-16
+updated: 2026-08-19
 ---
 
 # Start Installing xAgent
@@ -51,7 +51,7 @@ After the installer exits, confirm the version:
 xagent version
 ```
 
-The target version is `0.0.10.beta`. The installer command is unchanged and reads the current release catalog. On Linux, also check the service:
+The target version is `0.0.11.beta`. The installer command is unchanged and reads the current release catalog. On Linux, also check the service:
 
 ```bash
 sudo systemctl status xagent-server
@@ -118,7 +118,7 @@ The main fields are:
 - **Real model name**: The actual model ID sent to the model service, such as `qwen3.6-27b`.
 - **Base URL**: The compatible API address, including a path such as `/v1` when required by the service.
 - **API Key**: The model service credential. Do not put it in documentation, screenshots, or public logs after saving it.
-- **Model capabilities**: Select Chat, streaming, tool calls, vision, audio, and files according to the model's actual capabilities.
+- **Model capabilities**: Select chat, image generation, tool calls, vision, audio, and files according to the model's actual capabilities. Image generation is currently available only for OpenAI-compatible configurations that support it.
 - **Advanced options**: Configure timeout and other request parameters only when needed.
 
 The connectivity test only proves that the service is reachable. Run a real task afterward to verify tool calls, file processing, and saved outputs. See [Model Configuration](/docs/user-guide/model-config) for field details.

@@ -2,7 +2,7 @@
 title: "xAgent Model Configuration: Providers, Tool Calling, and Task Routing"
 description: Learn about xAgent Provider integration, tool-calling capabilities, connection testing, hot switching, and the future direction of unified task routing.
 status: stable
-updated: 2026-07-15
+updated: 2026-08-19
 ---
 
 # xAgent Model Configuration: Providers, Tool Calling, and Task Routing
@@ -30,7 +30,7 @@ Open this page when you need to:
 - Add an available model after initial deployment.
 - Change a model service address, key, or actual model name.
 - Test whether a model can connect.
-- Adjust whether a model supports images, files, Tool calling, or streaming output.
+- Adjust whether a model supports chat, image generation, image or file input, audio, and Tool calling.
 - Prepare different models for different task types.
 
 ## Reading the Page
@@ -46,7 +46,7 @@ The left side lists models; the right side edits the selected model. Common fiel
 | API Key | The model service key |
 | Request timeout | The maximum wait time for one request |
 | Description | A usage note for administrators |
-| Model capabilities | Whether it supports chat, vision, audio, files, streaming output, and Tool calling |
+| Model capabilities | Whether it supports chat, image generation, Tool calling, vision, audio, and files |
 | Default policy Raw JSON | Advanced default policy settings |
 | HTTP Headers | Additional request headers |
 
@@ -85,11 +85,13 @@ Configure switches according to the model's real capabilities. Do not enable eve
 | Capability | Effect |
 | --- | --- |
 | Chat | Whether it can be used for regular conversation and tasks |
+| Image generation | Whether the current OpenAI-compatible configuration enables `image_generate` |
 | Vision | Whether it can process image input |
 | Audio | Whether it can process audio input or output |
 | Files | Whether it can process file input |
-| Streaming | Whether output can appear while it is being generated |
 | Tool calling | Whether it can work with Tools to perform actions |
+
+Streaming output remains runtime behavior that should be tested when connecting a model, but it is no longer a model capability switch.
 
 A model without Tool calling is not appropriate for tasks that need file reading, external system calls, or concrete actions.
 

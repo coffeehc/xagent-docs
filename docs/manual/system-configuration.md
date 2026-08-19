@@ -2,7 +2,7 @@
 title: 系统配置页面
 description: xAgent 模型、系统、软件授权和 Agent 角色配置页面说明与界面图例。
 status: beta
-updated: 2026-07-27
+updated: 2026-08-19
 ---
 
 # 系统配置页面
@@ -21,7 +21,7 @@ updated: 2026-07-27
 
 - 新建模型并选择 Provider 协议。
 - 配置 Base URL、API Key、真实模型名、请求头和超时。
-- 声明聊天、流式、工具调用、视觉、音频和文件能力。
+- 声明聊天、生成图片、工具调用、视觉、音频和文件能力。
 - 测试连接后保存，并设置一个默认模型。
 
 完整说明见 [模型配置](/docs/user-guide/model-config)。

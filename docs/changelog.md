@@ -3,13 +3,68 @@ title: 更新日志
 description: 查看 xAgent 各二进制版本面向用户的重要变化、下载内容和升级注意事项。
 image: /img/share/zh/xagent-overview.png
 status: stable
-updated: 2026-08-16
+updated: 2026-08-19
 schemaType: CollectionPage
 ---
 
 # 更新日志
 
 本文记录 xAgent 免费二进制版本中与安装、使用和安全治理相关的重要变化。当前仍是测试版，功能、界面和协议可能继续调整。
+
+## `v0.0.11.beta` - 2026-08-19
+
+[查看安装方式](/docs/getting-started/install) · [查看 Connector 使用手册](/docs/user-guide/connector)
+
+本版本完成 Connector 运行体系升级，正式加入 Database 与 SSH Connector Server，并让 Connector Skill、文件能力、认证和多资源路由使用统一协议边界。同时新增图片生成工具、会话临时工作状态，并收口 Skill 标识、模型配置与 Connector 管理体验。
+
+### Connector 协议与运行时
+
+- Connector 公共协议升级到 `4.3`。xAgent 同时兼容 `3.0`、`4.0`、`4.1` 和 `4.2` Connector，并在数据平面握手时协商实际版本。
+- 删除 `target_type`。xAgent 只按 Connector Card、Profile、Tool、认证流程和 Channel 协议处理业务，不再按业务分类枚举限制 Connector 接入。
+- 同一用户与同一 Connector Server 只建立一条真实 Connector Channel；多资源模式在该 Channel 上按 `resource_key` 路由业务 VChannel，模型不接触内部 `connector_channel_id`。
+- Connector Card 声明的工具注册为全局 Runtime。工具是否进入模型上下文只由 Card 注册和真实运行时健康决定，不再按用户认证或 Connection Descriptor 状态过滤。
+- 文件传输从 IM Profile 中拆分为独立的 `xagent.file.v1`，Connector 可以明确声明双向文件能力。
+- Connector Skill 升级为目录模式：`/skill.json` 提供文件清单，xAgent 按 revision 下载并原子替换本地目录；脚本文件会被忽略，旧版 `/skill.md` 仍保持兼容。
+- Connector 与内置 Skill 使用稳定英文 ID，并通过 Skill Cards 提供中英文名称、说明和展示信息。
+
+### Database Connector Server
+
+- 首次正式发布 Database Connector Server，支持管理员配置多个 MySQL 和 PostgreSQL 目标，并以稳定资源 ID 向用户展示。
+- 用户认证、数据库凭据和数据库原生权限保留在 Connector Server 内；xAgent 只持有 Channel 归属和路由信息。
+- 提供有行数、结果大小和超时边界的 SQL 工具，并支持连接状态观察和执行错误回传。
+- 配置文件动态加载；数据库资源定义变化后自动重新校验，不需要重启 Connector。
+
+### SSH Connector Server
+
+- 首次正式发布 SSH Connector Server。管理员可配置多个 SSH 目标，模型只看到 `resource_key` 和 label，不会看到主机地址。
+- 私钥从 `config.yml` 同目录的 `keys` 目录按文件名加载；首次成功连接自动记录主机指纹，后续检测主机密钥变化。
+- 用户通过 principal 与 access token 完成 Connector 内认证，用于操作审计归属；xAgent `user_id` 不发送给 Connector Server。
+- 支持受控命令执行和基于 SSH/PTTY 的交互式 shell，包括打开、增量读取、写入、resize、signal、关闭和空闲回收。
+- 目标配置变化后按内存 hash 重新连接测试，运行状态、认证失败和执行错误提供可诊断日志；成功工具调用不再占用 info 日志。
+
+### 图片生成与模型配置
+
+- 新增 `image_generate` 原生工具，可使用当前模型的 OpenAI Responses 图片工具或 Images API 生成图片。
+- 生成结果会校验为 PNG、JPEG 或 WebP，保存为不可变 Session 产物，并在会话中直接展示和预览。
+- 模型配置通过 `default_policy.image_generation` 显式启用图片生成并承载上游默认参数；未启用的模型不会暴露该能力。
+- 删除无实际决策价值的 `supports_streaming` 模型能力字段，模型探测和管理界面统一使用当前有效能力事实。
+
+### 会话、Skill 与工具体验
+
+- 新增会话临时工作状态工具，Agent 可以在长任务中保存和读取结构化的短期执行状态，并随会话清理。
+- 内置 Skill ID 全面收口为稳定英文标识，界面继续通过 i18n Skill Card 展示本地化名称。
+- Connector 会话名称只显示 Connector 名称，不再追加“已连接目标数量”等动态状态。
+- Connector 认证表单按 Card 声明展示资源和凭据字段，SSH access token 流程同时要求 principal，便于审计区分用户。
+
+### 升级说明
+
+- Connector Server 与 xAgent 必须分别升级。当前公开版本为微信 `0.0.10`、Telegram `0.0.11`、飞书 `0.0.10`、Database `0.0.3`、SSH `0.0.4`。
+- Database `0.0.3` 与 SSH `0.0.4` 修复安装器首次生成空资源列表时 Connector 无法启动的问题；未配置资源时服务保持在线且不声明登录流程，管理员写入资源后动态加载生效。
+- 安装器在版本号相同时继续比较当前平台二进制摘要；同版本重新发布后会提示发现新构建，并在覆盖前保留旧二进制用于回滚。
+- Connector Protocol `4.3` 的目录式 Skill 与文件 Profile 是增量能力；旧 Connector 仍可通过兼容协议运行，但不会获得这些新能力。
+- SSH 安装后请在 Connector 配置目录创建 `keys` 目录并放入私钥，再配置目标、principal 和 access token。不要把真实私钥、token 或运行时指纹提交到源码仓库。
+- Database 与 SSH Connector 的目标系统凭据只保存在各自 Connector Server 中；升级前请备份 Connector 配置、状态目录和 SSH keys。
+- 升级 xAgent 前请备份配置、数据库、用户工作区、Memory、Skill、Tool 包和 Connector 状态。
 
 ## `v0.0.10.beta` - 2026-08-16
 
@@ -270,7 +325,7 @@ schemaType: CollectionPage
 
 ### 升级说明
 
-该版本发布时，重新运行安装命令即可检查并安装 `v0.0.5.beta`。当前升级请以 `v0.0.10.beta` 的[升级说明](#升级说明)为准。
+该版本发布时，重新运行安装命令即可检查并安装 `v0.0.5.beta`。当前升级请以 [`v0.0.11.beta`](#v0011beta---2026-08-19) 版本说明为准。
 
 ## `v0.0.4.beta` - 2026-07-15
 
@@ -334,4 +389,4 @@ Release 仅包含：
 
 该版本完善了 Connector 接入、Telegram Connector、使用手册和基础安全治理能力，是 `v0.0.4.beta` 之前的公开测试版本。
 
-新部署和升级应直接使用当前安装脚本与 `v0.0.10.beta` 版本目录。
+新部署和升级应直接使用当前安装脚本与 `v0.0.11.beta` 版本目录。

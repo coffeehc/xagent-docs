@@ -2,7 +2,7 @@
 title: System Configuration Pages
 description: Page-by-page guidance and English UI examples for xAgent models, system settings, software license, and Agent roles.
 status: beta
-updated: 2026-07-27
+updated: 2026-08-19
 ---
 
 # System Configuration Pages
@@ -19,7 +19,7 @@ System Configuration is available only to administrators. Changes affect all use
 
 - Create a model and select its Provider protocol.
 - Configure the Base URL, API key, upstream model name, headers, and timeout.
-- Declare chat, streaming, tool-call, vision, audio, and file capabilities.
+- Declare chat, image-generation, tool-call, vision, audio, and file capabilities.
 - Test the connection before saving and keep one default model.
 
 See [Model Configuration](/docs/user-guide/model-config) for details.
