@@ -5,7 +5,7 @@ import type {Props} from '@theme/Root';
 import {ImageLightboxProvider} from '@site/src/components/ImageLightbox';
 
 const releaseRepositoryPath = '/coffeehc/xagent-releases';
-const contactEmail = 'data@yaoankeji.com';
+const contactEmail = 'xagent@xiagaogao.com';
 const installerScriptFragment =
   'downloads.xagent.xiagaogao.com/scripts/install.sh';
 const installerCopyLabels = new Set([

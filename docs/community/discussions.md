@@ -2,12 +2,14 @@
 title: 社区讨论
 description: 加入 xAgent 社区讨论，交流使用场景、提出功能建议、完善内置 Skill，并区分公开讨论与可复现问题反馈。
 status: stable
-updated: 2026-08-01
+updated: 2026-08-21
 ---
 
 # 社区讨论
 
 xAgent 的公开讨论集中在 [xagent-releases Discussions](https://github.com/coffeehc/xagent-releases/discussions)。这里适合交流真实使用场景、收集产品建议，并沉淀可复用的经验。
+
+国内用户也可以加入 xAgent QQ 群：**135385989**，用于交流使用问题、部署经验和产品建议。
 
 ## 从哪里开始
 
@@ -44,4 +46,5 @@ xAgent 的公开讨论集中在 [xagent-releases Discussions](https://github.com
 
 ## 参与讨论
 
-[进入 xAgent Discussions](https://github.com/coffeehc/xagent-releases/discussions)
+- 国内交流：xAgent QQ 群 **135385989**
+- 公开讨论：[进入 xAgent Discussions](https://github.com/coffeehc/xagent-releases/discussions)

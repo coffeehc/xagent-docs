@@ -57,7 +57,7 @@ xAgent 也希望寻找优秀的 MCP 聚合服务商，共同完善用户的场�
 
 如果你是模型 API / Token 服务商，或正在建设 MCP 聚合服务，欢迎联系 xAgent 团队。如果你希望讨论合作，请通过邮件联系：
 
-**data@yaoankeji.com**
+**xagent@xiagaogao.com**
 
 来信时建议简单说明：
 

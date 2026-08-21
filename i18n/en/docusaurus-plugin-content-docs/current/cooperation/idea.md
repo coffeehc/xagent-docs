@@ -15,7 +15,7 @@ We welcome feedback from real tasks, including problems you encountered, capabil
 | Suitable for public discussion | Better for direct contact |
 | --- | --- |
 | Usage discussions, feature requests, documentation corrections, Skill improvements | Reproducible bugs, partnership inquiries, non-public scenarios, or discussions with internal context |
-| [Join the community](/docs/community/discussions) | [Open a new issue](https://github.com/coffeehc/xagent-releases/issues/new) or [send an email](mailto:data@yaoankeji.com) |
+| [Join the community](/docs/community/discussions) | [Open a new issue](https://github.com/coffeehc/xagent-releases/issues/new) or [send an email](mailto:xagent@xiagaogao.com) |
 
 Community discussions are for sharing usage experience and product ideas. Issues are only for reproducible defects, release packages, and installation failures. Email is better for context that should not be public. Do not send real keys, tokens, verification codes, customer data, or other unnecessary sensitive information through either channel.
 
@@ -31,4 +31,4 @@ A clear real-world scenario is easier to evaluate than a feature name alone. For
 
 ## Contact Email
 
-[data@yaoankeji.com](mailto:data@yaoankeji.com)
+[xagent@xiagaogao.com](mailto:xagent@xiagaogao.com)

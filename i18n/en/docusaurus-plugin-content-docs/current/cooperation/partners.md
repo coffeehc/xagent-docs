@@ -57,7 +57,7 @@ If you are a model API / token provider, or are building MCP aggregation service
 
 Contact email:
 
-**data@yaoankeji.com**
+**xagent@xiagaogao.com**
 
 Please briefly include:
 

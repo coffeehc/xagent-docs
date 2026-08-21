@@ -297,7 +297,7 @@ const config: Config = {
             },
             {
               label: '联系我们',
-              href: 'mailto:data@yaoankeji.com',
+              href: 'mailto:xagent@xiagaogao.com',
             },
           ],
         },
