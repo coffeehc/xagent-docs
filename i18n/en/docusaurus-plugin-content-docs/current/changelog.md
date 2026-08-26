@@ -3,13 +3,65 @@ title: Changelog
 description: Review important user-facing changes, binary release contents, and upgrade notes for each xAgent release.
 image: /img/share/en/xagent-overview.png
 status: stable
-updated: 2026-08-19
+updated: 2026-08-26
 schemaType: CollectionPage
 ---
 
 # Changelog
 
 This page records important installation, usage, and safety-governance changes in xAgent binary releases. xAgent remains in beta, and features, interfaces, and protocols may continue to change.
+
+## `v0.0.12.beta` - 2026-08-26
+
+[View installation instructions](/docs/getting-started/install) · [View long-term Memory guidance](/docs/user-guide/memory) · [View the Connector guide](/docs/user-guide/connector)
+
+This release adds direct long-term Memory management, concurrent Tool calls, and stronger Session context governance. It also improves legacy-data migration, local command isolation, Connector resource presentation, and file-reference reliability so long-running tasks remain more consistent through execution, approval, recovery, and upgrades.
+
+### Long-Term Memory Management
+
+- My Memory is now available from the account menu and Workbench shortcuts, allowing users to inspect, manually add, and delete long-term memories for their account.
+- The Memory list supports pagination and filters for keywords, type, scope, and source. It presents the original evidence first, with the full content and structured fields available in the RAW detail view.
+- Background extraction first decides whether content belongs in long-term Memory, should remain Session-only, should be rejected, or requires review. Questions, hypotheticals, unaccepted proposals, temporary task state, and sensitive information are not written directly to long-term Memory.
+- Corrections, mixed evidence, assistant-only evidence, and possible duplicates receive more cautious review. Review cannot silently rewrite or replace an existing fact.
+- Memory extraction segments now follow the active Memory model's effective context window and read extraction results in full, reducing parse failures caused by truncated long content.
+
+### Session Context and Tool Calls
+
+- Context budgets are calculated from the active model's context window, output limit, and prompt overhead, avoiding stale budgets after model changes or Session recovery.
+- Context compression now starts automatically at the runtime budget boundary. The manual `/compress` command has been removed because it could conflict with active execution; `/clear-history` remains available for explicit history removal.
+- While compression is active, the information panel keeps the current compression state visible instead of allowing older Tool, model, or connection notices to cover it.
+- Multiple Tool calls from one model turn can run within a bounded concurrency limit. Completed results remain stable even when another call is waiting for approval or continuation.
+- Tool cards appear as soon as the model starts producing a call and distinguish receiving arguments from execution. Incomplete arguments cut off by the model output limit are never executed.
+- Improved excessive blank-line handling for compatible Providers during Tool calls and aligned model-usage accounting across concurrent execution, approval recovery, and failures.
+
+### Platform Incident Governance
+
+- The administration console adds switchable platform-incident recording with aggregated details, sample inspection, individual deletion, and history cleanup.
+- Tool-argument issues, user input errors, model-driven Tool failures, business retries, and explicit cancellations are no longer duplicated as system incidents.
+- Recoverable connectivity failures such as unreachable networks or refused connections are handled as retryable warnings, while database and queue-persistence failures remain platform incidents.
+
+### xAgentDB and Legacy Data Migration
+
+- User table capabilities now use xAgentDB consistently across table creation, import, queries, deletion, file handling, and backup flows.
+- On first startup, xAgent migrates schemas and data from legacy user databases after checking table names, column definitions, and data conflicts instead of silently overwriting existing data.
+- Decimal user-workspace directories created by older releases are migrated to the current directory format. Existing destination files are never overwritten, and conflicts remain in a migration archive for inspection and recovery.
+
+### Connectors, Local Execution, and Files
+
+- Connector details now include structured targets and runtime status. SSH and Database Connectors show only resources within the active user's authorization scope and use stable ordering.
+- Connection details consistently present targets and Tools without exposing internal Channel identifiers. Connector Protocol `4.3`, multi-resource routing, directory-based Connector Skills, and independent file transfer remain supported.
+- Fixed conflicts between Python package locations and sandbox rules on macOS. Linux read-only upload mounts and residual-process cleanup are more reliable, further tightening local command execution boundaries.
+- The sidebar now shows a concise three-part version. Administrators can click it to check for an update immediately and continue through the existing one-click upgrade flow.
+- File-reference copy now works on non-secure HTTP pages, and copying different files in sequence uses each file's stable identity instead of pasting a duplicate or stale reference.
+- Tools that read, convert, or update existing files prefer an accessible path and fall back to the stable file reference when that path is unavailable, reducing failures when files move during long-running tasks.
+
+### Upgrade Notes
+
+- Upgrade xAgent Server and Connector Servers separately. Current public versions are WeChat `0.0.12`, Telegram `0.0.13`, Feishu `0.0.12`, Database `0.0.6`, and SSH `0.0.8`.
+- Legacy user workspaces are migrated on first startup. If a destination already contains the same path, the current file wins and the legacy file remains under `.migrations/user-workspaces` for inspection or recovery.
+- macOS and Linux migrate legacy execution-runtime directories, preserving user Python packages while removing expired temporary execution state.
+- Workflows that relied on manual `/compress` should use automatic compression instead. Explicit history removal remains available through `/clear-history`.
+- The installer discovers `v0.0.12.beta` through the public release catalog and compares the current platform binary digest. Before upgrading, back up configuration, databases, user workspaces, Memory, Skills, Tool packages, and Connector state.
 
 ## `v0.0.11.beta` - 2026-08-19
 
@@ -58,7 +110,7 @@ This release upgrades the Connector runtime, introduces the Database and SSH Con
 
 ### Upgrade Notes
 
-- Upgrade xAgent and Connector Servers separately. Current public versions are WeChat `0.0.10`, Telegram `0.0.11`, Feishu `0.0.10`, Database `0.0.3`, and SSH `0.0.4`.
+- Upgrade xAgent and Connector Servers separately. Current public versions are WeChat `0.0.11`, Telegram `0.0.12`, Feishu `0.0.11`, Database `0.0.5`, and SSH `0.0.7`.
 - Database `0.0.3` and SSH `0.0.4` fix first-install startup with the empty resource lists generated by the installer. An unconfigured Connector stays online without declaring a login flow and activates resources through dynamic reload after configuration.
 - When the version string is unchanged, the installer now also compares the platform binary digest. A republished build is offered as an update, with the previous binary preserved for rollback before replacement.
 - Directory Skills and the file Profile are incremental Protocol 4.3 capabilities. Older Connectors remain usable through compatibility paths but do not gain these features.
@@ -325,7 +377,7 @@ This release upgrades the console experience, real-time Connector interaction, t
 
 ### Upgrade Notes
 
-When this release shipped, rerunning the installer checked for and installed `v0.0.5.beta`. For current upgrades, use the [`v0.0.11.beta`](#v0011beta---2026-08-19) release notes.
+When this release shipped, rerunning the installer checked for and installed `v0.0.5.beta`. For current upgrades, use the [`v0.0.12.beta`](#v0012beta---2026-08-26) release notes.
 
 ## `v0.0.4.beta` - 2026-07-15
 
@@ -389,4 +441,4 @@ Each archive contains only the xAgent executable, README, and version metadata. 
 
 This earlier public beta improved Connector integration, added the Telegram Connector, expanded the user manual, and established the initial safety-governance workflow.
 
-New deployments and upgrades should use the current installer and the `v0.0.11.beta` release catalog.
+New deployments and upgrades should use the current installer and the `v0.0.12.beta` release catalog.
