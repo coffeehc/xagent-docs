@@ -84,6 +84,14 @@ A 27B model quantized to 4 bits keeps model size and inference cost relatively m
 - **Goal-level control:** the objective was not to call a tool once, but to establish a packet-capture path that could be verified.
 - **Explicit boundaries:** permissions, device state, and Android platform rules determined which actions were valid; a plausible paragraph could not replace those facts.
 
+After validating packet capture, I asked xAgent to continue investigating whether the device could be rooted. It first confirmed the chipset, bootloader state, system version, and region, then separated the official unlock path from other technical routes. It also stated the constraints plainly: the next stage required at least one physical USB connection, unlocking could erase all data and affect warranty coverage, and an unsuccessful attempt could leave the device unusable. It did not present a step that could not be completed remotely as something it could "automate away."
+
+![xAgent continues evaluating Android root options in a long Session while identifying physical actions and risk boundaries](/img/blog/xagent-27b-int4-android-packet-capture/long-session-root-assessment-zh.webp)
+
+*The page shows a current context of `123k / 160k tokens`. Across the full Session, it records approximately `35.97M tokens` processed, about `23.32M cached tokens`, and `612` tool calls. These are cumulative Session statistics, not the isolated cost of the packet-capture task.*
+
+The value of these numbers is not that using more tokens is inherently better. They show that the result was not produced by a few fortunate turns. After extensive tool feedback and context progression, the 27B INT4 model could still use the current device facts, identify the missing physical condition, and recommend a next step consistent with the actual risk boundary.
+
 That is the value of an Agent Harness. The model understands the task, reasons about it, and chooses actions. xAgent organizes tools, state, permissions, long-running work, and execution feedback into a path that can keep moving toward the goal.
 
 One case is not a general benchmark, and it does not prove that every 27B model can reliably complete every complex task. The outcome still depends on the model, context length, tool-calling quality, runtime environment, permission boundaries, and task complexity. But this case does provide concrete evidence that, inside the right Agent system, a quantized model can perform engineering work far beyond ordinary chat.
