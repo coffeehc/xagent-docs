@@ -1,9 +1,9 @@
 ---
 title: 开始安装 xAgent
-description: 从服务器运行安装脚本到完成首次系统初始化，按步骤安装并验证 xAgent v0.0.11.beta。
+description: 从服务器运行安装脚本到完成首次系统初始化，按步骤安装并验证 xAgent v0.0.13.beta。
 image: /img/getting-started/v005/install-terminal.webp
 status: beta
-updated: 2026-08-19
+updated: 2026-08-29
 ---
 
 # 开始安装 xAgent
@@ -51,7 +51,7 @@ curl -fsSL https://downloads.xagent.xiagaogao.com/scripts/install.sh \
 xagent version
 ```
 
-当前目标版本应为 `0.0.11.beta`。安装命令保持不变，安装器会读取当前发布目录。Linux 还可以检查服务状态：
+当前目标版本应为 `0.0.13.beta`。安装命令保持不变，安装器会读取当前发布目录。Linux 还可以检查服务状态：
 
 ```bash
 sudo systemctl status xagent-server
@@ -168,7 +168,7 @@ Runtime Assets 是 xAgent 管理的任务运行依赖，供文件处理、本地
 
 ## Connector 是可选项
 
-Connector 不影响 Web 控制台的基本使用。安装器已经安装 Connector 时，打开“Connector 管理”，填写安装器输出的地址和 API Key；没有安装时，可以稍后按照[连接器使用手册](/docs/user-guide/connector)完成接入。
+Connector 不影响 Web 控制台的基本使用。安装器已经安装 Connector 时，打开“Connector 管理”，填写安装器输出的地址和 API Key；没有安装时，可以稍后按照[连接器使用手册](/docs/user-guide/connector)完成接入。Database 和 SSH 的配置见 [Database Connector 配置](/docs/user-guide/database-connector) 和 [SSH Connector 配置](/docs/user-guide/ssh-connector)。
 
 ## 下一步
 

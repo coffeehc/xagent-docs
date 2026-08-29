@@ -1,9 +1,9 @@
 ---
 title: Start Installing xAgent
-description: Install and verify xAgent v0.0.11.beta from the server installer through the first system setup flow.
+description: Install and verify xAgent v0.0.13.beta from the server installer through the first system setup flow.
 image: /img/getting-started/v005/install-terminal.webp
 status: beta
-updated: 2026-08-19
+updated: 2026-08-29
 ---
 
 # Start Installing xAgent
@@ -51,7 +51,7 @@ After the installer exits, confirm the version:
 xagent version
 ```
 
-The target version is `0.0.11.beta`. The installer command is unchanged and reads the current release catalog. On Linux, also check the service:
+The target version is `0.0.13.beta`. The installer command is unchanged and reads the current release catalog. On Linux, also check the service:
 
 ```bash
 sudo systemctl status xagent-server
@@ -168,7 +168,7 @@ After setup is complete, xAgent opens the dashboard. It shows token usage, model
 
 ## Connectors Are Optional
 
-Connectors are not required for basic Web console access. If the installer installed a Connector, open **Connectors** and enter the address and API Key printed by the installer. If you skipped Connectors, complete the connection flow later with the [Connector user guide](/docs/user-guide/connector).
+Connectors are not required for basic Web console access. If the installer installed a Connector, open **Connectors** and enter the address and API Key printed by the installer. If you skipped Connectors, complete the connection flow later with the [Connector user guide](/docs/user-guide/connector). For Database and SSH, see [Database Connector Setup](/docs/user-guide/database-connector) and [SSH Connector Setup](/docs/user-guide/ssh-connector).
 
 ## Next Steps
 

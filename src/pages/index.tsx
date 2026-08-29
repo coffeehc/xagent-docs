@@ -63,7 +63,7 @@ const homeContent = {
     layoutTitle: 'xAgent：可私有化部署的多用户 AI Agent 工作门户',
     layoutDescription:
       'xAgent 是可私有化部署的多用户 AI Agent 工作门户，能够理解任务变化，按需准备 Skill、Tool 与长期记忆，并通过项目化会话、连接器、隔离工作区和安全治理持续完成任务。',
-    kicker: 'xAgent 产品介绍 · v0.0.11.beta',
+    kicker: 'xAgent 产品介绍 · v0.0.13.beta',
     title: '可私有化部署的多用户 AI Agent 工作门户',
     subtitle:
       'xAgent 是企业统一的 AI 工作平台。服务端部署，快速接入现有系统，权限与成本集中管控、操作全程审计；员工打开网页或手机，即可使用 AI 完成工作。实现企业可管、员工好用。',
@@ -178,7 +178,7 @@ const homeContent = {
       },
       {
         title: '私有化部署',
-        description: '当前测试版支持 5 个用户免费使用，暂无官方 SaaS 计划；推荐部署在自己的服务器和数据环境中。',
+        description: '当前免费版无需证书，固定支持 2 个用户、30 个会话、1 个 WorkGroup、5 个 Connector VChannel 和 5 个定时任务。',
         to: '/docs/guides/self-hosted-ai-agent',
       },
     ] satisfies Card[],
@@ -200,7 +200,7 @@ const homeContent = {
       },
       {
         title: '智能体功能与文档处理',
-        description: '查看 50 个内置 Skill 能完成的任务，以及图片、PDF、Office、表格和代码文件的处理边界。',
+        description: '查看 51 个内置 Skill 能完成的任务，以及图片、PDF、Office、表格和代码文件的处理边界。',
         to: '/docs/manual/capabilities',
       },
     ] satisfies Card[],
@@ -216,7 +216,7 @@ const homeContent = {
     layoutTitle: 'xAgent: Self-Hosted Multi-User AI Agent Platform',
     layoutDescription:
       'xAgent is a self-hosted multi-user AI agent platform that adapts Skills, Tools, and memory to each task across projects, connectors, and governed workspaces.',
-    kicker: 'xAgent Product Overview · v0.0.11.beta',
+    kicker: 'xAgent Product Overview · v0.0.13.beta',
     title: 'A Task-First, Self-Hosted Multi-User AI Agent Platform',
     subtitle:
       'xAgent is the unified AI work platform for the enterprise. Deploy on your own servers, connect existing systems quickly, centralize access and cost controls, and audit every action. Employees can get work done with AI from the web or mobile app, giving enterprises control and employees an effortless experience.',
@@ -321,7 +321,7 @@ const homeContent = {
       },
       {
         title: 'Release positioning',
-        description: 'The current beta is free for up to five users and is intended for evaluation, deployment trials, and task workflow validation.',
+        description: 'The certificate-free Free edition supports 2 users, 30 Sessions, 1 WorkGroup, 5 Connector VChannels, and 5 scheduled tasks.',
         to: '/docs/getting-started/what-is-xagent#the-short-version',
       },
     ] satisfies Card[],
@@ -343,7 +343,7 @@ const homeContent = {
       },
       {
         title: 'Agent Capabilities',
-        description: 'Explore 50 built-in Skills and the current boundaries for images, PDF, Office, spreadsheet, and source files.',
+        description: 'Explore 51 built-in Skills and the current boundaries for images, PDF, Office, spreadsheet, and source files.',
         to: '/docs/manual/capabilities',
       },
     ] satisfies Card[],
@@ -438,7 +438,7 @@ export default function Home(): ReactNode {
           ? 'Self-hosted multi-user AI agent platform'
           : '可私有化部署的多用户 AI Agent 平台',
         operatingSystem: 'Linux, macOS',
-        softwareVersion: '0.0.11.beta',
+        softwareVersion: '0.0.13.beta',
         downloadUrl: installerUrl,
         releaseNotes: `${localeUrl}docs/changelog/`,
         softwareHelp: {
@@ -477,8 +477,8 @@ export default function Home(): ReactNode {
           availability: 'https://schema.org/InStock',
           url: installerUrl,
           description: isEnglish
-            ? 'Free beta for up to five users'
-            : '5 个用户内免费使用的测试版',
+            ? 'Certificate-free Free edition for 2 users, 30 Sessions, 1 WorkGroup, 5 Connector VChannels, and 5 scheduled tasks'
+            : '无需证书的免费版：2 个用户、30 个会话、1 个 WorkGroup、5 个 Connector VChannel 和 5 个定时任务',
         },
       },
     ],

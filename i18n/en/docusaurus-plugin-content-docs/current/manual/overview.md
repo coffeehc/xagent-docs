@@ -2,13 +2,13 @@
 title: xAgent User Manual
 description: Find page guidance, permission scopes, key areas, and common operations by following the current xAgent console menu, covering ordinary users, advanced mode, and administrator pages.
 status: beta
-updated: 2026-08-19
+updated: 2026-08-29
 schemaType: CollectionPage
 ---
 
 # xAgent User Manual
 
-This manual corresponds to the `v0.0.11.beta` console and is organized by page rather than by concept. Each page explains its menu entry, visibility scope, key areas, and common operations, with interface examples.
+This manual corresponds to the `v0.0.13.beta` console and is organized by page rather than by concept. Each page explains its menu entry, visibility scope, key areas, and common operations, with interface examples.
 
 ## How to Use This Manual
 

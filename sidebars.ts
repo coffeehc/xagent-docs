@@ -158,6 +158,16 @@ const sidebars: SidebarsConfig = {
         },
         {
           type: 'doc',
+          id: 'user-guide/database-connector',
+          label: label('Database Connector 配置', 'Database Connector Setup'),
+        },
+        {
+          type: 'doc',
+          id: 'user-guide/ssh-connector',
+          label: label('SSH Connector 配置', 'SSH Connector Setup'),
+        },
+        {
+          type: 'doc',
           id: 'user-guide/approval-policy',
           label: label('审批策略', 'Approval Policies'),
         },

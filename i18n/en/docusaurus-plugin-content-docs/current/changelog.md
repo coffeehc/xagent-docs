@@ -3,13 +3,52 @@ title: Changelog
 description: Review important user-facing changes, binary release contents, and upgrade notes for each xAgent release.
 image: /img/share/en/xagent-overview.png
 status: stable
-updated: 2026-08-26
+updated: 2026-08-29
 schemaType: CollectionPage
 ---
 
 # Changelog
 
 This page records important installation, usage, and safety-governance changes in xAgent binary releases. xAgent remains in beta, and features, interfaces, and protocols may continue to change.
+
+## `v0.0.13.beta` - 2026-08-29
+
+[View installation instructions](/docs/getting-started/install) · [View Workspace guidance](/docs/user-guide/workspace) · [View the Connector guide](/docs/user-guide/connector)
+
+This release improves native file and document handling, unifies CLI and Tool workspace-path contracts, and replaces the bundled Free certificate with a fixed certificate-free Free edition. It also simplifies Session operations and makes Token usage charts easier to read.
+
+### Native File and Document Tools
+
+- Added native HTTP file downloads for binary responses with a stable file-output contract.
+- Expanded image conversion and Word document reading, inspection, and update workflows, reducing the need for models to assemble temporary CLI pipelines.
+- Native file Tools now use consistent workspace file identities and output contracts, and file arguments are normalized before execution.
+
+### Tool Runtime and Path Contracts
+
+- The CLI now starts in the current Session's canonical workspace directory, so models can use relative paths without a `$XAGENT_WORKSPACE` prefix.
+- ToolService normalizes model-generated workspace paths and applies consistent runtime governance to native, MCP, and Connector Tools.
+- Font, runtime-asset, and execution-environment readiness are checked through one contract, with explicit blocking reasons when dependencies are unavailable.
+- HTTP first-byte waiting, sandbox failures, and Tool output classification have been tightened so recoverable failures are less likely to be recorded as platform incidents.
+
+### Sessions and Usage UI
+
+- Removed the `/refresh_messages` command because automatic synchronization and reconnect recovery already cover that workflow; the message-load error view retains its internal refresh action.
+- Token usage charts now use consistent axis and tooltip formatting, including compact formatting for large values.
+
+### Free and Enterprise Licensing
+
+- xAgent now enters the Free edition directly when no external license certificate is installed; release packages no longer contain a built-in Free certificate or expiry.
+- The Free edition is limited to 2 users, 30 Sessions, 1 WorkGroup, 5 Connector VChannels, and 5 scheduled tasks.
+- Historical v2 `free` and v1 `temporary` certificates are no longer accepted. On startup, xAgent removes those certificate files and enters the certificate-free Free edition.
+- License Server now issues Enterprise certificates only. Historical issuance records remain visible, but the console no longer offers Free certificate issuance.
+- The license administration page displays the active Free entitlements directly while preserving Enterprise installation, device-binding, and expiry states.
+
+### Upgrade Notes
+
+- Environments using historical Free certificates will remove those certificates on startup and continue with the new certificate-free Free limits.
+- Enterprise certificates keep their existing signature, device-binding, expiry, and capacity validation.
+- Upgrade xAgent Server and Connector Servers separately. Current public versions are WeChat `0.0.12`, Telegram `0.0.13`, Feishu `0.0.12`, Database `0.0.6`, and SSH `0.0.8`.
+- The installer discovers `v0.0.13.beta` through the public release catalog and compares the current platform binary digest. Before upgrading, back up configuration, databases, user workspaces, Memory, Skills, Tool packages, and Connector state.
 
 ## `v0.0.12.beta` - 2026-08-26
 
@@ -377,7 +416,7 @@ This release upgrades the console experience, real-time Connector interaction, t
 
 ### Upgrade Notes
 
-When this release shipped, rerunning the installer checked for and installed `v0.0.5.beta`. For current upgrades, use the [`v0.0.12.beta`](#v0012beta---2026-08-26) release notes.
+When this release shipped, rerunning the installer checked for and installed `v0.0.5.beta`. For current upgrades, use the [`v0.0.13.beta`](#v0013beta---2026-08-29) release notes.
 
 ## `v0.0.4.beta` - 2026-07-15
 
@@ -441,4 +480,4 @@ Each archive contains only the xAgent executable, README, and version metadata. 
 
 This earlier public beta improved Connector integration, added the Telegram Connector, expanded the user manual, and established the initial safety-governance workflow.
 
-New deployments and upgrades should use the current installer and the `v0.0.12.beta` release catalog.
+New deployments and upgrades should use the current installer and the `v0.0.13.beta` release catalog.

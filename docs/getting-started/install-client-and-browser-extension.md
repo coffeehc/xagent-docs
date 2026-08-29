@@ -2,7 +2,7 @@
 title: 安装客户端与浏览器插件
 description: 从 xAgent 下载站安装桌面客户端和 Browser Runtime 浏览器插件，并连接到已有的 xAgent 服务。
 status: beta
-updated: 2026-08-10
+updated: 2026-08-29
 ---
 
 # 安装客户端与浏览器插件
@@ -13,17 +13,17 @@ xAgent 服务端提供 Web 控制台，桌面客户端和浏览器插件都是�
 
 ## 当前安装包
 
-下载站的[公开版本目录](https://downloads.xagent.xiagaogao.com/versions.json)记录当前客户端版本，[浏览器插件版本指针](https://downloads.xagent.xiagaogao.com/browser-extension/latest.json)记录当前插件版本。以下链接对应 2026 年 8 月 10 日的公开版本。
+下载站的[公开版本目录](https://downloads.xagent.xiagaogao.com/versions.json)记录当前客户端版本，[浏览器插件版本指针](https://downloads.xagent.xiagaogao.com/browser-extension/latest.json)记录当前插件版本。以下链接对应 2026 年 8 月 29 日的公开版本。
 
-### 桌面客户端 0.0.1
+### 桌面客户端 0.0.2
 
 | 系统 | 架构 | 下载 |
 | --- | --- | --- |
-| macOS | Apple Silicon (ARM64) | [下载 DMG（推荐）](https://downloads.xagent.xiagaogao.com/xagent-client/0.0.1/xagent-client-v0.0.1-darwin-arm64.dmg) · [下载 ZIP](https://downloads.xagent.xiagaogao.com/xagent-client/0.0.1/xagent-client-v0.0.1-darwin-arm64.zip) |
-| Windows | x64 (AMD64) | [下载 ZIP](https://downloads.xagent.xiagaogao.com/xagent-client/0.0.1/xagent-client-v0.0.1-windows-amd64.zip) |
-| Windows | ARM64 | [下载 ZIP](https://downloads.xagent.xiagaogao.com/xagent-client/0.0.1/xagent-client-v0.0.1-windows-arm64.zip) |
+| macOS | Apple Silicon (ARM64) | [下载 DMG（推荐）](https://downloads.xagent.xiagaogao.com/xagent-client/0.0.2/xagent-client-v0.0.2-darwin-arm64.dmg) · [下载 ZIP](https://downloads.xagent.xiagaogao.com/xagent-client/0.0.2/xagent-client-v0.0.2-darwin-arm64.zip) |
+| Windows | x64 (AMD64) | [下载 ZIP](https://downloads.xagent.xiagaogao.com/xagent-client/0.0.2/xagent-client-v0.0.2-windows-amd64.zip) |
+| Windows | ARM64 | [下载 ZIP](https://downloads.xagent.xiagaogao.com/xagent-client/0.0.2/xagent-client-v0.0.2-windows-arm64.zip) |
 
-ZIP 安装包和 Windows 便携包的文件名及校验值见[客户端发布清单](https://downloads.xagent.xiagaogao.com/xagent-client/0.0.1/release.json)与 [SHA256SUMS](https://downloads.xagent.xiagaogao.com/xagent-client/0.0.1/SHA256SUMS)。macOS DMG 的校验值见下方安装步骤。当前没有 Intel Mac 或 Linux 桌面客户端安装包。
+ZIP 安装包和 Windows 便携包的文件名及校验值见[客户端发布清单](https://downloads.xagent.xiagaogao.com/xagent-client/0.0.2/release.json)与 [SHA256SUMS](https://downloads.xagent.xiagaogao.com/xagent-client/0.0.2/SHA256SUMS)。macOS DMG 的校验值见下方安装步骤。当前没有 Intel Mac 或 Linux 桌面客户端安装包。
 
 ### Browser Runtime 0.1.0
 
@@ -42,19 +42,19 @@ ZIP 安装包和 Windows 便携包的文件名及校验值见[客户端发布清
 2. 校验下载文件：
 
    ```bash
-   shasum -a 256 ~/Downloads/xagent-client-v0.0.1-darwin-arm64.dmg
+   shasum -a 256 ~/Downloads/xagent-client-v0.0.2-darwin-arm64.dmg
    ```
 
    输出应为：
 
    ```text
-   9f9688915be08a8bad4064e7d7570592afb52eaac0ebc5c8a418176256d41b61
+   a9424fba0cbfa609c532fd93cd8ad3a7e71e7bc6c822fab430f7ed143b34106f
    ```
 
 3. 双击打开 DMG，将 `xagent-client.app` 拖到映像中的“应用程序”文件夹。
 4. 推出磁盘映像，再从“应用程序”目录打开 `xagent-client.app`。
 
-如果不能使用 DMG，也可以下载 ZIP。ZIP 的 SHA-256 为 `dc8f0eb0c598655241a4381d0767815181ffbdfc8d9c353311125dc3ed941eac`；解压后将 `xagent-client.app` 移到“应用程序”目录。
+如果不能使用 DMG，也可以下载 ZIP。ZIP 的 SHA-256 为 `5838a9cb718f5fbc77984ed841016c770f0d3ade47b919115336b8232a440f9b`；解压后将 `xagent-client.app` 移到“应用程序”目录。
 
 ### Windows
 
@@ -62,19 +62,19 @@ ZIP 安装包和 Windows 便携包的文件名及校验值见[客户端发布清
 2. 在 PowerShell 中校验文件：
 
    ```powershell
-   Get-FileHash "$HOME\Downloads\xagent-client-v0.0.1-windows-amd64.zip" -Algorithm SHA256
+   Get-FileHash "$HOME\Downloads\xagent-client-v0.0.2-windows-amd64.zip" -Algorithm SHA256
    ```
 
    x64 包的 SHA-256 应为：
 
    ```text
-   a7d2c96b60bcbb16a227140ee5455af2d17dc809220870f95293dfca630de284
+   3f91edf3b23c4383f49468e3416a21ac0304954f53d3507a6ec677d7531e1f6e
    ```
 
    ARM64 包的 SHA-256 应为：
 
    ```text
-   330a077b1aa2f94ea117b0abf7649c42d0c1f3290512f197f5d8fac5dafba2e1
+   698ca82addcef97b751089f448c1aed3fdcdbb11d8ad372f9304362585296fd2
    ```
 
 3. 解压 ZIP，将 `xagent-client.exe` 放到一个固定目录后运行。当前客户端是便携版，不需要安装程序。

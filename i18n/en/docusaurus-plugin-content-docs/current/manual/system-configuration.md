@@ -2,7 +2,7 @@
 title: System Configuration Pages
 description: Page-by-page guidance and English UI examples for xAgent models, system settings, software license, and Agent roles.
 status: beta
-updated: 2026-08-19
+updated: 2026-08-29
 ---
 
 # System Configuration Pages
@@ -45,7 +45,9 @@ See [Model Configuration](/docs/user-guide/model-config) for details.
 
 ![xAgent Software License showing device, validity, scope, and update action](/img/manual/v005/en/admin-license.webp)
 
-Review the device and license identifiers, customer, issue and expiry time, licensed users, devices, and features. Use **Update license** to upload a replacement license file.
+When no Enterprise license certificate is installed, xAgent enters the Free edition directly. This page shows the Free state and its fixed limits: 2 users, 30 Sessions, 1 WorkGroup, 5 Connector VChannels, and 5 scheduled tasks. The Free edition has no certificate expiry.
+
+After an Enterprise certificate is installed, this page shows the device and license identifiers, customer, issue and expiry time, and licensed capacity. Use **Update license** to upload a replacement Enterprise license file.
 
 ## Agent Role Config
 

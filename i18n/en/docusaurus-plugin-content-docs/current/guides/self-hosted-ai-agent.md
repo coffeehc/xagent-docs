@@ -3,7 +3,7 @@ title: "Self-Hosted AI Agent Platform: Deploy xAgent on Your Own Server"
 description: A practical guide to deploying a self-hosted AI agent platform, covering server preparation, model access, HTTPS, workspace isolation, connectors, backups, and long-running tasks.
 image: /img/share/en/xagent-security.png
 status: beta
-updated: 2026-08-19
+updated: 2026-08-29
 ---
 
 # Self-Hosted AI Agent Platform: Deploy xAgent on Your Own Server
@@ -52,7 +52,7 @@ The current version uses embedded SQLite by default, so the first deployment doe
 
 ### 1. Install and Start the Server
 
-Run the [official installer](/docs/getting-started/install). It detects the system and architecture, verifies release packages, and installs the current `v0.0.11.beta` release. On Linux it configures and starts a systemd service; on macOS it installs under the current user.
+Run the [official installer](/docs/getting-started/install). It detects the system and architecture, verifies release packages, and installs the current `v0.0.13.beta` release. On Linux it configures and starts a systemd service; on macOS it installs under the current user.
 
 ### 2. Configure and Validate a Model
 

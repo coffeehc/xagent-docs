@@ -2,7 +2,7 @@
 title: Install the Desktop Client and Browser Extension
 description: Install the xAgent desktop client and Browser Runtime extension from the public download site, then connect them to an existing xAgent server.
 status: beta
-updated: 2026-08-10
+updated: 2026-08-29
 ---
 
 # Install the Desktop Client and Browser Extension
@@ -13,17 +13,17 @@ Before continuing, complete the [server installation and setup](/docs/getting-st
 
 ## Current Packages
 
-The [public release catalog](https://downloads.xagent.xiagaogao.com/versions.json) records the current client version. The [browser extension version pointer](https://downloads.xagent.xiagaogao.com/browser-extension/latest.json) records the current extension version. The links below match the public releases available on August 10, 2026.
+The [public release catalog](https://downloads.xagent.xiagaogao.com/versions.json) records the current client version. The [browser extension version pointer](https://downloads.xagent.xiagaogao.com/browser-extension/latest.json) records the current extension version. The links below match the public releases available on August 29, 2026.
 
-### Desktop Client 0.0.1
+### Desktop Client 0.0.2
 
 | System | Architecture | Download |
 | --- | --- | --- |
-| macOS | Apple Silicon (ARM64) | [Download DMG (recommended)](https://downloads.xagent.xiagaogao.com/xagent-client/0.0.1/xagent-client-v0.0.1-darwin-arm64.dmg) · [Download ZIP](https://downloads.xagent.xiagaogao.com/xagent-client/0.0.1/xagent-client-v0.0.1-darwin-arm64.zip) |
-| Windows | x64 (AMD64) | [Download ZIP](https://downloads.xagent.xiagaogao.com/xagent-client/0.0.1/xagent-client-v0.0.1-windows-amd64.zip) |
-| Windows | ARM64 | [Download ZIP](https://downloads.xagent.xiagaogao.com/xagent-client/0.0.1/xagent-client-v0.0.1-windows-arm64.zip) |
+| macOS | Apple Silicon (ARM64) | [Download DMG (recommended)](https://downloads.xagent.xiagaogao.com/xagent-client/0.0.2/xagent-client-v0.0.2-darwin-arm64.dmg) · [Download ZIP](https://downloads.xagent.xiagaogao.com/xagent-client/0.0.2/xagent-client-v0.0.2-darwin-arm64.zip) |
+| Windows | x64 (AMD64) | [Download ZIP](https://downloads.xagent.xiagaogao.com/xagent-client/0.0.2/xagent-client-v0.0.2-windows-amd64.zip) |
+| Windows | ARM64 | [Download ZIP](https://downloads.xagent.xiagaogao.com/xagent-client/0.0.2/xagent-client-v0.0.2-windows-arm64.zip) |
 
-See the [client release manifest](https://downloads.xagent.xiagaogao.com/xagent-client/0.0.1/release.json) and [SHA256SUMS](https://downloads.xagent.xiagaogao.com/xagent-client/0.0.1/SHA256SUMS) for the ZIP and Windows portable package filenames and checksums. The macOS DMG checksum is listed in the installation steps below. There is currently no Intel Mac or Linux desktop client package.
+See the [client release manifest](https://downloads.xagent.xiagaogao.com/xagent-client/0.0.2/release.json) and [SHA256SUMS](https://downloads.xagent.xiagaogao.com/xagent-client/0.0.2/SHA256SUMS) for the ZIP and Windows portable package filenames and checksums. The macOS DMG checksum is listed in the installation steps below. There is currently no Intel Mac or Linux desktop client package.
 
 ### Browser Runtime 0.1.0
 
@@ -42,19 +42,19 @@ See the [browser extension release manifest](https://downloads.xagent.xiagaogao.
 2. Verify the downloaded file:
 
    ```bash
-   shasum -a 256 ~/Downloads/xagent-client-v0.0.1-darwin-arm64.dmg
+   shasum -a 256 ~/Downloads/xagent-client-v0.0.2-darwin-arm64.dmg
    ```
 
    The result must be:
 
    ```text
-   9f9688915be08a8bad4064e7d7570592afb52eaac0ebc5c8a418176256d41b61
+   a9424fba0cbfa609c532fd93cd8ad3a7e71e7bc6c822fab430f7ed143b34106f
    ```
 
 3. Open the DMG and drag `xagent-client.app` to the **Applications** folder shown in the disk image.
 4. Eject the disk image, then open `xagent-client.app` from **Applications**.
 
-If you cannot use the DMG, download the ZIP instead. Its SHA-256 is `dc8f0eb0c598655241a4381d0767815181ffbdfc8d9c353311125dc3ed941eac`. Extract it and move `xagent-client.app` to **Applications**.
+If you cannot use the DMG, download the ZIP instead. Its SHA-256 is `5838a9cb718f5fbc77984ed841016c770f0d3ade47b919115336b8232a440f9b`. Extract it and move `xagent-client.app` to **Applications**.
 
 ### Windows
 
@@ -62,19 +62,19 @@ If you cannot use the DMG, download the ZIP instead. Its SHA-256 is `dc8f0eb0c59
 2. Verify the file in PowerShell:
 
    ```powershell
-   Get-FileHash "$HOME\Downloads\xagent-client-v0.0.1-windows-amd64.zip" -Algorithm SHA256
+   Get-FileHash "$HOME\Downloads\xagent-client-v0.0.2-windows-amd64.zip" -Algorithm SHA256
    ```
 
    The x64 package SHA-256 must be:
 
    ```text
-   a7d2c96b60bcbb16a227140ee5455af2d17dc809220870f95293dfca630de284
+   3f91edf3b23c4383f49468e3416a21ac0304954f53d3507a6ec677d7531e1f6e
    ```
 
    The ARM64 package SHA-256 must be:
 
    ```text
-   330a077b1aa2f94ea117b0abf7649c42d0c1f3290512f197f5d8fac5dafba2e1
+   698ca82addcef97b751089f448c1aed3fdcdbb11d8ad372f9304362585296fd2
    ```
 
 3. Extract the ZIP, place `xagent-client.exe` in a permanent directory, and run it. The current client is portable and does not use an installer.

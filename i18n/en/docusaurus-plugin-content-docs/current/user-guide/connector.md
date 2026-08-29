@@ -2,7 +2,7 @@
 title: xAgent Connectors for IM, Databases, SSH, and Browsers
 description: Learn about xAgent Connector management, bidirectional IM messages, file transfer, Database and SSH resources, health state, and extension protocols.
 status: experimental
-updated: 2026-08-19
+updated: 2026-08-29
 ---
 
 # xAgent Connectors for IM, Databases, SSH, and Browsers
@@ -22,15 +22,15 @@ Compared with MCP, a Connector focuses on external events, user connections, and
 
 ## Current Connector Versions
 
-The server and Connectors are released independently. The current server version is `v0.0.11.beta`, and the public release catalog lists these Connector versions:
+The server and Connectors are released independently. The current server version is `v0.0.13.beta`, and the public release catalog lists these Connector versions:
 
 | Connector | Version | Main use |
 | --- | --- | --- |
-| WeChat Connector | `0.0.10` | WeChat messages, media, and connection-context renewal |
-| Telegram Connector | `0.0.11` | Telegram Bot direct and group messages |
-| Feishu Connector | `0.0.10` | Feishu direct messages and group @mentions in mainland China |
-| Database Connector | `0.0.3` | Administrator-defined MySQL and PostgreSQL resources |
-| SSH Connector | `0.0.4` | Administrator-defined SSH command and interactive-shell targets |
+| WeChat Connector | `0.0.12` | WeChat messages, media, and connection-context renewal |
+| Telegram Connector | `0.0.13` | Telegram Bot direct and group messages |
+| Feishu Connector | `0.0.12` | Feishu direct messages and group @mentions in mainland China |
+| Database Connector | `0.0.6` | Administrator-defined MySQL and PostgreSQL resources |
+| SSH Connector | `0.0.8` | Administrator-defined SSH command and interactive-shell targets |
 
 Binaries are downloaded from the `weixin/`, `telegram/`, `feishu/`, `database/`, and `ssh/` directories under `https://downloads.xagent.xiagaogao.com/connector/`. See [Start Installation](/docs/getting-started/install).
 
@@ -74,11 +74,11 @@ The current Connector supports Feishu in mainland China, not Lark. Scan the QR c
 
 ### Database
 
-Administrators first define MySQL or PostgreSQL resources in the Database Connector Server. Under **My connections**, users see only display names and provide the username and password for the selected database. Database addresses, credentials, and native authorization remain inside the Connector Server. Whether a SQL statement can run still depends on the permissions of that database account.
+Administrators add MySQL or PostgreSQL resources in the Database Connector Server. Users then select a resource under **My connections** and enter their own database username and password. See [Database Connector Setup](/docs/user-guide/database-connector) for installation, field definitions, and troubleshooting.
 
 ### SSH
 
-Administrators first configure targets, private keys, principals, and access tokens in the SSH Connector Server. Users see only the label associated with each `resource_key`, and models never see host addresses. The first successful connection records the host fingerprint, and later host-key changes are rejected. After installation, create a `keys` directory beside the Connector configuration and place the private keys there.
+Administrators first place private keys in the `keys/` directory beside the SSH Connector configuration, then configure targets, remote accounts, and access identities. Users see resource names, not host addresses or private keys. See [SSH Connector Setup](/docs/user-guide/ssh-connector) for the full procedure.
 
 ## Public Protocol and Capabilities
 
@@ -140,6 +140,8 @@ A custom Connector provides a Connector Card, health endpoint, authentication fl
 
 - [Start Installation](/docs/getting-started/install)
 - [What Is a Connector?](/docs/getting-started/what-is-connector#how-is-it-different-from-mcp)
+- [Database Connector Setup](/docs/user-guide/database-connector)
+- [SSH Connector Setup](/docs/user-guide/ssh-connector)
 - [Shortcut Instruction Protocol](/docs/guides/shortcut-instruction-protocol)
 - [Tool Management](/docs/user-guide/tool)
 - [Approval Policy](/docs/user-guide/approval-policy)

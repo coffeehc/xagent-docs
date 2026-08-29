@@ -2,7 +2,7 @@
 title: Common Questions
 description: Answers to common questions about xAgent installation, usage, model configuration, data security, Skills, Connectors, architecture, development, maintenance, and beta status.
 status: stable
-updated: 2026-08-19
+updated: 2026-08-29
 schemaType: WebPage
 ---
 
@@ -44,7 +44,7 @@ No. The documentation site is a static manual.
 
 ### Is the current release stable?
 
-The current version is `v0.0.11.beta`. It is still a beta release intended for deployment trials, scenario validation, and community feedback. The interface, Connectors, and some experimental capabilities may still change.
+The current version is `v0.0.13.beta`. It is still a beta release intended for deployment trials, scenario validation, and community feedback. The interface, Connectors, and some experimental capabilities may still change.
 
 ### How should I install or upgrade xAgent?
 
@@ -308,7 +308,7 @@ Usually not. Administrators can prepare common scenarios, dedicated Agents, Tool
 
 ### What does the free binary release mean?
 
-The free binary release is currently the `v0.0.11.beta` beta and serves as an entry point for understanding and evaluating xAgent. Users can deploy the standard version first and experience core capabilities such as Task submission, the file Workspace, Tools, Skills, and external connections.
+The free binary release is currently the `v0.0.13.beta` beta and serves as an entry point for understanding and evaluating xAgent. Users can deploy the standard version first and experience core capabilities such as Task submission, the file Workspace, Tools, Skills, and external connections.
 
 A free binary release is not the same as an open-source release. xAgent will evaluate whether to open the source or expand ecosystem collaboration based on product maturity, community feedback, security boundaries, and commercial sustainability.
 
@@ -316,9 +316,9 @@ Enterprise internal-system integration, unified identity, complex permissions, a
 
 ### What is the difference between the commercial and free editions?
 
-The commercial and free editions have the same product capabilities. The current difference is mainly the number of supported users; core functionality is not divided into separate free and commercial experiences.
+When no Enterprise license certificate is installed, xAgent enters the Free edition directly; no Free certificate application or renewal is required. The Free edition provides the core product capabilities with fixed limits of 2 users, 30 Sessions, 1 WorkGroup, 5 Connector VChannels, and 5 scheduled tasks.
 
-The free edition already provides the complete core xAgent experience for home deployment, small teams, and early scenario validation, with a low deployment and usage barrier. The commercial edition is more suitable for teams and companies that need more users, related support, or custom integration.
+The Enterprise edition uses an external license certificate to provide higher capacity while retaining signature, device-binding, and expiry validation. It is intended for organizations that need more capacity, support, or custom integration.
 
 ### Will xAgent provide an official SaaS?
 

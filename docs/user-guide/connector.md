@@ -2,7 +2,7 @@
 title: xAgent 连接器管理：IM、数据库、SSH 与浏览器
 description: 了解 xAgent 的 Connector 管理、IM 双向消息、文件传输、Database/SSH 资源连接、健康状态与扩展协议。
 status: experimental
-updated: 2026-08-19
+updated: 2026-08-29
 ---
 
 # xAgent 连接器管理：IM、数据库、SSH 与浏览器
@@ -22,15 +22,15 @@ Connector 是 xAgent 与外部系统之间的协议桥。它可以把微信、Te
 
 ## 当前连接器版本
 
-服务端版本与 Connector 版本独立发布。当前服务端版本为 `v0.0.11.beta`，公开版本目录中的 Connector 版本是：
+服务端版本与 Connector 版本独立发布。当前服务端版本为 `v0.0.13.beta`，公开版本目录中的 Connector 版本是：
 
 | Connector | 版本 | 主要用途 |
 | --- | --- | --- |
-| WeChat Connector | `0.0.10` | 微信消息、媒体发送与接收，以及连接上下文续期 |
-| Telegram Connector | `0.0.11` | Telegram Bot 私聊和群聊消息 |
-| Feishu Connector | `0.0.10` | 国内飞书单聊和群聊 @ 机器人消息 |
-| Database Connector | `0.0.3` | 管理员配置的 MySQL 和 PostgreSQL 资源 |
-| SSH Connector | `0.0.4` | 管理员配置的 SSH 命令与交互式 shell 目标 |
+| WeChat Connector | `0.0.12` | 微信消息、媒体发送与接收，以及连接上下文续期 |
+| Telegram Connector | `0.0.13` | Telegram Bot 私聊和群聊消息 |
+| Feishu Connector | `0.0.12` | 国内飞书单聊和群聊 @ 机器人消息 |
+| Database Connector | `0.0.6` | 管理员配置的 MySQL 和 PostgreSQL 资源 |
+| SSH Connector | `0.0.8` | 管理员配置的 SSH 命令与交互式 shell 目标 |
 
 二进制统一从 `https://downloads.xagent.xiagaogao.com/connector/` 下的 `weixin/`、`telegram/`、`feishu/`、`database/` 和 `ssh/` 目录下载。安装步骤见[开始安装](/docs/getting-started/install)。
 
@@ -74,11 +74,11 @@ xAgent 还提供 Browser Connector，让受控浏览器扩展把页面交互能�
 
 ### Database
 
-管理员先在 Database Connector Server 中配置 MySQL 或 PostgreSQL 资源。用户在“我的连接”中只选择展示名称并填写该数据库的用户名和密码；数据库地址、凭据和原生权限保留在 Connector Server 内。SQL 是否可执行仍由该数据库账号的权限决定。
+管理员先在 Database Connector Server 中添加 MySQL 或 PostgreSQL 资源。用户再在“我的连接”中选择资源，填写自己的数据库用户名和密码。安装、字段和排查步骤见 [Database Connector 配置](/docs/user-guide/database-connector)。
 
 ### SSH
 
-管理员先在 SSH Connector Server 中配置目标、私钥、principal 和 access token。用户连接时只看到 `resource_key` 对应的名称，模型不会看到主机地址。首次成功连接会记录主机指纹，后续主机密钥变化时拒绝连接。安装后需要在 Connector 配置目录中创建 `keys` 目录并放入私钥。
+管理员先把私钥放进 SSH Connector 配置目录旁的 `keys/`，再配置目标、远端账号和访问身份。用户只看到资源名称，不会看到主机地址和私钥。完整步骤见 [SSH Connector 配置](/docs/user-guide/ssh-connector)。
 
 ## 公共协议与能力
 
@@ -140,6 +140,8 @@ xAgent 会连续探测 Connector health，并按连续失败次数更新状态�
 
 - [开始安装](/docs/getting-started/install)
 - [什么是连接器](/docs/getting-started/what-is-connector#它和-mcp-有什么区别)
+- [Database Connector 配置](/docs/user-guide/database-connector)
+- [SSH Connector 配置](/docs/user-guide/ssh-connector)
 - [快捷指令协议](/docs/guides/shortcut-instruction-protocol)
 - [Tool 管理](/docs/user-guide/tool)
 - [审批策略](/docs/user-guide/approval-policy)
