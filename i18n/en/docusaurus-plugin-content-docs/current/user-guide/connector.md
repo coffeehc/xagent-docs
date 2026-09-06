@@ -2,7 +2,7 @@
 title: xAgent Connectors for IM, Databases, SSH, and Browsers
 description: Learn about xAgent Connector management, bidirectional IM messages, file transfer, Database and SSH resources, health state, and extension protocols.
 status: experimental
-updated: 2026-08-29
+updated: 2026-09-07
 ---
 
 # xAgent Connectors for IM, Databases, SSH, and Browsers
@@ -22,7 +22,7 @@ Compared with MCP, a Connector focuses on external events, user connections, and
 
 ## Current Connector Versions
 
-The server and Connectors are released independently. The current server version is `v0.0.13.beta`, and the public release catalog lists these Connector versions:
+The server and Connectors are released independently. The current server version is `v0.0.15.beta`, and the public release catalog lists these Connector versions:
 
 | Connector | Version | Main use |
 | --- | --- | --- |

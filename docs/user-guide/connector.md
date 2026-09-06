@@ -2,7 +2,7 @@
 title: xAgent 连接器管理：IM、数据库、SSH 与浏览器
 description: 了解 xAgent 的 Connector 管理、IM 双向消息、文件传输、Database/SSH 资源连接、健康状态与扩展协议。
 status: experimental
-updated: 2026-08-29
+updated: 2026-09-07
 ---
 
 # xAgent 连接器管理：IM、数据库、SSH 与浏览器
@@ -22,7 +22,7 @@ Connector 是 xAgent 与外部系统之间的协议桥。它可以把微信、Te
 
 ## 当前连接器版本
 
-服务端版本与 Connector 版本独立发布。当前服务端版本为 `v0.0.13.beta`，公开版本目录中的 Connector 版本是：
+服务端版本与 Connector 版本独立发布。当前服务端版本为 `v0.0.15.beta`，公开版本目录中的 Connector 版本是：
 
 | Connector | 版本 | 主要用途 |
 | --- | --- | --- |

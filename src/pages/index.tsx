@@ -63,7 +63,7 @@ const homeContent = {
     layoutTitle: 'xAgent：可私有化部署的多用户 AI Agent 工作门户',
     layoutDescription:
       'xAgent 是可私有化部署的多用户 AI Agent 工作门户，能够理解任务变化，按需准备 Skill、Tool 与长期记忆，并通过项目化会话、连接器、隔离工作区和安全治理持续完成任务。',
-    kicker: 'xAgent 产品介绍 · v0.0.13.beta',
+    kicker: 'xAgent 产品介绍 · v0.0.15.beta',
     title: '可私有化部署的多用户 AI Agent 工作门户',
     subtitle:
       'xAgent 是企业统一的 AI 工作平台。服务端部署，快速接入现有系统，权限与成本集中管控、操作全程审计；员工打开网页或手机，即可使用 AI 完成工作。实现企业可管、员工好用。',
@@ -200,7 +200,7 @@ const homeContent = {
       },
       {
         title: '智能体功能与文档处理',
-        description: '查看 51 个内置 Skill 能完成的任务，以及图片、PDF、Office、表格和代码文件的处理边界。',
+        description: '查看 54 个内置 Skill 能完成的任务，以及图片、PDF、Office、表格和代码文件的处理边界。',
         to: '/docs/manual/capabilities',
       },
     ] satisfies Card[],
@@ -216,7 +216,7 @@ const homeContent = {
     layoutTitle: 'xAgent: Self-Hosted Multi-User AI Agent Platform',
     layoutDescription:
       'xAgent is a self-hosted multi-user AI agent platform that adapts Skills, Tools, and memory to each task across projects, connectors, and governed workspaces.',
-    kicker: 'xAgent Product Overview · v0.0.13.beta',
+    kicker: 'xAgent Product Overview · v0.0.15.beta',
     title: 'A Task-First, Self-Hosted Multi-User AI Agent Platform',
     subtitle:
       'xAgent is the unified AI work platform for the enterprise. Deploy on your own servers, connect existing systems quickly, centralize access and cost controls, and audit every action. Employees can get work done with AI from the web or mobile app, giving enterprises control and employees an effortless experience.',
@@ -343,7 +343,7 @@ const homeContent = {
       },
       {
         title: 'Agent Capabilities',
-        description: 'Explore 51 built-in Skills and the current boundaries for images, PDF, Office, spreadsheet, and source files.',
+        description: 'Explore 54 built-in Skills and the current boundaries for images, PDF, Office, spreadsheet, and source files.',
         to: '/docs/manual/capabilities',
       },
     ] satisfies Card[],
@@ -438,7 +438,7 @@ export default function Home(): ReactNode {
           ? 'Self-hosted multi-user AI agent platform'
           : '可私有化部署的多用户 AI Agent 平台',
         operatingSystem: 'Linux, macOS',
-        softwareVersion: '0.0.13.beta',
+        softwareVersion: '0.0.15.beta',
         downloadUrl: installerUrl,
         releaseNotes: `${localeUrl}docs/changelog/`,
         softwareHelp: {

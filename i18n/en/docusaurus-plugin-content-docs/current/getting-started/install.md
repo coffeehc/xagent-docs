@@ -1,9 +1,9 @@
 ---
 title: Start Installing xAgent
-description: Install and verify xAgent v0.0.13.beta from the server installer through the first system setup flow.
+description: Install and verify xAgent v0.0.15.beta from the server installer through the first system setup flow.
 image: /img/getting-started/v005/install-terminal.webp
 status: beta
-updated: 2026-08-29
+updated: 2026-09-07
 ---
 
 # Start Installing xAgent
@@ -51,7 +51,7 @@ After the installer exits, confirm the version:
 xagent version
 ```
 
-The target version is `0.0.13.beta`. The installer command is unchanged and reads the current release catalog. On Linux, also check the service:
+The target version is `0.0.15.beta`. The installer command is unchanged and reads the current release catalog. On Linux, also check the service:
 
 ```bash
 sudo systemctl status xagent-server

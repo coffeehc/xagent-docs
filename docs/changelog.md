@@ -3,13 +3,58 @@ title: 更新日志
 description: 查看 xAgent 各二进制版本面向用户的重要变化、下载内容和升级注意事项。
 image: /img/share/zh/xagent-overview.png
 status: stable
-updated: 2026-08-29
+updated: 2026-09-07
 schemaType: CollectionPage
 ---
 
 # 更新日志
 
 本文记录 xAgent 免费二进制版本中与安装、使用和安全治理相关的重要变化。当前仍是测试版，功能、界面和协议可能继续调整。
+
+## `v0.0.15.beta` - 2026-09-06
+
+[查看安装方式](/docs/getting-started/install) · [查看支持的智能体功能](/docs/manual/capabilities) · [查看工作区说明](/docs/user-guide/workspace) · [GitHub Release 与校验文件](https://github.com/coffeehc/xagent-releases/releases/tag/v0.0.15.beta)
+
+本版本主要对办公文档系列进行了增强。Word、PowerPoint 和 Excel 统一使用 xAgent 默认 Office 模板与品牌样式，补齐可编辑文档的生成、预览、重算和 PDF 转换链路。同时，文档任务的派工和交付流程更直接，Runtime Assets 可以在启动后自动对齐所需软件包。
+
+### Office 文档与 PDF
+
+- Word、PowerPoint 和 Excel 统一使用 xAgent 默认 Office 模板与品牌样式，不再区分旧的 `business`、`clean` 和 `formal` 模板。
+- Word 封面与目录分页，表格正文继承模板正文字体；PowerPoint 统一品牌色、排版和图表样式。
+- LibreOffice 作为独立 Runtime Assets Catalog 软件包提供，统一支持 Word、PowerPoint 和 Excel 的 PDF 转换，以及 Excel 重算保存。
+- 完善 PDF、PPTX、DOCX、Excel 和 Mermaid 的前端预览路由与类型识别，并区分 Mermaid 的交互预览与导出渲染。
+
+### Excel 工作簿
+
+- 原生 Excel Tool 覆盖工作簿创建、结构检查、区域读写、追加、格式、表格、图表、重算和 PDF 导出。
+- Excel 附件不再预先转换并内联整份文本；Agent 只在需要内容时调用 Excel Tool 读取指定工作表和区域。
+- 新建、追加和转换任务不再因为无关的全量预读取被阻塞，文件结果统一使用 workspace 文件身份。
+
+### 文档任务与文件搜索
+
+- Main Session 派工只完整传递用户目标、输入文件和明确约束，不再自行补充字体、版式、质量检查或工具链要求；执行细节由对应 Skill 和 Tool 负责。
+- 文档创建、追加和格式转换在 Tool 成功后即可结束，不再默认进入开放式读取、校验、修复和重复导出。
+- 单个文本文件内搜索使用 `fs_search_in_text`；跨文件检索使用独立索引 Tool，并限定在当前 Session 可访问的文件范围。
+
+### Runtime Assets 自动更新
+
+- xAgent 启动后会自动同步 Catalog，并下载、安装和更新全部缺失或过期软件包。
+- 软件包完成下载、校验、解包、初始化和探测后再原子切换 `current`；失败时继续使用上一套可用安装。
+- 管理后台保留手工同步与单软件包升级入口，并展示安装阶段、失败原因和版本状态。
+
+### Session 与管理界面
+
+- Agent 循环、任务语义、编排、OCR、摘要、Memory 和图片生成等模型调用统一接入 AgentCore。
+- 完善审批恢复、历史 Tool 批次回放、会话产物投影、上下文压缩和运行状态同步。
+- Session 页面和管理后台统一复用消息、Tool 历史、附件、数据表格、筛选、空状态和操作布局等公共组件。
+- 修复智能体、Skill 和 Tool 卡片被包入单个网格项的问题，恢复响应式多列布局。
+
+### 升级说明
+
+- 升级前请备份配置、数据库、用户工作区、Memory、Skill、Tool 包和 Connector 状态。
+- Office 模板 Catalog 已统一为 `document.office-default-template`；旧 `document.office-templates` 包及 `business`、`clean`、`formal` 模板不再使用。
+- Runtime Assets 会在启动后自动对齐当前 Catalog；更新失败时继续使用上一套 `current`，可在管理后台查看失败原因并手工重试。
+- Connector Server 与 xAgent Server 独立发布和升级。当前公开版本为微信 `0.0.12`、Telegram `0.0.13`、飞书 `0.0.12`、Database `0.0.6`、SSH `0.0.8`。
 
 ## `v0.0.13.beta` - 2026-08-29
 
@@ -416,7 +461,7 @@ schemaType: CollectionPage
 
 ### 升级说明
 
-该版本发布时，重新运行安装命令即可检查并安装 `v0.0.5.beta`。当前升级请以 [`v0.0.13.beta`](#v0013beta---2026-08-29) 版本说明为准。
+该版本发布时，重新运行安装命令即可检查并安装 `v0.0.5.beta`。当前升级请以 [`v0.0.15.beta`](#v0015beta---2026-09-06) 版本说明为准。
 
 ## `v0.0.4.beta` - 2026-07-15
 
@@ -480,4 +525,4 @@ Release 仅包含：
 
 该版本完善了 Connector 接入、Telegram Connector、使用手册和基础安全治理能力，是 `v0.0.4.beta` 之前的公开测试版本。
 
-新部署和升级应直接使用当前安装脚本与 `v0.0.13.beta` 版本目录。
+新部署和升级应直接使用当前安装脚本与 `v0.0.15.beta` 版本目录。

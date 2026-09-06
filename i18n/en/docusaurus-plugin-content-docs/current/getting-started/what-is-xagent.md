@@ -3,7 +3,7 @@ title: What Is xAgent? Product Positioning and Core Capabilities
 description: A plain-language explanation of what xAgent is, what it can do, and how it differs from a typical chat assistant.
 image: /img/share/en/xagent-overview.png
 status: stable
-updated: 2026-08-29
+updated: 2026-09-07
 ---
 
 # What Is xAgent?
@@ -16,7 +16,7 @@ You can ask it to break down a goal, make a plan, carry out the steps, review da
 
 xAgent does not require a team to replace its existing systems, and it does not invent new permissions. It understands the task, coordinates execution, and summarizes results; each connected system still controls what its own accounts are allowed to access.
 
-The current version is `v0.0.13.beta`, a beta release for deployment trials, scenario validation, and feedback.
+The current version is `v0.0.15.beta`, a beta release for deployment trials, scenario validation, and feedback.
 
 ## Why use xAgent?
 
@@ -33,7 +33,7 @@ Typical tasks include:
 - Read contracts, meeting notes, PDFs, spreadsheets, and code to extract key points, risks, and action items.
 - Research topics, analyze data, prepare weekly reports, draft proposals, write articles, reply to customers, and organize project work.
 - Write simple programs from requirements, read and modify code, troubleshoot issues, and run tests to verify the result.
-- Save results as Markdown, Excel, CSV, HTML reports, or other workspace files.
+- Save results as Word, PowerPoint, Excel, PDF, Markdown, CSV, HTML reports, or other workspace files.
 - Use a browser, email, WeChat, Telegram, Feishu, or an enterprise system for the next step.
 - Break complex work into stages, continue running, and wait for more material or approval before proceeding.
 

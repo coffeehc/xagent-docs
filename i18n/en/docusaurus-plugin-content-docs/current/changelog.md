@@ -3,13 +3,58 @@ title: Changelog
 description: Review important user-facing changes, binary release contents, and upgrade notes for each xAgent release.
 image: /img/share/en/xagent-overview.png
 status: stable
-updated: 2026-08-29
+updated: 2026-09-07
 schemaType: CollectionPage
 ---
 
 # Changelog
 
 This page records important installation, usage, and safety-governance changes in xAgent binary releases. xAgent remains in beta, and features, interfaces, and protocols may continue to change.
+
+## `v0.0.15.beta` - 2026-09-06
+
+[View installation instructions](/docs/getting-started/install) · [View supported Agent capabilities](/docs/manual/capabilities) · [View the Workspace guide](/docs/user-guide/workspace) · [GitHub Release and checksum files](https://github.com/coffeehc/xagent-releases/releases/tag/v0.0.15.beta)
+
+This release primarily strengthens the Office document suite. Word, PowerPoint, and Excel now share the xAgent default Office template and brand system, with more complete workflows for generating, previewing, recalculating, and converting editable documents to PDF. Document delegation and delivery are also more direct, while Runtime Assets can automatically align the required software packages after startup.
+
+### Office Documents and PDF
+
+- Word, PowerPoint, and Excel now share the xAgent default Office template and brand system instead of the old `business`, `clean`, and `formal` template branches.
+- Word covers and tables of contents use separate pages, table text inherits the template body font, and PowerPoint uses consistent brand colors, typography, and chart styling.
+- LibreOffice is delivered as an independent Runtime Assets Catalog package for Word, PowerPoint, and Excel PDF conversion and Excel recalculation with saved results.
+- Frontend preview routing and type detection have been improved for PDF, PPTX, DOCX, Excel, and Mermaid, with separate Mermaid handling for interactive previews and exported documents.
+
+### Excel Workbooks
+
+- Native Excel Tools cover workbook creation, structural inspection, range reads and writes, append operations, formatting, tables, charts, recalculation, and PDF export.
+- Excel attachments are no longer converted and inlined as complete text before execution. The Agent reads only the required worksheets and ranges through Excel Tools.
+- Create, append, and conversion tasks are no longer blocked by unrelated full-workbook pre-reading, and outputs consistently use Workspace file identities.
+
+### Document Tasks and File Search
+
+- Main Session delegation carries only the user's complete goal, input files, and explicit constraints. It no longer invents font, layout, quality-check, or toolchain requirements; the selected Skill and Tool own those execution details.
+- Document creation, append, and format conversion finish when the Tool succeeds instead of entering open-ended read, validation, repair, and repeated-export loops by default.
+- Search within one text file uses `fs_search_in_text`; cross-file retrieval uses the dedicated index Tool and remains constrained to files accessible from the current Session.
+
+### Automatic Runtime Assets Updates
+
+- xAgent automatically synchronizes the Catalog after startup and downloads, installs, and updates every missing or outdated package.
+- Packages are downloaded, verified, extracted, initialized, and detected before `current` is switched atomically. A failed update leaves the previous working installation active.
+- Manual synchronization and individual package upgrades remain available in the administration console, together with installation stages, failure details, and version status.
+
+### Sessions and Administration
+
+- Agent loops, task semantics, orchestration, OCR, summaries, Memory, and image-generation model calls now use AgentCore consistently.
+- Approval recovery, historical Tool-batch replay, Session artifact projection, context compression, and runtime status synchronization have been tightened.
+- Session pages and administration now share message, Tool history, attachment, table, filter, empty-state, and action-layout components.
+- Fixed Agent, Skill, and Tool cards being nested inside a single grid item, restoring responsive multi-column layouts.
+
+### Upgrade Notes
+
+- Back up configuration, databases, user workspaces, Memory, Skills, Tool packages, and Connector state before upgrading.
+- The Office template Catalog is now `document.office-default-template`. The old `document.office-templates` package and its `business`, `clean`, and `formal` templates are no longer used.
+- Runtime Assets automatically align with the current Catalog after startup. A failed update keeps the previous `current` installation; administrators can inspect the failure and retry manually.
+- xAgent Server and Connector Server are released and upgraded independently. Current public versions are WeChat `0.0.12`, Telegram `0.0.13`, Feishu `0.0.12`, Database `0.0.6`, and SSH `0.0.8`.
 
 ## `v0.0.13.beta` - 2026-08-29
 
@@ -416,7 +461,7 @@ This release upgrades the console experience, real-time Connector interaction, t
 
 ### Upgrade Notes
 
-When this release shipped, rerunning the installer checked for and installed `v0.0.5.beta`. For current upgrades, use the [`v0.0.13.beta`](#v0013beta---2026-08-29) release notes.
+When this release shipped, rerunning the installer checked for and installed `v0.0.5.beta`. For current upgrades, use the [`v0.0.15.beta`](#v0015beta---2026-09-06) release notes.
 
 ## `v0.0.4.beta` - 2026-07-15
 
@@ -480,4 +525,4 @@ Each archive contains only the xAgent executable, README, and version metadata. 
 
 This earlier public beta improved Connector integration, added the Telegram Connector, expanded the user manual, and established the initial safety-governance workflow.
 
-New deployments and upgrades should use the current installer and the `v0.0.13.beta` release catalog.
+New deployments and upgrades should use the current installer and the `v0.0.15.beta` release catalog.

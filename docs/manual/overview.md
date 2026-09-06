@@ -2,13 +2,13 @@
 title: xAgent 使用手册
 description: 按当前 xAgent 控制台菜单查找页面说明、权限范围、关键区域和常用操作，覆盖普通用户、高级模式与管理员页面。
 status: beta
-updated: 2026-08-29
+updated: 2026-09-07
 schemaType: CollectionPage
 ---
 
 # xAgent 使用手册
 
-本手册对应 `v0.0.13.beta` 控制台，按页面而不是概念组织内容。每个页面都说明菜单入口、可见范围、关键区域和常用操作，并提供界面图例。
+本手册对应 `v0.0.15.beta` 控制台，按页面而不是概念组织内容。每个页面都说明菜单入口、可见范围、关键区域和常用操作，并提供界面图例。
 
 ## 怎么使用本手册
 
@@ -30,7 +30,7 @@ schemaType: CollectionPage
 
 ### 智能体能力
 
-- [51 个内置 Skill、可完成的任务与文档处理范围](/docs/manual/capabilities)
+- [54 个内置 Skill、可完成的任务与文档处理范围](/docs/manual/capabilities)
 
 ### 工作台
 
