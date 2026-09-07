@@ -21,7 +21,7 @@ schemaType: CollectionPage
 
 - Word、PowerPoint 和 Excel 统一使用 xAgent 默认 Office 模板与品牌样式，不再区分旧的 `business`、`clean` 和 `formal` 模板。
 - Word 封面与目录分页，表格正文继承模板正文字体；PowerPoint 统一品牌色、排版和图表样式。
-- LibreOffice 作为独立 Runtime Assets Catalog 软件包提供，统一支持 Word、PowerPoint 和 Excel 的 PDF 转换，以及 Excel 重算保存。
+- LibreOffice 用于 Word、PowerPoint 和 Excel 的 PDF 转换，以及 Excel 重算保存。由于它依赖较多系统软件包，xAgent 发布包不包含这些系统依赖；使用上述能力前，管理员需在服务器上通过系统包管理器直接安装可用的最新版 LibreOffice。
 - 完善 PDF、PPTX、DOCX、Excel 和 Mermaid 的前端预览路由与类型识别，并区分 Mermaid 的交互预览与导出渲染。
 
 ### Excel 工作簿
@@ -52,6 +52,7 @@ schemaType: CollectionPage
 ### 升级说明
 
 - 升级前请备份配置、数据库、用户工作区、Memory、Skill、Tool 包和 Connector 状态。
+- Debian/Ubuntu 服务器可执行 `sudo apt-get update && sudo apt-get install -y libreoffice` 安装软件源中的最新版本；其他 Linux 发行版使用等价命令。安装后通过 `soffice --headless --version` 确认 LibreOffice 可用。
 - Office 模板 Catalog 已统一为 `document.office-default-template`；旧 `document.office-templates` 包及 `business`、`clean`、`formal` 模板不再使用。
 - Runtime Assets 会在启动后自动对齐当前 Catalog；更新失败时继续使用上一套 `current`，可在管理后台查看失败原因并手工重试。
 - Connector Server 与 xAgent Server 独立发布和升级。当前公开版本为微信 `0.0.12`、Telegram `0.0.13`、飞书 `0.0.12`、Database `0.0.6`、SSH `0.0.8`。

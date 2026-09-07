@@ -21,7 +21,7 @@ This release primarily strengthens the Office document suite. Word, PowerPoint, 
 
 - Word, PowerPoint, and Excel now share the xAgent default Office template and brand system instead of the old `business`, `clean`, and `formal` template branches.
 - Word covers and tables of contents use separate pages, table text inherits the template body font, and PowerPoint uses consistent brand colors, typography, and chart styling.
-- LibreOffice is delivered as an independent Runtime Assets Catalog package for Word, PowerPoint, and Excel PDF conversion and Excel recalculation with saved results.
+- LibreOffice powers PDF conversion for Word, PowerPoint, and Excel, as well as Excel recalculation with saved results. Because LibreOffice depends on many operating-system packages, xAgent release archives do not bundle those system dependencies. Before using these capabilities, an administrator must install the latest LibreOffice available from the server's package repository.
 - Frontend preview routing and type detection have been improved for PDF, PPTX, DOCX, Excel, and Mermaid, with separate Mermaid handling for interactive previews and exported documents.
 
 ### Excel Workbooks
@@ -52,6 +52,7 @@ This release primarily strengthens the Office document suite. Word, PowerPoint, 
 ### Upgrade Notes
 
 - Back up configuration, databases, user workspaces, Memory, Skills, Tool packages, and Connector state before upgrading.
+- On Debian or Ubuntu, run `sudo apt-get update && sudo apt-get install -y libreoffice` to install the latest version from the configured package repository; use the equivalent command on other Linux distributions. Verify the installation with `soffice --headless --version`.
 - The Office template Catalog is now `document.office-default-template`. The old `document.office-templates` package and its `business`, `clean`, and `formal` templates are no longer used.
 - Runtime Assets automatically align with the current Catalog after startup. A failed update keeps the previous `current` installation; administrators can inspect the failure and retry manually.
 - xAgent Server and Connector Server are released and upgraded independently. Current public versions are WeChat `0.0.12`, Telegram `0.0.13`, Feishu `0.0.12`, Database `0.0.6`, and SSH `0.0.8`.
