@@ -62,8 +62,8 @@ const homeContent = {
   'zh-CN': {
     layoutTitle: 'xAgent：可私有化部署的多用户 AI Agent 工作门户',
     layoutDescription:
-      'xAgent 是可私有化部署的多用户 AI Agent 工作门户，能够理解任务变化，按需准备 Skill、Tool 与长期记忆，并通过项目化会话、连接器、隔离工作区和安全治理持续完成任务。',
-    kicker: 'xAgent 产品介绍 · v0.0.15.beta',
+      'xAgent 是可私有化部署的多用户 AI Agent 工作门户，能够理解任务变化，按需准备 Skill、Tool 与长期记忆，并通过项目化会话、AgentPlugin、隔离工作区和安全治理持续完成任务。',
+    kicker: 'xAgent 产品介绍 · v0.0.20.beta',
     title: '可私有化部署的多用户 AI Agent 工作门户',
     subtitle:
       'xAgent 是企业统一的 AI 工作平台。服务端部署，快速接入现有系统，权限与成本集中管控、操作全程审计；员工打开网页或手机，即可使用 AI 完成工作。实现企业可管、员工好用。',
@@ -127,7 +127,7 @@ const homeContent = {
       },
       {
         title: '能力可扩展',
-        description: '通过 Skill、Tool、MCP 和连接器扩展任务能力，外部系统也可以主动把消息推给 xAgent。',
+        description: '通过 Skill、Tool、MCP 和 AgentPlugin 扩展任务能力，外部系统也可以主动把消息推给 xAgent。',
       },
       {
         title: '安全边界清晰',
@@ -152,13 +152,13 @@ const homeContent = {
         to: '/docs/guides/ai-agent-dynamic-tool-discovery',
       },
       {
-        title: '连接器',
-        description: '微信、Telegram 与飞书连接器支持双向消息和文件；Database 与 SSH Connector 提供受管的数据库和远程主机能力，浏览器也可以作为受控连接入口。',
+        title: 'AgentPlugin',
+        description: '微信、Telegram、飞书和钉钉插件支持消息接入；Database 与 SSH 插件提供受管的数据库和远程主机能力，浏览器也可以作为受控连接入口。',
         to: '/docs/user-guide/connector',
       },
       {
         title: '会话事件总线',
-        description: '外部接口、触发器、连接器和会话都可以发起事件，经队列投递到目标智能体会话。',
+        description: '外部接口、触发器、AgentPlugin 和会话都可以发起事件，经队列投递到目标智能体会话。',
         to: '/docs/guides/multi-agent-session-event-collaboration',
       },
       {
@@ -168,7 +168,7 @@ const homeContent = {
       },
       {
         title: '自定义智能体',
-        description: '可以按任务场景创建专用入口，组合 Skill、Tool、连接器和审批策略，沉淀团队自己的工作助手。',
+        description: '可以按任务场景创建专用入口，组合 Skill、Tool、AgentPlugin 和审批策略，沉淀团队自己的工作助手。',
         to: '/docs/user-guide/agent-management',
       },
       {
@@ -178,7 +178,7 @@ const homeContent = {
       },
       {
         title: '私有化部署',
-        description: '当前免费版无需证书，固定支持 2 个用户、30 个会话、1 个 WorkGroup、5 个 Connector VChannel 和 5 个定时任务。',
+        description: '当前免费版无需证书，固定支持 2 个用户、30 个会话、1 个 WorkGroup、5 个 AgentPlugin VChannel 和 5 个定时任务。',
         to: '/docs/guides/self-hosted-ai-agent',
       },
     ] satisfies Card[],
@@ -215,8 +215,8 @@ const homeContent = {
   en: {
     layoutTitle: 'xAgent: Self-Hosted Multi-User AI Agent Platform',
     layoutDescription:
-      'xAgent is a self-hosted multi-user AI agent platform that adapts Skills, Tools, and memory to each task across projects, connectors, and governed workspaces.',
-    kicker: 'xAgent Product Overview · v0.0.15.beta',
+      'xAgent is a self-hosted multi-user AI agent platform that adapts Skills, Tools, and memory to each task across projects, AgentPlugins, and governed workspaces.',
+    kicker: 'xAgent Product Overview · v0.0.20.beta',
     title: 'A Task-First, Self-Hosted Multi-User AI Agent Platform',
     subtitle:
       'xAgent is the unified AI work platform for the enterprise. Deploy on your own servers, connect existing systems quickly, centralize access and cost controls, and audit every action. Employees can get work done with AI from the web or mobile app, giving enterprises control and employees an effortless experience.',
@@ -280,7 +280,7 @@ const homeContent = {
       },
       {
         title: 'Extensible capabilities',
-        description: 'Skills, Tools, MCP, and connectors extend what xAgent can do. External systems can also push messages into xAgent.',
+        description: 'Skills, Tools, MCP, and AgentPlugins extend what xAgent can do. External systems can also push messages into xAgent.',
       },
       {
         title: 'Clear safety boundaries',
@@ -300,8 +300,8 @@ const homeContent = {
         to: '/docs/manual/capabilities',
       },
       {
-        title: 'Connectors and MCP',
-        description: 'WeChat, Telegram, and Feishu Connectors provide bidirectional messages and files. Database and SSH Connectors expose governed database and remote-host capabilities, while Browser provides another controlled entry point.',
+        title: 'AgentPlugins and MCP',
+        description: 'WeChat, Telegram, Feishu, and DingTalk plugins connect messaging channels. Database and SSH plugins expose governed database and remote-host capabilities, while Browser provides another controlled entry point.',
         to: '/docs/user-guide/connector',
       },
       {
@@ -321,7 +321,7 @@ const homeContent = {
       },
       {
         title: 'Release positioning',
-        description: 'The certificate-free Free edition supports 2 users, 30 Sessions, 1 WorkGroup, 5 Connector VChannels, and 5 scheduled tasks.',
+        description: 'The certificate-free Free edition supports 2 users, 30 Sessions, 1 WorkGroup, 5 AgentPlugin VChannels, and 5 scheduled tasks.',
         to: '/docs/getting-started/what-is-xagent#the-short-version',
       },
     ] satisfies Card[],
@@ -438,7 +438,7 @@ export default function Home(): ReactNode {
           ? 'Self-hosted multi-user AI agent platform'
           : '可私有化部署的多用户 AI Agent 平台',
         operatingSystem: 'Linux, macOS',
-        softwareVersion: '0.0.15.beta',
+        softwareVersion: '0.0.20.beta',
         downloadUrl: installerUrl,
         releaseNotes: `${localeUrl}docs/changelog/`,
         softwareHelp: {
@@ -455,7 +455,7 @@ export default function Home(): ReactNode {
               'Automated installation and upgrades',
               'Reusable Agent entry points',
               'Shared Skills and Tools',
-              'MCP and Connector extensions',
+              'MCP and AgentPlugin extensions',
               'Long-running tasks and session events',
               'Approval and secret safety governance',
             ]
@@ -466,7 +466,7 @@ export default function Home(): ReactNode {
               '自动安装与升级',
               '可复用的智能体入口',
               '共享 Skill 与 Tool',
-              'MCP 与连接器扩展',
+              'MCP 与 AgentPlugin 扩展',
               '长任务与会话事件',
               '审批与密钥安全治理',
             ],
@@ -477,8 +477,8 @@ export default function Home(): ReactNode {
           availability: 'https://schema.org/InStock',
           url: installerUrl,
           description: isEnglish
-            ? 'Certificate-free Free edition for 2 users, 30 Sessions, 1 WorkGroup, 5 Connector VChannels, and 5 scheduled tasks'
-            : '无需证书的免费版：2 个用户、30 个会话、1 个 WorkGroup、5 个 Connector VChannel 和 5 个定时任务',
+            ? 'Certificate-free Free edition for 2 users, 30 Sessions, 1 WorkGroup, 5 AgentPlugin VChannels, and 5 scheduled tasks'
+            : '无需证书的免费版：2 个用户、30 个会话、1 个 WorkGroup、5 个 AgentPlugin VChannel 和 5 个定时任务',
         },
       },
     ],

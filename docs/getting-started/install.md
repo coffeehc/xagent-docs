@@ -1,9 +1,9 @@
 ---
 title: 开始安装 xAgent
-description: 从服务器运行安装脚本到完成首次系统初始化，按步骤安装并验证 xAgent v0.0.15.beta。
+description: 从服务器运行安装脚本到完成首次系统初始化，按步骤安装并验证 xAgent v0.0.20.beta。
 image: /img/getting-started/v005/install-terminal.webp
 status: beta
-updated: 2026-09-07
+updated: 2026-09-17
 ---
 
 # 开始安装 xAgent
@@ -20,7 +20,7 @@ updated: 2026-09-07
 - 服务器能够访问 `downloads.xagent.xiagaogao.com`、模型 API，以及之后准备接入的外部系统。
 - 有足够磁盘保存版本化二进制、运行数据、工作区文件和 Runtime Assets。
 - 如果准备通过公网访问，先规划 HTTPS 反向代理、防火墙和访问控制。xAgent 本身不终止 TLS。
-- 如果是升级已有环境，先备份配置、数据库、工作区和 Connector 状态。
+- 如果是升级已有环境，先备份配置、数据库、工作区、Memory、Skill、Tool 包和已安装 AgentPlugin 的配置与数据。
 
 ## 第一步：运行安装器
 
@@ -32,15 +32,15 @@ curl -fsSL https://downloads.xagent.xiagaogao.com/scripts/install.sh | bash
 
 安装器会自动检测操作系统和 CPU 架构，下载并校验对应的安装包，安装或升级 xAgent，并在 Linux 上创建、启用和启动 `xagent-server` systemd 服务。
 
-![Linux 安装器输出：检测环境、安装 xAgent 并询问 Connector](/img/getting-started/v005/install-terminal.webp)
+![早期 Linux 安装器输出图例](/img/getting-started/v005/install-terminal.webp)
 
-图中可以看到完整的交互顺序：先安装 xAgent，再询问是否安装 Connector；选择 Connector 后，安装器会继续下载、校验、注册服务，并打印接入地址和 API Key。API Key 不要发布到文档、截图或公共日志中。
+图例来自早期版本。当前安装器先安装 xAgent，再按需安装 AgentPlugin（微信、Telegram、飞书、Database、SSH 和钉钉）；选中后会下载、校验并注册服务，打印接入地址和 API Key。API Key 不要发布到文档、截图或公共日志中。
 
-如果暂时只使用 Web，可以在询问 Connector 时选择 `N`。需要无人值守安装时，可以参考：
+如果暂时只使用 Web，可以在询问 AgentPlugin 时选择 `N`。无人值守安装可跳过插件；要安装指定插件则使用 `--agent-plugins database,ssh`（可选值：`all`、`weixin`、`telegram`、`feishu`、`database`、`ssh`、`dingtalk`）：
 
 ```bash
 curl -fsSL https://downloads.xagent.xiagaogao.com/scripts/install.sh \
-  | bash -s -- --yes --no-connectors
+  | bash -s -- --yes --no-agent-plugins
 ```
 
 ## 第二步：确认安装结果
@@ -51,12 +51,14 @@ curl -fsSL https://downloads.xagent.xiagaogao.com/scripts/install.sh \
 xagent version
 ```
 
-当前目标版本应为 `0.0.15.beta`。安装命令保持不变，安装器会读取当前发布目录。Linux 还可以检查服务状态：
+当前目标版本应为 `0.0.20.beta`。安装命令保持不变，安装器会读取当前发布目录。Linux 还可以检查服务状态：
 
 ```bash
 sudo systemctl status xagent-server
 journalctl -u xagent-server -f
 ```
+
+从旧 Connector 环境升级时，请运行完整安装器或公开 `upgrade.sh`，让安装器迁移官方插件的程序、服务、配置和数据目录；不要仅替换 Server 二进制。自定义旧 Connector 需要单独适配。使用企业授权时，请先确认授权的最高版本允许 `0.0.20.beta`。
 
 安装器成功启动后，默认 Web 地址为：
 
@@ -93,7 +95,7 @@ http://服务器地址:18888/
 
 ## 第五步：初始化管理员
 
-系统会要求创建第一个管理员登录名和密码。这个账号用于登录控制台、配置模型、管理用户、设置审批策略和维护 Connector。
+系统会要求创建第一个管理员登录名和密码。这个账号用于登录控制台、配置模型、管理用户、设置审批策略和维护 AgentPlugin Connector。
 
 ![xAgent 中文初始化管理员页面](/img/getting-started/v005/system-setup-admin-zh.webp)
 
@@ -125,7 +127,9 @@ http://服务器地址:18888/
 
 ## 第七步：准备 Runtime Assets
 
-Runtime Assets 是 xAgent 管理的任务运行依赖，供文件处理、本地工具和其他受控执行使用。初始化页面会自动下载、校验并安装这些依赖组件，不需要管理员手工把 Python、Node.js 或其他工具装进宿主环境。
+Runtime Assets 是 xAgent 管理的任务运行依赖，供文件处理、本地工具和其他受控执行使用。初始化页面会自动下载、校验并安装这些依赖组件，Python、Node.js 等无需管理员手工安装。
+
+LibreOffice 是例外：发布包不包含其众多系统依赖。需要 Word、PowerPoint、Excel 转 PDF 或 Excel 重算时，管理员必须在宿主服务器上通过系统包管理器安装 LibreOffice，例如 Debian/Ubuntu 执行 `sudo apt-get update && sudo apt-get install -y libreoffice`；然后用 `soffice --headless --version` 验证。其他发行版使用对应包管理器。
 
 ![xAgent 中文 Runtime Assets 安装步骤](/img/getting-started/v005/system-setup-runtime-zh.webp)
 
@@ -146,7 +150,7 @@ Runtime Assets 是 xAgent 管理的任务运行依赖，供文件处理、本地
 
 ## 第九步：完成初始化
 
-确认数据目录、管理员、模型、Runtime Assets 和基础运行组件均已完成后，点击“完成设置”。系统会进入工作台，之后普通用户可以通过 Web 或已接入的 Connector 使用 xAgent。
+确认数据目录、管理员、模型、Runtime Assets 和基础运行组件均已完成后，点击“完成设置”。系统会进入工作台，之后普通用户可以通过 Web 或已接入的 AgentPlugin 使用 xAgent。
 
 ![xAgent 中文完成初始化并进入仪表板](/img/getting-started/v005/system-setup-finish-zh.webp)
 
@@ -166,9 +170,9 @@ Runtime Assets 是 xAgent 管理的任务运行依赖，供文件处理、本地
 
 ![xAgent 中文仪表板](/img/getting-started/v005/dashboard-after-setup-zh.webp)
 
-## Connector 是可选项
+## AgentPlugin 是可选项
 
-Connector 不影响 Web 控制台的基本使用。安装器已经安装 Connector 时，打开“Connector 管理”，填写安装器输出的地址和 API Key；没有安装时，可以稍后按照[连接器使用手册](/docs/user-guide/connector)完成接入。Database 和 SSH 的配置见 [Database Connector 配置](/docs/user-guide/database-connector) 和 [SSH Connector 配置](/docs/user-guide/ssh-connector)。
+AgentPlugin 不影响 Web 控制台的基本使用。安装器已安装插件时，管理员打开“Agent 治理 > AgentPlugin Connector”，填写安装器输出的地址和 API Key；普通用户在“运行治理 > 插件连接”绑定自己的账号或资源。没有安装时，可稍后按照[AgentPlugin 使用手册](/docs/user-guide/connector)完成接入。Database 和 SSH 的配置见 [Database AgentPlugin](/docs/user-guide/database-connector) 和 [SSH AgentPlugin](/docs/user-guide/ssh-connector)。
 
 ## 下一步
 

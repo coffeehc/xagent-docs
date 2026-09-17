@@ -1,8 +1,8 @@
 ---
 title: Agent 治理页面
-description: xAgent 管理员侧智能体、审批、Skill、Tool、Connector、MCP 和执行环境页面说明与图例。
+description: xAgent 管理员侧智能体、审批、Skill、Tool、AgentPlugin、MCP 和执行环境页面说明。
 status: beta
-updated: 2026-07-27
+updated: 2026-09-17
 ---
 
 # Agent 治理页面
@@ -63,21 +63,21 @@ Tool 管理汇总系统可以发现的全部工具：
 - 查看参数协议、权限、审批要求和不可用原因。
 - 管理工具是否进入用户可发现和可执行范围。
 
-## Connector 管理
+## AgentPlugin Connector
 
-**菜单路径：** Agent 治理 > Connector 管理
+**菜单路径：** Agent 治理 > AgentPlugin Connector
 
 **可见范围：** 管理员
 
 ![xAgent Connector 管理页面，显示软件版本、协议、在线状态和操作入口](/img/home/v005/xagent-connectors-zh.webp)
 
-Connector 管理维护系统安装的连接器实例：
+AgentPlugin Connector 管理系统安装的插件服务：
 
 - 查看软件版本、协议版本、在线状态和更新提示。
-- 添加 Connector，编辑地址和认证配置。
+- 添加 AgentPlugin，编辑地址和认证配置。
 - 刷新运行状态，查看详情或移除不再使用的实例。
 
-安装说明见[连接器使用手册](/docs/user-guide/connector)。
+安装说明见[AgentPlugin 使用手册](/docs/user-guide/connector)。
 
 ## MCP 配置
 

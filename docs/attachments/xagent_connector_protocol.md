@@ -1,16 +1,18 @@
 ---
 title: xAgent Connector Common Protocol
 description: xAgent Connector Protocol 3.0 的连接、认证、通道、消息、文件传输、工具调用和错误协议。
-updated: 2026-07-29
+updated: 2026-09-17
 ---
 
 # xAgent Connector Common Protocol
+
+> 历史资料：本文记录旧版 Connector 协议 `3.0`，不适用于当前 `v0.0.20.beta` 的 AgentPlugin 接入。当前公开协议为 `4.4`；请先查看 [AgentPlugin 使用说明](/docs/user-guide/connector#公共协议与能力)。
 
 本文档定义 xAgent Connector 通用协议。第三方开发者实现 Connector Server 时，应以本文档作为 wire contract。
 
 架构责任、事实归属和生命周期见 [xAgent Connector Architecture](xagent_connection_architecture.md)。
 
-当前协议版本：`3.0`。
+本文所述历史协议版本：`3.0`。
 
 ## 1. 协议族
 

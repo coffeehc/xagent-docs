@@ -2,7 +2,7 @@
 title: xAgent 工作区文件：材料、结果与下载产物
 description: 了解 xAgent 工作区如何保存、隔离和管理任务材料、生成文件、中间结果与可下载产物。
 status: stable
-updated: 2026-07-27
+updated: 2026-09-17
 ---
 
 # xAgent 工作区文件：材料、结果与下载产物
@@ -16,6 +16,8 @@ updated: 2026-07-27
 工作区是 xAgent 保存任务材料和结果的地方。你上传的文件、任务生成的 Markdown、CSV、HTML 报告和中间结果，通常都会出现在工作区文件中。
 
 xAgent 会按用户和任务范围隔离文件。需要运行外部命令时，Execution Lease 会生成最小文件视图，再由 ProcessSandbox 只挂载本次任务获得授权的路径。日常使用时，只需要关注页面里能看到的文件。
+
+在 `v0.0.20.beta` 中，进程工具生成的文件会正确提交到工作区，会话草稿在沙箱内保持可见；仍只允许访问当前任务授权的范围。
 
 ## 什么时候使用
 
@@ -70,6 +72,8 @@ xAgent 会按用户和任务范围隔离文件。需要运行外部命令时，E
 
 如果结果是 HTML、Markdown 或图片，优先使用预览入口确认内容。如果需要转发、存档或继续处理，再下载文件。
 
+管理员开启文件外链策略后，也可从预览、会话文件或工作区文件菜单[创建限时分享](/docs/user-guide/file-sharing)。默认不允许公开分享；访客预览附带动态水印，原文件下载需要单独允许。
+
 预览时重点检查：
 
 - 标题和内容是否正确。
@@ -105,6 +109,7 @@ xAgent 会按用户和任务范围隔离文件。需要运行外部命令时，E
 - [任务](/docs/user-guide/task)
 - [Tool 管理](/docs/user-guide/tool)
 - [审批策略](/docs/user-guide/approval-policy)
+- [文件外链分享](/docs/user-guide/file-sharing)
 
 ## 下一步操作
 

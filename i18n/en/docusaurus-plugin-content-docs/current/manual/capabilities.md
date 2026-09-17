@@ -1,19 +1,19 @@
 ---
 title: Supported Agent Capabilities
-description: See what xAgent v0.0.15.beta can do through its 54 built-in Skills, together with current file upload, parsing, preview, and output boundaries.
+description: See what xAgent v0.0.20.beta can do through its 54 built-in Skills, together with current file upload, parsing, preview, and output boundaries.
 status: beta
-updated: 2026-09-07
+updated: 2026-09-17
 ---
 
 # Supported Agent Capabilities
 
-The `v0.0.15.beta` package includes **54 built-in Skills**. They are not isolated chatbots. They are reusable task methods that xAgent can discover and load dynamically. One task may combine several Skills and then use Tools, MCP, or Connectors for file processing, computation, and external actions.
+The `v0.0.20.beta` package includes **54 built-in Skills**. They are not isolated chatbots. They are reusable task methods that xAgent can discover and load dynamically. One task may combine several Skills and then use Tools, MCP, or AgentPlugins for file processing, computation, and external actions.
 
 Use **Operations → Skills** as the source for a specific deployment. Administrators can disable bundled Skills and add personal or shared Skills.
 
 | Current measure | Value | Scope |
 | --- | ---: | --- |
-| Bundled Skills | 54 | Built-in Skill directories in `v0.0.15.beta` |
+| Bundled Skills | 54 | Built-in Skill directories in `v0.0.20.beta` |
 | Manual capability groups | 6 | A navigation aid, not a system permission model |
 | Web session attachment count and size | Determined by server file capabilities | Validated by file type and upload entry point; the console shows the limit before saving |
 
@@ -74,15 +74,17 @@ The Web session upload control currently accepts these formats:
 | XLSX | `excel-workbook-builder` uses native Excel Tools to create and modify editable workbooks with formulas, formatting, tables, charts, recalculation, and optional PDF export |
 | Self-contained HTML reports | `html-report-builder` creates responsive, offline reports designed for printing |
 | HTML slide decks | `html-slide-builder` creates browser-based presentations; it is not a PPTX editor or exporter |
-| PPTX | `powerpoint-builder` creates an editable PowerPoint file from a complete declarative deck specification and can export it to PDF on request; it does not arbitrarily edit existing PPTX files |
+| PPTX | `powerpoint-builder` plans audience questions and content order before creating an editable deck from a declarative specification; it supports product proposals, technical architecture, project progress, and business analysis, with optional PDF export, but does not arbitrarily edit existing PPTX files |
 | DOCX | `word-document-builder` creates new Word documents from built-in or user-provided templates with the shared fonts, covers, tables of contents, tables, and brand styles |
-| PDF | Current Tools can inspect, validate, merge, extract pages from, and optimize PDFs; Word, PowerPoint, and Excel can export to PDF on request through the current LibreOffice Runtime Asset |
+| PDF | Current Tools can inspect, validate, merge, extract pages from, and optimize PDFs; Word, PowerPoint, and Excel can export to PDF on request through LibreOffice installed on the server |
+
+Word, PowerPoint, and PDF previews use consistent font and missing-glyph fallback. The LibreOffice installation and its system dependencies needed for Office-to-PDF export and Excel recalculation are not included in the Server archive; an administrator must [install and verify it](/docs/getting-started/install#step-7-prepare-runtime-assets). Users can also [create expiring file links](/docs/user-guide/file-sharing) when policy allows.
 
 `word-document-builder` supports creating a new DOCX from a template, replacing a template body, or filling existing placeholders. It does not promise arbitrary native DOCX in-place editing, tracked changes, comments, macros, automatic tables of contents, embedded fonts, or pixel-identical rendering across systems. `powerpoint-builder` creates new PPTX files; it does not preserve or arbitrarily modify an existing PPTX or POTX. Inspect the final file when exact source-layout reproduction or complex Office features are required.
 
 ## Boundaries
 
-- A Skill provides a method; it does not mean an external system is already connected. Sending messages, writing to a CRM, publishing content, or changing business data requires the corresponding Tool, MCP or Connector, account authorization, and approval policy.
+- A Skill provides a method; it does not mean an external system is already connected. Sending messages, writing to a CRM, publishing content, or changing business data requires the corresponding Tool, MCP or AgentPlugin, account authorization, and approval policy.
 - A scanned PDF with no extractable text may produce no useful content through the current native parser. OCR is a future enhancement area.
 - Encrypted, damaged, or oversized files may fail processing. A long document may show partial completion while prepared content remains available through indexed reads.
 - Contract, compliance, finance, investment, and people-related Skills support analysis and preparation. They do not replace final judgment by qualified legal, accounting, audit, or other professionals.

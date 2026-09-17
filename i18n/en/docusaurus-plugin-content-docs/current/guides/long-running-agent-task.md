@@ -2,7 +2,7 @@
 title: How AI Agents Run Long Tasks
 description: Learn how xAgent runs multi-step work on the server and preserves continuity through structured context compression, approvals, session events, and recovery snapshots.
 status: beta
-updated: 2026-07-14
+updated: 2026-09-17
 ---
 
 # How AI Agents Run Long Tasks
@@ -78,7 +78,7 @@ The new model is read by a later execution round. The current implementation the
 - [Tasks](/docs/user-guide/task)
 - [Workspace Files](/docs/user-guide/workspace)
 - [Model Notes](/docs/deployment/model-requirements)
-- [Connectors](/docs/user-guide/connector)
+- [AgentPlugins](/docs/user-guide/connector)
 
 ## Next Steps
 

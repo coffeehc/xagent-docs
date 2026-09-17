@@ -2,7 +2,7 @@
 title: System Configuration Pages
 description: Page-by-page guidance and English UI examples for xAgent models, system settings, software license, and Agent roles.
 status: beta
-updated: 2026-08-29
+updated: 2026-09-17
 ---
 
 # System Configuration Pages
@@ -19,6 +19,7 @@ System Configuration is available only to administrators. Changes affect all use
 
 - Create a model and select its Provider protocol.
 - Configure the Base URL, API key, upstream model name, headers, and timeout.
+- OpenAI-compatible Providers can select upstream models from `/api/models` or use a manual ID; context limits, max output, reasoning effort, and thinking settings are configurable.
 - Declare chat, image-generation, tool-call, vision, audio, and file capabilities.
 - Test the connection before saving and keep one default model.
 
@@ -45,9 +46,17 @@ See [Model Configuration](/docs/user-guide/model-config) for details.
 
 ![xAgent Software License showing device, validity, scope, and update action](/img/manual/v005/en/admin-license.webp)
 
-When no Enterprise license certificate is installed, xAgent enters the Free edition directly. This page shows the Free state and its fixed limits: 2 users, 30 Sessions, 1 WorkGroup, 5 Connector VChannels, and 5 scheduled tasks. The Free edition has no certificate expiry.
+When no Enterprise license certificate is installed, xAgent enters the Free edition directly. This page shows the Free state and its fixed limits: 2 users, 30 Sessions, 1 WorkGroup, 5 AgentPlugin VChannels, and 5 scheduled tasks. The Free edition has no certificate expiry.
 
 After an Enterprise certificate is installed, this page shows the device and license identifiers, customer, issue and expiry time, and licensed capacity. Use **Update license** to upload a replacement Enterprise license file.
+
+Enterprise licenses can also limit the highest allowed xAgent version and A2A connection capacity. Check version eligibility before upgrading to `v0.0.20.beta`; A2A capacity is separate from AgentPlugin Channel capacity.
+
+## File Sharing Policy
+
+**Menu:** Storage Management > File Sharing (administrators)
+
+Public links are disabled by default. Administrators can allow xAgent-generated outputs only or all managed files, and set default and maximum expiry, original-download permission, and a public base URL. Users can [create expiring links](/docs/user-guide/file-sharing) only after the policy is saved and a reachable HTTPS domain is configured.
 
 ## Agent Role Config
 

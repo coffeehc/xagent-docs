@@ -2,7 +2,7 @@
 title: xAgent Built-in Skill Files
 description: Browse xAgent beta built-in Skill files, their scope, community improvement workflow, and contribution boundaries that avoid third-party MCP-specific behavior.
 status: stable
-updated: 2026-07-11
+updated: 2026-09-17
 ---
 
 # xAgent Built-in Skill Files
@@ -32,7 +32,7 @@ You can review built-in Skill text, templates, references, and examples there, t
 - A built-in Skill must be reviewed, synchronized, and released by maintainers before it enters the product.
 - Contributions should stay general, readable, and maintainable. Prioritize better workflows, input requirements, output standards, quality checks, and risk boundaries.
 - Safety comes first for teams and companies. Depending on the actual severity of Skill security risks, xAgent may later evaluate a unified Skill Marker or similar mechanism for centralized marking, review, and management.
-- A Skill should not depend on a particular third-party MCP, private service, or external account capability. When an external system is needed, describe the business goal, required information, and authorization boundary; leave the concrete integration to xAgent Tool, MCP, or Connector configuration.
+- A Skill should not depend on a particular third-party MCP, private service, or external account capability. When an external system is needed, describe the business goal, required information, and authorization boundary; leave the concrete integration to xAgent Tool, MCP, or AgentPlugin configuration.
 - Do not put real keys, customer data, internal addresses, tokens, verification codes, or one-off business material into a Skill.
 - Use [Community Discussions](/docs/community/discussions) to describe the real scenario and proposed improvement.
 

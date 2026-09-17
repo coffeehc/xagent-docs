@@ -1,11 +1,11 @@
 ---
-title: "xAgent Tool Management: Personal, Public, MCP, and Connector Tools"
-description: Understand the sources, availability, on-demand discovery, and task invocation of personal and public xAgent Tools, MCP Tools, and Connector Tools.
+title: "xAgent Tool Management: Personal, Public, MCP, and AgentPlugin Tools"
+description: Understand the sources, availability, on-demand discovery, and task invocation of personal and public xAgent Tools, MCP Tools, and AgentPlugin Tools.
 status: stable
-updated: 2026-07-29
+updated: 2026-09-17
 ---
 
-# xAgent Tool Management: Personal, Public, MCP, and Connector Tools
+# xAgent Tool Management: Personal, Public, MCP, and AgentPlugin Tools
 
 ## Who This Is For
 
@@ -30,18 +30,18 @@ Tool-related entry points are divided between user and administrator pages:
 
 Ordinary users mainly use **My Tools**. Administrators use **Tool Management** when they need to govern system-level capabilities.
 
-## Public, Personal, and Connector Tools
+## Public, Personal, and AgentPlugin Tools
 
 Tool visibility depends on source, connection state, user authorization, and administrator policy.
 
 | Type | Common Source | Visibility Scope |
 | --- | --- | --- |
-| System / public Tool | Built-in xAgent Tools, global MCP configured by administrators, and system-level Connector Tools | Displayed according to administrator policy and current user state |
+| System / public Tool | Built-in xAgent Tools, global MCP configured by administrators, and system-level AgentPlugin Tools | Displayed according to administrator policy and current user state |
 | Personal MCP Tool | An MCP Server configured by the current user | Affects only the current user's Tool view |
 | Personal Tool switch | The current user's enable or disable choice for a visible Tool | Affects only the current user's experience |
-| Connector Tool | Tools declared by Connectors such as WeChat, email, or enterprise systems | Usually requires an installed Connector and authorization or binding by the current user |
+| AgentPlugin Tool | Tools declared by AgentPlugins such as WeChat, email, or enterprise systems | Usually requires an installed AgentPlugin and authorization or binding by the current user |
 
-Seeing a Tool as available does not mean it can bypass approval or access all data in an external system. External permissions, Connector state, Secrets, and approval policies still apply.
+Seeing a Tool as available does not mean it can bypass approval or access all data in an external system. External permissions, AgentPlugin state, Secrets, and approval policies still apply.
 
 ## When to Use It
 
@@ -52,7 +52,7 @@ The following tasks usually require Tools:
 - Analyzing CSV, Excel, PDF, and other files.
 - Generating and saving reports.
 - Sending content to email, WeChat, or other external channels.
-- Querying external systems or handling events through Connectors.
+- Querying external systems or handling events through AgentPlugins.
 
 A Tool may not be necessary when the task only rewrites or summarizes text already provided in the message.
 
@@ -64,7 +64,7 @@ My Tools shows Tools visible to the current user. Tool Management shows Tool gov
 | --- | --- |
 | Tool name | The Tool's name in the system |
 | Availability | Whether the current user can use it |
-| Source | Whether the Tool comes from the system, personal MCP, a Connector, or another source |
+| Source | Whether the Tool comes from the system, personal MCP, an AgentPlugin, or another source |
 | Switch | Whether the Tool is enabled |
 | Description | The action the Tool can perform |
 | Details | More complete parameter and usage information |
@@ -166,7 +166,7 @@ Approval policies may intercept these actions. When an approval appears, review 
 
 - [How AI Agents Discover and Load Tools and Skills on Demand](/docs/guides/ai-agent-dynamic-tool-discovery)
 - [Skill Management](/docs/user-guide/skill)
-- [Connectors](/docs/user-guide/connector)
+- [AgentPlugins](/docs/user-guide/connector)
 - [Approval Policies](/docs/user-guide/approval-policy)
 
 ## Next Steps

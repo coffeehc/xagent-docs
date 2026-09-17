@@ -2,7 +2,7 @@
 title: How Multiple AI Agents Collaborate Through Session Events
 description: Learn how independent AI Agent sessions exchange status, tasks, and file references through notifications and collaboration events without polluting context or crossing user boundaries.
 status: beta
-updated: 2026-07-15
+updated: 2026-09-17
 ---
 
 # How Multiple AI Agents Collaborate Through Session Events
@@ -77,11 +77,11 @@ A Main Agent can create a Sub Session and send its first activation event. It ca
 
 A timer or external Trigger can submit configured work to a specific session. The Trigger submits the event but does not wait for the target task to finish.
 
-### Connectors
+### AgentPlugins
 
-When WeChat, Telegram, or another Connector receives a message, it can convert the message into a Session Event. An explicit session reference targets that session; otherwise the message normally enters the current user's Main Session.
+When WeChat, Telegram, or another AgentPlugin receives a message, it can convert the message into a Session Event. An explicit session reference targets that session; otherwise the message normally enters the current user's Main Session.
 
-Connectors can also include images and documents. xAgent resolves them and makes them available as attachments in the target session.
+AgentPlugins can also include images and documents. xAgent resolves them and makes them available as attachments in the target session.
 
 ### External Interfaces
 
@@ -116,9 +116,9 @@ Session Events are not unrestricted broadcasts. The target must be resolved when
 
 A Collaboration Event can activate a target session, but later Tool calls, file operations, external delivery, and business-system changes remain subject to permissions, workspace boundaries, and approval policies.
 
-### Connectors Do Not Expand External Permissions
+### AgentPlugins Do Not Expand External Permissions
 
-A Connector is an event and message entry point. What the external system allows still depends on user authorization and that system's permissions.
+An AgentPlugin is an event and message entry point. What the external system allows still depends on user authorization and that system's permissions.
 
 ## Current Boundaries
 
@@ -132,11 +132,11 @@ A Connector is an event and message entry point. What the external system allows
 
 - [Agent Session](/docs/user-guide/agent-session)
 - [How AI Agents Run Long Tasks](/docs/guides/long-running-agent-task)
-- [Connectors](/docs/user-guide/connector)
+- [AgentPlugins](/docs/user-guide/connector)
 - [Triggers](/docs/user-guide/trigger)
 
 ## Next Steps
 
 - [Create and Use an Agent Session](/docs/user-guide/agent-session)
 - [Configure a Trigger](/docs/user-guide/trigger)
-- [Connector user guide](/docs/user-guide/connector)
+- [AgentPlugin user guide](/docs/user-guide/connector)

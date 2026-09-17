@@ -1,11 +1,11 @@
 ---
-title: xAgent Tool 管理：个人、公共、MCP 与连接器工具
-description: 了解 xAgent 个人与公共 Tool、MCP 和连接器工具的来源、可用状态、按需发现及任务调用方式。
+title: xAgent Tool 管理：个人、公共、MCP 与 AgentPlugin 工具
+description: 了解 xAgent 个人与公共 Tool、MCP 和 AgentPlugin 工具的来源、可用状态、按需发现及任务调用方式。
 status: stable
-updated: 2026-07-15
+updated: 2026-09-17
 ---
 
-# xAgent Tool 管理：个人、公共、MCP 与连接器工具
+# xAgent Tool 管理：个人、公共、MCP 与 AgentPlugin 工具
 
 ## 适用对象
 
@@ -30,18 +30,18 @@ updated: 2026-07-15
 
 普通用户主要看“我的工具”。管理员需要治理系统级能力时，再看“Tool 管理”。
 
-## 公共工具、个人工具和连接器工具
+## 公共工具、个人工具和 AgentPlugin 工具
 
 工具是否可见，取决于来源、连接状态、用户授权和管理员策略。
 
 | 类型 | 常见来源 | 可见范围 |
 | --- | --- | --- |
-| 系统工具 / 公共工具 | xAgent 内置工具、管理员配置的全局 MCP、系统级连接器工具 | 按管理员策略和当前用户状态显示 |
+| 系统工具 / 公共工具 | xAgent 内置工具、管理员配置的全局 MCP、系统级 AgentPlugin 工具 | 按管理员策略和当前用户状态显示 |
 | 个人 MCP 工具 | 当前用户自己配置的 MCP Server | 只影响当前用户的工具视图 |
 | 个人工具开关 | 当前用户对可见工具的启用或停用选择 | 只影响当前用户使用体验 |
-| 连接器工具 | 微信、邮件、企业系统等连接器声明的工具 | 通常要求连接器已接入，且当前用户完成授权或绑定 |
+| AgentPlugin 工具 | 微信、邮件、企业系统等 AgentPlugin 声明的工具 | 通常要求 AgentPlugin 已接入，且当前用户完成授权或绑定 |
 
-普通用户看到“可用”不代表工具可以绕过审批，也不代表能访问外部系统里的全部数据。外部系统权限、连接器状态、密钥、审批策略仍然会继续生效。
+普通用户看到“可用”不代表工具可以绕过审批，也不代表能访问外部系统里的全部数据。外部系统权限、 AgentPlugin 状态、密钥、审批策略仍然会继续生效。
 
 ## 什么时候使用
 
@@ -52,7 +52,7 @@ updated: 2026-07-15
 - 分析 CSV、Excel、PDF 等文件。
 - 生成并保存报告。
 - 向邮件、微信或其他外部渠道发送内容。
-- 查询外部系统或通过连接器处理事件。
+- 查询外部系统或通过 AgentPlugin 处理事件。
 
 只要求改写、总结一段已提供的文字时，不一定需要工具。
 
@@ -64,7 +64,7 @@ updated: 2026-07-15
 | --- | --- |
 | 工具名称 | 工具在系统里的名称 |
 | 可用状态 | 当前用户是否可以使用 |
-| 来源 | 工具来自系统、个人 MCP、连接器或其他来源 |
+| 来源 | 工具来自系统、个人 MCP、 AgentPlugin 或其他来源 |
 | 开关 | 是否启用该工具 |
 | 说明 | 工具能完成什么动作 |
 | 详情 | 查看更完整的参数和用途说明 |
@@ -166,7 +166,7 @@ updated: 2026-07-15
 
 - [AI Agent 如何按需发现和加载工具与 Skill](/docs/guides/ai-agent-dynamic-tool-discovery)
 - [Skill 管理](/docs/user-guide/skill)
-- [连接器](/docs/user-guide/connector)
+- [AgentPlugin](/docs/user-guide/connector)
 - [审批策略](/docs/user-guide/approval-policy)
 
 ## 下一步操作

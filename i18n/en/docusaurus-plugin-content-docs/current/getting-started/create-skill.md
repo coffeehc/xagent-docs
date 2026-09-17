@@ -3,7 +3,7 @@ title: Create / Update a Skill
 description: Learn how to create, test, publish, and continuously update an xAgent Skill through Skill Management or an Agent Session, including personal and public Skill workflows.
 image: /img/share/en/xagent-shared-skills.png
 status: beta
-updated: 2026-07-29
+updated: 2026-09-17
 ---
 
 # Create / Update a Skill
@@ -33,7 +33,7 @@ A published Skill may still need adjustment during use. Update it when:
 - Its output format is unstable and needs additional fields, ordering, or examples.
 - Its execution steps are unclear and the model often drifts.
 - The business process changes and requires new rules, constraints, or confirmation actions.
-- New Tool, MCP, or Connector capabilities should be used correctly by the Skill.
+- New Tool, MCP, or AgentPlugin capabilities should be used correctly by the Skill.
 - User feedback reveals poorly handled cases that need boundaries or counterexamples.
 
 ## Prepare Before Creating

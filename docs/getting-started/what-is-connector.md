@@ -1,11 +1,13 @@
 ---
-title: 什么是连接器
-description: 用大白话了解连接器解决什么问题、可以做什么，以及它与 MCP 的区别。
+title: 什么是 AgentPlugin
+description: 了解 AgentPlugin 如何连接外部系统、管理用户通道，以及它与 MCP 的区别。
 status: beta
-updated: 2026-07-29
+updated: 2026-09-17
 ---
 
-# 什么是连接器
+# 什么是 AgentPlugin
+
+从 `v0.0.16.beta` 起，产品中的 Connector 统一称为 **AgentPlugin**。以下“连接器”仅用于解释外部连接的通俗概念；当前用户入口叫“插件连接”，管理员入口叫“AgentPlugin Connector”。目前公开的官方插件为微信、Telegram、飞书、钉钉、Database 和 SSH。CRM 等例子是集成方式示意，不表示现成内置插件。
 
 ## 它解决什么问题
 
@@ -91,8 +93,8 @@ updated: 2026-07-29
 
 ## 怎么开始使用
 
-1. 管理员先在“连接器”中添加并配置可用的连接器。
-2. 用户打开“我的连接”，按页面提示完成扫码、授权或账号绑定。
+1. 管理员先在“Agent 治理 > AgentPlugin Connector”添加并配置可用插件。
+2. 用户打开“运行治理 > 插件连接”，按页面提示完成扫码、授权或账号绑定。
 3. 连接成功后，就可以从对应的外部系统发起任务，或在 xAgent 会话中使用该连接器提供的能力。
 
 连接成功不等于获得了无限权限。连接器仍然使用外部账号原有的权限；发送消息、修改数据等敏感操作，也可能需要用户确认。
@@ -101,7 +103,7 @@ updated: 2026-07-29
 
 ## 继续了解
 
-- [连接器使用说明](/docs/user-guide/connector)
+- [AgentPlugin 使用说明](/docs/user-guide/connector)
 - [审批策略](/docs/user-guide/approval-policy)
-- [xAgent Connector 架构（附件）](/docs/attachments/xagent_connection_architecture)
-- [xAgent Connector 协议（附件）](/docs/attachments/xagent_connector_protocol)
+- [旧 Connector 架构（历史附件）](/docs/attachments/xagent_connection_architecture)
+- [旧 Connector 协议（历史附件）](/docs/attachments/xagent_connector_protocol)

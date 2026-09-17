@@ -1,19 +1,19 @@
 ---
 title: 支持的智能体功能
-description: 了解 xAgent v0.0.15.beta 根据 54 个内置 Skill 可以完成的任务，以及文件上传、解析、预览和产物格式的当前边界。
+description: 了解 xAgent v0.0.20.beta 根据 54 个内置 Skill 可以完成的任务，以及文件上传、解析、预览和产物格式的当前边界。
 status: beta
-updated: 2026-09-07
+updated: 2026-09-17
 ---
 
 # 支持的智能体功能
 
-`v0.0.15.beta` 随包内置 **54 个 Skill**。它们不是彼此隔离的聊天机器人，而是可按任务动态发现和加载的工作方法。一个任务可以组合多个 Skill，再调用 Tool、MCP 或 Connector 完成文件处理、数据计算和外部动作。
+`v0.0.20.beta` 随包内置 **54 个 Skill**。它们不是彼此隔离的聊天机器人，而是可按任务动态发现和加载的工作方法。一个任务可以组合多个 Skill，再调用 Tool、MCP 或 AgentPlugin 完成文件处理、数据计算和外部动作。
 
 实际部署中的可用列表以“运行治理 → Skill”页面为准。管理员可以停用内置 Skill，也可以增加个人或公共 Skill。
 
 | 当前数据 | 数值 | 口径 |
 | --- | ---: | --- |
-| 随包内置 Skill | 54 个 | `v0.0.15.beta` 内置 Skill 目录 |
+| 随包内置 Skill | 54 个 | `v0.0.20.beta` 内置 Skill 目录 |
 | 手册能力分组 | 6 类 | 为便于查找而归纳，不是系统权限分类 |
 | Web 会话附件数量与大小 | 以服务端文件能力为准 | 按文件类型和上传入口校验，控制台会在保存前提示限制 |
 
@@ -74,15 +74,17 @@ Web 会话的上传入口当前接受以下格式：
 | XLSX | `excel-workbook-builder` 可通过原生 Excel Tool 创建和修改可编辑工作簿，支持公式、格式、表格、图表、重算和按需导出 PDF |
 | 自包含 HTML 报告 | `html-report-builder` 生成可离线打开、响应式且适合打印的报告 |
 | HTML 幻灯片 | `html-slide-builder` 生成浏览器演示文稿；它不是 PPTX 编辑器或 PPTX 导出器 |
-| PPTX | `powerpoint-builder` 从完整的声明式演示文稿规格创建可编辑 PowerPoint，并可按需导出 PDF；不支持任意编辑已有 PPTX |
+| PPTX | `powerpoint-builder` 先规划受众问题与内容顺序，再从声明式规格创建可编辑 PowerPoint，支持产品方案、技术架构、项目进展、经营分析等场景和按需导出 PDF；不支持任意编辑已有 PPTX |
 | DOCX | `word-document-builder` 可基于内置或用户提供模板创建新的 Word 文档，并使用统一的字体、封面、目录、表格和品牌样式 |
-| PDF | 当前 Tool 可检查、验证、合并、抽取页面和优化 PDF；Word、PowerPoint 和 Excel 可通过当前 LibreOffice Runtime Asset 按需导出 PDF |
+| PDF | 当前 Tool 可检查、验证、合并、抽取页面和优化 PDF；Word、PowerPoint 和 Excel 可通过服务器安装的 LibreOffice 按需导出 PDF |
+
+Word、PowerPoint 和 PDF 预览使用统一的字体及缺字回退策略。Office 转 PDF、Excel 重算所需的 LibreOffice 及系统依赖不在 Server 发布包中，需管理员[安装并验证](/docs/getting-started/install#第七步准备-runtime-assets)。用户也可按管理员策略[创建限时文件分享](/docs/user-guide/file-sharing)。
 
 `word-document-builder` 支持基于模板创建新的 DOCX、替换模板正文或填充已有占位符；它不承诺任意原生 DOCX 的就地编辑、修订记录、批注、宏、自动目录、嵌入字体或跨系统像素级一致渲染。`powerpoint-builder` 创建新 PPTX，不保留或任意修改已有 PPTX/POTX。需要精确复刻原版式或复杂 Office 特性时，应检查最终文件。
 
 ## 使用边界
 
-- Skill 提供处理方法，不代表外部系统已经连接。发送消息、写入 CRM、发布内容或修改业务数据，需要对应 Tool、MCP 或 Connector、账号授权和审批策略。
+- Skill 提供处理方法，不代表外部系统已经连接。发送消息、写入 CRM、发布内容或修改业务数据，需要对应 Tool、MCP 或 AgentPlugin、账号授权和审批策略。
 - 扫描版 PDF 如果没有可提取文本，当前原生解析可能得不到有效正文；OCR 属于后续增强方向。
 - 加密、损坏或超出处理上限的文件可能无法解析；长文档可能显示为部分完成，但仍可按索引继续读取已准备的内容。
 - 合同、合规、财务、投资和人事类 Skill 用于资料整理和决策辅助，不替代律师、会计师、审计师或其他有资质人员的最终判断。

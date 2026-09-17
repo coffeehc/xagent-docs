@@ -2,7 +2,7 @@
 title: How AI Agents Switch Models, Skills, and Prompts During a Task
 description: Learn how a task-oriented AI Agent adjusts later model calls, Skills, Tools, and prompts while preserving session history, plans, and files, including the real boundaries of runtime switching.
 status: beta
-updated: 2026-07-15
+updated: 2026-09-17
 ---
 
 # How AI Agents Switch Models, Skills, and Prompts During a Task
@@ -88,7 +88,7 @@ As with Skills, every Tool shown in advanced settings is a resident Tool explici
 
 - A newly selected resident Tool can enter later request assembly when it is available.
 - Removing a resident Tool does not reverse an external action that already completed.
-- Tool execution still depends on MCP, Connector, runtime state, permission, and approval.
+- Tool execution still depends on MCP, AgentPlugin, runtime state, permission, and approval.
 - Only secret names are selected; real values do not enter model context.
 
 For stage-specific capabilities, dynamic Tool discovery avoids keeping every Tool resident.

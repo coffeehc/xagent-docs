@@ -1,16 +1,18 @@
 ---
 title: xAgent Connector Common Protocol
 description: Connection, authentication, channel, message, file transfer, Tool invocation, and error protocol for xAgent Connector Protocol 3.0.
-updated: 2026-07-29
+updated: 2026-09-17
 ---
 
 # xAgent Connector Common Protocol
+
+> Historical reference: this page documents the old Connector protocol `3.0`, not the AgentPlugin integration contract in `v0.0.20.beta`. The current public protocol is `4.4`; start with the [AgentPlugin guide](/docs/user-guide/connector#public-protocol-and-capabilities).
 
 This document defines the xAgent Connector common protocol. Third-party Connector Server implementations should treat it as the wire contract.
 
 For architecture responsibilities, fact ownership, and lifecycle, see [xAgent Connector Architecture](xagent_connection_architecture.md).
 
-Current protocol version: `3.0`.
+Historical protocol version covered here: `3.0`.
 
 ## 1. Protocol Family
 

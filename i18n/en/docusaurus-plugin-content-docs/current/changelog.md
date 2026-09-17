@@ -3,13 +3,60 @@ title: Changelog
 description: Review important user-facing changes, binary release contents, and upgrade notes for each xAgent release.
 image: /img/share/en/xagent-overview.png
 status: stable
-updated: 2026-09-07
+updated: 2026-09-17
 schemaType: CollectionPage
 ---
 
 # Changelog
 
 This page records important installation, usage, and safety-governance changes in xAgent binary releases. xAgent remains in beta, and features, interfaces, and protocols may continue to change.
+
+## `v0.0.20.beta` - 2026-09-17
+
+[Install xAgent](/docs/getting-started/install) · [Office capabilities](/docs/manual/capabilities) · [GitHub Release and checksums](https://github.com/coffeehc/xagent-releases/releases/tag/v0.0.20.beta)
+
+This release fixes ProcessSandbox runtime mounts and Workspace file commits, aligns font and missing-glyph fallback across Word, PowerPoint, and PDF, and improves presentation planning.
+
+- Fixed sandbox runtime mounts, writable and hidden mounts, and working directories. Files created by process Tools are committed to the Workspace, while Session drafts remain visible in the sandbox.
+- Word and PowerPoint documents and PDF previews use consistent font and missing-glyph fallback.
+- `powerpoint-builder` plans audience questions and content order before visual layout, adds product-solution, technical-architecture, project-progress, and business-analysis scenarios, and extends proposal, market-research, and diagram/layout references.
+- Office Tool licensing is unchanged. Only xAgent Server was updated; official AgentPlugin artifacts were not updated.
+
+Before upgrading, back up configuration, databases, workspaces, Memory, Skills, Tool packages, and installed AgentPlugin configuration and data. Office-to-PDF conversion and Excel recalculation still require administrators to install LibreOffice on the host; the xAgent archive does not bundle its system dependencies. See [installation](/docs/getting-started/install).
+
+## `v0.0.19.beta` - 2026-09-14 (republished September 15)
+
+[File sharing guide](/docs/user-guide/file-sharing) · [GitHub Release](https://github.com/coffeehc/xagent-releases/releases/tag/v0.0.19.beta)
+
+- Added administrator-governed, expiring file links. Users can create them from previews, Session files, or Workspace files, then view, copy, and revoke them in File Shares. Visitors can view a watermarked preview without signing in; downloading originals requires separate permission.
+- Administrators can disable links, restrict them to xAgent-generated files, or allow all managed files, and limit expiry, downloads, and the public base URL. Sharing is **disabled by default** and must be explicitly enabled after upgrading. Shares and visits are audited.
+- Improved Session interruption and model reconnect states, upstream model selection, and the offline Runtime Assets catalog cache. LibreOffice conversions use an immutable Runtime Assets installation.
+- Server-only release; official AgentPlugin artifacts were unchanged.
+
+## `v0.0.18.beta` - 2026-09-11
+
+[Model configuration](/docs/user-guide/model-config) · [GitHub Release](https://github.com/coffeehc/xagent-releases/releases/tag/v0.0.18.beta)
+
+- OpenAI-compatible Providers can list models from `/api/models` while retaining manual model IDs. The editor adds context limit, max output, reasoning effort, thinking controls, thinking tokens and temperature, while retaining Raw JSON.
+- Session usage prefers measured Provider values and only estimates when absent; Tool Schema strict-mode compatibility, streaming aggregation, and argument normalization are handled consistently.
+- Fixed empty upload-folder reads and model diagnostics. Server-only release; official AgentPlugin artifacts were unchanged.
+
+## `v0.0.17.beta` - 2026-09-09 (republished September 10)
+
+[AgentPlugin guide](/docs/user-guide/connector) · [GitHub Release](https://github.com/coffeehc/xagent-releases/releases/tag/v0.0.17.beta)
+
+- AgentPlugin Tool Cards can declare icons and safe summaries. Session message origins, context compression, file lifecycle, streaming recovery, and error diagnostics were improved.
+- Session drafts recover attachment references; Markdown preview table-of-contents links stay within the preview. SSH downloads, WeChat images, and other plugin-fetched files enter the current Session workspace.
+- Six official plugins (WeChat, Telegram, Feishu, Database, SSH, and DingTalk) entered the four-platform release flow; DingTalk was published for the first time. The September 10 republish updated Server only.
+
+## `v0.0.16.beta` - 2026-09-07 (republished September 9)
+
+[AgentPlugin migration and installation](/docs/user-guide/connector) · [A2A Client](/docs/user-guide/a2a) · [GitHub Release](https://github.com/coffeehc/xagent-releases/releases/tag/v0.0.16.beta)
+
+- The former Connector domain became **AgentPlugin**. Users manage Plugin Connections; administrators manage AgentPlugin Connectors. Protocol `4.4` and SQLite/PostgreSQL startup migrations preserve existing installations and Channels.
+- Official plugins use the new `agent-plugins/` installation path, `agentplugins/` download path, and new program, service, and configuration names. Linux installations with legacy Connectors should use the public upgrade script or full installer, not replace the Server binary alone; custom legacy components require manual adaptation.
+- Added a user-level A2A Client for discovering remote Agents, sending/querying/replying to/canceling tasks, and viewing an inbox. Enterprise licensing adds a maximum xAgent version and A2A connection limits.
+- Explicitly paused plans preserve unfinished tasks; the Provider default model is used when none is selected. Back up installed plugin state and check Enterprise license compatibility before upgrading.
 
 ## `v0.0.15.beta` - 2026-09-06
 
@@ -436,7 +483,7 @@ This release upgrades the console experience, real-time Connector interaction, t
 - One or two consecutive health failures are shown as degraded; the third failure marks the Connector offline. A successful probe can restore it to online.
 - WeChat Connector adds recipient-scoped credential renewal and expiration reminders and stops invalid sends after expiration.
 - Browser extensions connect through the built-in Browser Connector for governed browser messaging, page context, and tool calls.
-- When this release shipped, the independent Connector versions were WeChat `0.0.8`, Telegram `0.0.9`, and Feishu `0.0.8`. See [Connector Management](/docs/user-guide/connector#current-connector-versions) for current versions.
+- When this release shipped, the independent Connector versions were WeChat `0.0.8`, Telegram `0.0.9`, and Feishu `0.0.8`. See the [AgentPlugin catalog](/docs/user-guide/connector#current-agentplugin-versions) for current versions.
 
 ### ProcessSandbox and Runtime Environment
 
@@ -462,7 +509,7 @@ This release upgrades the console experience, real-time Connector interaction, t
 
 ### Upgrade Notes
 
-When this release shipped, rerunning the installer checked for and installed `v0.0.5.beta`. For current upgrades, use the [`v0.0.15.beta`](#v0015beta---2026-09-06) release notes.
+When this release shipped, rerunning the installer checked for and installed `v0.0.5.beta`. For current upgrades, use the [`v0.0.20.beta`](#v0020beta---2026-09-17) release notes.
 
 ## `v0.0.4.beta` - 2026-07-15
 
@@ -526,4 +573,4 @@ Each archive contains only the xAgent executable, README, and version metadata. 
 
 This earlier public beta improved Connector integration, added the Telegram Connector, expanded the user manual, and established the initial safety-governance workflow.
 
-New deployments and upgrades should use the current installer and the `v0.0.15.beta` release catalog.
+New deployments and upgrades should use the current installer and the `v0.0.20.beta` release catalog.

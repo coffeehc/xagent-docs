@@ -2,7 +2,7 @@
 title: "xAgent Model Configuration: Providers, Tool Calling, and Task Routing"
 description: Learn about xAgent Provider integration, tool-calling capabilities, connection testing, hot switching, and the future direction of unified task routing.
 status: stable
-updated: 2026-08-19
+updated: 2026-09-17
 ---
 
 # xAgent Model Configuration: Providers, Tool Calling, and Task Routing
@@ -41,10 +41,13 @@ The left side lists models; the right side edits the selected model. Common fiel
 | --- | --- |
 | Model name | The name displayed in xAgent |
 | Actual model name | The identifier used by the Provider |
+| Upstream model options | OpenAI-compatible Providers can list and filter `/api/models`; manual IDs remain available |
 | Provider type | The model service type |
 | Base URL | The model service address |
 | API Key | The model service key |
 | Request timeout | The maximum wait time for one request |
+| Context limit and max output | Set to the upstream model's actual limits to keep request budgets within its window |
+| Reasoning and thinking | Configure reasoning effort, thinking controls, thinking tokens, and temperature only when supported |
 | Description | A usage note for administrators |
 | Model capabilities | Whether it supports chat, image generation, Tool calling, vision, audio, and files |
 | Default policy Raw JSON | Advanced default policy settings |
@@ -66,6 +69,8 @@ Ordinary users do not need to understand these fields. Administrators only need 
 8. Save the model after the test succeeds.
 
 Name models by their use case, such as “General Writing Model,” “Code and Tool Model,” or “Lightweight Fast Model.” Avoid internal abbreviations that ordinary users cannot understand.
+
+Since `v0.0.18.beta`, OpenAI-compatible Providers can list upstream model candidates while preserving manual IDs. Context limits, output size, and thinking parameters have dedicated fields; other Provider-specific options remain in Raw JSON. Do not send unsupported parameters to a model. Session usage prefers measured Provider values and estimates only when the Provider omits them.
 
 ### Test the Connection
 

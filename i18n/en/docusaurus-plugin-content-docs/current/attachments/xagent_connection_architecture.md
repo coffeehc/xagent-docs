@@ -1,10 +1,12 @@
 ---
 title: xAgent Connector Architecture
 description: Architecture boundaries, fact ownership, lifecycle, event delivery, and Tool projection for xAgent Connectors.
-updated: 2026-07-29
+updated: 2026-09-17
 ---
 
 # xAgent Connector Architecture
+
+> Historical reference: this page describes the older Connector architecture, not the AgentPlugin integration contract in `v0.0.20.beta`. See the [AgentPlugin guide](/docs/user-guide/connector#public-protocol-and-capabilities).
 
 This document defines architecture boundaries, fact ownership, and lifecycle for xAgent Connectors. For HTTP endpoints, WebSocket packets, JSON fields, state enumerations, and third-party implementation requirements, see the
 [xAgent Connector Common Protocol](xagent_connector_protocol.md).

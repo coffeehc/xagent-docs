@@ -1,11 +1,13 @@
 ---
-title: What Is a Connector?
-description: A plain-language explanation of the problem Connectors solve, what they do, and how they differ from MCP.
+title: What Is an AgentPlugin?
+description: A plain-language explanation of AgentPlugin external connections and how they differ from MCP.
 status: beta
-updated: 2026-07-29
+updated: 2026-09-17
 ---
 
-# What Is a Connector?
+# What Is an AgentPlugin?
+
+Since `v0.0.16.beta`, the product name for the former Connector is **AgentPlugin**. Below, “connector” describes the integration concept, not the current menu name. Users open **Plugin Connections**; administrators open **Agent Governance > AgentPlugin Connectors**. Official published plugins cover WeChat, Telegram, Feishu, DingTalk, Database, and SSH. CRM examples illustrate a possible integration, not an included plugin.
 
 ## What problem does it solve?
 
@@ -91,8 +93,8 @@ If xAgent only needs to query or operate an external service while working on a 
 
 ## How to get started
 
-1. An administrator adds and configures an available Connector under **Connectors**.
-2. A user opens **My Connections** and follows the page instructions to scan a code, authorize access, or bind an account.
+1. An administrator adds and configures an available plugin under **Agent Governance > AgentPlugin Connectors**.
+2. A user opens **Operations > Plugin Connections** and follows the page instructions to scan a code, authorize access, or bind an account.
 3. Once connected, the user can start work from the external system or use the Connector's capabilities in an xAgent session.
 
 A successful connection does not grant unlimited access. The Connector still uses the external account's existing permissions, and sensitive actions such as sending messages or changing data may require user approval.
@@ -101,7 +103,7 @@ Do not paste passwords, access tokens, or verification codes into a session. Use
 
 ## Learn more
 
-- [Using Connectors](/docs/user-guide/connector)
+- [Using AgentPlugins](/docs/user-guide/connector)
 - [Approval Policies](/docs/user-guide/approval-policy)
-- [xAgent Connector Architecture (Attachment)](/docs/attachments/xagent_connection_architecture)
-- [xAgent Connector Protocol (Attachment)](/docs/attachments/xagent_connector_protocol)
+- [Legacy Connector Architecture (Historical Attachment)](/docs/attachments/xagent_connection_architecture)
+- [Legacy Connector Protocol (Historical Attachment)](/docs/attachments/xagent_connector_protocol)

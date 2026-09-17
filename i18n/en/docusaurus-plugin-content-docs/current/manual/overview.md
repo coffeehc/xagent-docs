@@ -2,13 +2,13 @@
 title: xAgent User Manual
 description: Find page guidance, permission scopes, key areas, and common operations by following the current xAgent console menu, covering ordinary users, advanced mode, and administrator pages.
 status: beta
-updated: 2026-09-07
+updated: 2026-09-17
 schemaType: CollectionPage
 ---
 
 # xAgent User Manual
 
-This manual corresponds to the `v0.0.15.beta` console and is organized by page rather than by concept. Each page explains its menu entry, visibility scope, key areas, and common operations, with interface examples.
+This manual corresponds to the `v0.0.20.beta` console and is organized by page rather than by concept. Each page explains its menu entry, visibility scope, key areas, and common operations, with interface examples.
 
 ## How to Use This Manual
 
@@ -34,7 +34,7 @@ This manual corresponds to the `v0.0.15.beta` console and is organized by page r
 
 ### Workspace
 
-- [Dashboard, Agent Sessions, Workspace Files, and Session List](/docs/manual/workspace)
+- [Dashboard, Agent Sessions, Workspace Files, File Shares, and Session List](/docs/manual/workspace)
 
 ### Operations
 

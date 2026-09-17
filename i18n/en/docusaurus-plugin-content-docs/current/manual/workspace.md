@@ -2,7 +2,7 @@
 title: Workspace Pages
 description: Page-by-page guidance and UI examples for the xAgent Dashboard, Agent Sessions, Workspace Files, and Session List.
 status: beta
-updated: 2026-07-27
+updated: 2026-09-17
 ---
 
 # Workspace Pages
@@ -17,7 +17,7 @@ Advanced mode adds orchestration and capability-management entries for users who
 
 | Mode | Menu difference | Recommendation |
 | --- | --- | --- |
-| Simple | Dashboard, Agent sessions, Workspace files, Approvals, My connections, Secrets, Account management | Default mode for starting work directly |
+| Simple | Dashboard, Agent sessions, Workspace files, File Shares, Approvals, Plugin Connections, Secrets, Account management | Default mode for starting work directly |
 | Advanced | Everything in Simple, plus Session list, Triggers, Agents, Skills, My tools, My MCP, and Personal approval policy | Enable when more management or orchestration is needed |
 
 ### Simple mode
@@ -70,6 +70,14 @@ See [Agent Session](/docs/user-guide/agent-session) and [Shortcut Instructions](
 - This view contains authorized workspace projections, not arbitrary host directories.
 
 See [Workspace Files](/docs/user-guide/workspace) for details.
+
+## File Shares
+
+**Menu:** Workspace > File Shares
+
+**Visibility:** All users; creating links requires an administrator-enabled policy
+
+Inspect links, visits, and download totals by file; copy or revoke links and inspect individual visits in the details. Sharing is disabled by default, and every link expires. See [Share Files with Expiring Links](/docs/user-guide/file-sharing).
 
 ## Session List
 

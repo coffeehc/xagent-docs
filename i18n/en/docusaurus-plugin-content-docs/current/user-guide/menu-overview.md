@@ -2,7 +2,7 @@
 title: Feature and Menu Overview
 description: Understand the current xAgent console structure, simple and advanced modes, and the main user and administrator menus.
 status: stable
-updated: 2026-08-17
+updated: 2026-09-17
 ---
 
 # Feature and Menu Overview
@@ -27,7 +27,7 @@ An administrator can enable advanced features for each user. Simple mode keeps t
 
 | Mode | Visible entries |
 | --- | --- |
-| Simple | Dashboard, Agent sessions, Workspace files, Approvals, My connections, Secrets, Account management |
+| Simple | Dashboard, Agent sessions, Workspace files, File Shares, Approvals, Plugin Connections, Secrets, Account management |
 | Advanced | Everything in simple mode, plus Session list, Triggers, Agents, Skills, My tools, My MCP, and Personal approval policy |
 
 Administrator-only groups depend on the administrator role, not the user's advanced-mode setting.
@@ -38,11 +38,13 @@ Administrator-only groups depend on the administrator role, not the user's advan
 | --- | --- | --- |
 | Submit tasks, upload materials, and follow execution | [Agent sessions](/docs/user-guide/agent-session) | Main daily workspace |
 | Review uploaded files and generated outputs | [Workspace files](/docs/user-guide/workspace) | Preview, download, or reference workspace files |
+| Create expiring links and inspect visits | [File Shares](/docs/user-guide/file-sharing) | Requires an administrator-enabled policy |
 | Find and manage historical sessions | Session list | Advanced mode; searches main and sub-sessions |
 | Review actions that require confirmation | Approvals | Shows approval details, risk, and related sessions |
 | Start tasks on a schedule or external event | [Triggers](/docs/user-guide/trigger) | Advanced mode |
 | Manage personal Agents, Skills, Tools, or MCP | Agents, Skills, My tools, My MCP | Advanced mode |
-| Bind WeChat, Telegram, Feishu, or other channels | [My connections](/docs/user-guide/connector) | Available in simple mode |
+| Bind WeChat, Telegram, Feishu, or other channels | [Plugin Connections](/docs/user-guide/connector) | Available in simple mode |
+| Call remote Agents and track tasks | [A2A](/docs/user-guide/a2a) | User-level remote connections |
 | Store API keys and external tokens | Secrets | Available in simple mode |
 
 ## Workspace
@@ -52,6 +54,7 @@ Administrator-only groups depend on the administrator role, not the user's advan
 | Dashboard | Review Token usage, session status, pending approvals, and recent sessions |
 | [Agent sessions](/docs/user-guide/agent-session) | Submit tasks, upload attachments, follow execution, and ask follow-up questions |
 | [Workspace files](/docs/user-guide/workspace) | Browse business spaces, session outputs, uploads, and personal Skill files |
+| [File Shares](/docs/user-guide/file-sharing) | Inspect expiring links and visit records, and revoke links |
 | Session list | Search and manage main and sub-sessions in advanced mode |
 
 Start with **Agent sessions**. Use **Workspace files** when a task works with files and **Session list** when you need to find history.
@@ -66,7 +69,8 @@ Start with **Agent sessions**. Use **Workspace files** when a task works with fi
 | [Skills](/docs/user-guide/skill) | Advanced | Use public Skills and maintain personal Skills |
 | [My tools](/docs/user-guide/tool) | Advanced | Review available tools, sources, and status |
 | My MCP | Advanced | Connect personal MCP services and discover tools |
-| [My connections](/docs/user-guide/connector) | All users | Bind external accounts and review authentication, channel, and tool status |
+| [Plugin Connections](/docs/user-guide/connector) | All users | Bind external accounts and review authentication, channel, and tool status |
+| [A2A](/docs/user-guide/a2a) | Users | Manage remote Agents, tasks, and inbox |
 | Secrets | All users | Store workspace secrets for the current user |
 
 Users do not need to understand the underlying protocols. Approvals control risk, Triggers start work automatically, Skills and Tools extend execution, and connections and secrets provide access to external systems.
@@ -108,9 +112,11 @@ These administrator-only entries manage system capabilities:
 | [Approval policy](/docs/user-guide/approval-policy) | Manage system-level approval rules |
 | [Skill admin](/docs/user-guide/skill) | Manage public Skills and submission reviews |
 | [Tool admin](/docs/user-guide/tool) | Manage tools, sources, status, and input/output contracts |
-| [Connectors](/docs/user-guide/connector) | Manage the Connector catalog, Cards, health, and tool declarations |
+| [AgentPlugin Connectors](/docs/user-guide/connector) | Manage plugin Cards, health, and tool declarations |
 | MCP config | Manage global MCP services |
 | Execution environment | Inspect Runtime Assets and server execution components |
+
+The administrator policy for public links is under **Storage Management > File Sharing**, and is disabled by default.
 
 ## System Config
 

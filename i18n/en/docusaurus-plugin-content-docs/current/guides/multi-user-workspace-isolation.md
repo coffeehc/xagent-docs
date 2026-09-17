@@ -3,7 +3,7 @@ title: How xAgent Isolates Multi-user Workspaces and Task Processes
 description: Learn how xAgent combines virtual workspaces, Execution Leases, ProcessSandbox, and Runtime Assets to isolate files and process execution.
 image: /img/share/en/xagent-security.png
 status: beta
-updated: 2026-07-27
+updated: 2026-09-17
 ---
 
 # How xAgent Isolates Multi-user Workspaces and Task Processes
@@ -26,7 +26,7 @@ Separate user directories are not sufficient when multiple users share an AI Age
 | Execution Lease | Minimum file snapshot, overlapping-write coordination, and file-change commit | Platform process isolation |
 | ProcessSandbox | File mounts, clean environment, process-tree cleanup, and resource limits | Business file ownership |
 
-External-system authorization is separate. A Connector or MCP service can access only the CRM, mailbox, or messaging data permitted by its external account.
+External-system authorization is separate. An AgentPlugin or MCP service can access only the CRM, mailbox, or messaging data permitted by its external account.
 
 ## User and Virtual Workspace Isolation
 
@@ -110,7 +110,7 @@ Assume Alice and Bob share one xAgent server:
 
 ## What These Boundaries Do Not Replace
 
-- **External permissions:** Connector and MCP data scope still depends on the external account.
+- **External permissions:** AgentPlugin and MCP data scope still depends on the external account.
 - **Model data boundaries:** Data sent to an external model API remains subject to that provider's terms.
 - **Deployment security:** HTTPS, firewalls, disk encryption, backups, and server-account permissions remain deployment responsibilities.
 - **Business approvals:** File and process isolation cannot decide whether deletion or external delivery is appropriate.

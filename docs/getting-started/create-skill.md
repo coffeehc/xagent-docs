@@ -3,7 +3,7 @@ title: 创建 / 更新 Skill
 description: 学习通过 Skill 管理或 Agent 会话创建、测试、发布和持续更新 xAgent Skill，并了解个人与公共 Skill 流程。
 image: /img/share/zh/xagent-shared-skills.png
 status: beta
-updated: 2026-07-11
+updated: 2026-09-17
 ---
 
 # 创建 / 更新 Skill
@@ -33,7 +33,7 @@ Skill 是一套可复用的工作方法。把固定步骤、输入要求、输�
 - 输出格式不够稳定，需要补充字段、顺序或示例。
 - 执行步骤不够清楚，导致模型容易走偏。
 - 业务流程发生变化，需要更新规则、限制或确认动作。
-- 新增了工具、MCP 或连接器能力，希望 Skill 能正确使用。
+- 新增了工具、MCP 或 AgentPlugin 能力，希望 Skill 能正确使用。
 - 用户反馈某些场景处理不好，需要补充边界和反例。
 
 ## 创建前先想清楚

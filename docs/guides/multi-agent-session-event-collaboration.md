@@ -2,7 +2,7 @@
 title: 多 Agent 如何通过会话事件协作
 description: 了解多个 AI Agent 会话如何通过通知与协作事件传递状态、任务和文件引用，以及如何避免上下文污染、错误唤醒和跨用户数据风险。
 status: beta
-updated: 2026-07-15
+updated: 2026-09-17
 ---
 
 # 多 Agent 如何通过会话事件协作
@@ -79,11 +79,11 @@ xAgent 内置了持久化会话事件队列：
 
 定时触发器或外部触发器命中后，可以把预先配置的任务发送到指定会话。触发器只负责提交事件，不等待目标会话完成整个任务。
 
-### 连接器
+### AgentPlugin
 
-微信、Telegram 等连接器收到消息后，可以将消息转换为会话事件。消息明确引用某个会话时进入该会话；没有指定目标时，通常进入当前用户的主会话。
+微信、Telegram 等 AgentPlugin 收到消息后，可以将消息转换为会话事件。消息明确引用某个会话时进入该会话；没有指定目标时，通常进入当前用户的主会话。
 
-连接器还可以携带图片或文档。xAgent 完成资源解析后，再把它们作为目标会话可使用的附件交给 Agent。
+AgentPlugin 还可以携带图片或文档。xAgent 完成资源解析后，再把它们作为目标会话可使用的附件交给 Agent。
 
 ### 外部接口
 
@@ -118,9 +118,9 @@ xAgent 内置了持久化会话事件队列：
 
 协作事件可以激活目标会话，但后续 Tool 调用、文件操作、外部发送和业务系统修改仍需遵守目标会话的权限、工作区边界和审批策略。
 
-### 连接器不扩大外部权限
+### AgentPlugin 不扩大外部权限
 
-连接器只是消息和事件入口。目标系统中能够读取、发送或修改哪些内容，仍由用户授权和外部系统权限决定。
+AgentPlugin 只是消息和事件入口。目标系统中能够读取、发送或修改哪些内容，仍由用户授权和外部系统权限决定。
 
 ## 当前版本的边界
 
@@ -134,11 +134,11 @@ xAgent 内置了持久化会话事件队列：
 
 - [Agent 会话](/docs/user-guide/agent-session)
 - [AI Agent 如何执行长任务](/docs/guides/long-running-agent-task)
-- [连接器](/docs/user-guide/connector)
+- [AgentPlugin](/docs/user-guide/connector)
 - [触发器管理](/docs/user-guide/trigger)
 
 ## 下一步操作
 
 - [创建并使用 Agent 会话](/docs/user-guide/agent-session)
 - [配置触发器](/docs/user-guide/trigger)
-- [连接器使用手册](/docs/user-guide/connector)
+- [AgentPlugin 使用手册](/docs/user-guide/connector)

@@ -3,7 +3,7 @@ title: xAgent 如何隔离多用户工作区与任务进程
 description: 了解 xAgent 如何通过虚拟工作区、Execution Lease、ProcessSandbox 和 Runtime Assets 隔离文件与进程执行。
 image: /img/share/zh/xagent-security.png
 status: beta
-updated: 2026-07-27
+updated: 2026-09-17
 ---
 
 # xAgent 如何隔离多用户工作区与任务进程
@@ -26,7 +26,7 @@ updated: 2026-07-27
 | Execution Lease | 为命令固定最小文件快照、协调重叠写根、提交文件变化 | 不替代平台进程隔离 |
 | ProcessSandbox | 挂载文件视图、清理环境、限制进程树与资源 | 不决定业务文件归属 |
 
-外部系统权限是另一条边界。Connector 或 MCP 能访问哪些 CRM、邮箱或消息数据，仍由外部账号授权决定。
+外部系统权限是另一条边界。 AgentPlugin 或 MCP 能访问哪些 CRM、邮箱或消息数据，仍由外部账号授权决定。
 
 ## 用户与虚拟工作区隔离
 
@@ -110,7 +110,7 @@ Agent会话附件同时绑定用户和 Session。预览、下载或交给任务�
 
 ## 这些隔离不替代什么
 
-- **外部系统权限**：Connector 和 MCP 的数据范围仍由外部账号决定。
+- **外部系统权限**：AgentPlugin 和 MCP 的数据范围仍由外部账号决定。
 - **模型数据边界**：发送到外部模型 API 的数据仍受模型供应商协议约束。
 - **部署安全**：HTTPS、防火墙、磁盘加密、备份和服务器账号权限仍由部署方负责。
 - **业务审批**：文件和进程隔离不能判断一次删除或外发是否符合业务规则。

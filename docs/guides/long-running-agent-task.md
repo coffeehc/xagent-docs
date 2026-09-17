@@ -2,7 +2,7 @@
 title: AI Agent 如何执行长任务
 description: 了解 xAgent 如何在服务端持续执行多步骤任务，通过结构化上下文压缩、审批等待、会话事件和恢复快照保持任务连续性。
 status: beta
-updated: 2026-07-14
+updated: 2026-09-17
 ---
 
 # AI Agent 如何执行长任务
@@ -11,7 +11,7 @@ updated: 2026-07-14
 
 ## 为什么部署在服务器端
 
-xAgent 的任务执行发生在服务端，不依赖浏览器页面持续打开。用户关闭网页或个人电脑后，已经提交的任务仍可以继续运行。用户之后可以重新打开 Web 页面，也可以通过已连接的 IM 连接器查看进展、补充信息或处理审批。
+xAgent 的任务执行发生在服务端，不依赖浏览器页面持续打开。用户关闭网页或个人电脑后，已经提交的任务仍可以继续运行。用户之后可以重新打开 Web 页面，也可以通过已连接的 IM AgentPlugin 查看进展、补充信息或处理审批。
 
 这不代表所有任务都一定能够无人值守完成。缺少材料、模型或工具失败、外部系统不可用、等待审批和服务重启，都可能让任务暂停或失败。
 
@@ -78,7 +78,7 @@ xAgent 会保存用于恢复的运行快照。服务启动后，Brain 会延迟�
 - [任务](/docs/user-guide/task)
 - [工作区文件](/docs/user-guide/workspace)
 - [模型说明](/docs/deployment/model-requirements)
-- [连接器](/docs/user-guide/connector)
+- [AgentPlugin](/docs/user-guide/connector)
 
 ## 下一步操作
 

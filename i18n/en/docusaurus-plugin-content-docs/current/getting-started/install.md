@@ -1,9 +1,9 @@
 ---
 title: Start Installing xAgent
-description: Install and verify xAgent v0.0.15.beta from the server installer through the first system setup flow.
+description: Install and verify xAgent v0.0.20.beta from the server installer through the first system setup flow.
 image: /img/getting-started/v005/install-terminal.webp
 status: beta
-updated: 2026-09-07
+updated: 2026-09-17
 ---
 
 # Start Installing xAgent
@@ -20,7 +20,7 @@ Confirm that:
 - The host can reach `downloads.xagent.xiagaogao.com`, your model API, and any external systems you plan to connect later.
 - There is enough disk space for versioned binaries, runtime data, workspace files, and Runtime Assets.
 - If the service will be public, plan HTTPS through a reverse proxy, firewall rules, and access control. xAgent does not terminate TLS itself.
-- If this is an upgrade, back up the configuration, database, workspace, and Connector state first.
+- If this is an upgrade, back up configuration, databases, workspaces, Memory, Skills, Tool packages, and installed AgentPlugin configuration and data first.
 
 ## Step 1: Run the Installer
 
@@ -32,15 +32,15 @@ curl -fsSL https://downloads.xagent.xiagaogao.com/scripts/install.sh | bash
 
 The installer detects the operating system and CPU architecture, downloads and verifies the matching package, installs or upgrades xAgent, and creates, enables, and starts the `xagent-server` systemd service on Linux.
 
-![Linux installer output showing environment detection, xAgent installation, and Connector prompts](/img/getting-started/v005/install-terminal.webp)
+![Earlier Linux installer output example](/img/getting-started/v005/install-terminal.webp)
 
-The image shows the complete interaction order: xAgent is installed first, then the installer asks whether to install Connectors. After a Connector is selected, it downloads and verifies the package, registers the service, and prints the connection address and API Key. Never publish API Keys in documentation, screenshots, or public logs.
+This image shows an earlier release. The current installer installs xAgent first and then optionally installs AgentPlugins (WeChat, Telegram, Feishu, Database, SSH, and DingTalk). It downloads and verifies selected packages, registers services, and prints their addresses and API Keys. Never publish API Keys in documentation, screenshots, or public logs.
 
-If you only need the Web console for now, answer `N` when the installer asks about Connectors. For unattended installation, use:
+If you only need the Web console, answer `N` when prompted for AgentPlugins. For unattended installation, skip them as shown below. To select plugins, use `--agent-plugins database,ssh` (values: `all`, `weixin`, `telegram`, `feishu`, `database`, `ssh`, `dingtalk`):
 
 ```bash
 curl -fsSL https://downloads.xagent.xiagaogao.com/scripts/install.sh \
-  | bash -s -- --yes --no-connectors
+  | bash -s -- --yes --no-agent-plugins
 ```
 
 ## Step 2: Verify the Installation
@@ -51,12 +51,14 @@ After the installer exits, confirm the version:
 xagent version
 ```
 
-The target version is `0.0.15.beta`. The installer command is unchanged and reads the current release catalog. On Linux, also check the service:
+The target version is `0.0.20.beta`. The installer command is unchanged and reads the current release catalog. On Linux, also check the service:
 
 ```bash
 sudo systemctl status xagent-server
 journalctl -u xagent-server -f
 ```
+
+When upgrading a legacy Connector installation, use the full installer or published `upgrade.sh` so official plugin binaries, services, configuration, and state migrate together; replacing only the Server binary is insufficient. Custom legacy components require separate adaptation. Verify that any Enterprise license allows `0.0.20.beta` before upgrading.
 
 After a successful start, the default Web address is:
 
@@ -93,7 +95,7 @@ Select **Save and continue** to persist the directory and move to administrator 
 
 ## Step 5: Initialize the Administrator
 
-Create the first administrator login name and password. This account is used to sign in, configure models, manage users, set approval policies, and maintain Connectors.
+Create the first administrator login name and password. This account is used to sign in, configure models, manage users, set approval policies, and maintain AgentPlugin Connectors.
 
 ![xAgent English administrator initialization page](/img/getting-started/v005/system-setup-admin-en.webp)
 
@@ -125,7 +127,9 @@ The connectivity test only proves that the service is reachable. Run a real task
 
 ## Step 7: Prepare Runtime Assets
 
-Runtime Assets are managed task dependencies used by file processing, local tools, and other controlled execution. The setup page automatically downloads, verifies, and installs these dependencies. You do not need to install Python, Node.js, or other tools into the host environment by hand.
+Runtime Assets are managed task dependencies used by file processing, local tools, and other controlled execution. The setup page automatically downloads, verifies, and installs these dependencies. You do not need to install Python or Node.js into the host environment by hand.
+
+LibreOffice is an exception: its many operating-system dependencies are not bundled in the xAgent release. For Word, PowerPoint, and Excel PDF conversion or Excel recalculation, administrators must install LibreOffice on the host with the system package manager. On Debian/Ubuntu run `sudo apt-get update && sudo apt-get install -y libreoffice`, then verify with `soffice --headless --version`; use the equivalent package manager on other distributions.
 
 ![xAgent English Runtime Assets installation step](/img/getting-started/v005/system-setup-runtime-en.webp)
 
@@ -146,7 +150,7 @@ If the check fails:
 
 ## Step 9: Finish Setup
 
-When the data directory, administrator, model, Runtime Assets, and runtime components are complete, select **Finish setup**. xAgent enters the workspace, and users can access it through the Web UI or installed Connectors.
+When the data directory, administrator, model, Runtime Assets, and runtime components are complete, select **Finish setup**. xAgent enters the workspace, and users can access it through the Web UI or installed AgentPlugins.
 
 ![xAgent English finish setup step](/img/getting-started/v005/system-setup-finish-en.webp)
 
@@ -166,9 +170,9 @@ After setup is complete, xAgent opens the dashboard. It shows token usage, model
 
 ![xAgent English dashboard](/img/getting-started/v005/dashboard-after-setup-en.webp)
 
-## Connectors Are Optional
+## AgentPlugins Are Optional
 
-Connectors are not required for basic Web console access. If the installer installed a Connector, open **Connectors** and enter the address and API Key printed by the installer. If you skipped Connectors, complete the connection flow later with the [Connector user guide](/docs/user-guide/connector). For Database and SSH, see [Database Connector Setup](/docs/user-guide/database-connector) and [SSH Connector Setup](/docs/user-guide/ssh-connector).
+AgentPlugins are not required for basic Web console access. After installing a plugin, administrators open **Agent Governance > AgentPlugin Connectors** and enter the installer-provided address and API Key; users bind their accounts or resources in **Operations > Plugin Connections**. If you skipped installation, follow the [AgentPlugin guide](/docs/user-guide/connector) later. See [Database AgentPlugin](/docs/user-guide/database-connector) and [SSH AgentPlugin](/docs/user-guide/ssh-connector) for those resources.
 
 ## Next Steps
 

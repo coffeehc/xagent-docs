@@ -1,8 +1,8 @@
 ---
 title: Agent Governance Pages
-description: Guide and screenshots for xAgent administrator pages covering Agents, approvals, Skills, Tools, Connectors, MCP, and execution environments.
+description: Guide to xAgent administrator pages covering Agents, approvals, Skills, Tools, AgentPlugins, MCP, and execution environments.
 status: beta
-updated: 2026-07-29
+updated: 2026-09-17
 ---
 
 # Agent Governance Pages
@@ -63,21 +63,21 @@ Tool Management brings together every Tool the system can discover:
 - View parameter contracts, permissions, approval requirements, and reasons for unavailability.
 - Control whether a Tool enters the user-visible discovery and execution scope.
 
-## Connector Management
+## AgentPlugin Connectors
 
-**Menu path:** Agent Governance > Connector Management
+**Menu path:** Agent Governance > AgentPlugin Connectors
 
 **Visible to:** Administrators
 
 ![xAgent Connector Management page showing software versions, protocol versions, online status, and actions](/img/home/v005/xagent-connectors-en.webp)
 
-Connector Management maintains Connector instances installed in the system:
+AgentPlugin Connectors manages plugin services installed in the system:
 
 - View software versions, protocol versions, online status, and update notices.
-- Add a Connector and edit its address and authentication configuration.
+- Add an AgentPlugin and edit its address and authentication configuration.
 - Refresh runtime status, inspect details, or remove instances that are no longer used.
 
-See [Connector User Guide](/docs/user-guide/connector) for installation instructions.
+See [AgentPlugin Guide](/docs/user-guide/connector) for installation instructions.
 
 ## MCP Configuration
 

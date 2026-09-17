@@ -2,7 +2,7 @@
 title: 功能导览与菜单入口
 description: 了解当前 xAgent 控制台的信息架构、简洁与高级模式，以及普通用户和管理员的主要菜单入口。
 status: stable
-updated: 2026-08-17
+updated: 2026-09-17
 ---
 
 # 功能导览与菜单入口
@@ -27,7 +27,7 @@ updated: 2026-08-17
 
 | 模式 | 默认可见入口 |
 | --- | --- |
-| 简洁模式 | 仪表板、Agent会话、工作区文件、审批、我的连接、密钥管理、账号管理 |
+| 简洁模式 | 仪表板、Agent 会话、工作区文件、文件分享、审批、插件连接、密钥管理、账号管理 |
 | 高级模式 | 在简洁模式基础上增加会话列表、触发器管理、智能体管理、Skill 管理、我的工具、我的 MCP、个人审批策略 |
 
 管理员专用分组是否显示由管理员角色决定，不受个人高级模式开关影响。
@@ -38,11 +38,13 @@ updated: 2026-08-17
 | --- | --- | --- |
 | 提交任务、上传材料、查看执行过程 | [Agent会话](/docs/user-guide/agent-session) | 日常工作的主要入口 |
 | 查看上传文件、生成文件和最终产物 | [工作区文件](/docs/user-guide/workspace) | 预览、下载或继续引用工作区文件 |
+| 创建限时外链并检查访问 | [文件分享](/docs/user-guide/file-sharing) | 需管理员启用分享策略 |
 | 查找和管理历史对话 | 会话列表 | 高级模式入口，可搜索主会话和子会话 |
 | 查看需要人工确认的动作 | 审批 | 查看审批内容、风险等级和关联会话 |
 | 让任务定时或由外部事件启动 | [触发器管理](/docs/user-guide/trigger) | 高级模式入口 |
 | 管理个人智能体、Skill、Tool 或 MCP | 智能体管理、Skill 管理、我的工具、我的 MCP | 高级模式入口 |
-| 绑定微信、Telegram、飞书等消息渠道 | [我的连接](/docs/user-guide/connector) | 简洁模式也会保留 |
+| 绑定微信、Telegram、飞书等消息渠道 | [插件连接](/docs/user-guide/connector) | 简洁模式也会保留 |
+| 调用远端 Agent 并跟踪任务 | [A2A](/docs/user-guide/a2a) | 用户级远端连接 |
 | 保存 API Key 和外部系统 token | 密钥管理 | 简洁模式也会保留 |
 
 ## 工作台
@@ -52,6 +54,7 @@ updated: 2026-08-17
 | 仪表板 | 查看 Token 使用、会话状态、等待审批和最近会话 |
 | [Agent会话](/docs/user-guide/agent-session) | 输入任务、上传附件、查看执行状态并继续追问 |
 | [工作区文件](/docs/user-guide/workspace) | 浏览业务空间、会话产物、上传文件和个人 Skill 文件 |
+| [文件分享](/docs/user-guide/file-sharing) | 按文件查看限时外链、访问记录并撤销链接 |
 | 会话列表 | 高级模式下统一搜索和管理主会话、子会话 |
 
 第一次使用时从 Agent会话 开始。任务涉及文件时再进入工作区文件，需要查找历史时进入会话列表。
@@ -66,7 +69,8 @@ updated: 2026-08-17
 | [Skill 管理](/docs/user-guide/skill) | 高级模式 | 使用公共 Skill，创建和维护个人 Skill |
 | [我的工具](/docs/user-guide/tool) | 高级模式 | 查看当前用户可用工具、来源和状态 |
 | 我的 MCP | 高级模式 | 接入个人 MCP 服务并发现工具 |
-| [我的连接](/docs/user-guide/connector) | 所有用户 | 绑定外部账号，查看认证、通道和工具状态 |
+| [插件连接](/docs/user-guide/connector) | 所有用户 | 绑定外部账号，查看认证、通道和工具状态 |
+| [A2A](/docs/user-guide/a2a) | 用户端 | 管理远端 Agent、任务及收件箱 |
 | 密钥管理 | 所有用户 | 保存当前用户的 workspace secret |
 
 普通用户不需要理解底层协议。审批负责风险控制，触发器负责自动启动任务，Skill 与 Tool 扩展执行能力，连接器与密钥负责接入外部系统。
@@ -108,9 +112,11 @@ updated: 2026-08-17
 | [审批策略](/docs/user-guide/approval-policy) | 管理系统级审批规则 |
 | [Skill 管理](/docs/user-guide/skill) | 管理公共 Skill 和提交审批 |
 | [Tool 管理](/docs/user-guide/tool) | 管理系统工具、来源、状态和输入输出合同 |
-| [Connector 管理](/docs/user-guide/connector) | 管理系统级 Connector catalog、Card、health 和工具声明 |
+| [AgentPlugin Connector](/docs/user-guide/connector) | 管理系统级插件 Card、health 和工具声明 |
 | MCP 配置 | 管理全局 MCP 服务 |
 | 执行环境 | 查看和检测服务端 Runtime Assets 与执行环境组件 |
+
+文件外链策略位于管理员“存储管理 > 文件分享”，默认关闭。
 
 ## 系统配置
 

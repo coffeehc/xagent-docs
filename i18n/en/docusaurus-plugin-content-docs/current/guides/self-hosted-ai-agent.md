@@ -3,7 +3,7 @@ title: "Self-Hosted AI Agent Platform: Deploy xAgent on Your Own Server"
 description: A practical guide to deploying a self-hosted AI agent platform, covering server preparation, model access, HTTPS, workspace isolation, connectors, backups, and long-running tasks.
 image: /img/share/en/xagent-security.png
 status: beta
-updated: 2026-09-07
+updated: 2026-09-17
 ---
 
 # Self-Hosted AI Agent Platform: Deploy xAgent on Your Own Server
@@ -22,7 +22,7 @@ With a self-hosted AI Agent platform, the deployment owner decides where xAgent 
 
 This does not mean all data automatically remains inside your environment. Model APIs, MCP services, connectors, and external business systems still process data according to their own integrations. Whether to use a local model, which external systems to allow, and who can access the service are deployment-owner decisions.
 
-If you are comparing self-hosting with a cloud service, separate runtime location from data flow: xAgent can run on your own server, private network, or cloud account, but a model Provider, MCP server, Connector, or external business system handles material only according to its actual configuration and authorization. Self-hosting is not synonymous with every byte staying local.
+If you are comparing self-hosting with a cloud service, separate runtime location from data flow: xAgent can run on your own server, private network, or cloud account, but a model Provider, MCP server, AgentPlugin, or external business system handles material only according to its actual configuration and authorization. Self-hosting is not synonymous with every byte staying local.
 
 ## AI Agent Hosting Architecture
 
@@ -52,7 +52,7 @@ The current version uses embedded SQLite by default, so the first deployment doe
 
 ### 1. Install and Start the Server
 
-Run the [official installer](/docs/getting-started/install). It detects the system and architecture, verifies release packages, and installs the current `v0.0.15.beta` release. On Linux it configures and starts a systemd service; on macOS it installs under the current user.
+Run the [official installer](/docs/getting-started/install). It detects the system and architecture, verifies release packages, and installs the current `v0.0.20.beta` release. On Linux it configures and starts a systemd service; on macOS it installs under the current user.
 
 ### 2. Configure and Validate a Model
 
@@ -72,7 +72,7 @@ Create an [Agent Session](/docs/user-guide/agent-session), upload a small non-se
 
 ### 5. Add External Capabilities Only as Needed
 
-Use MCP when sessions need to call an external service on demand. Use [Connectors](/docs/user-guide/connector) when accounts, messages, or events from WeChat, email, or enterprise systems need to enter xAgent proactively. See [What Is a Connector?](/docs/getting-started/what-is-connector#how-is-it-different-from-mcp) for the difference.
+Use MCP when sessions need to call an external service on demand. Use [AgentPlugins](/docs/user-guide/connector) when accounts, messages, or events from WeChat, email, or enterprise systems need to enter xAgent proactively. See [What Is an AgentPlugin?](/docs/getting-started/what-is-connector#how-is-it-different-from-mcp) for the difference.
 
 ## Common Use Cases
 
@@ -86,15 +86,15 @@ Use MCP when sessions need to call an external service on demand. Use [Connector
 - Self-hosted xAgent is not an offline desktop application. The server needs to stay online to receive and execute ongoing tasks.
 - A local model can improve data privacy, but MCP services, connectors, and external APIs still follow the data boundaries of the services you choose and authorize.
 - xAgent is currently beta. Before production use, validate models, external connections, approvals, and backups with real but non-sensitive tasks.
-- The installer supports pinned-version upgrades while preserving configuration and runtime data. If Linux activation fails, it attempts to restore the previous version. Back up first and verify the service, models, files, and Connectors after every upgrade.
+- The installer supports pinned-version upgrades while preserving configuration and runtime data. If Linux activation fails, it attempts to restore the previous version. Back up first and verify the service, models, files, and AgentPlugins after every upgrade.
 
 ## Related Concepts
 
 - [What is xAgent](/docs/getting-started/what-is-xagent)
 - [How xAgent Isolates Multi-user Workspaces and Task Processes](/docs/guides/multi-user-workspace-isolation)
 - [Model Notes](/docs/deployment/model-requirements)
-- [Connectors](/docs/user-guide/connector)
-- [What Is a Connector?](/docs/getting-started/what-is-connector#how-is-it-different-from-mcp)
+- [AgentPlugins](/docs/user-guide/connector)
+- [What Is an AgentPlugin?](/docs/getting-started/what-is-connector#how-is-it-different-from-mcp)
 
 ## Next Steps
 

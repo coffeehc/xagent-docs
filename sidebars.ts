@@ -27,7 +27,7 @@ const sidebars: SidebarsConfig = {
         {
           type: 'doc',
           id: 'getting-started/what-is-connector',
-          label: label('什么是连接器', 'What Is a Connector'),
+          label: label('什么是 AgentPlugin', 'What Is an AgentPlugin'),
         },
         {
           type: 'doc',
@@ -128,6 +128,11 @@ const sidebars: SidebarsConfig = {
         },
         {
           type: 'doc',
+          id: 'user-guide/file-sharing',
+          label: label('文件分享', 'File Sharing'),
+        },
+        {
+          type: 'doc',
           id: 'user-guide/long-task',
           label: label('长任务', 'Long-running Tasks'),
         },
@@ -154,17 +159,22 @@ const sidebars: SidebarsConfig = {
         {
           type: 'doc',
           id: 'user-guide/connector',
-          label: label('连接器', 'Connectors'),
+          label: label('AgentPlugin', 'AgentPlugins'),
+        },
+        {
+          type: 'doc',
+          id: 'user-guide/a2a',
+          label: label('A2A Client', 'A2A Client'),
         },
         {
           type: 'doc',
           id: 'user-guide/database-connector',
-          label: label('Database Connector 配置', 'Database Connector Setup'),
+          label: label('Database AgentPlugin 配置', 'Database AgentPlugin Setup'),
         },
         {
           type: 'doc',
           id: 'user-guide/ssh-connector',
-          label: label('SSH Connector 配置', 'SSH Connector Setup'),
+          label: label('SSH AgentPlugin 配置', 'SSH AgentPlugin Setup'),
         },
         {
           type: 'doc',
@@ -252,12 +262,12 @@ const sidebars: SidebarsConfig = {
         {
           type: 'doc',
           id: 'attachments/xagent_connection_architecture',
-          label: label('xAgent Connector 架构', 'xAgent Connector Architecture'),
+          label: label('旧版 Connector 架构', 'Legacy Connector Architecture'),
         },
         {
           type: 'doc',
           id: 'attachments/xagent_connector_protocol',
-          label: label('xAgent Connector 协议', 'xAgent Connector Protocol'),
+          label: label('旧版 Connector 协议', 'Legacy Connector Protocol'),
         },
       ],
     },

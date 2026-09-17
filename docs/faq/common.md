@@ -1,8 +1,8 @@
 ---
 title: 常见问题
-description: 解答 xAgent 安装、使用、模型配置、数据安全、Skill、Connector、架构、开发维护和测试版相关常见问题。
+description: 解答 xAgent 安装、使用、模型配置、数据安全、Skill、AgentPlugin、架构、开发维护和测试版常见问题。
 status: stable
-updated: 2026-09-07
+updated: 2026-09-17
 schemaType: WebPage
 ---
 
@@ -44,7 +44,7 @@ schemaType: WebPage
 
 ### 当前版本稳定吗？
 
-当前版本是 `v0.0.15.beta`，仍属于测试版，适合部署体验、场景验证和社区反馈。界面、Connector 与部分实验能力仍可能调整。
+当前版本是 `v0.0.20.beta`，仍属于测试版，适合部署体验、场景验证和社区反馈。界面、AgentPlugin 与部分实验能力仍可能调整。
 
 ### 应该如何安装或升级？
 
@@ -54,7 +54,19 @@ schemaType: WebPage
 curl -fsSL https://downloads.xagent.xiagaogao.com/scripts/install.sh | bash
 ```
 
-脚本会识别系统与架构、校验发布包，并支持版本固定、无人值守安装和 Connector 选择。Linux 激活失败时会尝试恢复上一版本。完整流程见[开始安装](/docs/getting-started/install)。
+脚本会识别系统与架构、校验发布包，并支持版本固定、无人值守安装和 AgentPlugin 选择。Linux 激活失败时会尝试恢复上一版本。完整流程见[开始安装](/docs/getting-started/install)。
+
+### Office 转 PDF 或 Excel 重算需要另外安装什么？
+
+需要管理员在服务器上安装 LibreOffice；其系统依赖未包含在 xAgent 发布包中。Debian/Ubuntu 可执行 `sudo apt-get update && sudo apt-get install -y libreoffice`，再用 `soffice --headless --version` 验证。参见[安装说明](/docs/getting-started/install#第七步准备-runtime-assets)。
+
+### 文件可以生成公开链接吗？
+
+可以，但管理员必须先在“存储管理 > 文件分享”开启策略；默认关闭。链接必须限时，公开预览带水印，原文件下载需单独授权。参见[文件外链分享](/docs/user-guide/file-sharing)。
+
+### 如何调用远端 Agent？
+
+在“运行治理 > A2A”添加并发现远端 Agent Card，配置对端认证，然后发起任务并在任务列表与收件箱核对结果。参见 [A2A Client](/docs/user-guide/a2a)。
 
 ### ProcessSandbox 和工作区隔离是一回事吗？
 
@@ -64,15 +76,15 @@ curl -fsSL https://downloads.xagent.xiagaogao.com/scripts/install.sh | bash
 
 以下问题原先分散在入门、使用、部署、架构、开发和参考页面，现统一收录于本页。
 
-### Connector 是否由 xAgent 保存目标系统 token？
+### AgentPlugin 是否由 xAgent 保存目标系统 token？
 
-不应这样描述。目标系统 token 属于 Connector 或目标系统边界。
+不应这样描述。目标系统 token 属于 AgentPlugin 或目标系统边界。
 
-### Connector 是否必须提供 Skill？
+### AgentPlugin 是否必须提供 Skill？
 
 可以提供，但不是唯一职责。
 
-### Connector 的协议是否已经完全稳定？
+### AgentPlugin 的协议是否已经完全稳定？
 
 当前标记为实验性，接口可能变化。
 
@@ -140,7 +152,7 @@ curl -fsSL https://downloads.xagent.xiagaogao.com/scripts/install.sh | bash
 
 ### 为什么需要工具调用能力？
 
-xAgent 不是聊天的系统。它需要读取文件、写入工作区、调用 MCP、使用连接器、处理触发器和生成产物。没有稳定工具调用能力，很多任务无法可靠完成。
+xAgent 不是聊天的系统。它需要读取文件、写入工作区、调用 MCP、使用 AgentPlugin、处理触发器和生成产物。没有稳定工具调用能力，很多任务无法可靠完成。
 
 ### 上下文压缩会影响结果吗？
 
@@ -148,15 +160,15 @@ xAgent 不是聊天的系统。它需要读取文件、写入工作区、调用 
 
 ### xAgent 是否保存目标系统登录态？
 
-不应这样设计。目标系统登录态属于 Connector 或目标系统。
+不应这样设计。目标系统登录态属于 AgentPlugin 或目标系统。
 
-### Agent 是否能看到 connector_channel_id？
+### Agent 是否能看到内部 AgentPlugin Channel ID？
 
 不应让 Agent 看到系统级和通道级内部 ID。
 
-### Connector 是否就是 Skill？
+### AgentPlugin 是否就是 Skill？
 
-不是。Connector 可以提供 Skill，但 Connector 本身是外部系统协议桥。
+不是。AgentPlugin 可以提供 Skill，但插件本身是外部系统接入边界。
 
 ### 是否可以参考其他项目的 manifest 字段？
 
@@ -170,13 +182,13 @@ xAgent 不是聊天的系统。它需要读取文件、写入工作区、调用 
 
 如果字段引入新术语，需要同步更新术语表。
 
-### RuntimeConnection 是否等同于 Connector？
+### RuntimeConnection 是否等同于 AgentPlugin？
 
-不等同。Connector 连接外部系统，RuntimeConnection 更关注执行环境。
+不等同。AgentPlugin 连接外部系统，RuntimeConnection 更关注执行环境。
 
 ### 是否可以先写接入协议？
 
-不可以。协议未稳定前只保留概念边界。
+已有公开的 AgentPlugin `4.4` 协议；实现前应核对目标 Server 版本、Card/Descriptor schema 及能力边界。旧 Connector 附件不是现行协议定义。
 
 ### RuntimeConnection 是否一定暴露给 Agent？
 
@@ -190,9 +202,9 @@ xAgent 不是聊天的系统。它需要读取文件、写入工作区、调用 
 
 不应这样描述。执行能力应属于 Tool 或 RuntimeConnection。
 
-### Skill 是否可以来自 Connector？
+### Skill 是否可以来自 AgentPlugin？
 
-可以作为 Connector 给 Agent 的运行时说明，但具体格式以实现为准。
+可以作为 AgentPlugin 给 Agent 的运行时说明；插件可通过 `/skill.json` 发布目录清单，xAgent 按 revision 下载并原子替换，不下载或执行脚本文件。
 
 ### 是否需要为 Markdown 写单元测试？
 
@@ -248,7 +260,7 @@ xAgent 不是聊天的系统。它需要读取文件、写入工作区、调用 
 
 ### xAgent 需要安装在每台电脑上吗？
 
-不需要。xAgent 部署在服务器端，用户通过 Web 或扩展的连接器访问。任务执行过程中不要求用户电脑一直开机，用户也可以通过微信等 IM 入口远程提交任务。
+不需要。xAgent 部署在服务器端，用户通过 Web 或已接入的 AgentPlugin 访问。任务执行过程中不要求用户电脑一直开机，用户也可以通过微信等 IM 入口远程提交任务。
 
 ### 任务文件保存在哪里？
 
@@ -272,11 +284,11 @@ xAgent 不是聊天的系统。它需要读取文件、写入工作区、调用 
 
 ### 会话事件从哪里来？
 
-会话事件可以来自外部接口、触发器、连接器，也可以来自其他会话。xAgent 会通过内置事件队列把事件投递到对应的智能体会话中。
+会话事件可以来自外部接口、触发器、AgentPlugin，也可以来自其他会话。xAgent 会通过内置事件队列把事件投递到对应的智能体会话中。
 
-### 连接器是什么？
+### AgentPlugin 是什么？
 
-Connector 负责把微信、Telegram、飞书、浏览器、企业系统或第三方服务接入 xAgent。它可以双向传递消息与文件引用、提供外部工具、管理授权状态，并把外部事件投递到智能体会话中。普通用户主要完成授权和使用，管理员负责准备 Connector 和安全策略。
+AgentPlugin 负责把微信、Telegram、飞书、钉钉、Database、SSH 等外部系统接入 xAgent；浏览器能力由内置 Runtime 提供。插件可双向传递消息、文件引用和外部工具。普通用户通过“插件连接”管理自己的通道，管理员通过“AgentPlugin Connector”管理插件服务与安全策略。
 
 ### 会话之间可以互相通信吗？
 
@@ -308,15 +320,15 @@ Connector 负责把微信、Telegram、飞书、浏览器、企业系统或第�
 
 ### 免费二进制版本意味着什么？
 
-免费二进制版本目前是 `v0.0.15.beta` 测试版，是了解和评估 xAgent 的入口。用户可以先部署标准版本，体验任务提交、文件工作区、工具、技能和外部连接等核心能力。
+免费二进制版本目前是 `v0.0.20.beta` 测试版，是了解和评估 xAgent 的入口。用户可以先部署标准版本，体验任务提交、文件工作区、工具、技能和外部连接等核心能力。
 
 免费二进制发布不等同于源码开源。xAgent 未来会视产品成熟度、社区反馈、安全边界和商业可持续性，评估是否开放源码或开放更多生态协作方式。
 
-如果需要企业内部系统接入、统一身份认证、复杂权限、审计合规、专属连接器或深度业务流程改造，通常应按实际需求进行定制集成。
+如果需要企业内部系统接入、统一身份认证、复杂权限、审计合规、专属 AgentPlugin 或深度业务流程改造，通常应按实际需求进行定制集成。
 
 ### 商业版与免费版有什么区别？
 
-未安装企业授权证书时，xAgent 会直接进入免费版，不需要申请或续期免费证书。免费版可以使用核心产品能力，固定额度为 2 个用户、30 个会话、1 个 WorkGroup、5 个 Connector VChannel 和 5 个定时任务。
+未安装企业授权证书时，xAgent 会直接进入免费版，不需要申请或续期免费证书。免费版可以使用核心产品能力，固定额度为 2 个用户、30 个会话、1 个 WorkGroup、5 个 AgentPlugin VChannel 和 5 个定时任务。
 
 企业版通过外部授权证书提供更高的数量权益，并继续校验签名、设备绑定和有效期。它更适合需要扩大团队规模、配套支持或定制集成的组织。
 
@@ -366,9 +378,9 @@ xAgent 可以作为企业智能工作门户和业务智能化入口的基础能�
 
 需要。稳定后应在本文集中维护。
 
-### 可以把 Connector 叫插件吗？
+### Connector 与 AgentPlugin 是什么关系？
 
-不建议。Connector 是外部系统协议桥，不等同于普通插件。
+`v0.0.16.beta` 起原 Connector 领域统一改名为 AgentPlugin。旧 Connector 附件和早期更新日志是历史名称；当前产品菜单和安装目录使用 AgentPlugin。它也不是任意代码可直接装入 xAgent 进程的通用插件。
 
 ### 可以把 Memory 叫历史记录吗？
 
@@ -376,7 +388,7 @@ xAgent 可以作为企业智能工作门户和业务智能化入口的基础能�
 
 ### 为什么有些术语保留英文？
 
-Session、Task、Tool、Skill、Connector、Workspace、Memory 是产品和代码中都会出现的固定概念，文档中保留英文可以减少 UI、日志和代码之间的理解偏差。
+Session、Task、Tool、Skill、AgentPlugin、Workspace、Memory 是产品和代码中都会出现的固定概念，文档中保留英文可以减少 UI、日志和代码之间的理解偏差。
 
 ### 智能体和 Skill 有什么区别？
 
@@ -440,23 +452,23 @@ Session、Task、Tool、Skill、Connector、Workspace、Memory 是产品和代�
 
 ### 可以从微信或 Telegram 处理审批吗？
 
-可以。自 `v0.0.4.beta` 起，会话进入审批等待状态时，xAgent 会尝试向当前用户全部可用的 IM 消息通道发送审批通知。连接器需要在线、用户已完成认证，并提供可用的消息发送工具。按通知中的 `@{approval:id}` 和明确的同意或不同意格式回复即可。
+可以。由 IM AgentPlugin 发起的任务进入审批等待时，若原通道仍可发送消息，xAgent 会尝试把审批通知发回该通道；Web 发起的任务不会向全部 IM 通道广播。按通知中的 `@{approval:id}` 和明确的同意或不同意格式回复即可。
 
 ### 普通用户能改系统审批策略吗？
 
 通常不能。普通用户可能只能配置个人审批策略，系统级策略由管理员维护。
 
-### 我的连接和 Connector 管理有什么区别？
+### 插件连接和 AgentPlugin Connector 有什么区别？
 
-我的连接用于绑定当前用户自己的外部账号；Connector 管理由管理员维护系统级 Connector 服务。
+“运行治理 > 插件连接”用于绑定当前用户自己的外部账号；“Agent 治理 > AgentPlugin Connector”由管理员维护系统级插件服务。
 
-### Connector 工具会自动对所有用户可用吗？
+### AgentPlugin 工具会自动对所有用户可用吗？
 
-不会。可用性取决于 Connector 是否在线、用户是否完成认证、连接状态、工具治理和审批策略。
+不会。可用性取决于 AgentPlugin 是否在线、用户是否完成认证、连接状态、工具治理和审批策略。
 
 ### 为什么能收到消息但不能回复？
 
-先检查 Connector health、用户认证和平台权限。微信还需要有效的收件人上下文；`context_token` 过期后，发送会被阻止，直到上下文重新建立。
+先检查 AgentPlugin health、用户认证和平台权限。微信还需要有效的收件人上下文；`context_token` 过期后，发送会被阻止，直到上下文重新建立。
 
 ### 长任务会自动拆分吗？
 
@@ -496,7 +508,7 @@ Session、Task、Tool、Skill、Connector、Workspace、Memory 是产品和代�
 
 ### 第一次使用应该打开哪个菜单？
 
-先进入 Agent会话，写清楚目标、材料、约束和交付要求。需要查看文件时进入工作区文件，需要绑定消息渠道时进入我的连接。
+先进入 Agent 会话，写清楚目标、材料、约束和交付要求。需要查看文件时进入工作区文件，需要绑定消息渠道时进入“插件连接”。
 
 ### 主题和显示密度在哪里？
 
@@ -578,7 +590,7 @@ Session、Task、Tool、Skill、Connector、Workspace、Memory 是产品和代�
 
 ### 为什么有些工具我看不到？
 
-工具会受账号权限、管理员配置、连接状态、个人 MCP 配置、连接器授权状态和个人开关影响。
+工具会受账号权限、管理员配置、连接状态、个人 MCP 配置、AgentPlugin 授权状态和个人开关影响。
 
 ### 触发器会一直等待任务完成吗？
 

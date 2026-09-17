@@ -1,10 +1,12 @@
 ---
 title: xAgent Connector Architecture
 description: xAgent Connector 的架构边界、事实归属、生命周期、事件投递和工具投影设计。
-updated: 2026-07-29
+updated: 2026-09-17
 ---
 
 # xAgent Connector Architecture
+
+> 历史资料：本文描述旧版 Connector 的架构与责任边界，不是当前 `v0.0.20.beta` 的 AgentPlugin 接入说明。请参阅 [AgentPlugin 使用说明](/docs/user-guide/connector#公共协议与能力)。
 
 本文档定义 xAgent Connector 的架构边界、事实归属和生命周期。HTTP endpoint、WebSocket packet、JSON 字段、状态枚举和第三方实现要求见
 [xAgent Connector Common Protocol](xagent_connector_protocol.md)。

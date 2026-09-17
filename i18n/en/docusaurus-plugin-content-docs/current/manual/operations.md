@@ -1,8 +1,8 @@
 ---
 title: Operations Pages
-description: Guide and interface screenshots for xAgent Approvals, Triggers, Agents, Skills, Tools, MCP, connections, and Secrets pages.
+description: Guide to xAgent Approvals, Triggers, Agents, Skills, Tools, MCP, Plugin Connections, A2A, and Secrets.
 status: beta
-updated: 2026-07-29
+updated: 2026-09-17
 ---
 
 # Operations Pages
@@ -22,7 +22,7 @@ The Approvals page centralizes sensitive actions requested during tasks:
 - View pending, approved, and rejected requests.
 - Check the originating Session, Tool, risk level, parameter summary, and reason.
 - After approval or rejection, the result returns to the original Session so execution can continue.
-- Every connected IM channel also receives approval notifications, allowing approval directly from a phone.
+- Tasks originating from an IM plugin may send approval notices back over that channel when it remains available. Web-originated tasks are not broadcast to every IM channel.
 
 ## Trigger Management
 
@@ -78,7 +78,7 @@ See [Skill Management](/docs/user-guide/skill) for the complete workflow.
 
 ![xAgent My Tools page showing Tool sources, risks, readiness, and actions](/img/manual/v005/en/tools.webp)
 
-My Tools brings together the native, MCP, and Connector Tools available to the current account:
+My Tools brings together the native, MCP, and AgentPlugin Tools available to the current account:
 
 - Search or filter by name, source, risk, and readiness.
 - View Tool descriptions, parameters, approval requirements, and reasons for unavailability.
@@ -100,21 +100,29 @@ My MCP is used to view and manage MCP services connected for the current account
 - Create or edit user-scoped MCP connections.
 - If a service is unhealthy, first check its address, authentication, and the administrator-side global configuration.
 
-## My Connections
+## Plugin Connections
 
-**Menu path:** Operations > My Connections
+**Menu path:** Operations > Plugin Connections
 
 **Visible to:** All users
 
 ![xAgent My Connections page showing Connector channels, authentication status, and dedicated Sessions](/img/manual/v005/en/connections.webp)
 
-My Connections binds personal external accounts to installed Connectors:
+Plugin Connections binds personal external accounts to installed AgentPlugins:
 
 - View channel connection status, authentication status, bound targets, and dedicated Sessions.
 - Create a connection and complete QR code, bot, or application authorization.
 - Enter the dedicated Session, or reauthenticate and reopen the channel when a connection expires.
 
-See [Connectors](/docs/user-guide/connector) for the complete workflow.
+See [AgentPlugins](/docs/user-guide/connector) for the complete workflow.
+
+## A2A
+
+**Menu path:** Operations > A2A
+
+**Visible to:** Users
+
+Users discover and manage remote Agents, send and track tasks, and inspect remote outcomes in an inbox. A2A is managed separately from locally installed AgentPlugins. See [A2A Client](/docs/user-guide/a2a).
 
 ## Secret Management
 

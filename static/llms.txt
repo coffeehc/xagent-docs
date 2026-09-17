@@ -1,6 +1,6 @@
 # xAgent
 
-> xAgent is a task-first, self-hosted multi-user AI agent platform. It adapts Skills, Tools, and long-term memory to each task and organizes project sessions, Connectors, isolated workspaces, long-running execution, approvals, and operational governance in one server-side work portal.
+> xAgent is a task-first, self-hosted multi-user AI agent platform. It adapts Skills, Tools, and long-term memory to each task and organizes project sessions, AgentPlugins, isolated workspaces, long-running execution, approvals, and operational governance in one server-side work portal. Current Server release: v0.0.20.beta.
 
 xAgent documentation is maintained as paired Chinese and English pages. Use the page matching the requested language. Product behavior and release details can change during beta, so prefer the linked documentation and changelog over third-party summaries.
 
@@ -19,22 +19,26 @@ xAgent documentation is maintained as paired Chinese and English pages. Use the 
 - [Long-running Tasks](https://xagent.xiagaogao.com/en/docs/user-guide/long-task/): Continuous server-side execution and staged delivery.
 - [Long-Term Memory](https://xagent.xiagaogao.com/en/docs/user-guide/memory/): Explicitly retain durable preferences, decisions, and boundaries across sessions, then recall them with source and freshness checks.
 - [Skills](https://xagent.xiagaogao.com/en/docs/user-guide/skill/): Create, test, publish, and update reusable task methods.
-- [Tools](https://xagent.xiagaogao.com/en/docs/user-guide/tool/): Personal and public Tools, MCP, Connector tools, discovery, and execution.
-- [Connectors](https://xagent.xiagaogao.com/en/docs/user-guide/connector/): WeChat, Telegram, Feishu, browser connections, messages, files, and health state.
+- [Tools](https://xagent.xiagaogao.com/en/docs/user-guide/tool/): Personal and public Tools, MCP, AgentPlugin tools, discovery, and execution.
+- [AgentPlugins](https://xagent.xiagaogao.com/en/docs/user-guide/connector/): Published IM, Database, and SSH plugins, user connections, versions, health, and protocol behavior. Browser is a built-in Runtime.
 - [Approval Policies](https://xagent.xiagaogao.com/en/docs/user-guide/approval-policy/): Control sensitive Tool actions with user and administrator rules.
 - [Workspace Files](https://xagent.xiagaogao.com/en/docs/user-guide/workspace/): Isolated task materials, generated files, intermediate results, and downloads.
+- [File Sharing (English)](https://xagent.xiagaogao.com/en/docs/user-guide/file-sharing/): Administrator-governed expiring links, watermarked previews, original-download permissions, and visit records.
+- [文件外链分享（中文）](https://xagent.xiagaogao.com/docs/user-guide/file-sharing/): 限时外链、水印预览、下载权限与访问记录。
+- [A2A Client (English)](https://xagent.xiagaogao.com/en/docs/user-guide/a2a/): Remote Agent discovery, task sending and tracking, and the results inbox.
+- [A2A Client（中文）](https://xagent.xiagaogao.com/docs/user-guide/a2a/): 远端 Agent 发现、任务执行与收件箱。
 - [Supported Agent Capabilities](https://xagent.xiagaogao.com/en/docs/manual/capabilities/): Built-in Skills and current file-processing boundaries.
 
 ## Architecture Guides
 
-- [Self-host an AI Agent](https://xagent.xiagaogao.com/en/docs/guides/self-hosted-ai-agent/): Server preparation, model access, HTTPS, isolation, connectors, backups, and continuous execution.
+- [Self-host an AI Agent](https://xagent.xiagaogao.com/en/docs/guides/self-hosted-ai-agent/): Server preparation, model access, HTTPS, isolation, AgentPlugins, backups, and continuous execution.
 - [Dynamic Capability Discovery](https://xagent.xiagaogao.com/en/docs/guides/ai-agent-dynamic-tool-discovery/): Discover and load Skills and Tools on demand instead of loading everything into context.
 - [Approval and Safety Controls](https://xagent.xiagaogao.com/en/docs/guides/agent-approval-security/): Reduce Tool calls to governed actions, pause risky operations, approve, and resume.
 - [Workspace and Process Isolation](https://xagent.xiagaogao.com/en/docs/guides/multi-user-workspace-isolation/): Virtual workspaces, Execution Leases, ProcessSandbox, and Runtime Assets.
 - [Runtime and ProcessSandbox](https://xagent.xiagaogao.com/en/docs/architecture/runtime/): Runtime ownership, sandbox file views, resource limits, platform backends, and Runtime Assets.
 - [Multi-Agent Session Events](https://xagent.xiagaogao.com/en/docs/guides/multi-agent-session-event-collaboration/): Exchange status, tasks, and file references without crossing user boundaries.
 - [Runtime Model and Skill Switching](https://xagent.xiagaogao.com/en/docs/guides/ai-agent-runtime-hot-switching/): Change later model calls, Skills, Tools, and prompts while preserving task state.
-- [Glossary](https://xagent.xiagaogao.com/en/docs/reference/glossary/): Standard meanings for Agent, Task, Skill, Tool, Connector, Memory, Session, Workspace, and Runtime terminology.
+- [Glossary](https://xagent.xiagaogao.com/en/docs/reference/glossary/): Standard meanings for Agent, Task, Skill, Tool, AgentPlugin (formerly Connector), Memory, Session, Workspace, and Runtime terminology.
 
 ## Insights
 
@@ -49,7 +53,9 @@ xAgent documentation is maintained as paired Chinese and English pages. Use the 
 - [AI Agent Skills vs. Tools vs. MCP (English)](https://xagent.xiagaogao.com/en/insights/ai-agent-tools-vs-skills/): Compare responsibilities, loading behavior, permissions, and selection criteria, then see how Skills, Tools, and MCP work together in one task.
 - [AI Agent Skill、Tool 与 MCP（中文）](https://xagent.xiagaogao.com/insights/ai-agent-tools-vs-skills/): 对比三者的职责、加载方式、权限与选型标准，并说明它们如何在一个任务中组合。
 
-## Connector Specifications
+## Legacy Connector Specifications
+
+These attachments document older Connector protocols and schemas, not the current AgentPlugin 4.4 contract.
 
 - [Connector Architecture (English)](https://xagent.xiagaogao.com/en/docs/attachments/xagent_connection_architecture/): Ownership, lifecycle, connection, event, and Tool projection boundaries.
 - [Connector 架构（中文）](https://xagent.xiagaogao.com/docs/attachments/xagent_connection_architecture/): Connector 所有权、生命周期、连接、事件与 Tool 投影边界。

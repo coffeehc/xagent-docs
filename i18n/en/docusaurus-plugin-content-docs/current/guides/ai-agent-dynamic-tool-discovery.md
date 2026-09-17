@@ -3,7 +3,7 @@ title: How AI Agents Discover and Load Tools on Demand
 description: Learn why AI Agents should not load every capability at startup and how summary discovery, candidate selection, and on-demand loading reduce context use and improve execution accuracy.
 image: /img/share/en/xagent-shared-skills.png
 status: beta
-updated: 2026-07-15
+updated: 2026-09-17
 ---
 
 # How AI Agents Discover and Load Tools on Demand
@@ -96,7 +96,7 @@ Discovery does not return every Tool schema, full Skill body, or resource file. 
 
 After a candidate has been loaded successfully, the earlier discovery result can leave future context assembly, preventing one-time search data from occupying the session indefinitely.
 
-## How MCP and Connector Capabilities Participate
+## How MCP and AgentPlugin Capabilities Participate
 
 Tools may come from built-in capabilities, personal MCP services, administrator-configured MCP services, or authorized connectors.
 
@@ -138,7 +138,7 @@ Dynamic capability loading helps an Agent obtain the right capability when neede
 
 - [Tool Management](/docs/user-guide/tool)
 - [Skill Management](/docs/user-guide/skill)
-- [What Is a Connector?](/docs/getting-started/what-is-connector#how-is-it-different-from-mcp)
+- [What Is an AgentPlugin?](/docs/getting-started/what-is-connector#how-is-it-different-from-mcp)
 - [AI Agent Approval and Safety Controls](/docs/guides/agent-approval-security)
 
 ## Next Steps

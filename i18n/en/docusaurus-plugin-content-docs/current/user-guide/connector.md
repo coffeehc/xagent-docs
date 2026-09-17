@@ -1,53 +1,54 @@
 ---
-title: xAgent Connectors for IM, Databases, SSH, and Browsers
-description: Learn about xAgent Connector management, bidirectional IM messages, file transfer, Database and SSH resources, health state, and extension protocols.
+title: AgentPlugins for IM, Databases, SSH, and Browsers
+description: Learn about AgentPlugin Connectors, Plugin Connections, bidirectional messaging, Database and SSH resources, and protocols.
 status: experimental
-updated: 2026-09-07
+updated: 2026-09-17
 ---
 
-# xAgent Connectors for IM, Databases, SSH, and Browsers
+# AgentPlugins for IM, Databases, SSH, and Browsers
 
 > Status: experimental. Pages, protocols, and authentication flows may still change.
 
 ## Who This Is For
 
-- Users bind external accounts or administrator-defined Database and SSH resources under **My connections** and review authentication, channel, and tool status.
-- Administrators add Connector services under **Connectors** and inspect Connector Cards, health, protocols, and tool declarations.
+- Users bind external accounts or administrator-defined Database and SSH resources under **Operations > Plugin Connections** and review authentication, channel, and tool status.
+- Administrators add plugin services under **Agent Governance > AgentPlugin Connectors** and inspect Cards, health, protocols, and tool declarations.
 
 ## What a Connector Is
 
-A Connector is the protocol bridge between xAgent and an external system. It can deliver messages from WeChat, Telegram, or Feishu into xAgent and send replies, execution activity, and files back to the originating channel. Database and SSH Connectors expose database queries, remote commands, and interactive shells to Agents through governed channels.
+An AgentPlugin connects xAgent to an external system. WeChat, Telegram, Feishu, and DingTalk plugins can deliver messages to xAgent and send replies, execution activity, and files back. Database and SSH plugins expose database queries and remote-host capabilities through governed Channels. Older documentation uses Connector, the name before `0.0.16.beta`.
 
 Compared with MCP, a Connector focuses on external events, user connections, and bidirectional channels. MCP is generally an external tool service called on demand during task execution. See [What Is a Connector?](/docs/getting-started/what-is-connector#how-is-it-different-from-mcp).
 
-## Current Connector Versions
+## Current AgentPlugin Versions
 
-The server and Connectors are released independently. The current server version is `v0.0.15.beta`, and the public release catalog lists these Connector versions:
+The Server and AgentPlugins are released independently. The current Server is `v0.0.20.beta`; the [public plugin catalog](https://downloads.xagent.xiagaogao.com/agentplugins/versions.json) lists:
 
-| Connector | Version | Main use |
+| AgentPlugin | Version | Main use |
 | --- | --- | --- |
-| WeChat Connector | `0.0.12` | WeChat messages, media, and connection-context renewal |
-| Telegram Connector | `0.0.13` | Telegram Bot direct and group messages |
-| Feishu Connector | `0.0.12` | Feishu direct messages and group @mentions in mainland China |
-| Database Connector | `0.0.6` | Administrator-defined MySQL and PostgreSQL resources |
-| SSH Connector | `0.0.8` | Administrator-defined SSH command and interactive-shell targets |
+| WeChat | `0.0.13` | WeChat messages, media, and connection-context renewal |
+| Telegram | `0.0.14` | Telegram Bot direct and group messages |
+| Feishu | `0.0.13` | Feishu direct messages and group @mentions in mainland China |
+| Database | `0.0.7` | Administrator-defined MySQL and PostgreSQL resources |
+| SSH | `0.0.10` | Administrator-defined SSH command and interactive-shell targets |
+| DingTalk | `0.0.2` | DingTalk messaging |
 
-Binaries are downloaded from the `weixin/`, `telegram/`, `feishu/`, `database/`, and `ssh/` directories under `https://downloads.xagent.xiagaogao.com/connector/`. See [Start Installation](/docs/getting-started/install).
+Plugin artifacts are distributed under `https://downloads.xagent.xiagaogao.com/agentplugins/`. Use `--agent-plugins` in the installer; see [Start Installation](/docs/getting-started/install).
 
-xAgent also includes a Browser Connector that lets the managed browser extension expose page interaction to the current user. It is managed by xAgent and does not use the five standalone Connector packages above.
+xAgent also includes a built-in Browser Runtime that lets the managed browser extension expose page interaction to the current user; it does not use a standalone AgentPlugin package.
 
 ## Page Entries
 
 | Page | Audience | Purpose |
 | --- | --- | --- |
-| My connections | Users | Manage account authentication, channel state, and available tools |
-| Connectors | Administrators | Manage the system Connector catalog, Cards, health, protocols, and tool declarations |
+| Plugin Connections | Users | Manage account authentication, channel state, and available tools |
+| AgentPlugin Connectors | Administrators | Manage system plugin Cards, health, protocols, and tool declarations |
 
-**My connections** remains available in simple mode. The administrator Connector catalog requires the administrator role.
+**Plugin Connections** belongs to user Operations; **AgentPlugin Connectors** requires the administrator role.
 
 ## Connect an External System
 
-1. Open **My connections**.
+1. Open **Plugin Connections**.
 2. Select the external system.
 3. Create a connection or open an existing one.
 4. Complete the QR-code, authorization, credential, or resource-binding flow shown on the page.
@@ -74,27 +75,27 @@ The current Connector supports Feishu in mainland China, not Lark. Scan the QR c
 
 ### Database
 
-Administrators add MySQL or PostgreSQL resources in the Database Connector Server. Users then select a resource under **My connections** and enter their own database username and password. See [Database Connector Setup](/docs/user-guide/database-connector) for installation, field definitions, and troubleshooting.
+Administrators add MySQL or PostgreSQL resources in the Database AgentPlugin. Users then select a resource under **Plugin Connections** and enter their own database username and password. See [Database AgentPlugin Setup](/docs/user-guide/database-connector) for installation, field definitions, and troubleshooting.
 
 ### SSH
 
-Administrators first place private keys in the `keys/` directory beside the SSH Connector configuration, then configure targets, remote accounts, and access identities. Users see resource names, not host addresses or private keys. See [SSH Connector Setup](/docs/user-guide/ssh-connector) for the full procedure.
+Administrators first place private keys in the `keys/` directory beside the SSH AgentPlugin configuration, then configure targets, remote accounts, and access identities. Users see resource names, not host addresses or private keys. See [SSH AgentPlugin Setup](/docs/user-guide/ssh-connector) for the full procedure.
 
 ## Public Protocol and Capabilities
 
-The current public Connector protocol is `4.3`. xAgent remains compatible with `4.2`, `4.1`, `4.0`, and older single Connectors that explicitly declare `3.0`, and determines the actual version during the data-plane handshake.
+The current public AgentPlugin protocol is `4.4`, with Card / Descriptor schemas `xagent.agent-plugin/card/v1` and `xagent.agent-plugin/descriptor/v2`. Data-plane negotiation can fall back to `4.3` or `4.0` according to the plugin Card. The older attachments describe historical Connector protocols.
 
 - IM channels use `xagent.im.v2` for incoming external messages, reply deltas, acknowledgements, execution activity, and final replies.
 - Bidirectional file transfer belongs to the independent `xagent.file.v1` Profile. File bytes are not carried as base64 content inside WebSocket messages.
-- A `multiple` Connector routes several business resources by `resource_key` over one real Channel without exposing the internal `connector_channel_id` to the model.
-- Tools declared by a Connector Card are registered according to actual runtime health. User authentication and target-system authorization are still checked by the Connector Server on every execution.
-- A Connector Skill may publish a complete directory manifest through `/skill.json`. xAgent downloads it by revision and replaces the local copy atomically; script files are neither downloaded nor executed.
+- A `multiple` AgentPlugin routes business resources by `resource_key` over one real Channel without exposing internal Channel IDs to the model.
+- Tools declared by an AgentPlugin Card are registered according to runtime health. The plugin server checks user authentication and target-system authorization on every execution.
+- A plugin Skill may publish a directory manifest through `/skill.json`. xAgent downloads it by revision and replaces the local copy atomically; script files are neither downloaded nor executed.
 
-A Connector can therefore expose tools and resources governed by real authentication and permissions in an external system, rather than only relaying incoming text.
+An AgentPlugin can expose tools and resources governed by real authentication and permissions in an external system, rather than only relaying incoming text.
 
 ## Health State
 
-xAgent probes Connector health continuously and derives state from consecutive failures:
+xAgent probes AgentPlugin health continuously and derives state from consecutive failures:
 
 | Probe result | Meaning |
 | --- | --- |
@@ -102,16 +103,16 @@ xAgent probes Connector health continuously and derives state from consecutive f
 | 1-2 consecutive failures | Degraded; the connection may be temporarily unstable |
 | 3 or more consecutive failures | Offline; the channel should not be relied on |
 
-A later successful probe restores the online state. When a message does not arrive or a tool cannot execute, inspect Connector health, user authentication, resource configuration, external-system permissions, and Connector logs together.
+A later successful probe restores the online state. When a message does not arrive or a tool cannot execute, inspect plugin health, user authentication, resource configuration, external-system permissions, and plugin logs together.
 
-## Administrator Connector Management
+## Administrator AgentPlugin Connector Management
 
-When an administrator adds a Connector, xAgent reads its Connector Card, probes health, and saves it to the system catalog.
+When an administrator adds an AgentPlugin, xAgent reads its Card, probes health, and saves it to the system catalog.
 
 | Field | Description |
 | --- | --- |
-| Connector address | Address reachable by the xAgent server |
-| API Key | Optional Bearer Token for the Connector Server |
+| AgentPlugin address | Address reachable by the xAgent server |
+| API Key | Optional Bearer Token for the plugin server |
 
 After adding it, verify that:
 
@@ -119,34 +120,34 @@ After adding it, verify that:
 - The Card name, version, protocol, and target system are correct.
 - Authentication flows such as QR scanning, Bot parameters, database credentials, or SSH principal/access-token verification work.
 - Tool declarations contain only actions that are currently executable.
-- Connector Skill and data-contact declarations are complete.
+- Plugin Skill and data-contact declarations are complete.
 
 Do not declare planned but unavailable tools. Once a tool is exposed, an Agent may select it during a task.
 
 ## Open Protocol and Extensions
 
-A custom Connector provides a Connector Card, health endpoint, authentication flow, WebSocket data channel, and required tools. File-capable Connectors also implement the fixed `xagent.file.v1` transfer endpoints. The protocol can support additional IM channels, internal systems, generation services, or other agent systems. The protocol is still in beta, so confirm the protocol version and capability boundaries supported by the target xAgent release before development.
+A custom AgentPlugin provides a Card, health endpoint, authentication flow, data channel, and required tools. File-capable plugins also implement the fixed `xagent.file.v1` transfer endpoints. The protocol can support additional IM channels, internal systems, generation services, or other agent systems. It remains in beta, so check the version and capabilities supported by the target xAgent release before development.
 
 ## Security Notes
 
 - Do not place passwords, tokens, or verification codes in a session.
-- A Connector API Key is only for authentication between the xAgent backend and Connector Server.
-- Run each Connector with a dedicated operating-system user and state directory, and do not expose its management port directly to the public internet.
-- Store database credentials, SSH private keys, access tokens, and host fingerprints only in controlled Connector Server configuration and state directories.
+- An AgentPlugin API Key is only for authentication between the xAgent backend and plugin server.
+- Run each plugin with a dedicated operating-system user and state directory, and do not expose its management port directly to the public internet.
+- Store database credentials, SSH private keys, access tokens, and host fingerprints only in controlled plugin server configuration and state directories.
 - Use approval policies for message sends, external writes, and sensitive reads.
-- External account permissions remain controlled by the external system and Connector.
+- External account permissions remain controlled by the external system and AgentPlugin.
 
 ## Related Docs
 
 - [Start Installation](/docs/getting-started/install)
-- [What Is a Connector?](/docs/getting-started/what-is-connector#how-is-it-different-from-mcp)
-- [Database Connector Setup](/docs/user-guide/database-connector)
-- [SSH Connector Setup](/docs/user-guide/ssh-connector)
+- [What Is an AgentPlugin?](/docs/getting-started/what-is-connector#how-is-it-different-from-mcp)
+- [Database AgentPlugin Setup](/docs/user-guide/database-connector)
+- [SSH AgentPlugin Setup](/docs/user-guide/ssh-connector)
 - [Shortcut Instruction Protocol](/docs/guides/shortcut-instruction-protocol)
 - [Tool Management](/docs/user-guide/tool)
 - [Approval Policy](/docs/user-guide/approval-policy)
 
 ## Next Steps
 
-- [Install a WeChat, Telegram, Feishu, Database, or SSH Connector](/docs/getting-started/install)
-- [Use Connector capabilities in Agent Sessions](/docs/user-guide/agent-session)
+- [Install a WeChat, Telegram, Feishu, DingTalk, Database, or SSH AgentPlugin](/docs/getting-started/install)
+- [Use AgentPlugin capabilities in Agent Sessions](/docs/user-guide/agent-session)

@@ -2,7 +2,7 @@
 title: "xAgent Workspace Files: Materials, Results, and Downloads"
 description: Learn how xAgent Workspaces save, isolate, and manage task materials, generated files, intermediate results, and downloadable outputs.
 status: stable
-updated: 2026-07-27
+updated: 2026-09-17
 ---
 
 # xAgent Workspace Files: Materials, Results, and Downloads
@@ -16,6 +16,8 @@ This page is for users who need to upload files, view outputs, preview reports, 
 The workspace is where xAgent saves task materials and results. Files you upload, generated Markdown, CSV files, HTML reports, and intermediate results will usually appear in Workspace Files.
 
 xAgent isolates files by user and task scope. When an external command runs, an Execution Lease creates the minimum file view and ProcessSandbox mounts only paths authorized for that task. In everyday use, focus on the files visible on the page.
+
+In `v0.0.20.beta`, files created by process Tools are committed to the Workspace correctly and Session drafts remain visible inside the sandbox. Access remains limited to the task's authorized scope.
 
 ## When to Use It
 
@@ -70,6 +72,8 @@ Common result types include:
 
 Preview HTML, Markdown, or image results first to confirm their content. Download them only when they need to be forwarded, archived, or processed further.
 
+When an administrator enables public file links, you can [create an expiring share](/docs/user-guide/file-sharing) from previews, Session files, or Workspace file menus. Sharing is disabled by default; visitors see a dynamically watermarked preview and original downloads require separate permission.
+
 When previewing, check:
 
 - Whether the title and content are correct.
@@ -105,6 +109,7 @@ Keep the following in mind:
 - [Tasks](/docs/user-guide/task)
 - [Tool Management](/docs/user-guide/tool)
 - [Approval Policies](/docs/user-guide/approval-policy)
+- [Share Files with Expiring Links](/docs/user-guide/file-sharing)
 
 ## Next Steps
 

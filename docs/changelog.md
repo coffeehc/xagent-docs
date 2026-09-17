@@ -3,13 +3,60 @@ title: 更新日志
 description: 查看 xAgent 各二进制版本面向用户的重要变化、下载内容和升级注意事项。
 image: /img/share/zh/xagent-overview.png
 status: stable
-updated: 2026-09-07
+updated: 2026-09-17
 schemaType: CollectionPage
 ---
 
 # 更新日志
 
 本文记录 xAgent 免费二进制版本中与安装、使用和安全治理相关的重要变化。当前仍是测试版，功能、界面和协议可能继续调整。
+
+## `v0.0.20.beta` - 2026-09-17
+
+[开始安装](/docs/getting-started/install) · [办公文档能力](/docs/manual/capabilities) · [GitHub Release 与校验文件](https://github.com/coffeehc/xagent-releases/releases/tag/v0.0.20.beta)
+
+本版本修复 ProcessSandbox 运行目录与工作区文件提交问题，统一 Word、PowerPoint 和 PDF 的字体及缺字回退策略，并改进 PowerPoint 演示文稿的内容规划。
+
+- 修复沙箱运行时目录挂载、可写目录隔离、隐藏挂载和工作目录；进程工具生成的文件会正确提交到 Workspace，会话草稿在沙箱中保持可见。
+- Word、PowerPoint 文档及 PDF 预览采用一致的字体与缺字回退策略。
+- `powerpoint-builder` 先规划受众问题和信息顺序，再选择视觉表达；增加产品方案、技术架构、项目进展和数据经营分析等场景参考，扩展提案与市场研究示例，并改进流程、架构、图表和比较的版式选择。
+- Office 工具授权方式不变。本次只更新 xAgent Server，官方 AgentPlugin 制品未更新。
+
+升级前请备份配置、数据库、工作区、Memory、Skill、Tool 包及已安装 AgentPlugin 的配置和数据。Office 文档转 PDF 与 Excel 重算仍需要管理员在宿主服务器安装 LibreOffice；xAgent 发布包不包含它的系统依赖，见[安装说明](/docs/getting-started/install)。
+
+## `v0.0.19.beta` - 2026-09-14（9 月 15 日重发）
+
+[文件分享使用说明](/docs/user-guide/file-sharing) · [GitHub Release](https://github.com/coffeehc/xagent-releases/releases/tag/v0.0.19.beta)
+
+- 新增受管理员策略控制的限时文件外链。用户可从文件预览、会话文件或 Workspace 创建链接，在“文件分享”中查看、复制和撤销；访客无需登录即可查看动态水印预览，原文件下载需要单独授权。
+- 管理员可关闭分享、仅允许 xAgent 产物或允许所有受管文件，并限制最长有效期、下载能力和公开 Base URL。**默认关闭**，升级后需管理员主动启用；分享与访问有审计记录。
+- 改进会话中断与模型重连状态、模型清单选择，以及 Runtime Assets 目录离线缓存；LibreOffice 转换使用不可变的 Runtime Assets 安装目录。
+- 本版本只更新 Server，官方 AgentPlugin 制品未更新。
+
+## `v0.0.18.beta` - 2026-09-11
+
+[模型配置](/docs/user-guide/model-config) · [GitHub Release](https://github.com/coffeehc/xagent-releases/releases/tag/v0.0.18.beta)
+
+- OpenAI 兼容 Provider 可读取 `/api/models` 模型候选项，仍允许手动填写模型 ID；模型编辑器增加上下文上限、最大输出、推理强度、思考开关、思考 token 与温度，同时保留 Raw JSON。
+- 会话用量优先采用 Provider 实测值，未返回时才估算；统一 Tool Schema 严格模式、流式聚合和工具参数回正。
+- 修复空上传目录读取与模型响应诊断。本版本只更新 Server，官方 AgentPlugin 制品未更新。
+
+## `v0.0.17.beta` - 2026-09-09（9 月 10 日重发）
+
+[AgentPlugin 使用说明](/docs/user-guide/connector) · [GitHub Release](https://github.com/coffeehc/xagent-releases/releases/tag/v0.0.17.beta)
+
+- AgentPlugin Tool Card 可声明图标和安全摘要字段；统一会话消息来源，增强上下文压缩、文件生命周期、流式恢复和失败诊断。
+- 会话草稿可恢复附件引用，Markdown 预览目录锚点在当前页面定位；SSH 下载、微信图片等插件拉取文件进入当前 Session workspace。
+- 官方六种插件（微信、Telegram、飞书、Database、SSH、钉钉）进入四平台发布链路，钉钉首次公开；9 月 10 日重发仅更新 Server。
+
+## `v0.0.16.beta` - 2026-09-07（9 月 9 日重发）
+
+[AgentPlugin 迁移与安装](/docs/user-guide/connector) · [A2A Client](/docs/user-guide/a2a) · [GitHub Release](https://github.com/coffeehc/xagent-releases/releases/tag/v0.0.16.beta)
+
+- 原 Connector 领域统一更名为 **AgentPlugin**，用户端使用“插件连接”，管理员使用“AgentPlugin Connector”。协议更新至 `4.4`，历史数据随 SQLite/PostgreSQL 启动迁移。
+- 官方插件改用 `agent-plugins/` 安装目录、`agentplugins/` 发布目录以及新程序、服务和配置名称。已安装旧 Connector 的 Linux 环境应通过公开升级脚本或完整安装器迁移，不要只替换 Server 二进制；自定义旧组件需要自行适配。
+- 新增用户级 A2A Client：发现远端 Agent、发送/查询/回复/取消任务，并在收件箱查看结果；企业授权增加版本上限与 A2A 容量治理。
+- 显式暂停的计划保留未完成任务；未指定模型时使用 Provider 默认模型。升级前备份已安装插件及其数据，并确认企业授权允许目标版本。
 
 ## `v0.0.15.beta` - 2026-09-06
 
@@ -436,7 +483,7 @@ schemaType: CollectionPage
 - Connector health 连续失败一至两次显示为“不稳定”，第三次起显示为“断开”；恢复成功后可以重新回到在线状态。
 - 微信 Connector 增加按接收人维护的凭据续期和到期提醒，凭据过期后停止无效发送。
 - 浏览器扩展通过内置 Browser Connector 建立受控连接，用于浏览器消息、页面上下文和工具调用。
-- 该版本发布时，独立 Connector 版本为微信 `0.0.8`、Telegram `0.0.9`、飞书 `0.0.8`；当前版本以[连接器管理](/docs/user-guide/connector#当前连接器版本)为准。
+- 该版本发布时，独立 Connector 版本为微信 `0.0.8`、Telegram `0.0.9`、飞书 `0.0.8`；当前版本以[AgentPlugin 版本目录](/docs/user-guide/connector#当前-agentplugin-版本)为准。
 
 ### ProcessSandbox 与运行环境
 
@@ -462,7 +509,7 @@ schemaType: CollectionPage
 
 ### 升级说明
 
-该版本发布时，重新运行安装命令即可检查并安装 `v0.0.5.beta`。当前升级请以 [`v0.0.15.beta`](#v0015beta---2026-09-06) 版本说明为准。
+该版本发布时，重新运行安装命令即可检查并安装 `v0.0.5.beta`。当前升级请以 [`v0.0.20.beta`](#v0020beta---2026-09-17) 版本说明为准。
 
 ## `v0.0.4.beta` - 2026-07-15
 
@@ -526,4 +573,4 @@ Release 仅包含：
 
 该版本完善了 Connector 接入、Telegram Connector、使用手册和基础安全治理能力，是 `v0.0.4.beta` 之前的公开测试版本。
 
-新部署和升级应直接使用当前安装脚本与 `v0.0.15.beta` 版本目录。
+新部署和升级应直接使用当前安装脚本与 `v0.0.20.beta` 版本目录。

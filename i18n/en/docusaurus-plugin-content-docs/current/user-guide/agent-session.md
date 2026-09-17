@@ -2,7 +2,7 @@
 title: "xAgent Agent Sessions: Submit Tasks, Files, and Approvals"
 description: Learn how to submit tasks, upload materials, follow execution, handle approvals, use sub-agents, and continuously adjust work in an xAgent Agent Session.
 status: stable
-updated: 2026-07-29
+updated: 2026-09-17
 ---
 
 # xAgent Agent Sessions: Submit Tasks, Files, and Approvals
@@ -142,7 +142,7 @@ If an attachment is still processing, the page prevents sending. Wait until proc
 
 ## Tool Calls and Approvals
 
-xAgent may call Tools to complete a task, such as reading or writing files, accessing web pages, processing spreadsheets, sending email, invoking a Connector, or creating a sub-session.
+xAgent may call Tools to complete a task, such as reading or writing files, accessing web pages, processing spreadsheets, sending email, invoking an AgentPlugin, or creating a sub-session.
 
 Ordinary users do not need to remember Tool names. Describe the action you want. When an action carries risk, the system intercepts it through an approval or confirmation flow.
 
@@ -152,7 +152,7 @@ Actions that require particular attention include:
 - Deleting files or modifying important data.
 - Accessing an external system or calling an internal API.
 - Creating a sub-session or long-running Trigger.
-- Using a Secret, Connector, or high-risk Tool.
+- Using a Secret, AgentPlugin, or high-risk Tool.
 
 When an approval appears, first check what it will do, which object it affects, and whether it sends content externally. Allow it only after confirming the details. If uncertain, reject it and add clarification in the Session.
 

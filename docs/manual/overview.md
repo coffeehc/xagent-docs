@@ -2,13 +2,13 @@
 title: xAgent 使用手册
 description: 按当前 xAgent 控制台菜单查找页面说明、权限范围、关键区域和常用操作，覆盖普通用户、高级模式与管理员页面。
 status: beta
-updated: 2026-09-07
+updated: 2026-09-17
 schemaType: CollectionPage
 ---
 
 # xAgent 使用手册
 
-本手册对应 `v0.0.15.beta` 控制台，按页面而不是概念组织内容。每个页面都说明菜单入口、可见范围、关键区域和常用操作，并提供界面图例。
+本手册对应 `v0.0.20.beta` 控制台，按页面而不是概念组织内容。每个页面都说明菜单入口、可见范围、关键区域和常用操作，并提供界面图例。
 
 ## 怎么使用本手册
 
@@ -34,11 +34,11 @@ schemaType: CollectionPage
 
 ### 工作台
 
-- [仪表板、Agent 会话、工作区文件、会话列表](/docs/manual/workspace)
+- [仪表板、Agent 会话、工作区文件、文件分享、会话列表](/docs/manual/workspace)
 
 ### 运行治理
 
-- [审批、触发器、智能体、Skill、Tool、MCP、连接与密钥](/docs/manual/operations)
+- [审批、触发器、智能体、Skill、Tool、MCP、插件连接、A2A 与密钥](/docs/manual/operations)
 
 ### 个人设置
 

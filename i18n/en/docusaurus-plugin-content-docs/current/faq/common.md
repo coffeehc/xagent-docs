@@ -1,8 +1,8 @@
 ---
 title: Common Questions
-description: Answers to common questions about xAgent installation, usage, model configuration, data security, Skills, Connectors, architecture, development, maintenance, and beta status.
+description: Answers to common questions about xAgent installation, usage, models, data safety, Skills, AgentPlugins, maintenance, and beta status.
 status: stable
-updated: 2026-09-07
+updated: 2026-09-17
 schemaType: WebPage
 ---
 
@@ -44,7 +44,7 @@ No. The documentation site is a static manual.
 
 ### Is the current release stable?
 
-The current version is `v0.0.15.beta`. It is still a beta release intended for deployment trials, scenario validation, and community feedback. The interface, Connectors, and some experimental capabilities may still change.
+The current version is `v0.0.20.beta`. It is still a beta release intended for deployment trials, scenario validation, and community feedback. The interface, AgentPlugins, and some experimental capabilities may still change.
 
 ### How should I install or upgrade xAgent?
 
@@ -54,7 +54,19 @@ Use the official installer:
 curl -fsSL https://downloads.xagent.xiagaogao.com/scripts/install.sh | bash
 ```
 
-The script detects the operating system and architecture, verifies release packages, and supports pinned versions, unattended installation, and Connector selection. On Linux, it attempts to restore the previous version if activation fails. See [Start Installation](/docs/getting-started/install) for the complete flow.
+The script detects the operating system and architecture, verifies release packages, and supports pinned versions, unattended installation, and AgentPlugin selection. On Linux, it attempts to restore the previous version if activation fails. See [Start Installation](/docs/getting-started/install) for the complete flow.
+
+### What must be installed for Office-to-PDF or Excel recalculation?
+
+An administrator must install LibreOffice on the server; its operating-system dependencies are not bundled in the xAgent release. On Debian/Ubuntu, run `sudo apt-get update && sudo apt-get install -y libreoffice`, then verify with `soffice --headless --version`. See [Installation](/docs/getting-started/install#step-7-prepare-runtime-assets).
+
+### Can files be shared through public links?
+
+Yes, after an administrator enables **Storage Management > File Sharing**; sharing is disabled by default. Links must expire, previews are watermarked, and original downloads need separate permission. See [File Sharing](/docs/user-guide/file-sharing).
+
+### How do I call a remote Agent?
+
+Add and discover its Agent Card under **Operations > A2A**, configure the remote credentials, then inspect tasks and inbox results. See [A2A Client](/docs/user-guide/a2a).
 
 ### Is ProcessSandbox the same as Workspace isolation?
 
@@ -64,15 +76,15 @@ No. Workspace isolation determines which files a user and Session can see, read,
 
 The following questions were previously spread across Getting Started, User Guide, Deployment, Architecture, Developer Guide, and Reference pages. They are now collected here.
 
-### Does xAgent store the target system token for a Connector?
+### Does xAgent store the target system token for an AgentPlugin?
 
-It should not be described that way. A target-system token belongs to the Connector or target-system boundary.
+It should not be described that way. A target-system token belongs to the AgentPlugin or target-system boundary.
 
-### Must a Connector provide a Skill?
+### Must an AgentPlugin provide a Skill?
 
 It may provide one, but that is not its only responsibility.
 
-### Is the Connector protocol fully stable?
+### Is the AgentPlugin protocol fully stable?
 
 It is currently marked experimental and may change.
 
@@ -140,7 +152,7 @@ If the model service supports prompt-prefix caching, the repeated cost of fixed 
 
 ### Why is Tool calling required?
 
-xAgent is not a chat-only system. It needs to read files, write to the Workspace, call MCP, use Connectors, process Triggers, and generate artifacts. Many tasks cannot be completed reliably without stable Tool calling.
+xAgent is not a chat-only system. It needs to read files, write to the Workspace, call MCP, use AgentPlugins, process Triggers, and generate artifacts. Many tasks cannot be completed reliably without stable Tool calling.
 
 ### Does context compression affect results?
 
@@ -148,15 +160,15 @@ It can. Context compression lets long tasks continue, but compressed content is 
 
 ### Does xAgent store target-system login state?
 
-It should not be designed that way. Target-system login state belongs to the Connector or target system.
+It should not be designed that way. Target-system login state belongs to the AgentPlugin or target system.
 
-### Can an Agent see connector_channel_id?
+### Can an Agent see internal AgentPlugin Channel IDs?
 
 An Agent should not see internal system-level or channel-level IDs.
 
-### Is a Connector the same as a Skill?
+### Is an AgentPlugin the same as a Skill?
 
-No. A Connector may provide a Skill, but the Connector itself is a protocol bridge to an external system.
+No. An AgentPlugin may provide a Skill, but the plugin itself owns an external-system integration boundary.
 
 ### Can fields from another project's manifest be used as a reference?
 
@@ -170,13 +182,13 @@ The documentation should not impose that restriction in advance. Ownership depen
 
 If the field introduces a new term, update the Glossary as well.
 
-### Is RuntimeConnection the same as Connector?
+### Is RuntimeConnection the same as AgentPlugin?
 
-No. Connector connects an external system, while RuntimeConnection focuses on an execution environment.
+No. AgentPlugin connects an external system, while RuntimeConnection focuses on an execution environment.
 
 ### Can an integration protocol be documented before implementation?
 
-No. Keep only conceptual boundaries until the protocol is stable.
+AgentPlugin protocol `4.4` is published. Before implementing it, check the target Server release, Card/Descriptor schemas, and capability boundaries. Legacy Connector attachments do not define the current protocol.
 
 ### Is RuntimeConnection always exposed to an Agent?
 
@@ -190,9 +202,9 @@ No. A Skill primarily describes task methods and Tool usage guidance.
 
 It should not be described that way. Execution capability should belong to a Tool or RuntimeConnection.
 
-### Can a Skill come from a Connector?
+### Can a Skill come from an AgentPlugin?
 
-It can serve as runtime guidance that a Connector provides to an Agent, but the concrete format depends on the implementation.
+Yes. A plugin can publish a directory manifest via `/skill.json`. xAgent downloads it by revision and replaces the local copy atomically; script files are not downloaded or executed.
 
 ### Are unit tests required for Markdown?
 
@@ -248,7 +260,7 @@ No. Chat is only one entry point. xAgent focuses on completing work: reading mat
 
 ### Does xAgent need to be installed on every computer?
 
-No. xAgent is deployed on a server and users access it through the web or extended Connectors. A user's computer does not need to remain on while a Task runs, and users can submit Tasks remotely through IM entry points such as WeChat.
+No. xAgent is deployed on a server and users access it through the web or installed AgentPlugins. A user's computer does not need to remain on while a Task runs, and users can submit Tasks remotely through IM entry points such as WeChat.
 
 ### Where are Task files stored?
 
@@ -272,11 +284,11 @@ Not currently. Knowledge capabilities can be extended through Skill + MCP: a Ski
 
 ### Where do Session events come from?
 
-Session events may come from external APIs, Triggers, Connectors, or other Sessions. xAgent delivers events to the corresponding Agent Session through its built-in event queue.
+Session events may come from external APIs, Triggers, AgentPlugins, or other Sessions. xAgent delivers events to the corresponding Agent Session through its built-in event queue.
 
-### What is a Connector?
+### What is an AgentPlugin?
 
-A Connector brings WeChat, Telegram, Feishu, browsers, enterprise systems, or third-party services into xAgent. It can carry bidirectional messages and file references, provide external Tools, manage authorization state, and deliver external events to Agent Sessions. Ordinary users complete authorization and use the connection, while administrators prepare Connectors and safety policies.
+AgentPlugins connect WeChat, Telegram, Feishu, DingTalk, Database, SSH, and other supported systems to xAgent; browser interaction uses a built-in Runtime. Plugins can carry messages, file references, and external Tools in both directions. Users manage their Channels in Plugin Connections; administrators manage the plugin servers and safety policies in AgentPlugin Connectors.
 
 ### Can Sessions communicate with each other?
 
@@ -308,15 +320,15 @@ Usually not. Administrators can prepare common scenarios, dedicated Agents, Tool
 
 ### What does the free binary release mean?
 
-The free binary release is currently the `v0.0.15.beta` beta and serves as an entry point for understanding and evaluating xAgent. Users can deploy the standard version first and experience core capabilities such as Task submission, the file Workspace, Tools, Skills, and external connections.
+The free binary release is currently the `v0.0.20.beta` beta and serves as an entry point for understanding and evaluating xAgent. Users can deploy the standard version first and experience core capabilities such as Task submission, the file Workspace, Tools, Skills, and external connections.
 
 A free binary release is not the same as an open-source release. xAgent will evaluate whether to open the source or expand ecosystem collaboration based on product maturity, community feedback, security boundaries, and commercial sustainability.
 
-Enterprise internal-system integration, unified identity, complex permissions, audit and compliance, dedicated Connectors, or deep business-process changes usually require custom integration based on actual needs.
+Enterprise internal-system integration, unified identity, complex permissions, audit and compliance, dedicated AgentPlugins, or deep business-process changes usually require custom integration based on actual needs.
 
 ### What is the difference between the commercial and free editions?
 
-When no Enterprise license certificate is installed, xAgent enters the Free edition directly; no Free certificate application or renewal is required. The Free edition provides the core product capabilities with fixed limits of 2 users, 30 Sessions, 1 WorkGroup, 5 Connector VChannels, and 5 scheduled tasks.
+When no Enterprise license certificate is installed, xAgent enters the Free edition directly; no Free certificate application or renewal is required. The Free edition provides the core product capabilities with fixed limits of 2 users, 30 Sessions, 1 WorkGroup, 5 AgentPlugin VChannels, and 5 scheduled tasks.
 
 The Enterprise edition uses an external license certificate to provide higher capacity while retaining signature, device-binding, and expiry validation. It is intended for organizations that need more capacity, support, or custom integration.
 
@@ -366,9 +378,9 @@ Troubleshooting directions can be documented, but error codes must not be invent
 
 Yes. Once stable, they should be maintained centrally on this page.
 
-### Can a Connector be called a plugin?
+### How are Connectors and AgentPlugins related?
 
-That is not recommended. A Connector is a protocol bridge to an external system and is not the same as a general plugin.
+The former Connector domain was renamed AgentPlugin in `v0.0.16.beta`. Older attachments and changelogs use the historical name; current menus and installation paths use AgentPlugin. This is not an arbitrary in-process code plugin.
 
 ### Can Memory be called history?
 
@@ -376,7 +388,7 @@ No. Memory and Session history are different concepts.
 
 ### Why are some terms kept in English?
 
-Session, Task, Tool, Skill, Connector, Workspace, and Memory are fixed concepts that appear in the product and code. Keeping the English terms reduces ambiguity across the UI, logs, and code.
+Session, Task, Tool, Skill, AgentPlugin, Workspace, and Memory are fixed concepts that appear in the product and code. Keeping the English terms reduces ambiguity across the UI, logs, and code.
 
 ### What is the difference between an Agent and a Skill?
 
@@ -440,23 +452,23 @@ No. A Task can begin execution. Only a specific Tool action that matches a polic
 
 ### Can I handle approvals from WeChat or Telegram?
 
-Yes. Since `v0.0.4.beta`, xAgent attempts to send an approval notice to every available IM channel for the current user when a Session enters the approval-waiting state. The Connector must be online, the user must be authenticated, and a working message-sending Tool must be available. Reply using the `@{approval:id}` reference and the explicit approval or rejection format shown in the notice.
+Yes. When an IM AgentPlugin-originated task needs approval and its original channel can still send messages, xAgent attempts to return the notice to that channel; Web-originated tasks are not broadcast to every IM channel. Reply using the `@{approval:id}` reference and the explicit approval or rejection format shown in the notice.
 
 ### Can ordinary users change system approval policies?
 
 Usually not. Ordinary users may be able to configure personal approval policies, while administrators maintain system-level policies.
 
-### What is the difference between My Connections and Connector Management?
+### What is the difference between Plugin Connections and AgentPlugin Connectors?
 
-My Connections binds the current user's external accounts. Administrators use Connector Management to maintain system-level Connector services.
+Users bind their own external accounts under **Operations > Plugin Connections**. Administrators manage system-level plugin services under **Agent Governance > AgentPlugin Connectors**.
 
-### Are Connector Tools automatically available to every user?
+### Are AgentPlugin Tools automatically available to every user?
 
-No. Availability depends on whether the Connector is online, whether the user is authenticated, connection state, Tool governance, and approval policies.
+No. Availability depends on whether the AgentPlugin is online, whether the user is authenticated, connection state, Tool governance, and approval policies.
 
 ### Why can I receive a message but not reply?
 
-First check Connector health, user authentication, and platform permissions. WeChat also requires valid recipient context. Sending is blocked after the `context_token` expires until the context is re-established.
+First check AgentPlugin health, user authentication, and platform permissions. WeChat also requires valid recipient context. Sending is blocked after the `context_token` expires until the context is re-established.
 
 ### Are long-running Tasks split automatically?
 
@@ -496,7 +508,7 @@ First confirm whether an administrator enabled advanced features for your accoun
 
 ### Which menu should I open first?
 
-Start with Agent Session and describe the goal, materials, constraints, and delivery requirements. Open Workspace Files when you need to inspect files, or My Connections when you need to bind a messaging channel.
+Start with Agent Session and describe the goal, materials, constraints, and delivery requirements. Open Workspace Files when you need to inspect files, or Plugin Connections when you need to bind a messaging channel.
 
 ### Where are theme and display density settings?
 
@@ -578,7 +590,7 @@ Read the failure reason first. Common responses include adding the file, complet
 
 ### Why are some Tools not visible to me?
 
-Tool visibility depends on account permissions, administrator configuration, connection state, personal MCP configuration, Connector authorization state, and personal switches.
+Tool visibility depends on account permissions, administrator configuration, connection state, personal MCP configuration, AgentPlugin authorization state, and personal switches.
 
 ### Does a Trigger wait until a Task finishes?
 
