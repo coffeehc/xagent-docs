@@ -1,36 +1,48 @@
 ---
-title: Workspace Pages
-description: Page-by-page guidance and UI examples for the xAgent Dashboard, Agent Sessions, Workspace Files, and Session List.
+title: "Workspace Pages"
+description: "Page-by-page guidance and UI examples for the xAgent Dashboard, Agent Sessions, Workspace Files, and Session List."
 status: beta
-updated: 2026-09-17
+updated: 2026-10-01
 ---
 
 # Workspace Pages
 
-Workspace contains the pages used most often. Dashboard, Agent Sessions, and Workspace Files are available to standard users. Session List requires advanced mode.
+Workspace-related pages support task submission, usage review, materials, and delivery checks. This page preserves their instructions and UI examples. Simple/advanced-mode differences apply to versions that still offer that setting; follow the entries exposed by your installed version and account permissions.
 
-## Simple and Advanced Modes
+## Choose the Right Entry Point {/* #choose-the-right-entry-point */}
 
-xAgent uses two menu modes to balance ease of use and configurability. Simple mode keeps only the entries needed for daily work, so it is the recommended starting point for most users, especially people who are new to AI. With fewer menus, users can submit tasks directly without being distracted by settings they do not need.
+| Your goal | Start here | Check afterward |
+| --- | --- | --- |
+| Submit work, add materials, or continue a task | [Agent Sessions](#agent-sessions) | Results, files, and pending approvals in the timeline |
+| Find uploaded materials or generated files | [Workspace Files](#workspace-files) | File contents, source task, and downloaded output |
+| Give external visitors access to a file | [File Shares](#file-shares) | Expiry, anonymous access, and original-download permission |
+| Review usage or execution state | [Dashboard](#dashboard) | Date range, call totals, and Session status |
+| Search and manage more historical Sessions | [Session List](#session-list) | Current menu, Session goal, and status; advanced mode applies only to earlier versions |
 
-Advanced mode adds orchestration and capability-management entries for users who need to find historical sessions, configure automation, manage Agents, Skills, Tools/MCP, or maintain personal approval policies. An administrator can enable advanced mode for each account. The mode changes menu visibility only; it does not change the permissions already assigned to the account.
+The screenshots below explain each page’s purpose; use the menu names and layout in your installed version. If an entry is missing, check the deployed version and permissions; menu mode applies only to versions that offer it.
+
+## Simple and Advanced Modes {/* #simple-and-advanced-modes */}
+
+Versions that offer this setting use two menu modes to balance ease of use and configurability. Simple mode keeps only the entries needed for daily work, so it is the recommended starting point for most users, especially people who are new to AI. With fewer menus, users can submit tasks directly without being distracted by settings they do not need.
+
+Advanced mode adds orchestration and capability-management entries for users who need to find historical sessions, configure automation, manage Agents, Skills, Tools/MCP, or maintain personal approval policies. Earlier administrators could enable advanced mode per account; it changed menu visibility, not permissions. User menus in source checked on 2026-10-01 no longer filter by that switch.
 
 | Mode | Menu difference | Recommendation |
 | --- | --- | --- |
 | Simple | Dashboard, Agent sessions, Workspace files, File Shares, Approvals, Plugin Connections, Secrets, Account management | Default mode for starting work directly |
 | Advanced | Everything in Simple, plus Session list, Triggers, Agents, Skills, My tools, My MCP, and Personal approval policy | Enable when more management or orchestration is needed |
 
-### Simple mode
+### Simple mode {/* #simple-mode */}
 
 ![xAgent English simple mode menu showing the entries needed for daily work](/img/manual/v005/en/mode-simple.webp)
 
-### Advanced mode
+### Advanced mode {/* #advanced-mode */}
 
 ![xAgent English advanced mode menu showing the full orchestration and capability-management entries](/img/manual/v005/en/mode-advanced.webp)
 
-## Dashboard
+## Dashboard {/* #dashboard */}
 
-**Menu:** Workspace > Dashboard
+**Menu:** Workspace &gt; Dashboard
 
 **Visibility:** All users
 
@@ -41,9 +53,9 @@ Advanced mode adds orchestration and capability-management entries for users who
 - Use the charts to compare usage and call trends.
 - Open a session from the session panel and check execution or approval blocking.
 
-## Agent Sessions
+## Agent Sessions {/* #agent-sessions */}
 
-**Menu:** Workspace > Agent Sessions
+**Menu:** Agent Sessions. The version shown below uses Workspace &gt; Agent Sessions; newer layouts may use a separate Session entry point.
 
 **Visibility:** All users
 
@@ -56,9 +68,9 @@ Advanced mode adds orchestration and capability-management entries for users who
 
 See [Agent Session](/docs/user-guide/agent-session) and [Shortcut Instructions](/docs/user-guide/shortcut-instructions) for complete workflows.
 
-## Workspace Files
+## Workspace Files {/* #workspace-files */}
 
-**Menu:** Workspace > Workspace Files
+**Menu:** Workspace &gt; Workspace Files
 
 **Visibility:** All users
 
@@ -71,19 +83,19 @@ See [Agent Session](/docs/user-guide/agent-session) and [Shortcut Instructions](
 
 See [Workspace Files](/docs/user-guide/workspace) for details.
 
-## File Shares
+## File Shares {/* #file-shares */}
 
-**Menu:** Workspace > File Shares
+**Menu:** Workspace &gt; File Shares
 
 **Visibility:** All users; creating links requires an administrator-enabled policy
 
 Inspect links, visits, and download totals by file; copy or revoke links and inspect individual visits in the details. Sharing is disabled by default, and every link expires. See [Share Files with Expiring Links](/docs/user-guide/file-sharing).
 
-## Session List
+## Session List {/* #session-list */}
 
-**Menu:** Workspace > Session List
+**Menu:** Workspace &gt; Session List
 
-**Visibility:** Advanced-mode users
+**Visibility:** Determined by account permissions and the current menu. The version shown below requires advanced mode
 
 ![xAgent Session List showing state, type, update time, target, and actions](/img/manual/v005/en/session-list.webp)
 

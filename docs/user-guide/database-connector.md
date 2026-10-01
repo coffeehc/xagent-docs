@@ -1,9 +1,9 @@
 ---
-title: Database AgentPlugin 配置：连接 MySQL 与 PostgreSQL
-description: 安装 xAgent Database AgentPlugin，通过管理页面添加 MySQL 和 PostgreSQL 数据库，并完成用户连接与故障排查。
-image: /img/user-guide/connectors/database-management-zh.webp
+title: "Database AgentPlugin 配置：连接 MySQL 与 PostgreSQL"
+description: "安装 xAgent Database AgentPlugin，通过管理页面添加 MySQL 和 PostgreSQL 数据库，并完成用户连接与故障排查。"
+image: "/img/user-guide/connectors/database-management-zh.webp"
 status: beta
-updated: 2026-09-17
+updated: 2026-10-01
 ---
 
 # Database AgentPlugin 配置：连接 MySQL 与 PostgreSQL
@@ -12,7 +12,15 @@ Database AgentPlugin 由管理员配置数据库地址，用户再用自己的�
 
 当前公开版本为 `0.0.7`，支持 MySQL 和 PostgreSQL。
 
-## 安装
+## 开始前检查 {/* #开始前检查 */}
+
+- **只需要使用已有数据库的用户：** 先向管理员确认资源已添加，再直接看[用户连接](#%E7%94%A8%E6%88%B7%E8%BF%9E%E6%8E%A5)。不需要重复安装或接入服务。
+- **首次配置的管理员：** 确认插件服务能访问数据库网络，准备稳定的资源 ID、数据库名和地址，再依次安装、接入并添加资源。
+- **权限与保管：** 数据库原生账号决定可执行的 SQL；只读任务应使用只读账号。用户凭据留在 AgentPlugin 状态目录，不要写进会话或资源用途说明。
+
+完成标准是“服务在线、用户连接成功、只读查询返回正确资源的结果”。仅在管理页面保存一条资源，不代表用户已经连接。
+
+## 安装 {/* #安装 */}
 
 在 xAgent 服务器上重新运行安装器，并只选择 Database AgentPlugin：
 
@@ -36,9 +44,9 @@ cd ~/.local/share/xagent/agent-plugins/database
 ~/.local/bin/xagent-database-agent-plugin start --config ./config.yml
 ```
 
-## 接入 xAgent
+## 接入 xAgent {/* #接入-xagent */}
 
-管理员打开“Agent 治理 > AgentPlugin Connector”，点击“添加 AgentPlugin”。
+管理员打开“Agent 治理 &gt; AgentPlugin Connector”，点击“添加 AgentPlugin”。
 
 | 字段 | 填写内容 |
 | --- | --- |
@@ -49,7 +57,7 @@ cd ~/.local/share/xagent/agent-plugins/database
 
 `19094` 只需要允许 xAgent Server 访问，不要直接开放到公网。
 
-## 添加数据库
+## 添加数据库 {/* #添加数据库 */}
 
 点击 Database AgentPlugin 行末的管理按钮，进入数据库资源页面。
 
@@ -76,7 +84,7 @@ cd ~/.local/share/xagent/agent-plugins/database
 - 修改主机、端口、数据库名或类型会重新连接目标。
 - 删除资源会关闭对应连接，并清理 AgentPlugin Server 保存的用户凭据。
 
-## 用户连接
+## 用户连接 {/* #用户连接 */}
 
 管理员添加资源后，用户打开“插件连接”，选择 Database AgentPlugin 和数据库资源，再填写自己的数据库用户名和密码。
 
@@ -92,7 +100,7 @@ Database AgentPlugin 提供 `db_list`、`db_getinfo` 和 `db_execute_sql`。生�
 
 用户凭据保存在 AgentPlugin 的 `state_dir/credentials.json`。目录权限为 `0700`，文件权限为 `0600`，当前没有应用层加密，生产环境应把状态目录放在加密磁盘或受控 volume 中。
 
-## 直接编辑配置文件
+## 直接编辑配置文件 {/* #直接编辑配置文件 */}
 
 管理页面只修改 `database_agent_plugin.databases`。监听地址、API Key、状态目录和查询限制需要编辑 `config.yml`：
 
@@ -121,7 +129,7 @@ sudo systemctl restart xagent-database-agent-plugin
 sudo systemctl status xagent-database-agent-plugin
 ```
 
-## 常见问题
+## 常见问题 {/* #常见问题 */}
 
 | 现象 | 处理方法 |
 | --- | --- |
@@ -138,7 +146,7 @@ Linux 日志：
 journalctl -u xagent-database-agent-plugin -f
 ```
 
-## 相关文档
+## 相关文档 {/* #相关文档 */}
 
 - [AgentPlugin 总览](/docs/user-guide/connector)
 - [SSH AgentPlugin 配置](/docs/user-guide/ssh-connector)

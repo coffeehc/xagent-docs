@@ -1,9 +1,9 @@
 ---
 title: "SSH AgentPlugin Configuration: Private Keys, Targets, and Access Identities"
-description: Install the xAgent SSH AgentPlugin, put private keys in the keys directory, and configure SSH targets, access identities, and host fingerprints.
-image: /img/user-guide/connectors/ssh-management-zh.webp
+description: "Install the xAgent SSH AgentPlugin, put private keys in the keys directory, and configure SSH targets, access identities, and host fingerprints."
+image: "/img/user-guide/connectors/ssh-management-zh.webp"
 status: beta
-updated: 2026-09-17
+updated: 2026-10-01
 ---
 
 # SSH AgentPlugin Configuration: Private Keys, Targets, and Access Identities
@@ -12,7 +12,16 @@ The SSH AgentPlugin signs in to servers with remote accounts and private keys co
 
 The current public release is `0.0.10`. Put the private key in the SSH AgentPlugin `keys/` directory before configuring a target. The management page accepts only a filename and does not upload private keys.
 
-## Install
+## Before You Start {/* #before-you-start */}
+
+- **Users of an existing target:** obtain the assigned access identity from an administrator and go to [Connect a User](#connect-a-user). Do not provide private keys in a Session.
+- **Administrators setting up a target:** prepare the remote account, usable private key, reachable host, and user access identities. Install first, place the key in `keys/` as described below, then register the plugin and add the target.
+- **Distinguish the two identities:** users enter an AgentPlugin access identity; the administrator-configured SSH account and private key authenticate to the remote host. They serve different purposes.
+- **Verify before writing:** check connection state and the host fingerprint, confirm the target with read-only commands, and follow approvals for file changes or other mutations.
+
+The installation and field examples below cover the public SSH AgentPlugin `0.0.10`. Server and plugin releases are independent; upgrading Server does not imply a plugin configuration-format change.
+
+## Install {/* #install */}
 
 Rerun the installer on the xAgent host and select only the SSH AgentPlugin:
 
@@ -30,7 +39,7 @@ curl -fsSL https://downloads.xagent.xiagaogao.com/scripts/install.sh \
 
 Linux creates and starts the `xagent-ssh-agent-plugin` systemd service. The macOS installer also prepares and starts a managed service.
 
-## Put the Private Key in `keys/`
+## Put the Private Key in `keys/` {/* #put-the-private-key-in-keys */}
 
 The private key must be a regular file under the `keys/` directory beside `config.yml`. Do not configure an arbitrary absolute path.
 
@@ -67,9 +76,9 @@ cd ~/.local/share/xagent/agent-plugins/ssh
 
 The AgentPlugin reads `config.yml` and `keys/` only at startup. Restart it after adding or replacing a private key. The management page does not upload or hot-reload keys.
 
-## Register It in xAgent
+## Register It in xAgent {/* #register-it-in-xagent */}
 
-As an administrator, open **Agent Governance > AgentPlugin Connectors** and select **Add AgentPlugin**.
+As an administrator, open **Agent Governance &gt; AgentPlugin Connectors** and select **Add AgentPlugin**.
 
 | Field | Value |
 | --- | --- |
@@ -80,7 +89,7 @@ The AgentPlugin should show **Online** with protocol `4.4`. SSH AgentPlugin `0.0
 
 Only xAgent Server needs access to port `19095`; do not expose it directly to the public internet.
 
-## Add an SSH Target
+## Add an SSH Target {/* #add-an-ssh-target */}
 
 Use the management action on the SSH AgentPlugin row to open the target page.
 
@@ -106,7 +115,7 @@ The management page stores a SHA-256 digest for a new token and a bcrypt digest 
 
 Saving a target reprobes it immediately. Changes to connection fields close the old SSH connection, user bindings, and related PTY Sessions.
 
-## Connect a User
+## Connect a User {/* #connect-a-user */}
 
 After the administrator adds a target, the user opens **Plugin Connections**, selects the SSH AgentPlugin and target, and enters the assigned principal and access token or AgentPlugin-local username and password.
 
@@ -120,13 +129,13 @@ List my available SSH targets, then run uname -a and pwd on the test server. Do 
 
 The SSH AgentPlugin supports bounded commands, interactive PTYs, and SFTP upload and download. It does not currently support port forwarding, jump hosts, agent forwarding, keyboard-interactive authentication, or arbitrary TCP proxying.
 
-## Host Fingerprints
+## Host Fingerprints {/* #host-fingerprints */}
 
 On the first connection, the AgentPlugin records the remote host key's `SHA256:` fingerprint. If the fingerprint changes later, the target enters `host_key_changed`; the AgentPlugin does not trust the new key automatically.
 
 Select **Trust the new host key on the next connection** only after confirming through another channel that the server intentionally changed its SSH host key. Do not clear the old fingerprint if the change cannot be verified.
 
-## Edit `config.yml` Directly
+## Edit `config.yml` Directly {/* #edit-configyml-directly */}
 
 The management page maintains targets and access identities. Edit `config.yml` for the listen address, API Key, state directory, timeouts, file limits, and audit mode:
 
@@ -167,7 +176,7 @@ sudo systemctl status xagent-ssh-agent-plugin
 
 `audit_shell_input` supports `full`, `hash_only`, and `none`. Shell input may contain sensitive values; production deployments normally use `hash_only` or `none`.
 
-## Common Problems
+## Common Problems {/* #common-problems */}
 
 | State or symptom | Fix |
 | --- | --- |
@@ -186,7 +195,7 @@ journalctl -u xagent-ssh-agent-plugin -f
 sudo tail -f /opt/xagent/agent-plugins/ssh/logs/ssh-audit.jsonl
 ```
 
-## Related Documentation
+## Related Documentation {/* #related-documentation */}
 
 - [AgentPlugin overview](/docs/user-guide/connector)
 - [Database AgentPlugin configuration](/docs/user-guide/database-connector)

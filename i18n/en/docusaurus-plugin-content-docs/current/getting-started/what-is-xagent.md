@@ -1,14 +1,14 @@
 ---
-title: What Is xAgent? Product Positioning and Core Capabilities
-description: A plain-language explanation of what xAgent is, what it can do, and how it differs from a typical chat assistant.
-image: /img/share/en/xagent-overview.png
+title: "What Is xAgent? Product Positioning and Core Capabilities"
+description: "A plain-language explanation of what xAgent is, what it can do, and how it differs from a typical chat assistant."
+image: "/img/share/en/xagent-overview.png"
 status: stable
-updated: 2026-09-17
+updated: 2026-10-01
 ---
 
 # What Is xAgent?
 
-## The short version
+## The short version {/* #the-short-version */}
 
 xAgent is best understood as an **AI portal and AI foundation**. It gives employees one place to use AI while giving the company one place to manage models, capabilities, permissions, and usage. It also connects the systems a team already uses and works within the permissions of each user's existing accounts.
 
@@ -16,17 +16,17 @@ You can ask it to break down a goal, make a plan, carry out the steps, review da
 
 xAgent does not require a team to replace its existing systems, and it does not invent new permissions. It understands the task, coordinates execution, and summarizes results; each connected system still controls what its own accounts are allowed to access.
 
-The current version is `v0.0.20.beta`, a beta release for deployment trials, scenario validation, and feedback.
+As of 2026-10-01, the latest public binary release is `v0.0.21.beta`, a beta release for deployment trials, scenario validation, and feedback.
 
-## Why use xAgent?
+## Why use xAgent? {/* #why-use-xagent */}
 
-1. **No separate deployment for every employee:** Employees open a browser or send a text or voice message through WeChat. The server runs the task centrally.
+1. **No separate deployment for every employee:** Employees open a browser or send text through a configured and authorized channel such as WeChat. Voice also depends on the channel and audio-processing capability. The server runs the task centrally.
 2. **One shared integration, existing permissions preserved:** After an administrator connects an internal system, each employee only needs to scan a code or sign in with their account to confirm their identity. xAgent then provides access according to that employee's existing permissions in the internal system; it does not add new permissions.
 3. **Keep important work products on the server:** Task materials and results are managed centrally, reducing the amount of sensitive data, passwords, and intermediate files stored on employee computers. This lowers exposure when a device is infected, lost, or stolen.
 4. **Balance safety and convenience:** xAgent does not give AI unlimited autonomy. Sending messages, deleting files, or changing data can require user approval. The extra confirmation adds a step, but makes the control boundary clear.
 5. **Hide unnecessary complexity:** Administrators prepare models, Tools, AgentPlugins, and policies. Most users only need to type or describe their goal to get started.
 
-## What can it do?
+## What can it do? {/* #what-can-it-do */}
 
 Typical tasks include:
 
@@ -39,17 +39,17 @@ Typical tasks include:
 
 See [Supported Agent Capabilities](/docs/manual/capabilities) for the built-in Skills and supported document formats.
 
-## How it works
+## How it works {/* #how-it-works */}
 
 Suppose you ask: "Turn these three sales spreadsheets into a weekly report, flag anomalies, and show me a draft first. Do not send it yet."
 
 1. xAgent reads the files and understands the goal and constraints.
 2. It selects the relevant Skills and Tools when needed instead of loading everything up front.
 3. It analyzes the data, creates the report, and saves it to the workspace.
-4. Because you said not to send it, it stops at the draft and does not send a message on its own.
+4. “Do not send” defines the task scope. Also constrain actual sending capabilities through least-privilege external accounts and approval policies, and inspect execution records during review.
 5. After you approve the content, it can send the report, or save this workflow for reuse.
 
-## What makes it different
+## What makes it different {/* #what-makes-it-different */}
 
 - **Task-first:** The goal is a checkable result, not an endless conversation.
 - **Works with real materials:** It can read, create, save, and revise files instead of only producing chat text.
@@ -59,9 +59,9 @@ Suppose you ask: "Turn these three sales spreadsheets into a weekly report, flag
 - **Self-hostable:** The service, workspace, and model gateway can run in your own environment.
 - **Turns experience into reusable capability:** After a task is complete, an employee can tell the AI, "Summarize this workflow as a Skill," and xAgent can help organize, test, and improve it. If it also needs a fixed role, prompt, and capability entry point, it can become a dedicated Agent for the team.
 
-## How it compares
+## How it compares {/* #how-it-compares */}
 
-| | Typical chat assistant | Single-purpose bot | xAgent |
+|  | Typical chat assistant | Single-purpose bot | xAgent |
 | --- | --- | --- | --- |
 | Main use | Answer questions and generate text | Solve one fixed scenario | Combine several work capabilities around a task |
 | Materials | Usually stays in the conversation | Depends on the product | Files, spreadsheets, web pages, and session materials can all be task inputs |
@@ -72,13 +72,13 @@ Suppose you ask: "Turn these three sales spreadsheets into a weekly report, flag
 
 In short: a chat assistant is mainly a question-and-answer window, a single-purpose bot is a fixed machine, and xAgent is a team workbench that can keep gaining useful capabilities.
 
-## What it does not replace
+## What it does not replace {/* #what-it-does-not-replace */}
 
 xAgent understands tasks, organizes capabilities, and controls execution boundaries. It does not replace an organization's identity system, business permissions, backups, or audits. What an external system can access is still determined by the external account and the authorization configured for its AgentPlugin or MCP.
 
 xAgent runs on the server, so each computer does not need a separate client. Debian Linux is recommended for stable, long-running deployments. macOS is xAgent's primary development environment and is also well supported. Windows currently lacks enough sandbox support to run managed scripts with the same safety and control, so it is not recommended as a deployment environment for now.
 
-## Go deeper when you need to
+## Go deeper when you need to {/* #go-deeper-when-you-need-to */}
 
 This page keeps only the core ideas. The following pages carry the detailed usage and implementation guidance:
 
@@ -89,7 +89,7 @@ This page keeps only the core ideas. The following pages carry the detailed usag
 - [How Multiple Agents Collaborate Through Session Events](/docs/guides/multi-agent-session-event-collaboration)
 - [Deploying an AI Agent on Your Own Server](/docs/guides/self-hosted-ai-agent)
 
-## Who is it for?
+## Who is it for? {/* #who-is-it-for */}
 
 xAgent is a good fit when work involves many materials, repeated discussion, tool calls, files, or multiple stages. Examples include research, report generation, meeting organization, contract review, data analysis, customer support, and project collaboration.
 
@@ -101,7 +101,7 @@ To try it, continue with:
 - [Supported Agent Capabilities](/docs/manual/capabilities)
 - [Common Questions](/docs/faq/common)
 
-## A plain-language glossary
+## A plain-language glossary {/* #a-plain-language-glossary */}
 
 | Term | Think of it as | What it does |
 | --- | --- | --- |

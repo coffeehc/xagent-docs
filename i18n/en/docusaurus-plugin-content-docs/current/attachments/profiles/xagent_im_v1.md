@@ -1,8 +1,16 @@
 ---
-title: xAgent IM Profile v1
-description: Legacy instant-messaging capabilities, inbound messages, delivery semantics, and compatibility boundaries for xAgent IM Profile v1.
-updated: 2026-07-29
+title: "xAgent IM Profile v1"
+description: "Legacy instant-messaging capabilities, inbound messages, delivery semantics, and compatibility boundaries for xAgent IM Profile v1."
+updated: 2026-10-01
 ---
+
+<div className="alert alert--warning margin-bottom--lg" role="note">
+
+**Historical Connector material**
+
+This page preserves the earlier Connector schema or Profile for compatibility review. Terms such as “current” in the original specification refer to that protocol generation, not today’s AgentPlugin contract. Keep the fields and examples intact when checking old integrations; start new integrations from the [AgentPlugin guide](/docs/user-guide/connector).
+
+</div>
 
 # xAgent IM Profile v1
 
@@ -10,7 +18,7 @@ This document defines the legacy instant-messaging capabilities, inbound-message
 For Connector Server connection behavior, HTTP endpoints, the WebSocket envelope, authentication, channels, Tool invocation, and common error semantics, see the
 [xAgent Connector Common Protocol](../xagent_connector_protocol.md).
 
-## 1. Normative Language
+## 1\. Normative Language {/* #1-normative-language */}
 
 - **Must** identifies externally observable behavior required for `xagent.im.v1` compatibility.
 - **Should** identifies a recommended implementation; implementers can adjust it for the target system and deployment environment.
@@ -18,7 +26,7 @@ For Connector Server connection behavior, HTTP endpoints, the WebSocket envelope
 
 This document constrains observable results between xAgent and Connector Server. It does not require the Connector to use files, a database, a message queue, or a particular concurrency model internally.
 
-## 2. Purpose
+## 2\. Purpose {/* #2-purpose */}
 
 `xagent.im.v1` represents a legacy Connector Channel connected to an instant-messaging target. It projects target-system messages and sending capabilities to xAgent through `message.push`.
 
@@ -37,7 +45,7 @@ It does not define:
 - File byte transfer, which belongs to the Transfer Plane in the common protocol.
 - xAgent's internal Session, Agent, event queue, or persistence structures.
 
-## 3. Profile Declaration
+## 3\. Profile Declaration {/* #3-profile-declaration */}
 
 The Connector Card must declare static support in `supports.profiles`. The Connection Descriptor must declare the Profiles actually enabled for the current channel in `connection.profiles`.
 
@@ -56,7 +64,7 @@ The Connector Card must declare static support in `supports.profiles`. The Conne
 
 A legacy Connector declares `xagent.im.v1`; a current Connector declares `xagent.im.v2`. A built-in Connector does not declare both and does not retain a `message.push` fallback branch in the current implementation. xAgent can advertise support for both v1 and v2 so it can connect legacy and current Connectors separately.
 
-## 4. IM Tools
+## 4\. IM Tools {/* #4-im-tools */}
 
 IM Tools continue to use `tool.invoke` and `tool.invoke.ack` from the common protocol.
 
@@ -70,7 +78,7 @@ Implementations must follow these rules:
 
 The Connector defines Tool IDs, argument structures, and target-system-specific capabilities. The Profile does not require every IM Connector to expose the same Tool set.
 
-## 5. Inbound Messages
+## 5\. Inbound Messages {/* #5-inbound-messages */}
 
 A legacy IM Connector pushes structured events using `message.push` from the common protocol. A current Connector should use `chat.message` from `xagent.im.v2` and should not fall back to `message.push` based on negotiation within the same implementation.
 
@@ -96,7 +104,7 @@ A `message.push` payload should use these fields:
 
 Target-system-specific fields can be appended, but must not replace these standard fields or expose authentication material.
 
-## 6. Source and Reply Routing
+## 6\. Source and Reply Routing {/* #6-source-and-reply-routing */}
 
 The Connector must let xAgent and the Agent understand the source system, sender, and conversation type without requiring the Agent to infer target-system routing.
 
@@ -119,11 +127,11 @@ User text: {original text; use "none" when absent}
 
 A legacy IM Connector can show typing or an equivalent activity indicator in the target system after successful message delivery, then clear it after a reply is sent or a timeout occurs. A current IM v2 Connector should consume `chat.activity` and degrade it to typing or a no-op according to target-platform capabilities.
 
-## 7. Message Retention and Expiration
+## 7\. Message Retention and Expiration {/* #7-message-retention-and-expiration */}
 
 The retention policy should prevent silent message loss during brief disconnections between Connector and xAgent while also preventing unlimited caching, unlimited retries, and a burst of stale conversations after recovery.
 
-### 7.1 Required External Behavior
+### 7.1 Required External Behavior {/* #71-required-external-behavior */}
 
 - The Connector must implement finite retention and expiration for inbound messages that have not reached a terminal delivery state.
 - Temporary failures such as a closed channel, disconnected transport, write failure, or ack timeout must not be treated as successful delivery.
@@ -136,7 +144,7 @@ The retention policy should prevent silent message loss during brief disconnecti
 
 These requirements constrain results only. A Connector can satisfy them with local persistence, an external message queue, or a reliable cursor provided by the target system.
 
-### 7.2 Recommended Implementation
+### 7.2 Recommended Implementation {/* #72-recommended-implementation */}
 
 - Retain interactive IM messages for approximately one hour.
 - Calculate `expires_at` from the time the Connector first assumes responsibility for a message. A reliable target-system event time can also be used to reject messages that are already clearly stale.
@@ -149,7 +157,7 @@ These requirements constrain results only. A Connector can satisfy them with loc
 
 TTL, capacity, cleanup interval, and storage medium are not fixed protocol constants. Implementers can retain alerts, tickets, or other non-real-time events for longer, but should publish the effective policy in deployment or configuration documentation.
 
-### 7.3 Terminal Delivery States
+### 7.3 Terminal Delivery States {/* #73-terminal-delivery-states */}
 
 With `xagent.im.v2`:
 
@@ -161,7 +169,7 @@ With `xagent.im.v2`:
 
 `message.push` currently has no separate business ack. Chat messages that are sensitive to loss should also enable `xagent.im.v2`. An implementation using only `message.push` should document its successful-write and replay boundaries.
 
-## 8. Capacity and Overflow
+## 8\. Capacity and Overflow {/* #8-capacity-and-overflow */}
 
 Capacity limits protect resources; they are not the same as TTL expiration.
 
@@ -174,7 +182,7 @@ Recommended order:
 
 Messages must not be dropped silently without any record.
 
-## 9. File Messages
+## 9\. File Messages {/* #9-file-messages */}
 
 Each file item in an IM payload must contain at least `file_ref`. The current automatic xAgent file reader also requires `download_url` or `url`.
 
@@ -197,14 +205,14 @@ Message-retention TTL and file TTL are independent policies:
 - The file TTL should cover the time in which the message can be delivered and read normally.
 - If a target-system CDN URL may expire earlier, the Connector should download or retain the file promptly.
 
-## 10. Security Boundaries
+## 10\. Security Boundaries {/* #10-security-boundaries */}
 
 - A Connector must not require third-party implementations to understand xAgent's user table, Session state, Agent state, or internal event model.
 - xAgent internal IDs must not appear in an IM payload.
 - A Connector depends only on public `connector_channel_id`, `message_id`, packets, acks, Card, Descriptor, and Tool protocols.
 - Target-system tokens, bot tokens, system API keys, and one-time authentication material must not appear in message content, file fields, or logs.
 
-## 11. Conformance Checklist
+## 11\. Conformance Checklist {/* #11-conformance-checklist */}
 
 - Do the Card and Descriptor both declare `xagent.im.v1` correctly?
 - Is each inbound `message_id` stable within its channel?

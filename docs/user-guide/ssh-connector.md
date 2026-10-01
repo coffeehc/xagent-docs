@@ -1,9 +1,9 @@
 ---
-title: SSH AgentPlugin 配置：私钥、目标与访问身份
-description: 安装 xAgent SSH AgentPlugin，把私钥放入 keys 目录，通过管理页面配置 SSH 目标、访问身份和主机指纹。
-image: /img/user-guide/connectors/ssh-management-zh.webp
+title: "SSH AgentPlugin 配置：私钥、目标与访问身份"
+description: "安装 xAgent SSH AgentPlugin，把私钥放入 keys 目录，通过管理页面配置 SSH 目标、访问身份和主机指纹。"
+image: "/img/user-guide/connectors/ssh-management-zh.webp"
 status: beta
-updated: 2026-09-17
+updated: 2026-10-01
 ---
 
 # SSH AgentPlugin 配置：私钥、目标与访问身份
@@ -12,7 +12,16 @@ SSH AgentPlugin 使用管理员配置的远端账号和私钥连接服务器。x
 
 当前公开版本为 `0.0.10`。配置目标前，先把私钥放进 SSH AgentPlugin 的 `keys/` 目录。管理页面只填写文件名，不负责上传私钥。
 
-## 安装
+## 开始前检查 {/* #开始前检查 */}
+
+- **只需要使用已有目标的用户：** 向管理员取得对应访问身份，直接看[用户连接](#%E7%94%A8%E6%88%B7%E8%BF%9E%E6%8E%A5)；不要在会话中提供私钥。
+- **首次配置的管理员：** 准备远端账号、可用私钥、可达主机和用户访问身份。先安装，再按下文把私钥放到 `keys/`，然后接入并添加目标。
+- **先辨认两层身份：** 用户输入的是 AgentPlugin 访问身份；真正登录远端主机的是管理员配置的 SSH 账号和私钥。两者用途不同。
+- **先验证再执行写入：** 检查目标连接状态和主机指纹，用只读命令确认目标后，再按审批要求处理文件或执行修改。
+
+以下安装与字段示例对应公开的 SSH AgentPlugin `0.0.10`。Server 和插件独立发布，升级 Server 不等于同步更换插件配置格式。
+
+## 安装 {/* #安装 */}
 
 在 xAgent 服务器上重新运行安装器，并只选择 SSH AgentPlugin：
 
@@ -30,7 +39,7 @@ curl -fsSL https://downloads.xagent.xiagaogao.com/scripts/install.sh \
 
 Linux 会自动创建并启动 `xagent-ssh-agent-plugin` systemd 服务；macOS 安装器也会准备并启动托管服务。
 
-## 把私钥放进 `keys/` 目录
+## 把私钥放进 `keys/` 目录 {/* #把私钥放进-keys-目录 */}
 
 私钥必须是 `config.yml` 同目录下 `keys/` 里的普通文件。不要在配置中填写任意绝对路径。
 
@@ -67,9 +76,9 @@ cd ~/.local/share/xagent/agent-plugins/ssh
 
 AgentPlugin 只在启动时读取 `config.yml` 和 `keys/`。新增或替换私钥后要重启；管理页面不会上传或热重载私钥。
 
-## 接入 xAgent
+## 接入 xAgent {/* #接入-xagent */}
 
-管理员打开“Agent 治理 > AgentPlugin Connector”，点击“添加 AgentPlugin”。
+管理员打开“Agent 治理 &gt; AgentPlugin Connector”，点击“添加 AgentPlugin”。
 
 | 字段 | 填写内容 |
 | --- | --- |
@@ -80,7 +89,7 @@ AgentPlugin 只在启动时读取 `config.yml` 和 `keys/`。新增或替换私�
 
 `19095` 只需要允许 xAgent Server 访问，不要直接开放到公网。
 
-## 添加 SSH 目标
+## 添加 SSH 目标 {/* #添加-ssh-目标 */}
 
 点击 SSH AgentPlugin 行末的管理按钮，进入目标管理页面。
 
@@ -106,7 +115,7 @@ AgentPlugin 只在启动时读取 `config.yml` 和 `keys/`。新增或替换私�
 
 保存目标后会立即重新探测。连接参数变化时，旧 SSH 连接、用户绑定和相关 PTY 会话会被关闭。
 
-## 用户连接
+## 用户连接 {/* #用户连接 */}
 
 管理员添加目标后，用户打开“插件连接”，选择 SSH AgentPlugin 和目标，再填写管理员分配的 principal 与 access token，或账号密码身份。
 
@@ -120,13 +129,13 @@ AgentPlugin 只在启动时读取 `config.yml` 和 `keys/`。新增或替换私�
 
 SSH AgentPlugin 支持受限命令、交互式 PTY 和 SFTP 上传下载，当前不支持端口转发、跳板机、agent forwarding、键盘交互认证或任意 TCP 代理。
 
-## 主机指纹
+## 主机指纹 {/* #主机指纹 */}
 
 第一次连接时，AgentPlugin 会记录远端主机公钥的 `SHA256:` 指纹。以后指纹不一致，目标会进入 `host_key_changed`，不会自动信任新密钥。
 
 只有通过其他渠道确认服务器确实更换了 SSH 主机密钥后，才能在编辑页面勾选“下次连接时信任新的主机密钥”。无法确认时不要清除旧指纹。
 
-## 直接编辑配置文件
+## 直接编辑配置文件 {/* #直接编辑配置文件 */}
 
 管理页面维护目标和访问身份。监听地址、API Key、状态目录、超时、文件限制和审计方式需要编辑 `config.yml`：
 
@@ -167,7 +176,7 @@ sudo systemctl status xagent-ssh-agent-plugin
 
 `audit_shell_input` 可设为 `full`、`hash_only` 或 `none`。Shell 输入可能包含敏感内容，生产环境通常使用 `hash_only` 或 `none`。
 
-## 常见问题
+## 常见问题 {/* #常见问题 */}
 
 | 状态或现象 | 处理方法 |
 | --- | --- |
@@ -186,7 +195,7 @@ journalctl -u xagent-ssh-agent-plugin -f
 sudo tail -f /opt/xagent/agent-plugins/ssh/logs/ssh-audit.jsonl
 ```
 
-## 相关文档
+## 相关文档 {/* #相关文档 */}
 
 - [AgentPlugin 总览](/docs/user-guide/connector)
 - [Database AgentPlugin 配置](/docs/user-guide/database-connector)

@@ -1,8 +1,16 @@
 ---
-title: xAgent Device Profile v1
-description: xAgent Device Profile v1 的设备绑定、能力声明、操作边界和媒体结果交付规范。
-updated: 2026-07-29
+title: "xAgent Device Profile v1"
+description: "xAgent Device Profile v1 的设备绑定、能力声明、操作边界和媒体结果交付规范。"
+updated: 2026-10-01
 ---
+
+<div className="alert alert--warning margin-bottom--lg" role="note">
+
+**历史 Connector 资料**
+
+本文保留旧版 Connector Schema 或 Profile，用于兼容性核对。原规范中的“当前”指当时的协议代际，不代表今天的 AgentPlugin 合同。排查旧连接时可逐项对照原字段和示例；新接入请从 [AgentPlugin 使用说明](/docs/user-guide/connector)开始。
+
+</div>
 
 # xAgent Device Profile v1
 
@@ -10,7 +18,7 @@ updated: 2026-07-29
 公共连接、认证、工具、媒体和错误协议见
 [xAgent Connector Common Protocol](../xagent_connector_protocol.md)。
 
-## 1. 定位
+## 1\. 定位 {/* #1-定位 */}
 
 `xagent.device.v1` 表示 Connector Channel 绑定到可观察或操作的设备。
 
@@ -23,7 +31,7 @@ Profile 负责：
 
 Profile 不规定 ADB、厂商云 API、局域网协议或其他具体设备协议，也不要求所有 Device Connector 提供相同工具。
 
-## 2. Profile 声明
+## 2\. Profile 声明 {/* #2-profile-声明 */}
 
 Connector Card 必须声明 `device` target type 和 `xagent.device.v1`：
 
@@ -45,7 +53,7 @@ Connector Card 必须声明 `device` target type 和 `xagent.device.v1`：
 
 认证或绑定完成后，Connection Descriptor 的 `connection.target_type` 必须是 `device`，并在 `connection.profiles` 声明 `xagent.device.v1`。
 
-## 3. 设备绑定
+## 3\. 设备绑定 {/* #3-设备绑定 */}
 
 必须遵守：
 
@@ -57,7 +65,7 @@ Connector Card 必须声明 `device` target type 和 `xagent.device.v1`：
 
 设备租约、断线保护时间和抢占策略属于实现建议；实现者应在 Connector 文档中说明。
 
-## 4. 工具分类
+## 4\. 工具分类 {/* #4-工具分类 */}
 
 Device Connector 可以声明：
 
@@ -73,7 +81,7 @@ Device Connector 可以声明：
 - 不得把系统 API key、设备密钥或平台 token 暴露给 Agent。
 - 有副作用操作必须具备明确的重复调用语义；不能把网络重试隐式解释为再次执行。
 
-## 5. 并发与状态
+## 5\. 并发与状态 {/* #5-并发与状态 */}
 
 Profile 不强制内部锁、队列或 worker 实现。
 
@@ -85,20 +93,20 @@ Profile 不强制内部锁、队列或 worker 实现。
 - 设备离线、命令超时和权限拒绝使用不同稳定错误 code。
 - 长耗时操作可以使用主协议的 `tool.progress.push`，最终仍以 `tool.invoke.ack` 收束。
 
-## 6. 设备文件
+## 6\. 设备文件 {/* #6-设备文件 */}
 
 截图、录屏或设备文件不得直接放入 WebSocket payload、工具参数或 base64 字段。
 
 Connector 应通过 Transfer Plane 返回 `file_ref` 和可下载 URL。文件缓存 TTL、容量和清理周期由实现决定，但必须有限，并应在实现文档中说明。
 
-## 7. 安全
+## 7\. 安全 {/* #7-安全 */}
 
 - Connector 必须限制可执行的设备动作，不能把任意 shell 或未约束命令默认暴露为模型工具。
 - 涉及隐私、支付、账号、安全设置等高风险操作时，Connector 可以要求额外授权或拒绝执行。
 - 日志不能记录设备密钥、完整认证材料或敏感输入正文。
 - Connector 不得依赖 xAgent 内部用户表、Session 或 Agent 状态做设备路由。
 
-## 8. 一致性检查
+## 8\. 一致性检查 {/* #8-一致性检查 */}
 
 - Card 和 Descriptor 是否正确声明 `device` 与 `xagent.device.v1`？
 - 所有工具是否只操作 channel 绑定设备？

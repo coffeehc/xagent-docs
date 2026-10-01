@@ -1,9 +1,9 @@
 ---
 title: "Database AgentPlugin Configuration: Connect MySQL and PostgreSQL"
-description: Install the xAgent Database AgentPlugin, add MySQL and PostgreSQL resources from the management page, connect users, and troubleshoot failures.
-image: /img/user-guide/connectors/database-management-zh.webp
+description: "Install the xAgent Database AgentPlugin, add MySQL and PostgreSQL resources from the management page, connect users, and troubleshoot failures."
+image: "/img/user-guide/connectors/database-management-zh.webp"
 status: beta
-updated: 2026-09-17
+updated: 2026-10-01
 ---
 
 # Database AgentPlugin Configuration: Connect MySQL and PostgreSQL
@@ -12,7 +12,15 @@ Administrators configure database addresses in the Database AgentPlugin. Users t
 
 The current public release is `0.0.7`. It supports MySQL and PostgreSQL.
 
-## Install
+## Before You Start {/* #before-you-start */}
+
+- **Users of an existing database resource:** confirm that an administrator has added it, then go directly to [Connect a User](#connect-a-user). Do not repeat service installation or registration.
+- **Administrators setting up a resource:** verify network access from the plugin host and prepare a stable resource ID, database name, and address before installing, registering, and adding it.
+- **Permissions and storage:** native database accounts determine which SQL can run. Use read-only accounts for read-only work. Keep credentials in the AgentPlugin state directory, not in Sessions or resource descriptions.
+
+Setup is verified when the service is online, the user is connected, and a read-only query returns the expected resource’s data. Saving a resource alone does not connect a user.
+
+## Install {/* #install */}
 
 Rerun the installer on the xAgent host and select only the Database AgentPlugin:
 
@@ -36,9 +44,9 @@ cd ~/.local/share/xagent/agent-plugins/database
 ~/.local/bin/xagent-database-agent-plugin start --config ./config.yml
 ```
 
-## Register It in xAgent
+## Register It in xAgent {/* #register-it-in-xagent */}
 
-As an administrator, open **Agent Governance > AgentPlugin Connectors** and select **Add AgentPlugin**.
+As an administrator, open **Agent Governance &gt; AgentPlugin Connectors** and select **Add AgentPlugin**.
 
 | Field | Value |
 | --- | --- |
@@ -49,7 +57,7 @@ The AgentPlugin should show **Online** with protocol `4.4`. Database AgentPlugin
 
 Only xAgent Server needs access to port `19094`; do not expose it directly to the public internet.
 
-## Add a Database
+## Add a Database {/* #add-a-database */}
 
 Use the management action on the Database AgentPlugin row to open the database resource page.
 
@@ -76,7 +84,7 @@ Saving applies immediately and does not require a restart:
 - Changing the host, port, database name, or type reconnects the target.
 - Deleting a resource closes its connections and removes the user credentials stored for it by the AgentPlugin Server.
 
-## Connect a User
+## Connect a User {/* #connect-a-user */}
 
 After the administrator adds a resource, the user opens **Plugin Connections**, selects the Database AgentPlugin and resource, and enters their own database username and password.
 
@@ -92,7 +100,7 @@ The Database AgentPlugin provides `db_list`, `db_getinfo`, and `db_execute_sql`.
 
 User credentials are stored in `state_dir/credentials.json`. The directory mode is `0700` and the file mode is `0600`. There is currently no application-layer encryption, so place the state directory on an encrypted disk or controlled volume in production.
 
-## Edit `config.yml` Directly
+## Edit `config.yml` Directly {/* #edit-configyml-directly */}
 
 The management page changes only `database_agent_plugin.databases`. Edit `config.yml` for the listen address, API Key, state directory, and query limits:
 
@@ -121,7 +129,7 @@ sudo systemctl restart xagent-database-agent-plugin
 sudo systemctl status xagent-database-agent-plugin
 ```
 
-## Common Problems
+## Common Problems {/* #common-problems */}
 
 | Symptom | Fix |
 | --- | --- |
@@ -138,7 +146,7 @@ Linux logs:
 journalctl -u xagent-database-agent-plugin -f
 ```
 
-## Related Documentation
+## Related Documentation {/* #related-documentation */}
 
 - [AgentPlugin overview](/docs/user-guide/connector)
 - [SSH AgentPlugin configuration](/docs/user-guide/ssh-connector)

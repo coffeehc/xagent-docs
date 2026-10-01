@@ -1,9 +1,9 @@
 ---
-title: How xAgent Isolates Multi-user Workspaces and Task Processes
-description: Learn how xAgent combines virtual workspaces, Execution Leases, ProcessSandbox, and Runtime Assets to isolate files and process execution.
-image: /img/share/en/xagent-security.png
+title: "How xAgent Isolates Multi-user Workspaces and Task Processes"
+description: "Learn how xAgent combines virtual workspaces, Execution Leases, ProcessSandbox, and Runtime Assets to isolate files and process execution."
+image: "/img/share/en/xagent-security.png"
 status: beta
-updated: 2026-09-17
+updated: 2026-10-01
 ---
 
 # How xAgent Isolates Multi-user Workspaces and Task Processes
@@ -17,7 +17,16 @@ Separate user directories are not sufficient when multiple users share an AI Age
 3. An Execution Lease creates the minimum file view for one process and coordinates commits.
 4. ProcessSandbox executes the command with operating-system file, environment, process-tree, and resource limits.
 
-## What Each Boundary Owns
+## Find the Relevant Boundary {/* #find-the-relevant-boundary */}
+
+- **A file is missing from the page:** check user, Session, and virtual-workspace visibility first.
+- **The process ended but the file was not saved:** inspect the Execution Lease commit or repair result, not only the exit code.
+- **A command or interpreter cannot run:** check ProcessSandbox and Runtime Assets readiness rather than bypassing isolation with broader host access.
+- **An external system denies access:** check the AgentPlugin or MCP account authorization and target-system permissions. Workspace permissions cannot replace them.
+
+This page explains isolation mechanisms and checks. For everyday uploads, previews, and downloads, see [Workspace Files](/docs/user-guide/workspace).
+
+## What Each Boundary Owns {/* #what-each-boundary-owns */}
 
 | Layer | Responsibility | Not its responsibility |
 | --- | --- | --- |
@@ -28,7 +37,7 @@ Separate user directories are not sufficient when multiple users share an AI Age
 
 External-system authorization is separate. An AgentPlugin or MCP service can access only the CRM, mailbox, or messaging data permitted by its external account.
 
-## User and Virtual Workspace Isolation
+## User and Virtual Workspace Isolation {/* #user-and-virtual-workspace-isolation */}
 
 Every file operation carries the current user identity and resolves within that user's Workspace. Workspace pages and file Tools receive an authorized business view, not the server's physical directory tree.
 
@@ -46,7 +55,7 @@ System indexes, internal state, Session metadata, and private system directories
 
 File Tools accept Workspace-relative paths rather than server absolute paths, URLs, or parent traversal. A Session can write only to explicitly authorized roots. Approval policies can still govern deletion, external delivery, and other sensitive operations.
 
-## How an Execution Lease Protects Writes
+## How an Execution Lease Protects Writes {/* #how-an-execution-lease-protects-writes */}
 
 Before an external process starts, WorkspaceFileService creates an Execution Lease:
 
@@ -56,9 +65,11 @@ Before an external process starts, WorkspaceFileService creates an Execution Lea
 - After the process exits, writable roots are scanned safely and additions, changes, and deletions are committed as one fact batch.
 - If commit fails, repair input is persisted so file facts can be recovered idempotently.
 
-A host-file write therefore does not by itself complete a Workspace commit. The Execution Lease reconciles process changes back into xAgent's file facts and indexes.
+In the current implementation, a process writes into the lease’s private `writable-staging`. Security scans and change-limit checks run before changes reach the durable workspace. Special nodes, untraversable directories, or out-of-scope content cause the entire commit to fail, leaving the durable workspace in its pre-execution state.
 
-## How ProcessSandbox Isolates Processes
+Writing files in the execution view is therefore not the same as completing a Workspace commit. The Execution Lease reconciles process changes back into xAgent's file facts and indexes.
+
+## How ProcessSandbox Isolates Processes {/* #how-processsandbox-isolates-processes */}
 
 ProcessSandbox is the common boundary for untrusted process execution. Each run uses an independent file view, process tree, scratch directory, and platform resources. Undeclared host environment variables are not inherited.
 
@@ -76,29 +87,29 @@ The working directory must be under `/workspace`, `/input`, `/output`, or `/tmp`
 
 ProcessSandbox also limits execution time, process count, memory, CPU, and retained stdout/stderr. Timeout or cancellation cleans up the complete process tree and platform resources.
 
-### Linux
+### Linux {/* #linux */}
 
 Linux uses `bubblewrap` for mount and namespace boundaries, cgroup v2 for process-tree resources, and seccomp to restrict system calls. If a required isolation component is unavailable, ProcessSandbox returns an unavailable error instead of falling back to unrestricted host execution.
 
-### macOS
+### macOS {/* #macos */}
 
 macOS uses a `sandbox-exec` profile and a private file view for each run. Allowed paths are projected to stable logical sandbox paths, while system-owned files remain inaccessible through explicit deny rules.
 
-## Runtime Assets
+## Runtime Assets {/* #runtime-assets */}
 
 Runtime Assets are xAgent-managed Python, Node, and helper-binary dependencies. They are installed and verified independently, do not live in a user's Workspace, and are mounted read-only at `/runtime` during execution.
 
 If required Runtime Assets are missing or fail readiness checks, the corresponding Tool is unavailable. xAgent does not bypass that gate by using an interpreter or binary that happens to exist on the host.
 
-Administrators can inspect ProcessSandbox and Runtime Assets readiness under **Agent governance > Execution environment**.
+Administrators can inspect ProcessSandbox and Runtime Assets readiness under **Agent governance &gt; Execution environment**.
 
-## Uploads and Session Attachments
+## Uploads and Session Attachments {/* #uploads-and-session-attachments */}
 
 Files uploaded from the Workspace page belong to the current user. A distinct display path is generated for a duplicate name instead of overwriting the existing file.
 
 Agent Session attachments are bound to both user and Session. xAgent verifies ownership before preview, download, or task processing. The visible Session path is an access point, while xAgent keeps the stable file record.
 
-## A Simple Example
+## A Simple Example {/* #a-simple-example */}
 
 Assume Alice and Bob share one xAgent server:
 
@@ -108,14 +119,14 @@ Assume Alice and Bob share one xAgent server:
 4. If Alice starts two commands that modify the same output root, the second Execution Lease waits for the first commit.
 5. Both tasks may create `summary.md`, while each output remains in its owner's Workspace facts.
 
-## What These Boundaries Do Not Replace
+## What These Boundaries Do Not Replace {/* #what-these-boundaries-do-not-replace */}
 
 - **External permissions:** AgentPlugin and MCP data scope still depends on the external account.
 - **Model data boundaries:** Data sent to an external model API remains subject to that provider's terms.
 - **Deployment security:** HTTPS, firewalls, disk encryption, backups, and server-account permissions remain deployment responsibilities.
 - **Business approvals:** File and process isolation cannot decide whether deletion or external delivery is appropriate.
 
-## Deployment Checks
+## Deployment Checks {/* #deployment-checks */}
 
 1. Create an individual account for every user instead of sharing an xAgent account.
 2. Confirm ProcessSandbox and Runtime Assets readiness under **Execution environment**.
@@ -123,14 +134,14 @@ Assume Alice and Bob share one xAgent server:
 4. Configure approval policies for deletion, external delivery, and external writes.
 5. Back up runtime data and test recovery regularly.
 
-## Related Docs
+## Related Docs {/* #related-docs */}
 
 - [Workspace Files](/docs/user-guide/workspace)
 - [Agent Sessions](/docs/user-guide/agent-session)
 - [Runtime Architecture](/docs/architecture/runtime)
 - [Approval and Safety Controls](/docs/guides/agent-approval-security)
 
-## Next Steps
+## Next Steps {/* #next-steps */}
 
 - [Install and check Runtime Assets](/docs/getting-started/install)
 - [Configure Approval Policies](/docs/user-guide/approval-policy)

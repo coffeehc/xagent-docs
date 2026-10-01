@@ -1,23 +1,41 @@
 ---
 title: "xAgent AI Agent Setup and Management: Main Agents and Sub-Agents"
-description: Learn how to set up, select, and maintain xAgent AI Agent entry points for different task scenarios, including the difference between main Agents and sub-agents.
+description: "Learn how to set up, select, and maintain xAgent AI Agent entry points for different task scenarios, including the difference between main Agents and sub-agents."
 status: stable
-updated: 2026-08-06
+updated: 2026-10-01
 ---
 
 # xAgent AI Agent Setup and Management: Main Agents and Sub-Agents
 
-## Who This Is For
+Choose an Agent entry point that fits the task, then describe the goal in a Session. Create a dedicated Agent when its default capabilities, task boundaries, or safety requirements need to be reused.
+
+## Distinguish Entry Points from Sessions {/* #distinguish-entry-points-from-sessions */}
+
+- **Agent entry point:** stores a reusable purpose, default model, and capability configuration managed on this page.
+- **Main Session:** handles the overall goal, task delegation, and progress summaries.
+- **Sub-session:** handles an independent goal delegated by the main Session and can receive follow-up messages directly.
+
+Preparing an entry point and starting a task are separate steps. For everyday work, see [Choose an Entry Point for a Task](#choose-an-entry-point-for-a-task). For reusable configuration, see [How to Set Up an AI Agent](#how-to-set-up-an-ai-agent). For Session controls, see [Agent Sessions](/docs/user-guide/agent-session).
+
+## Who This Is For {/* #who-this-is-for */}
 
 This page is for users and administrators who need to select, view, or maintain task entry points.
 
-## What It Is
+## What It Is {/* #what-it-is */}
 
 Agent Management maintains entry points for different work scenarios. Ordinary users can think of it as a list of different work assistants: some are suitable for general questions, some for creating Skills, and others for a specific business workflow.
 
-![xAgent Agent Management page showing available Agents, capability counts, and the create entry point](/img/manual/v005/en/agent-management.webp)
+![2026-10-01 reviewed product interface](/img/home/current/xagent-agent-management.webp)
 
-## How to Set Up an AI Agent
+Agent list in the reviewed instance: public entries, search, and personal/public counts. Chinese UI; card visibility does not establish that every Agent was tested.
+
+<details>
+<summary>Earlier interface reference (retained)</summary>
+
+![xAgent Agent Management page showing available Agents, capability counts, and the create entry point](/img/manual/v005/en/agent-management.webp)
+</details>
+
+## How to Set Up an AI Agent {/* #how-to-set-up-an-ai-agent */}
 
 In xAgent, setting up an AI Agent means preparing one entry point for a repeatable task: define its purpose, default model, available Skills, Tools, and safety boundaries, then let users create Sessions from that entry point. It is not copying a prompt for every task, and it does not mean an Agent acts without controls.
 
@@ -31,7 +49,7 @@ An administrator, or a user with the relevant permission, can prepare an entry p
 
 For a one-off task, start with the general Agent and state the goal in the Session. Create a dedicated Agent only when its task boundary, default capabilities, or safety requirements need to be reused.
 
-## When to Use It
+## When to Use It {/* #when-to-use-it */}
 
 Open Agent Management when you need to:
 
@@ -42,7 +60,7 @@ Open Agent Management when you need to:
 
 Ordinary users do not usually need to modify Agents often. Once an administrator has prepared public Agents, users can select and use them directly in a session.
 
-## Reading the Page
+## Reading the Page {/* #reading-the-page */}
 
 Each card represents an available entry point. Common information includes:
 
@@ -56,9 +74,9 @@ Each card represents an available entry point. Common information includes:
 | Key count | The number of security credentials referenced by the entry point |
 | Read-only | The current user can view or use it but cannot modify it directly |
 
-## Basic Usage
+## Basic Usage {/* #basic-usage */}
 
-### View Available Entry Points
+### View Available Entry Points {/* #view-available-entry-points */}
 
 1. Open **Agent Management**.
 2. Use the search box with a name, prompt, Skill, Tool, or key keyword.
@@ -67,7 +85,7 @@ Each card represents an available entry point. Common information includes:
 
 If you are an ordinary user, focus on the name and description, then choose the entry point closest to your task.
 
-### Choose an Entry Point for a Task
+### Choose an Entry Point for a Task {/* #choose-an-entry-point-for-a-task */}
 
 Open Agent Session, select an appropriate Agent, and then submit the task. The following rules can help:
 
@@ -80,7 +98,7 @@ Open Agent Session, select an appropriate Agent, and then submit the task. The f
 
 If you are not sure which one to choose, start with a general-purpose entry point and state the goal in the task.
 
-### Create an Entry Point as an Administrator
+### Create an Entry Point as an Administrator {/* #create-an-entry-point-as-an-administrator */}
 
 Before creating an Agent, prepare the following:
 
@@ -95,21 +113,21 @@ Do not put temporary accounts, passwords, tokens, or one-off task content into a
 
 The default model comes from the administrator-configured model list. Its Provider, Base URL, key, and capabilities stay in server-managed Model Configuration and should not be written into an Agent prompt. See [Model Configuration](/docs/user-guide/model-config) for the fields and connection checks.
 
-## Common Scenarios
+## Common Scenarios {/* #common-scenarios */}
 
-### Prepare a General Entry Point for a Team
+### Prepare a General Entry Point for a Team {/* #prepare-a-general-entry-point-for-a-team */}
 
 Create a general-purpose Agent for everyday questions, document organization, lightweight analysis, and solution suggestions. Keep it simple and avoid binding too many specialized rules.
 
-### Prepare an Entry Point for Recurring Work
+### Prepare an Entry Point for Recurring Work {/* #prepare-an-entry-point-for-recurring-work */}
 
 If a team frequently performs the same kind of work, such as weekly reporting, customer replies, contract review, or investment research organization, create a specialized entry point and associate the relevant Skills.
 
-### Provide an Extended Entry Point for Users Who Need Fine Tuning
+### Provide an Extended Entry Point for Users Who Need Fine Tuning {/* #provide-an-extended-entry-point-for-users-who-need-fine-tuning */}
 
 When permissions allow, ordinary users can also create personal entry points to try new Skills or Tools. Most users can work directly with public entry points prepared by administrators; experienced users can later fine-tune a personal entry point and have an administrator turn a stable version into a public one.
 
-## Notes
+## Notes {/* #notes */}
 
 - An Agent is an entry point, so more is not always better.
 - Write names and descriptions for users rather than filling them with technical terms.
@@ -117,14 +135,14 @@ When permissions allow, ordinary users can also create personal entry points to 
 - Tool and key use remains controlled by permissions, connections, and approval policies.
 - Do not use unfinished or unstable entry points as the main entry point for ordinary users.
 
-## Continue Reading
+## Continue Reading {/* #continue-reading */}
 
 - [Agent Session](/docs/user-guide/agent-session)
 - [Skill Management](/docs/user-guide/skill)
 - [Tool Management](/docs/user-guide/tool)
 - [Approval Policies](/docs/user-guide/approval-policy)
 
-## Next Steps
+## Next Steps {/* #next-steps */}
 
 - [Choose an Agent and run a task in Agent Session](/docs/user-guide/agent-session)
 - [Create or update a reusable Skill](/docs/getting-started/create-skill)

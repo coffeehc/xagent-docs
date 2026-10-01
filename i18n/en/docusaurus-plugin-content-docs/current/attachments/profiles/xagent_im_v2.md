@@ -1,8 +1,16 @@
 ---
-title: xAgent IM Profile v2
-description: Bidirectional messages, file transfer, text deltas, delivery acknowledgments, and activity state for xAgent IM Profile v2.
-updated: 2026-07-29
+title: "xAgent IM Profile v2"
+description: "Bidirectional messages, file transfer, text deltas, delivery acknowledgments, and activity state for xAgent IM Profile v2."
+updated: 2026-10-01
 ---
+
+<div className="alert alert--warning margin-bottom--lg" role="note">
+
+**Historical Connector material**
+
+This page preserves the earlier Connector schema or Profile for compatibility review. Terms such as “current” in the original specification refer to that protocol generation, not today’s AgentPlugin contract. Keep the fields and examples intact when checking old integrations; start new integrations from the [AgentPlugin guide](/docs/user-guide/connector).
+
+</div>
 
 # xAgent IM Profile v2
 
@@ -10,7 +18,7 @@ This document defines bidirectional complete text and file messages, assistant t
 For common connection, envelope, channel, and error semantics, see the
 [xAgent Connector Common Protocol](../xagent_connector_protocol.md).
 
-## 1. Purpose
+## 1\. Purpose {/* #1-purpose */}
 
 `xagent.im.v2` is the current Profile for `target_types: ["im"]`. It is neither a general chat Profile shared across target types nor a new communication plane.
 
@@ -30,7 +38,7 @@ Creating or reconnecting an IM v2 message channel restores only real-time routin
 
 The virtual Connector Channel in xAgent must load its negotiated result from the protocol layer's structured Profile catalog and silently filter all other internal signals. It must not hard-code a signaling allowlist in the channel implementation. One IM v2 catalog entry declares `chat.message`, `chat.message.delta`, `chat.message.ack`, `chat.activity`, and their outbound projections. Adding an internal xAgent `PayloadType`, Session state, or business event must not automatically expand the protocol surface visible to a Connector.
 
-## 2. Profile Declaration
+## 2\. Profile Declaration {/* #2-profile-declaration */}
 
 The Connector Card declares static support in `supports.profiles`. The Connection Descriptor declares Profiles actually enabled for the current channel in `connection.profiles`.
 
@@ -49,7 +57,7 @@ The Connector Card declares static support in `supports.profiles`. The Connectio
 
 A Descriptor can declare only Profiles that the Card declares.
 
-## 3. Identity and Routing
+## 3\. Identity and Routing {/* #3-identity-and-routing */}
 
 - The top-level `connector_channel_id` in WirePacket is the only Channel routing identifier.
 - A payload must not contain `session_id`, `user_connector_id`, `user_id`, `connector_id`, or `role`.
@@ -57,20 +65,20 @@ A Descriptor can declare only Profiles that the Card declares.
 - `message_id` is the idempotency identifier for a business message within the current Channel.
 - `packet_id` identifies one transmission and `reply_to` associates an acknowledgment. Neither can replace `message_id`.
 
-## 4. Packets
+## 4\. Packets {/* #4-packets */}
 
 There are four base packet types:
 
 | Type | Direction | Meaning |
 | --- | --- | --- |
 | `chat.message` | Bidirectional | Complete, persistable final text or file message |
-| `chat.message.delta` | xAgent -> Connector | Real-time text delta for an assistant message |
+| `chat.message.delta` | xAgent -&gt; Connector | Real-time text delta for an assistant message |
 | `chat.message.ack` | Bidirectional | Acknowledgment that a complete message was accepted, duplicated, or rejected |
-| `chat.activity` | xAgent -> Connector | Complete, redacted snapshot of the current processing state |
+| `chat.activity` | xAgent -&gt; Connector | Complete, redacted snapshot of the current processing state |
 
 An extension Profile must not change the fields, direction, idempotency, or completion semantics of these packets.
 
-## 5. `chat.message`
+## 5\. `chat.message` {/* #5-chatmessage */}
 
 ```json
 {
@@ -100,23 +108,23 @@ An extension Profile must not change the fields, direction, idempotency, or comp
 
 Implementations must follow these rules:
 
-- Connector -> xAgent represents user input; xAgent -> Connector represents final assistant output.
+- Connector -&gt; xAgent represents user input; xAgent -&gt; Connector represents final assistant output.
 - The sender generates `message_id`. It must be stable within the same `connector_channel_id` and must not be reused for another message.
 - At least one of `text` and `files` must be non-empty. A file message can omit text.
 - `files[].type` must be `image`, `video`, `audio`, or `file`.
 - Each file item must provide a `file_ref` unique within the current message. `filename`, `mime_type`, `byte_size`, and `expires_at` are optional metadata.
-- A Connector -> xAgent file item must provide `download_url`. It can be an absolute HTTP(S) URL or a relative Connector URI. xAgent downloads the file and registers it as a file in the current Session.
+- A Connector -&gt; xAgent file item must provide `download_url`. It can be an absolute HTTP(S) URL or a relative Connector URI. xAgent downloads the file and registers it as a file in the current Session.
 - Before xAgent sends a file to a Connector, it must upload the corresponding Session file to the current Connector Channel through `POST /files/uploads`, then place the returned `file_ref` in the final `chat.message`. This direction does not require `download_url`.
 - File bytes, base64, local paths, target-system tokens, and CDN authentication material are forbidden from `chat.message`.
 - The receiver uses only `message_id` to process retransmission of a business message idempotently.
-- The final xAgent -> Connector `chat.message` is the only completion fact for an assistant message.
+- The final xAgent -&gt; Connector `chat.message` is the only completion fact for an assistant message.
 - The Connector must treat `chat.message.text` in the final packet as the complete content. It must not send both assembled delta content and final content as separate messages.
 - The final text and all files together form one business message. The receiver can return `accepted` only after all target-system side effects complete.
 - The Connector must be able to process a final message without ever receiving a delta.
 
-## 6. `chat.message.delta`
+## 6\. `chat.message.delta` {/* #6-chatmessagedelta */}
 
-Direction: xAgent -> Connector.
+Direction: xAgent -&gt; Connector.
 
 ```json
 {
@@ -149,7 +157,7 @@ Recommended implementation:
 - A delta cache should have a finite lifetime and capacity so a missing final packet cannot consume resources indefinitely.
 - The implementation defines and documents delta-cache TTL, capacity, and cleanup interval.
 
-## 7. `chat.message.ack`
+## 7\. `chat.message.ack` {/* #7-chatmessageack */}
 
 `reply_to` must point to the acknowledged `chat.message` packet. An ack indicates only whether the receiver accepted the message. It does not indicate that Agent execution, a target-system reply, or any subsequent business process has completed.
 
@@ -186,9 +194,9 @@ Implementations must follow these rules:
 - `retryable=true` means the same `message_id` and content can be redelivered after backoff. `retryable=false` means the same request will not succeed; the sender must stop automatic redelivery and preserve an observable failure reason.
 - Deterministic errors such as an invalid payload, permission denial, invalid authentication state, or explicit target-platform rejection must use `retryable=false`. Errors such as a network interruption, rate limit, or temporary busy state can use `retryable=true`.
 
-## 8. `chat.activity`
+## 8\. `chat.activity` {/* #8-chatactivity */}
 
-Direction: xAgent -> Connector. Each packet is a complete snapshot of the current channel state and replaces the previous state directly. It is not persisted, requires no ack, and does not participate in message idempotency.
+Direction: xAgent -&gt; Connector. Each packet is a complete snapshot of the current channel state and replaces the previous state directly. It is not persisted, requires no ack, and does not participate in message idempotency.
 
 ```json
 {
@@ -211,7 +219,7 @@ Direction: xAgent -> Connector. Each packet is a complete snapshot of the curren
 - Clear temporary activity on `idle`, a final message, or the start of visible text deltas.
 - Temporary activity must have a local timeout. Failure to send activity must not reject, retry, or duplicate a chat message.
 
-## 9. Cache and Idempotency State
+## 9\. Cache and Idempotency State {/* #9-cache-and-idempotency-state */}
 
 The Profile constrains only external results:
 
@@ -226,7 +234,7 @@ The Profile constrains only external results:
 
 Sender pending-delivery state and receiver completed-idempotency state are independent facts. They must not share a "delete immediately after sending" lifecycle. An implementation can use memory, a database, or an editable target-system message handle. Exact cache sizes and durations are implementation guidance.
 
-## 10. Errors
+## 10\. Errors {/* #10-errors */}
 
 - Profile not declared or not in the current negotiated allowlist: the virtual channel silently drops the signal without an error response.
 - Channel not open: `channel_not_open`.
@@ -234,7 +242,7 @@ Sender pending-delivery state and receiver completed-idempotency state are indep
 - Non-contiguous or conflicting sequence: explicitly reject it; do not concatenate silently.
 - Target-system delivery failure: use `rejected` in `chat.message.ack` with a stable code.
 
-## 11. Conformance Checklist
+## 11\. Conformance Checklist {/* #11-conformance-checklist */}
 
 - Do both the Card and Descriptor declare this Profile?
 - Does the implementation support both delta plus final and direct final delivery?

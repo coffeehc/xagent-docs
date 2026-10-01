@@ -1,20 +1,33 @@
 ---
-title: Create / Update a Skill
-description: Learn how to create, test, publish, and continuously update an xAgent Skill through Skill Management or an Agent Session, including personal and public Skill workflows.
-image: /img/share/en/xagent-shared-skills.png
+title: "Create / Update a Skill"
+description: "Learn how to create, test, publish, and continuously update an xAgent Skill through Skill Management or an Agent Session, including personal and public Skill workflows."
+image: "/img/share/en/xagent-shared-skills.png"
 status: beta
-updated: 2026-09-17
+updated: 2026-10-01
 ---
 
 # Create / Update a Skill
 
-## What It Is
+The outcome of this tutorial is a tested Skill that you can reuse in personal tasks. If it should be shared with all users, submit it for public-library review as a separate step.
+
+## Choose a Creation or Update Route {/* #choose-a-creation-or-update-route */}
+
+| What you have | Start here | Prepare first |
+| --- | --- | --- |
+| An existing method or Skill file | [Create or Import in Skill Management](#option-1-create-or-import-in-skill-management) | Content, resources, and a test input |
+| A work goal without a documented method | [Describe the Skill in the Main Session](#option-2-describe-the-skill-in-the-main-session) | Purpose, inputs, outputs, and limits |
+| A complex method to refine | [Create a Dedicated Skill-building Session](#option-3-create-a-dedicated-skill-building-session) | Typical tasks and completion criteria |
+| A Skill that needs changes | [Update a Skill](#update-a-skill) | Skill name, current problems, and desired changes |
+
+Every route still requires draft review, testing, and publishing. A draft, published personal Skill, pending review snapshot, and public Skill are different states; see [Skill Management](/docs/user-guide/skill) for their scope.
+
+## What It Is {/* #what-it-is */}
 
 A Skill is a reusable work method. After fixed steps, input requirements, output formats, and important notes are saved as a Skill, xAgent does not need the entire process explained again whenever it handles a similar task.
 
 The goal of creating or updating a Skill is not to write code. It is to describe recurring work clearly and keep refining it through real use so xAgent can reuse it reliably.
 
-## When to Create a Skill
+## When to Create a Skill {/* #when-to-create-a-skill */}
 
 Create a Skill for work that:
 
@@ -26,7 +39,7 @@ Create a Skill for work that:
 
 For a one-off task, describe the requirement directly in an Agent Session. A Skill is not always necessary.
 
-## When to Update a Skill
+## When to Update a Skill {/* #when-to-update-a-skill */}
 
 A published Skill may still need adjustment during use. Update it when:
 
@@ -36,7 +49,7 @@ A published Skill may still need adjustment during use. Update it when:
 - New Tool, MCP, or AgentPlugin capabilities should be used correctly by the Skill.
 - User feedback reveals poorly handled cases that need boundaries or counterexamples.
 
-## Prepare Before Creating
+## Prepare Before Creating {/* #prepare-before-creating */}
 
 Before creating or updating a Skill, prepare the following:
 
@@ -52,9 +65,9 @@ Before creating or updating a Skill, prepare the following:
 
 Do not put account passwords, API keys, verification codes, customer-private data, temporary file paths, or one-time information in a Skill.
 
-## Creation Entry Points
+## Creation Entry Points {/* #creation-entry-points */}
 
-### Option 1: Create or Import in Skill Management
+### Option 1: Create or Import in Skill Management {/* #option-1-create-or-import-in-skill-management */}
 
 Use this option when the Skill content is already prepared or you want to import an existing Skill file.
 
@@ -67,7 +80,9 @@ Use this option when the Skill content is already prepared or you want to import
 
 You can also import an existing Skill file in Skill Management and adapt it to how the current team works.
 
-### Option 2: Describe the Skill in the Main Session
+**Entry-point differences:** the current source’s creation dialog offers ZIP import, GitHub / URL, and target description. If your page presents these options, choose ZIP for a complete package, GitHub / URL for an existing source, or target description for a work requirement. Then review and refine the draft in the building Session. The name, description, scenario, and work method above remain content to prepare; they do not imply that every version has the same direct-edit form.
+
+### Option 2: Describe the Skill in the Main Session {/* #option-2-describe-the-skill-in-the-main-session */}
 
 Use this option when you know what you want but have not organized it into a Skill document.
 
@@ -84,7 +99,7 @@ After the requirements are clear, xAgent helps generate a Skill draft. You revie
 
 The model assists throughout the build process. Because creating a Skill requires understanding the task, abstracting the workflow, checking boundaries, and organizing a reusable method, use a model with stronger reasoning capability.
 
-### Option 3: Create a Dedicated Skill-building Session
+### Option 3: Create a Dedicated Skill-building Session {/* #option-3-create-a-dedicated-skill-building-session */}
 
 If you already know that you want to build a Skill, you can create a dedicated Session through an Agent.
 
@@ -99,7 +114,7 @@ The flow in a Skill-building Session is similar to one created automatically by 
 
 This option suits more complex Skills that will be used long term, shared by multiple people, require a stable output format, or need continuous improvement.
 
-## Update a Skill
+## Update a Skill {/* #update-a-skill */}
 
 To update a Skill, use the main Session or a dedicated Skill-update Session to identify the Skill and describe the desired result.
 
@@ -123,7 +138,7 @@ The update flow is usually:
 
 Use a model with stronger reasoning capability for Skill updates as well. An insufficient model can significantly reduce the Skill's logic, boundary decisions, step organization, and long-term maintainability.
 
-## A Simple Template
+## A Simple Template {/* #a-simple-template */}
 
 Use the following structure:
 
@@ -139,7 +154,7 @@ Completion criteria:
 Example task:
 ```
 
-## Test a Skill
+## Test a Skill {/* #test-a-skill */}
 
 After creating or updating a Skill, test it with a real but low-risk task:
 
@@ -149,7 +164,7 @@ After creating or updating a Skill, test it with a real but low-risk task:
 4. If the steps are unstable, return to the Skill-building or update Session and add constraints, examples, or quality standards.
 5. If the Skill is too complex, split it into smaller Skills.
 
-## Publish and Maintain
+## Publish and Maintain {/* #publish-and-maintain */}
 
 The recommended publication flow starts with personal use before entering the public library:
 
@@ -165,7 +180,7 @@ When you submit a Skill for public library review, the system copies a snapshot 
 
 Publication is not the end of a Skill's lifecycle. Continue describing problems, adding test cases, and requesting changes in the original Skill-building Session so xAgent can help optimize it. You can also create a new Session for another round of adjustment, testing, and publication.
 
-## Related Docs
+## Related Docs {/* #related-docs */}
 
 - [Skill Management](/docs/user-guide/skill)
 - [Agent Sessions](/docs/user-guide/agent-session)

@@ -1,8 +1,16 @@
 ---
-title: xAgent Device Profile v1
-description: Device binding, capability declarations, operation boundaries, and media result delivery for xAgent Device Profile v1.
-updated: 2026-07-29
+title: "xAgent Device Profile v1"
+description: "Device binding, capability declarations, operation boundaries, and media result delivery for xAgent Device Profile v1."
+updated: 2026-10-01
 ---
+
+<div className="alert alert--warning margin-bottom--lg" role="note">
+
+**Historical Connector material**
+
+This page preserves the earlier Connector schema or Profile for compatibility review. Terms such as “current” in the original specification refer to that protocol generation, not today’s AgentPlugin contract. Keep the fields and examples intact when checking old integrations; start new integrations from the [AgentPlugin guide](/docs/user-guide/connector).
+
+</div>
 
 # xAgent Device Profile v1
 
@@ -10,7 +18,7 @@ This document defines device binding, capability declarations, and device-operat
 For the common connection, authentication, Tool, media, and error protocols, see the
 [xAgent Connector Common Protocol](../xagent_connector_protocol.md).
 
-## 1. Purpose
+## 1\. Purpose {/* #1-purpose */}
 
 `xagent.device.v1` represents a Connector Channel bound to a device that can be observed or controlled.
 
@@ -23,7 +31,7 @@ The Profile defines:
 
 The Profile does not prescribe ADB, a vendor cloud API, a LAN protocol, or any other device-specific protocol. It also does not require every Device Connector to expose the same Tools.
 
-## 2. Profile Declaration
+## 2\. Profile Declaration {/* #2-profile-declaration */}
 
 The Connector Card must declare the `device` target type and `xagent.device.v1`:
 
@@ -45,7 +53,7 @@ The Connector Card must declare the `device` target type and `xagent.device.v1`:
 
 After authentication or binding completes, `connection.target_type` in the Connection Descriptor must be `device`, and `connection.profiles` must include `xagent.device.v1`.
 
-## 3. Device Binding
+## 3\. Device Binding {/* #3-device-binding */}
 
 Implementations must follow these rules:
 
@@ -57,7 +65,7 @@ Implementations must follow these rules:
 
 Device leases, disconnect grace periods, and preemption policy are implementation guidance. Implementers should document them for their Connector.
 
-## 4. Tool Categories
+## 4\. Tool Categories {/* #4-tool-categories */}
 
 A Device Connector can declare:
 
@@ -73,7 +81,7 @@ Implementations must follow these rules:
 - System API keys, device keys, and platform tokens must not be exposed to the Agent.
 - A side-effecting operation must define explicit repeated-call behavior. A network retry must not be interpreted implicitly as permission to execute the operation again.
 
-## 5. Concurrency and State
+## 5\. Concurrency and State {/* #5-concurrency-and-state */}
 
 The Profile does not require a particular internal lock, queue, or worker implementation.
 
@@ -85,20 +93,20 @@ Recommendations:
 - Use different stable error codes for an offline device, a command timeout, and permission denial.
 - A long-running operation can use `tool.progress.push` from the common protocol, but must still finish with `tool.invoke.ack`.
 
-## 6. Device Files
+## 6\. Device Files {/* #6-device-files */}
 
 Screenshots, recordings, and device files must not be placed directly in a WebSocket payload, Tool argument, or base64 field.
 
 The Connector should return a `file_ref` and downloadable URL through the Transfer Plane. File-cache TTL, capacity, and cleanup interval are implementation choices, but each must be finite and should be documented.
 
-## 7. Security
+## 7\. Security {/* #7-security */}
 
 - The Connector must restrict executable device actions. It must not expose an arbitrary shell or unconstrained commands as model Tools by default.
 - For high-risk operations involving privacy, payment, accounts, or security settings, the Connector can require additional authorization or refuse execution.
 - Logs must not contain device keys, complete authentication material, or sensitive input content.
 - The Connector must not depend on xAgent's internal user table, Session state, or Agent state for device routing.
 
-## 8. Conformance Checklist
+## 8\. Conformance Checklist {/* #8-conformance-checklist */}
 
 - Do the Card and Descriptor correctly declare `device` and `xagent.device.v1`?
 - Does every Tool operate only on the device bound to the channel?

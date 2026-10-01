@@ -1,21 +1,21 @@
 ---
-title: 术语表
-description: 查阅 xAgent 中 Agent、Task、Skill、Tool、AgentPlugin、Memory、Session、Workspace 和 Runtime 等核心术语的含义。
+title: "术语表"
+description: "查阅 xAgent 中 Agent、Task、Skill、Tool、AgentPlugin、Memory、Session、Workspace 和 Runtime 等核心术语的含义。"
 status: stable
-updated: 2026-09-17
+updated: 2026-10-01
 ---
 
 # 术语表
 
-## 适用对象
+## 适用对象 {/* #适用对象 */}
 
 本文适合所有 xAgent 文档作者和读者。
 
-## 这是什么
+## 这是什么 {/* #这是什么 */}
 
 术语表是 xAgent 文档的固定用词来源。新增术语必须同步更新本文。
 
-## 核心术语
+## 核心术语 {/* #核心术语 */}
 
 | 术语 | 固定含义 |
 | --- | --- |
@@ -32,12 +32,17 @@ updated: 2026-09-17
 | Session | 用户与 Agent 的一次交互上下文 |
 | Workspace | Agent 执行任务时使用的文件、上下文和中间产物空间 |
 | 触发器 | 把未来时间或外部事件转换成 Session 任务的机制 |
+| WorkGroup（工作编排） | 智能体及通信关系的版本化配置，不拥有会话运行状态 |
+| 工作记录（Work Record） | 会话范围的主题记录、修订与增量，用于核对连续性与阶段证据 |
+| Model Profile ID | 模型配置的稳定引用，区别于显示名和 Provider 的真实模型 ID |
+| A2A Client | 用户范围内连接远端 Agent、跟踪远端任务并接收结果的能力 |
+| 投递回执 | 某个消息阶段已被接受的证据，本身不等于整个任务已经完成 |
 
-## 什么时候使用
+## 什么时候使用 {/* #什么时候使用 */}
 
 所有使用手册、技术参考和维护说明都应使用本文术语。用户手册中可以使用中文说明，但核心术语含义不能漂移。
 
-## 基本用法
+## 基本用法 {/* #基本用法 */}
 
 写文档时：
 
@@ -46,7 +51,7 @@ updated: 2026-09-17
 - 新增术语时同步本文和相关文档。
 - 普通用户页面优先解释“怎么用”，技术参考页再解释内部边界。
 
-## 相关文档
+## 相关文档 {/* #相关文档 */}
 
 - [什么是 xAgent](/docs/getting-started/what-is-xagent)
 - [长期记忆](/docs/user-guide/memory)

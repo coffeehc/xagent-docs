@@ -1,8 +1,16 @@
 ---
-title: Connector Packet JSON Schema
-description: Complete JSON Schema for the xAgent Connector Packet Envelope xagent.connector.packet/v1.
-updated: 2026-07-29
+title: "Connector Packet JSON Schema"
+description: "Complete JSON Schema for the xAgent Connector Packet Envelope xagent.connector.packet/v1."
+updated: 2026-10-01
 ---
+
+<div className="alert alert--warning margin-bottom--lg" role="note">
+
+**Historical Connector material**
+
+This page preserves the earlier Connector schema or Profile for compatibility review. Terms such as “current” in the original specification refer to that protocol generation, not today’s AgentPlugin contract. Keep the fields and examples intact when checking old integrations; start new integrations from the [AgentPlugin guide](/docs/user-guide/connector).
+
+</div>
 
 ```json
 {

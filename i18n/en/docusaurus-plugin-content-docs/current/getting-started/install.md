@@ -1,16 +1,32 @@
 ---
-title: Start Installing xAgent
-description: Install and verify xAgent v0.0.20.beta from the server installer through the first system setup flow.
-image: /img/getting-started/v005/install-terminal.webp
+title: "Start Installing xAgent"
+description: "Install and verify xAgent v0.0.21.beta from the server installer through the first system setup flow."
+image: "/img/getting-started/v005/install-terminal.webp"
 status: beta
-updated: 2026-09-17
+updated: 2026-10-01
 ---
 
 # Start Installing xAgent
 
 This page is for administrators installing xAgent for the first time. It starts with the installer command and walks through the system setup that opens automatically when you first visit the Web console. For server preparation and self-hosting boundaries, continue to [Self-host an AI Agent](/docs/guides/self-hosted-ai-agent).
 
-## Before You Start
+## Match the Version and Setup Screen {/* #match-the-version-and-setup-screen */}
+
+The installer reads the public release catalog. As of 2026-10-01, the public release is `v0.0.21.beta`. Most screenshots are from `v0.0.5.beta`; they preserve field explanations, not current button locations.
+
+The setup screen in the 2026-10-01 source uses the following sequence. If you installed a public binary, follow the steps actually displayed; newer source behavior does not describe every earlier release.
+
+| Current Source Order | What to Complete | Relation to the Guidance Below |
+| --- | --- | --- |
+| Data directory | Choose a persistent absolute path; if prompted, restart before returning | Step 4 |
+| Database | Choose SQLite or PostgreSQL; configure and test PostgreSQL; restart if prompted | No separate step in the earlier screenshots |
+| Administrator | Create the first administrator and confirm the password | Step 5 |
+| Default model | Choose a conversational Provider, test, and save it | Step 6 |
+| Finish setup | Check the directory, database, administrator, and model; select a runtime source if needed | Step 9; runtime validation remains in Steps 7 and 8 |
+
+Runtime Assets and ProcessSandbox still require execution-environment validation. Current source no longer gives them two separate setup-wizard steps. Do not reset a working installation just to reproduce the earlier screenshots.
+
+## Before You Start {/* #before-you-start */}
 
 Confirm that:
 
@@ -22,7 +38,7 @@ Confirm that:
 - If the service will be public, plan HTTPS through a reverse proxy, firewall rules, and access control. xAgent does not terminate TLS itself.
 - If this is an upgrade, back up configuration, databases, workspaces, Memory, Skills, Tool packages, and installed AgentPlugin configuration and data first.
 
-## Step 1: Run the Installer
+## Step 1: Run the Installer {/* #step-1-run-the-installer */}
 
 Linux and macOS use the same installer command:
 
@@ -43,7 +59,7 @@ curl -fsSL https://downloads.xagent.xiagaogao.com/scripts/install.sh \
   | bash -s -- --yes --no-agent-plugins
 ```
 
-## Step 2: Verify the Installation
+## Step 2: Verify the Installation {/* #step-2-verify-the-installation */}
 
 After the installer exits, confirm the version:
 
@@ -51,14 +67,14 @@ After the installer exits, confirm the version:
 xagent version
 ```
 
-The target version is `0.0.20.beta`. The installer command is unchanged and reads the current release catalog. On Linux, also check the service:
+The public target at this review date is `0.0.21.beta`; compare the actual installed output with the release catalog on the day you install. The installer command is unchanged and reads the current release catalog. On Linux, also check the service:
 
 ```bash
 sudo systemctl status xagent-server
 journalctl -u xagent-server -f
 ```
 
-When upgrading a legacy Connector installation, use the full installer or published `upgrade.sh` so official plugin binaries, services, configuration, and state migrate together; replacing only the Server binary is insufficient. Custom legacy components require separate adaptation. Verify that any Enterprise license allows `0.0.20.beta` before upgrading.
+When upgrading a legacy Connector installation, use the full installer or published `upgrade.sh` so official plugin binaries, services, configuration, and state migrate together; replacing only the Server binary is insufficient. Custom legacy components require separate adaptation. Verify that any Enterprise license allows `0.0.21.beta` before upgrading.
 
 After a successful start, the default Web address is:
 
@@ -68,9 +84,9 @@ http://server-address:18888/
 
 Do not expose port `18888` directly to the public internet. Use Nginx, Caddy, or another reverse proxy for HTTPS and restrict the allowed sources.
 
-## Step 3: Open System Setup
+## Step 3: Open System Setup {/* #step-3-open-system-setup */}
 
-After the service starts, the first visit to the Web address automatically opens the **System setup** page. You do not need to find another settings entry. The page shows these steps in order and advances automatically after each step is completed:
+After the service starts, the first visit to the Web address automatically opens the **System setup** page. You do not need to find another settings entry. Earlier wizard screens show the following sequence. Current source adds database configuration and consolidates runtime-resource controls, as described above:
 
 1. Configure the data directory.
 2. Initialize the administrator.
@@ -81,7 +97,7 @@ After the service starts, the first visit to the Web address automatically opens
 
 ![xAgent English system setup page](/img/getting-started/v005/system-setup-en.webp)
 
-## Step 4: Configure the Data Directory
+## Step 4: Configure the Data Directory {/* #step-4-configure-the-data-directory */}
 
 The data directory stores the xAgent database, workspaces, and Runtime Assets. Linux production installations default to:
 
@@ -91,9 +107,9 @@ The data directory stores the xAgent database, workspaces, and Runtime Assets. L
 
 Use an absolute path and make sure the xAgent runtime account can read and write it. This directory must be persistent. Do not place it in a temporary directory, a container temporary layer, or a location that is cleaned automatically.
 
-Select **Save and continue** to persist the directory and move to administrator initialization.
+Earlier versions use **Save and continue** to proceed to administrator initialization. Current source first inserts database configuration; if a restart is requested, follow the prompt and reopen the page.
 
-## Step 5: Initialize the Administrator
+## Step 5: Initialize the Administrator {/* #step-5-initialize-the-administrator */}
 
 Create the first administrator login name and password. This account is used to sign in, configure models, manage users, set approval policies, and maintain AgentPlugin Connectors.
 
@@ -107,7 +123,7 @@ Recommendations:
 
 After the account is created, xAgent signs you in automatically and moves to model configuration.
 
-## Step 6: Set the Default Model
+## Step 6: Set the Default Model {/* #step-6-set-the-default-model */}
 
 Enter the default model connection information and select **Test and save**. The setup flow moves to the next step only after the model connection test passes.
 
@@ -120,26 +136,26 @@ The main fields are:
 - **Real model name**: The actual model ID sent to the model service, such as `qwen3.6-27b`.
 - **Base URL**: The compatible API address, including a path such as `/v1` when required by the service.
 - **API Key**: The model service credential. Do not put it in documentation, screenshots, or public logs after saving it.
-- **Model capabilities**: Select chat, image generation, tool calls, vision, audio, and files according to the model's actual capabilities. Image generation is currently available only for OpenAI-compatible configurations that support it.
+- **Model capabilities**: Select chat, tool calls, vision, audio, and files according to actual support. Earlier versions exposed image generation as an OpenAI-compatible capability switch. Current source uses a dedicated image Provider, which cannot be the default chat model; see Model Configuration.
 - **Advanced options**: Configure timeout and other request parameters only when needed.
 
 The connectivity test only proves that the service is reachable. Run a real task afterward to verify tool calls, file processing, and saved outputs. See [Model Configuration](/docs/user-guide/model-config) for field details.
 
-## Step 7: Prepare Runtime Assets
+## Step 7: Prepare Runtime Assets {/* #step-7-prepare-runtime-assets */}
 
-Runtime Assets are managed task dependencies used by file processing, local tools, and other controlled execution. The setup page automatically downloads, verifies, and installs these dependencies. You do not need to install Python or Node.js into the host environment by hand.
+Runtime Assets are managed task dependencies used by file processing, local tools, and other controlled execution. xAgent downloads, verifies, and installs these dependencies. Earlier versions display installation in the wizard; current source manages them through execution-environment and runtime-resource controls. You do not need to install Python or Node.js into the host environment by hand.
 
 LibreOffice is an exception: its many operating-system dependencies are not bundled in the xAgent release. For Word, PowerPoint, and Excel PDF conversion or Excel recalculation, administrators must install LibreOffice on the host with the system package manager. On Debian/Ubuntu run `sudo apt-get update && sudo apt-get install -y libreoffice`, then verify with `soffice --headless --version`; use the equivalent package manager on other distributions.
 
 ![xAgent English Runtime Assets installation step](/img/getting-started/v005/system-setup-runtime-en.webp)
 
-When the page shows that Runtime Assets are not ready, select **Download and install**. xAgent downloads the matching runtime dependencies from the download site, verifies them, and installs them. The setup flow continues after this step changes to **Completed**.
+In the earlier wizard, when the page shows that Runtime Assets are not ready, select **Download and install**. xAgent downloads the matching runtime dependencies from the download site, verifies them, and installs them. The setup flow continues after this step changes to **Completed**.
 
 Wait for this step to complete before continuing. If the download or installation fails, check the service logs and download connectivity instead of bypassing the setup flow.
 
-## Step 8: Check Runtime Components
+## Step 8: Check Runtime Components {/* #step-8-check-runtime-components */}
 
-Runtime components provide document processing, command isolation, and other local execution capabilities. xAgent installs and tests these components automatically. After the test passes, open **Agent governance > Execution environment** and confirm that Runtime Assets and ProcessSandbox are available.
+Runtime components provide document processing, command isolation, and other local execution capabilities. xAgent installs and tests these components automatically. After the test passes, open **Agent governance &gt; Execution environment** and confirm that Runtime Assets and ProcessSandbox are available.
 
 If the check fails:
 
@@ -148,13 +164,13 @@ If the check fails:
 3. Confirm that the host can reach the download site and that the kernel supports the sandbox features required by Linux.
 4. Run the check again after fixing the cause. Do not enable unrestricted host execution as a workaround.
 
-## Step 9: Finish Setup
+## Step 9: Finish Setup {/* #step-9-finish-setup */}
 
-When the data directory, administrator, model, Runtime Assets, and runtime components are complete, select **Finish setup**. xAgent enters the workspace, and users can access it through the Web UI or installed AgentPlugins.
+After completing the required wizard items for your version and checking the data directory, database (if shown), administrator, model, and required runtime dependencies, select **Finish setup**. xAgent enters the workspace, and users can access it through the Web UI or installed AgentPlugins.
 
 ![xAgent English finish setup step](/img/getting-started/v005/system-setup-finish-en.webp)
 
-The final step summarizes the completed items. Confirm that every item shows **Completed**, then select **Finish and open dashboard** to end the one-time setup and enter the workspace.
+The earlier final step summarizes completed items and uses **Finish and open dashboard**. Current source summarizes the directory, database, administrator, and model. Use the completion button actually shown by your version.
 
 Run a minimal acceptance check immediately after entering the workspace:
 
@@ -164,17 +180,17 @@ Reply with “installation check passed” and tell me whether this session can 
 
 If the model, session, and reply work, upload a small non-sensitive file to verify workspace reading and result saving.
 
-## The Dashboard After Setup
+## The Dashboard After Setup {/* #the-dashboard-after-setup */}
 
 After setup is complete, xAgent opens the dashboard. It shows token usage, model and tool call counts, and the current session state. From here, you can continue to Agent sessions, workspace files, and governance settings.
 
 ![xAgent English dashboard](/img/getting-started/v005/dashboard-after-setup-en.webp)
 
-## AgentPlugins Are Optional
+## AgentPlugins Are Optional {/* #agentplugins-are-optional */}
 
-AgentPlugins are not required for basic Web console access. After installing a plugin, administrators open **Agent Governance > AgentPlugin Connectors** and enter the installer-provided address and API Key; users bind their accounts or resources in **Operations > Plugin Connections**. If you skipped installation, follow the [AgentPlugin guide](/docs/user-guide/connector) later. See [Database AgentPlugin](/docs/user-guide/database-connector) and [SSH AgentPlugin](/docs/user-guide/ssh-connector) for those resources.
+AgentPlugins are not required for basic Web console access. After installing a plugin, administrators open **Agent Governance &gt; AgentPlugin Connectors** and enter the installer-provided address and API Key; users bind their accounts or resources in **Operations &gt; Plugin Connections**. If you skipped installation, follow the [AgentPlugin guide](/docs/user-guide/connector) later. See [Database AgentPlugin](/docs/user-guide/database-connector) and [SSH AgentPlugin](/docs/user-guide/ssh-connector) for those resources.
 
-## Next Steps
+## Next Steps {/* #next-steps */}
 
 - [Install the Desktop Client and Browser Extension](/docs/getting-started/install-client-and-browser-extension)
 - [Complete Your First Task](/docs/getting-started/first-task)

@@ -1,19 +1,19 @@
 ---
 title: "AI Agent Model Requirements: Tool Calling, Context, and API Compatibility"
-description: Learn which tool-calling, context-length, and API compatibility requirements an xAgent model needs, and how to validate it for long-running tasks.
+description: "Learn which tool-calling, context-length, and API compatibility requirements an xAgent model needs, and how to validate it for long-running tasks."
 status: beta
-updated: 2026-07-15
+updated: 2026-10-01
 ---
 
 # AI Agent Model Requirements: Tool Calling, Context, and API Compatibility
 
-## What It Is
+## What It Is {/* #what-it-is */}
 
 xAgent relies on models for understanding, reasoning, planning, tool calling, and result generation. After deployment, administrators need to configure at least one usable model before users can reliably create sessions and run tasks.
 
 The current version is still beta. Model selection and parameter suggestions will continue to change based on testing.
 
-## Basic Requirements
+## Basic Requirements {/* #basic-requirements */}
 
 Prefer models with:
 
@@ -25,7 +25,7 @@ Prefer models with:
 | Stable streaming | Users need to see progress and results during long execution |
 | API compatibility | OpenAI API, Gemini API, and Anthropic API are currently supported, but OpenAI-compatible API is the most tested path |
 
-## API Support Status
+## API Support Status {/* #api-support-status */}
 
 The current version supports:
 
@@ -35,13 +35,13 @@ The current version supports:
 
 Development and testing have mainly used OpenAI API / OpenAI-compatible API. Gemini API and Anthropic API provider compatibility is not fully guaranteed yet. If you have these APIs, you can try them in model configuration and verify chat, streaming, tool calling, long context, and long-task stability.
 
-## Context Guidance
+## Context Guidance {/* #context-guidance */}
 
-xAgent loads dynamic prompts, default tool descriptions, and task context into a session. The initial context can be around 20k tokens.
+xAgent loads dynamic prompts, default tool descriptions, and task context into a session. Earlier development observations reported an initial context near 20k tokens. This is not a fixed startup cost; the version, selected capabilities, and session inputs affect it.
 
 Context has been optimized for prompt-prefix caching. On model services that support prefix caching, repeated system prompts and default tool descriptions can be cached effectively.
 
-When context reaches about 80% of the maximum context window, xAgent triggers context compression. Compression helps long tasks continue, but it also consumes model capability and may lose details.
+Earlier documentation used an approximately 80% context threshold. The public `v0.0.21.beta` notes specify a 90% request-budget line, with batched summaries of oversized history and active turns. Persistence advances only after all summaries succeed. Request budget is not necessarily the Provider’s advertised window. Compression helps long tasks continue, but it also consumes model capability and may lose details.
 
 Recommended context:
 
@@ -51,21 +51,21 @@ Recommended context:
 
 Prefix caching reduces repeated fixed-prefix cost, but it does not replace long-context capability. Task materials, tool results, conversation history, and user additions still consume context.
 
-## Current Test Notes
+## Current Test Notes {/* #current-test-notes */}
 
-The current development environment is resource-limited and mainly tests with `Qwen3.6-27B`. This is not a recommended production configuration. It is only one model available in the development environment.
+The previously documented development environment was resource-limited and mainly tested with `Qwen3.6-27B`. This is not a recommended production configuration. It is only one model available in the development environment.
 
-Smaller models such as `Gemma4-12B` have also been tested and can execute long tasks. In real deployment, choose based on task complexity, provider stability, context length, tool calling, and cost.
+Earlier test notes reported that smaller models such as `Gemma4-12B` have also been tested and can execute long tasks. In real deployment, choose based on task complexity, provider stability, context length, tool calling, and cost.
 
 xAgent will not be limited to one model or one provider. Different models have different strengths. Future model routing and default suggestions will be adjusted based on test results.
 
-## Development Test Parameters
+## Development Test Parameters {/* #development-test-parameters */}
 
 The following parameters are development test parameters, not recommended defaults. Actual configuration should follow provider documentation and your own test results.
 
-The development environment also validates prompt-prefix caching. In stable sessions, prefix cache hit rate can usually reach 90% or higher.
+Earlier development observations also recorded prompt-prefix caching, with sample stable sessions reaching 90% or higher. These historical figures are not a general performance promise; actual cache behavior depends on the provider, deployment, and request shape.
 
-![xAgent development model server logs showing a prefix cache hit rate above ninety percent](/img/manual/v005/en/prefix-cache-metrics.webp)
+![xAgent development model server logs showing a prefix cache hit rate above ninety percent](/img/manual/v005/zh/prefix-cache-metrics.webp)
 
 ```json
 {
@@ -87,7 +87,7 @@ The development environment also validates prompt-prefix caching. In stable sess
 
 If your model service does not support a field, remove that field and first ensure stable chat, streaming, tool calling, and long-task execution.
 
-## Configuration Checklist
+## Configuration Checklist {/* #configuration-checklist */}
 
 When adding a model:
 
@@ -100,13 +100,13 @@ When adding a model:
 
 Only make a model available to ordinary users after it can reliably read files, call tools, generate results, and handle confirmations.
 
-## Related Concepts
+## Related Concepts {/* #related-concepts */}
 
 - [Start Installation](/docs/getting-started/install)
 - [How AI Agents Run Long Tasks](/docs/guides/long-running-agent-task)
 - [How AI Agents Discover and Load Tools on Demand](/docs/guides/ai-agent-dynamic-tool-discovery)
 
-## Next Steps
+## Next Steps {/* #next-steps */}
 
 - [Add and test a model in Model Configuration](/docs/user-guide/model-config)
 - [Validate tool calling in an Agent Session](/docs/user-guide/agent-session)

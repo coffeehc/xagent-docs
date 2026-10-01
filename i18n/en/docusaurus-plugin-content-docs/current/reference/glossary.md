@@ -1,21 +1,21 @@
 ---
-title: Glossary
-description: Find the standard meanings of xAgent terms including Agent, Task, Skill, Tool, AgentPlugin, Memory, Session, Workspace, and Runtime.
+title: "Glossary"
+description: "Find the standard meanings of xAgent terms including Agent, Task, Skill, Tool, AgentPlugin, Memory, Session, Workspace, and Runtime."
 status: stable
-updated: 2026-09-17
+updated: 2026-10-01
 ---
 
 # Glossary
 
-## Who This Is For
+## Who This Is For {/* #who-this-is-for */}
 
 This page is for every author and reader of xAgent documentation.
 
-## What It Is
+## What It Is {/* #what-it-is */}
 
 The glossary is the source of standardized terminology for xAgent documentation. Add new terms here when they are introduced.
 
-## Core Terms
+## Core Terms {/* #core-terms */}
 
 | Term | Standard Meaning |
 | --- | --- |
@@ -32,12 +32,17 @@ The glossary is the source of standardized terminology for xAgent documentation.
 | Session | An interaction context between a user and an Agent |
 | Workspace | The space for files, context, and intermediate artifacts used by an Agent during a Task |
 | Trigger | A mechanism that turns a future time or external event into a Session Task |
+| WorkGroup | Versioned configuration for agents and communication edges; not the owner of session runtime state |
+| Work Record | Session-scoped topic records, revisions, and deltas used to inspect continuity and evidence |
+| Model Profile ID | Stable reference to a model configuration; distinct from its display name or the Provider’s model ID |
+| A2A Client | User-scoped connections to remote Agents, remote task tracking, and inbox result delivery |
+| Delivery Receipt | Evidence that a particular messaging stage was accepted; does not by itself prove the whole task completed |
 
-## When to Use It
+## When to Use It {/* #when-to-use-it */}
 
 User guides, technical references, and maintenance documentation should all follow this glossary. A user guide can explain a term in plain language, but its core meaning must remain consistent.
 
-## Writing Rules
+## Writing Rules {/* #writing-rules */}
 
 When writing documentation:
 
@@ -46,7 +51,7 @@ When writing documentation:
 - Update this page and related documentation when adding a term.
 - Explain how to use a feature in user-facing pages; reserve internal boundaries for technical references.
 
-## Related Documentation
+## Related Documentation {/* #related-documentation */}
 
 - [What Is xAgent](/docs/getting-started/what-is-xagent)
 - [Long-Term Memory](/docs/user-guide/memory)

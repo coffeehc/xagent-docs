@@ -208,44 +208,67 @@ const config: Config = {
         height: 32,
       },
       items: [
-        {
-          to: '/docs/getting-started/what-is-xagent/',
-          position: 'left',
-          label: '产品介绍',
-        },
-        {
-          to: '/docs/manual/overview/',
-          position: 'left',
-          label: '使用手册',
-        },
-        {
-          href: `${localeSiteUrl}/blog/`,
-          position: 'left',
-          label: 'Blog',
-          target: '_self',
-        },
-        {
-          href: `${localeSiteUrl}/insights/`,
-          position: 'left',
-          label: '行业观察',
-          target: '_self',
-        },
-        {
-          href: `${localeSiteUrl}/docs/community/discussions/`,
-          position: 'left',
-          label: '社区讨论',
-          target: '_self',
-        },
-        {
-          type: 'localeDropdown',
-          position: 'right',
-        },
-        {
-          href: 'https://github.com/coffeehc/xagent-releases',
-          label: 'GitHub',
-          position: 'right',
-        },
-      ],
+  {
+    "to": "/#demo-title",
+    "activeBaseRegex": "^/(en/)?$",
+    "position": "left",
+    "label": "产品体验",
+    "target": "_self"
+  },
+  {
+    "to": "/docs/manual/overview/",
+    "activeBasePath": "/docs/",
+    "position": "left",
+    "label": "使用手册"
+  },
+  {
+    "label": "更多资源",
+    "position": "left",
+    "items": [
+      {
+        "label": "产品介绍",
+        "href": `${localeSiteUrl}/docs/getting-started/what-is-xagent/`,
+        "target": "_self"
+      },
+      {
+        "label": "更新日志",
+        "href": `${localeSiteUrl}/docs/changelog/`,
+        "target": "_self"
+      },
+      {
+        "label": "Blog",
+        "href": `${localeSiteUrl}/blog/`,
+        "target": "_self"
+      },
+      {
+        "label": "行业观察",
+        "href": `${localeSiteUrl}/insights/`,
+        "target": "_self"
+      },
+      {
+        "label": "社区讨论",
+        "href": `${localeSiteUrl}/docs/community/discussions/`,
+        "target": "_self"
+      }
+    ]
+  },
+  {
+    "to": "/docs/getting-started/install/",
+    "position": "right",
+    "label": "开始使用"
+  },
+  {
+    "type": "localeDropdown",
+    "position": "right",
+    "dropdownItemsBefore": [],
+    "dropdownItemsAfter": []
+  },
+  {
+    "href": "https://github.com/coffeehc/xagent-releases",
+    "label": "GitHub",
+    "position": "right"
+  }
+],
     },
     footer: {
       style: 'dark',

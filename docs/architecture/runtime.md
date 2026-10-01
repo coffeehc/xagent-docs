@@ -1,17 +1,17 @@
 ---
-title: Runtime 与 ProcessSandbox
-description: 了解 xAgent 如何通过 Execution Lease、ProcessSandbox 和 Runtime Assets 隔离本地命令、文件投影与执行依赖。
+title: "Runtime 与 ProcessSandbox"
+description: "了解 xAgent 如何通过 Execution Lease、ProcessSandbox 和 Runtime Assets 隔离本地命令、文件投影与执行依赖。"
 status: beta
-updated: 2026-07-30
+updated: 2026-10-01
 ---
 
 # Runtime 与 ProcessSandbox
 
-## 适用对象
+## 适用对象 {/* #适用对象 */}
 
 本文适合需要理解 xAgent 本地命令执行、文件投影、运行依赖和责任边界的开发者与部署管理员。
 
-## 当前实现
+## 当前实现 {/* #当前实现 */}
 
 `v0.0.6.beta` 已经提供本地 Runtime 执行链，不再只是规划概念。一次命令执行由三个 owner 协作完成：
 
@@ -23,7 +23,7 @@ updated: 2026-07-30
 
 Runtime 不拥有 Workspace 权限，也不能把宿主绝对路径直接传给命令。ProcessSandbox 不重新解释业务授权，只消费上游 owner 已经校验完成的挂载计划。
 
-## 文件视图
+## 文件视图 {/* #文件视图 */}
 
 ProcessSandbox 的稳定逻辑根包括：
 
@@ -31,11 +31,12 @@ ProcessSandbox 的稳定逻辑根包括：
 - `/input`：系统任务的精确输入。
 - `/output`：系统任务的精确输出。
 - `/runtime`：只读 Runtime Assets。
+- `/user-runtime`：按执行计划挂载的用户私有可写运行依赖目录，可跨执行共享，但不属于 Workspace 文件事实。
 - `/tmp`：单次执行独占 scratch。
 
 挂载项必须是普通文件或目录，目标路径不能重复。系统 owner 节点可以作为排除项覆盖父目录权限，避免较大目录投影意外暴露内部索引和状态文件。
 
-## Execution Lease
+## Execution Lease {/* #execution-lease */}
 
 本地 Runtime 必须先向 WorkspaceFileService 申请 Execution Lease。Lease 负责：
 
@@ -47,7 +48,7 @@ ProcessSandbox 的稳定逻辑根包括：
 
 ProcessSandbox 返回以后，local provider 必须先完成 Lease Commit，再释放临时资源与写锁。仅启动进程成功不能视为完整执行成功。
 
-## 环境与资源
+## 环境与资源 {/* #环境与资源 */}
 
 目标进程不继承完整宿主环境。ProcessSandbox 构造固定的 `HOME`、`PATH`、临时目录变量和按文件视图决定的 `XAGENT_WORKSPACE`、`XAGENT_INPUT`、`XAGENT_OUTPUT`；调用方只能追加非保留环境变量。
 
@@ -56,34 +57,40 @@ ProcessSandbox 返回以后，local provider 必须先完成 Lease Commit，再�
 - 60 秒执行超时。
 - 128 个进程。
 - 512 MiB 内存。
-- 1 个 CPU 配额周期。
+- 每 100,000 微秒周期允许 100,000 微秒 CPU 时间，即 1 个 CPU 的配额。
 - stdout 和 stderr 各保留 1 MiB。
 
 调用方可以在执行计划中收紧或调整限制。命令退出、超时或取消后，返回结果前必须清理完整进程树和平台资源。
 
-## 平台后端
+这些是 ProcessSandbox 请求未提供对应值时的默认值，不是所有 Tool 的固定配置，也不是长任务只能运行 60 秒。长任务可包含多次独立命令执行；每次调用仍受自身超时、资源和输出保留上限约束。返回结果中的截断标记需要检查，不能把被截断的 stdout/stderr 当作完整日志。
 
-### Linux
+`/user-runtime`、精确默认值与执行计划边界按 2026-10-01 主分支 `43d2698` 核对。`v0.0.6.beta` 说明本地执行链的引入历史，不表示后续能力均已包含在该版本。
+
+## 平台后端 {/* #平台后端 */}
+
+### Linux {/* #linux */}
 
 Linux 使用 `bubblewrap` 建立文件挂载与命名空间边界，cgroup v2 管理进程树资源，seccomp 收紧系统调用。平台检查会执行一次真实的最小沙箱命令，验证启动和清理链路。
 
-### macOS
+### macOS {/* #macos */}
 
 macOS 为每次执行创建私有文件视图，并使用 `sandbox-exec` profile 约束文件访问。稳定逻辑路径会映射到私有视图中的宿主路径，同时对系统 owner 文件添加明确拒绝规则。
 
+CPU、内存与进程数上限在 Linux 后端通过 cgroup v2 落实。当前 macOS 后端侧重私有文件视图、sandbox-exec 与进程清理，没有同等的 cgroup 资源限制实现；不要把上面的请求默认值理解为两个平台完全相同的硬资源保证。超时与输出截断仍由公共执行层处理。
+
 缺少必需隔离能力时返回 ProcessSandbox 不可用错误，不允许回退到不受控宿主执行。
 
-## Runtime Assets
+## Runtime Assets {/* #runtime-assets */}
 
 Runtime Assets 由 RuntimeAssetService 独立下载、校验、安装和切换，包含 xAgent 托管的 Python、Node 与辅助二进制。准备就绪的版本以只读目录挂载到 `/runtime`。
 
 Tool readiness 以 Runtime Assets 的安装事实和沙箱内探测结果为准，不使用宿主机上偶然存在的解释器作为后备路径。安装流程见[开始安装](/docs/getting-started/install)。
 
-## 并发语义
+## 并发语义 {/* #并发语义 */}
 
 ProcessSandbox Service 支持并发调用，每次调用使用独立文件视图、进程树和平台资源。真正需要串行的是同一用户下相互重叠的 Workspace 可写根，这一约束由 Execution Lease owner 负责；互不重叠的根可以并发执行。
 
-## 相关文档
+## 相关文档 {/* #相关文档 */}
 
 - [多用户工作区与任务进程隔离](/docs/guides/multi-user-workspace-isolation)
 - [开始安装](/docs/getting-started/install)

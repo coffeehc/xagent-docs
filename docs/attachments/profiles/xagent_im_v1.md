@@ -1,8 +1,16 @@
 ---
-title: xAgent IM Profile v1
-description: xAgent IM Profile v1 的旧版即时通讯能力、入站消息、投递语义和兼容边界规范。
-updated: 2026-07-29
+title: "xAgent IM Profile v1"
+description: "xAgent IM Profile v1 的旧版即时通讯能力、入站消息、投递语义和兼容边界规范。"
+updated: 2026-10-01
 ---
+
+<div className="alert alert--warning margin-bottom--lg" role="note">
+
+**历史 Connector 资料**
+
+本文保留旧版 Connector Schema 或 Profile，用于兼容性核对。原规范中的“当前”指当时的协议代际，不代表今天的 AgentPlugin 合同。排查旧连接时可逐项对照原字段和示例；新接入请从 [AgentPlugin 使用说明](/docs/user-guide/connector)开始。
+
+</div>
 
 # xAgent IM Profile v1
 
@@ -10,7 +18,7 @@ updated: 2026-07-29
 Connector Server 的连接方式、HTTP endpoint、WebSocket envelope、认证、channel、工具调用和公共错误语义见
 [xAgent Connector Common Protocol](../xagent_connector_protocol.md)。
 
-## 1. 规范用语
+## 1\. 规范用语 {/* #1-规范用语 */}
 
 - “必须”表示实现为了兼容 `xagent.im.v1` 必须满足的外部协议行为。
 - “建议”表示推荐实现方式；实现者可以根据目标系统和部署条件调整。
@@ -18,7 +26,7 @@ Connector Server 的连接方式、HTTP endpoint、WebSocket envelope、认证�
 
 本文档约束 xAgent 和 Connector Server 之间的可观察结果，不规定 Connector 内部必须使用文件、数据库、消息队列或特定并发模型。
 
-## 2. 定位
+## 2\. 定位 {/* #2-定位 */}
 
 `xagent.im.v1` 表示旧 Connector Channel 连接到即时通讯目标，并通过 `message.push` 把目标系统消息和发送能力投影给 xAgent。
 
@@ -37,7 +45,7 @@ Connector Server 的连接方式、HTTP endpoint、WebSocket envelope、认证�
 - 文件字节传输；该能力属于主协议的 Transfer Plane。
 - xAgent 内部 Session、Agent、事件队列或持久化结构。
 
-## 3. Profile 声明
+## 3\. Profile 声明 {/* #3-profile-声明 */}
 
 Connector Card 必须在 `supports.profiles` 声明静态支持，Connection Descriptor 必须在 `connection.profiles` 声明当前 channel 实际启用。
 
@@ -56,7 +64,7 @@ Connector Card 必须在 `supports.profiles` 声明静态支持，Connection Des
 
 旧 Connector 声明 `xagent.im.v1`；当前 Connector 声明 `xagent.im.v2`。内置 Connector 不同时声明两者，也不在当前实现中保留 `message.push` 回退分支。xAgent 可以同时公布自己支持 v1 和 v2，以便分别接入旧 Connector 和当前 Connector。
 
-## 4. IM 工具
+## 4\. IM 工具 {/* #4-im-工具 */}
 
 IM 工具仍使用主协议的 `tool.invoke` / `tool.invoke.ack`。
 
@@ -70,7 +78,7 @@ IM 工具仍使用主协议的 `tool.invoke` / `tool.invoke.ack`。
 
 工具 ID、参数结构和具体目标系统能力由 Connector 定义；Profile 不强制所有 IM Connector 提供相同工具集合。
 
-## 5. 入站消息
+## 5\. 入站消息 {/* #5-入站消息 */}
 
 旧 IM Connector 通过主协议的 `message.push` 推送结构化事件。当前 Connector 应改用 `xagent.im.v2` 的 `chat.message`，不应在同一实现中根据协商结果回退到 `message.push`。
 
@@ -96,7 +104,7 @@ IM 工具仍使用主协议的 `tool.invoke` / `tool.invoke.ack`。
 
 目标系统特有字段可以追加，但不能替代以上标准字段，也不能泄漏认证材料。
 
-## 6. 来源和回复路由
+## 6\. 来源和回复路由 {/* #6-来源和回复路由 */}
 
 Connector 必须让 xAgent 和 Agent 能理解消息来自哪个系统、发送方和会话类型，但不应要求 Agent 推导目标系统路由。
 
@@ -119,11 +127,11 @@ Connector 必须让 xAgent 和 Agent 能理解消息来自哪个系统、发送�
 
 旧 IM Connector 可以在消息成功投递后自行向目标系统展示 typing 或“正在输入”状态，并在回复发送或超时后取消。当前 IM v2 Connector 应消费 `chat.activity`，并按目标平台能力降级为 typing 或空操作。
 
-## 7. 消息保留与过期
+## 7\. 消息保留与过期 {/* #7-消息保留与过期 */}
 
 消息保留策略的目标是在 Connector 与 xAgent 短暂断线时避免静默丢失消息，同时防止无限缓存、无限重试和恢复后集中投递大量过时对话。
 
-### 7.1 必须满足的外部行为
+### 7.1 必须满足的外部行为 {/* #71-必须满足的外部行为 */}
 
 - Connector 必须为尚未到达投递终态的入站消息设计有限的保留和过期机制。
 - channel 未打开、连接断开、写入失败、ack 超时等临时故障不能直接视为投递成功。
@@ -136,7 +144,7 @@ Connector 必须让 xAgent 和 Agent 能理解消息来自哪个系统、发送�
 
 这些要求只约束结果。Connector 可以使用本地持久化、外部消息队列或目标系统自身的可靠游标满足要求。
 
-### 7.2 建议实现
+### 7.2 建议实现 {/* #72-建议实现 */}
 
 - 交互式 IM 消息建议保留 1 小时。
 - 建议从 Connector 第一次接管消息的时间计算 `expires_at`；目标系统事件时间可靠时，可以同时用于拒绝明显过旧的消息。
@@ -149,7 +157,7 @@ Connector 必须让 xAgent 和 Agent 能理解消息来自哪个系统、发送�
 
 TTL、容量、清理周期和存储介质不是固定协议常量。实现者可以根据告警、工单或其他非实时业务延长保留时间，但应在部署文档或配置说明中公开实际策略。
 
-### 7.3 投递终态
+### 7.3 投递终态 {/* #73-投递终态 */}
 
 使用 `xagent.im.v2` 时：
 
@@ -161,7 +169,7 @@ TTL、容量、清理周期和存储介质不是固定协议常量。实现者�
 
 `message.push` 当前没有独立业务 ack。对丢失敏感的聊天消息建议同时启用 `xagent.im.v2`；仅使用 `message.push` 的实现应明确其成功写入和重放边界。
 
-## 8. 容量和溢出
+## 8\. 容量和溢出 {/* #8-容量和溢出 */}
 
 容量限制是资源保护，不等同于 TTL 过期。
 
@@ -174,7 +182,7 @@ TTL、容量、清理周期和存储介质不是固定协议常量。实现者�
 
 不得在没有任何记录的情况下静默删除消息。
 
-## 9. 文件消息
+## 9\. 文件消息 {/* #9-文件消息 */}
 
 IM payload 中的文件项必须至少包含 `file_ref`。当前 xAgent 自动读取文件时还需要 `download_url` 或 `url`。
 
@@ -197,14 +205,14 @@ IM payload 中的文件项必须至少包含 `file_ref`。当前 xAgent 自动�
 - 文件 TTL 建议覆盖消息可能被正常投递和读取的时间窗口。
 - 目标系统 CDN 可能提前过期时，Connector 建议尽早下载或转存。
 
-## 10. 安全边界
+## 10\. 安全边界 {/* #10-安全边界 */}
 
 - Connector 不能要求第三方实现理解 xAgent 的用户表、Session、Agent 状态或内部事件模型。
 - xAgent 内部 ID 不得进入 IM payload。
 - Connector 只依赖公开的 `connector_channel_id`、`message_id`、packet、ack、Card、Descriptor 和工具协议。
 - 目标系统 token、bot token、系统 API key 和一次性认证材料不得进入消息正文、文件字段或日志。
 
-## 11. 一致性检查
+## 11\. 一致性检查 {/* #11-一致性检查 */}
 
 - Card 和 Descriptor 是否同时正确声明 `xagent.im.v1`？
 - 入站 `message_id` 是否在 channel 内稳定？

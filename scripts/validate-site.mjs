@@ -82,6 +82,9 @@ htmlFiles.forEach((filePath) => {
   const main = $('main').first();
   const visible = (main.length > 0 ? main : $('body')).clone();
   visible.find('script, style, code, pre, nav, footer, aside').remove();
+  if (/:::\s*(?:note|info|tip|warning|danger)\b/.test(visible.text())) {
+    errors.push(`${route}: contains an unrendered documentation notice`);
+  }
 
   pages.set(route, {
     $,

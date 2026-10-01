@@ -1,17 +1,17 @@
 ---
 title: "xAgent Agent Sessions: Submit Tasks, Files, and Approvals"
-description: Learn how to submit tasks, upload materials, follow execution, handle approvals, use sub-agents, and continuously adjust work in an xAgent Agent Session.
+description: "Learn how to submit tasks, upload materials, follow execution, handle approvals, use sub-agents, and continuously adjust work in an xAgent Agent Session."
 status: stable
-updated: 2026-09-17
+updated: 2026-10-01
 ---
 
 # xAgent Agent Sessions: Submit Tasks, Files, and Approvals
 
-## Who This Is For
+## Who This Is For {/* #who-this-is-for */}
 
 This page is for users who use xAgent every day to submit tasks, follow progress, add materials, and receive results.
 
-## What It Is
+## What It Is {/* #what-it-is */}
 
 Agent Session is the main work page in xAgent. Think of it as the place where you collaborate with a work assistant: enter requirements, upload materials, follow execution, confirm risky actions, and continue asking questions or refining results.
 
@@ -19,9 +19,17 @@ It is not an ordinary chat window. It also handles task submission, context cont
 
 `v0.0.5.beta` reorganized the message timeline, attachments, Tool call blocks, execution status, and Workspace entry points, and improved narrow-screen and mobile layouts.
 
-![xAgent Agent Session page showing the Session list, execution timeline, approval card, and message input](/img/manual/v005/en/agent-session.webp)
+![2026-10-01 reviewed product interface](/img/home/current/xagent-launch-session.webp)
 
-## When to Use It
+Session and file panel from the real launch-kit demonstration, completed with human review and follow-up instructions. Chinese UI; this shows actual file references, not a promise of unattended completion.
+
+<details>
+<summary>Earlier interface reference (retained)</summary>
+
+![xAgent Agent Session page showing the Session list, execution timeline, approval card, and message input](/img/manual/v005/en/agent-session.webp)
+</details>
+
+## When to Use It {/* #when-to-use-it */}
 
 Start from an Agent Session when you need to:
 
@@ -34,7 +42,7 @@ Start from an Agent Session when you need to:
 - Delegate work to a sub-session or return to the main Session to consolidate progress.
 - Fine-tune prompts, Skills, Tools, models, or Secrets during a task.
 
-## Page Layout
+## Page Layout {/* #page-layout */}
 
 The Agent Session page has several main areas:
 
@@ -49,7 +57,7 @@ The Agent Session page has several main areas:
 
 Ordinary users usually only need the Session list, timeline, and input area. Advanced users can open Advanced Settings when they need to improve the current task.
 
-## Main Session and Sub-session
+## Main Session and Sub-session {/* #main-session-and-sub-session */}
 
 Agent Session shows two kinds of Sessions:
 
@@ -62,9 +70,17 @@ You can send messages directly in both main Sessions and sub-sessions. The main 
 
 After entering a sub-session, a **Back to Main Session** button may appear at the top. Use it to return to the overall entry point for further discussion or consolidation.
 
-## Basic Usage
+### Confirm That Collaboration Actually Finished {/* #confirm-that-collaboration-actually-finished */}
 
-### Create or Enter a Session
+Creating a Sub Session, delivering its task, producing a result, and returning that result to the coordinator are separate steps. The current messaging protocol does not generate a business result merely because creation or sending succeeded. If a return is needed, explicitly ask for the complete result to be sent to the exact source Session. The coordinator can continue consolidation when the reply arrives.
+
+If the Main Session has no new result, open the relevant Sub Session and check for missing materials, pending approval, execution failure, or an answer left only in that Sub Session. Address the actual blocker with one clear follow-up rather than creating the same task again. File references still require target access.
+
+Same-user Session collaboration, WorkGroup orchestration, and remote A2A operate at different layers. Orchestration manages Agent and connection configuration; remote A2A has separate authentication and task receipts. Neither implies cross-user Session sharing. See the collaboration guide below for message semantics.
+
+## Basic Usage {/* #basic-usage */}
+
+### Create or Enter a Session {/* #create-or-enter-a-session */}
 
 1. Open **Agent Session** from the left menu.
 2. If Sessions already exist, select a Session card on the left.
@@ -72,7 +88,7 @@ After entering a sub-session, a **Back to Main Session** button may appear at th
 4. Describe what should be completed in the input box.
 5. If files are required, upload the attachments first and then identify which file to process.
 
-### Write the First Message
+### Write the First Message {/* #write-the-first-message */}
 
 A good message usually contains four kinds of information:
 
@@ -89,7 +105,7 @@ For example:
 Read the meeting.md file I just uploaded. Organize the meeting decisions, action items, owners, and risks, save the result as Markdown, and give me a summary in the Session.
 ```
 
-### Refine the Result
+### Refine the Result {/* #refine-the-result */}
 
 If the direction is correct but the result needs improvement, continue in the same Session:
 
@@ -101,7 +117,7 @@ If the direction is correct but the result needs improvement, continue in the sa
 
 The same Session preserves context and is better for continuous refinement. Create a new Session only when the goal has become a different task or you do not want the current context to continue.
 
-## Reading the Timeline
+## Reading the Timeline {/* #reading-the-timeline */}
 
 Several kinds of content may appear in a Session:
 
@@ -119,7 +135,7 @@ Several kinds of content may appear in a Session:
 
 The top toolbar includes a **Show Tool Calls** switch. When it is off, completed Tool calls are hidden and the timeline is easier to read. Turn it on when troubleshooting or confirming what a particular step did.
 
-## Input and Attachments
+## Input and Attachments {/* #input-and-attachments */}
 
 Use the input area at the bottom to continue sending messages to the current Session. Common actions include:
 
@@ -140,7 +156,7 @@ Do not enter an arbitrary path on your computer or treat an internal server path
 
 If an attachment is still processing, the page prevents sending. Wait until processing is complete so xAgent can access the file content.
 
-## Tool Calls and Approvals
+## Tool Calls and Approvals {/* #tool-calls-and-approvals */}
 
 xAgent may call Tools to complete a task, such as reading or writing files, accessing web pages, processing spreadsheets, sending email, invoking an AgentPlugin, or creating a sub-session.
 
@@ -156,7 +172,7 @@ Actions that require particular attention include:
 
 When an approval appears, first check what it will do, which object it affects, and whether it sends content externally. Allow it only after confirming the details. If uncertain, reject it and add clarification in the Session.
 
-## Session Files
+## Session Files {/* #session-files */}
 
 The Session Files entry in the top toolbar shows files related to the current Session. Use it to:
 
@@ -167,7 +183,19 @@ The Session Files entry in the top toolbar shows files related to the current Se
 
 If a task generated a file but no entry appears in the message, open the Session Files panel and refresh it once.
 
-## Advanced Settings and Task Tuning
+## Work Records and Stage Continuity {/* #work-records-and-stage-continuity */}
+
+Current main provides Session work records for traceable stage conclusions, unresolved questions, and evidence references. If your deployed version has Work Records, you can inspect active/archived records, select historical revisions, and read incremental entries not yet covered by the summary.
+
+1. Ask the Agent to record conclusions, evidence, blockers, and next steps by stable topic.
+2. Append new developments; when revising a summary, retain increments it has not covered.
+3. Review the revision, original sources, and actual artifacts before accepting the result.
+
+`active` only means a record remains in the default directory; `archived` removes it from that directory while retaining history. Neither proves validated business success. Work records belong to the current Session and differ from cross-Session Memory or a downloadable final file.
+
+This section was checked against main commit `43d2698` on 2026-10-01; older versions may have different entry points and fields.
+
+## Advanced Settings and Task Tuning {/* #advanced-settings-and-task-tuning */}
 
 Advanced Settings configures capabilities for the current Session. It is optional and intended for experienced users who need to fine-tune a task while it is running.
 
@@ -185,7 +213,7 @@ Secret settings select only keys. Actual Secret values do not enter the model or
 
 Task tuning is not intended to shift configuration work onto users. It gives advanced users a way to gradually adjust context, capabilities, and models when a task needs higher quality, until the task reaches a better completion state.
 
-## Context and Long Sessions
+## Context and Long Sessions {/* #context-and-long-sessions */}
 
 The top toolbar shows context and token information to indicate context usage in the current Session. Ordinary users do not need to understand every number. The important points are:
 
@@ -196,7 +224,7 @@ The top toolbar shows context and token information to indicate context usage in
 
 If a Session is already long, ask xAgent to summarize the current state before continuing.
 
-## Session Commands
+## Session Commands {/* #session-commands */}
 
 The input area supports a small set of commands for troubleshooting or managing the current Session:
 
@@ -209,39 +237,39 @@ The input area supports a small set of commands for troubleshooting or managing 
 
 Commands may be temporarily unavailable while the current Session is running or waiting for confirmation.
 
-## Common Scenarios
+## Common Scenarios {/* #common-scenarios */}
 
-### Organize Materials
+### Organize Materials {/* #organize-materials */}
 
 ```text
 Read the three materials I uploaded. Organize their shared conclusions, disagreements, and open questions, and output the result as a Markdown table.
 ```
 
-### Generate a Report
+### Generate a Report {/* #generate-a-report */}
 
 ```text
 Create a weekly report from the sales data in the Workspace. Include key metrics, anomaly explanations, possible causes, and recommendations for next week, then save it as an HTML report.
 ```
 
-### Handle an External Message
+### Handle an External Message {/* #handle-an-external-message */}
 
 ```text
 Review the latest customer message and draft a reply. Do not send it directly.
 ```
 
-### Work in Stages
+### Work in Stages {/* #work-in-stages */}
 
 ```text
 List the processing plan first. Wait for my confirmation before reading files and generating the result.
 ```
 
-### Tune the Current Task
+### Tune the Current Task {/* #tune-the-current-task */}
 
 ```text
 This task needs a more formal report. Switch to a model better suited to long-form writing and reorganize it as Background / Findings / Recommendations / Risks.
 ```
 
-## Important Notes
+## Important Notes {/* #important-notes */}
 
 - Review the content before continuing with sending, deletion, external APIs, or sensitive files.
 - Do not put passwords, tokens, or verification codes directly in a Session.
@@ -250,13 +278,13 @@ This task needs a more formal report. Switch to a model better suited to long-fo
 - If the current task needs higher quality, tune it gradually in the same Session instead of frequently creating new Sessions.
 - If a Session is already long, ask xAgent to summarize its current state before continuing.
 
-## Related Concepts
+## Related Concepts {/* #related-concepts */}
 
 - [Shortcut Instruction Protocol: Commands, Directed Sending, and Object References](/docs/guides/shortcut-instruction-protocol)
 - [How AI Agents Switch Models, Skills, and Prompts During a Task](/docs/guides/ai-agent-runtime-hot-switching)
 - [How Multiple Agents Collaborate Through Session Events](/docs/guides/multi-agent-session-event-collaboration)
 
-## Next Steps
+## Next Steps {/* #next-steps */}
 
 - [Complete Your First Task](/docs/getting-started/first-task)
 - [Shortcut Instructions](/docs/user-guide/shortcut-instructions)

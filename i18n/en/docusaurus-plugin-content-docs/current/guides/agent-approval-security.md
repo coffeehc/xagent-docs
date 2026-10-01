@@ -1,16 +1,18 @@
 ---
 title: "AI Agent Security Risks: How xAgent Approval and Safety Controls Work"
 description: "Learn how xAgent currently handles AI Agent security risks that reach a tool call: it identifies file, network, data, session, and Skill operations, then pauses, approves, or resumes specific risky actions."
-image: /img/share/en/xagent-security.png
+image: "/img/share/en/xagent-security.png"
 status: beta
-updated: 2026-08-06
+updated: 2026-10-01
 ---
 
 # AI Agent Security Risks: How xAgent Approval and Safety Controls Work
 
+> Version scope: current-field and behavior corrections below were checked against source `43d2698` on 2026-10-01. Older public binaries may differ; verify your installed version before following a changed UI or operation.
+
 An AI Agent may do more than generate text. It can read or delete files, execute commands, access networks, send data, modify external systems, or publish team-visible Skills. Approval does not review an entire conversation before a task starts. It pauses the task when execution reaches a specific risky action.
 
-## Which AI Agent Security Risks xAgent Currently Controls
+## Which AI Agent Security Risks xAgent Currently Controls {/* #which-ai-agent-security-risks-xagent-currently-controls */}
 
 xAgent approval handles concrete operations an Agent is about to execute. It is not a complete defense for every security risk. This table defines the scope this page can accurately cover:
 
@@ -23,7 +25,7 @@ xAgent approval handles concrete operations an Agent is about to execute. It is 
 
 Prompt injection, excessive permissions, model and Provider data boundaries, third-party Skill or MCP supply-chain risk, and security testing each need their own design and validation. This approval page describes only the action-approval boundary; it is not a substitute for a complete AI Agent security framework.
 
-## How xAgent Decides Whether Approval Is Required
+## How xAgent Decides Whether Approval Is Required {/* #how-xagent-decides-whether-approval-is-required */}
 
 Before a tool runs, xAgent derives atomic operation facts from the tool and its arguments. The current implementation covers these main areas:
 
@@ -35,7 +37,7 @@ Before a tool runs, xAgent derives atomic operation facts from the tool and its 
 
 One tool call may produce several facts. Downloading an email attachment, for example, reads personal data and writes a workspace file. xAgent evaluates each fact and merges the result with this priority: deny, approval, then allow.
 
-## When a Task Pauses
+## When a Task Pauses {/* #when-a-task-pauses */}
 
 Approval does not prevent users from submitting a task. The normal flow is:
 
@@ -49,9 +51,9 @@ Approval does not prevent users from submitting a task. The normal flow is:
 
 `waiting_approval` therefore means a specific operation has paused the session. It does not mean the whole task waited for administrator review before starting.
 
-## Current Default Policy
+## Current Default Policy {/* #current-default-policy */}
 
-In `v0.0.4.beta`, the default policy allows a main session to create sub-sessions and allows deletion inside the current session's artifact directory. These actions require one-time approval by default:
+The current default policy allows operations when no rule matches, so a main Session can create sub-sessions when no other rule applies. File deletion is allowed for current-session child paths (`current_session_child`), including the current Session artifact directory. The older `v0.0.4.beta` wording described only artifacts and should not be used to assume that other current-session files always require approval. The following operations require one-time approval by default:
 
 - Deleting other workspace files.
 - Transferring personal data to an external system.
@@ -61,7 +63,7 @@ In `v0.0.4.beta`, the default policy allows a main session to create sub-session
 
 Other operations are allowed when no rule matches. Teams should add stricter rules for network access, process execution, file writes, and external-system actions instead of treating the default policy as a complete enterprise security baseline.
 
-## System and Personal Policies
+## System and Personal Policies {/* #system-and-personal-policies */}
 
 Administrators maintain the system policy, while users can maintain a personal policy. The current beta evaluates them in this order:
 
@@ -71,7 +73,7 @@ Administrators maintain the system policy, while users can maintain a personal p
 
 The current personal policy is therefore an override layer, not an add-only restriction layer. Environments that require administrator rules to be an immutable minimum baseline should not treat this beta behavior as the final enterprise governance model. The approval architecture still needs further unification for that requirement.
 
-## Handling Approval in Web and IM
+## Handling Approval in Web and IM {/* #handling-approval-in-web-and-im */}
 
 Users can inspect and decide approvals in the web session. Starting with `v0.0.4.beta`, when a session enters the approval-waiting state, xAgent also attempts to notify every currently available IM messaging channel owned by that user:
 
@@ -83,7 +85,15 @@ Users can inspect and decide approvals in the web session. Starting with `v0.0.4
 
 IM delivery depends on Connector availability, completed user authentication, and an available message-send Tool for the connection. The same approval can still be handled on the Web; the first valid decision accepted by the system takes effect.
 
-## Approval Does Not Replace External Authorization
+## Verifying a Real Approval {/* #verifying-a-real-approval */}
+
+1. Check the originating Session, Tool, action preview, resource, or recipient rather than relying only on the risk label.
+2. Copy the notice’s standard `@{approval:approval-id}` reference; the current parser does not support the old `#approval-number` form.
+3. Submit the decision through one entry point, then check execution in the original Session. Notification delivery, approval, and task completion are separate states.
+4. If an IM notice is missing, handle the pending request in Web and then check the channel’s connection, sending-tool availability, and target permissions.
+5. If the decision differs from expectations, check personal overrides first, then system-rule order and the actual operation facts.
+
+## Approval Does Not Replace External Authorization {/* #approval-does-not-replace-external-authorization */}
 
 Approval controls whether xAgent runs an action. It does not replace account permissions, data permissions, or auditing in an external system. When a Connector or MCP service accesses an enterprise system, that system should still decide what the connected identity can read or change.
 
@@ -95,14 +105,14 @@ Enterprise deployments should also use:
 - HTTPS, network controls, and firewalls.
 - Real task validation for high-risk tools and external systems.
 
-## Related Concepts
+## Related Concepts {/* #related-concepts */}
 
 - [Tool Management](/docs/user-guide/tool)
 - [Skill Management](/docs/user-guide/skill)
 - [Connectors](/docs/user-guide/connector)
 - [What Is a Connector?](/docs/getting-started/what-is-connector#how-is-it-different-from-mcp)
 
-## Next Steps
+## Next Steps {/* #next-steps */}
 
 - [Configure Approval Policies](/docs/user-guide/approval-policy)
 - [Validate Approval in an Agent Session](/docs/user-guide/agent-session)

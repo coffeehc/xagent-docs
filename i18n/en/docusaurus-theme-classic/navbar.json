@@ -11,10 +11,6 @@
     "message": "User Manual",
     "description": "Navbar item with label 使用手册"
   },
-  "item.label.产品介绍": {
-    "message": "Product Overview",
-    "description": "Navbar item with label 产品介绍"
-  },
   "item.label.行业观察": {
     "message": "Insights",
     "description": "Navbar item with label 行业观察"
@@ -22,5 +18,25 @@
   "item.label.社区讨论": {
     "message": "Community",
     "description": "Navbar item with label 社区讨论"
+  },
+  "item.label.产品体验": {
+    "message": "Product experience",
+    "description": "Navbar item with label 产品体验"
+  },
+  "item.label.更多资源": {
+    "message": "Resources",
+    "description": "Navbar item with label 更多资源"
+  },
+  "item.label.产品介绍": {
+    "message": "Product overview",
+    "description": "Navbar item with label 产品介绍"
+  },
+  "item.label.更新日志": {
+    "message": "Changelog",
+    "description": "Navbar item with label 更新日志"
+  },
+  "item.label.开始使用": {
+    "message": "Get started",
+    "description": "Navbar item with label 开始使用"
   }
 }

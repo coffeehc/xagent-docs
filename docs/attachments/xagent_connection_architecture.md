@@ -1,12 +1,12 @@
 ---
-title: xAgent Connector Architecture
-description: xAgent Connector 的架构边界、事实归属、生命周期、事件投递和工具投影设计。
-updated: 2026-09-17
+title: "xAgent Connector Architecture"
+description: "xAgent Connector 的架构边界、事实归属、生命周期、事件投递和工具投影设计。"
+updated: 2026-10-01
 ---
 
 # xAgent Connector Architecture
 
-> 历史资料：本文描述旧版 Connector 的架构与责任边界，不是当前 `v0.0.20.beta` 的 AgentPlugin 接入说明。请参阅 [AgentPlugin 使用说明](/docs/user-guide/connector#公共协议与能力)。
+> 历史资料：本文描述旧版 Connector 的架构与责任边界，不是当前发行版 的 AgentPlugin 接入说明。请参阅 [AgentPlugin 使用说明](/docs/user-guide/connector#%E5%85%AC%E5%85%B1%E5%8D%8F%E8%AE%AE%E4%B8%8E%E8%83%BD%E5%8A%9B)。
 
 本文档定义 xAgent Connector 的架构边界、事实归属和生命周期。HTTP endpoint、WebSocket packet、JSON 字段、状态枚举和第三方实现要求见
 [xAgent Connector Common Protocol](xagent_connector_protocol.md)。
@@ -17,7 +17,7 @@ updated: 2026-09-17
 - [xAgent IM Profile v2](profiles/xagent_im_v2.md)
 - [xAgent Device Profile v1](profiles/xagent_device_v1.md)
 
-## 1. 定位
+## 1\. 定位 {/* #1-定位 */}
 
 Connector 是运行在 xAgent 进程外的外部系统桥接服务。它负责把目标系统的登录态、消息、文件和操作能力投影成 xAgent 可治理的连接、事件和工具。
 
@@ -35,7 +35,7 @@ flowchart LR
   CS <--> T["Target System"]
 ```
 
-## 2. 事实边界
+## 2\. 事实边界 {/* #2-事实边界 */}
 
 | 角色 | 拥有事实 | 不拥有 |
 | --- | --- | --- |
@@ -53,9 +53,9 @@ flowchart LR
 - xAgent 不解析目标系统私有协议，例如微信 iLink、OAuth provider API、IMAP 细节。
 - `connector_channel_id` 是路由和绑定索引，不是鉴权凭证。
 
-## 3. 核心模型
+## 3\. 核心模型 {/* #3-核心模型 */}
 
-### 3.1 BaseConnector
+### 3.1 BaseConnector {/* #31-baseconnector */}
 
 BaseConnector 是 xAgent 系统级 connector catalog 事实。
 
@@ -72,7 +72,7 @@ BaseConnector 是 xAgent 系统级 connector catalog 事实。
 
 BaseConnector 不包含目标系统账号、token、联系人或用户登录态。
 
-### 3.2 Connector Card
+### 3.2 Connector Card {/* #32-connector-card */}
 
 Connector Card 是 Connector 未绑定前的静态能力声明。
 
@@ -87,7 +87,7 @@ Connector Card 是 Connector 未绑定前的静态能力声明。
 
 Card 不表达某个用户是否已经登录，也不表达某个 channel 当前工具是否可用。
 
-### 3.3 ConnectorClient
+### 3.3 ConnectorClient {/* #33-connectorclient */}
 
 xAgent 为每个 `connector_card_id` 维护一个系统级 ConnectorClient。
 
@@ -103,7 +103,7 @@ ConnectorClient 持有：
 
 页面刷新、状态读取、工具调用和重连必须复用同一个 ConnectorClient，不能各自创建 WebSocket 线路。
 
-### 3.4 connector_id
+### 3.4 connector\_id {/* #34-connector_id */}
 
 `connector_id` 是 Connector Server 为当前 data plane 握手分配的运行实例 ID。
 
@@ -117,7 +117,7 @@ ConnectorClient 持有：
 
 `connector_id` 不是 `connector_card_id`。
 
-#### Connector Server 离线租约
+#### Connector Server 离线租约 {/* #connector-server-离线租约 */}
 
 Connector Server 必须把 xAgent data plane 在线状态作为 `connector_id` 的运行租约管理：
 
@@ -130,7 +130,7 @@ Connector Server 必须把 xAgent data plane 在线状态作为 `connector_id` �
 
 这三层的 owner 分别是 Connector Server 运行实例、Connector Channel 和 provider 共享消费实例。上层注销可以依次触发下层检查，但下层不得依赖上层定时器代替自己的引用判断。
 
-### 3.5 connector_channel_id
+### 3.5 connector\_channel\_id {/* #35-connector_channel_id */}
 
 `connector_channel_id` 是 Connector 在稳定 `connector_card_id` 命名空间下分配的用户级持久 channel ID。
 
@@ -146,7 +146,7 @@ Connector Server 必须把 xAgent data plane 在线状态作为 `connector_id` �
 - Connector 使用同一个 `connector_channel_id` 映射目标账号、平台会话和运行态属性，不使用 xAgent 内部主键做业务归属。
 - `connector_channel_id` 以稳定的 `connector_card_id` 为归属命名空间，不随 Card 当前对应的 `connector_id` 变化；运行实例替换后 xAgent 用原 Channel ID 恢复路由。
 
-### 3.6 Connection Descriptor
+### 3.6 Connection Descriptor {/* #36-connection-descriptor */}
 
 Connection Descriptor 是绑定后的用户级动态投影。
 
@@ -159,7 +159,7 @@ Connection Descriptor 是绑定后的用户级动态投影。
 
 Descriptor 只描述当前 channel，不描述 Connector 全局能力。`connection.profiles` 必须是 Card `supports.profiles` 的非空子集；Card 中没有的工具不能出现在 Descriptor 中，Descriptor 中不可用的工具不能投影给 Agent。
 
-### 3.7 Connector Skill
+### 3.7 Connector Skill {/* #37-connector-skill */}
 
 Connector Skill 是 Connector 给 Agent 的运行时说明。
 
@@ -172,9 +172,9 @@ Connector Skill 是 Connector 给 Agent 的运行时说明。
 
 Skill 不保存状态，不包含密钥，不替代 Card 或 Descriptor。
 
-## 4. 三个通信平面
+## 4\. 三个通信平面 {/* #4-三个通信平面 */}
 
-### 4.1 Control Plane
+### 4.1 Control Plane {/* #41-control-plane */}
 
 Control Plane 是系统级 HTTP 读取和健康检查。
 
@@ -186,7 +186,7 @@ Control Plane 是系统级 HTTP 读取和健康检查。
 
 Control Plane 不执行用户级工具，也不传文件正文。
 
-### 4.2 Data Plane
+### 4.2 Data Plane {/* #42-data-plane */}
 
 Data Plane 是 WebSocket packet bus。
 
@@ -205,16 +205,16 @@ Data Plane 只传结构化 packet，不传文件正文、base64 或目标系统 
 
 `xagent.im.v2` 是 `target_type=im` 的 Data Plane Profile，不是第四个通信平面。它传输完整聊天消息、assistant 实时文本增量、接收确认和脱敏活动状态；完整消息可以携带 Transfer Plane `file_ref`，但不能携带文件字节。interrupt、approval、pending 与 Browser Runtime 信令不属于 IM v2。xAgent 内部的 Session 同步、历史回放和 UI 投影不属于 Connector 扩展能力，不得通过任何 Connector Profile 转发。Connector 必须同时处理可能出现的 assistant 增量和最终消息；原生支持流式展示时可以实时更新目标消息，不支持时在本地缓存增量并在最终消息到达后一次性发送。文件只随 final 到达。
 
-#### Connector 虚拟消息通道边界
+#### Connector 虚拟消息通道边界 {/* #connector-虚拟消息通道边界 */}
 
 xAgent 为协商成功的实时消息 Profile 注册虚拟消息通道，只是为了把 Connector 接入与其它实时消息入口相同的 Brain 处理链。IM Connector 使用 `xagent.im.v2`；Browser Runtime 使用自身的版本化 Profile。该虚拟通道是传输适配器，不是 UI Channel，也不是通用 Session 客户端。
 
 必须遵守：
 
-- Connector -> xAgent 的 `chat.message` 只表示一条新的用户输入；完成前置校验和路由后，直接进入当前 Session 的统一 Brain 处理链。
-- Connector -> xAgent 的图片、视频、音频和普通文件先按 `download_url` 登记为统一文件，再作为普通文件块随同一用户消息进入 Brain；Connector 内部上传引用不得进入提示文本、Skill 或模型工具参数。
-- xAgent -> Connector 的 `chat.message.delta`、最终 `chat.message` 和可选 `chat.activity` 只来自当前实时执行；每条新落库的 assistant 消息都以自己的最终 `chat.message` 完成，不受它位于工具调用前后影响。这里的“最终”表示单条消息完成，不表示整个 Agent/tool loop 只能发送最后一条回复。消息投递不能由 Session 历史查询、历史遍历或同步投影触发。
-- xAgent -> Connector 的 assistant 文件块先通过 Transfer Plane 上传，最终 `chat.message.files` 只携带 Connector 返回的引用；文本和全部文件共用一个 `message_id` 和 ack 生命周期。
+- Connector -&gt; xAgent 的 `chat.message` 只表示一条新的用户输入；完成前置校验和路由后，直接进入当前 Session 的统一 Brain 处理链。
+- Connector -&gt; xAgent 的图片、视频、音频和普通文件先按 `download_url` 登记为统一文件，再作为普通文件块随同一用户消息进入 Brain；Connector 内部上传引用不得进入提示文本、Skill 或模型工具参数。
+- xAgent -&gt; Connector 的 `chat.message.delta`、最终 `chat.message` 和可选 `chat.activity` 只来自当前实时执行；每条新落库的 assistant 消息都以自己的最终 `chat.message` 完成，不受它位于工具调用前后影响。这里的“最终”表示单条消息完成，不表示整个 Agent/tool loop 只能发送最后一条回复。消息投递不能由 Session 历史查询、历史遍历或同步投影触发。
+- xAgent -&gt; Connector 的 assistant 文件块先通过 Transfer Plane 上传，最终 `chat.message.files` 只携带 Connector 返回的引用；文本和全部文件共用一个 `message_id` 和 ack 生命周期。
 - `session.sync_request`、`session.sync_message`、`session.sync_end` 以及等价的历史、快照、回放和 UI 投影只能服务 xAgent 自己的 UI/Session Channel，不能写入 Connector 虚拟消息通道。
 - 虚拟消息通道重连只恢复当前 `connector_channel_id` 的实时路由和未完成投递，不主动回放已经完成的 Session 消息。
 - Connector 虚拟消息 packet 不接收 `SessionID`、`UserConnector.ID`、内部消息角色或历史游标；这些事实由 xAgent 保留，并通过当前 Channel 绑定完成内部路由。`tool.invoke` 单独允许在 `payload.context.session_id` 中携带非权威关联信息。
@@ -223,7 +223,7 @@ ChannelService 必须在写入传输前区分 UI 会话投影与 Connector 实�
 
 内置 Browser Runtime 使用独立的版本化物理连接协议。当前客户端通过 Envelope v2 与 `protocol_version: "2.0"` 建立连接，xAgent 继续接受未声明版本的 Envelope v1 客户端；Connection Descriptor 只投影当前连接实际支持的 Browser Runtime Profile，不声明 `xagent.im.v2`。Browser Runtime v1/v2 自己拥有所需的 `chat.message`、`chat.message.delta` 和 `chat.message.ack` 路由；v2 额外通过 `browser.chat.message.snapshot` 接收同一 assistant 消息的正文、思考过程与流式状态完整快照。
 
-### 4.3 Transfer Plane
+### 4.3 Transfer Plane {/* #43-transfer-plane */}
 
 Transfer Plane 处理文件、图片、视频等字节流。
 
@@ -235,9 +235,9 @@ Transfer Plane 处理文件、图片、视频等字节流。
 
 前端、Agent 和 LLM 只持有 xAgent 统一 `file_ref`，不能直接持有 Connector 内部上传引用、系统 API key、目标系统 CDN token 或临时下载密钥。
 
-## 5. 标准生命周期
+## 5\. 标准生命周期 {/* #5-标准生命周期 */}
 
-### 5.1 接入 Connector
+### 5.1 接入 Connector {/* #51-接入-connector */}
 
 ```text
 Admin 输入 Connector Base URL 和可选 API key
@@ -250,7 +250,7 @@ xAgent 注册 Connector 工具 runtime
 
 接入阶段只建立系统级 Connector 事实，不自动创建用户 channel。
 
-### 5.2 建立系统连接
+### 5.2 建立系统连接 {/* #52-建立系统连接 */}
 
 ```text
 xAgent 打开 /ws data plane
@@ -263,7 +263,7 @@ xAgent 校验并保存 connector_id
 
 Connector 以 `supported_profiles` 与 Card 静态能力的交集决定逐 Channel 实际启用的 Profile，并通过 Connection Descriptor 返回结果；旧 xAgent 未声明该字段时不能被动启用新增 Profile 信令。
 
-### 5.3 打开用户 channel
+### 5.3 打开用户 channel {/* #53-打开用户-channel */}
 
 ```text
 User 点击连接
@@ -279,7 +279,7 @@ xAgent 创建 UserConnector 与专属 Session 聚合
 
 如果用户已有持久化 channel，页面只提交 `UserConnector.ID`。xAgent 以该主键读取最新记录，按记录中的 `connector_card_id` 解析当前 Connector，再带数据库中的 `connector_channel_id` 重新 `channel.open`。Connector 能识别则复用，不能识别则重新分配并返回新 ID；xAgent 始终更新原 UserConnector 主键，不创建第二条记录。
 
-### 5.4 用户认证
+### 5.4 用户认证 {/* #54-用户认证 */}
 
 认证必须在已打开 channel 上进行。
 
@@ -295,7 +295,7 @@ Connector -> connection.descriptor.push(optional)
 
 `auth.cancel` 只取消未完成的认证会话，不等于登出目标系统。
 
-### 5.5 工具调用
+### 5.5 工具调用 {/* #55-工具调用 */}
 
 ```text
 Agent 调用 connector tool
@@ -315,7 +315,7 @@ Connector -> tool.invoke.ack(result or error)
 - 业务失败返回 `tool.invoke.ack.error`。
 - 协议、身份、路由错误返回 `type = error`。
 
-### 5.6 入站消息
+### 5.6 入站消息 {/* #56-入站消息 */}
 
 Connector 负责从目标系统接收消息，并推给 xAgent。
 
@@ -329,7 +329,7 @@ Connector 按接收结果结束、重试或等待过期
 
 Connector 拥有目标系统消息的接管、重投和过期责任，但协议不规定必须使用本地文件、数据库或消息队列。当前 IM 消息的外部保证和建议策略见 [xAgent IM Profile v2](profiles/xagent_im_v2.md)；[IM Profile v1](profiles/xagent_im_v1.md) 只用于旧 `message.push` 兼容。
 
-### 5.7 关闭和登出
+### 5.7 关闭和登出 {/* #57-关闭和登出 */}
 
 `channel.close` 和 `auth.logout` 是两个不同动作：
 
@@ -337,7 +337,7 @@ Connector 拥有目标系统消息的接管、重投和过期责任，但协议�
 - `auth.logout` 要求 Connector 清理目标系统登录态；xAgent 在成功后保留 UserConnector 与专属 Session，更新为未认证并删除运行时路由，供用户下次编辑认证信息后再次认证。
 - 彻底删除 UserConnector 与专属 Session 是独立的显式删除动作，不属于登出语义。
 
-## 6. Card、Descriptor、Skill 的关系
+## 6\. Card、Descriptor、Skill 的关系 {/* #6-carddescriptorskill-的关系 */}
 
 三者职责不能混用：
 
@@ -347,7 +347,7 @@ Connector 拥有目标系统消息的接管、重投和过期责任，但协议�
 | Connection Descriptor | 用户级运行态投影 | channel.open/auth/status/push 时刷新 | 当前 channel 状态、目标账号展示、工具可用性 |
 | Connector Skill | Agent 行为说明 | 接入时下载，版本变化时刷新 | 如何处理事件、如何使用工具、禁止伪造什么 |
 
-## 7. 工具投影
+## 7\. 工具投影 {/* #7-工具投影 */}
 
 Connector 工具是动态 runtime 投影，不是全局永久工具。
 
@@ -367,13 +367,13 @@ xAgent 投影流程：
 - 官方 Connector 工具 schema 包含模型可见的 `connector_channel_id`；系统 API key 和目标系统 token 始终不可见。
 - 当前 Session 绑定 Connector Channel 时只使用该绑定；没有绑定时，xAgent 遍历当前用户可用 Channel 并采用第一个匹配 Connector Card 且提供该工具的 Channel。
 
-## 8. 入站消息模型
+## 8\. 入站消息模型 {/* #8-入站消息模型 */}
 
 Connector 只需要按公共协议和已声明 Profile 输出消息，不需要理解 xAgent 内部 Session、Agent 或事件模型。
 
 `message.push` 的公共 packet 结构由主协议定义，[xAgent IM Profile v1](profiles/xagent_im_v1.md) 仅用于 xAgent 兼容旧 Connector。当前 IM Connector 使用 [xAgent IM Profile v2](profiles/xagent_im_v2.md) 传输双向 final、delta、ack、activity 和文件引用，并声明 IM 工具归属。
 
-## 9. 文件和资源引用
+## 9\. 文件和资源引用 {/* #9-文件和资源引用 */}
 
 Connector 文件模型：
 
@@ -401,7 +401,7 @@ Connector 文件模型：
 - 如果目标系统已经给出语音转文字，Connector 可以作为文本消息推送。
 - 如果目标系统不能解析，Connector 不应强迫 xAgent 做 ASR；可以按普通文件或不可解析事件处理。
 
-## 10. 状态、缓存和恢复
+## 10\. 状态、缓存和恢复 {/* #10-状态缓存和恢复 */}
 
 xAgent 持久化：
 
@@ -440,7 +440,7 @@ Connector 可以使用本地存储、外部数据库、消息队列或目标系�
 - 需要保留消息的 Profile 必须定义有限的过期和容量语义，但不规定具体存储实现。
 - xAgent data plane 会自动重连；连续失败达到上限后停止自动重试，等待用户或管理员动作触发恢复。
 
-## 11. 安全约束
+## 11\. 安全约束 {/* #11-安全约束 */}
 
 必须遵守：
 
@@ -455,7 +455,7 @@ Connector 可以使用本地存储、外部数据库、消息队列或目标系�
 9. Connector 返回的工具结果不得携带目标系统 token、bot token、context token 或 API key。
 10. 日志不得记录系统 API key、目标系统 token、临时下载密钥或目标系统 CDN 签名原文。
 
-## 12. 版本和兼容
+## 12\. 版本和兼容 {/* #12-版本和兼容 */}
 
 `connector.version` 表示 Connector Card 和 Connector 自身能力版本。
 

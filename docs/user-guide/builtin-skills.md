@@ -1,17 +1,29 @@
 ---
-title: 内置 Skill 文件
-description: 查看 xAgent 测试版提供的内置 Skill 文件、适用范围、社区改进方式和不接入第三方 MCP 的贡献要求。
+title: "内置 Skill 文件"
+description: "查看 xAgent 测试版提供的内置 Skill 文件、适用范围、社区改进方式和不接入第三方 MCP 的贡献要求。"
 status: stable
-updated: 2026-09-17
+updated: 2026-10-01
 ---
 
 # 内置 Skill 文件
 
-## 适用对象
+这里面向希望查看和改进 Skill 文件的贡献者。要在产品中选择、使用、发布或更新 Skill，请先看[Skill 管理](/docs/user-guide/skill)；要按任务查找能力，请看[支持的智能体功能](/docs/manual/capabilities)。
+
+## 先确认你修改的是哪一份 {/* #先确认你修改的是哪一份 */}
+
+| 对象 | 用途 | 修改后的影响 |
+| --- | --- | --- |
+| 本文的 docs 仓库 `skills/` 副本 | 阅读、讨论与提交改进 | 不会自动更新运行中的 xAgent |
+| 部署中的个人 Skill | 当前用户测试与复用 | 按个人库发布流程生效 |
+| 部署中的公共 Skill | 供所有用户使用 | 由管理员审核和维护 |
+
+从 [v0.0.21.beta](https://github.com/coffeehc/xagent-releases/releases/tag/v0.0.21.beta) 起，公共 catalog 使用每个 Skill 独立的不可变 ZIP 与 `skill.json`。不要把 docs 副本的目录数量当成公共目录或某个部署的已安装数量。
+
+## 适用对象 {/* #适用对象 */}
 
 本文适合希望查看、修改、讨论或提交 xAgent 内置 Skill 改进建议的用户和贡献者。
 
-## 这是什么
+## 这是什么 {/* #这是什么 */}
 
 文档项目中提供了一套 xAgent 内置 Skill 文件副本，放在 `skills/` 目录下。目前这些 Skill 主要是为了测试版先覆盖一批常见场景，内容还比较早期，欢迎大家提出改进建议。
 
@@ -25,7 +37,7 @@ skills/
 
 它的用途是让大家能直接查看内置 Skill 的文本、模板、参考资料和示例，并基于真实使用场景讨论改进。
 
-## 重要说明
+## 重要说明 {/* #重要说明 */}
 
 - `skills/` 是文档仓库中的可编辑副本，不是运行中 xAgent 的安装目录。
 - 修改 docs 仓库里的 `skills/` 不会立刻改变已经发布的 xAgent 二进制。
@@ -36,7 +48,7 @@ skills/
 - 不要把真实密钥、客户数据、内部地址、token、验证码或一次性业务材料写进 Skill。
 - 反馈问题或改进建议时，请在[社区讨论](/docs/community/discussions)中说明真实场景和建议改法。
 
-## 如何修改
+## 如何修改 {/* #如何修改 */}
 
 一个 Skill 通常是一个独立目录，最重要的文件是 `SKILL.md`。有些 Skill 还带有 `references/`、`templates/`、`examples/`、`scripts/`、`assets/` 或 `LICENSE`。
 
@@ -50,20 +62,20 @@ skills/
 6. 如果这次修改准备进入产品版本，更新 `SKILL.md` 里的 `meta.version`。
 7. 在[社区讨论](/docs/community/discussions)中说明问题、真实场景和建议改法。
 
-## 当前包含范围
+## 当前包含范围 {/* #当前包含范围 */}
 
-截至 2026 年 7 月 7 日，这份副本包含 47 个内置 Skill 目录。这里优先整理面向实际任务场景、适合社区一起改进的 Skill。随着测试版反馈和后续审计，数量、分类和内容都可能继续调整。
+截至 2026 年 7 月 7 日，这份副本包含 47 个内置 Skill 目录；2026 年 10 月 1 日复核 docs 仓库，仍有 47 个包含 `SKILL.md` 的目录。这里优先整理面向实际任务场景、适合社区一起改进的 Skill。随着测试版反馈和后续审计，数量、分类和内容都可能继续调整。
 
 | 范围 | Skill 目录 |
 | --- | --- |
-| 报告、写作与文档 | `weekly-report`、`data-visual-report-builder`、`html-report-builder`、`html-slide-builder`、`official-document-drafting`、`document-understanding`、`writing-and-editing`、`blog-writing-workflow` |
-| 研究与分析 | `deep-research`、`research-synthesis`、`market-research`、`investment-research`、`policy-analysis`、`financial-statement-analysis`、`business-model-analysis`、`pricing-strategy` |
+| 报告、写作与文档 | `weekly-report`、`data-visual-report-builder`、`html-report-builder`、`html-slide-builder`、`official-document-drafting`、`document-understanding`、`writing-and-editing`、`blog-writing-workflow`、`meeting-brief`、`meeting-recap` |
+| 研究与分析 | `deep-research`、`research-synthesis`、`market-research`、`investment-research`、`policy-analysis`、`financial-statement-analysis`、`business-model-analysis`、`pricing-strategy`、`budget-and-forecasting` |
 | 合同、合规与方案 | `contract-review`、`compliance-review`、`rfp-proposal-response`、`solution-brief` |
 | 客户、销售与运营 | `customer-support`、`customer-success`、`sales-outreach`、`crm-pipeline-management`、`marketing-campaign`、`social-media-content`、`ecommerce-operations`、`accounts-receivable-collections` |
 | 管理、项目与组织 | `project-management`、`operations-process-improvement`、`procurement-and-vendor-management`、`performance-review`、`recruiting-and-hiring`、`learning-and-training`、`personal-productivity`、`internal-comms` |
 | 产品、技术与专用场景 | `product-discovery`、`product-requirements`、`code-reading-and-change`、`ai-workflow-automation`、`growth-experimentation`、`knowledge-base-article`、`seo-content-strategy`、`resume-and-interview-prep` |
 
-## 修改建议
+## 修改建议 {/* #修改建议 */}
 
 好的 Skill 修改通常聚焦在下面几类问题：
 
@@ -78,7 +90,7 @@ skills/
 
 不建议把临时项目、单个客户、个人账号、真实系统地址或不可公开的内部流程直接写进公共内置 Skill。确实需要沉淀团队私有流程时，更适合在自己的 xAgent 环境中维护个人或团队 Skill。
 
-## 相关文档
+## 相关文档 {/* #相关文档 */}
 
 - [Skill 管理](/docs/user-guide/skill)
 - [Agent会话](/docs/user-guide/agent-session)

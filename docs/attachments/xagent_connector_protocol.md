@@ -1,12 +1,12 @@
 ---
-title: xAgent Connector Common Protocol
-description: xAgent Connector Protocol 3.0 的连接、认证、通道、消息、文件传输、工具调用和错误协议。
-updated: 2026-09-17
+title: "xAgent Connector Common Protocol"
+description: "xAgent Connector Protocol 3.0 的连接、认证、通道、消息、文件传输、工具调用和错误协议。"
+updated: 2026-10-01
 ---
 
 # xAgent Connector Common Protocol
 
-> 历史资料：本文记录旧版 Connector 协议 `3.0`，不适用于当前 `v0.0.20.beta` 的 AgentPlugin 接入。当前公开协议为 `4.4`；请先查看 [AgentPlugin 使用说明](/docs/user-guide/connector#公共协议与能力)。
+> 历史资料：本文记录旧版 Connector 协议 `3.0`，不适用于当前发行版 的 AgentPlugin 接入。当前公开协议为 `4.4`；请先查看 [AgentPlugin 使用说明](/docs/user-guide/connector#%E5%85%AC%E5%85%B1%E5%8D%8F%E8%AE%AE%E4%B8%8E%E8%83%BD%E5%8A%9B)。
 
 本文档定义 xAgent Connector 通用协议。第三方开发者实现 Connector Server 时，应以本文档作为 wire contract。
 
@@ -14,7 +14,7 @@ updated: 2026-09-17
 
 本文所述历史协议版本：`3.0`。
 
-## 1. 协议族
+## 1\. 协议族 {/* #1-协议族 */}
 
 | 名称 | 值 |
 | --- | --- |
@@ -42,7 +42,7 @@ updated: 2026-09-17
 
 JSON Schema 负责对象结构、字段类型和枚举；Profile 归属、Card/Descriptor 交叉校验、Channel 所有权和 packet 顺序仍以本文规则及共享协议校验代码为准。
 
-## 2. 最小实现清单
+## 2\. 最小实现清单 {/* #2-最小实现清单 */}
 
 一个可接入 xAgent 的 Connector Server 至少需要实现：
 
@@ -62,13 +62,13 @@ JSON Schema 负责对象结构、字段类型和枚举；Profile 归属、Card/D
    - `message.push` 或已声明 Profile 定义的消息 packet，如果 Connector 有入站消息
    - `ping` / `pong`
 6. 如果涉及文件、图片、视频或音频，按实际传输方向实现 endpoint：
-   - Connector -> xAgent 文件下载需要 `GET /files/refs/{file_ref}`。
-   - xAgent -> Connector 文件上传需要 `POST /files/uploads`。
+   - Connector -&gt; xAgent 文件下载需要 `GET /files/refs/{file_ref}`。
+   - xAgent -&gt; Connector 文件上传需要 `POST /files/uploads`。
    - 双向文件 Connector 同时实现两者；仅提供设备截图等入站文件的 Connector 可以只实现下载。
 
 Connector 只需要实现自身声明的 Profile，但声明后必须满足对应独立规范中的“必须”条款。
 
-## 3. Base URL 和认证
+## 3\. Base URL 和认证 {/* #3-base-url-和认证 */}
 
 xAgent 以管理员配置的 Connector Base URL 为根路径访问固定 endpoint。
 
@@ -94,9 +94,9 @@ Base URL 规则：
 - `connector_channel_id`、`request_id`、`file_ref` 都不是鉴权凭证。
 - Connector 必须在服务端校验 `connector_id`、`connector_channel_id`、目标系统登录态和工具权限。
 
-## 4. Control Plane HTTP
+## 4\. Control Plane HTTP {/* #4-control-plane-http */}
 
-### 4.1 `GET /connector-card.json`
+### 4.1 `GET /connector-card.json` {/* #41-get-connector-cardjson */}
 
 读取 Connector Card。
 
@@ -281,7 +281,7 @@ Base URL 规则：
 | `secret` | 否 | 是否为敏感字段；`password` 建议同时设置 `secret=true` |
 | `default_value` | 否 | 默认值；禁止用于敏感字段 |
 
-### 4.2 `GET /skill.md`
+### 4.2 `GET /skill.md` {/* #42-get-skillmd */}
 
 读取 Connector 主 Skill。
 
@@ -314,7 +314,7 @@ Skill 命名规范：
 | `im.wechat` | `wechat_message_send` | `connector-im-wechat` |
 | `device.adb` | `android_device_status` | `connector-device-adb` |
 
-### 4.3 `GET /health`
+### 4.3 `GET /health` {/* #43-get-health */}
 
 探测 Connector 系统级健康状态。
 
@@ -347,11 +347,11 @@ Skill 命名规范：
 - `build` 直接使用 Connector 编译时注入的 `configuration.Version`、`GitTag`、`GitRev` 和 `BuildTime`，并与 Connector Card 的 `build` 一致。
 - xAgent 定时只请求 `/health`；当 `connector_card_version`、`protocol_version` 或 `build` 与已缓存 Card 不一致时，重新拉取 Card 和 Skill。
 
-## 5. Transfer Plane HTTP
+## 5\. Transfer Plane HTTP {/* #5-transfer-plane-http */}
 
 Transfer Plane 只允许 xAgent backend 调用。前端和 LLM 不直接访问。
 
-### 5.1 `POST /files/uploads`
+### 5.1 `POST /files/uploads` {/* #51-post-filesuploads */}
 
 上传待发送文件，返回 Connector 内部 `file_ref`。
 
@@ -394,7 +394,7 @@ Content-Type: multipart/form-data
 - 上传只表示文件已进入 Connector/目标系统文件链路，不等于消息已发送。
 - 使用 `xagent.im.v2` 回复当前消息时，xAgent 会把返回的 `file_ref` 放入最终 `chat.message.files`；显式工具工作流仍可调用 Connector Card 中声明的文件发送工具。
 
-### 5.2 `GET /files/refs/{file_ref}`
+### 5.2 `GET /files/refs/{file_ref}` {/* #52-get-filesrefsfile_ref */}
 
 下载 Connector 暂存文件流。
 
@@ -414,7 +414,7 @@ Content-Type: multipart/form-data
 - 不得透出目标系统 CDN token、bot token、context token 或 API key。
 - 对于可能过期或一次性的目标系统 CDN，Connector 应在收到入站文件时立即下载并缓存到 Connector 本地。
 
-## 6. Data Plane WebSocket
+## 6\. Data Plane WebSocket {/* #6-data-plane-websocket */}
 
 Endpoint：
 
@@ -433,7 +433,7 @@ Authorization: Bearer <api_key>
 - WebSocket 不传文件正文、base64 或目标系统 CDN 字节流。
 - 断线后 xAgent 会自动重连，并重新打开持久化的用户 channel。
 
-## 7. Packet Envelope
+## 7\. Packet Envelope {/* #7-packet-envelope */}
 
 所有 data plane packet 使用同一个 envelope。
 
@@ -483,11 +483,11 @@ Authorization: Bearer <api_key>
 - `error.code` 应为稳定机器可读字符串。
 - `error.message` 面向日志和开发者，不应包含密钥或目标系统 token。
 
-## 8. Packet 类型
+## 8\. Packet 类型 {/* #8-packet-类型 */}
 
-### 8.1 `connector.hello`
+### 8.1 `connector.hello` {/* #81-connectorhello */}
 
-方向：xAgent -> Connector。
+方向：xAgent -&gt; Connector。
 
 payload：
 
@@ -510,9 +510,9 @@ payload：
 - Connector 可以参考请求中的历史 `connector_id` 恢复运行态；服务端状态已重建时允许重新签发。
 - Connector 不应因为 xAgent 首次未传 `connector_id` 而拒绝连接。
 
-### 8.2 `connector.hello.ack`
+### 8.2 `connector.hello.ack` {/* #82-connectorhelloack */}
 
-方向：Connector -> xAgent。
+方向：Connector -&gt; xAgent。
 
 payload：
 
@@ -541,9 +541,9 @@ Connector Server 运行租约约束：
 - 每个 Channel 注销必须独立清理目标系统绑定；共享 `getUpdates`、平台长连接或等价消费实例只在最后一个 Channel 引用移除后停止。
 - Connector Server 启动恢复了持久 Channel 但一小时内没有 xAgent 完成 hello 时，按相同规则清理这些无运行实例归属的 Channel。
 
-### 8.3 `channel.open`
+### 8.3 `channel.open` {/* #83-channelopen */}
 
-方向：xAgent -> Connector。
+方向：xAgent -&gt; Connector。
 
 Envelope 的 `connector_channel_id`：
 
@@ -560,9 +560,9 @@ payload 当前可为空。
 - xAgent 首次创建连接时不会因 `channel.open.ack` 单独持久化用户 Channel；认证成功并获得 `connection_descriptor` 后才创建本地 Channel 聚合。
 - 已有连接重新认证时，客户端只提交 xAgent 内部的 UserConnector 主键；`connector_id` 和 `connector_channel_id` 均由 xAgent 按 `connector_card_id` 与当前数据库记录解析。
 
-### 8.4 `channel.open.ack`
+### 8.4 `channel.open.ack` {/* #84-channelopenack */}
 
-方向：Connector -> xAgent。
+方向：Connector -&gt; xAgent。
 
 必须返回：
 
@@ -603,9 +603,9 @@ payload 当前可为空。
 }
 ```
 
-### 8.5 `channel.close`
+### 8.5 `channel.close` {/* #85-channelclose */}
 
-方向：xAgent -> Connector。
+方向：xAgent -&gt; Connector。
 
 语义：关闭运行时 channel 路由。
 
@@ -615,9 +615,9 @@ payload 当前可为空。
 - 不要求 xAgent 删除本地持久绑定。
 - Connector 应停止向该 WebSocket route 推送该 channel 的 `message.push`。
 
-### 8.6 `channel.close.ack`
+### 8.6 `channel.close.ack` {/* #86-channelcloseack */}
 
-方向：Connector -> xAgent。
+方向：Connector -&gt; xAgent。
 
 payload：
 
@@ -627,9 +627,9 @@ payload：
 }
 ```
 
-### 8.7 `auth.start`
+### 8.7 `auth.start` {/* #87-authstart */}
 
-方向：xAgent -> Connector。
+方向：xAgent -&gt; Connector。
 
 payload：
 
@@ -650,9 +650,9 @@ payload：
 - `input` 用于 `type = form` 的认证流；`qr_login` 等无输入流可以省略。
 - 如果该 channel 已有可复用登录态，Connector 可以直接返回 `authenticated` 和 `connection_descriptor`。
 
-### 8.8 `auth.start.ack`
+### 8.8 `auth.start.ack` {/* #88-authstartack */}
 
-方向：Connector -> xAgent。
+方向：Connector -&gt; xAgent。
 
 payload 字段：
 
@@ -684,9 +684,9 @@ payload 字段：
 }
 ```
 
-### 8.9 `auth.status`
+### 8.9 `auth.status` {/* #89-authstatus */}
 
-方向：xAgent -> Connector。
+方向：xAgent -&gt; Connector。
 
 payload：
 
@@ -703,9 +703,9 @@ payload：
 - `refresh = true` 表示请求 Connector 刷新认证材料，例如二维码。
 - 未找到认证会话时，Connector 应返回 `auth.status.ack.error` 或 `type = "error"`，错误码建议 `auth_session_not_found`。
 
-### 8.10 `auth.status.ack`
+### 8.10 `auth.status.ack` {/* #810-authstatusack */}
 
-方向：Connector -> xAgent。
+方向：Connector -&gt; xAgent。
 
 字段与 `auth.start.ack` 基本一致，`status` 取值：
 
@@ -719,9 +719,9 @@ payload：
 
 认证成功时应返回 `connection_descriptor`。xAgent 用它创建或回正用户连接投影和工具可用性；首次认证成功前的临时 Channel 不进入持久化层。
 
-### 8.11 `auth.cancel`
+### 8.11 `auth.cancel` {/* #811-authcancel */}
 
-方向：xAgent -> Connector。
+方向：xAgent -&gt; Connector。
 
 语义：取消未完成的认证会话。
 
@@ -740,9 +740,9 @@ payload：
 - 如果认证已经完成，Connector 可以返回 `ignored` 并附带当前 `connection_descriptor`。
 - xAgent 取消首次创建中的认证时会同时关闭本地临时 Channel；该动作不会产生 UserConnector 记录。
 
-### 8.12 `auth.cancel.ack`
+### 8.12 `auth.cancel.ack` {/* #812-authcancelack */}
 
-方向：Connector -> xAgent。
+方向：Connector -&gt; xAgent。
 
 payload：
 
@@ -762,9 +762,9 @@ payload：
 - `ignored`
 - `not_found`
 
-### 8.13 `auth.logout`
+### 8.13 `auth.logout` {/* #813-authlogout */}
 
-方向：xAgent -> Connector。
+方向：xAgent -&gt; Connector。
 
 语义：退出当前 channel 绑定的目标系统真实登录态。
 
@@ -776,9 +776,9 @@ payload：
 - 删除本地 Channel 聚合是独立的显式删除动作，不属于 `auth.logout`。
 - 它不是 `channel.close`。
 
-### 8.14 `auth.logout.ack`
+### 8.14 `auth.logout.ack` {/* #814-authlogoutack */}
 
-方向：Connector -> xAgent。
+方向：Connector -&gt; xAgent。
 
 payload：
 
@@ -791,17 +791,17 @@ payload：
 
 `connection_descriptor` 应反映登出后的状态，例如 `created`、`expired` 或 `revoked`。
 
-### 8.15 `connection.descriptor.get`
+### 8.15 `connection.descriptor.get` {/* #815-connectiondescriptorget */}
 
-方向：xAgent -> Connector。
+方向：xAgent -&gt; Connector。
 
 语义：请求当前 channel 的 Connection Descriptor。
 
 payload 当前可为空。
 
-### 8.16 `connection.descriptor.get.ack`
+### 8.16 `connection.descriptor.get.ack` {/* #816-connectiondescriptorgetack */}
 
-方向：Connector -> xAgent。
+方向：Connector -&gt; xAgent。
 
 payload：
 
@@ -811,9 +811,9 @@ payload：
 }
 ```
 
-### 8.17 `connection.descriptor.push`
+### 8.17 `connection.descriptor.push` {/* #817-connectiondescriptorpush */}
 
-方向：Connector -> xAgent。
+方向：Connector -&gt; xAgent。
 
 语义：Connector 主动推送当前 channel 的 descriptor 变化。
 
@@ -831,9 +831,9 @@ payload：
 - xAgent 会校验 descriptor 身份，不匹配时忽略。
 - Connector 不需要等待 xAgent 轮询后才推送重要状态变化。
 
-### 8.18 `tool.invoke`
+### 8.18 `tool.invoke` {/* #818-toolinvoke */}
 
-方向：xAgent -> Connector。
+方向：xAgent -&gt; Connector。
 
 官方 Connector 返回的工具 input schema 会包含必填 `connector_channel_id`，因此模型 arguments 通常包含该字段：
 
@@ -872,9 +872,9 @@ payload：
 - `context` 是 xAgent 运行时上下文，Connector 只能作为关联信息使用，不能当鉴权材料。
 - Connector 必须拒绝 envelope 中缺少、无归属、Connector 不匹配或不可用的 Channel。
 
-### 8.19 `tool.invoke.ack`
+### 8.19 `tool.invoke.ack` {/* #819-toolinvokeack */}
 
-方向：Connector -> xAgent。
+方向：Connector -&gt; xAgent。
 
 成功 payload：
 
@@ -906,9 +906,9 @@ payload：
 - 有副作用工具必须具备幂等或重复调用识别能力。
 - 文件发送类工具在 xAgent 模型边界只暴露统一 `file_ref`。xAgent adapter 打开文件并在 wire 边界生成 Connector 内部上传引用后，Connector handler 只消费该内部引用，不消费文件正文、base64 或目标系统 URL。
 
-### 8.20 `tool.progress.push`
+### 8.20 `tool.progress.push` {/* #820-toolprogresspush */}
 
-方向：Connector -> xAgent。
+方向：Connector -&gt; xAgent。
 
 语义：长耗时工具的进度事件。
 
@@ -925,9 +925,9 @@ payload 建议：
 
 当前 xAgent 主要等待 `tool.invoke.ack` 作为终态；progress 只能作为运行时事件，不替代 ack。
 
-### 8.21 `message.push`
+### 8.21 `message.push` {/* #821-messagepush */}
 
-方向：Connector -> xAgent。
+方向：Connector -&gt; xAgent。
 
 语义：旧 `xagent.im.v1` Connector 主动推送目标系统入站消息。当前 IM Connector 使用 `xagent.im.v2` 的 `chat.message`，不发送该 packet。
 
@@ -960,7 +960,7 @@ payload 示例：
 - xAgent 默认把未指定目标的消息投递到当前 UserConnector 的专属 Connector Session。
 - payload 的 Profile 语义、IM 字段、回复路由、文件引用和消息保留策略见 [xAgent IM Profile v1](profiles/xagent_im_v1.md)。
 
-### 8.22 `ping` / `pong`
+### 8.22 `ping` / `pong` {/* #822-ping--pong */}
 
 方向：双向。
 
@@ -969,7 +969,7 @@ payload 示例：
 - 收到 `ping` 后应回复 `pong`。
 - `pong` 应带回同一个 `request_id`。
 
-### 8.23 `error`
+### 8.23 `error` {/* #823-error */}
 
 方向：双向。
 
@@ -1011,8 +1011,7 @@ payload 示例：
 | `tool_invoke_failed` | 工具执行失败 |
 | `unsupported_packet` | packet type 不支持 |
 
-
-## 9. Connection Descriptor
+## 9\. Connection Descriptor {/* #9-connection-descriptor */}
 
 Connection Descriptor 是用户级运行态投影。
 
@@ -1093,7 +1092,7 @@ Connection Descriptor 是用户级运行态投影。
 - `target` 只能包含展示级账号信息和脱敏提示。
 - `offline` 和 `error` 不等于登出；xAgent 会把它们视为已认证但当前不可激活。
 
-## 10. Connector Card 工具声明
+## 10\. Connector Card 工具声明 {/* #10-connector-card-工具声明 */}
 
 工具声明示例：
 
@@ -1144,7 +1143,7 @@ Connection Descriptor 是用户级运行态投影。
 - 系统 API key、目标系统 token、transfer token 不进入 `input_schema`。
 - Connector Card 可以按 wire 协议声明内部上传引用参数；xAgent 注册模型工具时必须把它投影为统一 `file_ref`，并在调用 Connector 前完成文件打开、上传和参数转换。LLM、Skill 和用户不可见该内部上传引用，也不直接传递文件字节、base64 或目标系统 URL。
 
-### 10.1 当前工具 Channel 解析
+### 10.1 当前工具 Channel 解析 {/* #101-当前工具-channel-解析 */}
 
 当前 xAgent 对 Connector Card 工具采用以下解析流程：
 
@@ -1158,7 +1157,7 @@ Connection Descriptor 是用户级运行态投影。
 
 Connector Card 不定义 `connector_card_id` 模型参数。Connector Server 从 envelope 的 `connector_channel_id` 及当前 data plane 身份校验归属。
 
-## 11. Profile 规范
+## 11\. Profile 规范 {/* #11-profile-规范 */}
 
 Connector 实现只需要理解公开协议，不需要理解 xAgent 内部 Session、Agent、事件队列或持久化结构。Connector data plane 不是 xAgent UI/Session WebSocket 的代理；`session.sync_request`、`session.sync_message`、`session.sync_end` 以及其它内部历史、回放和 UI 投影 Envelope 禁止进入 Connector wire。协议实现必须为全部标准 Profile 维护结构化能力目录，至少声明 Profile ID、允许的 Card `target_types`、packet type、方向和路由边界；需要接收 xAgent 内部实时投影的 Profile 还必须声明允许的出站 `PayloadType`。虚拟 Connector Channel 在协商完成后加载目录交集并只查询该结果，不得维护 Profile 特例或硬编码白名单。未列入协议目录和当前协商结果的内部信令一律不发送。IM v2 虚拟消息通道重连只恢复实时路由和未完成投递，不触发 Session 历史同步。
 
@@ -1170,7 +1169,7 @@ Connector 实现只需要理解公开协议，不需要理解 xAgent 内部 Sess
 
 Profile 规范中的“必须”属于兼容契约；“建议”和具体数值只提供实现参考。内部存储、队列、线程和清理方式由 Connector 自己负责。
 
-## 12. 版本兼容
+## 12\. 版本兼容 {/* #12-版本兼容 */}
 
 兼容规则：
 
@@ -1186,7 +1185,7 @@ Profile 规范中的“必须”属于兼容契约；“建议”和具体数值
 - 修改 packet envelope、ID 校验规则、必选 packet 或核心状态语义，必须升级 Protocol version。
 - xAgent 发现 `connector.version` 变化后，会重新拉取 Card 和 Skill，并刷新工具投影。
 
-## 13. 当前实现边界
+## 13\. 当前实现边界 {/* #13-当前实现边界 */}
 
 当前 xAgent 实现已经覆盖：
 
@@ -1217,7 +1216,7 @@ Profile 规范中的“必须”属于兼容契约；“建议”和具体数值
 - Connector 文件 ResourceRef 当前自动解析链只支持 `download_url`。
 - 文件下载 URL 如果是相对 URI，xAgent 会使用 catalog 中的 `server_base_url` 拼成绝对 URL。
 
-## 14. 第三方实现建议
+## 14\. 第三方实现建议 {/* #14-第三方实现建议 */}
 
 实现 Connector Server 时建议按以下顺序开发：
 
@@ -1230,6 +1229,6 @@ Profile 规范中的“必须”属于兼容契约；“建议”和具体数值
 7. 实现目标系统认证流程：`auth.start`、`auth.status`、`auth.cancel`、`auth.logout`。
 8. 实现 `tool.invoke`，并确保每个工具都在 Card 和 Descriptor 中一致声明。
 9. 按所声明的 Profile 实现入站消息、重投和过期语义；当前 IM Connector 见 [xAgent IM Profile v2](profiles/xagent_im_v2.md)，v1 只用于旧 `message.push` 兼容。
-10. 如果支持 Connector -> xAgent 文件，先本地缓存并实现 `/files/refs/{file_ref}`；如果支持 xAgent -> Connector 文件，再实现 `/files/uploads`。双向文件 Connector 同时实现两者。
+10. 如果支持 Connector -&gt; xAgent 文件，先本地缓存并实现 `/files/refs/{file_ref}`；如果支持 xAgent -&gt; Connector 文件，再实现 `/files/uploads`。双向文件 Connector 同时实现两者。
 11. 做断线恢复测试：xAgent 重连后重新 `channel.open`，尚未进入终态且未过期的消息仍可投递。
 12. 做安全检查：日志、Card、Skill、Descriptor、tool result 和 message payload 中不能出现密钥或目标系统 token。

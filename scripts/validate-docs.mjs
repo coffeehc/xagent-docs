@@ -1,5 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
+import vm from 'node:vm';
+import ts from 'typescript';
 
 const chineseRoot = 'docs';
 const englishRoot = 'i18n/en/docusaurus-plugin-content-docs/current';
@@ -173,6 +175,30 @@ const englishFiles = listMarkdownFiles(englishRoot)
   .map((filePath) => path.relative(englishRoot, filePath))
   .sort();
 const errors = [];
+
+// Every published documentation page must have exactly one reading-path entry.
+const sidebarCode = ts.transpileModule(fs.readFileSync('sidebars.ts', 'utf8'), {
+  compilerOptions: {module: ts.ModuleKind.CommonJS},
+}).outputText;
+for (const locale of ['zh-CN', 'en']) {
+  const sandbox = {exports: {}, process: {env: {DOCUSAURUS_CURRENT_LOCALE: locale}}};
+  vm.runInNewContext(sidebarCode, sandbox, {timeout: 1000});
+  const ids = [];
+  function collect(items) {
+    for (const item of items) {
+      if (typeof item === 'string') ids.push(item);
+      else if (item.type === 'doc') ids.push(item.id);
+      else if (item.items) collect(item.items);
+    }
+  }
+  for (const items of Object.values(sandbox.exports.default)) collect(items);
+  const expected = chineseFiles.map((file) => file.replace(/\.mdx?$/, '').split(path.sep).join('/'));
+  for (const id of expected) {
+    const count = ids.filter((entry) => entry === id).length;
+    if (count !== 1) errors.push(`sidebars.ts (${locale}): ${id} appears ${count} times; expected once`);
+  }
+  for (const id of ids) if (!expected.includes(id)) errors.push(`sidebars.ts (${locale}): unknown doc ${id}`);
+}
 
 chineseFiles
   .filter((relativePath) => !englishFiles.includes(relativePath))

@@ -1,16 +1,32 @@
 ---
-title: 开始安装 xAgent
-description: 从服务器运行安装脚本到完成首次系统初始化，按步骤安装并验证 xAgent v0.0.20.beta。
-image: /img/getting-started/v005/install-terminal.webp
+title: "开始安装 xAgent"
+description: "从服务器运行安装脚本到完成首次系统初始化，按步骤安装并验证 xAgent v0.0.21.beta。"
+image: "/img/getting-started/v005/install-terminal.webp"
 status: beta
-updated: 2026-09-17
+updated: 2026-10-01
 ---
 
 # 开始安装 xAgent
 
 本页适合第一次部署 xAgent 的管理员。它从安装命令开始，带你完成首次打开 Web 控制台时自动进入的系统初始化流程。需要了解服务器准备和私有化部署边界时，请继续阅读[私有化部署 AI Agent](/docs/guides/self-hosted-ai-agent)。
 
-## 安装前确认
+## 先确认版本与初始化界面 {/* #先确认版本与初始化界面 */}
+
+本页安装命令读取公开发行目录。截至 2026-10-01，公开发行版是 `v0.0.21.beta`；历史截图主要来自 `v0.0.5.beta`，保留用于解释字段，不能据此寻找当前按钮。
+
+2026-10-01 源码中的初始化界面已调整为以下流程。如果你安装的是公开二进制，请以实际显示的步骤为准，不要把源码新流程理解为所有旧版本的行为。
+
+| 当前源码中的顺序 | 要完成的事 | 与下方说明的关系 |
+| --- | --- | --- |
+| 数据目录 | 选择持久化绝对路径；如提示重启，执行提示后重新打开页面 | 对应第四步 |
+| 数据库 | 选择 SQLite 或 PostgreSQL；后者填写连接信息并测试；如提示重启则先重启 | 旧版截图没有这个独立步骤 |
+| 管理员 | 创建首个管理员及确认密码 | 对应第五步 |
+| 默认模型 | 使用可对话的 Provider，测试并保存模型 | 对应第六步 |
+| 完成设置 | 核对数据目录、数据库、管理员、模型；可选择运行资源源 | 对应第九步，运行依赖检查仍见第七、八步 |
+
+Runtime Assets 与 ProcessSandbox 仍需在执行环境中验证，但当前源码不再把它们作为初始化向导中的两个独立步骤。不要为了让旧图中的每一项出现而重置已完成的系统。
+
+## 安装前确认 {/* #安装前确认 */}
 
 开始前确认：
 
@@ -22,7 +38,7 @@ updated: 2026-09-17
 - 如果准备通过公网访问，先规划 HTTPS 反向代理、防火墙和访问控制。xAgent 本身不终止 TLS。
 - 如果是升级已有环境，先备份配置、数据库、工作区、Memory、Skill、Tool 包和已安装 AgentPlugin 的配置与数据。
 
-## 第一步：运行安装器
+## 第一步：运行安装器 {/* #第一步运行安装器 */}
 
 Linux 和 macOS 使用同一个安装命令：
 
@@ -43,7 +59,7 @@ curl -fsSL https://downloads.xagent.xiagaogao.com/scripts/install.sh \
   | bash -s -- --yes --no-agent-plugins
 ```
 
-## 第二步：确认安装结果
+## 第二步：确认安装结果 {/* #第二步确认安装结果 */}
 
 安装命令结束后，先确认版本：
 
@@ -51,14 +67,14 @@ curl -fsSL https://downloads.xagent.xiagaogao.com/scripts/install.sh \
 xagent version
 ```
 
-当前目标版本应为 `0.0.20.beta`。安装命令保持不变，安装器会读取当前发布目录。Linux 还可以检查服务状态：
+截至本页核对日，公开目标版本为 `0.0.21.beta`；安装器会跟随发行目录更新，因此应将实际输出与当日公开版本核对。安装命令保持不变，安装器会读取当前发布目录。Linux 还可以检查服务状态：
 
 ```bash
 sudo systemctl status xagent-server
 journalctl -u xagent-server -f
 ```
 
-从旧 Connector 环境升级时，请运行完整安装器或公开 `upgrade.sh`，让安装器迁移官方插件的程序、服务、配置和数据目录；不要仅替换 Server 二进制。自定义旧 Connector 需要单独适配。使用企业授权时，请先确认授权的最高版本允许 `0.0.20.beta`。
+从旧 Connector 环境升级时，请运行完整安装器或公开 `upgrade.sh`，让安装器迁移官方插件的程序、服务、配置和数据目录；不要仅替换 Server 二进制。自定义旧 Connector 需要单独适配。使用企业授权时，请先确认授权的最高版本允许 `0.0.21.beta`。
 
 安装器成功启动后，默认 Web 地址为：
 
@@ -68,9 +84,9 @@ http://服务器地址:18888/
 
 不要把 `18888` 直接暴露到公网。生产环境应通过 Nginx、Caddy 或其他反向代理提供 HTTPS，并限制访问来源。
 
-## 第三步：打开系统初始化
+## 第三步：打开系统初始化 {/* #第三步打开系统初始化 */}
 
-安装并启动成功后，第一次打开 Web 地址时，xAgent 会自动进入“系统初始化”页面，不需要额外寻找设置入口。页面会按顺序显示以下步骤，完成当前步骤后自动进入下一步：
+安装并启动成功后，第一次打开 Web 地址时，xAgent 会自动进入“系统初始化”页面，不需要额外寻找设置入口。旧版向导按下面顺序显示步骤，完成当前步骤后进入下一步；当前源码新增数据库步骤并合并运行资源入口，见上方对照：
 
 1. 配置数据目录。
 2. 初始化管理员。
@@ -81,7 +97,7 @@ http://服务器地址:18888/
 
 ![xAgent 中文系统初始化页面](/img/getting-started/v005/system-setup-zh.webp)
 
-## 第四步：配置数据目录
+## 第四步：配置数据目录 {/* #第四步配置数据目录 */}
 
 数据目录用于保存 xAgent 数据库、工作区和 Runtime Assets。Linux 生产环境默认使用：
 
@@ -91,9 +107,9 @@ http://服务器地址:18888/
 
 请填写绝对路径，并确认运行 xAgent 的账号拥有读写权限。数据目录需要持久化保存，不要放在临时目录、容器临时层或会被自动清理的位置。
 
-点击“保存并继续”后，系统会保存目录配置并进入管理员初始化。
+旧版点击“保存并继续”后进入管理员初始化；当前源码先完成数据库配置。如界面要求重启，请先按提示重启并重新打开页面。
 
-## 第五步：初始化管理员
+## 第五步：初始化管理员 {/* #第五步初始化管理员 */}
 
 系统会要求创建第一个管理员登录名和密码。这个账号用于登录控制台、配置模型、管理用户、设置审批策略和维护 AgentPlugin Connector。
 
@@ -107,7 +123,7 @@ http://服务器地址:18888/
 
 创建成功后，xAgent 会自动登录并进入模型配置步骤。
 
-## 第六步：设置默认模型
+## 第六步：设置默认模型 {/* #第六步设置默认模型 */}
 
 填写默认模型的连接信息，并点击“测试并保存”。只有模型连接测试通过后，初始化流程才会进入下一步。
 
@@ -120,26 +136,26 @@ http://服务器地址:18888/
 - **真实模型名**：发送给模型服务的实际模型 ID，例如 `qwen3.6-27b`。
 - **Base URL**：模型服务的兼容 API 地址，按服务要求填写 `/v1` 等路径。
 - **API Key**：模型服务的认证密钥，保存后不要写入文档、截图或公共日志。
-- **模型能力**：按模型实际能力选择聊天、生成图片、工具调用、视觉、音频和文件。生成图片当前只对支持该能力的 OpenAI-compatible 配置开放。
+- **模型能力**：按模型实际能力选择聊天、工具调用、视觉、音频和文件。旧版把生成图片作为 OpenAI-compatible 能力开关；当前源码改用专用图片 Provider，不能把它设为默认聊天模型，具体见模型配置。
 - **高级选项**：需要时再配置超时和其他请求参数。
 
 模型连接测试只说明服务可访问，后续仍建议执行一个真实任务验证工具调用、文件处理和输出保存。模型字段说明见[模型配置](/docs/user-guide/model-config)。
 
-## 第七步：准备 Runtime Assets
+## 第七步：准备 Runtime Assets {/* #第七步准备-runtime-assets */}
 
-Runtime Assets 是 xAgent 管理的任务运行依赖，供文件处理、本地工具和其他受控执行使用。初始化页面会自动下载、校验并安装这些依赖组件，Python、Node.js 等无需管理员手工安装。
+Runtime Assets 是 xAgent 管理的任务运行依赖，供文件处理、本地工具和其他受控执行使用。它们由 xAgent 下载、校验并安装，Python、Node.js 等无需管理员手工安装；旧版在初始化步骤显示安装按钮，当前源码从执行环境和运行资源入口管理。
 
 LibreOffice 是例外：发布包不包含其众多系统依赖。需要 Word、PowerPoint、Excel 转 PDF 或 Excel 重算时，管理员必须在宿主服务器上通过系统包管理器安装 LibreOffice，例如 Debian/Ubuntu 执行 `sudo apt-get update && sudo apt-get install -y libreoffice`；然后用 `soffice --headless --version` 验证。其他发行版使用对应包管理器。
 
 ![xAgent 中文 Runtime Assets 安装步骤](/img/getting-started/v005/system-setup-runtime-zh.webp)
 
-当页面显示“Runtime Assets 尚未就绪”时，点击“下载并安装”。安装器会从下载站获取对应的运行依赖，完成校验和安装；按钮所在步骤显示“已完成”后，初始化流程才会继续。
+旧版向导中，当页面显示“Runtime Assets 尚未就绪”时，点击“下载并安装”。安装器会从下载站获取对应的运行依赖，完成校验和安装；按钮所在步骤显示“已完成”后，初始化流程才会继续。
 
-等待该步骤变为已完成后再继续。下载或安装失败时，应先查看服务日志和下载连通性，不要绕过初始化流程。
+旧版向导中，等待该步骤变为已完成后再继续。下载或安装失败时，应先查看服务日志和下载连通性，不要绕过初始化流程。
 
-## 第八步：检查基础运行组件
+## 第八步：检查基础运行组件 {/* #第八步检查基础运行组件 */}
 
-基础运行组件负责文档解析、命令隔离和其他本地执行能力。xAgent 会自动安装并测试这些组件；测试通过后，管理员还应进入“Agent 治理 > 执行环境”，确认 Runtime Assets 和 ProcessSandbox 均可用。
+基础运行组件负责文档解析、命令隔离和其他本地执行能力。xAgent 会自动安装并测试这些组件；测试通过后，管理员还应进入“Agent 治理 &gt; 执行环境”，确认 Runtime Assets 和 ProcessSandbox 均可用。
 
 如果组件检查失败：
 
@@ -148,13 +164,13 @@ LibreOffice 是例外：发布包不包含其众多系统依赖。需要 Word、
 3. 确认服务器可以访问下载站，且内核支持 Linux 所需的沙箱能力。
 4. 修复后重新执行检查，不要直接启用不受控的宿主执行。
 
-## 第九步：完成初始化
+## 第九步：完成初始化 {/* #第九步完成初始化 */}
 
-确认数据目录、管理员、模型、Runtime Assets 和基础运行组件均已完成后，点击“完成设置”。系统会进入工作台，之后普通用户可以通过 Web 或已接入的 AgentPlugin 使用 xAgent。
+按所用版本完成向导必需项，并检查数据目录、数据库（如显示）、管理员、模型与所需运行依赖后，点击“完成设置”。系统会进入工作台，之后普通用户可以通过 Web 或已接入的 AgentPlugin 使用 xAgent。
 
 ![xAgent 中文完成初始化并进入仪表板](/img/getting-started/v005/system-setup-finish-zh.webp)
 
-最后一步会汇总前面已经完成的项目。确认每一项都显示“已完成”后，点击“完成并进入仪表板”，系统才会结束一次性初始化并正式进入工作台。
+旧版最后一步汇总已经完成的项目，显示“已完成”后点击“完成并进入仪表板”；当前源码汇总数据目录、数据库、管理员与模型，再完成设置。按实际页面的完成按钮进入工作台。
 
 首次进入工作台后，建议立即完成一次最小验收：
 
@@ -164,17 +180,17 @@ LibreOffice 是例外：发布包不包含其众多系统依赖。需要 Word、
 
 如果模型、会话和回复均正常，再上传一个非敏感的小文件，验证工作区文件读取和结果保存。
 
-## 进入系统后的仪表板
+## 进入系统后的仪表板 {/* #进入系统后的仪表板 */}
 
 完成初始化后，系统会进入 xAgent 仪表板。这里可以查看 Token 使用情况、模型和工具调用次数，以及当前会话状态；后续可以从仪表板进入 Agent 会话、工作区文件和治理配置。
 
 ![xAgent 中文仪表板](/img/getting-started/v005/dashboard-after-setup-zh.webp)
 
-## AgentPlugin 是可选项
+## AgentPlugin 是可选项 {/* #agentplugin-是可选项 */}
 
-AgentPlugin 不影响 Web 控制台的基本使用。安装器已安装插件时，管理员打开“Agent 治理 > AgentPlugin Connector”，填写安装器输出的地址和 API Key；普通用户在“运行治理 > 插件连接”绑定自己的账号或资源。没有安装时，可稍后按照[AgentPlugin 使用手册](/docs/user-guide/connector)完成接入。Database 和 SSH 的配置见 [Database AgentPlugin](/docs/user-guide/database-connector) 和 [SSH AgentPlugin](/docs/user-guide/ssh-connector)。
+AgentPlugin 不影响 Web 控制台的基本使用。安装器已安装插件时，管理员打开“Agent 治理 &gt; AgentPlugin Connector”，填写安装器输出的地址和 API Key；普通用户在“运行治理 &gt; 插件连接”绑定自己的账号或资源。没有安装时，可稍后按照[AgentPlugin 使用手册](/docs/user-guide/connector)完成接入。Database 和 SSH 的配置见 [Database AgentPlugin](/docs/user-guide/database-connector) 和 [SSH AgentPlugin](/docs/user-guide/ssh-connector)。
 
-## 下一步
+## 下一步 {/* #下一步 */}
 
 - [安装桌面客户端与浏览器插件](/docs/getting-started/install-client-and-browser-extension)
 - [完成第一个任务](/docs/getting-started/first-task)

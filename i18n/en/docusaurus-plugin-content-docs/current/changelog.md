@@ -1,9 +1,9 @@
 ---
-title: Changelog
-description: Review important user-facing changes, binary release contents, and upgrade notes for each xAgent release.
-image: /img/share/en/xagent-overview.png
+title: "Changelog"
+description: "Review important user-facing changes, binary release contents, and upgrade notes for each xAgent release."
+image: "/img/share/en/xagent-overview.png"
 status: stable
-updated: 2026-09-17
+updated: 2026-10-01
 schemaType: CollectionPage
 ---
 
@@ -11,7 +11,27 @@ schemaType: CollectionPage
 
 This page records important installation, usage, and safety-governance changes in xAgent binary releases. xAgent remains in beta, and features, interfaces, and protocols may continue to change.
 
-## `v0.0.20.beta` - 2026-09-17
+## Documentation Review - 2026-10-01 {/* #documentation-review---2026-10-01 */}
+
+This is a documentation update, not a new binary release. Existing URLs, technical examples, and historical release records are retained while navigation follows reader tasks.
+
+- The [Documentation Guide](/docs/manual/overview) offers six reading paths; [Common Questions](/docs/faq/common) groups existing questions by topic and adds symptom-first entry points.
+- [Installation](/docs/getting-started/install), the [Menu Overview](/docs/user-guide/menu-overview), and [Shortcut Instructions](/docs/user-guide/shortcut-instructions) distinguish public releases, current source, and earlier UI.
+- The 2026-10-01 source was used to review [Memory](/docs/user-guide/memory), [Session Collaboration](/docs/guides/multi-agent-session-event-collaboration), [A2A](/docs/user-guide/a2a), approval notifications, personal/system policy precedence, and trigger receipts. New source behavior is not assumed to exist in every older release.
+- Earlier Connector schemas, Profiles, screenshots, and parameter examples remain as labeled historical references. The bundled Skill-file inventory is completed. Some administrator screenshots remain historical because a current authorized screen was unavailable.
+
+## `v0.0.21.beta` - 2026-09-22 {/* #v0021beta---2026-09-22 */}
+
+[GitHub Release and Checksums](https://github.com/coffeehc/xagent-releases/releases/tag/v0.0.21.beta) · [Model Configuration](/docs/user-guide/model-config) · [Skill Management](/docs/user-guide/skill)
+
+- Fixed task roles now reference stable Model Profile IDs. Old model names migrate at startup and unresolved references produce an explicit error.
+- Agent definitions, capability orchestration, task semantics, OCR, summaries, Memory, and context compression use strict JSON and business-schema validation. Structured retries provide only current field requirements, without replaying invalid model output.
+- Compression uses a 90% request-budget line. Oversized history and active turns can be summarized in batches; persistence advances only after every batch succeeds. Context/output-limit recovery shrinks source input, and a candidate without net compression does not advance the cursor.
+- Public Skill Catalog v2 uses an immutable ZIP and `skill.json` per Skill instead of whole-catalog artifacts or startup migration. Installation state comes from the loaded source path and version.
+- Role management selects Model Profile IDs; orchestration preserves still-referenced Skills absent from the current selectable catalog. Stopped running rounds no longer accrue time, and session-list/compact navigation layouts are adjusted.
+- Server only; official AgentPlugin artifacts are unchanged. Continue backing up configuration, databases, workspaces, Memory, Skills, Tools, and plugin state before upgrades.
+
+## `v0.0.20.beta` - 2026-09-17 {/* #v0020beta---2026-09-17 */}
 
 [Install xAgent](/docs/getting-started/install) · [Office capabilities](/docs/manual/capabilities) · [GitHub Release and checksums](https://github.com/coffeehc/xagent-releases/releases/tag/v0.0.20.beta)
 
@@ -24,7 +44,7 @@ This release fixes ProcessSandbox runtime mounts and Workspace file commits, ali
 
 Before upgrading, back up configuration, databases, workspaces, Memory, Skills, Tool packages, and installed AgentPlugin configuration and data. Office-to-PDF conversion and Excel recalculation still require administrators to install LibreOffice on the host; the xAgent archive does not bundle its system dependencies. See [installation](/docs/getting-started/install).
 
-## `v0.0.19.beta` - 2026-09-14 (republished September 15)
+## `v0.0.19.beta` - 2026-09-14 (republished September 15) {/* #v0019beta---2026-09-14-republished-september-15 */}
 
 [File sharing guide](/docs/user-guide/file-sharing) · [GitHub Release](https://github.com/coffeehc/xagent-releases/releases/tag/v0.0.19.beta)
 
@@ -33,7 +53,7 @@ Before upgrading, back up configuration, databases, workspaces, Memory, Skills, 
 - Improved Session interruption and model reconnect states, upstream model selection, and the offline Runtime Assets catalog cache. LibreOffice conversions use an immutable Runtime Assets installation.
 - Server-only release; official AgentPlugin artifacts were unchanged.
 
-## `v0.0.18.beta` - 2026-09-11
+## `v0.0.18.beta` - 2026-09-11 {/* #v0018beta---2026-09-11 */}
 
 [Model configuration](/docs/user-guide/model-config) · [GitHub Release](https://github.com/coffeehc/xagent-releases/releases/tag/v0.0.18.beta)
 
@@ -41,7 +61,7 @@ Before upgrading, back up configuration, databases, workspaces, Memory, Skills, 
 - Session usage prefers measured Provider values and only estimates when absent; Tool Schema strict-mode compatibility, streaming aggregation, and argument normalization are handled consistently.
 - Fixed empty upload-folder reads and model diagnostics. Server-only release; official AgentPlugin artifacts were unchanged.
 
-## `v0.0.17.beta` - 2026-09-09 (republished September 10)
+## `v0.0.17.beta` - 2026-09-09 (republished September 10) {/* #v0017beta---2026-09-09-republished-september-10 */}
 
 [AgentPlugin guide](/docs/user-guide/connector) · [GitHub Release](https://github.com/coffeehc/xagent-releases/releases/tag/v0.0.17.beta)
 
@@ -49,7 +69,7 @@ Before upgrading, back up configuration, databases, workspaces, Memory, Skills, 
 - Session drafts recover attachment references; Markdown preview table-of-contents links stay within the preview. SSH downloads, WeChat images, and other plugin-fetched files enter the current Session workspace.
 - Six official plugins (WeChat, Telegram, Feishu, Database, SSH, and DingTalk) entered the four-platform release flow; DingTalk was published for the first time. The September 10 republish updated Server only.
 
-## `v0.0.16.beta` - 2026-09-07 (republished September 9)
+## `v0.0.16.beta` - 2026-09-07 (republished September 9) {/* #v0016beta---2026-09-07-republished-september-9 */}
 
 [AgentPlugin migration and installation](/docs/user-guide/connector) · [A2A Client](/docs/user-guide/a2a) · [GitHub Release](https://github.com/coffeehc/xagent-releases/releases/tag/v0.0.16.beta)
 
@@ -58,45 +78,45 @@ Before upgrading, back up configuration, databases, workspaces, Memory, Skills, 
 - Added a user-level A2A Client for discovering remote Agents, sending/querying/replying to/canceling tasks, and viewing an inbox. Enterprise licensing adds a maximum xAgent version and A2A connection limits.
 - Explicitly paused plans preserve unfinished tasks; the Provider default model is used when none is selected. Back up installed plugin state and check Enterprise license compatibility before upgrading.
 
-## `v0.0.15.beta` - 2026-09-06
+## `v0.0.15.beta` - 2026-09-06 {/* #v0015beta---2026-09-06 */}
 
 [View installation instructions](/docs/getting-started/install) · [View supported Agent capabilities](/docs/manual/capabilities) · [View the Workspace guide](/docs/user-guide/workspace) · [GitHub Release and checksum files](https://github.com/coffeehc/xagent-releases/releases/tag/v0.0.15.beta)
 
 This release primarily strengthens the Office document suite. Word, PowerPoint, and Excel now share the xAgent default Office template and brand system, with more complete workflows for generating, previewing, recalculating, and converting editable documents to PDF. Document delegation and delivery are also more direct, while Runtime Assets can automatically align the required software packages after startup.
 
-### Office Documents and PDF
+### Office Documents and PDF {/* #office-documents-and-pdf */}
 
 - Word, PowerPoint, and Excel now share the xAgent default Office template and brand system instead of the old `business`, `clean`, and `formal` template branches.
 - Word covers and tables of contents use separate pages, table text inherits the template body font, and PowerPoint uses consistent brand colors, typography, and chart styling.
 - LibreOffice powers PDF conversion for Word, PowerPoint, and Excel, as well as Excel recalculation with saved results. Because LibreOffice depends on many operating-system packages, xAgent release archives do not bundle those system dependencies. Before using these capabilities, an administrator must install the latest LibreOffice available from the server's package repository.
 - Frontend preview routing and type detection have been improved for PDF, PPTX, DOCX, Excel, and Mermaid, with separate Mermaid handling for interactive previews and exported documents.
 
-### Excel Workbooks
+### Excel Workbooks {/* #excel-workbooks */}
 
 - Native Excel Tools cover workbook creation, structural inspection, range reads and writes, append operations, formatting, tables, charts, recalculation, and PDF export.
 - Excel attachments are no longer converted and inlined as complete text before execution. The Agent reads only the required worksheets and ranges through Excel Tools.
 - Create, append, and conversion tasks are no longer blocked by unrelated full-workbook pre-reading, and outputs consistently use Workspace file identities.
 
-### Document Tasks and File Search
+### Document Tasks and File Search {/* #document-tasks-and-file-search */}
 
 - Main Session delegation carries only the user's complete goal, input files, and explicit constraints. It no longer invents font, layout, quality-check, or toolchain requirements; the selected Skill and Tool own those execution details.
 - Document creation, append, and format conversion finish when the Tool succeeds instead of entering open-ended read, validation, repair, and repeated-export loops by default.
 - Search within one text file uses `fs_search_in_text`; cross-file retrieval uses the dedicated index Tool and remains constrained to files accessible from the current Session.
 
-### Automatic Runtime Assets Updates
+### Automatic Runtime Assets Updates {/* #automatic-runtime-assets-updates */}
 
 - xAgent automatically synchronizes the Catalog after startup and downloads, installs, and updates every missing or outdated package.
 - Packages are downloaded, verified, extracted, initialized, and detected before `current` is switched atomically. A failed update leaves the previous working installation active.
 - Manual synchronization and individual package upgrades remain available in the administration console, together with installation stages, failure details, and version status.
 
-### Sessions and Administration
+### Sessions and Administration {/* #sessions-and-administration */}
 
 - Agent loops, task semantics, orchestration, OCR, summaries, Memory, and image-generation model calls now use AgentCore consistently.
 - Approval recovery, historical Tool-batch replay, Session artifact projection, context compression, and runtime status synchronization have been tightened.
 - Session pages and administration now share message, Tool history, attachment, table, filter, empty-state, and action-layout components.
 - Fixed Agent, Skill, and Tool cards being nested inside a single grid item, restoring responsive multi-column layouts.
 
-### Upgrade Notes
+### Upgrade Notes {/* #upgrade-notes */}
 
 - Back up configuration, databases, user workspaces, Memory, Skills, Tool packages, and Connector state before upgrading.
 - On Debian or Ubuntu, run `sudo apt-get update && sudo apt-get install -y libreoffice` to install the latest version from the configured package repository; use the equivalent command on other Linux distributions. Verify the installation with `soffice --headless --version`.
@@ -104,31 +124,31 @@ This release primarily strengthens the Office document suite. Word, PowerPoint, 
 - Runtime Assets automatically align with the current Catalog after startup. A failed update keeps the previous `current` installation; administrators can inspect the failure and retry manually.
 - xAgent Server and Connector Server are released and upgraded independently. Current public versions are WeChat `0.0.12`, Telegram `0.0.13`, Feishu `0.0.12`, Database `0.0.6`, and SSH `0.0.8`.
 
-## `v0.0.13.beta` - 2026-08-29
+## `v0.0.13.beta` - 2026-08-29 {/* #v0013beta---2026-08-29 */}
 
 [View installation instructions](/docs/getting-started/install) · [View Workspace guidance](/docs/user-guide/workspace) · [View the Connector guide](/docs/user-guide/connector)
 
 This release improves native file and document handling, unifies CLI and Tool workspace-path contracts, and replaces the bundled Free certificate with a fixed certificate-free Free edition. It also simplifies Session operations and makes Token usage charts easier to read.
 
-### Native File and Document Tools
+### Native File and Document Tools {/* #native-file-and-document-tools */}
 
 - Added native HTTP file downloads for binary responses with a stable file-output contract.
 - Expanded image conversion and Word document reading, inspection, and update workflows, reducing the need for models to assemble temporary CLI pipelines.
 - Native file Tools now use consistent workspace file identities and output contracts, and file arguments are normalized before execution.
 
-### Tool Runtime and Path Contracts
+### Tool Runtime and Path Contracts {/* #tool-runtime-and-path-contracts */}
 
 - The CLI now starts in the current Session's canonical workspace directory, so models can use relative paths without a `$XAGENT_WORKSPACE` prefix.
 - ToolService normalizes model-generated workspace paths and applies consistent runtime governance to native, MCP, and Connector Tools.
 - Font, runtime-asset, and execution-environment readiness are checked through one contract, with explicit blocking reasons when dependencies are unavailable.
 - HTTP first-byte waiting, sandbox failures, and Tool output classification have been tightened so recoverable failures are less likely to be recorded as platform incidents.
 
-### Sessions and Usage UI
+### Sessions and Usage UI {/* #sessions-and-usage-ui */}
 
 - Removed the `/refresh_messages` command because automatic synchronization and reconnect recovery already cover that workflow; the message-load error view retains its internal refresh action.
 - Token usage charts now use consistent axis and tooltip formatting, including compact formatting for large values.
 
-### Free and Enterprise Licensing
+### Free and Enterprise Licensing {/* #free-and-enterprise-licensing */}
 
 - xAgent now enters the Free edition directly when no external license certificate is installed; release packages no longer contain a built-in Free certificate or expiry.
 - The Free edition is limited to 2 users, 30 Sessions, 1 WorkGroup, 5 Connector VChannels, and 5 scheduled tasks.
@@ -136,20 +156,20 @@ This release improves native file and document handling, unifies CLI and Tool wo
 - License Server now issues Enterprise certificates only. Historical issuance records remain visible, but the console no longer offers Free certificate issuance.
 - The license administration page displays the active Free entitlements directly while preserving Enterprise installation, device-binding, and expiry states.
 
-### Upgrade Notes
+### Upgrade Notes {/* #upgrade-notes-1 */}
 
 - Environments using historical Free certificates will remove those certificates on startup and continue with the new certificate-free Free limits.
 - Enterprise certificates keep their existing signature, device-binding, expiry, and capacity validation.
 - Upgrade xAgent Server and Connector Servers separately. Current public versions are WeChat `0.0.12`, Telegram `0.0.13`, Feishu `0.0.12`, Database `0.0.6`, and SSH `0.0.8`.
 - The installer discovers `v0.0.13.beta` through the public release catalog and compares the current platform binary digest. Before upgrading, back up configuration, databases, user workspaces, Memory, Skills, Tool packages, and Connector state.
 
-## `v0.0.12.beta` - 2026-08-26
+## `v0.0.12.beta` - 2026-08-26 {/* #v0012beta---2026-08-26 */}
 
 [View installation instructions](/docs/getting-started/install) · [View long-term Memory guidance](/docs/user-guide/memory) · [View the Connector guide](/docs/user-guide/connector)
 
 This release adds direct long-term Memory management, concurrent Tool calls, and stronger Session context governance. It also improves legacy-data migration, local command isolation, Connector resource presentation, and file-reference reliability so long-running tasks remain more consistent through execution, approval, recovery, and upgrades.
 
-### Long-Term Memory Management
+### Long-Term Memory Management {/* #long-term-memory-management */}
 
 - My Memory is now available from the account menu and Workbench shortcuts, allowing users to inspect, manually add, and delete long-term memories for their account.
 - The Memory list supports pagination and filters for keywords, type, scope, and source. It presents the original evidence first, with the full content and structured fields available in the RAW detail view.
@@ -157,7 +177,7 @@ This release adds direct long-term Memory management, concurrent Tool calls, and
 - Corrections, mixed evidence, assistant-only evidence, and possible duplicates receive more cautious review. Review cannot silently rewrite or replace an existing fact.
 - Memory extraction segments now follow the active Memory model's effective context window and read extraction results in full, reducing parse failures caused by truncated long content.
 
-### Session Context and Tool Calls
+### Session Context and Tool Calls {/* #session-context-and-tool-calls */}
 
 - Context budgets are calculated from the active model's context window, output limit, and prompt overhead, avoiding stale budgets after model changes or Session recovery.
 - Context compression now starts automatically at the runtime budget boundary. The manual `/compress` command has been removed because it could conflict with active execution; `/clear-history` remains available for explicit history removal.
@@ -166,19 +186,19 @@ This release adds direct long-term Memory management, concurrent Tool calls, and
 - Tool cards appear as soon as the model starts producing a call and distinguish receiving arguments from execution. Incomplete arguments cut off by the model output limit are never executed.
 - Improved excessive blank-line handling for compatible Providers during Tool calls and aligned model-usage accounting across concurrent execution, approval recovery, and failures.
 
-### Platform Incident Governance
+### Platform Incident Governance {/* #platform-incident-governance */}
 
 - The administration console adds switchable platform-incident recording with aggregated details, sample inspection, individual deletion, and history cleanup.
 - Tool-argument issues, user input errors, model-driven Tool failures, business retries, and explicit cancellations are no longer duplicated as system incidents.
 - Recoverable connectivity failures such as unreachable networks or refused connections are handled as retryable warnings, while database and queue-persistence failures remain platform incidents.
 
-### xAgentDB and Legacy Data Migration
+### xAgentDB and Legacy Data Migration {/* #xagentdb-and-legacy-data-migration */}
 
 - User table capabilities now use xAgentDB consistently across table creation, import, queries, deletion, file handling, and backup flows.
 - On first startup, xAgent migrates schemas and data from legacy user databases after checking table names, column definitions, and data conflicts instead of silently overwriting existing data.
 - Decimal user-workspace directories created by older releases are migrated to the current directory format. Existing destination files are never overwritten, and conflicts remain in a migration archive for inspection and recovery.
 
-### Connectors, Local Execution, and Files
+### Connectors, Local Execution, and Files {/* #connectors-local-execution-and-files */}
 
 - Connector details now include structured targets and runtime status. SSH and Database Connectors show only resources within the active user's authorization scope and use stable ordering.
 - Connection details consistently present targets and Tools without exposing internal Channel identifiers. Connector Protocol `4.3`, multi-resource routing, directory-based Connector Skills, and independent file transfer remain supported.
@@ -187,7 +207,7 @@ This release adds direct long-term Memory management, concurrent Tool calls, and
 - File-reference copy now works on non-secure HTTP pages, and copying different files in sequence uses each file's stable identity instead of pasting a duplicate or stale reference.
 - Tools that read, convert, or update existing files prefer an accessible path and fall back to the stable file reference when that path is unavailable, reducing failures when files move during long-running tasks.
 
-### Upgrade Notes
+### Upgrade Notes {/* #upgrade-notes-2 */}
 
 - Upgrade xAgent Server and Connector Servers separately. Current public versions are WeChat `0.0.12`, Telegram `0.0.13`, Feishu `0.0.12`, Database `0.0.6`, and SSH `0.0.8`.
 - Legacy user workspaces are migrated on first startup. If a destination already contains the same path, the current file wins and the legacy file remains under `.migrations/user-workspaces` for inspection or recovery.
@@ -195,13 +215,13 @@ This release adds direct long-term Memory management, concurrent Tool calls, and
 - Workflows that relied on manual `/compress` should use automatic compression instead. Explicit history removal remains available through `/clear-history`.
 - The installer discovers `v0.0.12.beta` through the public release catalog and compares the current platform binary digest. Before upgrading, back up configuration, databases, user workspaces, Memory, Skills, Tool packages, and Connector state.
 
-## `v0.0.11.beta` - 2026-08-19
+## `v0.0.11.beta` - 2026-08-19 {/* #v0011beta---2026-08-19 */}
 
 [View installation instructions](/docs/getting-started/install) · [View the Connector guide](/docs/user-guide/connector)
 
 This release upgrades the Connector runtime, introduces the Database and SSH Connector Servers, and unifies Connector Skills, file capabilities, authentication, and multi-resource routing under shared protocol boundaries. It also adds image generation, ephemeral Session working state, stable Skill identities, and streamlined model and Connector administration.
 
-### Connector Protocol and Runtime
+### Connector Protocol and Runtime {/* #connector-protocol-and-runtime */}
 
 - Connector Protocol is now `4.3`. xAgent remains compatible with `3.0`, `4.0`, `4.1`, and `4.2` Connectors and negotiates the actual data-plane version during the handshake.
 - `target_type` has been removed. xAgent accepts Connectors through the Card, Profile, Tool, authentication-flow, and Channel contracts without a business-category allowlist.
@@ -211,14 +231,14 @@ This release upgrades the Connector runtime, introduces the Database and SSH Con
 - Connector Skills now support directories: `/skill.json` exposes a revisioned file manifest, and xAgent downloads and atomically replaces the local directory. Script files are ignored, while legacy `/skill.md` remains compatible.
 - Connector and built-in Skills use stable English IDs with localized Skill Cards for Chinese and English presentation.
 
-### Database Connector Server
+### Database Connector Server {/* #database-connector-server */}
 
 - The first public Database Connector release supports administrator-defined MySQL and PostgreSQL resources with stable user-facing resource IDs.
 - User authentication, database credentials, and native database authorization stay inside the Connector Server. xAgent stores only Channel ownership and routing facts.
 - SQL tools enforce row, result-size, and timeout limits and expose actual execution errors.
 - Configuration reloads dynamically and revalidates changed database resources without restarting the Connector.
 
-### SSH Connector Server
+### SSH Connector Server {/* #ssh-connector-server */}
 
 - The first public SSH Connector release supports multiple administrator-defined targets. Models see only the `resource_key` and label, never the host address.
 - Private keys are loaded by filename from the `keys` directory beside `config.yml`. A successful first connection records the host fingerprint, and later host-key changes are rejected.
@@ -226,21 +246,21 @@ This release upgrades the Connector runtime, introduces the Database and SSH Con
 - Bounded command execution and SSH/PTTY shell tools cover open, incremental read, write, resize, signal, close, and idle-session reclamation.
 - Target changes trigger hash-based reprobes. Authentication and execution failures are logged with actionable context, while successful tool calls no longer occupy info logs.
 
-### Image Generation and Model Configuration
+### Image Generation and Model Configuration {/* #image-generation-and-model-configuration */}
 
 - Added the native `image_generate` Tool using either the OpenAI Responses image tool or the Images API of the active model.
 - Generated PNG, JPEG, and WebP results are validated, stored as immutable Session artifacts, and rendered directly in the conversation.
 - `default_policy.image_generation` explicitly enables image generation and carries upstream defaults. Models without that policy do not expose the capability.
 - Removed the non-decision-bearing `supports_streaming` capability field from model configuration and administration.
 
-### Sessions, Skills, and Tools
+### Sessions, Skills, and Tools {/* #sessions-skills-and-tools */}
 
 - Added ephemeral Session working-state tools for structured long-running task state that follows Session cleanup.
 - Built-in Skill IDs now use stable English identifiers while localized Skill Cards continue to provide user-facing names.
 - Connector Session names show only the Connector name instead of appending dynamic connected-resource counts.
 - Connector authentication forms follow Card-declared resources and fields. The SSH access-token flow also requires a principal for unambiguous auditing.
 
-### Upgrade Notes
+### Upgrade Notes {/* #upgrade-notes-3 */}
 
 - Upgrade xAgent and Connector Servers separately. Current public versions are WeChat `0.0.11`, Telegram `0.0.12`, Feishu `0.0.11`, Database `0.0.5`, and SSH `0.0.7`.
 - Database `0.0.3` and SSH `0.0.4` fix first-install startup with the empty resource lists generated by the installer. An unconfigured Connector stays online without declaring a login flow and activates resources through dynamic reload after configuration.
@@ -250,13 +270,13 @@ This release upgrades the Connector runtime, introduces the Database and SSH Con
 - Database and SSH target credentials remain in their Connector Servers. Back up Connector configuration, state directories, and SSH keys before upgrading.
 - Before upgrading xAgent, back up its configuration, database, user workspaces, Memory, Skills, Tool packages, and Connector state.
 
-## `v0.0.10.beta` - 2026-08-16
+## `v0.0.10.beta` - 2026-08-16 {/* #v0010beta---2026-08-16 */}
 
 [View installation instructions](/docs/getting-started/install) · [Task understanding and tool selection](/insights/xagent-agent-harness-task-alignment) · [Agent Loop and context management](/insights/xagent-agent-harness-execution-loop)
 
 This release improves task understanding, capability preparation, and cross-session collaboration so Agents can select Skills, Tools, and long-term memory around the active task and adjust the execution environment when the goal changes. It also adds platform capability self-awareness, project-oriented session navigation, context diagnostics, more reliable file delivery, localized Skill presentation, and local administrator recovery.
 
-### Task Understanding, Capability Preparation, and Long-Term Memory
+### Task Understanding, Capability Preparation, and Long-Term Memory {/* #task-understanding-capability-preparation-and-long-term-memory */}
 
 - Before processing a new message in a sub-session, xAgent evaluates its relationship to the current task goal and the overall session goal. Continuing goals keep the current environment, while changed goals trigger capability reconciliation.
 - Capability retrieval derives separate search phrases for Skills, Tools, and Memory from the task objective, covering methods, actions, evidence, quality, domains, deliverables, and reusable knowledge topics.
@@ -266,7 +286,7 @@ This release improves task understanding, capability preparation, and cross-sess
 - Providing Tools no longer forces a Tool call. When Tools are available, the model decides whether the task needs one; when no Tools are available, Tool use is explicitly disabled.
 - Short-request, planning, and capability-use guidance has been strengthened so the Agent checks whether a task is executable before acting, asking for missing information, or loading capabilities.
 
-### Project Sessions and Cross-Session Collaboration
+### Project Sessions and Cross-Session Collaboration {/* #project-sessions-and-cross-session-collaboration */}
 
 - The session sidebar groups regular sessions, projects, teams, and Connectors. Users can create projects and add separate sessions within a project.
 - Sub-session creation uses an explicit session goal and first task message. Original attachments follow the assignment without turning routing wrappers into duplicate instructions.
@@ -275,7 +295,7 @@ This release improves task understanding, capability preparation, and cross-sess
 - When a plan step becomes too large during execution, the Agent can split it into consecutive checkpoints while preserving plan order and completed progress.
 - Long-history loading, runtime-state recovery, and timeline rendering have been improved. Failures to load earlier messages now surface an explicit state.
 
-### Skill Presentation and Context Management
+### Skill Presentation and Context Management {/* #skill-presentation-and-context-management */}
 
 - Skills can provide localized names, descriptions, and icons. Administration lists, detail views, and session capability pickers use the same Skill Card presentation.
 - Advanced settings show the Skills and Tools actually loaded by the session and preserve unavailable-but-selected capability state for accurate runtime inspection.
@@ -283,77 +303,77 @@ This release improves task understanding, capability preparation, and cross-sess
 - Administration now exposes Task Relevance as a separate Agent role alongside Session, Task Capability Orchestration, Summary, and OCR roles.
 - Skill summary generation and retrieval material now share a versioned boundary. Older derived summaries refresh when required instead of remaining out of sync with current capability descriptions.
 
-### File Preview and Delivery
+### File Preview and Delivery {/* #file-preview-and-delivery */}
 
 - Markdown files now have a rendered preview with Preview and Source modes. Tables, code blocks, lists, and line breaks follow the document structure.
 - Spreadsheet preview supports switching worksheets within a file and uses an independent scrolling area for larger tables.
 - Workspace files have a stable standalone download page with direct links, retry, and download-again actions. Paths containing special filename characters retain their original identity.
 - Agent sessions, project files, shared files, business spaces, uploads, and team materials use localized names and descriptions in the Workspace browser.
 
-### Preferences and Administrator Recovery
+### Preferences and Administrator Recovery {/* #preferences-and-administrator-recovery */}
 
 - Response language is now an explicit Chinese or English choice and stays aligned with the console language. Changing it updates both the interface and subsequent Agent responses.
 - Reply detail and Direct Execution / Plan First workflow preferences remain centrally stored and apply consistently to new task turns.
 - Formatting user data now also clears long-term memory, memory summaries, and background extraction state. The account, Skills, secrets, Connector and model configuration, and Token statistics are retained, and the confirmation dialog describes the expanded scope.
 - A local administrator password-recovery command is available on the server. Passwords are accepted only through an interactive terminal, and all existing sign-in sessions for that administrator are revoked after a successful reset.
 
-### Stability Improvements
+### Stability Improvements {/* #stability-improvements */}
 
 - OpenAI and compatible Providers no longer execute truncated Tool arguments as an empty object when output limits interrupt the stream. The response is treated as output-limited and handed back to the runtime for recovery.
 - Streaming and non-streaming Tool argument validation, finish reasons, and history replay are aligned, reducing repeated Tool calls after a model response has already ended.
 - Tool Schemas preserve input property order while continuing to adapt to Provider-specific structural constraints, improving complex file-write and multi-parameter Tool calls.
 - Session replies, Prompt assembly, file access, and storage compatibility now use one runtime path, removing older flows that could interpret or execute the same instruction twice.
 
-### Upgrade Notes
+### Upgrade Notes {/* #upgrade-notes-4 */}
 
 - Storage changes for session collaboration are migrated automatically; no manual database migration is required.
 - Formatting user data now includes long-term memory and background memory jobs. Review the updated confirmation scope before running it.
 - If an administrator cannot sign in, stop the service and run `xagent admin reset-password --username <admin-name> --config <path-to-config.yml>` locally on the server.
 - Before upgrading, back up the xAgent configuration, database, user workspaces, Memory, Skills, Tool packages, and Connector state.
 
-## `v0.0.9.beta` - 2026-08-10
+## `v0.0.9.beta` - 2026-08-10 {/* #v009beta---2026-08-10 */}
 
 [View installation instructions](/docs/getting-started/install) · [Full release notes](/blog/xagent-0-0-9-beta)
 
 This release separates the administration console from the user workspace, unifies the Web and desktop session layout, and makes per-session prompts directly editable and effective from the next model turn.
 
-### Administration Console and User Workspace
+### Administration Console and User Workspace {/* #administration-console-and-user-workspace */}
 
 - Added dedicated `/admin/login` and `/admin` entry points. Administration menus, authentication redirects, sign-out, release notices, and upgrades now remain inside the administration console.
 - `/app` is always the user entry point. Administrators opening it receive the same personal sessions and workspace experience as regular users, without system-governance menus.
 - The user workspace and administration console no longer link to each other, keeping personal work separate from organization administration.
 
-### Session Workspace
+### Session Workspace {/* #session-workspace */}
 
 - Web and desktop now share a two-column layout with the session sidebar on the left and the active conversation on the right.
 - The main session is pinned above search, while sub-sessions remain ordered by recent activity.
 - Conversation content scales with the available width and remains centered. Empty states, messages, and the composer now share one content axis.
 - The toolbar no longer exposes the internal Session identifier. Advanced settings use an icon entry, and the sidebar account menu provides personal settings and sign-out.
 
-### Session Prompts and Configuration
+### Session Prompts and Configuration {/* #session-prompts-and-configuration */}
 
 - The prompt editor remains available when a session has no existing prompt.
 - The prompt section opens by default with a larger editing area. Long content scrolls inside the editor without hiding the actual configuration.
 - A saved session prompt applies from the next model turn for main sessions, Connector sessions, and regular sub-sessions.
 - Configuration drawers no longer close after an accidental backdrop click, reducing loss of unsaved changes. Read-only information drawers may still use backdrop dismissal.
 
-### Usage Statistics and Stability
+### Usage Statistics and Stability {/* #usage-statistics-and-stability */}
 
 - The user dashboard is now Usage Statistics and shows only the current user's Token, model-call, and Tool-call data. The administration console retains organization-wide reporting.
 - Model usage details are visible by default without another expand action.
 - Fixed legacy Memory data being rewritten during reads or list queries, and consolidated database checks, schema creation, and migrations into the storage startup sequence.
 
-### Upgrade Notes
+### Upgrade Notes {/* #upgrade-notes-5 */}
 
 Update administrator bookmarks and reverse-proxy rules from `/app/admin/...` to `/admin/...`; the administration login page is now `/admin/login`. `/app` opens the user session workspace, and personal usage statistics are available at `/app/dashboard`. Before upgrading, back up configuration, the database, user workspaces, Memory, Skills, Tool packages, and Connector state.
 
-## `v0.0.8.beta` - 2026-08-09
+## `v0.0.8.beta` - 2026-08-09 {/* #v008beta---2026-08-09 */}
 
 [View installation instructions](/docs/getting-started/install) · [Full release notes](/blog/xagent-0-0-8-beta) · [Backup and restore guide](/blog/xagent-backup-and-disaster-recovery)
 
 This release adds online incremental backup and disaster recovery, clarifies the boundary between formal local files and external cloud storage, and improves session file reuse, multilingual Skill governance, and local storage cleanup.
 
-### Online Backup and Disaster Recovery
+### Online Backup and Disaster Recovery {/* #online-backup-and-disaster-recovery */}
 
 - Configure S3, an S3-compatible object store, or WebDAV as a backup repository, with connection testing and repository initialization before use.
 - Run backups manually or on a schedule. Every completed snapshot is independently restorable, while only new or changed encrypted content is uploaded.
@@ -361,14 +381,14 @@ This release adds online incremental backup and disaster recovery, clarifies the
 - Validate and confirm a cutover, roll back after a failed validation, or resume an interrupted restore from its durable journal.
 - Download a self-contained `recovery.yml` to list complete snapshots and prepare recovery even when the original database is unavailable.
 
-### Cloud Storage and Public Files
+### Cloud Storage and Public Files {/* #cloud-storage-and-public-files */}
 
 - Mount S3, S3-compatible storage, and WebDAV into Public Files, with an independent prefix for each integration.
 - Existing user and group ACLs continue to apply. Administrators can create directories and upload files; authorized users can browse, preview, and download.
 - Static credentials are stored encrypted. TLS certificate verification can be skipped per integration for controlled internal storage using a self-signed certificate.
 - An unavailable remote remains visible and is marked unavailable instead of appearing as an empty directory.
 
-### Sessions, Skills, and Production Capabilities
+### Sessions, Skills, and Production Capabilities {/* #sessions-skills-and-production-capabilities */}
 
 - Attach visible Workspace, Public Files, and cloud-storage files directly from the message composer.
 - Remote public files are processed into model-readable content on demand while originals remain in external storage. Failed imports leave no invalid attachment.
@@ -376,60 +396,60 @@ This release adds online incremental backup and disaster recovery, clarifies the
 - Connector cards use the service-declared version and validate their associated Skill IDs.
 - Production mode hides development-only Tool administration pages and mutation APIs without affecting Tool selection, approval policy, or personal MCP.
 
-### Local Storage and Upgrade Boundaries
+### Local Storage and Upgrade Boundaries {/* #local-storage-and-upgrade-boundaries */}
 
 - Background cleanup watches disk space and inode usage and reclaims only expired staging, terminal diagnostics, temporary data, and unreferenced content. Formal user data is not deleted by age.
 - Starting with `0.0.8.beta`, formal file storage is fixed to the local data directory. Older S3 formal storage is migrated back only after integrity validation; failure stops startup and preserves the original configuration.
 - S3 and WebDAV are cloud storage integrations under Public Files, not formal file-storage Providers.
 
-### Upgrade Notes
+### Upgrade Notes {/* #upgrade-notes-6 */}
 
 Back up configuration, the database, Workspaces, Memory, Skills, Tool packages, and Connector state before upgrading. After repository initialization, immediately download and store `recovery.yml` offline; it contains sensitive repository access and decryption information. Third-party cloud content mounted in Public Files is outside xAgent backup and needs its own provider-side protection.
 
-## `v0.0.7.beta` - 2026-08-06
+## `v0.0.7.beta` - 2026-08-06 {/* #v007beta---2026-08-06 */}
 
 [View installation instructions](/docs/getting-started/install)
 
 This release focuses on file storage and team sharing, introduces the first Desktop Client release, and continues to improve model request caching, Provider compatibility, and image recognition.
 
-### File Storage and Team Sharing
+### File Storage and Team Sharing {/* #file-storage-and-team-sharing */}
 
 - Added unified Local and S3 file storage Providers for AWS S3 and S3-compatible object stores, with connectivity and read/write checks before activation.
 - Added managed migration between Local and S3. A failed migration does not replace the active Provider; if S3 becomes temporarily unavailable, xAgent can fall back to local storage, upload content after recovery, and switch back to S3.
 - Added an instance-wide `share` directory. Administrators can create directories and upload, move, rename, download, and delete shared content.
 - Unified file ACLs across `workspace`, `upload`, and `share`. Shared directories support inherited read-only `R` and read-write `RW` grants for users and groups.
 
-### Image Recognition and OCR
+### Image Recognition and OCR {/* #image-recognition-and-ocr */}
 
 - Added a configurable OCR model role so administrators can select a vision-capable model and manage OCR-specific model policy.
 - When text is needed from an image attachment, xAgent can create canonical Markdown containing visible text, necessary visual description, and the primary language.
 - OCR in this release applies to image attachments. Scanned PDFs without a text layer remain unsupported.
 
-### Desktop Client `v0.0.1`
+### Desktop Client `v0.0.1` {/* #desktop-client-v001 */}
 
 - First xAgent Desktop Client release, with packages for macOS Apple Silicon and Windows AMD64.
 - The Client can discover a newer package for the current platform, then download it after confirmation, verify SHA-256, replace the installation, and restart automatically. If replacement fails, it retains the previous installation and attempts to restart it.
 
-### Model Context and Providers
+### Model Context and Providers {/* #model-context-and-providers */}
 
 - Improved the organization of stable context and changing runtime state within a turn, increasing the overall Token Cache hit rate by 13% and reducing repeated request latency and cost.
 - Improved LLM Provider compatibility across different model service configurations.
 - Normalized cached-token reporting across OpenAI, Anthropic, and Gemini, and included system usage from model connectivity tests in usage statistics.
 
-### UI and Stability
+### UI and Stability {/* #ui-and-stability */}
 
 - Added administration UI and localized copy for shared files, storage runtime status, and S3 migration progress.
 - Fixed Session Timeline compatibility for some legacy messages and thinking-block state.
 
-### Upgrade Notes
+### Upgrade Notes {/* #upgrade-notes-7 */}
 
 Back up configuration, database, workspaces, shared files, and Connector state before upgrading. Before enabling S3, save and test the configuration, then start Provider migration; the current Provider remains active until migration succeeds. Run the existing installer command to check for and install `v0.0.7.beta`.
 
-## `v0.0.6.beta` - 2026-08-01
+## `v0.0.6.beta` - 2026-08-01 {/* #v006beta---2026-08-01 */}
 
 [View installation instructions](/docs/getting-started/install)
 
-### Files and Attachments
+### Files and Attachments {/* #files-and-attachments */}
 
 - Session attachments and Workspace files now use one receive flow. Files that fail format, size, or content parsing checks do not leave unusable records behind.
 - Supported uploads include DOCX, text-extractable PDF, PPTX, XLSX, CSV, TSV, static HTML, Markdown, common text and source files, and PNG, JPEG, and WebP images.
@@ -439,35 +459,35 @@ Back up configuration, database, workspaces, shared files, and Connector state b
 - Fixed Workspace files that appeared to exist but could not be read, plus downloads with Chinese characters or spaces in their filenames.
 - GIF, legacy Office files, encrypted documents, and scanned PDFs without a text layer are not supported for upload yet.
 
-### Word Documents and Fonts
+### Word Documents and Fonts {/* #word-documents-and-fonts */}
 
 - Added a built-in Word template catalog and default template. `.docx` files can use built-in or user-provided templates while retaining template styles, headers, footers, and placeholders.
 - Document creation completes the full content before creating the file, then validates delivery through DOCX-to-PDF and page rendering checks for pagination, fonts, spacing, tables, and clipping.
 - Added shared font resources, initially including Noto Sans SC, Noto Serif SC, and Noto Sans Mono CJK SC. Administrators can add local fonts or register internal online fonts with integrity checks.
 
-### Sub-sessions, Models, and Runtime
+### Sub-sessions, Models, and Runtime {/* #sub-sessions-models-and-runtime */}
 
 - New sub-sessions now initialize orchestration and capability selection automatically without an extra approval. The release also avoids duplicate capability loads, repeated delegated work, and duplicate result delivery.
 - Improved model request-cache stability in ongoing sessions, configuration compatibility for OpenAI, Anthropic, and Gemini, and configuration change activation.
 - Python dependencies are installed in a user-shared location while built-in runtime resources remain read-only. CLI output hides host and temporary paths and enables pipeline failure detection by default.
 
-### Updates and Stability
+### Updates and Stability {/* #updates-and-stability */}
 
 - Supported managed installations can download, switch, and restart from the console after a new version is detected, with automatic rollback after a failed health check.
 - Older OpenAI model configurations are adapted during upgrade, and one damaged or unrecognized legacy file no longer blocks startup.
 - User-data formatting more completely removes triggers, sessions, attachments, Workspaces, and related runtime data. Accounts, model usage, and explicitly retained external connections are unaffected.
 
-### Upgrade Notes
+### Upgrade Notes {/* #upgrade-notes-8 */}
 
 Back up the xAgent runtime directory, configuration, database, and Connector state before upgrading. Run the existing installer command to check for and install `v0.0.6.beta`; it preserves configuration and state and records the active and previous binary versions. See [Start Installation](/docs/getting-started/install).
 
-## `v0.0.5.beta` - 2026-07-27
+## `v0.0.5.beta` - 2026-07-27 {/* #v005beta---2026-07-27 */}
 
 [View installation instructions](/docs/getting-started/install)
 
 This release upgrades the console experience, real-time Connector interaction, task-process isolation, and automated installation. The server, Runtime Assets, and three IM Connectors now use one version catalog.
 
-### Console and Session Experience
+### Console and Session Experience {/* #console-and-session-experience */}
 
 - Unified console branding, typography density, page hierarchy, status presentation, and responsive layouts.
 - Resource lists now use shared searchable and paginated data tables. Details and editing use drawers or dialogs to preserve list context.
@@ -475,7 +495,7 @@ This release upgrades the console experience, real-time Connector interaction, t
 - Administrators can enable advanced mode per user. Simple mode keeps high-frequency session, file, approval, connection, and account entries; advanced mode also exposes triggers, Agents, Skills, Tools, MCP, and session diagnostics.
 - Agent Session reorganizes the timeline, attachments, tool calls, runtime state, session files, and advanced settings, with stronger narrow-screen and mobile layouts.
 
-### Connectors and Browser Connections
+### Connectors and Browser Connections {/* #connectors-and-browser-connections */}
 
 - Connector source, public protocol, and architecture documents are consolidated under `connectors/` and `docs/architecture/connector/` in the xAgent repository.
 - The common protocol is now `3.0`. WeChat, Telegram, and Feishu use `xagent.im.v2` for bidirectional final messages, streaming deltas, acknowledgements, activity state, and file references.
@@ -485,7 +505,7 @@ This release upgrades the console experience, real-time Connector interaction, t
 - Browser extensions connect through the built-in Browser Connector for governed browser messaging, page context, and tool calls.
 - When this release shipped, the independent Connector versions were WeChat `0.0.8`, Telegram `0.0.9`, and Feishu `0.0.8`. See the [AgentPlugin catalog](/docs/user-guide/connector#current-agentplugin-versions) for current versions.
 
-### ProcessSandbox and Runtime Environment
+### ProcessSandbox and Runtime Environment {/* #processsandbox-and-runtime-environment */}
 
 - A unified `ProcessSandbox` now starts and reaps every untrusted command without inheriting undeclared host environment variables.
 - Linux uses `bubblewrap + cgroup v2 + seccomp`; macOS uses `sandbox-exec` with a private file view per execution.
@@ -493,7 +513,7 @@ This release upgrades the console experience, real-time Connector interaction, t
 - Workspace execution leases serialize overlapping writable roots, scan real file changes, and commit workspace facts. Failed commits can be recovered later.
 - Python, Node.js, and other Runtime Assets are installed independently and mounted read-only. User tasks no longer fall back to an unrestricted host runtime.
 
-### Automated Installation, Upgrades, and Rollback
+### Automated Installation, Upgrades, and Rollback {/* #automated-installation-upgrades-and-rollback */}
 
 - Linux and macOS use one stable installer:
 
@@ -502,22 +522,26 @@ This release upgrades the console experience, real-time Connector interaction, t
   ```
 
 - The installer detects the OS and CPU architecture, reads `versions.json`, verifies the platform package and every internal module with SHA256, and removes temporary files on exit.
+
 - It upgrades an older installation but never automatically downgrades a newer local build.
+
 - Server and Connector binaries remain versioned behind stable symlinks. A failed Linux activation restores the previous working target.
+
 - Linux runs `xagent setup`, generates or updates the systemd service, and starts it. macOS uses user-level installation paths.
+
 - Interactive setup first asks whether to install any Connector, then asks about WeChat, Telegram, and Feishu individually. Unattended installs can use `--connectors` or `--no-connectors`.
 
-### Upgrade Notes
+### Upgrade Notes {/* #upgrade-notes-9 */}
 
 When this release shipped, rerunning the installer checked for and installed `v0.0.5.beta`. For current upgrades, use the [`v0.0.20.beta`](#v0020beta---2026-09-17) release notes.
 
-## `v0.0.4.beta` - 2026-07-15
+## `v0.0.4.beta` - 2026-07-15 {/* #v004beta---2026-07-15 */}
 
 [Install a specific version with the installer](/docs/getting-started/install)
 
 This release unifies session targeting, object references, and approval replies. Users can now handle the same approval from the Web or an available IM Connector.
 
-### Shortcut Instructions and Unified References
+### Shortcut Instructions and Unified References {/* #shortcut-instructions-and-unified-references */}
 
 - `/command` runs a deterministic session command explicitly supported by the system.
 - `@{session:id}` directs a message or command to a specific session.
@@ -527,7 +551,7 @@ This release unifies session targeting, object references, and approval replies.
 
 See the [Shortcut Instruction Protocol](/docs/guides/shortcut-instruction-protocol) for usage details.
 
-### Web and IM Approval
+### Web and IM Approval {/* #web-and-im-approval */}
 
 - Every new suspended confirmation creates an approval with a stable ID.
 - When a session waits for approval, xAgent attempts to notify every available IM messaging channel owned by that user.
@@ -535,25 +559,30 @@ See the [Shortcut Instruction Protocol](/docs/guides/shortcut-instruction-protoc
 - Users can decide from the Web, WeChat, or Telegram, and the approval ID routes the reply to the correct session.
 - The first valid decision takes effect. Later decisions for the same approval cannot change its state again.
 
-### Connector Management and Connector `v0.0.4`
+### Connector Management and Connector `v0.0.4` {/* #connector-management-and-connector-v004 */}
 
 - User connections now follow the connection mode declared by each Connector Card, reducing duplicate or invalid connections.
+
 - Connector Management shows software version and authentication method details.
+
 - My Connections adds connection deletion, invalid-state handling, and clearer unavailable states.
 
 - Connector Release `v0.0.4` adds Feishu Connector alongside WeChat and Telegram.
+
 - The release provides 12 Linux/Darwin, AMD64/ARM64 binary archives and a `SHA256SUMS` verification file.
+
 - Feishu Connector supports mainland China Feishu direct messages and group @mentions. Lark is not yet supported. See the [Connector user guide](/docs/user-guide/connector) for connection and authorization.
+
 - At that time, all three Connectors shipped in one `v0.0.4` release. Current Connectors use independent versions and download roots.
 
-### Stability Fixes
+### Stability Fixes {/* #stability-fixes */}
 
 - Fixed duplicate progression caused by concurrent approval recovery, session runtime synchronization, and timer scheduling.
 - Fixed internal errors for invalid approval IDs and empty Agent runs caused by target-only messages.
 - Fixed inconsistent IM approval notifications, reply routing, and duplicate decisions from multiple entry points.
 - Timer triggers no longer keep appending duplicate task prompts while a session waits for approval.
 
-### Release Assets
+### Release Assets {/* #release-assets */}
 
 The Release contains only:
 
@@ -565,11 +594,11 @@ The Release contains only:
 
 Each archive contains only the xAgent executable, README, and version metadata. Source code is not included.
 
-### Upgrade Method at the Time
+### Upgrade Method at the Time {/* #upgrade-method-at-the-time */}
 
 `v0.0.4.beta` required a stopped service, backup, and manual binary replacement. The current installer provides automated installation, upgrades, and rollback after failed activation. See [Start Installation](/docs/getting-started/install).
 
-## `v0.0.3.beta`
+## `v0.0.3.beta` {/* #v003beta */}
 
 This earlier public beta improved Connector integration, added the Telegram Connector, expanded the user manual, and established the initial safety-governance workflow.
 

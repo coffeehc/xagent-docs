@@ -1,18 +1,18 @@
 ---
-title: Ecosystem Partners
-description: Explore xAgent partnership opportunities for model API providers, token services, and MCP aggregators that can reduce cost and expand task scenarios.
+title: "Ecosystem Partners"
+description: "Explore xAgent partnership opportunities for model API providers, token services, and MCP aggregators that can reduce cost and expand task scenarios."
 status: beta
-updated: 2026-09-17
+updated: 2026-10-01
 schemaType: ContactPage
 ---
 
 # Ecosystem Partners
 
-xAgent is currently in `v0.0.20.beta`. The free binary release is intended to let more users deploy, try, and provide feedback from real task scenarios.
+xAgent is currently in `v0.0.21.beta`. The free binary release is intended to let more users deploy, try, and provide feedback from real task scenarios.
 
 As xAgent is used for long-running tasks, file processing, tool calling, and automated collaboration, model cost and external capability ecosystems become important. We are looking for partners who can reduce long-task running cost and expand real-world scenario coverage.
 
-## Model Provider Partnership
+## Model Provider Partnership {/* #model-provider-partnership */}
 
 xAgent is looking for a model API or token provider as a recommended default model-service partner.
 
@@ -30,7 +30,7 @@ xAgent does not want to lock users into one provider. Different models have diff
 
 However, long-running tasks, repeated file organization, tool calls, and deliverable generation all create ongoing model cost. A stable, easy-to-use, cost-effective default model entry can significantly reduce the pressure of getting started and using xAgent long term.
 
-## MCP Ecosystem Partnership
+## MCP Ecosystem Partnership {/* #mcp-ecosystem-partnership */}
 
 xAgent is also looking for high-quality MCP aggregation providers to improve scenario coverage.
 
@@ -44,7 +44,7 @@ An ideal partner can provide:
 
 In xAgent, Skills describe task methods and execution flows. MCP provides external callable capabilities. Good MCP aggregation can work with Skills: the Skill says how a task should be done, and MCP provides what can be called during execution.
 
-## Cooperation Directions
+## Cooperation Directions {/* #cooperation-directions */}
 
 We welcome:
 
@@ -57,7 +57,7 @@ If you are a model API / token provider, or are building MCP aggregation service
 
 Contact email:
 
-**xagent@xiagaogao.com**
+**[xagent@xiagaogao.com](mailto:xagent@xiagaogao.com)**
 
 Please briefly include:
 

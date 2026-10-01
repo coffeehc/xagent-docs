@@ -1,9 +1,9 @@
 ---
-title: 更新日志
-description: 查看 xAgent 各二进制版本面向用户的重要变化、下载内容和升级注意事项。
-image: /img/share/zh/xagent-overview.png
+title: "更新日志"
+description: "查看 xAgent 各二进制版本面向用户的重要变化、下载内容和升级注意事项。"
+image: "/img/share/zh/xagent-overview.png"
 status: stable
-updated: 2026-09-17
+updated: 2026-10-01
 schemaType: CollectionPage
 ---
 
@@ -11,7 +11,27 @@ schemaType: CollectionPage
 
 本文记录 xAgent 免费二进制版本中与安装、使用和安全治理相关的重要变化。当前仍是测试版，功能、界面和协议可能继续调整。
 
-## `v0.0.20.beta` - 2026-09-17
+## 文档核对 - 2026-10-01 {/* #文档核对---2026-10-01 */}
+
+本次是文档更新，不是新的二进制发行。保留原文档地址、技术示例和历史版本记录，按读者任务重组入口。
+
+- [文档导航](/docs/manual/overview)提供六条阅读路径；[常见问题](/docs/faq/common)将原有问题按主题归类，并增加按现象定位的入口。
+- [安装](/docs/getting-started/install)、[菜单导览](/docs/user-guide/menu-overview)和[快捷指令](/docs/user-guide/shortcut-instructions)区分公开发行、当前源码与旧界面，避免按旧图操作新部署。
+- 按 2026-10-01 源码核对[长期记忆](/docs/user-guide/memory)、[多会话协作](/docs/guides/multi-agent-session-event-collaboration)、[A2A](/docs/user-guide/a2a)、审批通知、个人/系统策略优先级和触发器回执。源码新增行为不代表所有旧发行版都已包含。
+- 保留旧 Connector Schema、Profile、截图与参数示例，并标明历史边界；补齐随文档保存的 Skill 文件清单。未能取得当前管理员界面的部分截图仍是历史参考。
+
+## `v0.0.21.beta` - 2026-09-22 {/* #v0021beta---2026-09-22 */}
+
+[GitHub Release 与校验文件](https://github.com/coffeehc/xagent-releases/releases/tag/v0.0.21.beta) · [模型配置](/docs/user-guide/model-config) · [Skill 管理](/docs/user-guide/skill)
+
+- 固定任务角色改为使用稳定的 Model Profile ID；旧模型名在启动时迁移，无法解析会明确报错。
+- Agent 定义、任务能力编排、任务语义、OCR、摘要、Memory 与上下文压缩统一严格 JSON 和业务 Schema 校验；结构化重试只反馈最新字段要求，不回放无效模型原文。
+- 压缩使用 90% 请求预算线，超长历史和 active turn 可分批摘要，全部成功后才推进持久化边界；达到上下文/输出上限会缩小摘要来源重试，未形成净压缩时不推进游标。
+- 公共 Skill Catalog v2 为每个 Skill 使用独立不可变 ZIP 和 `skill.json`，不再生成整包或执行启动迁移；安装状态来自当前加载的来源路径与版本。
+- 角色管理按 Model Profile ID 选择模型；工作编排保留已不在可选目录中但仍被引用的 Skill；修复停止后旧 running 轮次计时并调整会话列表与缩略导航。
+- 只更新 Server，官方 AgentPlugin 制品不变。升级前继续备份配置、数据库、工作区、Memory、Skill、Tool 和插件数据。
+
+## `v0.0.20.beta` - 2026-09-17 {/* #v0020beta---2026-09-17 */}
 
 [开始安装](/docs/getting-started/install) · [办公文档能力](/docs/manual/capabilities) · [GitHub Release 与校验文件](https://github.com/coffeehc/xagent-releases/releases/tag/v0.0.20.beta)
 
@@ -24,7 +44,7 @@ schemaType: CollectionPage
 
 升级前请备份配置、数据库、工作区、Memory、Skill、Tool 包及已安装 AgentPlugin 的配置和数据。Office 文档转 PDF 与 Excel 重算仍需要管理员在宿主服务器安装 LibreOffice；xAgent 发布包不包含它的系统依赖，见[安装说明](/docs/getting-started/install)。
 
-## `v0.0.19.beta` - 2026-09-14（9 月 15 日重发）
+## `v0.0.19.beta` - 2026-09-14（9 月 15 日重发） {/* #v0019beta---2026-09-149-月-15-日重发 */}
 
 [文件分享使用说明](/docs/user-guide/file-sharing) · [GitHub Release](https://github.com/coffeehc/xagent-releases/releases/tag/v0.0.19.beta)
 
@@ -33,7 +53,7 @@ schemaType: CollectionPage
 - 改进会话中断与模型重连状态、模型清单选择，以及 Runtime Assets 目录离线缓存；LibreOffice 转换使用不可变的 Runtime Assets 安装目录。
 - 本版本只更新 Server，官方 AgentPlugin 制品未更新。
 
-## `v0.0.18.beta` - 2026-09-11
+## `v0.0.18.beta` - 2026-09-11 {/* #v0018beta---2026-09-11 */}
 
 [模型配置](/docs/user-guide/model-config) · [GitHub Release](https://github.com/coffeehc/xagent-releases/releases/tag/v0.0.18.beta)
 
@@ -41,7 +61,7 @@ schemaType: CollectionPage
 - 会话用量优先采用 Provider 实测值，未返回时才估算；统一 Tool Schema 严格模式、流式聚合和工具参数回正。
 - 修复空上传目录读取与模型响应诊断。本版本只更新 Server，官方 AgentPlugin 制品未更新。
 
-## `v0.0.17.beta` - 2026-09-09（9 月 10 日重发）
+## `v0.0.17.beta` - 2026-09-09（9 月 10 日重发） {/* #v0017beta---2026-09-099-月-10-日重发 */}
 
 [AgentPlugin 使用说明](/docs/user-guide/connector) · [GitHub Release](https://github.com/coffeehc/xagent-releases/releases/tag/v0.0.17.beta)
 
@@ -49,7 +69,7 @@ schemaType: CollectionPage
 - 会话草稿可恢复附件引用，Markdown 预览目录锚点在当前页面定位；SSH 下载、微信图片等插件拉取文件进入当前 Session workspace。
 - 官方六种插件（微信、Telegram、飞书、Database、SSH、钉钉）进入四平台发布链路，钉钉首次公开；9 月 10 日重发仅更新 Server。
 
-## `v0.0.16.beta` - 2026-09-07（9 月 9 日重发）
+## `v0.0.16.beta` - 2026-09-07（9 月 9 日重发） {/* #v0016beta---2026-09-079-月-9-日重发 */}
 
 [AgentPlugin 迁移与安装](/docs/user-guide/connector) · [A2A Client](/docs/user-guide/a2a) · [GitHub Release](https://github.com/coffeehc/xagent-releases/releases/tag/v0.0.16.beta)
 
@@ -58,45 +78,45 @@ schemaType: CollectionPage
 - 新增用户级 A2A Client：发现远端 Agent、发送/查询/回复/取消任务，并在收件箱查看结果；企业授权增加版本上限与 A2A 容量治理。
 - 显式暂停的计划保留未完成任务；未指定模型时使用 Provider 默认模型。升级前备份已安装插件及其数据，并确认企业授权允许目标版本。
 
-## `v0.0.15.beta` - 2026-09-06
+## `v0.0.15.beta` - 2026-09-06 {/* #v0015beta---2026-09-06 */}
 
 [查看安装方式](/docs/getting-started/install) · [查看支持的智能体功能](/docs/manual/capabilities) · [查看工作区说明](/docs/user-guide/workspace) · [GitHub Release 与校验文件](https://github.com/coffeehc/xagent-releases/releases/tag/v0.0.15.beta)
 
 本版本主要对办公文档系列进行了增强。Word、PowerPoint 和 Excel 统一使用 xAgent 默认 Office 模板与品牌样式，补齐可编辑文档的生成、预览、重算和 PDF 转换链路。同时，文档任务的派工和交付流程更直接，Runtime Assets 可以在启动后自动对齐所需软件包。
 
-### Office 文档与 PDF
+### Office 文档与 PDF {/* #office-文档与-pdf */}
 
 - Word、PowerPoint 和 Excel 统一使用 xAgent 默认 Office 模板与品牌样式，不再区分旧的 `business`、`clean` 和 `formal` 模板。
 - Word 封面与目录分页，表格正文继承模板正文字体；PowerPoint 统一品牌色、排版和图表样式。
 - LibreOffice 用于 Word、PowerPoint 和 Excel 的 PDF 转换，以及 Excel 重算保存。由于它依赖较多系统软件包，xAgent 发布包不包含这些系统依赖；使用上述能力前，管理员需在服务器上通过系统包管理器直接安装可用的最新版 LibreOffice。
 - 完善 PDF、PPTX、DOCX、Excel 和 Mermaid 的前端预览路由与类型识别，并区分 Mermaid 的交互预览与导出渲染。
 
-### Excel 工作簿
+### Excel 工作簿 {/* #excel-工作簿 */}
 
 - 原生 Excel Tool 覆盖工作簿创建、结构检查、区域读写、追加、格式、表格、图表、重算和 PDF 导出。
 - Excel 附件不再预先转换并内联整份文本；Agent 只在需要内容时调用 Excel Tool 读取指定工作表和区域。
 - 新建、追加和转换任务不再因为无关的全量预读取被阻塞，文件结果统一使用 workspace 文件身份。
 
-### 文档任务与文件搜索
+### 文档任务与文件搜索 {/* #文档任务与文件搜索 */}
 
 - Main Session 派工只完整传递用户目标、输入文件和明确约束，不再自行补充字体、版式、质量检查或工具链要求；执行细节由对应 Skill 和 Tool 负责。
 - 文档创建、追加和格式转换在 Tool 成功后即可结束，不再默认进入开放式读取、校验、修复和重复导出。
 - 单个文本文件内搜索使用 `fs_search_in_text`；跨文件检索使用独立索引 Tool，并限定在当前 Session 可访问的文件范围。
 
-### Runtime Assets 自动更新
+### Runtime Assets 自动更新 {/* #runtime-assets-自动更新 */}
 
 - xAgent 启动后会自动同步 Catalog，并下载、安装和更新全部缺失或过期软件包。
 - 软件包完成下载、校验、解包、初始化和探测后再原子切换 `current`；失败时继续使用上一套可用安装。
 - 管理后台保留手工同步与单软件包升级入口，并展示安装阶段、失败原因和版本状态。
 
-### Session 与管理界面
+### Session 与管理界面 {/* #session-与管理界面 */}
 
 - Agent 循环、任务语义、编排、OCR、摘要、Memory 和图片生成等模型调用统一接入 AgentCore。
 - 完善审批恢复、历史 Tool 批次回放、会话产物投影、上下文压缩和运行状态同步。
 - Session 页面和管理后台统一复用消息、Tool 历史、附件、数据表格、筛选、空状态和操作布局等公共组件。
 - 修复智能体、Skill 和 Tool 卡片被包入单个网格项的问题，恢复响应式多列布局。
 
-### 升级说明
+### 升级说明 {/* #升级说明 */}
 
 - 升级前请备份配置、数据库、用户工作区、Memory、Skill、Tool 包和 Connector 状态。
 - Debian/Ubuntu 服务器可执行 `sudo apt-get update && sudo apt-get install -y libreoffice` 安装软件源中的最新版本；其他 Linux 发行版使用等价命令。安装后通过 `soffice --headless --version` 确认 LibreOffice 可用。
@@ -104,31 +124,31 @@ schemaType: CollectionPage
 - Runtime Assets 会在启动后自动对齐当前 Catalog；更新失败时继续使用上一套 `current`，可在管理后台查看失败原因并手工重试。
 - Connector Server 与 xAgent Server 独立发布和升级。当前公开版本为微信 `0.0.12`、Telegram `0.0.13`、飞书 `0.0.12`、Database `0.0.6`、SSH `0.0.8`。
 
-## `v0.0.13.beta` - 2026-08-29
+## `v0.0.13.beta` - 2026-08-29 {/* #v0013beta---2026-08-29 */}
 
 [查看安装方式](/docs/getting-started/install) · [查看工作区说明](/docs/user-guide/workspace) · [查看 Connector 使用手册](/docs/user-guide/connector)
 
 本版本重点完善原生文件与文档处理、统一 CLI 和 Tool 的 workspace 路径契约，并将免费版调整为无需证书即可生效的固定权益模型。同时简化会话操作，改进 Token 用量图表的可读性。
 
-### 原生文件与文档工具
+### 原生文件与文档工具 {/* #原生文件与文档工具 */}
 
 - 新增原生 HTTP 文件下载能力，可直接保存二进制响应，并通过稳定的文件输出协议返回结果。
 - 完善图片格式转换，以及 Word 文档读取、检查和更新链路，减少模型临时拼接 CLI 文件处理流程的需要。
 - 原生文件 Tool 统一使用 workspace 文件身份和输出合同；文件参数会在进入执行器前完成规范化。
 
-### Tool 运行时与路径契约
+### Tool 运行时与路径契约 {/* #tool-运行时与路径契约 */}
 
 - CLI 默认工作目录统一为当前 Session 的规范 workspace 目录；模型可以直接使用相对路径，不再依赖 `$XAGENT_WORKSPACE` 前缀。
 - ToolService 会统一回正模型生成的 workspace 路径参数，并对原生 Tool、MCP Tool 和 Connector Tool 使用一致的运行时治理事实。
 - 字体、运行时资产和执行环境就绪状态纳入统一检查，缺少依赖时会在调用前给出明确阻断原因。
 - HTTP 首字节等待、沙箱执行失败和 Tool 输出分类进一步收口，减少可恢复问题被记录为平台异常。
 
-### 会话与用量界面
+### 会话与用量界面 {/* #会话与用量界面 */}
 
 - 删除已经由自动同步和重连恢复覆盖的 `/refresh_messages` 命令；消息加载失败界面仍保留内部刷新能力。
 - Token 用量图表统一坐标轴和提示值格式，大数值使用紧凑显示，趋势对比更清晰。
 
-### 免费版与企业授权
+### 免费版与企业授权 {/* #免费版与企业授权 */}
 
 - 未安装外部授权证书时直接进入免费版，发行包不再内置免费版证书或有效期。
 - 免费版固定限制为 2 个用户、30 个会话、1 个 WorkGroup、5 个 Connector VChannel 和 5 个定时任务。
@@ -136,20 +156,20 @@ schemaType: CollectionPage
 - License Server 只签发企业版证书，控制台不再提供免费版签发选项；历史签发记录仍可查看。
 - 授权管理页直接展示当前免费版权益，并继续保留企业证书的安装、设备绑定和有效期状态。
 
-### 升级说明
+### 升级说明 {/* #升级说明-1 */}
 
 - 使用历史免费版证书的环境升级后会自动删除该证书，并按新的无证书免费版额度运行。
 - 企业版证书仍保持原有签名、设备绑定、有效期和数量权益校验。
 - Connector Server 与 xAgent Server 独立发布和升级。当前公开版本为微信 `0.0.12`、Telegram `0.0.13`、飞书 `0.0.12`、Database `0.0.6`、SSH `0.0.8`。
 - 安装器会通过公开版本目录发现 `v0.0.13.beta`，并比较当前平台的二进制摘要。升级前请备份配置、数据库、用户工作区、Memory、Skill、Tool 包和 Connector 状态。
 
-## `v0.0.12.beta` - 2026-08-26
+## `v0.0.12.beta` - 2026-08-26 {/* #v0012beta---2026-08-26 */}
 
 [查看安装方式](/docs/getting-started/install) · [查看长期记忆说明](/docs/user-guide/memory) · [查看 Connector 使用手册](/docs/user-guide/connector)
 
 本版本重点补齐长期记忆管理、并发 Tool 调用和会话上下文治理，并加强旧数据迁移、本地命令隔离、Connector 资源展示与文件引用稳定性。长任务在执行、审批、恢复和升级过程中的状态更加一致，也更容易检查和诊断。
 
-### 长期记忆管理
+### 长期记忆管理 {/* #长期记忆管理 */}
 
 - 用户菜单和工作台新增“我的记忆”，可以直接查看、手工添加和删除当前账号的长期记忆。
 - 记忆列表支持分页，并可按关键字、类型、范围和来源筛选；列表优先展示形成记忆时使用的原始证据，完整内容与结构化字段可在 RAW 详情中查看。
@@ -157,7 +177,7 @@ schemaType: CollectionPage
 - 对纠正、混合证据、仅有助手证据或疑似重复的内容进行更谨慎的复核；复核不会自动改写或替换已有事实。
 - 记忆提取会根据当前 Memory 模型的实际上下文窗口安排分段，并完整读取提取结果，减少长内容被截断后解析失败的问题。
 
-### 会话上下文与 Tool 调用
+### 会话上下文与 Tool 调用 {/* #会话上下文与-tool-调用 */}
 
 - 上下文预算会根据当前模型的上下文窗口、最大输出和提示词开销动态计算，切换模型或恢复会话后不再沿用过期预算。
 - 上下文压缩改为在达到预算边界时自动触发，不再提供容易与执行状态冲突的 `/compress` 手工命令；需要明确清空历史时仍可使用 `/clear-history`。
@@ -166,19 +186,19 @@ schemaType: CollectionPage
 - Tool 卡片会在模型开始生成调用时出现，并区分“正在接收参数”和“正在执行”；因模型输出达到上限而不完整的参数不会进入真实执行。
 - 改进兼容 Provider 在 Tool 调用期间连续输出空行的问题，并统一并发执行、审批恢复和失败场景下的模型用量统计。
 
-### 平台异常治理
+### 平台异常治理 {/* #平台异常治理 */}
 
 - 管理后台新增可开关的平台异常记录，可以查看聚合详情和样本，并支持删除单项记录或清理历史。
 - 工具参数问题、用户输入错误、模型驱动的 Tool 失败、业务重试和主动取消不再重复记为系统异常。
 - 临时网络不可达、连接拒绝等可恢复问题会作为可重试警告处理；数据库和队列持久化等真实基础设施故障仍会保留为平台异常。
 
-### xAgentDB 与旧数据迁移
+### xAgentDB 与旧数据迁移 {/* #xagentdb-与旧数据迁移 */}
 
 - 用户数据表能力统一由 xAgentDB 提供，建表、导入、查询、删除、文件处理和备份使用一致的存储边界。
 - 首次启动会迁移旧用户数据库中的表结构和数据，并在写入前检查表名、列定义和数据冲突，避免静默覆盖已有数据。
 - 旧版本生成的十进制用户工作区目录会自动迁移到当前目录格式。已有目标文件不会被覆盖，冲突内容会保留在迁移归档中供检查和恢复。
 
-### Connector、本地执行与文件
+### Connector、本地执行与文件 {/* #connector本地执行与文件 */}
 
 - Connector 连接详情新增结构化目标和运行状态；SSH 与 Database Connector 只展示当前用户实际获得授权的资源，并保持稳定排序。
 - 连接详情统一展示目标与 Tool，不再暴露内部 Channel 标识；继续支持 Connector Protocol `4.3`、多资源路由、目录式 Connector Skill 和独立文件传输。
@@ -187,7 +207,7 @@ schemaType: CollectionPage
 - 文件引用复制增加非安全 HTTP 页面兼容处理，连续复制不同文件时会使用各自稳定的引用，不再粘贴出重复或失效的文件身份。
 - 读取、转换和更新已有文件时，会优先使用可访问路径，并在路径不可用时回退到稳定文件引用，减少长任务中文件位置变化造成的失败。
 
-### 升级说明
+### 升级说明 {/* #升级说明-2 */}
 
 - Connector Server 与 xAgent Server 独立发布和升级。当前公开版本为微信 `0.0.12`、Telegram `0.0.13`、飞书 `0.0.12`、Database `0.0.6`、SSH `0.0.8`。
 - 旧用户工作区会在首次启动时自动迁移。如目标目录已有同名文件，以当前文件为准，旧文件保留在 `.migrations/user-workspaces` 下供检查和恢复。
@@ -195,13 +215,13 @@ schemaType: CollectionPage
 - 依赖手工 `/compress` 的使用方式需要改为自动压缩；明确删除会话历史仍使用 `/clear-history`。
 - 安装器会通过公开版本目录发现 `v0.0.12.beta`，并比较当前平台的二进制摘要。升级前请备份配置、数据库、用户工作区、Memory、Skill、Tool 包和 Connector 状态。
 
-## `v0.0.11.beta` - 2026-08-19
+## `v0.0.11.beta` - 2026-08-19 {/* #v0011beta---2026-08-19 */}
 
 [查看安装方式](/docs/getting-started/install) · [查看 Connector 使用手册](/docs/user-guide/connector)
 
 本版本完成 Connector 运行体系升级，正式加入 Database 与 SSH Connector Server，并让 Connector Skill、文件能力、认证和多资源路由使用统一协议边界。同时新增图片生成工具、会话临时工作状态，并收口 Skill 标识、模型配置与 Connector 管理体验。
 
-### Connector 协议与运行时
+### Connector 协议与运行时 {/* #connector-协议与运行时 */}
 
 - Connector 公共协议升级到 `4.3`。xAgent 同时兼容 `3.0`、`4.0`、`4.1` 和 `4.2` Connector，并在数据平面握手时协商实际版本。
 - 删除 `target_type`。xAgent 只按 Connector Card、Profile、Tool、认证流程和 Channel 协议处理业务，不再按业务分类枚举限制 Connector 接入。
@@ -211,14 +231,14 @@ schemaType: CollectionPage
 - Connector Skill 升级为目录模式：`/skill.json` 提供文件清单，xAgent 按 revision 下载并原子替换本地目录；脚本文件会被忽略，旧版 `/skill.md` 仍保持兼容。
 - Connector 与内置 Skill 使用稳定英文 ID，并通过 Skill Cards 提供中英文名称、说明和展示信息。
 
-### Database Connector Server
+### Database Connector Server {/* #database-connector-server */}
 
 - 首次正式发布 Database Connector Server，支持管理员配置多个 MySQL 和 PostgreSQL 目标，并以稳定资源 ID 向用户展示。
 - 用户认证、数据库凭据和数据库原生权限保留在 Connector Server 内；xAgent 只持有 Channel 归属和路由信息。
 - 提供有行数、结果大小和超时边界的 SQL 工具，并支持连接状态观察和执行错误回传。
 - 配置文件动态加载；数据库资源定义变化后自动重新校验，不需要重启 Connector。
 
-### SSH Connector Server
+### SSH Connector Server {/* #ssh-connector-server */}
 
 - 首次正式发布 SSH Connector Server。管理员可配置多个 SSH 目标，模型只看到 `resource_key` 和 label，不会看到主机地址。
 - 私钥从 `config.yml` 同目录的 `keys` 目录按文件名加载；首次成功连接自动记录主机指纹，后续检测主机密钥变化。
@@ -226,21 +246,21 @@ schemaType: CollectionPage
 - 支持受控命令执行和基于 SSH/PTTY 的交互式 shell，包括打开、增量读取、写入、resize、signal、关闭和空闲回收。
 - 目标配置变化后按内存 hash 重新连接测试，运行状态、认证失败和执行错误提供可诊断日志；成功工具调用不再占用 info 日志。
 
-### 图片生成与模型配置
+### 图片生成与模型配置 {/* #图片生成与模型配置 */}
 
 - 新增 `image_generate` 原生工具，可使用当前模型的 OpenAI Responses 图片工具或 Images API 生成图片。
 - 生成结果会校验为 PNG、JPEG 或 WebP，保存为不可变 Session 产物，并在会话中直接展示和预览。
 - 模型配置通过 `default_policy.image_generation` 显式启用图片生成并承载上游默认参数；未启用的模型不会暴露该能力。
 - 删除无实际决策价值的 `supports_streaming` 模型能力字段，模型探测和管理界面统一使用当前有效能力事实。
 
-### 会话、Skill 与工具体验
+### 会话、Skill 与工具体验 {/* #会话skill-与工具体验 */}
 
 - 新增会话临时工作状态工具，Agent 可以在长任务中保存和读取结构化的短期执行状态，并随会话清理。
 - 内置 Skill ID 全面收口为稳定英文标识，界面继续通过 i18n Skill Card 展示本地化名称。
 - Connector 会话名称只显示 Connector 名称，不再追加“已连接目标数量”等动态状态。
 - Connector 认证表单按 Card 声明展示资源和凭据字段，SSH access token 流程同时要求 principal，便于审计区分用户。
 
-### 升级说明
+### 升级说明 {/* #升级说明-3 */}
 
 - Connector Server 与 xAgent 必须分别升级。当前公开版本为微信 `0.0.11`、Telegram `0.0.12`、飞书 `0.0.11`、Database `0.0.5`、SSH `0.0.7`。
 - Database `0.0.3` 与 SSH `0.0.4` 修复安装器首次生成空资源列表时 Connector 无法启动的问题；未配置资源时服务保持在线且不声明登录流程，管理员写入资源后动态加载生效。
@@ -250,13 +270,13 @@ schemaType: CollectionPage
 - Database 与 SSH Connector 的目标系统凭据只保存在各自 Connector Server 中；升级前请备份 Connector 配置、状态目录和 SSH keys。
 - 升级 xAgent 前请备份配置、数据库、用户工作区、Memory、Skill、Tool 包和 Connector 状态。
 
-## `v0.0.10.beta` - 2026-08-16
+## `v0.0.10.beta` - 2026-08-16 {/* #v0010beta---2026-08-16 */}
 
 [查看安装方式](/docs/getting-started/install) · [任务理解与能力选择说明](/insights/xagent-agent-harness-task-alignment) · [Agent Loop 与上下文管理说明](/insights/xagent-agent-harness-execution-loop)
 
 本版本重点完善任务理解、能力准备与跨会话协作链路，让 Agent 能围绕当前任务更准确地选择 Skill、Tool 和长期记忆，并在任务目标变化时及时调整执行环境。同时补齐平台能力自知、项目化会话导航、上下文观察、文件交付、Skill 展示和管理员恢复能力。
 
-### 任务理解、能力准备与长期记忆
+### 任务理解、能力准备与长期记忆 {/* #任务理解能力准备与长期记忆 */}
 
 - 子会话收到新消息后，会先判断消息与当前阶段目标及会话总目标的关系。目标延续时直接继续当前任务，目标变化时再调整 Skill、Tool 和长期记忆等任务环境。
 - 能力检索会从任务目标中分别提炼 Skill、Tool 和 Memory 所需的检索短语，围绕方法、动作、证据、质量、领域、交付物和可复用知识查找候选能力。
@@ -266,7 +286,7 @@ schemaType: CollectionPage
 - 提供 Tool 不再强制模型调用；有 Tool 时由模型根据任务决定是否使用，没有 Tool 时明确禁用 Tool 调用，减少重复调用和无意义循环。
 - 强化短请求、计划执行和能力使用规则，Agent 会先确认任务是否具备执行条件，再选择直接处理、补充信息或调用能力。
 
-### 项目化会话与跨会话协作
+### 项目化会话与跨会话协作 {/* #项目化会话与跨会话协作 */}
 
 - 会话侧栏按会话、项目、团队和 Connector 分组展示；支持创建项目，以及在项目中继续创建独立会话。
 - 子会话创建使用明确的会话目标和首条任务消息，原始附件会随任务传递，但不会把路由包装重复当成执行指令。
@@ -275,7 +295,7 @@ schemaType: CollectionPage
 - 执行中发现当前计划步骤过大时，Agent 可以把该步骤拆成连续检查点，同时保留原计划顺序和已完成进度。
 - 改进长会话历史加载、运行状态恢复和消息时间线展示，加载更早消息失败时会提供明确状态。
 
-### Skill 展示与上下文管理
+### Skill 展示与上下文管理 {/* #skill-展示与上下文管理 */}
 
 - Skill 支持按用户语言展示名称、描述和图标；管理列表、详情页和会话能力选择器使用一致的 Skill Card 信息。
 - 高级配置会展示当前会话实际加载的 Skill 与 Tool，并保留不可用但已选择的能力状态，便于核对真实运行配置。
@@ -283,77 +303,77 @@ schemaType: CollectionPage
 - 管理后台新增“任务相关度 Agent”角色配置，与会话 Agent、任务能力编排、摘要和 OCR 角色分开管理。
 - Skill 摘要生成与检索材料使用同一版本边界，旧摘要会按需刷新，避免界面信息与能力检索描述不一致。
 
-### 文件预览与交付
+### 文件预览与交付 {/* #文件预览与交付 */}
 
 - Markdown 文件新增渲染预览，并可在“预览”和“源码”之间切换；表格、代码块、列表和换行会按文档结构展示。
 - 电子表格预览支持在同一文件中切换工作表，并对大表格使用独立滚动区域。
 - Workspace 文件提供稳定的独立下载页面，支持直接打开下载链接、失败重试和再次下载，文件名中的特殊字符也会按原路径处理。
 - Workspace 中的 Agent 会话、项目文件、共享文件、业务空间、上传文件和团队资料统一使用本地化名称与说明。
 
-### 用户偏好与管理员恢复
+### 用户偏好与管理员恢复 {/* #用户偏好与管理员恢复 */}
 
 - 回复语言调整为确定的中文或英文选项，并与当前界面语言保持一致；切换语言后，界面和后续 Agent 回复使用同一语言设置。
 - 回复详细程度和“直接执行 / 先列计划”工作流偏好继续由个人设置统一保存，并稳定作用于新一轮任务。
 - 管理员格式化用户数据时，会同时清理长期记忆、记忆摘要和后台提取状态；账号、Skill、密钥、Connector、模型配置和 Token 统计会保留，确认框会明确展示新的清理范围。
 - 新增服务器本机管理员密码恢复命令。密码只能在交互式终端输入，重置成功后该管理员的旧登录状态会全部失效。
 
-### 稳定性改进
+### 稳定性改进 {/* #稳定性改进 */}
 
 - OpenAI 及兼容 Provider 在 Tool 参数流被输出上限截断时，不再把半截参数当作空对象执行，而是按输出上限结束并交由上层恢复。
 - 统一流式与非流式响应的 Tool 参数校验、结束原因和历史回放处理，减少模型已经结束但界面仍重复调用 Tool 的情况。
 - Tool Schema 会保留输入字段顺序，并继续适配不同 Provider 的结构限制，提高复杂文件写入和多参数 Tool 的调用稳定性。
 - 收口会话回复、Prompt 装配、文件访问和存储兼容路径，删除会造成双重解释或重复执行的旧流程。
 
-### 升级说明
+### 升级说明 {/* #升级说明-4 */}
 
 - 本版本会自动升级会话协作等相关存储结构，无需手工执行数据库迁移。
 - “格式化用户数据”的清理范围已扩大到长期记忆和后台记忆任务；执行前请重新确认保留与删除内容。
 - 管理员无法登录时，可在服务器本机停止服务后执行 `xagent admin reset-password --username <管理员用户名> --config <config.yml 路径>` 完成恢复。
 - 升级前请备份 xAgent 配置、数据库、用户工作区、Memory、Skill、Tool 包和 Connector 状态。
 
-## `v0.0.9.beta` - 2026-08-10
+## `v0.0.9.beta` - 2026-08-10 {/* #v009beta---2026-08-10 */}
 
 [查看安装方式](/docs/getting-started/install) · [完整发布说明](/blog/xagent-0-0-9-beta)
 
 本版本把管理后台与用户工作区拆分为两个独立入口，统一 Web 与桌面端的会话布局，并让会话级提示词可以直接编辑且从下一轮请求生效。
 
-### 管理后台与用户工作区
+### 管理后台与用户工作区 {/* #管理后台与用户工作区 */}
 
 - 新增独立的 `/admin/login` 和 `/admin` 管理入口，管理菜单、登录跳转、退出登录和版本升级均在管理后台内完成。
 - `/app` 固定为用户入口；管理员从这里登录时也使用个人会话和工作区，不再混入系统治理菜单。
 - 用户端与管理后台不再互相提供跳转入口，避免把个人工作与组织管理放在同一导航结构中。
 
-### 会话工作区
+### 会话工作区 {/* #会话工作区 */}
 
 - Web 与桌面端统一为左侧会话栏、右侧会话内容的双栏结构。
 - 主会话固定在搜索框上方，子会话继续按最近活跃顺序展示。
 - 会话内容随可用空间按比例伸缩并保持居中，空状态、消息区和输入区使用一致的内容基准线。
 - 工具栏不再显示内部 Session 标识，高级配置改为图标入口；侧栏账号菜单提供个人设置和退出登录。
 
-### 会话提示词与配置
+### 会话提示词与配置 {/* #会话提示词与配置 */}
 
 - 中文界面统一使用“提示词”名称；没有现有内容时也会显示可编辑文本框。
 - 提示词默认展开并提供更大的编辑区域，长内容在文本框内部滚动，不会遮挡实际配置。
 - 保存后的会话级提示词从下一轮请求生效，适用于主会话、Connector 会话和普通子会话。
 - 配置类抽屉不再因误点遮罩关闭，减少未保存内容丢失；只读信息抽屉仍可点击空白处关闭。
 
-### 用量统计与稳定性
+### 用量统计与稳定性 {/* #用量统计与稳定性 */}
 
 - 用户端仪表盘调整为“用量统计”，仅展示当前用户的 Token、模型调用和 Tool 调用；管理后台继续提供组织级统计。
 - 模型用量明细默认直接展示，无需再次展开。
 - 修复旧 Memory 数据在读取或列表查询时可能被改写的问题，并统一数据库检查、建表和升级的启动顺序。
 
-### 升级说明
+### 升级说明 {/* #升级说明-5 */}
 
 管理员需要把旧的 `/app/admin/...` 书签和反向代理规则更新为 `/admin/...`，新的管理登录页是 `/admin/login`。`/app` 现在直接进入用户会话工作区，个人用量统计位于 `/app/dashboard`。升级前请备份配置、数据库、用户工作区、Memory、Skill、Tool 包和 Connector 状态。
 
-## `v0.0.8.beta` - 2026-08-09
+## `v0.0.8.beta` - 2026-08-09 {/* #v008beta---2026-08-09 */}
 
 [查看安装方式](/docs/getting-started/install) · [完整发布说明](/blog/xagent-0-0-8-beta) · [备份与恢复指南](/blog/xagent-backup-and-disaster-recovery)
 
 本版本新增在线增量备份与灾难恢复，重新明确本地正式文件和外部云存储的边界，并完善会话文件复用、Skill 多语言治理和本地存储清理。
 
-### 在线备份与灾难恢复
+### 在线备份与灾难恢复 {/* #在线备份与灾难恢复 */}
 
 - 支持把 S3、兼容 S3 或 WebDAV 配置为备份仓库，并在启用前测试连接和初始化仓库。
 - 支持手动与定时备份；每个完成的快照都可独立恢复，远端只上传新增或变化的加密内容。
@@ -361,14 +381,14 @@ schemaType: CollectionPage
 - 切换后可以验证并确认，失败时可以停机回滚；中断的恢复流程可以从持久化日志继续。
 - 支持下载独立的 `recovery.yml`，原数据库不可用时仍可列出完整快照和准备恢复。
 
-### 云存储与公共目录
+### 云存储与公共目录 {/* #云存储与公共目录 */}
 
 - 支持把 S3、兼容 S3 和 WebDAV 映射到公共目录，每个接入使用独立前缀。
 - 公共目录原有用户和用户组 ACL 继续生效；管理员可以创建目录和上传文件，授权用户可以浏览、预览和下载。
 - 静态凭据加密保存；内部自签名存储可以按接入单独跳过 TLS 证书校验。
 - 远端不可用时保留入口并显示不可用状态，不再把连接失败误认为空目录。
 
-### 会话、Skill 与生产能力
+### 会话、Skill 与生产能力 {/* #会话skill-与生产能力 */}
 
 - 消息输入区可以直接选择当前可见的工作区、公共目录和云存储文件作为会话附件。
 - 远端公共文件按需处理为模型可读内容，原文件仍保留在外部存储；失败的导入不会留下无效附件。
@@ -376,60 +396,60 @@ schemaType: CollectionPage
 - Connector 卡片使用服务声明的真实版本并校验关联 Skill ID。
 - 生产模式隐藏开发期 Tool 管理页面和修改接口，不影响会话与智能体选 Tool、审批策略或个人 MCP。
 
-### 本地存储与升级边界
+### 本地存储与升级边界 {/* #本地存储与升级边界 */}
 
 - 后台清理同时观察磁盘空间与 inode，仅回收过期暂存、终态诊断、临时数据和未被引用的文件内容，不按年龄删除正式用户数据。
 - `0.0.8.beta` 起，正式文件存储固定为本地目录；旧版 S3 正式存储会在完整性校验后迁回本地，失败时停止启动并保留原配置。
 - S3 与 WebDAV 现在用于公共目录云存储接入，不再作为正式文件存储 Provider。
 
-### 升级说明
+### 升级说明 {/* #升级说明-6 */}
 
 升级前请备份配置、数据库、工作区、Memory、Skill、Tool 包和 Connector 状态。备份仓库初始化后应立即下载并离线保存 `recovery.yml`；它包含仓库访问和解密所需的敏感信息。公共目录背后的第三方云存储内容不进入 xAgent 备份，需要在对应存储服务上单独保护。
 
-## `v0.0.7.beta` - 2026-08-06
+## `v0.0.7.beta` - 2026-08-06 {/* #v007beta---2026-08-06 */}
 
 [查看安装方式](/docs/getting-started/install)
 
 本版本重点升级文件存储与团队共享，推出首个桌面端版本，并继续优化模型请求缓存、Provider 兼容性和图片识别能力。
 
-### 文件存储与团队共享
+### 文件存储与团队共享 {/* #文件存储与团队共享 */}
 
 - 新增统一的 Local/S3 文件存储 Provider，支持 AWS S3 和兼容 S3 的对象存储；启用前可以验证连通性与读写权限。
 - 支持在 Local 与 S3 之间迁移正式文件。迁移失败不会替换当前有效 Provider；S3 暂时不可用时可以降级到本地存储，恢复后补传内容并切回 S3。
 - 新增实例级 `share` 共享目录，管理员可以创建目录，并上传、移动、重命名、下载和删除共享内容。
 - 统一 `workspace`、`upload` 和 `share` 的文件 ACL；共享目录支持按用户或用户组设置可继承的只读 `R` 和读写 `RW` 权限。
 
-### 图片识别与 OCR
+### 图片识别与 OCR {/* #图片识别与-ocr */}
 
 - 新增可配置的 OCR 模型角色，管理员可以选择支持视觉输入的模型，并单独配置 OCR 模型策略。
 - 图片附件需要文本内容时，可以生成包含可见文字、必要视觉描述和主要语言的规范 Markdown 内容。
 - 本版本 OCR 面向图片附件；没有文本层的纯扫描 PDF 仍暂不支持。
 
-### Desktop Client `v0.0.1`
+### Desktop Client `v0.0.1` {/* #desktop-client-v001 */}
 
 - 首次发布 xAgent Desktop Client，提供 macOS Apple Silicon 和 Windows AMD64 安装包。
 - 客户端可以发现当前平台的新版本，确认后下载对应安装包、校验 SHA-256、替换程序并自动重启；替换失败时保留原安装并尝试恢复启动。
 
-### 模型上下文与 Provider
+### 模型上下文与 Provider {/* #模型上下文与-provider */}
 
 - 优化单轮任务中的稳定上下文与实时状态组织，整体 Token Cache 缓存率提升 13%，减少重复请求带来的等待和消耗。
 - 增强 LLM Provider 适配兼容度，改善不同模型服务配置的接入体验。
 - 统一 OpenAI、Anthropic 和 Gemini 的缓存 Token 上报语义，并补齐模型连通性测试产生的系统用量统计。
 
-### 界面与稳定性
+### 界面与稳定性 {/* #界面与稳定性 */}
 
 - 完善共享目录、文件存储状态和 S3 迁移进度的管理界面与中英文文案。
 - 修复 Session Timeline 对部分历史消息和思考块状态的兼容问题。
 
-### 升级说明
+### 升级说明 {/* #升级说明-7 */}
 
 升级前请备份配置、数据库、工作区、共享目录和 Connector 状态。首次启用 S3 前请先保存并测试配置，再执行 Provider 迁移；迁移完成前，当前 Provider 保持不变。重新运行现有安装命令即可检查并安装 `v0.0.7.beta`。
 
-## `v0.0.6.beta` - 2026-08-01
+## `v0.0.6.beta` - 2026-08-01 {/* #v006beta---2026-08-01 */}
 
 [查看安装方式](/docs/getting-started/install)
 
-### 文件与附件
+### 文件与附件 {/* #文件与附件 */}
 
 - 统一会话附件和工作区文件的接收流程；格式、大小和内容解析未通过的文件不会留下不可用记录。
 - 支持 DOCX、可提取文本的 PDF、PPTX、XLSX、CSV、TSV、静态 HTML、Markdown、常见文本与代码文件，以及 PNG、JPEG、WebP 图片。
@@ -439,35 +459,35 @@ schemaType: CollectionPage
 - 修复部分工作区文件显示存在但无法读取，以及中文或空格文件名下载异常的问题。
 - GIF、旧版 Office 文件、加密文档和没有文本层的扫描 PDF 暂不支持上传。
 
-### Word 文档与字体
+### Word 文档与字体 {/* #word-文档与字体 */}
 
 - 新增内置 Word 模板库和默认模板，支持基于内置或用户提供模板生成 `.docx`，并保留模板样式、页眉、页脚和占位符。
 - 文档生成会先完成全文，再创建文件；交付前通过 DOCX 转 PDF 和逐页渲染检查分页、字体、间距、表格和文本裁切。
 - 新增共享字体资源，首批内置 Noto Sans SC、Noto Serif SC 和 Noto Sans Mono CJK SC；管理员可以补充本地字体或登记具备完整性校验的内部在线字体。
 
-### 子会话、模型与运行环境
+### 子会话、模型与运行环境 {/* #子会话模型与运行环境 */}
 
 - 创建子会话时自动完成初始化编排和能力选择，无需额外审批；同时减少重复加载能力、重复执行委派和重复发送结果。
 - 提升连续会话中的模型请求缓存稳定性，完善 OpenAI、Anthropic 和 Gemini 配置兼容性，并加快模型配置变更生效。
 - Python 依赖改为用户级共享安装，内置运行资源保持只读；CLI 输出隐藏宿主机和临时目录，默认启用管道失败检测。
 
-### 升级与稳定性
+### 升级与稳定性 {/* #升级与稳定性 */}
 
 - 受支持的托管安装可在控制台发现新版本后下载、切换并重启；健康检查失败时自动回滚。
 - 旧版 OpenAI 模型配置会在升级时适配当前类型；单条损坏或无法识别的旧文件不会阻断服务启动。
 - 完善用户数据格式化，清理触发器、会话、附件、工作区及相关运行数据；账号、模型用量和明确保留的外部连接信息不受影响。
 
-### 升级说明
+### 升级说明 {/* #升级说明-8 */}
 
 升级前建议备份 xAgent 运行目录、配置、数据库和 Connector 状态。重新运行现有安装命令即可检查并安装 `v0.0.6.beta`；安装器会保留当前配置和状态，并记录当前与上一个二进制版本。具体步骤见[开始安装](/docs/getting-started/install)。
 
-## `v0.0.5.beta` - 2026-07-27
+## `v0.0.5.beta` - 2026-07-27 {/* #v005beta---2026-07-27 */}
 
 [查看安装方式](/docs/getting-started/install)
 
 本版本重点升级控制台体验、Connector 实时交互、任务进程隔离和自动安装流程，并把服务端、Runtime Assets 与三个 IM Connector 纳入统一版本目录。
 
-### 控制台与会话体验
+### 控制台与会话体验 {/* #控制台与会话体验 */}
 
 - 统一控制台的品牌、字体密度、页面层级、状态表达和响应式布局。
 - 资源列表统一使用可搜索、可分页的数据表格，详情和编辑流程改为抽屉或对话框，减少页面跳转。
@@ -475,7 +495,7 @@ schemaType: CollectionPage
 - 管理员可以为用户开启高级模式；普通模式保留会话、文件、审批、连接和账号等高频入口，高级模式再显示触发器、Agent、Skill、Tool、MCP 和会话诊断能力。
 - Agent 会话重新整理时间线、附件、工具调用、运行状态、会话文件和高级设置，并增强窄屏与移动端布局。
 
-### Connector 与浏览器连接
+### Connector 与浏览器连接 {/* #connector-与浏览器连接 */}
 
 - Connector 源码、公共协议和架构文档统一收口到 xAgent 仓库的 `connectors/` 与 `docs/architecture/connector/`。
 - 公共协议升级到 `3.0`；微信、Telegram 与飞书使用 `xagent.im.v2` 传输双向最终消息、流式增量、消息确认、活动状态和文件引用。
@@ -483,9 +503,9 @@ schemaType: CollectionPage
 - Connector health 连续失败一至两次显示为“不稳定”，第三次起显示为“断开”；恢复成功后可以重新回到在线状态。
 - 微信 Connector 增加按接收人维护的凭据续期和到期提醒，凭据过期后停止无效发送。
 - 浏览器扩展通过内置 Browser Connector 建立受控连接，用于浏览器消息、页面上下文和工具调用。
-- 该版本发布时，独立 Connector 版本为微信 `0.0.8`、Telegram `0.0.9`、飞书 `0.0.8`；当前版本以[AgentPlugin 版本目录](/docs/user-guide/connector#当前-agentplugin-版本)为准。
+- 该版本发布时，独立 Connector 版本为微信 `0.0.8`、Telegram `0.0.9`、飞书 `0.0.8`；当前版本以[AgentPlugin 版本目录](/docs/user-guide/connector#%E5%BD%93%E5%89%8D-agentplugin-%E7%89%88%E6%9C%AC)为准。
 
-### ProcessSandbox 与运行环境
+### ProcessSandbox 与运行环境 {/* #processsandbox-与运行环境 */}
 
 - 新增统一 `ProcessSandbox`，所有不受信任命令都通过同一执行边界启动和回收，不继承未声明的宿主环境。
 - Linux 使用 `bubblewrap + cgroup v2 + seccomp`；macOS 使用 `sandbox-exec` 和每次执行独立的私有文件视图。
@@ -493,7 +513,7 @@ schemaType: CollectionPage
 - Workspace execution lease 负责串行化重叠写入范围、扫描真实文件差量并提交工作区事实；失败的提交可以在后续恢复。
 - Python、Node.js 和其他 Runtime Assets 独立安装，进入沙箱时只读挂载，不再回退到用户任务可直接使用的宿主运行环境。
 
-### 自动安装、升级与回滚
+### 自动安装、升级与回滚 {/* #自动安装升级与回滚 */}
 
 - Linux 和 macOS 使用同一个稳定安装入口：
 
@@ -502,22 +522,26 @@ schemaType: CollectionPage
   ```
 
 - 安装器自动检测操作系统与 CPU 架构，读取 `versions.json`，校验平台安装包和内部模块的 SHA256，并在退出时清理临时文件。
+
 - 已安装版本低于版本目录时自动升级；本地版本更高时不会自动降级。
+
 - 服务端和 Connector 二进制按版本保留，通过稳定符号链接原子切换；Linux 服务启动失败时恢复到上一个可用版本。
+
 - Linux 自动执行 `xagent setup`、生成或更新 systemd 服务并启动；macOS 使用用户级安装目录。
+
 - 交互安装会先询问是否安装 Connector，再逐个询问微信、Telegram 与飞书；无人值守场景可以使用 `--connectors` 或 `--no-connectors`。
 
-### 升级说明
+### 升级说明 {/* #升级说明-9 */}
 
 该版本发布时，重新运行安装命令即可检查并安装 `v0.0.5.beta`。当前升级请以 [`v0.0.20.beta`](#v0020beta---2026-09-17) 版本说明为准。
 
-## `v0.0.4.beta` - 2026-07-15
+## `v0.0.4.beta` - 2026-07-15 {/* #v004beta---2026-07-15 */}
 
 [使用安装器安装指定版本](/docs/getting-started/install)
 
 本版本重点统一了会话定向、对象引用和审批回复的表达方式，并让用户可以从 Web 或可用 IM 连接器中处理同一张审批单。
 
-### 快捷指令与统一标识
+### 快捷指令与统一标识 {/* #快捷指令与统一标识 */}
 
 - `/command` 用于执行系统明确支持的确定性会话命令。
 - `@{session:id}` 可以把消息或命令定向发送到明确会话。
@@ -527,7 +551,7 @@ schemaType: CollectionPage
 
 详细使用方式请阅读[快捷指令协议](/docs/guides/shortcut-instruction-protocol)。
 
-### Web 与 IM 审批
+### Web 与 IM 审批 {/* #web-与-im-审批 */}
 
 - 所有新挂起确认都会创建带编号的审批记录。
 - 会话进入审批等待状态后，xAgent 会尝试向该用户全部可用的 IM 消息通道发送审批通知。
@@ -535,25 +559,30 @@ schemaType: CollectionPage
 - 用户可以从 Web、微信或 Telegram 提交意见，系统会把审批编号路由回正确会话。
 - 第一个有效意见生效，后续同号意见不会重复改变审批状态。
 
-### 连接器管理与 Connector `v0.0.4`
+### 连接器管理与 Connector `v0.0.4` {/* #连接器管理与-connector-v004 */}
 
 - 用户连接按照 Connector Card 声明的连接模式管理，减少重复或无效连接。
+
 - Connector 管理页面补充软件版本和认证方式信息。
+
 - “我的连接”补充连接删除、失效状态和异常连接处理。
 
 - Connector Release `v0.0.4` 新增飞书 Connector，并同时提供微信、Telegram 与飞书三种连接器。
+
 - 同一 Release 提供 12 个 Linux/Darwin、AMD64/ARM64 平台二进制包，以及 `SHA256SUMS` 校验文件。
+
 - 飞书 Connector 当前支持国内飞书的单聊消息和群聊 @ 机器人消息，暂不支持 Lark。具体接入与授权方式见[连接器使用手册](/docs/user-guide/connector)。
+
 - 该版本的 Connector 当时以统一 `v0.0.4` Release 发布；当前版本已经改为三个 Connector 独立版本和独立下载目录。
 
-### 稳定性修复
+### 稳定性修复 {/* #稳定性修复 */}
 
 - 修复审批恢复、会话运行状态和定时调度并发时可能重复推进的问题。
 - 修复无效审批编号返回内部错误、纯定向消息误触发空 Agent 执行等问题。
 - 修复 IM 审批通知、回复路由和多入口重复审批不一致的问题。
 - 会话等待审批时，定时触发不会持续追加重复任务提示。
 
-### 下载内容
+### 下载内容 {/* #下载内容 */}
 
 Release 仅包含：
 
@@ -565,11 +594,11 @@ Release 仅包含：
 
 每个压缩包只包含 xAgent 可执行文件、README 和版本元数据，不包含源代码。
 
-### 当时的升级方式
+### 当时的升级方式 {/* #当时的升级方式 */}
 
 `v0.0.4.beta` 当时需要停机、备份并手工替换二进制。当前安装器已提供自动安装、升级和失败回滚流程，具体步骤请参考[开始安装](/docs/getting-started/install)。
 
-## `v0.0.3.beta`
+## `v0.0.3.beta` {/* #v003beta */}
 
 该版本完善了 Connector 接入、Telegram Connector、使用手册和基础安全治理能力，是 `v0.0.4.beta` 之前的公开测试版本。
 

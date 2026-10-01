@@ -1,23 +1,23 @@
 ---
 title: "xAgent Tasks: Goals, Materials, and Acceptance Criteria"
-description: Learn how to describe task goals, input materials, constraints, and acceptance criteria to xAgent, then refine the work as it runs.
+description: "Learn how to describe task goals, input materials, constraints, and acceptance criteria to xAgent, then refine the work as it runs."
 status: stable
-updated: 2026-07-15
+updated: 2026-10-01
 ---
 
 # xAgent Tasks: Goals, Materials, and Acceptance Criteria
 
-## Who This Is For
+## Who This Is For {/* #who-this-is-for */}
 
 This page is for ordinary users who want xAgent to complete work more reliably.
 
-## What It Is
+## What It Is {/* #what-it-is */}
 
 A task is a piece of work you want xAgent to complete. It can be one simple request or a complex job that needs files, Tools, confirmation, and multiple rounds of communication.
 
 You do not need to learn models, Tools, or internal concepts before using xAgent. Clearly state what to do, where the materials are, and what the result should look like.
 
-## When to Use It
+## When to Use It {/* #when-to-use-it */}
 
 Submit a task whenever you want xAgent to complete something with a clear outcome, for example:
 
@@ -28,7 +28,7 @@ Submit a task whenever you want xAgent to complete something with a clear outcom
 - Draft a reply based on an external message.
 - Run a recurring piece of work on a schedule.
 
-## Check Before Submitting
+## Check Before Submitting {/* #check-before-submitting */}
 
 Confirm these four things before you submit:
 
@@ -41,7 +41,7 @@ Confirm these four things before you submit:
 
 When a task involves sending, deleting, or accessing an external system, add: “Ask me for confirmation first. Do not execute it directly.”
 
-## Basic Format
+## Basic Format {/* #basic-format */}
 
 Use this structure:
 
@@ -63,39 +63,39 @@ Requirements:
 3. Save the final result as a Markdown file.
 ```
 
-## Common Task Templates
+## Common Task Templates {/* #common-task-templates */}
 
-### Organize Meeting Notes
+### Organize Meeting Notes {/* #organize-meeting-notes */}
 
 ```text
 Please read the meeting notes I uploaded. Organize conclusions, action items, owners, due dates, and risks in a Markdown table.
 ```
 
-### Analyze a Spreadsheet
+### Analyze a Spreadsheet {/* #analyze-a-spreadsheet */}
 
 ```text
 Please analyze sales.csv in the workspace. Find the 10 metrics that changed the most this week, explain possible causes, and generate a short report.
 ```
 
-### Draft a Reply
+### Draft a Reply {/* #draft-a-reply */}
 
 ```text
 Please draft a reply based on the latest customer message. Show me a draft first and do not send it directly.
 ```
 
-### Generate a Report
+### Generate a Report {/* #generate-a-report */}
 
 ```text
 Please create an HTML report from the materials I uploaded, including a summary, key findings, evidence, and recommended next steps.
 ```
 
-### Plan Before Execution
+### Plan Before Execution {/* #plan-before-execution */}
 
 ```text
 Please list the processing plan first, including which materials you need to read and what outputs you will generate. Wait for my confirmation before continuing.
 ```
 
-## Reading Task Progress
+## Reading Task Progress {/* #reading-task-progress */}
 
 After submitting a task, focus on these states:
 
@@ -109,7 +109,7 @@ After submitting a task, focus on these states:
 
 Do not submit the exact same task repeatedly. Add instructions in the original session instead, so xAgent does not generate duplicate results.
 
-## Accept the Result
+## Accept the Result {/* #accept-the-result */}
 
 When the result is ready, check:
 
@@ -123,7 +123,25 @@ When the result is ready, check:
 
 When the result is not satisfactory, give a concrete revision request. For example: “add an evidence column,” “remove speculative content,” “sort by priority,” or “save it as CSV.”
 
-## Common Mistakes
+## Do Not Treat an Execution Receipt as Acceptance {/* #do-not-treat-an-execution-receipt-as-acceptance */}
+
+| Information | What it establishes | What it does not establish on its own |
+| --- | --- | --- |
+| Session created or message submitted | The entry point accepted creation or delivery work | Child completion or a returned result |
+| Successful Tool call | That operation completed as reported by the Tool | Every stage and external effect meets the goal |
+| Work record or plan state | Saved progress and task organization | Verified evidence or a correct final file |
+| Remote terminal task state | The state reported by the remote service | Local processing or acceptance of the business outcome |
+
+For complex tasks, specify where the result is, what supports it, and what remains unfinished. For example:
+
+```text
+List completed and unfinished parts, and provide the final file and key evidence.
+If work was delegated to another Session or a remote Agent, distinguish receiving a reply from validating its artifacts. Do not treat successful submission as task completion.
+```
+
+Current main also supports Session work records and scheduled business-run state. They record different progress or lifecycle facts and are not interchangeable. Continue in the original task Session, checking blockers and the original action before sending anything again.
+
+## Common Mistakes {/* #common-mistakes */}
 
 | Wording | Problem | Better wording |
 | --- | --- | --- |
@@ -133,14 +151,14 @@ When the result is not satisfactory, give a concrete revision request. For examp
 | Use the previous approach | A new session may lack the context | Briefly restate the rules to retain |
 | Analyze everything | The scope is too broad | Analyze the most recent 30 days and output the top 10 anomalies |
 
-## Continue Reading
+## Continue Reading {/* #continue-reading */}
 
 - [Agent Session](/docs/user-guide/agent-session)
 - [Workspace Files](/docs/user-guide/workspace)
 - [Long-running Tasks](/docs/user-guide/long-task)
 - [Triggers](/docs/user-guide/trigger)
 
-## Next Steps
+## Next Steps {/* #next-steps */}
 
 - [Submit a task in Agent Session](/docs/user-guide/agent-session)
 - [Prepare Workspace materials](/docs/user-guide/workspace)

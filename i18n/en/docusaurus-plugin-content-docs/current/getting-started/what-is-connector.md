@@ -1,15 +1,22 @@
 ---
-title: What Is an AgentPlugin?
-description: A plain-language explanation of AgentPlugin external connections and how they differ from MCP.
+title: "What Is an AgentPlugin?"
+description: "A plain-language explanation of AgentPlugin external connections and how they differ from MCP."
 status: beta
-updated: 2026-09-17
+updated: 2026-10-01
 ---
 
 # What Is an AgentPlugin?
 
-Since `v0.0.16.beta`, the product name for the former Connector is **AgentPlugin**. Below, “connector” describes the integration concept, not the current menu name. Users open **Plugin Connections**; administrators open **Agent Governance > AgentPlugin Connectors**. Official published plugins cover WeChat, Telegram, Feishu, DingTalk, Database, and SSH. CRM examples illustrate a possible integration, not an included plugin.
+Since `v0.0.16.beta`, the product name for the former Connector is **AgentPlugin**. Below, “connector” describes the integration concept, not the current menu name. Users open **Plugin Connections**; administrators open **Agent Governance &gt; AgentPlugin Connectors**. Official published plugins cover WeChat, Telegram, Feishu, DingTalk, Database, and SSH. CRM examples illustrate a possible integration, not an included plugin.
 
-## What problem does it solve?
+## Choose Your Route First {/* #choose-your-route-first */}
+
+- **Call an external query or action:** compare [AgentPlugins and MCP](#how-is-it-different-from-mcp) below to decide whether you need a callable Tool or a bidirectional channel.
+- **Send and receive WeChat, Telegram, Feishu, or DingTalk messages:** see [AgentPlugin setup and user connections](/docs/user-guide/connector).
+- **Use databases or remote hosts:** an administrator configures resources before users connect. See [Database](/docs/user-guide/database-connector) or [SSH](/docs/user-guide/ssh-connector).
+- **Connect your own CRM, ERP, or internal system:** use this page to understand protocol and permission boundaries. Verify plugin availability and supported actions for that system individually.
+
+## What problem does it solve? {/* #what-problem-does-it-solve */}
 
 Most companies already have CRM, ERP, OA, customer service, knowledge base, and other internal systems. Each system already has employee accounts, data permissions, and operating rules. The difficult part of adding AI is usually not getting it to answer a question. It is solving these integration problems:
 
@@ -24,7 +31,7 @@ In other words, the Connector mounts the user's identity and permissions from th
 
 The connection is two-way rather than read-only. Messages, files, and data can enter xAgent from the internal system, while approved replies, files, and operations can return through the same Connector.
 
-## What is a Connector?
+## What is a Connector? {/* #what-is-a-connector */}
 
 Think of a Connector as a two-way path between xAgent and an existing enterprise system:
 
@@ -36,7 +43,7 @@ A Connector does more than forward data. Depending on the internal system, it ca
 
 Capabilities vary by Connector. One may connect a CRM or knowledge base, while another connects a messaging system such as WeChat or Feishu. One may use a QR code while another uses browser authorization. Check the Connector page for the capabilities actually available.
 
-## What can it do?
+## What can it do? {/* #what-can-it-do */}
 
 A Connector can usually help you:
 
@@ -49,7 +56,7 @@ A Connector can usually help you:
 
 For example, suppose an employee can only view the customers assigned to them in a CRM. After connecting their own CRM account, they can ask xAgent to find and organize those customer records, but they do not gain access to customers assigned to other employees. After approval, the same Connector can write an update back to the CRM.
 
-## How is it different from MCP?
+## How is it different from MCP? {/* #how-is-it-different-from-mcp */}
 
 In plain language:
 
@@ -68,7 +75,7 @@ A quick way to decide is to ask:
 - "Do I want to connect each user's existing account and permissions to xAgent, with both read and write-back support?" You probably need a Connector.
 - "Do I want xAgent to call an external tool while doing a task?" You probably need MCP.
 
-## They can work together
+## They can work together {/* #they-can-work-together */}
 
 Connectors and MCP are not mutually exclusive. They often handle different parts of the same task. For example:
 
@@ -80,7 +87,7 @@ Connectors and MCP are not mutually exclusive. They often handle different parts
 
 In this flow, the Connector answers "whose identity is xAgent using, and which enterprise data may it read or write?" MCP answers "which external tools should xAgent use while doing the work?"
 
-## When should you choose a Connector?
+## When should you choose a Connector? {/* #when-should-you-choose-a-connector */}
 
 Start with a Connector when you want to:
 
@@ -91,17 +98,17 @@ Start with a Connector when you want to:
 
 If xAgent only needs to query or operate an external service while working on a task, start by considering MCP.
 
-## How to get started
+## How to get started {/* #how-to-get-started */}
 
-1. An administrator adds and configures an available plugin under **Agent Governance > AgentPlugin Connectors**.
-2. A user opens **Operations > Plugin Connections** and follows the page instructions to scan a code, authorize access, or bind an account.
+1. An administrator adds and configures an available plugin under **Agent Governance &gt; AgentPlugin Connectors**.
+2. A user opens **Operations &gt; Plugin Connections** and follows the page instructions to scan a code, authorize access, or bind an account.
 3. Once connected, the user can start work from the external system or use the Connector's capabilities in an xAgent session.
 
 A successful connection does not grant unlimited access. The Connector still uses the external account's existing permissions, and sensitive actions such as sending messages or changing data may require user approval.
 
 Do not paste passwords, access tokens, or verification codes into a session. Use the authorization flow provided on the Connector page.
 
-## Learn more
+## Learn more {/* #learn-more */}
 
 - [Using AgentPlugins](/docs/user-guide/connector)
 - [Approval Policies](/docs/user-guide/approval-policy)

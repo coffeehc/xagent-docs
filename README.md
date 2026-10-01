@@ -68,11 +68,25 @@ Node version: 20
 
 ## 内容结构
 
-- `docs/getting-started/`：项目介绍、快速开始和第一次使用路径。
-- `docs/user-guide/`：面向用户的主要使用手册。
-- `docs/developer-guide/`：扩展开发和维护说明，默认不放入普通用户阅读路径。
-- `docs/architecture/`：技术参考和架构边界，默认不放入普通用户阅读路径。
-- `docs/reference/`：命令、配置、术语和排错参考。
+首页用于介绍产品与展示任务交付；完整技术文档从 `docs/manual/overview` 进入。侧栏按阅读目标组织为六条路径：了解产品、安装与第一次使用、日常工作、进阶能力、部署与治理、排错与技术参考。
+
+- `docs/getting-started/`：产品定位、安装、第一次使用与能力准备。
+- `docs/manual/`、`docs/user-guide/`：页面操作、任务、文件、工具、技能与日常使用。
+- `docs/guides/`、`docs/deployment/`：专题说明、安全策略、部署与模型选择。
+- `docs/architecture/`、`docs/reference/`、`docs/attachments/`：实现边界、命令协议和历史技术参考。维护与扩展细节仍完整保留，不要求普通用户先读完这些材料。
+- `docs/faq/`：按问题现象查找答案与排错入口。
+- `i18n/en/docusaurus-plugin-content-docs/current/`：与中文 58 篇文档对应的完整英文版本。
+
+只调整导航与阅读顺序，不搬动已发布文档 URL。版本说明须区分公开发布版本、较新的源码行为和用户实际部署版本；历史截图与旧协议示例保留并标明适用范围。
+
+提交前检查：
+
+```bash
+npm run typecheck
+npm run validate:docs
+npm run build
+npm run validate:site
+```
 
 ## 搜索
 

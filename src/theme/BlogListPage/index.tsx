@@ -14,16 +14,26 @@ import BlogPostItems from '@theme/BlogPostItems';
 import SearchMetadata from '@theme/SearchMetadata';
 import type {Props} from '@theme/BlogListPage';
 
+function getBlogListDescription(metadata: Props['metadata'], locale: string): string {
+  if (metadata.page <= 1) return metadata.blogDescription;
+  const suffix = locale === 'en' ? `Page ${metadata.page}.` : `第 ${metadata.page} 页。`;
+  return `${metadata.blogDescription} ${suffix}`;
+}
+
 function BlogListPageMetadata({metadata, items}: Props): ReactNode {
   const {
     siteConfig: {title: siteTitle},
+    i18n: {currentLocale},
   } = useDocusaurusContext();
-  const {blogDescription, blogTitle, permalink} = metadata;
-  const title = permalink === '/' ? siteTitle : blogTitle;
+  const {blogDescription, blogTitle, permalink, page} = metadata;
+  const pageLabel = currentLocale === 'en' ? `Page ${page}` : `第 ${page} 页`;
+  const baseTitle = permalink === '/' ? siteTitle : blogTitle;
+  const title = page > 1 ? `${baseTitle} · ${pageLabel}` : baseTitle;
+  const description = getBlogListDescription(metadata, currentLocale);
 
   return (
     <>
-      <PageMetadata title={title} description={blogDescription} />
+      <PageMetadata title={title} description={description} />
       <SearchMetadata tag="blog_posts_list" />
       {items.length === 0 && (
         <Head>
@@ -48,6 +58,11 @@ function BlogListPageContent({metadata, items, sidebar}: Props): ReactNode {
 }
 
 export default function BlogListPage(props: Props): ReactNode {
+  const {i18n: {currentLocale}} = useDocusaurusContext();
+  const structuredMetadata = {
+    ...props.metadata,
+    blogDescription: getBlogListDescription(props.metadata, currentLocale),
+  };
   return (
     <HtmlClassNameProvider
       className={clsx(
@@ -55,7 +70,7 @@ export default function BlogListPage(props: Props): ReactNode {
         ThemeClassNames.page.blogListPage,
       )}>
       <BlogListPageMetadata {...props} />
-      <BlogListPageStructuredData {...props} />
+      <BlogListPageStructuredData {...props} metadata={structuredMetadata} />
       <BlogListPageContent {...props} />
     </HtmlClassNameProvider>
   );

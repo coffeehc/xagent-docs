@@ -1,17 +1,29 @@
 ---
 title: "xAgent Workspace Files: Materials, Results, and Downloads"
-description: Learn how xAgent Workspaces save, isolate, and manage task materials, generated files, intermediate results, and downloadable outputs.
+description: "Learn how xAgent Workspaces save, isolate, and manage task materials, generated files, intermediate results, and downloadable outputs."
 status: stable
-updated: 2026-09-17
+updated: 2026-10-01
 ---
 
 # xAgent Workspace Files: Materials, Results, and Downloads
 
-## Who This Is For
+Workspace Files supports the full path from uploading and referencing materials to checking, downloading, or reusing results. Confirm that a file belongs to the current task before checking its contents and delivery format.
+
+## From Materials to Delivery {/* #from-materials-to-delivery */}
+
+1. [Upload a File](#upload-a-file), wait for completion, and describe the required scope.
+2. [Reference a File](#reference-a-file) using its visible name or readable path.
+3. [View Results](#view-results) and confirm the file mentioned in the Session was saved.
+4. [Preview and Download](#preview-and-download), checking content, charts, text, and sensitive information.
+5. To make further changes, [reuse the existing output](#reuse-existing-outputs) and specify the new goal.
+
+Upload acceptance, model reading, and UI preview have different boundaries. Office text extraction is not original-layout rendering, and a scanned PDF preview does not establish extractable text. See [Supported Agent Capabilities](/docs/manual/capabilities) for formats and limits.
+
+## Who This Is For {/* #who-this-is-for */}
 
 This page is for users who need to upload files, view outputs, preview reports, or reuse task materials.
 
-## What It Is
+## What It Is {/* #what-it-is */}
 
 The workspace is where xAgent saves task materials and results. Files you upload, generated Markdown, CSV files, HTML reports, and intermediate results will usually appear in Workspace Files.
 
@@ -19,7 +31,7 @@ xAgent isolates files by user and task scope. When an external command runs, an 
 
 In `v0.0.20.beta`, files created by process Tools are committed to the Workspace correctly and Session drafts remain visible inside the sandbox. Access remains limited to the task's authorized scope.
 
-## When to Use It
+## When to Use It {/* #when-to-use-it */}
 
 Use the workspace when you need to:
 
@@ -29,9 +41,9 @@ Use the workspace when you need to:
 - Reuse existing materials in a later session.
 - Confirm whether a result has been saved.
 
-## Basic Usage
+## Basic Usage {/* #basic-usage */}
 
-### Upload a File
+### Upload a File {/* #upload-a-file */}
 
 1. Upload the file from **Agent Session** or a workspace-related entry point.
 2. Wait for the upload to finish.
@@ -44,7 +56,7 @@ Example:
 Please read the three PDFs I just uploaded. Only organize content related to the procurement process, then output a summary and original evidence.
 ```
 
-### Reference a File
+### Reference a File {/* #reference-a-file */}
 
 When referencing a file, use the file name or path visible on the page. For example:
 
@@ -54,7 +66,7 @@ Please process customer_feedback.xlsx in the workspace and identify the five pro
 
 Do not use a local desktop path or an internal server path. xAgent can only process files in the current workspace and authorized scope.
 
-### View Results
+### View Results {/* #view-results */}
 
 When a task is complete, read the session reply first. If it says a file was generated, open Workspace Files to find it.
 
@@ -68,7 +80,7 @@ Common result types include:
 | PDF | Reports that need a fixed layout or external delivery |
 | Images | Charts, screenshots, and visual outputs |
 
-### Preview and Download
+### Preview and Download {/* #preview-and-download */}
 
 Preview HTML, Markdown, or image results first to confirm their content. Download them only when they need to be forwarded, archived, or processed further.
 
@@ -82,7 +94,7 @@ When previewing, check:
 - Whether it contains sensitive information that should not be public.
 - Whether the file belongs to the current task rather than an older result.
 
-### Reuse Existing Outputs
+### Reuse Existing Outputs {/* #reuse-existing-outputs */}
 
 Workspace files can be used as material for the next task. For example:
 
@@ -92,7 +104,7 @@ Based on the summary.md file that was just generated, create a five-minute brief
 
 When filenames are similar, state the name clearly to avoid using the wrong material.
 
-## File Safety
+## File Safety {/* #file-safety */}
 
 Keep the following in mind:
 
@@ -102,7 +114,7 @@ Keep the following in mind:
 - Use stable filenames and directories for materials that need long-term use.
 - Temporary files may not be suitable as formal deliverables.
 
-## Continue Reading
+## Continue Reading {/* #continue-reading */}
 
 - [How xAgent Isolates Multi-user Workspaces and Task Processes](/docs/guides/multi-user-workspace-isolation)
 - [Agent Session](/docs/user-guide/agent-session)
@@ -111,7 +123,7 @@ Keep the following in mind:
 - [Approval Policies](/docs/user-guide/approval-policy)
 - [Share Files with Expiring Links](/docs/user-guide/file-sharing)
 
-## Next Steps
+## Next Steps {/* #next-steps */}
 
 - [Upload and process files in Agent Session](/docs/user-guide/agent-session)
 - [Describe a file-processing task](/docs/user-guide/task)

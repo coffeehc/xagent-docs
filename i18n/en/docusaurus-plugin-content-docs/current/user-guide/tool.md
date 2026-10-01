@@ -1,17 +1,28 @@
 ---
 title: "xAgent Tool Management: Personal, Public, MCP, and AgentPlugin Tools"
-description: Understand the sources, availability, on-demand discovery, and task invocation of personal and public xAgent Tools, MCP Tools, and AgentPlugin Tools.
+description: "Understand the sources, availability, on-demand discovery, and task invocation of personal and public xAgent Tools, MCP Tools, and AgentPlugin Tools."
 status: stable
-updated: 2026-09-17
+updated: 2026-10-01
 ---
 
 # xAgent Tool Management: Personal, Public, MCP, and AgentPlugin Tools
 
-## Who This Is For
+Start everyday tasks in an Agent Session; you do not need to select every Tool manually first. When a step cannot run, use this page to distinguish Tool sources, enabled state, external connections, and approval requirements.
+
+## Find Guidance by Problem {/* #find-guidance-by-problem */}
+
+| Problem | First check | Read |
+| --- | --- | --- |
+| You do not know which Tool to use | Describe the goal, input, and output format | [Use a Tool in a Task](#use-a-tool-in-a-task) |
+| A Tool is missing or cannot run | Visibility, enabled state, connection, secrets, and account permissions | [Check Whether a Tool Is Available](#check-whether-a-tool-is-available) |
+| A call did not produce the expected result | Returned status, target, files, and errors | [Review Tool Call Results](#review-tool-call-results) |
+| System capabilities need to be enabled or withdrawn | Source trust, runtimes, and default approvals | [Govern Tools as an Administrator](#govern-tools-as-an-administrator) |
+
+## Who This Is For {/* #who-this-is-for */}
 
 This page is for users who need xAgent to read files, access web pages, process spreadsheets, send messages, or use external capabilities.
 
-## What It Is
+## What It Is {/* #what-it-is */}
 
 A Tool is a capability that lets xAgent perform a concrete action. Ordinary users can think of Tools as the function buttons available to a work assistant: reading files, searching the web, processing spreadsheets, generating reports, calling external systems, and sending messages can all be performed through Tools.
 
@@ -19,7 +30,7 @@ You usually do not need to remember Tool names. Describe the action you want to 
 
 ![xAgent My Tools page showing Tools available to the current user, their sources, and enabled status](/img/manual/v005/en/tools.webp)
 
-## Entry Points and Scope
+## Entry Points and Scope {/* #entry-points-and-scope */}
 
 Tool-related entry points are divided between user and administrator pages:
 
@@ -30,7 +41,7 @@ Tool-related entry points are divided between user and administrator pages:
 
 Ordinary users mainly use **My Tools**. Administrators use **Tool Management** when they need to govern system-level capabilities.
 
-## Public, Personal, and AgentPlugin Tools
+## Public, Personal, and AgentPlugin Tools {/* #public-personal-and-agentplugin-tools */}
 
 Tool visibility depends on source, connection state, user authorization, and administrator policy.
 
@@ -43,7 +54,7 @@ Tool visibility depends on source, connection state, user authorization, and adm
 
 Seeing a Tool as available does not mean it can bypass approval or access all data in an external system. External permissions, AgentPlugin state, Secrets, and approval policies still apply.
 
-## When to Use It
+## When to Use It {/* #when-to-use-it */}
 
 The following tasks usually require Tools:
 
@@ -56,7 +67,7 @@ The following tasks usually require Tools:
 
 A Tool may not be necessary when the task only rewrites or summarizes text already provided in the message.
 
-## Reading the Page
+## Reading the Page {/* #reading-the-page */}
 
 My Tools shows Tools visible to the current user. Tool Management shows Tool governance information from the administrator's perspective. Common information includes:
 
@@ -74,9 +85,9 @@ My Tools shows Tools visible to the current user. Tool Management shows Tool gov
 
 Ordinary users should focus on availability and description, then ask xAgent to invoke the Tool directly. Advanced users can also inspect source, parameters, and risk level to fine-tune personal capabilities, while administrators manage system-level governance.
 
-## Basic Usage
+## Basic Usage {/* #basic-usage */}
 
-### Use a Tool in a Task
+### Use a Tool in a Task {/* #use-a-tool-in-a-task */}
 
 Do not force an internal Tool name. Describe the action directly:
 
@@ -86,7 +97,7 @@ Read the Excel file I just uploaded, calculate the order amount for each custome
 
 If you know a Tool can complete the task, you may ask xAgent to use an available Tool, but ordinary users should not need to specify internal Tool names.
 
-### Check Whether a Tool Is Available
+### Check Whether a Tool Is Available {/* #check-whether-a-tool-is-available */}
 
 If a task cannot proceed, open **My Tools** and check:
 
@@ -98,7 +109,7 @@ If a task cannot proceed, open **My Tools** and check:
 
 If the Tool is not listed, contact an administrator to enable or connect it.
 
-### Govern Tools as an Administrator
+### Govern Tools as an Administrator {/* #govern-tools-as-an-administrator */}
 
 In **Tool Management**, administrators should confirm:
 
@@ -112,7 +123,7 @@ In **Tool Management**, administrators should confirm:
 
 Do not assume a Tool is suitable for every user merely because it appears in the list. Tools that interact with external systems, write files, send messages, or access internal addresses should use approval policies and least-privilege configuration.
 
-### Review Tool Call Results
+### Review Tool Call Results {/* #review-tool-call-results */}
 
 In an Agent Session, Tool calls may appear as process cards. Check:
 
@@ -124,33 +135,33 @@ In an Agent Session, Tool calls may appear as process cards. Check:
 
 A Tool result is not always the final answer. xAgent usually organizes the Tool result into a user-readable response.
 
-## Common Scenarios
+## Common Scenarios {/* #common-scenarios */}
 
-### Read a File
+### Read a File {/* #read-a-file */}
 
 ```text
 Read contract.pdf in the Workspace and identify risks related to payment, delivery, and breach.
 ```
 
-### Generate a File
+### Generate a File {/* #generate-a-file */}
 
 ```text
 Save the previous analysis as Markdown and create the file in the Workspace.
 ```
 
-### Access a Web Page
+### Access a Web Page {/* #access-a-web-page */}
 
 ```text
 Open this web page, summarize the product pricing information, and list the source links.
 ```
 
-### Confirm Before Sending
+### Confirm Before Sending {/* #confirm-before-sending */}
 
 ```text
 Draft a reply based on the customer's message. Ask for confirmation before sending it.
 ```
 
-## Risks and Approvals
+## Risks and Approvals {/* #risks-and-approvals */}
 
 Some Tool actions may affect external systems or data security, including:
 
@@ -162,14 +173,14 @@ Some Tool actions may affect external systems or data security, including:
 
 Approval policies may intercept these actions. When an approval appears, review the action, target, and outcome before deciding whether to allow it.
 
-## Related Concepts
+## Related Concepts {/* #related-concepts */}
 
 - [How AI Agents Discover and Load Tools and Skills on Demand](/docs/guides/ai-agent-dynamic-tool-discovery)
 - [Skill Management](/docs/user-guide/skill)
 - [AgentPlugins](/docs/user-guide/connector)
 - [Approval Policies](/docs/user-guide/approval-policy)
 
-## Next Steps
+## Next Steps {/* #next-steps */}
 
 - [Use Tools in an Agent Session](/docs/user-guide/agent-session)
 - [Manage Workspace Files](/docs/user-guide/workspace)

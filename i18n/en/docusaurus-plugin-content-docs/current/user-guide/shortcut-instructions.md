@@ -1,17 +1,30 @@
 ---
-title: Shortcut Instructions
-description: Learn how to use commands, directed targets, object references, and approval control replies in an xAgent session.
+title: "Shortcut Instructions"
+description: "Learn how to use commands, directed targets, object references, and approval control replies in an xAgent session."
 status: beta
-updated: 2026-07-15
+updated: 2026-10-01
 ---
 
 # Shortcut Instructions
 
 > Version note: the unified command, target, reference, and approval-reply protocol is available starting with `v0.0.4.beta`.
 
+<div className="alert alert--warning margin-bottom--lg" role="note">
+
+**Check the command version first**
+
+The backend checked on 2026-10-01 supports only `/delete` (sub-sessions) and `/clear-history` (main and sub-sessions), plus the latter’s two aliases. The `/refresh_messages` and `/compress` material retained below describes earlier behavior; these are not current executable backend commands. Use the candidates and explicit receipt from your own deployment, rather than experimenting with unknown recovery commands.
+
+</div>
+
+| Current Source Command | Scope | Check Before Acting |
+| --- | --- | --- |
+| `/delete` | Sub-sessions | Save necessary files and conclusions, then verify the target |
+| `/clear-history` | Main and sub-sessions | Advances visible history and clears runtime-recovery material; not secure erasure; preserve required context first |
+
 Shortcut instructions perform explicit session operations. They are not ordinary tasks sent to the Agent and do not require the model to infer the user's intent.
 
-## How to Use Them
+## How to Use Them {/* #how-to-use-them */}
 
 Enter `/` in the Agent Session composer. The page shows commands available for the current session. Select a command and send it.
 
@@ -23,7 +36,9 @@ Commands should normally be sent by themselves without ordinary task text after 
 
 If a command does not apply to the selected session, or the session is running or waiting for confirmation, the page explains why it cannot run.
 
-## Available Commands
+## Available Commands {/* #available-commands */}
+
+The table above describes current source. The four-item table below is an earlier UI reference: refresh was Web-local and manual compression is no longer a current backend command.
 
 | Command | Where it works | Effect |
 | --- | --- | --- |
@@ -32,9 +47,11 @@ If a command does not apply to the selected session, or the session is running o
 | `/clear-history` | Main session only | Clears the currently visible main-session history and continues from a new context boundary |
 | `/compress` | Main and sub-sessions | Manually compresses the current session context |
 
-The page only suggests commands that apply to the selected session. A main session does not show `/delete`, and a sub-session does not show `/clear-history`.
+Earlier pages filtered the four commands that way: main sessions hid `/delete`, while sub-sessions hid `/clear-history`. Current source also supports clearing sub-session history; do not apply the older candidate rule to it.
 
-## Refresh Messages
+## Refresh Messages {/* #refresh-messages */}
+
+This is an earlier Web-local action. Use the refresh or reconnect control actually offered by the current interface rather than sending this historical command to the backend.
 
 ```text
 /refresh_messages
@@ -44,7 +61,7 @@ Use this when messages appear incomplete, the page has not updated, or you want 
 
 It only synchronizes the page again. It does not rerun the task or delete server records.
 
-## Delete a Sub-session
+## Delete a Sub-session {/* #delete-a-sub-session */}
 
 ```text
 /delete
@@ -54,13 +71,13 @@ This command only works for a sub-session. It removes the sub-session from the a
 
 Before deleting it, confirm that important results have been returned to the main session or saved in the appropriate location.
 
-## Clear Main-session History
+## Clear Main-session History {/* #clear-main-session-history */}
 
 ```text
 /clear-history
 ```
 
-This command only works for the main session. It moves earlier messages outside the currently visible history and lets later work continue from a new context boundary.
+Earlier releases limited this command to main sessions. Source checked on 2026-10-01 supports main and sub-sessions. It moves earlier messages outside visible history and lets later work continue from a new context boundary.
 
 Important boundaries:
 
@@ -70,19 +87,19 @@ Important boundaries:
 
 `/clear_history` and `/clear history` are accepted as aliases. The interface shows `/clear-history` as the standard form.
 
-## Manually Compress Context
+## Manually Compress Context {/* #manually-compress-context */}
 
 ```text
 /compress
 ```
 
-Use this when a session has become long and you want to reduce context usage while preserving the current task's main line.
+The following explains earlier manual compression for migration. Current backend source rejects `/compress`; current long-session recovery uses context compression separately from history clearing.
 
 Compression keeps the current goal, progress, constraints, working facts, and important artifact references. It does not delete workspace files and is different from clearing history. Compression may take some time and uses model capacity.
 
 If there is not enough context to compress, the page reports that directly. Handle a running task or pending approval before starting manual compression.
 
-## Targets, Object References, and Approval Replies
+## Targets, Object References, and Approval Replies {/* #targets-object-references-and-approval-replies */}
 
 xAgent uses different prefixes for routing and object references:
 
@@ -99,7 +116,7 @@ Analyze #{file:file-id}
 
 Prefer text generated by the interface, Connector notification, or suggestion menu instead of guessing object IDs manually. See the [Shortcut Instruction Protocol](/docs/guides/shortcut-instruction-protocol) for complete semantics, combinations, and security boundaries.
 
-## Notes
+## Notes {/* #notes */}
 
 - An unknown `/command` returns an error instead of becoming an ordinary Agent task.
 - Do not append ordinary task instructions after a command.
@@ -108,7 +125,7 @@ Prefer text generated by the interface, Connector notification, or suggestion me
 - A directed target must appear at the beginning. `@{session:id}` in the middle of ordinary text does not reroute the message.
 - Object references do not bypass file boundaries, approval policy, or other permission checks.
 
-## Continue Reading
+## Continue Reading {/* #continue-reading */}
 
 - [Shortcut Instruction Protocol](/docs/guides/shortcut-instruction-protocol)
 - [Agent Session](/docs/user-guide/agent-session)

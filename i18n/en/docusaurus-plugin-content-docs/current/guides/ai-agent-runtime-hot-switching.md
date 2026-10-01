@@ -1,8 +1,8 @@
 ---
-title: How AI Agents Switch Models, Skills, and Prompts During a Task
-description: Learn how a task-oriented AI Agent adjusts later model calls, Skills, Tools, and prompts while preserving session history, plans, and files, including the real boundaries of runtime switching.
+title: "How AI Agents Switch Models, Skills, and Prompts During a Task"
+description: "Learn how a task-oriented AI Agent adjusts later model calls, Skills, Tools, and prompts while preserving session history, plans, and files, including the real boundaries of runtime switching."
 status: beta
-updated: 2026-09-17
+updated: 2026-10-01
 ---
 
 # How AI Agents Switch Models, Skills, and Prompts During a Task
@@ -13,13 +13,13 @@ The traditional approach is to stop the task, create another session, upload mat
 
 xAgent lets users adjust the model, request policy, Agent Prompt, resident Skills, resident Tools, and selected secret names inside the same Agent Session. Later steps use the updated configuration without deleting the session or restarting the whole task.
 
-## What Runtime Switching Means
+## What Runtime Switching Means {/* #what-runtime-switching-means */}
 
 Runtime switching preserves the session, history, plans, task state, and workspace outputs while changing how the session continues.
 
-It does not rewrite a model request that has already been sent, and it does not replace a Tool halfway through execution. The new configuration applies to later model requests or execution steps.
+It does not rewrite a model request already sent or replace a Tool halfway through execution. Effective timing depends on the capability: an execution with a bound model keeps that model, and later unbound execution resolves the Session selection again. Skills, Tools, and prompts update under their own rules during subsequent context assembly.
 
-## Why Different Stages Need Different Configurations
+## Why Different Stages Need Different Configurations {/* #why-different-stages-need-different-configurations */}
 
 | Stage | Primary concerns |
 | --- | --- |
@@ -31,17 +31,19 @@ It does not rewrite a model request that has already been sent, and it does not 
 
 One model and one method do not always provide the best quality or cost across every stage.
 
-## Switching Models During a Session
+## Switching Models During a Session {/* #switching-models-during-a-session */}
 
 Users can select the model for later work in Agent Session advanced settings and adjust the session-level model policy.
 
-After a switch, session history remains available, later requests use the updated model setting, context budgeting follows the new model configuration, and Tools, Skills, plans, and workspace files remain in the original session.
+After a switch, Session history remains available. Later unbound executions resolve the updated model setting; a currently bound model-and-tool loop is not guaranteed to switch immediately. Context budgeting follows the effective model configuration, and Tools, Skills, plans, and workspace files remain in the original Session.
 
 If a model request has already been sent, it still completes with the original model. A separately bound execution step also keeps its current model for consistency before the new setting affects later unbound calls.
 
 Runtime model switching therefore means switching future calls without stopping the session, not changing the model halfway through one streaming response.
 
-### When to Switch Models
+Resolution first preserves an already bound execution model. Otherwise it prefers the Session override, then falls back through execution configuration, the role model, and the system default. This describes the boundary checked at main commit `43d2698` on 2026-10-01; saving settings does not rerun completed stages. Verify the effective model and required capabilities on the next actual execution.
+
+### When to Switch Models {/* #when-to-switch-models */}
 
 - The current model cannot fit the required material in context.
 - Initial organization is complete and stronger reasoning is needed.
@@ -51,7 +53,7 @@ Runtime model switching therefore means switching future calls without stopping 
 
 Confirm that the new model supports required capabilities, especially Tool Calling, vision, and sufficient context length.
 
-## Adjusting Skills
+## Adjusting Skills {/* #adjusting-skills */}
 
 xAgent supports two Skill selection patterns:
 
@@ -66,7 +68,7 @@ Users can add a research Skill during analysis, switch to a report Skill for del
 
 Loading a Skill changes later method guidance. It does not grant Tool permission or execute actions described by the Skill.
 
-## Adjusting the Agent Prompt
+## Adjusting the Agent Prompt {/* #adjusting-the-agent-prompt */}
 
 Users can edit the current Agent Prompt in advanced settings. For example:
 
@@ -80,7 +82,7 @@ Some Sub Agents can also refine their prompt through a controlled runtime capabi
 
 Prompt changes do not rewrite previous messages or regenerate existing outputs automatically. Ask the Agent to recheck or regenerate a result when needed.
 
-## Tools and Secret Selection Can Also Change
+## Tools and Secret Selection Can Also Change {/* #tools-and-secret-selection-can-also-change */}
 
 Advanced settings also manage resident Tools and the secret names the current session may reference.
 
@@ -93,13 +95,13 @@ As with Skills, every Tool shown in advanced settings is a resident Tool explici
 
 For stage-specific capabilities, dynamic Tool discovery avoids keeping every Tool resident.
 
-## What Remains Available
+## What Remains Available {/* #what-remains-available */}
 
 Runtime tuning preserves session history, user supplements, plans, task state, workspace files, attachments, stable file references, completed Tool results, and Main/Sub Session relationships.
 
 The new model or Skill can continue from these facts, but critical conclusions should still be validated rather than accepted only because they appeared earlier in history.
 
-## A Staged Example
+## A Staged Example {/* #a-staged-example */}
 
 For an industry research report:
 
@@ -112,7 +114,7 @@ For an industry research report:
 
 The task remains in one session while each stage uses a better-suited model and method.
 
-## A Safe Tuning Process
+## A Safe Tuning Process {/* #a-safe-tuning-process */}
 
 1. Preserve a reusable output or status summary before a major change.
 2. Change one important variable at a time.
@@ -121,7 +123,7 @@ The task remains in one session while each stage uses a better-suited model and 
 5. Test one verifiable step after switching models.
 6. Recheck important conclusions because models may judge evidence differently.
 
-## Runtime Switching Boundaries
+## Runtime Switching Boundaries {/* #runtime-switching-boundaries */}
 
 - It does not replace a model request that has already been sent.
 - It does not interrupt and rewrite an active Tool call.
@@ -132,14 +134,14 @@ The task remains in one session while each stage uses a better-suited model and 
 
 Runtime switching preserves task continuity while allowing later steps to use a better configuration. It is not an unrestricted replacement mechanism for every action already in progress.
 
-## Related Concepts
+## Related Concepts {/* #related-concepts */}
 
 - [Agent Session](/docs/user-guide/agent-session)
 - [How AI Agents Discover and Load Tools on Demand](/docs/guides/ai-agent-dynamic-tool-discovery)
 - [Model Notes](/docs/deployment/model-requirements)
 - [Skill Management](/docs/user-guide/skill)
 
-## Next Steps
+## Next Steps {/* #next-steps */}
 
 - [Tune Advanced Settings in Agent Session](/docs/user-guide/agent-session)
 - [Create or Update a Skill](/docs/getting-started/create-skill)
