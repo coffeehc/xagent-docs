@@ -14,7 +14,10 @@
     "validate:site": "node scripts/validate-site.mjs",
     "write-translations": "docusaurus write-translations",
     "write-heading-ids": "docusaurus write-heading-ids",
-    "typecheck": "tsc"
+    "typecheck": "tsc",
+    "sync:release": "node scripts/sync-release.mjs",
+    "validate:release": "node scripts/sync-release.mjs --check",
+    "prebuild": "npm run validate:release"
   },
   "dependencies": {
     "@docusaurus/core": "3.10.2",

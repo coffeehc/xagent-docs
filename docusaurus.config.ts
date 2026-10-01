@@ -1,5 +1,7 @@
 import {themes as prismThemes} from 'prism-react-renderer';
 import path from 'node:path';
+import fs from 'node:fs';
+import {load} from 'cheerio';
 import type {Config} from '@docusaurus/types';
 import type * as Preset from '@docusaurus/preset-classic';
 
@@ -90,6 +92,7 @@ const config: Config = {
             ? 'Product updates, practical lessons, and release notes from xAgent.'
             : 'xAgent 的产品进展、实践记录与版本说明。',
           showReadingTime: true,
+          showLastUpdateTime: true,
         },
         gtag: {
           trackingID: 'G-P1WT74PKR0',
@@ -106,6 +109,30 @@ const config: Config = {
             '/en/blog/tags/**',
           ],
           lastmod: 'date',
+          async createSitemapItems(params) {
+            const items = await params.defaultCreateSitemapItems(params);
+            return items.map((item) => {
+              if (item.lastmod) return item;
+              // Read only dates emitted from explicit content metadata. Never
+              // use build time or filesystem mtime to imply fresh content.
+              const route = new URL(item.url).pathname;
+              const htmlPath = path.join(process.cwd(), 'build', route, 'index.html');
+              if (!fs.existsSync(htmlPath)) return item;
+              const $ = load(fs.readFileSync(htmlPath, 'utf8'));
+              for (const element of $('script[type="application/ld+json"]').toArray()) {
+                const data = JSON.parse($(element).html() ?? '');
+                const entries = data['@graph'] ?? (Array.isArray(data) ? data : [data]);
+                const page = entries.find((entry: Record<string, unknown>) =>
+                  ['WebPage', 'Blog'].includes(String(entry['@type'])) &&
+                  [entry.url, entry.mainEntityOfPage].some((url) =>
+                    typeof url === 'string' && url.replace(/\/$/, '') === item.url.replace(/\/$/, ''),
+                  ),
+                );
+                if (page?.dateModified) return {...item, lastmod: page.dateModified};
+              }
+              return item;
+            });
+          },
           changefreq: null,
           priority: null,
         },
@@ -128,6 +155,7 @@ const config: Config = {
           ? 'Practical perspectives on AI agents, deployment, governance, and the evolving ecosystem.'
           : '围绕 AI Agent、部署、治理与生态变化的实践观察。',
         showReadingTime: true,
+        showLastUpdateTime: true,
       },
     ],
     function noPrefetchLinks() {
@@ -184,16 +212,6 @@ const config: Config = {
       {
         name: 'twitter:card',
         content: 'summary_large_image',
-      },
-      {
-        name: 'twitter:title',
-        content: isEnglish
-          ? 'xAgent: Self-Hosted Multi-User AI Agent Platform'
-          : 'xAgent：可私有化部署的多用户 AI Agent 工作门户',
-      },
-      {
-        name: 'twitter:description',
-        content: siteDescription,
       },
     ],
     colorMode: {

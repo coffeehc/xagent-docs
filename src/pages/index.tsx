@@ -6,6 +6,8 @@ import Heading from "@theme/Heading";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import { useImageLightbox } from "@site/src/components/ImageLightbox";
 import "./home.css";
+import productRelease from "@site/src/data/product-release.json";
+import contentDates from "@site/src/data/content-dates.json";
 const scenarios = {
     zh: [
       {
@@ -716,6 +718,16 @@ ${text("这是官网交互演示的预设示例，不是实际 AI 执行结果�
       "@context": "https://schema.org",
       "@graph": [
         {
+          "@type": "WebPage",
+          "@id": `${canonicalUrl}#webpage`,
+          url: canonicalUrl,
+          name: title,
+          description,
+          dateModified: contentDates.homepage.modified,
+          inLanguage: en ? "en-US" : "zh-CN",
+          isPartOf: {"@id": `${canonicalUrl}#website`},
+        },
+        {
           "@type": "WebSite",
           "@id": `${canonicalUrl}#website`,
           name: "xAgent",
@@ -731,7 +743,7 @@ ${text("这是官网交互演示的预设示例，不是实际 AI 执行结果�
           description: description,
           applicationCategory: "BusinessApplication",
           operatingSystem: "Linux, macOS",
-          softwareVersion: "0.0.21.beta",
+          softwareVersion: productRelease.version,
           downloadUrl:
             "https://downloads.xagent.xiagaogao.com/scripts/install.sh",
           releaseNotes: `${canonicalUrl}docs/changelog/`,
@@ -772,7 +784,7 @@ ${text("这是官网交互演示的预设示例，不是实际 AI 执行结果�
                 "YOUR SERVER. YOUR AI WORKSPACE.",
               )}
               <a href={localize("/docs/changelog/")}>
-                {"v0.0.21.beta "}
+                {`v${productRelease.version} `}
                 <span aria-hidden="true">{"↗"}</span>
               </a>
             </div>

@@ -64,3 +64,11 @@ npm run validate:docs
 npm run build
 npm run validate:site
 ```
+
+## Search metadata maintenance
+
+- Keep the verified public Server version in `src/data/product-release.json`, then run `npm run sync:release` to synchronize `static/llms.txt`. The homepage and its structured data import the same version. Historical release notes are not rewritten.
+- Add `updated: YYYY-MM-DD` only after a substantive article change or factual review; retain the original publication date. This drives the visible update, JSON-LD, and sitemap. Never refresh old posts using deployment time.
+- `src/data/content-dates.json` records the homepage revision with its source commit. Listing pages inherit explicit updates only from articles actually displayed. Unknown dates remain absent.
+- Page-specific Open Graph titles and descriptions supply the X/Twitter fallback, rather than global homepage copy.
+- `npm run build` first checks release consistency. Run `npm run validate:site` after building to check JSON-LD, dates, sharing metadata, links, and analytics.

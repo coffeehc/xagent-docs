@@ -8,6 +8,16 @@ const googleAnalyticsTrackingID = 'G-P1WT74PKR0';
 const googleAnalyticsScript =
   `https://www.googletagmanager.com/gtag/js?id=${googleAnalyticsTrackingID}`;
 const errors = [];
+const release = JSON.parse(fs.readFileSync('src/data/product-release.json', 'utf8'));
+const contentDates = JSON.parse(fs.readFileSync('src/data/content-dates.json', 'utf8'));
+const today = new Date().toISOString().slice(0, 10);
+const validDate = (value) => typeof value === 'string' &&
+  /^\d{4}-\d{2}-\d{2}(?:T.*)?$/.test(value) &&
+  Number.isFinite(Date.parse(value)) &&
+  new Date(value).toISOString().slice(0, 10) === value.slice(0, 10) &&
+  value.slice(0, 10) <= today;
+const dateOnly = (value) => typeof value === 'string' ? value.slice(0, 10) : undefined;
+
 
 function listFiles(root, predicate) {
   return fs
@@ -121,6 +131,11 @@ const sitemapEntries = ['build/sitemap.xml', 'build/en/sitemap.xml'].flatMap(
 );
 const sitemapRoutes = sitemapEntries.map(({loc}) => localRoute(loc));
 const sitemapSet = new Set(sitemapRoutes);
+const sitemapDates = new Map(sitemapEntries.map(({loc, lastmod}) => [localRoute(loc), lastmod]));
+sitemapEntries.forEach(({loc, lastmod}) => {
+  if (lastmod && !validDate(lastmod)) errors.push(`${loc}: invalid or future sitemap lastmod ${lastmod}`);
+});
+
 
 if (sitemapRoutes.some((route) => !route)) {
   errors.push('sitemap: contains a URL outside the configured site origin');
@@ -164,6 +179,20 @@ pages.forEach((page) => {
   }
   if (isIndexable && !page.description) {
     errors.push(`${page.route}: missing description`);
+  }
+  if (isIndexable) {
+    const ogTitle = page.$('meta[property="og:title"]').attr('content');
+    const ogDescription = page.$('meta[property="og:description"]').attr('content');
+    if (ogTitle !== page.title) errors.push(`${page.route}: Open Graph title differs from page title`);
+    if (ogDescription !== page.description) errors.push(`${page.route}: Open Graph description differs from page description`);
+    // X/Twitter falls back to Open Graph when these optional fields are absent.
+    // Any explicit value must describe this page, never a global homepage blurb.
+    for (const [name, expected] of [['twitter:title', ogTitle], ['twitter:description', ogDescription]]) {
+      const tags = page.$(`meta[name="${name}"]`);
+      if (tags.length > 1 || (tags.length && tags.attr('content') !== expected)) {
+        errors.push(`${page.route}: ${name} must match the page-specific Open Graph value or be omitted`);
+      }
+    }
   }
   if (page.$('meta[name="keywords"]').length > 0) {
     errors.push(`${page.route}: meta keywords are not allowed`);
@@ -278,6 +307,29 @@ pages.forEach((page) => {
       ? structuredData
       : structuredData['@graph'] ?? [structuredData];
     entries.forEach((entry) => {
+      for (const property of ['datePublished', 'dateModified']) {
+        if (entry[property] && !validDate(entry[property])) {
+          errors.push(`${page.route}: invalid or future JSON-LD ${property}`);
+        }
+      }
+      if (entry.datePublished && entry.dateModified && Date.parse(entry.dateModified) < Date.parse(entry.datePublished)) {
+        errors.push(`${page.route}: dateModified precedes datePublished`);
+      }
+      if (entry.dateModified && ['BlogPosting', 'TechArticle', 'WebPage', 'Blog'].includes(entry['@type']) && isIndexable) {
+        if (dateOnly(entry.dateModified) !== sitemapDates.get(page.route)) {
+          errors.push(`${page.route}: JSON-LD dateModified and sitemap lastmod differ`);
+        }
+      }
+      if (entry['@type'] === 'SoftwareApplication' && entry.softwareVersion !== release.version) {
+        errors.push(`${page.route}: SoftwareApplication version differs from the public release record`);
+      }
+      if (entry['@type'] === 'Blog') {
+        for (const post of entry.blogPost ?? []) {
+          if (post.dateModified && (!validDate(post.dateModified) || dateOnly(post.dateModified) !== sitemapDates.get(localRoute(post.url)))) {
+            errors.push(`${page.route}: listed post dateModified differs from its article sitemap entry`);
+          }
+        }
+      }
       if (
         entry.description &&
         page.description &&
@@ -339,6 +391,29 @@ pages.forEach((page) => {
     });
   }
 });
+
+for (const locale of ['', 'en/']) {
+  const home = pages.get(`/${locale}`);
+  if (sitemapDates.get(`/${locale}`) !== contentDates.homepage.modified) {
+    errors.push(`/${locale}: homepage lastmod must match its documented content revision`);
+  }
+  if (!home?.text.includes(`v${release.version}`)) errors.push(`/${locale}: visible release differs from canonical version`);
+  const articleRoute = `/${locale}blog/xagent-and-other-agents/`;
+  const source = locale ? 'i18n/en/docusaurus-plugin-content-blog/2026-08-01-xagent-and-other-agents.md' : 'blog/2026-08-01-xagent-and-other-agents.md';
+  const updated = fs.readFileSync(source, 'utf8').match(/^updated: ["']?(\d{4}-\d{2}-\d{2})/m)?.[1];
+  const article = pages.get(articleRoute);
+  if (!updated || !validDate(updated)) errors.push(`${source}: missing valid explicit updated date`);
+  if (sitemapDates.get(articleRoute) !== updated) errors.push(`${articleRoute}: explicit source update and sitemap differ`);
+  const timeDates = article?.$('time[datetime]').map((_, element) => dateOnly(article.$(element).attr('datetime'))).get() ?? [];
+  if (!timeDates.includes('2026-08-01') || !timeDates.includes(updated)) {
+    errors.push(`${articleRoute}: both original publication and content update dates must remain visible`);
+  }
+}
+for (const file of ['build/llms.txt', 'build/en/llms.txt']) {
+  if (!fs.readFileSync(file, 'utf8').includes(`Current Server release: v${release.version}.`)) {
+    errors.push(`${file}: stale public Server release`);
+  }
+}
 
 [...titleGroups.entries(), ...descriptionGroups.entries()].forEach(
   ([key, routes]) => {

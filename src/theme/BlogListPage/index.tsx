@@ -13,6 +13,7 @@ import BlogListPaginator from '@theme/BlogListPaginator';
 import BlogPostItems from '@theme/BlogPostItems';
 import SearchMetadata from '@theme/SearchMetadata';
 import type {Props} from '@theme/BlogListPage';
+import {getBlogContentDate} from '@site/src/utils/blogContentDate';
 
 function getBlogListDescription(metadata: Props['metadata'], locale: string): string {
   if (metadata.page <= 1) return metadata.blogDescription;
@@ -45,11 +46,17 @@ function BlogListPageMetadata({metadata, items}: Props): ReactNode {
 }
 
 function BlogListPageContent({metadata, items, sidebar}: Props): ReactNode {
+  const {i18n: {currentLocale}} = useDocusaurusContext();
+  const dateModified = getBlogContentDate(items);
   return (
     <BlogLayout sidebar={sidebar}>
       <header className="margin-bottom--lg">
         <h1>{metadata.blogTitle}</h1>
         <p>{metadata.blogDescription}</p>
+        {dateModified && <p className="text--secondary">
+          {currentLocale === 'en' ? 'Content updated: ' : '内容更新：'}
+          <time dateTime={dateModified}>{dateModified}</time>
+        </p>}
       </header>
       <BlogPostItems items={items} />
       <BlogListPaginator metadata={metadata} />
