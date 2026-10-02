@@ -429,6 +429,57 @@ for (const file of ['build/llms.txt', 'build/en/llms.txt']) {
   }
 }
 
+// Historical URLs need real edge redirects, not duplicate pages or a 404 catch-all.
+// Check the deployed artifact and its current targets; HTTP behavior is verified at the edge.
+const legacyDocFamilies = [
+  ['deployment/connector-install', 'getting-started/install'],
+  ['guides/mcp-vs-connector', 'getting-started/what-is-connector',
+    '它和-mcp-有什么区别', 'how-is-it-different-from-mcp'],
+  ['reference/config', 'manual/system-configuration'],
+  ['reference/error-codes', 'faq/common', '按现象快速定位', 'find-help-by-symptom'],
+  ['architecture/connector-system', 'attachments/xagent_connection_architecture'],
+];
+const expectedRedirects = new Map();
+for (const locale of ['', 'en/']) {
+  for (const [from, to, zhFragment, enFragment] of legacyDocFamilies) {
+    const source = `/${locale}docs/${from}`;
+    const fragment = locale ? enFragment : zhFragment;
+    const destination = `/${locale}docs/${to}/${fragment ? `#${encodeURIComponent(fragment)}` : ''}`;
+    for (const slash of ['', '/']) expectedRedirects.set(`${source}${slash}`, destination);
+    if (pages.has(`${source}/`) || sitemapSet.has(`${source}/`)) {
+      errors.push(`${source}: legacy redirects must not replace a generated or indexed page`);
+    }
+    const target = pages.get(`/${locale}docs/${to}/`);
+    if (!target || target.noindex || !sitemapSet.has(target.route)) {
+      errors.push(`${destination}: redirect target must be a generated, indexable page`);
+    }
+    if (fragment && !target?.ids.has(fragment)) {
+      errors.push(`${destination}: redirect target fragment is missing`);
+    }
+  }
+}
+const redirectsPath = path.join(buildRoot, '_redirects');
+if (!fs.existsSync(redirectsPath)) {
+  errors.push('build/_redirects: missing historical documentation redirects');
+} else {
+  const source = fs.readFileSync('static/_redirects', 'utf8');
+  const output = fs.readFileSync(redirectsPath, 'utf8');
+  if (source !== output) errors.push('build/_redirects: differs from static/_redirects');
+  const rules = output.split(/\r?\n/).map((line) => line.trim())
+    .filter((line) => line && !line.startsWith('#'));
+  const seen = new Set();
+  for (const rule of rules) {
+    const [from, to, status, extra] = rule.split(/\s+/);
+    if (extra || status !== '301' || expectedRedirects.get(from) !== to || seen.has(from)) {
+      errors.push(`build/_redirects: unexpected, duplicate, or invalid rule ${rule}`);
+    }
+    seen.add(from);
+  }
+  for (const from of expectedRedirects.keys()) {
+    if (!seen.has(from)) errors.push(`build/_redirects: missing exact 301 rule for ${from}`);
+  }
+}
+
 [...titleGroups.entries(), ...descriptionGroups.entries()].forEach(
   ([key, routes]) => {
     if (routes.length > 1) {
