@@ -393,7 +393,21 @@ pages.forEach((page) => {
 });
 
 for (const locale of ['', 'en/']) {
+  const communityRoute = `/${locale}docs/community/discussions/`;
+  const community = pages.get(communityRoute);
+  for (const href of [
+    'https://www.reddit.com/r/xAgent/',
+    'https://github.com/coffeehc/xagent-releases/discussions',
+    'https://github.com/coffeehc/xagent-releases/issues/new',
+  ]) {
+    if (!community?.$(`main a[href="${href}"]`).length) {
+      errors.push(`${communityRoute}: missing community channel ${href}`);
+    }
+  }
   const home = pages.get(`/${locale}`);
+  if (!home?.$('footer a[href="https://www.reddit.com/r/xAgent/"]').length) {
+    errors.push(`/${locale}: missing official Reddit community footer link`);
+  }
   if (sitemapDates.get(`/${locale}`) !== contentDates.homepage.modified) {
     errors.push(`/${locale}: homepage lastmod must match its documented content revision`);
   }

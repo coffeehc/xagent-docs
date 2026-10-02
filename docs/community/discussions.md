@@ -1,13 +1,15 @@
 ---
 title: 社区讨论
-description: 加入 xAgent 社区讨论，交流使用场景、提出功能建议、完善内置 Skill，并区分公开讨论与可复现问题反馈。
+description: 加入 xAgent 官方 Reddit 社区与 GitHub Discussions，交流使用问题、工作流程和产品建议；通过 GitHub Issues 反馈可复现故障。
 status: stable
-updated: 2026-08-21
+updated: 2026-10-02
 ---
 
 # 社区讨论
 
-xAgent 的公开讨论集中在 [xagent-releases Discussions](https://github.com/coffeehc/xagent-releases/discussions)。这里适合交流真实使用场景、收集产品建议，并沉淀可复用的经验。
+xAgent 官方 Reddit 社区是 [r/xAgent](https://www.reddit.com/r/xAgent/)，欢迎交流使用问题、分享工作流程和提出产品建议。
+
+[xagent-releases Discussions](https://github.com/coffeehc/xagent-releases/discussions) 继续提供按主题分类的讨论，适合沉淀使用经验、Skill 思路和产品建议。可复现的故障请通过 [GitHub Issues](https://github.com/coffeehc/xagent-releases/issues/new) 跟踪。
 
 国内用户也可以加入 xAgent QQ 群：**135385989**，用于交流使用问题、部署经验和产品建议。
 
@@ -15,6 +17,7 @@ xAgent 的公开讨论集中在 [xagent-releases Discussions](https://github.com
 
 | 你想讨论什么 | 前往分类 | 适合的内容 |
 | --- | --- | --- |
+| 在 Reddit 交流 | [r/xAgent](https://www.reddit.com/r/xAgent/) | 一般使用问题、工作流程分享与产品反馈。 |
 | 使用中遇到困难 | [Q&A](https://github.com/coffeehc/xagent-releases/discussions/categories/q-a) | 安装、模型、Skill、Tool、MCP、连接器和任务执行的使用问题。 |
 | 分享一个实际场景 | [Show and tell](https://github.com/coffeehc/xagent-releases/discussions/categories/show-and-tell) | 任务流程、结果样例、私有化部署经验和可复用的 Skill 思路。 |
 | 提出产品或文档建议 | [Ideas](https://github.com/coffeehc/xagent-releases/discussions/categories/ideas) | 功能方向、文档改进、Skill 改进和新的连接器需求。 |
@@ -32,7 +35,7 @@ xAgent 的公开讨论集中在 [xagent-releases Discussions](https://github.com
 - 可安全公开的日志、截图和复现步骤；
 - 已尝试的排查方式。
 
-功能想法、场景讨论和 Skill 改进不需要先写成 Issue，优先在 Discussions 中交流。确认有明确实现边界后，维护者会再决定是否转为 Issue 跟踪。
+功能想法、场景讨论和 Skill 改进不需要先写成 Issue，可以在 Reddit 或 Discussions 中交流。确认有明确实现边界后，维护者会再决定是否转为 Issue 跟踪。
 
 ## 讨论时请注意
 
@@ -47,4 +50,6 @@ xAgent 的公开讨论集中在 [xagent-releases Discussions](https://github.com
 ## 参与讨论
 
 - 国内交流：xAgent QQ 群 **135385989**
+- Reddit 官方社区：[加入 r/xAgent](https://www.reddit.com/r/xAgent/)
 - 公开讨论：[进入 xAgent Discussions](https://github.com/coffeehc/xagent-releases/discussions)
+- 可复现故障：[提交 GitHub Issue](https://github.com/coffeehc/xagent-releases/issues/new)

@@ -1,18 +1,21 @@
 ---
 title: Community Discussions
-description: Join xAgent community discussions for usage questions, real-world scenarios, product ideas, and built-in Skill improvements.
+description: Join the official xAgent Reddit community and GitHub Discussions for usage questions, workflows, and product feedback. Report reproducible bugs in GitHub Issues.
 status: stable
-updated: 2026-08-01
+updated: 2026-10-02
 ---
 
 # Community Discussions
 
-Public xAgent discussions live in [xagent-releases Discussions](https://github.com/coffeehc/xagent-releases/discussions). This is the place to share real usage scenarios, discuss product ideas, and build reusable knowledge together.
+The official xAgent Reddit community is [r/xAgent](https://www.reddit.com/r/xAgent/). Join to ask usage questions, share workflows, and discuss product feedback.
+
+[xagent-releases Discussions](https://github.com/coffeehc/xagent-releases/discussions) remains available for topic-based conversations and reusable knowledge, including usage experience, Skill ideas, and product suggestions. Track reproducible bugs in [GitHub Issues](https://github.com/coffeehc/xagent-releases/issues/new).
 
 ## Where to Start
 
 | What you want to discuss | Category | Good fit |
 | --- | --- | --- |
+| You want to talk on Reddit | [r/xAgent](https://www.reddit.com/r/xAgent/) | General usage questions, workflow sharing, and product feedback. |
 | You need help using xAgent | [Q&A](https://github.com/coffeehc/xagent-releases/discussions/categories/q-a) | Questions about installation, models, Skills, Tools, MCP, Connectors, and task execution. |
 | You want to share a real scenario | [Show and tell](https://github.com/coffeehc/xagent-releases/discussions/categories/show-and-tell) | Task workflows, result examples, self-hosting experience, and reusable Skill ideas. |
 | You have a product or documentation idea | [Ideas](https://github.com/coffeehc/xagent-releases/discussions/categories/ideas) | Feature direction, documentation improvements, Skill improvements, and Connector requests. |
@@ -30,7 +33,7 @@ An Issue should include:
 - Safe-to-share logs, screenshots, and reproduction steps.
 - Troubleshooting you have already tried.
 
-Feature ideas, scenario discussions, and Skill improvements do not need an Issue first. Start in Discussions. Maintainers can move confirmed, well-scoped work into an Issue when needed.
+Feature ideas, scenario discussions, and Skill improvements do not need an Issue first. Start on Reddit or in Discussions. Maintainers can move confirmed, well-scoped work into an Issue when needed.
 
 ## Discussion Guidelines
 
@@ -44,4 +47,6 @@ Maintainers may remove content that violates these rules, lock conversations tha
 
 ## Join the Community
 
-[Open xAgent Discussions](https://github.com/coffeehc/xagent-releases/discussions)
+- Official Reddit community: [Join r/xAgent](https://www.reddit.com/r/xAgent/)
+- Topic-based conversations: [Open xAgent Discussions](https://github.com/coffeehc/xagent-releases/discussions)
+- Reproducible bugs: [Open a GitHub Issue](https://github.com/coffeehc/xagent-releases/issues/new)

@@ -328,6 +328,10 @@ const config: Config = {
           title: '交流',
           items: [
             {
+              label: 'Reddit · r/xAgent',
+              href: 'https://www.reddit.com/r/xAgent/',
+            },
+            {
               label: '社区讨论',
               href: `${localeSiteUrl}/docs/community/discussions/`,
               target: '_self',
