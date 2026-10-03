@@ -59,7 +59,7 @@ No. The documentation site is a static manual.
 
 ### Is the current release stable? {/* #is-the-current-release-stable */}
 
-As of 2026-10-01, the latest public binary is `v0.0.21.beta` (2026-09-22), still intended for evaluation, scenario validation, and feedback. Newer source behavior is dated where discussed; a public release, source snapshot, and deployed instance are not the same state.
+As of 2026-10-03, the latest public binary is `v0.0.22.beta` (2026-10-02), still intended for evaluation, scenario validation, and feedback. Newer source behavior is dated where discussed; a public release, source snapshot, and deployed instance are not the same state.
 
 ### Must I create an Agent before starting? {/* #must-i-create-an-agent-before-starting */}
 
