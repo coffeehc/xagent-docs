@@ -2,7 +2,7 @@
 title: "术语表"
 description: "查阅 xAgent 中 Agent、Task、Skill、Tool、AgentPlugin、Memory、Session、Workspace 和 Runtime 等核心术语的含义。"
 status: stable
-updated: 2026-10-01
+updated: 2026-10-03
 ---
 
 # 术语表
@@ -32,7 +32,7 @@ updated: 2026-10-01
 | Session | 用户与 Agent 的一次交互上下文 |
 | Workspace | Agent 执行任务时使用的文件、上下文和中间产物空间 |
 | 触发器 | 把未来时间或外部事件转换成 Session 任务的机制 |
-| WorkGroup（工作编排） | 智能体及通信关系的版本化配置，不拥有会话运行状态 |
+| WorkGroup（工作编排） | 已实现的智能体及通信关系编排配置，支持草稿与发布版本；实际任务由各 Session 执行 |
 | 工作记录（Work Record） | 会话范围的主题记录、修订与增量，用于核对连续性与阶段证据 |
 | Model Profile ID | 模型配置的稳定引用，区别于显示名和 Provider 的真实模型 ID |
 | A2A Client | 用户范围内连接远端 Agent、跟踪远端任务并接收结果的能力 |

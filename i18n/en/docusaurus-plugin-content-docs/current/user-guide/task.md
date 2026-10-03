@@ -2,7 +2,7 @@
 title: "xAgent Tasks: Goals, Materials, and Acceptance Criteria"
 description: "Learn how to describe task goals, input materials, constraints, and acceptance criteria to xAgent, then refine the work as it runs."
 status: stable
-updated: 2026-10-01
+updated: 2026-10-03
 ---
 
 # xAgent Tasks: Goals, Materials, and Acceptance Criteria
@@ -127,6 +127,7 @@ When the result is not satisfactory, give a concrete revision request. For examp
 
 | Information | What it establishes | What it does not establish on its own |
 | --- | --- | --- |
+| Published WorkGroup configuration | A published orchestration configuration exists | A concrete task has started or completed |
 | Session created or message submitted | The entry point accepted creation or delivery work | Child completion or a returned result |
 | Successful Tool call | That operation completed as reported by the Tool | Every stage and external effect meets the goal |
 | Work record or plan state | Saved progress and task organization | Verified evidence or a correct final file |

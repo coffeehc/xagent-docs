@@ -1,9 +1,9 @@
 ---
 title: "Start Installing xAgent"
-description: "Install and verify xAgent v0.0.21.beta from the server installer through the first system setup flow."
+description: "Install and verify xAgent v0.0.22.beta from the server installer through the first system setup flow."
 image: "/img/getting-started/v005/install-terminal.webp"
 status: beta
-updated: 2026-10-01
+updated: 2026-10-03
 ---
 
 # Start Installing xAgent
@@ -12,7 +12,7 @@ This page is for administrators installing xAgent for the first time. It starts 
 
 ## Match the Version and Setup Screen {/* #match-the-version-and-setup-screen */}
 
-The installer reads the public release catalog. As of 2026-10-01, the public release is `v0.0.21.beta`. Most screenshots are from `v0.0.5.beta`; they preserve field explanations, not current button locations.
+The installer reads the public release catalog. As of 2026-10-03, the public release is `v0.0.22.beta`. Most screenshots are from `v0.0.5.beta`; they preserve field explanations, not current button locations.
 
 The setup screen in the 2026-10-01 source uses the following sequence. If you installed a public binary, follow the steps actually displayed; newer source behavior does not describe every earlier release.
 
@@ -67,14 +67,14 @@ After the installer exits, confirm the version:
 xagent version
 ```
 
-The public target at this review date is `0.0.21.beta`; compare the actual installed output with the release catalog on the day you install. The installer command is unchanged and reads the current release catalog. On Linux, also check the service:
+The public target at this review date is `0.0.22.beta`; compare the actual installed output with the release catalog on the day you install. The installer command is unchanged and reads the current release catalog. On Linux, also check the service:
 
 ```bash
 sudo systemctl status xagent-server
 journalctl -u xagent-server -f
 ```
 
-When upgrading a legacy Connector installation, use the full installer or published `upgrade.sh` so official plugin binaries, services, configuration, and state migrate together; replacing only the Server binary is insufficient. Custom legacy components require separate adaptation. Verify that any Enterprise license allows `0.0.21.beta` before upgrading.
+When upgrading a legacy Connector installation, use the full installer or published `upgrade.sh` so official plugin binaries, services, configuration, and state migrate together; replacing only the Server binary is insufficient. Custom legacy components require separate adaptation. Verify that any Enterprise license allows `0.0.22.beta` before upgrading.
 
 After a successful start, the default Web address is:
 

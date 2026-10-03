@@ -2,7 +2,7 @@
 title: "xAgent Agent Sessions: Submit Tasks, Files, and Approvals"
 description: "Learn how to submit tasks, upload materials, follow execution, handle approvals, use sub-agents, and continuously adjust work in an xAgent Agent Session."
 status: stable
-updated: 2026-10-01
+updated: 2026-10-03
 ---
 
 # xAgent Agent Sessions: Submit Tasks, Files, and Approvals
@@ -185,7 +185,7 @@ If a task generated a file but no entry appears in the message, open the Session
 
 ## Work Records and Stage Continuity {/* #work-records-and-stage-continuity */}
 
-Current main provides Session work records for traceable stage conclusions, unresolved questions, and evidence references. If your deployed version has Work Records, you can inspect active/archived records, select historical revisions, and read incremental entries not yet covered by the summary.
+In `v0.0.22.beta`, Work Records opens below the input area; its entry is hidden when there are no records. Use it to inspect stage conclusions, unresolved questions, and evidence through current records, historical summary versions, process entries, and attachment previews. Attachment and Workspace links can be opened directly.
 
 1. Ask the Agent to record conclusions, evidence, blockers, and next steps by stable topic.
 2. Append new developments; when revising a summary, retain increments it has not covered.
@@ -193,7 +193,15 @@ Current main provides Session work records for traceable stage conclusions, unre
 
 `active` only means a record remains in the default directory; `archived` removes it from that directory while retaining history. Neither proves validated business success. Work records belong to the current Session and differ from cross-Session Memory or a downloadable final file.
 
-This section was checked against main commit `43d2698` on 2026-10-01; older versions may have different entry points and fields.
+Work records and Session archiving follow the [v0.0.22.beta release notes](https://github.com/coffeehc/xagent-releases/releases/tag/v0.0.22.beta); older versions may have different entry points and fields.
+
+## Archive and Restore a Session {/* #archive-and-restore */}
+
+`v0.0.22.beta` supports Session archiving. It stops that Session’s execution and related scheduling while retaining messages, work records, tasks, waits, and files. Archiving is not deletion. Reviewing history, restoring the Session, and continuing execution are separate decisions. Restoring a Session does not automatically resume work; execution still requires an explicit continuation action.
+
+Default Session queries and the sandbox hide archived Sessions. Include archived history explicitly when looking for it. Main Sessions and AgentPlugin-dedicated Sessions remain managed through their existing entry points, and deletion remains available. Do not use deletion just to pause work.
+
+Before restoring, inspect the original waits, pending approvals, and external outcomes to avoid repeating an action that already took effect. Archiving a work record only changes its default visibility; it does not archive the whole Session.
 
 ## Advanced Settings and Task Tuning {/* #advanced-settings-and-task-tuning */}
 
@@ -209,7 +217,7 @@ Common settings include:
 | Resident Skill | Keep specific Skills in the current Session context | A long task must consistently follow a fixed work method |
 | Resident Tool | Keep specific Tools in the current Session Tool list | The current task depends on fixed Tools for a long period |
 
-Secret settings select only keys. Actual Secret values do not enter the model or message history.
+Encrypted environment variables expose placeholder references. This does not mean all environment variables are hidden from the model: unencrypted text can be read on demand. See [environment variables](/docs/manual/operations#secret-management) for mode selection and confidentiality boundaries.
 
 Task tuning is not intended to shift configuration work onto users. It gives advanced users a way to gradually adjust context, capabilities, and models when a task needs higher quality, until the task reaches a better completion state.
 

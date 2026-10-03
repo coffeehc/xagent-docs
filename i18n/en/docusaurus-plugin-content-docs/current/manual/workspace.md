@@ -2,7 +2,7 @@
 title: "Workspace Pages"
 description: "Page-by-page guidance and UI examples for the xAgent Dashboard, Agent Sessions, Workspace Files, and Session List."
 status: beta
-updated: 2026-10-01
+updated: 2026-10-03
 ---
 
 # Workspace Pages
@@ -103,3 +103,9 @@ Inspect links, visits, and download totals by file; copy or revoke links and ins
 - Compare state, main or child type, update time, and target summary.
 - Open a session or remove an obsolete child session when permitted.
 - Use this page for management; the execution timeline remains in Agent Sessions.
+
+### Archive or Delete? {/* #archive-or-delete */}
+
+From `v0.0.22.beta`, archive a supported Session when you want to stop its work while retaining its history. Archiving stops execution and associated scheduling while preserving messages, work records, tasks, waits, and files. Default queries and sandbox views hide archived Sessions.
+
+Archived Sessions do not consume Free Session capacity; restoring one checks capacity across the deployment again. Explicitly restore the original Session before continuing, then review its state, pending approvals, and scheduling instead of creating a duplicate task. Main and plugin-specific Sessions retain their dedicated management paths. See [archive and restore](/docs/user-guide/agent-session#archive-and-restore) for scope and steps.

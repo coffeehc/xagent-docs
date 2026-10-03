@@ -1,9 +1,9 @@
 ---
 title: "开始安装 xAgent"
-description: "从服务器运行安装脚本到完成首次系统初始化，按步骤安装并验证 xAgent v0.0.21.beta。"
+description: "从服务器运行安装脚本到完成首次系统初始化，按步骤安装并验证 xAgent v0.0.22.beta。"
 image: "/img/getting-started/v005/install-terminal.webp"
 status: beta
-updated: 2026-10-01
+updated: 2026-10-03
 ---
 
 # 开始安装 xAgent
@@ -12,7 +12,7 @@ updated: 2026-10-01
 
 ## 先确认版本与初始化界面 {/* #先确认版本与初始化界面 */}
 
-本页安装命令读取公开发行目录。截至 2026-10-01，公开发行版是 `v0.0.21.beta`；历史截图主要来自 `v0.0.5.beta`，保留用于解释字段，不能据此寻找当前按钮。
+本页安装命令读取公开发行目录。截至 2026-10-03，公开发行版是 `v0.0.22.beta`；历史截图主要来自 `v0.0.5.beta`，保留用于解释字段，不能据此寻找当前按钮。
 
 2026-10-01 源码中的初始化界面已调整为以下流程。如果你安装的是公开二进制，请以实际显示的步骤为准，不要把源码新流程理解为所有旧版本的行为。
 
@@ -67,14 +67,14 @@ curl -fsSL https://downloads.xagent.xiagaogao.com/scripts/install.sh \
 xagent version
 ```
 
-截至本页核对日，公开目标版本为 `0.0.21.beta`；安装器会跟随发行目录更新，因此应将实际输出与当日公开版本核对。安装命令保持不变，安装器会读取当前发布目录。Linux 还可以检查服务状态：
+截至本页核对日，公开目标版本为 `0.0.22.beta`；安装器会跟随发行目录更新，因此应将实际输出与当日公开版本核对。安装命令保持不变，安装器会读取当前发布目录。Linux 还可以检查服务状态：
 
 ```bash
 sudo systemctl status xagent-server
 journalctl -u xagent-server -f
 ```
 
-从旧 Connector 环境升级时，请运行完整安装器或公开 `upgrade.sh`，让安装器迁移官方插件的程序、服务、配置和数据目录；不要仅替换 Server 二进制。自定义旧 Connector 需要单独适配。使用企业授权时，请先确认授权的最高版本允许 `0.0.21.beta`。
+从旧 Connector 环境升级时，请运行完整安装器或公开 `upgrade.sh`，让安装器迁移官方插件的程序、服务、配置和数据目录；不要仅替换 Server 二进制。自定义旧 Connector 需要单独适配。使用企业授权时，请先确认授权的最高版本允许 `0.0.22.beta`。
 
 安装器成功启动后，默认 Web 地址为：
 

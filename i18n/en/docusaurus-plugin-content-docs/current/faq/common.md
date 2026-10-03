@@ -2,7 +2,7 @@
 title: "Common Questions"
 description: "Answers to common questions about xAgent installation, usage, models, data safety, Skills, AgentPlugins, maintenance, and beta status."
 status: stable
-updated: 2026-10-01
+updated: 2026-10-03
 schemaType: WebPage
 toc_max_heading_level: 2
 ---
@@ -83,7 +83,7 @@ Not by default. xAgent can continuously optimize a specific Skill through prompt
 
 ### What does the free binary release mean? {/* #what-does-the-free-binary-release-mean */}
 
-The free binary release is currently the `v0.0.21.beta` beta and serves as an entry point for understanding and evaluating xAgent. Users can deploy the standard version first and experience core capabilities such as Task submission, the file Workspace, Tools, Skills, and external connections.
+The free binary release is currently the `v0.0.22.beta` beta, published on 2026-10-02, and serves as an entry point for understanding and evaluating xAgent. Users can deploy the standard version first and experience core capabilities such as Task submission, the file Workspace, Tools, Skills, and external connections.
 
 A free binary release is not the same as an open-source release. xAgent will evaluate whether to open the source or expand ecosystem collaboration based on product maturity, community feedback, security boundaries, and commercial sustainability.
 
@@ -91,7 +91,9 @@ Enterprise internal-system integration, unified identity, complex permissions, a
 
 ### What is the difference between the commercial and free editions? {/* #what-is-the-difference-between-the-commercial-and-free-editions */}
 
-When no Enterprise license certificate is installed, xAgent enters the Free edition directly; no Free certificate application or renewal is required. The Free edition provides the core product capabilities with fixed limits of 2 users, 30 Sessions, 1 WorkGroup, 5 AgentPlugin VChannels, and 5 scheduled tasks.
+Without an Enterprise license certificate, xAgent uses the Free edition directly, with no Free certificate application, renewal, or expiry. Current Free runtime limits apply across the deployment: 2 non-disabled users, 30 non-deleted and unarchived Sessions of all kinds, 1 WorkGroup, 5 AgentPlugin VChannel bindings, 5 scheduled tasks, and 1 remote A2A connection.
+
+Archived Sessions do not consume capacity; restoring them checks capacity again. Disabled timers still count, while external-event triggers do not consume timer capacity. Licensing controls quantities rather than a feature whitelist; account and external-system permissions still apply. See [Software License](/docs/manual/system-configuration#software-license) for counting rules.
 
 The Enterprise edition uses an external license certificate to provide higher capacity while retaining signature, device-binding, and expiry validation. It is intended for organizations that need more capacity, support, or custom integration.
 

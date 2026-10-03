@@ -2,12 +2,12 @@
 title: "xAgent Triggers: Scheduled and Event-Driven Tasks"
 description: "Learn how to use xAgent Triggers to submit tasks on a schedule or in response to events, including creation, testing, enabling, and run-state checks."
 status: experimental
-updated: 2026-10-01
+updated: 2026-10-03
 ---
 
 # xAgent Triggers: Scheduled and Event-Driven Tasks
 
-> Version scope: current-field and behavior corrections below were checked against source `43d2698` on 2026-10-01. Older public binaries may differ; verify your installed version before following a changed UI or operation.
+> Version scope: baseline page fields were checked against source `43d2698` on 2026-10-01. The marked 0.0.22 additions follow the [v0.0.22.beta release notes](https://github.com/coffeehc/xagent-releases/releases/tag/v0.0.22.beta). Verify your installed version if the UI or behavior differs.
 
 > Status: Experimental. The page and its fields may change.
 
@@ -113,6 +113,16 @@ External Triggers have no next scheduled time. They submit a message only after 
 ### Disable a Trigger {/* #disable-a-trigger */}
 
 Disable a Trigger when it is no longer needed, its external connection is failing, its policy needs adjustment, or it might run repeatedly. Disabling is better than deleting when you only need to pause it temporarily.
+
+## Recurring Tasks: Waiting and Completing a Run {/* #business-rounds */}
+
+In `v0.0.22.beta`, an unfinished run prevents the same scheduled task from starting another run. The Agent can explicitly register waiting or completion without creating a Plan/Task just to express that state. Ending a chat reply, delivering a message, and accepting a business result are separate events.
+
+- Reply waits have no default timeout and reject unrelated input. Answer the original pending request; put other work in another Session.
+- A Plan/Task waiting deadline is a signal to handle, not automatic completion.
+- Timer delivery retains its original input identity and planned time across busy deferrals, failures, write-back errors, and restarts. An old callback cannot consume an edited schedule early.
+
+Before scheduling, define the scope of each run, the person or result it must wait for, acceptance criteria, and external actions that require approval. See [recovery checks](/docs/user-guide/long-task#recovery-checks).
 
 ## Run Checks and Troubleshooting {/* #run-checks-and-troubleshooting */}
 

@@ -696,8 +696,8 @@ function Home() {
       "xAgent: Turn your to-do list into deliverables",
     ),
     description = text(
-      "把研究、表格和会议记录交给 xAgent，在自己的服务器上推进任务、按策略审批关键动作，并交付可检查的报告与文件。",
-      "Give xAgent your research, spreadsheets, and meeting notes. Run tasks on your own server, review key actions under your policies, and keep checkable reports and files.",
+      "xAgent 是可私有化部署的多用户智能体平台：按任务组合模型、技能与工具，用工作记录、跨轮等待和受控协作持续推进工作，留下可检查的交付。",
+      "xAgent is a self-hosted, multi-user agent platform. Combine models, Skills, and tools for each task, then use work records, cross-turn waits, and governed collaboration to deliver checkable results.",
     ),
     canonicalUrl = `${siteUrl}${en ? "/en" : ""}/`,
     demoMarkdown = `# ${scenario.documentTitle}
@@ -798,13 +798,13 @@ ${text("这是官网交互演示的预设示例，不是实际 AI 执行结果�
                 </Heading>
                 <p className="xagent-home-subtitle">
                   {text(
-                    "资料太散，步骤太多？把目标交给 xAgent。",
-                    "Too many sources. Too many steps. Give xAgent the goal.",
+                    "一个可私有化部署的多用户智能体平台。",
+                    "A self-hosted, multi-user agent platform.",
                   )}
                   <br />
                   {text(
-                    "让研究有结论、表格成报告、会议留下行动。",
-                    "Turn research into briefs, sheets into reports, and meetings into next steps.",
+                    "按任务组合模型、技能与工具，让工作持续推进。",
+                    "Bring models, Skills, and tools together to keep work moving.",
                   )}
                 </p>
                 <div className="xagent-home-actions">
@@ -1556,8 +1556,8 @@ ${text("这是官网交互演示的预设示例，不是实际 AI 执行结果�
               <span className="xagent-home-release-badge">{"BETA"}</span>
               <p>
                 {text(
-                  "免费二进制版本用于体验与评估。当前免费版支持 2 个用户、30 个会话；模型与服务器费用另计。",
-                  "The free binary edition is for evaluation. It supports 2 users and 30 sessions; model and server costs are separate.",
+                  "免费二进制版本用于体验与评估。系统总额度为 2 个未禁用用户、30 个未删除且未归档会话；模型与服务器费用另计。",
+                  "The free binary edition is for evaluation: system-wide limits of 2 non-disabled users and 30 sessions excluding deleted or archived sessions. Model and server costs are separate.",
                 )}{" "}
                 <a href={localize("/docs/getting-started/what-is-xagent/")}>
                   {text("查看完整定位与限制", "See positioning and limits")}
@@ -1582,6 +1582,13 @@ ${text("这是官网交互演示的预设示例，不是实际 AI 执行结果�
                     ),
                   ],
                   [
+                    text("周期任务怎样接着做？", "How does recurring work continue?"),
+                    text(
+                      "v0.0.22.beta 用工作记录保留阶段判断与过程条目，支持跨轮等待和外部结果接续。同一定时任务上一轮未结束时不会启动下一轮；归档会停止执行与相关调度，恢复后仍需明确续跑。操作步骤见使用手册。",
+                      "v0.0.22.beta keeps assessments and incremental entries in work records, supports cross-turn waits, and continues from external results. A timer will not start its next round while the previous one is unfinished. Archiving stops execution and related schedules; restoring still requires an explicit resume action. See the manual for the workflow.",
+                    ),
+                  ],
+                  [
                     text(
                       "这些示例是在实时运行吗？",
                       "Are these demos running live?",
@@ -1593,12 +1600,12 @@ ${text("这是官网交互演示的预设示例，不是实际 AI 执行结果�
                   ],
                   [
                     text(
-                      "已经有协作能力，Team 还在规划什么？",
-                      "What exists today, and what is still planned?",
+                      "现在怎样组织多个智能体？",
+                      "How are multiple agents organized today?",
                     ),
                     text(
-                      "当前已有同一用户下的会话通知、协作事件和长期记忆能力。完整的项目级 Agent Team、进一步的记忆增强与知识库能力仍在后续规划中。",
-                      "Session notifications, collaboration events within the same user, and long-term memory exist today. Full project-level Agent Teams, further memory improvements, and knowledge-base features are still planned.",
+                      "工作编排（WorkGroup）组织智能体与通信关系，独立会话执行任务，同一用户的会话通过协作消息交接；A2A 可连接远端 Agent。编排配置不等于跨用户共享团队，也不保证任意复杂项目自主完成。",
+                      "WorkGroup organizes agents and communication links. Independent sessions execute tasks and exchange collaboration messages within one user; A2A connects remote agents. Orchestration does not imply cross-user shared teams or guaranteed autonomous completion of any project.",
                     ),
                   ],
                 ].map(([e, s]) => (

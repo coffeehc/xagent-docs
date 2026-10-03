@@ -2,7 +2,7 @@
 title: "xAgent Documentation Guide and User Manual"
 description: "Find a path through product basics, first use, everyday work, advanced workflows, deployment, and troubleshooting, with a full role and console-page index."
 status: beta
-updated: 2026-10-01
+updated: 2026-10-03
 schemaType: CollectionPage
 ---
 
@@ -18,7 +18,7 @@ Start with the work you want to do; you do not need to read every concept first.
 
 **Match the documentation to your version**
 
-The public binary release is now `v0.0.21.beta` (2026-09-22). This revision also checks the source as of 2026-10-01; behavior newer than the public release is labeled separately. A documentation date does not establish that your deployment includes it. Run `xagent version` or check Software License, then consult the [Changelog](/docs/changelog). Actual pages, roles, installed tools, and external authorizations depend on your deployment.
+The public binary release is now `v0.0.22.beta` (2026-10-02). This revision also checks the source as of 2026-10-01; behavior newer than the public release is labeled separately. A documentation date does not establish that your deployment includes it. Run `xagent version` or check Software License, then consult the [Changelog](/docs/changelog). Actual pages, roles, installed tools, and external authorizations depend on your deployment.
 
 </div>
 
@@ -27,7 +27,7 @@ The public binary release is now `v0.0.21.beta` (2026-09-22). This revision also
 | Your Role | Start Here | Description |
 | --- | --- | --- |
 | Ordinary user | [Workspace](/docs/manual/workspace) | Start with Dashboard, Agent Session, and Workspace Files |
-| User configuring advanced capabilities | [Operations](/docs/manual/operations) | Manage Triggers, Agents, Skills, Tools, MCP, connections, and Secrets |
+| User configuring advanced capabilities | [Operations](/docs/manual/operations) | Manage Triggers, Agents, Skills, Tools, MCP, connections, and Environment Variables |
 | Administrator | [User Management](/docs/manual/user-management), [Analytics](/docs/manual/analytics), [Agent Governance](/docs/manual/agent-governance), and [System Configuration](/docs/manual/system-configuration) | Manage global resources, execution environments, and system configuration |
 
 ![2026-10-01 reviewed product interface](/img/home/current/xagent-launch-session.webp)
@@ -58,7 +58,7 @@ From a session to inspectable files: the launch-kit demonstration, completed wit
 
 ### Operations {/* #operations */}
 
-- [Approvals, Triggers, Agents, Skills, Tools, MCP, connections, A2A, and Secrets](/docs/manual/operations)
+- [Approvals, Triggers, Agents, Skills, Tools, MCP, connections, A2A, and Environment Variables](/docs/manual/operations)
 
 ### Personal Settings {/* #personal-settings */}
 

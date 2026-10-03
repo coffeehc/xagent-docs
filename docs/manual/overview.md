@@ -2,7 +2,7 @@
 title: "xAgent 文档导航与使用手册"
 description: "按了解产品、第一次使用、日常工作、进阶能力、部署治理和排错六条路径阅读 xAgent 文档，也可按角色和控制台页面查找完整操作说明。"
 status: beta
-updated: 2026-10-01
+updated: 2026-10-03
 schemaType: CollectionPage
 ---
 
@@ -18,7 +18,7 @@ import DocsJourney from '@site/src/components/DocsJourney';
 
 **版本与界面怎么对照**
 
-公开二进制发行版已更新到 `v0.0.21.beta`（2026-09-22）。本轮文档同时核对了 2026-10-01 的源码；超出公开发行版的行为会单独注明，不能仅凭文档日期判断自己的部署已支持。先运行 `xagent version` 或查看软件授权页，再核对[更新日志](/docs/changelog)。页面、角色、已安装工具与外部授权仍以当前部署为准。
+公开二进制发行版已更新到 `v0.0.22.beta`（2026-10-02）。本轮文档同时核对了 2026-10-01 的源码；超出公开发行版的行为会单独注明，不能仅凭文档日期判断自己的部署已支持。先运行 `xagent version` 或查看软件授权页，再核对[更新日志](/docs/changelog)。页面、角色、已安装工具与外部授权仍以当前部署为准。
 
 </div>
 
@@ -27,7 +27,7 @@ import DocsJourney from '@site/src/components/DocsJourney';
 | 你的身份 | 建议先看 | 说明 |
 | --- | --- | --- |
 | 普通用户 | [工作台](/docs/manual/workspace) | 从仪表板、Agent 会话和工作区文件开始 |
-| 需要配置进阶能力的用户 | [运行治理](/docs/manual/operations) | 管理触发器、智能体、Skill、Tool、MCP、连接和密钥 |
+| 需要配置进阶能力的用户 | [运行治理](/docs/manual/operations) | 管理触发器、智能体、Skill、Tool、MCP、连接和环境变量 |
 | 管理员 | [用户管理](/docs/manual/user-management)、[统计分析](/docs/manual/analytics)、[Agent 治理](/docs/manual/agent-governance)、[系统配置](/docs/manual/system-configuration) | 负责全局资源、执行环境和系统配置 |
 
 ![2026-10-01 实际核对的产品界面](/img/home/current/xagent-launch-session.webp)
@@ -58,7 +58,7 @@ import DocsJourney from '@site/src/components/DocsJourney';
 
 ### 运行治理 {/* #运行治理 */}
 
-- [审批、触发器、智能体、Skill、Tool、MCP、插件连接、A2A 与密钥](/docs/manual/operations)
+- [审批、触发器、智能体、Skill、Tool、MCP、插件连接、A2A 与环境变量](/docs/manual/operations)
 
 ### 个人设置 {/* #个人设置 */}
 

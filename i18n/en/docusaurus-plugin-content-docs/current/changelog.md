@@ -3,13 +3,28 @@ title: "Changelog"
 description: "Review important user-facing changes, binary release contents, and upgrade notes for each xAgent release."
 image: "/img/share/en/xagent-overview.png"
 status: stable
-updated: 2026-10-01
+updated: 2026-10-03
 schemaType: CollectionPage
 ---
 
 # Changelog
 
 This page records important installation, usage, and safety-governance changes in xAgent binary releases. xAgent remains in beta, and features, interfaces, and protocols may continue to change.
+
+## `v0.0.22.beta` - 2026-10-02 {/* #v0022beta---2026-10-02 */}
+
+[GitHub Release and Checksums](https://github.com/coffeehc/xagent-releases/releases/tag/v0.0.22.beta) · [Long Tasks and Recovery](/docs/user-guide/long-task) · [Environment Variables](/docs/manual/operations) · [Session Archiving](/docs/user-guide/agent-session)
+
+This release improves continuity for periodic long-running work with work records, cross-turn waits, external-result continuation, and session archiving. These are execution mechanisms, not a promise that every task finishes without intervention.
+
+- **Work records**: incremental entries preserve changes to a topic while short summaries capture the current assessment. Paginated history, version checks, and call deduplication help avoid repeated updates. The work-record dialog below the composer shows summary versions, entries, and attachments; its entry is hidden when no records exist.
+- **Environment variables**: Secrets becomes a variable manager supporting encrypted and plain-text values, descriptions, and usage notes. Encryption mode is immutable after creation. Encrypted values expose placeholders only; plain-text values are read on demand, with a warning before saving sensitive-looking names.
+- **Periodic execution and waits**: a timer does not start another round until its previous round ends. Explicit wait and completion registration do not require a Plan/Task. Reply waits have no default timeout and reject unrelated input; a waiting deadline is a signal, not proof of completion.
+- **Recovery and remote results**: timer delivery preserves input identity and scheduled time across busy deferral, failures, writeback errors, and restarts. A2A preserves the original action and remote task identity, with original-task queries, unknown-effect states, late results, and linked recovery so old results cannot overwrite confirmed terminal states.
+- **Archive and restore**: archiving stops execution and related scheduling while retaining messages, records, tasks, waits, and files. Archived sessions do not count toward session capacity. Restore checks capacity again and requires an explicit action to resume work. Default queries and sandbox views hide archived sessions; historical queries must explicitly include them. Main and plugin-dedicated sessions retain their existing management entry points.
+- **Models and tools**: fixed text roles retain context and output budgets while inheriting other request parameters from the selected model. Record identities, versions, cursors, optional-parameter hints, and bounded recovery for truncated output, protocol fragments, and text-edit errors are improved.
+
+Before upgrading, back up configuration, the database, workspaces, Memory, Skill and Tool packages, and installed AgentPlugin configuration and data. This release uses database migration version 39 and migrates existing secrets to encrypted variables; replacing the binary alone is not a database rollback. Only the Server is updated; plugins retain their independent releases. Verify the installed version, then test variables, one waiting continuation, and archive/restore with non-sensitive inputs.
 
 ## Documentation Review - 2026-10-01 {/* #documentation-review---2026-10-01 */}
 

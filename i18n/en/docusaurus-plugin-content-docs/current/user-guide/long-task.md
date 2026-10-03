@@ -2,7 +2,7 @@
 title: "xAgent Long-running Tasks: Continuous Execution and Staged Delivery"
 description: "Learn how to use xAgent for multi-step, long-running, and staged deliverable tasks, and follow them through sessions, files, confirmations, and events."
 status: experimental
-updated: 2026-10-01
+updated: 2026-10-03
 ---
 
 # xAgent Long-running Tasks: Continuous Execution and Staged Delivery
@@ -125,9 +125,21 @@ After a stage transition, compression, restart, or child reply, check:
 
 Work records retain topics, revisions, and appended entries in the current Session; context summaries support continuation; long-term Memory reuses stable background. None means automatically remembering every historical detail.
 
-For scheduled tasks, distinguish ending one business run from keeping the recurring Trigger enabled. In current main, an unfinished or waiting run blocks the next run for the same Trigger. Waiting for feedback is not failure, and finishing a chat response does not automatically complete the business run. For A2A waits, check the original remote action so a late receipt is not mistaken for authorization in a new run.
+For scheduled tasks, distinguish ending one business run from keeping the recurring Trigger enabled. In `v0.0.22.beta`, an unfinished or waiting run blocks the next run for the same Trigger. Waiting for feedback is not failure, and finishing a chat response does not automatically complete the business run. For A2A waits, check the original remote action so a late receipt is not mistaken for authorization in a new run.
 
-Work-record, scheduled-run, and recovery boundaries in this section were checked against main commit `43d2698` on 2026-10-01. Entry points and behavior depend on the deployed version.
+See the [v0.0.22.beta release notes](https://github.com/coffeehc/xagent-releases/releases/tag/v0.0.22.beta) for work records, scheduled-run waits, and recovery, and [Triggers](/docs/user-guide/trigger#business-rounds) for operational boundaries.
+
+## Recovery Checks After Restart or an External Result {/* #recovery-checks */}
+
+Return to the original Session before recreating a task or repeating an external action:
+
+1. Check the server version, original task message, last stage result, work records, and files. If the Session is archived, decide whether execution should resume; see [archive and restore](/docs/user-guide/agent-session#archive-and-restore).
+2. Distinguish running, waiting for material, waiting for approval, and failure. Waiting does not mean a task was lost. Resolve the original wait; neither a timeout nor a restart replaces approval.
+3. If an external outcome is unclear, query the original request or remote task first. Preserve the original action identity, planned time, and receipts so a late result is not treated as new work.
+4. Retry only a step confirmed to be missing. Before writing or sending again, check whether the target system already applied the action, then continue within the original authorization.
+5. Accept the result using real artifacts or target-system receipts before confirming the run complete. If it remains unresolved, give an administrator the version, Session identifier, occurrence time, and redacted error, never credentials.
+
+When receiving external state, the first message and Session state change are persisted in one transaction. After restart, the service scans stored states to recover the work. This is not an exactly-once guarantee for external business actions. Business deduplication, idempotency keys, and completion acknowledgments (ACKs) require cooperation from the Tool and integrated system. A2A original-task queries, unknown-effect states, and late-result handling do not replace acceptance checks in the target system.
 
 ## Common Scenarios {/* #common-scenarios */}
 

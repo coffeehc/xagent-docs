@@ -1,13 +1,13 @@
 ---
 title: "Operations Pages"
-description: "Guide to xAgent Approvals, Triggers, Agents, Skills, Tools, MCP, Plugin Connections, A2A, and Secrets."
-status: beta
-updated: 2026-10-01
+description: "Guide to xAgent Approvals, Triggers, Agents, Skills, Tools, MCP, Plugin Connections, A2A, and environment variables."
+status: experimental
+updated: 2026-10-03
 ---
 
 # Operations Pages
 
-> Version scope: current-field and behavior corrections below were checked against source `43d2698` on 2026-10-01. Older public binaries may differ; verify your installed version before following a changed UI or operation.
+> Version scope: baseline page fields were checked against source `43d2698` on 2026-10-01. The marked 0.0.22 additions follow the [v0.0.22.beta release notes](https://github.com/coffeehc/xagent-releases/releases/tag/v0.0.22.beta). Verify your installed version if the UI or behavior differs.
 
 Operations covers task control and capability configuration for the signed-in user under `/app`. The current menu no longer hides these pages behind simple or advanced mode. Resource access and executable actions still depend on account permissions, service readiness, and approval policy. Global administration is in the separate `/admin` console.
 
@@ -129,16 +129,21 @@ See [AgentPlugins](/docs/user-guide/connector) for the complete workflow.
 
 Users discover and manage remote Agents, send and track tasks, and inspect remote outcomes in an inbox. A2A is managed separately from locally installed AgentPlugins. See [A2A Client](/docs/user-guide/a2a).
 
-## Secret Management {/* #secret-management */}
+## Environment Variables (Formerly Secrets) {/* #secret-management */}
 
-**Menu path:** Operations &gt; Secrets (`/app/secrets`)
+**Entry note:** The image and `/app/secrets` refer to the older Secrets entry. `v0.0.22.beta` replaces Secret management with environment variables; follow the actual menu in your installed version.
 
 **Visible to:** All users
 
 ![xAgent Secret Management page showing Secret names, masked value previews, purposes, and update times](/img/manual/v005/en/secrets.webp)
 
-Secret Management stores sensitive values required by tasks and external services:
+Environment variables hold credentials or ordinary configuration. Choose the appropriate mode before creating one:
 
-- Create a stable Secret Key and describe its purpose.
-- The page shows only a masked preview and never displays the complete Secret again.
-- Skills, Tools, and configuration reference Secrets through placeholders. Do not put real values in prompts or Workspace files.
+| Mode | Purpose and reading boundary |
+| --- | --- |
+| Encrypted | Sensitive values such as passwords and access tokens; the model sees placeholders only |
+| Unencrypted | Ordinary text configuration readable on demand; not confidential storage |
+
+The encryption mode cannot be changed after creation. Provide a clear name, description, and usage notes. Names containing markers such as `KEY` or `TOKEN` require confirmation before saving an unencrypted value; this warning does not determine whether its contents are sensitive. Existing Secrets migrate to encrypted variables during upgrade.
+
+Keep credentials out of prompts, Workspace files, and screenshots. These mode and access boundaries follow the [v0.0.22.beta release notes](https://github.com/coffeehc/xagent-releases/releases/tag/v0.0.22.beta); the older image does not show the new fields.

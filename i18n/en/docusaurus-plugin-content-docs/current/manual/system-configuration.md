@@ -2,7 +2,7 @@
 title: "System Configuration Pages"
 description: "Page-by-page guidance and English UI examples for xAgent models, system settings, software license, and Agent roles."
 status: beta
-updated: 2026-10-01
+updated: 2026-10-03
 ---
 
 # System Configuration Pages
@@ -53,7 +53,22 @@ See [Model Configuration](/docs/user-guide/model-config) for details.
 
 ![xAgent Software License showing device, validity, scope, and update action](/img/manual/v005/en/admin-license.webp)
 
-When no Enterprise license certificate is installed, xAgent enters the Free edition directly. This page shows the Free state and its system-wide limits (not separate allowances for each user): 2 users, 30 Sessions, 1 WorkGroup, 5 AgentPlugin VChannels, 5 scheduled tasks, and 1 A2A connection. The Free edition has no certificate expiry.
+Without an Enterprise license certificate, xAgent uses the Free edition directly. No Free certificate application or renewal is needed, and there is no Free certificate expiry. Current Free runtime capacity is counted across the deployment, not separately for each user:
+
+| Resource | System-wide limit | Counting rule |
+| --- | --- | --- |
+| Users | 2 | Users that are not disabled |
+| Sessions | 30 | Sessions that are neither deleted nor archived, across all Session kinds, not only children |
+| WorkGroup | 1 | WorkGroups in the system |
+| AgentPlugin VChannels | 5 | Virtual-channel bindings, not installed plugin services |
+| Scheduled tasks | 5 | Timer triggers, including disabled timers; external-event triggers are excluded |
+| Remote A2A | 1 | Remote A2A connections, counted separately from VChannels |
+
+Archived Sessions do not consume Session capacity; restoring one checks available capacity again. At a limit, review usage across the whole deployment. Stopping execution does not remove an unarchived Session from the count, and disabling a timer does not release timer capacity. See [archive and restore](/docs/user-guide/agent-session#archive-and-restore).
+
+Licensing controls quantities rather than a feature whitelist. Available capabilities still depend on the version, configured models and connections, account permissions, and security policies. Capacity does not expand permissions in external systems.
+
+> The limits above describe current runtime capacity. The [EULA bundled with v0.0.22.beta](https://github.com/coffeehc/xagent-releases/releases/download/v0.0.22.beta/EULA.md) still contains older quota wording that differs from this page. This page does not replace the license agreement; contact the maintainer to clarify applicable license terms.
 
 After an Enterprise certificate is installed, this page shows the device and license identifiers, customer, issue and expiry time, and licensed capacity. Use **Update license** to upload a replacement Enterprise license file.
 

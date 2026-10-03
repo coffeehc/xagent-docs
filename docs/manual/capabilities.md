@@ -2,14 +2,14 @@
 title: "支持的智能体功能"
 description: "按任务选择 xAgent 能力，区分版本清单与部署可用状态，并了解文件上传、解析、预览和 Word、Excel、PowerPoint 产物边界。"
 status: beta
-updated: 2026-10-01
+updated: 2026-10-03
 ---
 
 # 支持的智能体功能
 
 本页保留 `v0.0.20.beta` 随包内置 **54 个 Skill** 的版本清单，便于按任务查找和比较。它们不是彼此隔离的聊天机器人，而是可按任务动态发现和加载的工作方法。一个任务可以组合多个 Skill，再调用 Tool、MCP 或 AgentPlugin 完成文件处理、数据计算和外部动作。
 
-当前公开 Server 版本为 [v0.0.21.beta](https://github.com/coffeehc/xagent-releases/releases/tag/v0.0.21.beta)。该版本的公共 Skill catalog 使用逐项制品：每个 Skill 对应独立、不可变的 ZIP 和 `skill.json`，不再生成公共 Skill 整包或执行旧的启动迁移。因此，下面的 54 项是明确版本的参考清单，不是新版部署的固定数量承诺。
+当前公开 Server 版本为 [v0.0.22.beta](https://github.com/coffeehc/xagent-releases/releases/tag/v0.0.22.beta)。该版本的公共 Skill catalog 使用逐项制品：每个 Skill 对应独立、不可变的 ZIP 和 `skill.json`，不再生成公共 Skill 整包或执行旧的启动迁移。因此，下面的 54 项是明确版本的参考清单，不是新版部署的固定数量承诺。
 
 实际部署中的可用列表以“运行治理 → Skill”页面为准。管理员可以停用内置 Skill，也可以增加个人或公共 Skill；页面卡片数量还会受到安装来源和可见范围影响，不能用来反推某个发布包的内置数量。
 

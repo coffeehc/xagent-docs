@@ -2,7 +2,7 @@
 title: "AgentPlugins for IM, Databases, SSH, and Browsers"
 description: "Learn about AgentPlugin Connectors, Plugin Connections, bidirectional messaging, Database and SSH resources, and protocols."
 status: experimental
-updated: 2026-10-01
+updated: 2026-10-03
 ---
 
 # AgentPlugins for IM, Databases, SSH, and Browsers
@@ -30,7 +30,7 @@ Compared with MCP, a Connector focuses on external events, user connections, and
 
 ## Current AgentPlugin Versions {/* #current-agentplugin-versions */}
 
-The Server and AgentPlugins are released independently. The current Server is [v0.0.21.beta](https://github.com/coffeehc/xagent-releases/releases/tag/v0.0.21.beta), whose release did not change official AgentPlugins. The [public plugin catalog](https://downloads.xagent.xiagaogao.com/agentplugins/versions.json) lists:
+The Server and AgentPlugins are released independently. The current Server is [v0.0.22.beta](https://github.com/coffeehc/xagent-releases/releases/tag/v0.0.22.beta), whose release did not change official AgentPlugins. The [public plugin catalog](https://downloads.xagent.xiagaogao.com/agentplugins/versions.json) lists:
 
 | AgentPlugin | Version | Main use |
 | --- | --- | --- |

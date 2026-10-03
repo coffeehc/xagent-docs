@@ -2,7 +2,7 @@
 title: "AgentPlugin：IM、数据库、SSH 与浏览器"
 description: "了解 AgentPlugin Connector 管理、插件连接、IM 双向消息、Database/SSH 资源与协议。"
 status: experimental
-updated: 2026-10-01
+updated: 2026-10-03
 ---
 
 # AgentPlugin：IM、数据库、SSH 与浏览器
@@ -30,7 +30,7 @@ AgentPlugin 是 xAgent 与外部系统之间的扩展协议。微信、Telegram�
 
 ## 当前 AgentPlugin 版本 {/* #当前-agentplugin-版本 */}
 
-Server 与 AgentPlugin 独立发布。当前 Server 为 [v0.0.21.beta](https://github.com/coffeehc/xagent-releases/releases/tag/v0.0.21.beta)，该次发布未更新官方 AgentPlugin；[公开插件版本目录](https://downloads.xagent.xiagaogao.com/agentplugins/versions.json)中的版本是：
+Server 与 AgentPlugin 独立发布。当前 Server 为 [v0.0.22.beta](https://github.com/coffeehc/xagent-releases/releases/tag/v0.0.22.beta)，该次发布未更新官方 AgentPlugin；[公开插件版本目录](https://downloads.xagent.xiagaogao.com/agentplugins/versions.json)中的版本是：
 
 | AgentPlugin | 版本 | 主要用途 |
 | --- | --- | --- |

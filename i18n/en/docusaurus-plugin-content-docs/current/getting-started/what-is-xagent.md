@@ -3,7 +3,7 @@ title: "What Is xAgent? Product Positioning and Core Capabilities"
 description: "A plain-language explanation of what xAgent is, what it can do, and how it differs from a typical chat assistant."
 image: "/img/share/en/xagent-overview.png"
 status: stable
-updated: 2026-10-01
+updated: 2026-10-03
 ---
 
 # What Is xAgent?
@@ -16,7 +16,7 @@ You can ask it to break down a goal, make a plan, carry out the steps, review da
 
 xAgent does not require a team to replace its existing systems, and it does not invent new permissions. It understands the task, coordinates execution, and summarizes results; each connected system still controls what its own accounts are allowed to access.
 
-As of 2026-10-01, the latest public binary release is `v0.0.21.beta`, a beta release for deployment trials, scenario validation, and feedback.
+As of 2026-10-03, the latest public binary release is `v0.0.22.beta`, published on 2026-10-02 for deployment trials, scenario validation, and feedback.
 
 ## Why use xAgent? {/* #why-use-xagent */}
 
@@ -58,6 +58,12 @@ Suppose you ask: "Turn these three sales spreadsheets into a weekly report, flag
 - **Keeps people in control:** Sending, deleting, overwriting, or changing external data can pause for approval.
 - **Self-hostable:** The service, workspace, and model gateway can run in your own environment.
 - **Turns experience into reusable capability:** After a task is complete, an employee can tell the AI, "Summarize this workflow as a Skill," and xAgent can help organize, test, and improve it. If it also needs a fixed role, prompt, and capability entry point, it can become a dedicated Agent for the team.
+
+## How Multiple Agents Work Together {/* #how-multiple-agents-work-together */}
+
+xAgent supports independent Session collaboration under the same user and WorkGroup orchestration. WorkGroup maintains Agents, communication links, drafts, and published versions. Each Session owns its context and execution state and performs the actual work. Remote A2A uses separate connections and task receipts to work with external Agents.
+
+These layers answer how work is organized, where it executes, and how external Agents are connected. Publishing configuration, submitting a message, and completing a task are distinct states. Check replies, files, and execution records to accept the result. See [multi-Agent collaboration](/docs/guides/multi-agent-session-event-collaboration) and [remote A2A](/docs/user-guide/a2a).
 
 ## How it compares {/* #how-it-compares */}
 

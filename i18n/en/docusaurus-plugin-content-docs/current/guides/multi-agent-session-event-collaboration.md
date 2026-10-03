@@ -2,7 +2,7 @@
 title: "How Multiple AI Agents Collaborate Through Session Events"
 description: "Learn how independent AI Agent sessions exchange status, tasks, and file references through notifications and collaboration events without polluting context or crossing user boundaries."
 status: beta
-updated: 2026-10-01
+updated: 2026-10-03
 ---
 
 # How Multiple AI Agents Collaborate Through Session Events
@@ -16,6 +16,20 @@ Message kinds, acceptance boundaries, and WorkGroup behavior below were checked 
 ## Why Use Independent Sessions {/* #why-use-independent-sessions */}
 
 Independent sessions let each Agent maintain its own goal, role, context, Tools, Skills, plan, progress, workspace, and outputs. Research, writing, data processing, and external delivery do not need to share one context. One session can also wait for approval while others continue working.
+
+## Sessions, WorkGroup, and Remote A2A {/* #sessions-workgroup-and-remote-a2a */}
+
+Multi-Agent collaboration is available, with three distinct layers:
+
+| Layer | What it manages | What to check |
+| --- | --- | --- |
+| Local Session collaboration | Independent Sessions and targeted messages under one user | Exact target, task materials, replies, and artifacts |
+| WorkGroup orchestration | Management Sessions, Agent and communication-link directories, drafts, and published versions | The configuration version and communication links in use |
+| Remote A2A | External Agent connections, remote task identities, status, and result delivery | Connection authentication, original remote task state, and local receipt of results |
+
+WorkGroup is implemented orchestration configuration, rather than a placeholder for a future Team feature. It does not own separate business runtime state: Sessions execute the work. Publishing configuration does not establish that a task has started or completed. Remote A2A has its own connection and task lifecycle; see [remote Agent collaboration](/docs/user-guide/a2a).
+
+The same-user boundary for local Sessions still applies. Neither orchestration nor remote connections imply cross-user sharing of local Sessions or expanded external permissions.
 
 ## Main Agents and Sub Agents {/* #main-agents-and-sub-agents */}
 
