@@ -342,7 +342,7 @@ const config: Config = {
             },
             {
               label: '联系我们',
-              href: 'mailto:xagent@xiagaogao.com',
+              href: 'mailto:coffeehc@gmail.com',
             },
           ],
         },

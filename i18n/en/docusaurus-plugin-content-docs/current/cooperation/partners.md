@@ -57,7 +57,7 @@ If you are a model API / token provider, or are building MCP aggregation service
 
 Contact email:
 
-**[xagent@xiagaogao.com](mailto:xagent@xiagaogao.com)**
+**[coffeehc@gmail.com](mailto:coffeehc@gmail.com)**
 
 Please briefly include:
 
