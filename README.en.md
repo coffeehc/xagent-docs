@@ -73,3 +73,7 @@ npm run validate:site
 - `src/data/content-dates.json` records the homepage revision with its source commit. Listing pages inherit explicit updates only from articles actually displayed. Unknown dates remain absent.
 - Page-specific Open Graph titles and descriptions supply the X/Twitter fallback, rather than global homepage copy.
 - `npm run build` first checks release consistency. Run `npm run validate:site` after building to check JSON-LD, dates, sharing metadata, links, and analytics.
+
+### Build-cache regression
+
+Docusaurus 3.10.2 can leave server MDX compilation waiting for a client loader that was skipped by a persistent-cache hit. `future.faster.mdxCrossCompilerCache` is explicitly disabled; webpack caching and all content/link checks remain enabled. After changing build-cache configuration, run `node scripts/test-build-cache.mjs`. It builds both locales, removes only generated server caches, then rebuilds and validates the site with warm client caches.

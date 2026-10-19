@@ -24,6 +24,9 @@ const config: Config = {
     v4: true,
     experimental_vcs: 'disabled',
     faster: {
+      // A restored client cache can skip the loader that resolves server MDX.
+      // Compile MDX independently to avoid an unsettled build promise.
+      mdxCrossCompilerCache: false,
       rspackBundler: false,
       rspackPersistentCache: false,
     },

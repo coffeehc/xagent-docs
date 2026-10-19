@@ -100,3 +100,7 @@ npm run validate:site
 - 首页修订日期记录在 `src/data/content-dates.json`，附对应内容提交作为依据。列表页只继承实际展示文章的明确更新日期；未知日期保持缺省。
 - 分享标题与描述使用页面自己的 Open Graph 元数据，X/Twitter 回退到这些值，避免全站套用首页文案。
 - `npm run build` 先检查版本一致性；构建后运行 `npm run validate:site` 检查 JSON-LD、日期、分享元数据、链接和分析代码。
+
+### 构建缓存回归
+
+Docusaurus 3.10.2 在客户端命中持久缓存时，可能让服务端 MDX 编译等待一个不会运行的客户端 loader。因此显式关闭 `future.faster.mdxCrossCompilerCache`；保留 webpack 缓存及全部内容、链接检查。修改构建缓存配置后运行 `node scripts/test-build-cache.mjs`：先构建双语站点，仅移除生成的服务端缓存，再保留客户端热缓存重建并校验整站。
