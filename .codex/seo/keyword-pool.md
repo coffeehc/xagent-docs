@@ -120,3 +120,17 @@
 | 2026-08-02 | 完成 Agent 与自动化中英文 Insights、真实计划与审批截图、失败产物复验、持久化修复计划和发布前站点校验 | xAgent 受控实跑、真实 CSV 解析器、双语生产构建、浏览器桌面与移动 QA | 人工审阅后发布；发布 2 至 4 周后按页面复盘 Search Console |
 | 2026-08-15 | DeepSeek Harness 开发者预览发布后复核官方页面、GitHub 和当前 SERP；将任务编排与 Agent Loop 两组比较意图分配给已有双语 Harness Insights，保留 xAgent 标题与 slug，避免误导和页面竞争 | DeepSeek 官方页面、官方 GitHub、官方架构文档与 SERP 2026-08-15 | 发布后 2 至 4 周按四个页面分别复盘 Search Console 查询落点 |
 | 2026-08-16 | 用户确认新增 DeepSeek Harness 与 xAgent 比较入口页；将架构选型意图分配给新页面，任务编排与执行循环细节继续由原两篇文章承接，避免三页互相复制 | DeepSeek 官方固定提交、xAgent 当前代码与现有双语 Harness 文章 | 发布后 2 至 4 周分别检查比较词、任务编排词和 Agent Loop 词的 Search Console 落点 |
+
+
+## 2026-10-19：Moltbook 持续运营案例
+
+仅记录本次真实案例的搜索意图；未取得搜索量、KD 或 Search Console 测量数据。调研与内容简报见 [2026-10-19 案例发布研究](./2026-10-19-moltbook-case-study.md)。
+
+| 关键词 | 语言 | 集群 | 搜索意图 | 目标读者 | 产品事实依据 | 对应落地页 | 来源 | 状态 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| Moltbook 智能体持续运营案例 | zh-CN | 长任务案例 | 实际结果与过程核验（主词） | Agent 部署者与运营负责人 | 账号指标、r1859 恢复报告、工作记录 | `/blog/xagent-moltbook-continuous-operations/` | 2026-10-19 搜索样本与第一手截图 | 已选题 |
+| Agent 中断恢复 | zh-CN | 长任务案例 | 失败与接续核验（辅助词） | Agent 部署者 | r1859 先查已有写入、分开记录验证结果 | `/blog/xagent-moltbook-continuous-operations/` | 2026-10-19 第一手截图 | 已选题 |
+| Agent 工作记录 | zh-CN | 长任务案例 | 待办移交与记录核验（辅助词） | 运营负责人 | 指标追加与下一轮待办 | `/blog/xagent-moltbook-continuous-operations/` | 2026-10-19 第一手截图 | 已选题 |
+| Moltbook agent operations case study | EN | Long-running work | Results and process evidence (primary) | Agent operators | Account metrics and recovery reports | `/en/blog/xagent-moltbook-continuous-operations/` | Search samples and screenshots, 2026-10-19 | 已选题 |
+| agent interruption recovery | EN | Long-running work | Recovery evidence (supporting) | Agent operators | r1859 write verification and split outcomes | `/en/blog/xagent-moltbook-continuous-operations/` | First-hand screenshots, 2026-10-19 | 已选题 |
+| agent work records | EN | Long-running work | Continuity evidence (supporting) | Operations leads | Metric writes and pending-work handoff | `/en/blog/xagent-moltbook-continuous-operations/` | First-hand screenshots, 2026-10-19 | 已选题 |

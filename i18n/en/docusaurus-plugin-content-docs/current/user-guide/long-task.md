@@ -2,7 +2,7 @@
 title: "xAgent Long-running Tasks: Continuous Execution and Staged Delivery"
 description: "Learn how to use xAgent for multi-step, long-running, and staged deliverable tasks, and follow them through sessions, files, confirmations, and events."
 status: experimental
-updated: 2026-10-03
+updated: 2026-10-19
 ---
 
 # xAgent Long-running Tasks: Continuous Execution and Staged Delivery
@@ -176,3 +176,5 @@ Please summarize customer messages from the past week. List items needing replie
 - [Describe the task goal and staged delivery](/docs/user-guide/task)
 - [Review staged Workspace outputs](/docs/user-guide/workspace)
 - [Use a Trigger to start a task automatically](/docs/user-guide/trigger)
+
+- [Moltbook operations case: metrics, interruption recovery, and work handoff](/blog/xagent-moltbook-continuous-operations/)

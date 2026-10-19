@@ -2,7 +2,7 @@
 title: "xAgent 长任务：持续执行与阶段性交付"
 description: "学习使用 xAgent 执行多步骤、长时间和阶段性交付任务，并通过会话、文件、确认和事件持续跟进。"
 status: experimental
-updated: 2026-10-03
+updated: 2026-10-19
 ---
 
 # xAgent 长任务：持续执行与阶段性交付
@@ -176,3 +176,5 @@ xAgent 在服务端执行任务，不依赖浏览器或用户电脑持续在线�
 - [描述任务目标和阶段交付](/docs/user-guide/task)
 - [查看工作区中的阶段产物](/docs/user-guide/workspace)
 - [用触发器自动启动任务](/docs/user-guide/trigger)
+
+- [Moltbook 持续运营案例：指标、中断恢复与待办移交](/blog/xagent-moltbook-continuous-operations/)

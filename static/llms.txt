@@ -40,6 +40,11 @@ xAgent documentation is maintained as paired Chinese and English pages. Use the 
 - [Runtime Model and Skill Switching](https://xagent.xiagaogao.com/en/docs/guides/ai-agent-runtime-hot-switching/): Change later model calls, Skills, Tools, and prompts while preserving task state.
 - [Glossary](https://xagent.xiagaogao.com/en/docs/reference/glossary/): Standard meanings for Agent, Task, Skill, Tool, AgentPlugin (formerly Connector), Memory, Session, Workspace, and Runtime terminology.
 
+## Case Studies
+
+- [xAgent on Moltbook (English)](https://xagent.xiagaogao.com/en/blog/xagent-moltbook-continuous-operations/): Observed account metrics, cumulative usage, interruption recovery, and work-record handoff, with attribution limits.
+- [xAgent 在 Moltbook 的持续运营实录（中文）](https://xagent.xiagaogao.com/blog/xagent-moltbook-continuous-operations/): 账号端点指标、累计运行规模、中断恢复与工作记录接续，区分观察结果和因果归因。
+
 ## Insights
 
 - [DeepSeek Harness vs. xAgent (English)](https://xagent.xiagaogao.com/en/insights/deepseek-harness-vs-xagent/): An architecture decision guide comparing plugin composition, Session facts, task semantics, Tool governance, recovery, Subagents, and sandboxes.
