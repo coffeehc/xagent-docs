@@ -2,7 +2,7 @@
 title: "系统配置页面"
 description: "xAgent 模型、系统、软件授权和 Agent 角色配置页面说明与界面图例。"
 status: beta
-updated: 2026-10-03
+updated: 2026-10-19
 ---
 
 # 系统配置页面
@@ -72,7 +72,7 @@ updated: 2026-10-03
 
 授权控制数量权益，不设置功能白名单。实际可用能力仍取决于版本、已配置的模型与连接、账号权限和安全策略；数量额度不扩大外部系统授权。
 
-> 当前运行容量如上；[v0.0.22.beta 附带的 EULA](https://github.com/coffeehc/xagent-releases/releases/download/v0.0.22.beta/EULA.md) 尚有旧配额表述，与此处不一致。本页不替代许可协议；许可条款问题请联系维护者确认。
+> 当前运行容量如上；[v0.1.0 附带的 EULA](https://github.com/coffeehc/xagent-releases/releases/download/v0.1.0/EULA.md) 尚有旧配额表述，与此处不一致。本页不替代许可协议；许可条款问题请联系维护者确认。
 
 安装企业版证书后，可以在这里查看设备 ID、授权编号、客户、签发时间、过期时间和数量权益。使用“更新 license”上传新的企业授权文件。
 

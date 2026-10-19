@@ -2,7 +2,7 @@
 title: "运行治理页面"
 description: "xAgent 审批、触发器、智能体、Skill、Tool、MCP、插件连接、A2A 和环境变量页面说明。"
 status: experimental
-updated: 2026-10-03
+updated: 2026-10-19
 ---
 
 # 运行治理页面
@@ -145,5 +145,7 @@ Skill 管理用于复用任务方法和维护个人 Skill：
 | 非加密 | 用于可按需读取的普通文本配置；不要把它当成保密存储 |
 
 加密模式创建后不可更改。填写清楚名称、说明和使用注意事项；保存非加密变量时，名称含 `KEY`、`TOKEN` 等敏感标识会触发确认提醒。提醒不能代替对内容敏感性的判断。升级时，既有密钥迁移为加密环境变量。
+
+`v0.1.0` 中，加密占位符只在允许的请求执行边界解析；文件、消息和持久化内容保留占位符，不展开真实密钥。依据[正式发布说明](https://github.com/coffeehc/xagent-releases/releases/tag/v0.1.0)，这一机制不等于授权向其他目标发送凭据。
 
 不要把真实凭据写进提示词、工作区文件或截图。环境变量的模式和读取边界依据 [v0.0.22.beta 发布说明](https://github.com/coffeehc/xagent-releases/releases/tag/v0.0.22.beta)；旧截图不展示这些新增字段。

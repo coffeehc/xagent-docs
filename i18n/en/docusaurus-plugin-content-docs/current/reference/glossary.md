@@ -2,7 +2,7 @@
 title: "Glossary"
 description: "Find the standard meanings of xAgent terms including Agent, Task, Skill, Tool, AgentPlugin, Memory, Session, Workspace, and Runtime."
 status: stable
-updated: 2026-10-03
+updated: 2026-10-19
 ---
 
 # Glossary
@@ -32,6 +32,7 @@ The glossary is the source of standardized terminology for xAgent documentation.
 | Session | An interaction context between a user and an Agent |
 | Workspace | The space for files, context, and intermediate artifacts used by an Agent during a Task |
 | Trigger | A mechanism that turns a future time or external event into a Session Task |
+| Virtual team | Server 0.1.0 team with a dedicated manager, member Session tree, shared business directory, and whole-team archiving |
 | WorkGroup | Implemented orchestration configuration for Agents and communication links, with drafts and published versions; Sessions execute the actual tasks |
 | Work Record | Session-scoped topic records, revisions, and deltas used to inspect continuity and evidence |
 | Model Profile ID | Stable reference to a model configuration; distinct from its display name or the Provider’s model ID |

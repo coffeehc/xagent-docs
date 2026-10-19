@@ -3,13 +3,25 @@ title: "Changelog"
 description: "Review important user-facing changes, binary release contents, and upgrade notes for each xAgent release."
 image: "/img/share/en/xagent-overview.png"
 status: stable
-updated: 2026-10-03
+updated: 2026-10-19
 schemaType: CollectionPage
 ---
 
 # Changelog
 
-This page records important installation, usage, and safety-governance changes in xAgent binary releases. xAgent remains in beta, and features, interfaces, and protocols may continue to change.
+This page records important installation, usage, and safety-governance changes in xAgent binary releases. Version 0.1.0 is a formal release; verify the installed version and applicable scope for each deployment.
+
+## `v0.1.0` - 2026-10-18 {/* #v010---2026-10-18 */}
+
+[GitHub Release / checksums](https://github.com/coffeehc/xagent-releases/releases/tag/v0.1.0) · [Virtual teams](/docs/user-guide/virtual-teams)
+
+- **Interface**: XUI 4.2.18 with the Forest palette, light/dark/system themes, clearer Session progress and approval states, and on-demand file previews.
+- **Virtual teams**: dedicated managers, member Session trees, reusable role templates, manager delegation, owner guidance, and shared business directories.
+- **Lifecycle**: disbanding a team archives it as a whole while preserving membership. Archived material is read-only; restore and resume are explicit actions. Long-unused Sessions can be archived automatically.
+- **Execution**: unified input-batch consumption and runtime recovery, collaboration continuation fixes, and improved MCP connection reuse, cancellation, and recovery.
+- **Security and operations**: Web and desktop share the Cookie session lifecycle. Encrypted variable placeholders resolve only at permitted request-execution boundaries; files, messages, and persisted content retain placeholders. Approval-rule changes save immediately.
+
+Back up configuration, databases, workspaces, Memory, Skill/Tool packages, and AgentPlugin configuration/state before upgrading with the existing installer. Only Server 0.1.0 is released here; AgentPlugins, desktop client, and runtime resources keep independent versions. The release notes explicitly state that the full test suite was not rerun: package integrity, four-platform builds, and installer mock regression do not establish complete business acceptance on every platform.
 
 ## `v0.0.22.beta` - 2026-10-02 {/* #v0022beta---2026-10-02 */}
 

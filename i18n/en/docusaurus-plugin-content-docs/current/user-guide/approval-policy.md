@@ -1,8 +1,8 @@
 ---
 title: "xAgent Approval Policies: Controlling Sensitive Tool Actions"
 description: "Learn how xAgent uses approvals and approval policies to control sensitive Tool actions, including user confirmations and administrator rule configuration."
-status: beta
-updated: 2026-10-01
+status: stable
+updated: 2026-10-19
 ---
 
 # xAgent Approval Policies: Controlling Sensitive Tool Actions
@@ -78,9 +78,9 @@ Policies are matched in order. The first matching rule takes effect. Put more sp
 
 ## System and Personal Policies {/* #system-and-personal-policies */}
 
-Administrators maintain the system policy, while users can maintain a personal policy. The current beta evaluates the personal policy first and falls back to the system policy only when no personal rule matches or the personal rule uses inherit. An explicit personal match overrides the system decision.
+Administrators maintain the system policy, while users can maintain a personal policy. The reviewed policy evaluates the personal policy first and falls back to the system policy only when no personal rule matches or the personal rule uses inherit. An explicit personal match overrides the system decision.
 
-The personal policy is therefore an override layer, not an add-only restriction layer. Enterprise environments that require administrator rules to be an immutable minimum baseline should evaluate whether personal policy editing is appropriate for the current beta.
+The personal policy is therefore an override layer, not an add-only restriction layer. Enterprise environments that require administrator rules to be an immutable minimum baseline should evaluate whether personal policy editing is appropriate for the current policy behavior.
 
 ## Current Default Policy {/* #current-default-policy */}
 
@@ -108,7 +108,7 @@ Security requirements differ across teams. The current effective result is deter
 
 ## Checks After Configuration {/* #checks-after-configuration */}
 
-Before saving, check:
+In `v0.1.0`, rule changes save immediately. Review the following before editing and verify each change afterward:
 
 - Whether any direct-allow rule is too broad.
 - Whether deletion, sending, and external requests still require approval.
@@ -116,7 +116,7 @@ Before saving, check:
 - Whether example hosts or paths were mistakenly used as real configuration.
 - Whether a personal approval policy needs additional rules.
 
-After saving, use a low-risk test task to verify that the policy takes effect.
+After editing, use a low-risk test task to verify that the policy takes effect.
 
 Verify both “no personal match / inherit” and “explicit personal match,” and record the Tool, actual resource, matched rule, and effective decision. When one call produces multiple operation facts, allowing one fact does not allow every other fact.
 

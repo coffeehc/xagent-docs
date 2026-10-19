@@ -2,7 +2,7 @@
 title: "How Multiple AI Agents Collaborate Through Session Events"
 description: "Learn how independent AI Agent sessions exchange status, tasks, and file references through notifications and collaboration events without polluting context or crossing user boundaries."
 status: beta
-updated: 2026-10-03
+updated: 2026-10-19
 ---
 
 # How Multiple AI Agents Collaborate Through Session Events
@@ -12,6 +12,8 @@ Putting every role, message, and tool call into one shared context is a simple w
 xAgent uses independent sessions plus Session messages. Each Agent keeps its own context, task state, and workspace scope. When another Session needs information or should continue working, the sender delivers a targeted message. This page retains the conceptual term Session Event; the current implementation preprocesses a MessageEnvelope before passing input to the target SessionEngine.
 
 Message kinds, acceptance boundaries, and WorkGroup behavior below were checked against main commit `43d2698` on 2026-10-01. Older event modes or automatic-return descriptions are not current tool parameters. Available behavior still depends on the deployed version.
+
+Server `v0.1.0` adds [virtual teams](/docs/user-guide/virtual-teams), shared business directories, whole-team archiving, and automatic archiving of long-unused Sessions. The older source references and screenshots below retain their stated dates; use the new team guide for this release.
 
 ## Why Use Independent Sessions {/* #why-use-independent-sessions */}
 

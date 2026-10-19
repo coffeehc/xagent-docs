@@ -1553,7 +1553,7 @@ ${text("这是官网交互演示的预设示例，不是实际 AI 执行结果�
               ))}
             </div>
             <div className="xagent-home-release-note">
-              <span className="xagent-home-release-badge">{"BETA"}</span>
+              <span className="xagent-home-release-badge">{`v${productRelease.version}`}</span>
               <p>
                 {text(
                   "免费二进制版本用于体验与评估。系统总额度为 2 个未禁用用户、30 个未删除且未归档会话；模型与服务器费用另计。",
@@ -1584,8 +1584,8 @@ ${text("这是官网交互演示的预设示例，不是实际 AI 执行结果�
                   [
                     text("周期任务怎样接着做？", "How does recurring work continue?"),
                     text(
-                      "v0.0.22.beta 用工作记录保留阶段判断与过程条目，支持跨轮等待和外部结果接续。同一定时任务上一轮未结束时不会启动下一轮；归档会停止执行与相关调度，恢复后仍需明确续跑。操作步骤见使用手册。",
-                      "v0.0.22.beta keeps assessments and incremental entries in work records, supports cross-turn waits, and continues from external results. A timer will not start its next round while the previous one is unfinished. Archiving stops execution and related schedules; restoring still requires an explicit resume action. See the manual for the workflow.",
+                      "xAgent 用工作记录保留阶段判断与过程条目，支持跨轮等待和外部结果接续。同一定时任务上一轮未结束时不会启动下一轮；归档会停止执行与相关调度，恢复后仍需明确续跑。操作步骤见使用手册。",
+                      "xAgent keeps assessments and incremental entries in work records, supports cross-turn waits, and continues from external results. A timer will not start its next round while the previous one is unfinished. Archiving stops execution and related schedules; restoring still requires an explicit resume action. See the manual for the workflow.",
                     ),
                   ],
                   [
@@ -1604,8 +1604,8 @@ ${text("这是官网交互演示的预设示例，不是实际 AI 执行结果�
                       "How are multiple agents organized today?",
                     ),
                     text(
-                      "工作编排（WorkGroup）组织智能体与通信关系，独立会话执行任务，同一用户的会话通过协作消息交接；A2A 可连接远端 Agent。编排配置不等于跨用户共享团队，也不保证任意复杂项目自主完成。",
-                      "WorkGroup organizes agents and communication links. Independent sessions execute tasks and exchange collaboration messages within one user; A2A connects remote agents. Orchestration does not imply cross-user shared teams or guaranteed autonomous completion of any project.",
+                      "v0.1.0 的虚拟团队提供专用经理、成员会话树、岗位模板与共享业务目录，支持经理委托和所有者指导。解散会整体归档并保留成员关系，恢复后仍需明确继续执行；团队不会扩大原有账号权限。",
+                      "Virtual teams in v0.1.0 provide dedicated managers, member Session trees, role templates, shared business directories, delegation, and owner guidance. Disbanding archives the team while retaining membership; resuming after restoration is explicit. Teams do not expand account permissions.",
                     ),
                   ],
                 ].map(([e, s]) => (

@@ -75,6 +75,11 @@ const sidebars: SidebarsConfig = {
         },
         {
           type: "doc",
+          id: "user-guide/virtual-teams",
+          label: label("虚拟团队", "Virtual Teams"),
+        },
+        {
+          type: "doc",
           id: "user-guide/task",
           label: label(
             "xAgent 任务：目标、材料与验收标准",

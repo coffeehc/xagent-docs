@@ -3,13 +3,13 @@ import fs from 'node:fs';
 // Update this one record when a public Server release is verified. Historical
 // release notes are not rewritten. The homepage imports the same record.
 const release = JSON.parse(fs.readFileSync('src/data/product-release.json', 'utf8'));
-if (!/^\d+\.\d+\.\d+\.beta$/.test(release.version) ||
+if (!/^\d+\.\d+\.\d+(?:\.beta)?$/.test(release.version) ||
     release.url !== `https://github.com/coffeehc/xagent-releases/releases/tag/v${release.version}`) {
   throw new Error('Invalid canonical public Server release record');
 }
 const file = 'static/llms.txt';
 const original = fs.readFileSync(file, 'utf8');
-const pattern = /Current Server release: v\d+\.\d+\.\d+\.beta\./g;
+const pattern = /Current Server release: v\d+\.\d+\.\d+(?:\.beta)?\./g;
 if ([...original.matchAll(pattern)].length !== 1) {
   throw new Error('llms.txt must have exactly one current Server release marker');
 }

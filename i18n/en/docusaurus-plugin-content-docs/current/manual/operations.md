@@ -2,7 +2,7 @@
 title: "Operations Pages"
 description: "Guide to xAgent Approvals, Triggers, Agents, Skills, Tools, MCP, Plugin Connections, A2A, and environment variables."
 status: experimental
-updated: 2026-10-03
+updated: 2026-10-19
 ---
 
 # Operations Pages
@@ -145,5 +145,7 @@ Environment variables hold credentials or ordinary configuration. Choose the app
 | Unencrypted | Ordinary text configuration readable on demand; not confidential storage |
 
 The encryption mode cannot be changed after creation. Provide a clear name, description, and usage notes. Names containing markers such as `KEY` or `TOKEN` require confirmation before saving an unencrypted value; this warning does not determine whether its contents are sensitive. Existing Secrets migrate to encrypted variables during upgrade.
+
+In `v0.1.0`, encrypted placeholders resolve only at permitted request-execution boundaries. Files, messages, and persisted content retain the placeholder rather than expanding the secret. See the [release notes](https://github.com/coffeehc/xagent-releases/releases/tag/v0.1.0). This boundary does not authorize sending credentials to additional destinations.
 
 Keep credentials out of prompts, Workspace files, and screenshots. These mode and access boundaries follow the [v0.0.22.beta release notes](https://github.com/coffeehc/xagent-releases/releases/tag/v0.0.22.beta); the older image does not show the new fields.

@@ -2,7 +2,7 @@
 title: "System Configuration Pages"
 description: "Page-by-page guidance and English UI examples for xAgent models, system settings, software license, and Agent roles."
 status: beta
-updated: 2026-10-03
+updated: 2026-10-19
 ---
 
 # System Configuration Pages
@@ -68,7 +68,7 @@ Archived Sessions do not consume Session capacity; restoring one checks availabl
 
 Licensing controls quantities rather than a feature whitelist. Available capabilities still depend on the version, configured models and connections, account permissions, and security policies. Capacity does not expand permissions in external systems.
 
-> The limits above describe current runtime capacity. The [EULA bundled with v0.0.22.beta](https://github.com/coffeehc/xagent-releases/releases/download/v0.0.22.beta/EULA.md) still contains older quota wording that differs from this page. This page does not replace the license agreement; contact the maintainer to clarify applicable license terms.
+> The limits above describe current runtime capacity. The [EULA bundled with v0.1.0](https://github.com/coffeehc/xagent-releases/releases/download/v0.1.0/EULA.md) still contains older quota wording that differs from this page. This page does not replace the license agreement; contact the maintainer to clarify applicable license terms.
 
 After an Enterprise certificate is installed, this page shows the device and license identifiers, customer, issue and expiry time, and licensed capacity. Use **Update license** to upload a replacement Enterprise license file.
 

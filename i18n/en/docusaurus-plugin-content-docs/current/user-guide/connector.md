@@ -2,7 +2,7 @@
 title: "AgentPlugins for IM, Databases, SSH, and Browsers"
 description: "Learn about AgentPlugin Connectors, Plugin Connections, bidirectional messaging, Database and SSH resources, and protocols."
 status: experimental
-updated: 2026-10-03
+updated: 2026-10-19
 ---
 
 # AgentPlugins for IM, Databases, SSH, and Browsers
@@ -30,7 +30,7 @@ Compared with MCP, a Connector focuses on external events, user connections, and
 
 ## Current AgentPlugin Versions {/* #current-agentplugin-versions */}
 
-The Server and AgentPlugins are released independently. The current Server is [v0.0.22.beta](https://github.com/coffeehc/xagent-releases/releases/tag/v0.0.22.beta), whose release did not change official AgentPlugins. The [public plugin catalog](https://downloads.xagent.xiagaogao.com/agentplugins/versions.json) lists:
+The Server and AgentPlugins are released independently. The current Server is [v0.1.0](https://github.com/coffeehc/xagent-releases/releases/tag/v0.1.0), whose release did not change official AgentPlugins. The [public plugin catalog](https://downloads.xagent.xiagaogao.com/agentplugins/versions.json) lists:
 
 | AgentPlugin | Version | Main use |
 | --- | --- | --- |
@@ -38,7 +38,7 @@ The Server and AgentPlugins are released independently. The current Server is [v
 | Telegram | `0.0.14` | Telegram Bot direct and group messages |
 | Feishu | `0.0.13` | Feishu direct messages and group @mentions in mainland China |
 | Database | `0.0.7` | Administrator-defined MySQL and PostgreSQL resources |
-| SSH | `0.0.10` | Administrator-defined SSH command and interactive-shell targets |
+| SSH | `0.0.11` | Administrator-defined SSH command and interactive-shell targets |
 | DingTalk | `0.0.2` | DingTalk messaging |
 
 Plugin artifacts are distributed under `https://downloads.xagent.xiagaogao.com/agentplugins/`. Use `--agent-plugins` in the installer; see [Start Installation](/docs/getting-started/install).

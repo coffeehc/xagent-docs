@@ -2,7 +2,7 @@
 title: "AgentPlugin：IM、数据库、SSH 与浏览器"
 description: "了解 AgentPlugin Connector 管理、插件连接、IM 双向消息、Database/SSH 资源与协议。"
 status: experimental
-updated: 2026-10-03
+updated: 2026-10-19
 ---
 
 # AgentPlugin：IM、数据库、SSH 与浏览器
@@ -30,7 +30,7 @@ AgentPlugin 是 xAgent 与外部系统之间的扩展协议。微信、Telegram�
 
 ## 当前 AgentPlugin 版本 {/* #当前-agentplugin-版本 */}
 
-Server 与 AgentPlugin 独立发布。当前 Server 为 [v0.0.22.beta](https://github.com/coffeehc/xagent-releases/releases/tag/v0.0.22.beta)，该次发布未更新官方 AgentPlugin；[公开插件版本目录](https://downloads.xagent.xiagaogao.com/agentplugins/versions.json)中的版本是：
+Server 与 AgentPlugin 独立发布。当前 Server 为 [v0.1.0](https://github.com/coffeehc/xagent-releases/releases/tag/v0.1.0)，该次发布未更新官方 AgentPlugin；[公开插件版本目录](https://downloads.xagent.xiagaogao.com/agentplugins/versions.json)中的版本是：
 
 | AgentPlugin | 版本 | 主要用途 |
 | --- | --- | --- |
@@ -38,7 +38,7 @@ Server 与 AgentPlugin 独立发布。当前 Server 为 [v0.0.22.beta](https://g
 | Telegram | `0.0.14` | Telegram Bot 私聊和群聊消息 |
 | Feishu | `0.0.13` | 国内飞书单聊和群聊 @ 机器人消息 |
 | Database | `0.0.7` | 管理员配置的 MySQL 和 PostgreSQL 资源 |
-| SSH | `0.0.10` | 管理员配置的 SSH 命令与交互式 shell 目标 |
+| SSH | `0.0.11` | 管理员配置的 SSH 命令与交互式 shell 目标 |
 | DingTalk | `0.0.2` | 钉钉消息接入 |
 
 插件制品位于 `https://downloads.xagent.xiagaogao.com/agentplugins/` 对应目录。安装器使用 `--agent-plugins` 选择安装项；步骤见[开始安装](/docs/getting-started/install)。

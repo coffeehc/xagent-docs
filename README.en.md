@@ -14,7 +14,7 @@ https://xagent.xiagaogao.com/en/docs/cooperation/idea/
 
 ## English Entry
 
-The English documentation now covers all 58 Chinese documentation routes. Start at the reading-path overview, then follow the path for your goal:
+The English documentation now covers all 59 Chinese documentation routes. Start at the reading-path overview, then follow the path for your goal:
 
 - Documentation overview: `/en/docs/manual/overview`
 - Site page: `/en/docs/getting-started/what-is-xagent`
@@ -54,6 +54,7 @@ npm run build
 Type check:
 
 ```bash
+node scripts/test-sync-release.mjs
 npm run typecheck
 ```
 

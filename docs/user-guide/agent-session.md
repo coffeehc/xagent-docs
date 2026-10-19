@@ -2,10 +2,12 @@
 title: "xAgent Agent 会话：提交任务、文件与审批"
 description: "学习在 xAgent Agent 会话中提交任务、上传材料、查看执行过程、处理审批、使用子 Agent 并持续调整任务。"
 status: stable
-updated: 2026-10-03
+updated: 2026-10-19
 ---
 
 # xAgent Agent 会话：提交任务、文件与审批
+
+Server `v0.1.0` 新增[虚拟团队](/docs/user-guide/virtual-teams)、共享业务目录、团队整体归档和长期未用会话自动归档。下文旧源码引用与截图保留原核对日期；本版团队操作请先阅读新指南。
 
 ## 适用对象 {/* #适用对象 */}
 

@@ -2,10 +2,12 @@
 title: "xAgent Agent Sessions: Submit Tasks, Files, and Approvals"
 description: "Learn how to submit tasks, upload materials, follow execution, handle approvals, use sub-agents, and continuously adjust work in an xAgent Agent Session."
 status: stable
-updated: 2026-10-03
+updated: 2026-10-19
 ---
 
 # xAgent Agent Sessions: Submit Tasks, Files, and Approvals
+
+Server `v0.1.0` adds [virtual teams](/docs/user-guide/virtual-teams), shared business directories, whole-team archiving, and automatic archiving of long-unused Sessions. The older source references and screenshots below retain their stated dates; use the new team guide for this release.
 
 ## Who This Is For {/* #who-this-is-for */}
 

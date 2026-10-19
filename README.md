@@ -75,13 +75,14 @@ Node version: 20
 - `docs/guides/`、`docs/deployment/`：专题说明、安全策略、部署与模型选择。
 - `docs/architecture/`、`docs/reference/`、`docs/attachments/`：实现边界、命令协议和历史技术参考。维护与扩展细节仍完整保留，不要求普通用户先读完这些材料。
 - `docs/faq/`：按问题现象查找答案与排错入口。
-- `i18n/en/docusaurus-plugin-content-docs/current/`：与中文 58 篇文档对应的完整英文版本。
+- `i18n/en/docusaurus-plugin-content-docs/current/`：与中文 59 篇文档对应的完整英文版本。
 
 只调整导航与阅读顺序，不搬动已发布文档 URL。版本说明须区分公开发布版本、较新的源码行为和用户实际部署版本；历史截图与旧协议示例保留并标明适用范围。
 
 提交前检查：
 
 ```bash
+node scripts/test-sync-release.mjs
 npm run typecheck
 npm run validate:docs
 npm run build

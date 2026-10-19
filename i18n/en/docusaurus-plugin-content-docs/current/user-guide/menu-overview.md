@@ -2,12 +2,14 @@
 title: "Feature and Menu Overview"
 description: "Find xAgent features across sessions, user settings, and the separate admin console, with earlier menu names and advanced-mode differences for migration."
 status: stable
-updated: 2026-10-01
+updated: 2026-10-19
 ---
 
 # Feature and Menu Overview
 
 For page-by-page paths, visibility, actions, and current English UI examples, use the [xAgent User Manual](/docs/manual/overview).
+
+Server `v0.1.0` adds [virtual teams](/docs/user-guide/virtual-teams), shared business directories, whole-team archiving, and automatic archiving of long-unused Sessions. The older source references and screenshots below retain their stated dates; use the new team guide for this release.
 
 ## Who This Is For {/* #who-this-is-for */}
 
