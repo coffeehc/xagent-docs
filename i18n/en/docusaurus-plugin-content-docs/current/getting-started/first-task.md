@@ -2,7 +2,7 @@
 title: "How to Complete Your First AI Agent Task with xAgent"
 description: "Learn how to describe a task, provide source material, confirm tool actions, and review generated results through a clear, verifiable xAgent example."
 status: stable
-updated: 2026-10-01
+updated: 2026-10-23
 ---
 
 # Complete Your First Task with xAgent
@@ -12,6 +12,72 @@ updated: 2026-10-01
 - Already have an xAgent account and service address? Sign in to the session surface; you do not need to install a server or create an Agent yourself.
 - No service yet? Ask an administrator to complete [installation and setup](/docs/getting-started/install) and model validation.
 - Prepare a small file without passwords, keys, or real sensitive information. The meeting case below is an exercise, not a claim of an executed business result.
+
+## First Success: A Source Brief with an Agent Team {/* #first-success-agent-team-brief */}
+
+Turn supplied facts into a checkable English brief: a researcher extracts the facts, an editor uses that report, and a manager checks the result. No web search, external connection, file upload, or extra Skill is needed. One person can lead this team.
+
+### Prerequisites and Cost {/* #team-prerequisites-and-cost */}
+
+Use an existing instance you are authorized to access. The [public demo](https://xagent.51apis.com) is an entry point to check, without guaranteed access, model availability or capacity; do not submit private material. Otherwise ask an administrator to follow the [installation guide](/docs/getting-started/install). No desktop client or browser extension is required for this exercise.
+
+The public Server release at this review date is `v0.1.1`; check your actual installed version. Configure a chat model that supports Tool calling using [model configuration](/docs/user-guide/model-config#test-the-connection). A successful connection test does not verify Tool calling; the actual assignments below provide a separate check.
+
+The Free edition currently allows one WorkGroup per deployment and 30 active, unarchived Sessions of all kinds. This exercise needs a manager and two member Sessions. Reuse an empty test team you own if capacity is occupied; do not archive other work to make space. See [edition limits](/docs/faq/common#what-is-the-difference-between-the-commercial-and-free-editions).
+
+Provider charges can include initialization, context sent on later calls and retries. The free binary does not include free model usage. Choose a model and spending limit you have approved, observe usage, and stop at your limit. A natural-language instruction is not a billing cap.
+
+### Create the Team and Submit the Goal {/* #create-the-team-and-submit-the-goal */}
+
+1. Choose **New team** (`新团队` in the Chinese UI), and name it `First success`.
+2. Set responsibilities to: `Coordinate one English source-to-brief exercise using only facts supplied in the goal. Wait for the goal. No publishing, external systems, recurring work, or unrelated sessions. Deliver once, then remain idle.`
+3. Open the manager session. Creation may automatically start a requirements review. If it keeps running without a concrete goal, use **Stop current execution** (`终止当前执行`), wait for the stop to finish, then submit the task. A ready team with one manager is configuration, not task completion.
+4. Confirm the selected model, then paste the complete task:
+
+```text
+Complete one bounded English source-to-brief exercise.
+Use ONLY these supplied facts:
+F1: Creating a team initializes a dedicated manager.
+F2: Concrete goals are supplied after creation; members are recruited as needed.
+F3: The owner can guide the manager and inspect member sessions.
+
+Recruit exactly two members: Researcher and Editor. Give each at most one assignment.
+Researcher: return a three-row table of Fact ID and supported fact, without adding claims.
+After receiving that report, Editor: write an English brief of at most 90 words
+using [F1], [F2], [F3], followed by one sentence stating that this exercise does
+not measure speed, cost, or unattended reliability.
+Manager: verify both member replies against F1-F3, return the final brief and a
+three-item acceptance checklist, then remain idle.
+
+Use only team coordination and status tools. Do not use files, shell, web,
+other sessions, external services, publishing, schedules, persistent plans,
+extra goals or archival. If blocked, report the blocker instead of retrying
+blindly. Do not claim completion until both member replies and the final
+text are inspectable.
+```
+
+These instructions do not replace Tool permissions or approval policies.
+
+### Inspect and Accept the Result {/* #inspect-and-accept-the-result */}
+
+- Open Researcher in the team tree. Verify the received assignment and actual three-row report against F1–F3. A send receipt alone is insufficient.
+- Open Editor. Verify that editing followed the research report, the brief contains all three fact references, and no extra capability claims were introduced.
+- Return to the manager. Compare the final brief with both replies; independently check the 90-word body limit, separate limitation sentence, and three acceptance checks. Confirm execution stops without another goal.
+
+All three checks must pass. Installation, team creation, “ready,” or a manager's promise does not count as first success. This staged exercise does not measure parallel speedup or unattended reliability.
+
+### Recover in the Same Team {/* #recover-in-the-same-team */}
+
+| Symptom | Next action |
+| --- | --- |
+| Model missing or connection fails | Check Provider type, model ID, Base URL, credentials and server reachability. Since `v0.1.1`, saving tests the connection, but a failed configuration can still be saved. |
+| Team/member creation fails | Check WorkGroup and Session capacity and account permissions; reuse an existing empty test team where appropriate. |
+| Manager idle while a member runs | Inspect the member's received assignment and report; do not recreate the team or resend the task blindly. |
+| Member error or invalid wait/reference | Keep the original assignment. Ask the manager to inspect existing reports and explain the blocker. An invalid reference does not prove the work never ran. |
+| Unexpected file, external action or extra goal | Stop the affected execution, inspect Tool records and actual effects, then give a narrow correction in the same manager session. Stopping does not undo completed effects. |
+| Incomplete result or wrong language | Request the missing result or English final delivery using the existing reports; record this as human intervention. |
+
+The [published field test](/blog/xagent-agent-teams-field-test) contains real screenshots, human corrections and failed references from a separate Chinese-language task. Do not combine its results with your run. For file delivery next, use the meeting exercise below and inspect the actual files.
 
 ## From Submission to Acceptance {/* #from-submission-to-acceptance */}
 

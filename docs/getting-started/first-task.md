@@ -2,7 +2,7 @@
 title: "如何使用 xAgent 完成第一个 AI Agent 任务"
 description: "通过一个目标明确、结果可验收的示例，学习如何向 xAgent 描述任务、上传材料、确认工具调用并查看生成结果。"
 status: stable
-updated: 2026-10-01
+updated: 2026-10-23
 ---
 
 # 使用 xAgent 完成第一个任务
@@ -12,6 +12,72 @@ updated: 2026-10-01
 - 已有 xAgent 账号和可用服务地址：直接登录会话界面，不需要自己安装服务器或创建智能体。
 - 还没有服务：请由管理员完成[安装与初始化](/docs/getting-started/install)及模型验证。
 - 准备一份不含密码、密钥或真实敏感资料的小文件。下面的会议案例是练习示例，不代表已经执行的业务结果。
+
+## 首次成功：用智能体团队整理材料 {/* #first-success-agent-team-brief */}
+
+把给定事实整理为可以核查的英文短文：研究成员提取事实，编辑成员使用研究回报，经理检查结果。无需联网搜索、外部连接、上传文件或额外 Skill，一个人也可以带领团队。
+
+### 前置条件与费用 {/* #team-prerequisites-and-cost */}
+
+使用已有且获得授权的实例。[公开演示入口](https://xagent.51apis.com)可供检查，但不保证始终开放、具有可用模型或剩余容量；不要提交私人材料。否则请管理员按[安装指南](/docs/getting-started/install)准备服务。本练习无需桌面客户端或浏览器扩展。
+
+本次复核的公开 Server 版本为 `v0.1.1`，请核对实际安装版本。按[模型配置](/docs/user-guide/model-config)准备支持 Tool calling 的聊天模型。连接测试成功不等于工具调用通过，下面的实际派工需要单独验收。
+
+Free 版当前整个部署允许 1 个 WorkGroup 和 30 个活跃、未归档会话；本练习需要经理及两名成员会话。容量已占用时，可复用自己拥有的空测试团队，不要为腾容量归档其他工作。参见[版本容量限制](/docs/faq/common)。
+
+模型服务可能对初始化、后续上下文和重试收费，免费二进制不包含免费模型用量。使用你已批准的模型和费用上限，观察用量并在达到上限时停止；自然语言要求不能作为账单硬上限。
+
+### 创建团队并提交目标 {/* #create-the-team-and-submit-the-goal */}
+
+1. 选择“新团队”，命名为 `First success`。
+2. 团队职责填写：`Coordinate one English source-to-brief exercise using only facts supplied in the goal. Wait for the goal. No publishing, external systems, recurring work, or unrelated sessions. Deliver once, then remain idle.`
+3. 打开经理会话。创建后可能自动启动需求梳理；若没有具体目标却持续执行，使用“终止当前执行”，等待停止完成后再提交任务。只有经理的“已就绪”团队仍属于配置状态。
+4. 确认所选模型，粘贴以下完整任务。保留英文便于复现英文交付：
+
+```text
+Complete one bounded English source-to-brief exercise.
+Use ONLY these supplied facts:
+F1: Creating a team initializes a dedicated manager.
+F2: Concrete goals are supplied after creation; members are recruited as needed.
+F3: The owner can guide the manager and inspect member sessions.
+
+Recruit exactly two members: Researcher and Editor. Give each at most one assignment.
+Researcher: return a three-row table of Fact ID and supported fact, without adding claims.
+After receiving that report, Editor: write an English brief of at most 90 words
+using [F1], [F2], [F3], followed by one sentence stating that this exercise does
+not measure speed, cost, or unattended reliability.
+Manager: verify both member replies against F1-F3, return the final brief and a
+three-item acceptance checklist, then remain idle.
+
+Use only team coordination and status tools. Do not use files, shell, web,
+other sessions, external services, publishing, schedules, persistent plans,
+extra goals or archival. If blocked, report the blocker instead of retrying
+blindly. Do not claim completion until both member replies and the final
+text are inspectable.
+```
+
+这些任务要求不能替代工具权限和审批策略。
+
+### 检查并验收结果 {/* #inspect-and-accept-the-result */}
+
+- 打开团队树中的 Researcher，核对实际收到的派工和三行回报是否与 F1–F3 一致；发送回执不足以证明完成。
+- 打开 Editor，检查编辑发生在研究回报之后，短文包含三个事实标记，未增加产品能力声称。
+- 回到经理，比较最终短文与两份成员回报；自行检查正文不超过 90 个英文词、单独的限制说明和三项验收清单，确认交付后停止且未启动新目标。
+
+三项全部通过才算首次成功。安装、团队创建、“已就绪”或经理的承诺都不算。本练习不测量并行加速或无人值守可靠性。
+
+### 在原团队中恢复 {/* #recover-in-the-same-team */}
+
+| 现象 | 下一步 |
+| --- | --- |
+| 模型缺失或连接失败 | 检查 Provider 类型、模型 ID、Base URL、凭据和服务端网络。`v0.1.1` 保存时会测试连接，但测试失败的配置仍可保存。 |
+| 无法创建团队或成员 | 检查 WorkGroup、会话容量及账号权限；适用时复用已有空测试团队。 |
+| 经理空闲而成员仍在执行 | 查看成员实际收到的派工和回报，不要盲目重建团队或重发任务。 |
+| 成员报错或等待、引用无效 | 保留原派工，请经理检查已有回报并说明阻塞；引用无效不能证明原任务没有执行。 |
+| 意外文件、外部动作或额外目标 | 停止受影响的执行，核对工具记录和实际影响，再在原经理会话给出窄范围修正；停止不会撤销已完成的影响。 |
+| 结果不完整或语言不对 | 利用已有回报要求补齐结果或英文交付，并记录此次人工介入。 |
+
+[已发布实测](/blog/xagent-agent-teams-field-test)保留了另一项中文任务的真实截图、人工纠正和引用失败，不能与自己的结果合并统计。之后如需练习文件交付，可继续下方会议案例，核对实际文件。
 
 ## 从提交到验收 {/* #从提交到验收 */}
 

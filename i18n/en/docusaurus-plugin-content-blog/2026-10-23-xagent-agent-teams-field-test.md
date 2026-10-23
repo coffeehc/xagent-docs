@@ -139,6 +139,7 @@ This test does not measure speed, cost or success rate relative to a single Agen
 
 ## Further reading
 
+- [Try a bounded English source-to-brief task](/docs/getting-started/first-task#first-success-agent-team-brief): copy the supplied facts and prompt, inspect both member reports, and accept the actual final result. This is a separate exercise from the test above.
 - [Virtual teams: managers, members and archiving](/docs/user-guide/virtual-teams)
 - [How multiple Agents collaborate through session events](/docs/guides/multi-agent-session-event-collaboration)
 - [Agent sessions: tasks, work records and archiving](/docs/user-guide/agent-session)

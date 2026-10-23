@@ -138,6 +138,7 @@ Agent Harness（智能体运行体系）是更大的范围：工具调用、上�
 
 ## 继续阅读
 
+- [复现有明确边界的英文材料整理任务](/docs/getting-started/first-task#first-success-agent-team-brief)：复制给定事实与任务提示，核对两份成员回报及最终结果。这是与本文实测分开进行的练习。
 - [虚拟团队：经理、成员与归档](/docs/user-guide/virtual-teams)
 - [多 Agent 如何通过会话事件协作](/docs/guides/multi-agent-session-event-collaboration)
 - [Agent 会话：任务、工作记录与归档](/docs/user-guide/agent-session)
