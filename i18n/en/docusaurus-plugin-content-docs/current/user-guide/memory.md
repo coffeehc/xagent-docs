@@ -1,13 +1,13 @@
 ---
 title: "xAgent Long-Term Memory for Preferences and Decisions"
 description: "Learn explicit memory requests, My Memory management, and background history extraction, and distinguish cross-session facts from standing rules and task continuity."
-status: experimental
-updated: 2026-10-01
+status: stable
+updated: 2026-10-23
 ---
 
 # xAgent Long-Term Memory for Preferences and Decisions
 
-> Status: Experimental. Interfaces may change.
+> Long-term Memory is a standard feature enabled by default.
 
 ## Who This Is For {/* #who-this-is-for */}
 
@@ -17,7 +17,7 @@ This page is for users who want xAgent to retain stable preferences, confirmed d
 
 Long-term Memory reuses stable information across Sessions owned by the same user. The current implementation has three entry paths: explicit requests, direct user management, and background history extraction. It provides cross-Session background context, but it is not Session history, context compression, or an automatic archive of every conversation.
 
-This page was checked against main commit `43d2698` on 2026-10-01. Earlier experimental implementations provided explicit registration only. Background extraction and management depend on the deployed version; do not assume older instances behave the same way.
+This page was checked against main commit `68080b8` on 2026-10-23. The Memory service is enabled during SessionEngine, task orchestration and API service assembly. Check the deployed version for background extraction and management behavior; do not assume older instances behave the same way.
 
 ## When to Use It {/* #when-to-use-it */}
 

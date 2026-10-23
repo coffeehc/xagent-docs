@@ -29,7 +29,7 @@ xAgent is an **agentic platform for ongoing work**. Agentic capabilities are the
 | Skill | A reusable task method, constraints, and tool-use guidance; not an individual tool or an automatic grant of tool permissions |
 | Context Engineering | Organizing instructions, materials, history, and capability definitions for the current task; xAgent includes on-demand Skill and tool loading and context compaction |
 | Context Compaction | Reducing session history while retaining goals, constraints, progress, and key results for continued execution; not long-term memory, infinite context, or lossless retention |
-| Agent Memory / Long-term Memory | Experimental reuse of stable preferences, accepted decisions, and background across one user's sessions, checked against source evidence, time, and current facts; not storage of every conversation |
+| Agent Memory / Long-term Memory | A standard feature enabled by default that reuses stable preferences, accepted decisions, and background across one user's sessions, checked against source evidence, time, and current facts; not storage of every conversation |
 | Resumable Execution / Tasks | Continuing tasks after waiting or interruption using session state, recovery snapshots, and work artifacts; not a guarantee of exactly-once external actions |
 | Agent Teams | Multiple agents organized through dedicated managers, member session trees, role reuse, manager delegation, owner guidance, and shared materials; the product's Virtual Teams, not multi-user account administration |
 | Multi-agent Orchestration | Organization of agent roles, task delegation, and collaboration; xAgent executes through teams and sessions, while WorkGroup stores orchestration configuration. Publishing configuration is not task completion |

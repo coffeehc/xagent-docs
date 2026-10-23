@@ -66,7 +66,7 @@ This cycle of **model decision → tool execution → result feedback → next d
 | Capability | How it helps | Current boundary |
 | --- | --- | --- |
 | **Context Engineering** | Loads Skills and tools on demand and compacts context to retain goals, constraints, progress, and key results for long tasks | Compaction is neither infinite context nor guaranteed lossless retention; save important materials as files |
-| **Long-term Memory** | Reuses stable preferences, accepted decisions, and background across one user's sessions, with source evidence for review | Experimental; it does not save every conversation or replace live checks or fresh authorization |
+| **Long-term Memory** | Enabled by default; reuses stable preferences, accepted decisions, and background across one user's sessions, with source evidence for review | It does not save every conversation or replace live checks or fresh authorization |
 | **Resumable Tasks** | Uses session state, recovery snapshots, and work artifacts to continue after waiting or interruption | Recovery does not guarantee exactly-once execution of external actions; verify uncertain outcomes first |
 | **Agent Teams / Multi-agent Orchestration** | Organizes work through dedicated managers, role templates, member session trees, and manager delegation, with shared team materials | Check actual replies and artifacts; successful dispatch is not task completion or cross-user access authorization |
 | **Tool Calling / MCP / A2A** | Connects tools, external systems, and remote Agents, with Skills providing reusable methods | MCP connects tools; current A2A support is client-side; availability depends on configuration, version, and authorization |

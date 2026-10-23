@@ -415,8 +415,15 @@ for (const locale of ['', 'en/']) {
   if (!home?.$(`.xagent-home-agentic-grid a[href="/${locale}docs/user-guide/virtual-teams"]`).length) {
     errors.push(`/${locale}: core Agent Teams card must link to the team guide`);
   }
-  const memoryLabel = locale ? 'Long-term Memory (experimental)' : '长期记忆（实验性）';
-  if (!home?.text.includes(memoryLabel)) errors.push(`/${locale}: memory must be labeled experimental`);
+  const memoryCardText = home?.$(`.xagent-home-agentic-grid a[href="/${locale}docs/user-guide/memory"]`).text() ?? '';
+  const defaultMemoryDescription = locale ? 'Long-term memory is enabled by default.' : '默认开启长期记忆';
+  if (!memoryCardText.includes(defaultMemoryDescription)) {
+    errors.push(`/${locale}: memory card must state that long-term memory is enabled by default`);
+  }
+  const obsoleteMemoryLabel = locale ? 'Long-term Memory (experimental)' : '长期记忆（实验性）';
+  if (memoryCardText.includes(obsoleteMemoryLabel)) {
+    errors.push(`/${locale}: memory card must not label long-term memory experimental`);
+  }
   if (home?.$('.xagent-home-agentic-grid > a').length !== 4) {
     errors.push(`/${locale}: expected four core Agentic capability cards`);
   }

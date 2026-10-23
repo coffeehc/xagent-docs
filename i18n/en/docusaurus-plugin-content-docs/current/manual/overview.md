@@ -14,7 +14,7 @@ Start with the work you want to do; you do not need to read every concept first.
 
 <DocsJourney />
 
-For the core AI concepts, start with [Agentic Loop and capabilities](/docs/getting-started/what-is-xagent), [context engineering and on-demand loading](/docs/guides/ai-agent-dynamic-tool-discovery), [resumable tasks](/docs/guides/long-running-agent-task), [long-term memory (experimental)](/docs/user-guide/memory), and [multi-agent collaboration](/docs/guides/multi-agent-session-event-collaboration). Instructions retain product menu names so you can find the corresponding controls.
+For the core AI concepts, start with [Agentic Loop and capabilities](/docs/getting-started/what-is-xagent), [context engineering and on-demand loading](/docs/guides/ai-agent-dynamic-tool-discovery), [resumable tasks](/docs/guides/long-running-agent-task), [long-term memory](/docs/user-guide/memory), and [multi-agent collaboration](/docs/guides/multi-agent-session-event-collaboration). Instructions retain product menu names so you can find the corresponding controls.
 
 <div className="alert alert--info margin-bottom--lg" role="note">
 

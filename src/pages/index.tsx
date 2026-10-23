@@ -989,8 +989,8 @@ ${text("这是官网交互演示的预设示例，不是实际 AI 执行结果�
                 {
                   icon: "file",
                   terms: "Agent Memory · Long-term Memory",
-                  title: text("复用经验 · 长期记忆（实验性）", "Reuse experience · Long-term Memory (experimental)"),
-                  body: text("跨会话保留偏好、决策与经验，通过关键词检索找回相关记忆与产物，保留来源供复核。", "Retain preferences, decisions, and experience across sessions. Find relevant memories and artifacts with keyword search, keeping sources available for review."),
+                  title: text("复用经验 · 长期记忆", "Reuse experience · Long-term Memory"),
+                  body: text("默认开启长期记忆，跨会话保留偏好、决策与经验，通过关键词检索找回相关记忆与产物，保留来源供复核。", "Long-term memory is enabled by default. Retain preferences, decisions, and experience across sessions. Find relevant memories and artifacts with keyword search, keeping sources available for review."),
                   href: "/docs/user-guide/memory",
                 },
                 {
