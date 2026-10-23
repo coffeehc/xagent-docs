@@ -14,6 +14,8 @@ import DocsJourney from '@site/src/components/DocsJourney';
 
 <DocsJourney />
 
+如果你先想理解技术概念：从[Agentic Loop 与核心能力](/docs/getting-started/what-is-xagent)、[上下文工程与按需加载](/docs/guides/ai-agent-dynamic-tool-discovery)、[可恢复的长任务](/docs/guides/long-running-agent-task)、[长期记忆（实验性）](/docs/user-guide/memory)和[多智能体协作](/docs/guides/multi-agent-session-event-collaboration)开始。操作说明保留当前产品的菜单名称，方便对应界面。
+
 <div className="alert alert--info margin-bottom--lg" role="note">
 
 **版本与界面怎么对照**

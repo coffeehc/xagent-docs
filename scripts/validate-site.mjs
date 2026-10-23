@@ -408,6 +408,18 @@ for (const locale of ['', 'en/']) {
   if (!home?.$('footer a[href="https://www.reddit.com/r/xAgent/"]').length) {
     errors.push(`/${locale}: missing official Reddit community footer link`);
   }
+  // Keep the public capability vocabulary and real-demo evidence in both locales.
+  for (const term of ['Agentic', 'Agent Harness', 'Agentic Loop', 'Tool Calling', 'Context Engineering', 'Resumable Execution', 'Agent Memory', 'Observability', 'MCP', 'Skills', 'A2A Client', 'HITL']) {
+    if (!home?.text.includes(term)) errors.push(`/${locale}: missing core capability term ${term}`);
+  }
+  const memoryLabel = locale ? 'Long-term Memory (experimental)' : '长期记忆（实验性）';
+  if (!home?.text.includes(memoryLabel)) errors.push(`/${locale}: memory must be labeled experimental`);
+  if (home?.$('.xagent-home-agentic-grid > a').length !== 4) {
+    errors.push(`/${locale}: expected four core Agentic capability cards`);
+  }
+  if (!home?.$('a[href="/demo/launch/xagent-launch-demo.zip"]').length || !home?.$('#recorded-demo').length) {
+    errors.push(`/${locale}: real launch demo and evidence disclosure must remain available`);
+  }
   if (sitemapDates.get(`/${locale}`) !== contentDates.homepage.modified) {
     errors.push(`/${locale}: homepage lastmod must match its documented content revision`);
   }

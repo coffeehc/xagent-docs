@@ -2,7 +2,9 @@
 
 This repository contains the public user manual and contribution materials for xAgent.
 
-xAgent is a server-side, multi-user AI work portal designed for task completion. It is not a CLI project and not primarily a casual chat companion. Teams can prepare models, Skills, Tools, connectors, files, approval rules, and safety boundaries in one web-based system, so users can describe the task, provide materials, confirm sensitive actions, and receive results.
+xAgent is an agentic platform for ongoing work. Its core capabilities combine an Agentic Loop, context engineering, long-term memory, resumable tasks, multi-agent collaboration, and tool calling to progress work toward verifiable results. Individuals and teams use the same core capabilities. Private deployment, multi-user access, and centralized configuration are deployment and administration extensions rather than the product's core capabilities.
+
+The documentation starts with what users can accomplish, then explains the capabilities and their boundaries using familiar AI terminology. Long-term memory remains experimental; context compaction is not lossless retention, task recovery does not guarantee exactly-once external actions, and current A2A support is client-side. Free binary releases support product trials and evaluation, while implementation details and configuration are supporting references.
 
 ## Beta Notice
 

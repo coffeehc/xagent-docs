@@ -139,7 +139,7 @@ const sidebars: SidebarsConfig = {
         {
           type: "doc",
           id: "guides/multi-agent-session-event-collaboration",
-          label: label("多会话协作", "Multi-session Collaboration"),
+          label: label("多智能体协作（会话分工）", "Multi-agent Collaboration (Sessions)"),
         },
         {
           type: "doc",
@@ -257,7 +257,7 @@ const sidebars: SidebarsConfig = {
         {
           type: "doc",
           id: "guides/agent-approval-security",
-          label: label("审批与安全边界", "Approval and Safety Boundaries"),
+          label: label("人工介入与审批边界", "Human-in-the-loop and Approval Boundaries"),
         },
         {
           type: "doc",
@@ -280,7 +280,7 @@ const sidebars: SidebarsConfig = {
         {
           type: "doc",
           id: "manual/analytics",
-          label: label("统计分析页面", "Analytics Pages"),
+          label: label("可观测性 Observability 与统计分析", "Observability and Analytics"),
         },
         {
           type: "doc",
@@ -324,7 +324,7 @@ const sidebars: SidebarsConfig = {
         {
           type: "doc",
           id: "guides/ai-agent-dynamic-tool-discovery",
-          label: label("动态能力发现", "Dynamic Capability Discovery"),
+          label: label("上下文工程 Context Engineering", "Context Engineering: On-demand Capabilities"),
         },
         {
           type: "doc",

@@ -3015,3 +3015,16 @@
     transform: translateY(0) rotate(1deg);
   }
 }
+
+/* Agentic capability overview: keep explanatory copy readable in both locales. */
+.xagent-home-agentic-section { padding: 5rem 0; }
+.xagent-home-agentic-grid { display: grid; gap: 0 2rem; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.xagent-home-integrations { margin-top: 2rem; padding: 1.5rem; border: 1px solid var(--ifm-color-emphasis-300); border-radius: 1rem; }
+.xagent-home-integrations ul { margin-bottom: 0; padding-left: 1.25rem; }
+.xagent-home-integrations li + li { margin-top: .75rem; }
+@media (max-width: 700px) {
+  .xagent-home-agentic-grid { grid-template-columns: 1fr; }
+  .xagent-home-agentic-section { padding: 3rem 0; }
+}
+
+.xagent-home-capability-terms { grid-column: 2; margin: 0 0 .6rem; color: var(--ifm-color-emphasis-700); font-size: .75rem; line-height: 1.5; overflow-wrap: anywhere; }
