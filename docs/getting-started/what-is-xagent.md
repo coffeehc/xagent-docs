@@ -22,7 +22,7 @@ xAgent 是一个**面向持续工作的 Agentic 平台**。你提出目标、提
 
 Agentic 平台是产品定位，**Agent Harness** 是支撑 Agent 执行的运行体系：模型负责理解目标和决定下一步，模型之外的机制负责提供工具、组织上下文、保存进度、接续任务、协调子 Agent，并按配置引入人工审批和执行记录。它不只是提示词，也不等同于模型本身。
 
-在 xAgent 中，可以用 Agent Harness 理解下面这些能力的组合：Tool Calling、Context Engineering、Agent Memory、Resumable Execution、Multi-agent Collaboration、Human-in-the-loop 与 Observability。这里描述的是已有机制的职责分工，不代表符合某种统一认证标准，也不承诺任务必然完成。
+在 xAgent 中，可以用 Agent Harness 理解下面这些能力的组合：Tool Calling、Context Engineering、Agent Memory、Resumable Execution、Agent Teams / Multi-agent Orchestration、Multi-agent Collaboration、Human-in-the-loop 与 Observability。这里描述的是已有机制的职责分工，不代表符合某种统一认证标准，也不承诺任务必然完成。
 
 概念背景可参考 Anthropic 的 [Effective harnesses for long-running agents](https://www.anthropic.com/research/effective-harnesses-for-long-running-agents)。该文讨论长任务跨上下文持续推进的工程实践；xAgent 的实现和效果仍需按自身文档与实际任务验证，不代表使用同一架构或获得官方背书。
 
@@ -31,7 +31,7 @@ Agentic 平台是产品定位，**Agent Harness** 是支撑 Agent 执行的运�
 1. **让多步骤工作接着做**：研究、分析、写作和修改可以围绕同一目标分阶段推进，不必把每个步骤都当成新的问答。
 2. **在需要时补齐方法和工具**：Agent 按任务加载相关 Skills 和工具说明，让模型上下文优先留给当前材料、约束与执行结果。
 3. **复用经过确认的背景和方法**：长期记忆用于跨会话保留稳定信息；Skills 用于复用任务方法，两者分别管理，不把所有聊天都当成长期知识。
-4. **把复杂任务拆开协作**：主 Agent 可以把明确的子任务交给独立子 Agent，再结合回复、文件和执行记录核对结果。
+4. **组织 Agent 团队分工协作**：通过专用经理、成员会话树、岗位模板和经理委托组织复杂任务；成员独立执行，再结合共享资料、回复和产物核对结果。
 5. **保留人的检查与决策入口**：通过人工审批、任务状态和执行记录，检查正在做什么、哪些动作需要确认、最终交付是否满足要求。
 
 ## 它能帮你做什么 {/* #它能帮你做什么 */}
@@ -68,7 +68,7 @@ Agentic 平台是产品定位，**Agent Harness** 是支撑 Agent 执行的运�
 | **上下文工程（Context Engineering）** | 按需加载 Skills 和工具，结合上下文压缩，为长任务保留目标、约束、进度和关键结果 | 压缩不等于无限上下文，也不能保证无损保留每个细节；关键材料应保存为文件 |
 | **长期记忆（Long-term Memory）** | 在同一用户的多个会话间复用稳定偏好、已确认决策和背景，并结合来源证据核对 | 实验性能力；不等于保存所有聊天，也不能代替实时查询或新的操作授权 |
 | **可恢复的长任务（Resumable Tasks）** | 结合会话状态、恢复快照和工作产物，在等待或中断后接续任务 | 恢复不保证每次外部操作恰好执行一次；结果不确定时需要先核验 |
-| **多智能体协作（Multi-agent Collaboration）** | 将研究、分析或写作拆成独立子任务，各自维护上下文，再交换结果 | 需要核对具体回复和产物；派发成功不等于任务完成，也不自动获得跨用户访问权限 |
+| **智能体团队与多智能体编排（Agent Teams / Multi-agent Orchestration）** | 通过专用经理、岗位模板、成员会话树和经理委托组织分工，使用共享资料目录汇集成果 | 需要核对具体回复和产物；派发成功不等于任务完成，也不自动获得跨用户访问权限 |
 | **工具调用与开放协议（Tool Calling / MCP / A2A）** | 连接工具、外部系统和远端 Agent，用 Skills 组织可复用的方法 | MCP 提供工具接入；当前 A2A 是客户端能力；可用范围受配置、版本和授权限制 |
 | **人工审批与可观测性（Human-in-the-loop / Observability）** | 在需要时等待人工确认，通过状态、消息、工具结果和文件检查过程 | 审批依赖具体工具和策略覆盖，不是不可绕过的全局保证；执行记录也不等于完整评测平台 |
 
@@ -76,9 +76,11 @@ Agentic 平台是产品定位，**Agent Harness** 是支撑 Agent 执行的运�
 
 ## 多个智能体怎样分工 {/* #多个智能体怎样分工 */}
 
-主 Agent 承接你的目标，子 Agent 围绕明确的子任务独立执行。不同会话通过消息和文件引用协作，而不是把所有角色的历史混进一个上下文。是否完成，应检查各自的回复、交付物和执行记录。
+**Agent Teams（智能体团队）是多智能体编排的核心能力**，不是多用户账号管理。Server `v0.1.0` 已提供[虚拟团队](/docs/user-guide/virtual-teams)：专用经理、成员会话树、岗位模板复用、经理间委托、所有者指导和共享业务目录。个人用户也可以组织多个 Agent 为同一目标分工。
 
-`v0.1.0` 的[虚拟团队](/docs/user-guide/virtual-teams)提供专用经理、成员会话树、岗位模板复用、经理间委托和所有者指导入口，团队资料统一放在共享业务目录。它是多智能体协作的组织入口，不代表获得跨用户资料访问权限。
+经理组织任务与成员协作，你可以通过所有者指导入口补充方向，并检查成员聊天、回复和共享产物。团队解散会整体归档并保留成员关系；恢复资料与继续执行是不同操作，恢复后仍需明确续跑。团队不自动获得跨用户资料或外部系统权限。
+
+主 Agent 与子 Agent 分工仍是具体的执行机制之一：各会话独立维护上下文，通过消息和文件引用交换结果。团队编排与会话执行属于不同层次，团队成果仍应通过成员的实际回复和共享产物验收。
 
 会话协作、工作编排（WorkGroup）和远端 A2A 解决不同问题：会话执行任务，WorkGroup 保存角色与通信关系等编排配置，A2A 客户端连接外部 Agent 并跟踪远端任务。发布配置、提交消息和完成任务是不同状态。详见[多 Agent 协作](/docs/guides/multi-agent-session-event-collaboration)和[远端 A2A](/docs/user-guide/a2a)。
 

@@ -76,7 +76,7 @@ const sidebars: SidebarsConfig = {
         {
           type: "doc",
           id: "user-guide/virtual-teams",
-          label: label("虚拟团队", "Virtual Teams"),
+          label: label("智能体团队 Agent Teams（虚拟团队）", "Agent Teams (Virtual Teams)"),
         },
         {
           type: "doc",

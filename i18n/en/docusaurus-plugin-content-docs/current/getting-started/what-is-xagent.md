@@ -22,7 +22,7 @@ As of 2026-10-23, the latest public binary release is `v0.1.1`, published on 202
 
 An Agentic platform is the product; the **Agent Harness** is the runtime support around the model. The model interprets goals and decides the next step. Surrounding mechanisms provide tools, organize context, retain progress, resume tasks, coordinate child agents, and apply configured human review and execution records. A harness is more than a prompt and is not the model itself.
 
-In xAgent, this describes the combination of Tool Calling, Context Engineering, Agent Memory, Resumable Execution, Multi-agent Collaboration, Human-in-the-loop, and Observability. It maps existing mechanisms to their roles, not a certification standard or a promise that every task succeeds.
+In xAgent, this describes the combination of Tool Calling, Context Engineering, Agent Memory, Resumable Execution, Agent Teams / Multi-agent Orchestration, Multi-agent Collaboration, Human-in-the-loop, and Observability. It maps existing mechanisms to their roles, not a certification standard or a promise that every task succeeds.
 
 For conceptual background, see Anthropic’s [Effective harnesses for long-running agents](https://www.anthropic.com/research/effective-harnesses-for-long-running-agents), which discusses engineering practices for progress across context windows. Validate xAgent’s own implementation and outcomes against its documentation and real tasks; this reference does not imply the same architecture or an endorsement.
 
@@ -31,7 +31,7 @@ For conceptual background, see Anthropic’s [Effective harnesses for long-runni
 1. **Keep multi-step work moving:** Research, analysis, writing, and revision can progress toward the same goal without treating each step as a separate question.
 2. **Load methods and tools when needed:** The Agent loads relevant Skills and tool definitions on demand, leaving more context for current materials, constraints, and execution results.
 3. **Reuse confirmed context and methods:** Long-term memory retains stable information across sessions; Skills capture reusable methods. They are managed separately rather than treating every conversation as lasting knowledge.
-4. **Split complex work into focused tasks:** A parent Agent can delegate well-defined subtasks to independent child Agents, then inspect their replies, files, and execution records.
+4. **Organize agent teams around complex work:** Dedicated managers, member session trees, reusable roles, and manager delegation structure the work. Members execute independently; shared materials, replies, and artifacts support review.
 5. **Keep review and decisions accessible:** Human approval, task status, and execution records help you check what is happening, what needs confirmation, and whether the deliverable meets the goal.
 
 ## What can it do? {/* #what-can-it-do */}
@@ -68,7 +68,7 @@ This cycle of **model decision → tool execution → result feedback → next d
 | **Context Engineering** | Loads Skills and tools on demand and compacts context to retain goals, constraints, progress, and key results for long tasks | Compaction is neither infinite context nor guaranteed lossless retention; save important materials as files |
 | **Long-term Memory** | Reuses stable preferences, accepted decisions, and background across one user's sessions, with source evidence for review | Experimental; it does not save every conversation or replace live checks or fresh authorization |
 | **Resumable Tasks** | Uses session state, recovery snapshots, and work artifacts to continue after waiting or interruption | Recovery does not guarantee exactly-once execution of external actions; verify uncertain outcomes first |
-| **Multi-agent Collaboration** | Splits research, analysis, or writing into independent subtasks with separate contexts and exchanged results | Check actual replies and artifacts; successful dispatch is not task completion or cross-user access authorization |
+| **Agent Teams / Multi-agent Orchestration** | Organizes work through dedicated managers, role templates, member session trees, and manager delegation, with shared team materials | Check actual replies and artifacts; successful dispatch is not task completion or cross-user access authorization |
 | **Tool Calling / MCP / A2A** | Connects tools, external systems, and remote Agents, with Skills providing reusable methods | MCP connects tools; current A2A support is client-side; availability depends on configuration, version, and authorization |
 | **Human-in-the-loop / Observability** | Waits for human confirmation when needed and exposes status, messages, tool results, and files for review | Approval coverage depends on tools and policies, not an unbypassable global guarantee; execution records are not a full evaluation platform |
 
@@ -76,9 +76,11 @@ After completing a task, xAgent can also help organize, test, and refine a stabl
 
 ## How Multiple Agents Work Together {/* #how-multiple-agents-work-together */}
 
-The parent Agent takes your goal, while child Agents independently execute well-defined subtasks. Sessions collaborate through messages and file references instead of merging every role's history into one context. Check their replies, deliverables, and execution records to establish completion.
+**Agent Teams are a core multi-agent orchestration capability**, not multi-user account administration. Server `v0.1.0` introduced [virtual teams](/docs/user-guide/virtual-teams) with dedicated managers, member session trees, reusable role templates, delegation between managers, owner guidance, and shared team materials. An individual user can also organize multiple agents around one goal.
 
-In `v0.1.0`, [virtual teams](/docs/user-guide/virtual-teams) bring together a dedicated manager, member Session trees, reusable role templates, manager delegation, and owner guidance. Team materials use a shared business directory. This organizes multi-agent collaboration; it does not grant access to other users' data.
+Managers coordinate tasks and members. You can guide them through the owner interface and review member conversations, replies, and shared artifacts. Disbanding archives the whole team while retaining membership; restoring materials and resuming execution are distinct actions, and continuation must be explicit. Teams do not automatically gain access to other users' data or external systems.
+
+Parent-child delegation remains one execution mechanism: sessions keep independent contexts and exchange messages and file references. Team orchestration and session execution are distinct layers; verify team outcomes through actual member results and shared artifacts.
 
 Session collaboration, WorkGroup orchestration, and remote A2A address different needs: Sessions execute tasks, WorkGroup stores role and communication configuration, and the A2A client connects to external Agents and tracks remote tasks. Publishing configuration, submitting a message, and completing a task are distinct states. See [multi-Agent collaboration](/docs/guides/multi-agent-session-event-collaboration) and [remote A2A](/docs/user-guide/a2a).
 
