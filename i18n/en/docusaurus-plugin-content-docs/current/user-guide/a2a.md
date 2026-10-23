@@ -2,7 +2,7 @@
 title: "A2A Client and Remote Agents"
 description: "Discover remote Agent Cards, configure user-level connections, send or cancel tasks, and inspect the inbox."
 status: beta
-updated: 2026-10-01
+updated: 2026-10-23
 ---
 
 # A2A Client and Remote Agents
@@ -19,7 +19,7 @@ The persistence, unknown-outcome, and return-delivery behavior below was checked
 
 1. Add a remote Agent in the A2A page, enter its Agent Card address, discover the Card, and check its name and capabilities.
 2. Configure the remote service's API Key, Bearer, or existing OAuth bearer token as required and save the connection. Do not put credentials in Session messages or documentation.
-3. A callable remote Agent needs a working connection, valid authentication, and available Enterprise license capacity.
+3. A callable remote Agent needs a working connection, valid authentication, and available capacity under the current edition's license. The Free edition currently permits one remote A2A connection across the deployment; Enterprise capacity follows its license certificate.
 
 The client supports A2A v1 JSON-RPC and HTTP+JSON. Available actions depend on the remote Card and service implementation.
 

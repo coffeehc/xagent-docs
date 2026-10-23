@@ -2,7 +2,7 @@
 title: "A2A Client 与远端 Agent"
 description: "配置用户级远端 Agent，发现 Agent Card，发送、回复或取消任务并查看收件箱。"
 status: beta
-updated: 2026-10-01
+updated: 2026-10-23
 ---
 
 # A2A Client 与远端 Agent
@@ -19,7 +19,7 @@ updated: 2026-10-01
 
 1. 在 A2A 页面添加远端 Agent，填写对方提供的 Agent Card 地址，发起发现并检查 Card 的名称与能力。
 2. 根据远端服务要求配置 API Key、Bearer 或已有 OAuth bearer token，保存连接。凭据属于远端访问边界，不要粘贴到会话正文或文档中。
-3. 只有连接可用、认证正确且企业授权容量允许时，才能正常发起远端任务。
+3. 只有连接可用、认证正确且当前版本授权容量允许时，才能正常发起远端任务。Free 版当前整个部署允许 1 个远端 A2A 连接；Enterprise 版按许可证容量计数。
 
 支持 A2A v1 JSON-RPC 与 HTTP+JSON。具体可用能力以远端 Card 和对端实现为准。
 
