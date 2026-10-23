@@ -7,9 +7,9 @@ import type * as Preset from '@docusaurus/preset-classic';
 
 const siteUrl = 'https://xagent.xiagaogao.com';
 const zhDescription =
-  'xAgent 是可私有化部署的多用户 AI Agent 工作门户，能够理解任务变化，按需准备 Skill、Tool 与长期记忆，并通过项目化会话、连接器、隔离工作区和安全治理持续完成任务。';
+  'xAgent 是面向持续工作的 Agentic 平台，以 Agent Harness 组织 Agentic Loop、工具调用（Tool Calling）、上下文工程（Context Engineering）与多智能体协作交付可检查的结果。';
 const enDescription =
-  'xAgent is a self-hosted multi-user AI agent platform that adapts Skills, Tools, and memory to each task across projects, connectors, and governed workspaces.';
+  'xAgent is an Agentic platform for ongoing work, with an Agent Harness combining Agentic Loop, Tool Calling, Context Engineering, Agent Memory, and multi-agent collaboration.';
 const currentLocale = process.env.DOCUSAURUS_CURRENT_LOCALE ?? 'zh-CN';
 const isEnglish = currentLocale === 'en';
 const localeSiteUrl = isEnglish ? `${siteUrl}/en` : siteUrl;
@@ -233,7 +233,7 @@ const config: Config = {
     "to": "/#demo-title",
     "activeBaseRegex": "^/(en/)?$",
     "position": "left",
-    "label": "产品体验",
+    "label": "任务案例",
     "target": "_self"
   },
   {

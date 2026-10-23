@@ -23,8 +23,8 @@ const paths: JourneyPath[] = [
     route: '/docs/manual/workspace/',
   },
   {
-    zh: ['让任务走得更远', '长任务、会话协作、触发器与能力扩展', '了解会话协作'],
-    en: ['Build on your workflow', 'Long tasks, session handoffs, triggers, and extensions', 'Learn session collaboration'],
+    zh: ['让任务走得更远', '可恢复的长任务、多智能体协作与工具扩展', '了解多智能体协作'],
+    en: ['Build on your workflow', 'Resumable tasks, multi-agent collaboration, and tool extensions', 'Explore multi-agent collaboration'],
     route: '/docs/guides/multi-agent-session-event-collaboration/',
   },
   {

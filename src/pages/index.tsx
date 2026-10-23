@@ -62,7 +62,7 @@ const scenarios = {
         id: "launch",
         label: "产品首发包",
         icon: "notes",
-        headline: "一个首发包，两个子会话接力。",
+        headline: "一个首发包，两个 Agent 分工完成。",
         prompt:
           "根据三篇官方资料，准备可审阅的产品首发包。A 核对事实；B 制作离线页面与短文案；汇总后检查修订，不对外发布。",
         inputs: ["3 篇官方资料", "明确分工与交付要求"],
@@ -106,7 +106,7 @@ const scenarios = {
             body: "fact-check.md：按当次官方资料核对来源与限制，并区分文档机制和本轮实际观察。原件保留当时资料口径，仍需结合当前版本复核。",
           },
         ],
-        relatedLabel: "了解真实会话协作",
+        relatedLabel: "了解真实多智能体协作",
         relatedHref: "/docs/guides/multi-agent-session-event-collaboration",
       },
       {
@@ -217,7 +217,7 @@ const scenarios = {
         id: "launch",
         label: "Launch preparation",
         icon: "notes",
-        headline: "One launch kit. Two sessions working together.",
+        headline: "One launch kit. Two agents working together.",
         prompt:
           "Use three official sources to prepare a launch kit for review. A checks facts; B creates an offline page and short copy. Collect, inspect, and revise the files without publishing them.",
         inputs: ["3 official sources", "Defined roles and deliverables"],
@@ -465,11 +465,11 @@ function WorkflowTheater({ en }: { en: boolean }) {
       note: text("目标 + 材料 + 交付要求", "GOAL + SOURCES + OUTPUT"),
     },
     {
-      label: text("分工推进", "Delegate"),
+      label: text("多智能体协作", "Multi-agent collaboration"),
       title: text("把复杂，拆成几件事。", "Make complex work manageable."),
       body: text(
-        "在同一用户工作区内，将子任务交给独立会话。各自处理，再汇总结果。",
-        "Delegate subtasks to independent sessions within the same user workspace, then collect the results.",
+        "通过多智能体协作（Multi-agent Collaboration），主 Agent 将子任务交给同一用户下的独立子会话，再汇总结果。",
+        "Use multi-agent collaboration: a parent agent delegates to independent child sessions owned by the same user, then collects the results.",
       ),
       note: text(
         "独立会话 · 工具执行 · 结果汇总",
@@ -477,7 +477,7 @@ function WorkflowTheater({ en }: { en: boolean }) {
       ),
     },
     {
-      label: text("关键确认", "Review"),
+      label: text("人工确认", "Human review"),
       title: text(
         "该你把关时，停下来。",
         "Pause where your policy calls for it.",
@@ -643,7 +643,7 @@ function Home() {
     },
     gallery = [
       {
-        label: text("任务与会话", "Tasks & sessions"),
+        label: text("Agent 任务执行", "Agent execution"),
         image: "xagent-launch-session",
         title: text(
           "过程看得见，结果接得住。",
@@ -657,7 +657,7 @@ function Home() {
         icon: "branch",
       },
       {
-        label: text("可复用的助手", "Reusable agents"),
+        label: text("专用智能体", "Custom agents"),
         image: "xagent-agent-management",
         title: text(
           "好用的做法，下次接着用。",
@@ -671,7 +671,7 @@ function Home() {
         icon: "notes",
       },
       {
-        label: text("发现可用技能", "Discover available Skills"),
+        label: text("Skills 与工具发现", "Skills & tool discovery"),
         image: "xagent-skills",
         title: text(
           "需要什么能力，按任务来选。",
@@ -692,12 +692,12 @@ function Home() {
       `xAgent ${selectedGallery.label.toLowerCase()} in the current demo environment (Chinese UI)`,
     ),
     title = text(
-      "xAgent：把待办变成交付的 AI 工作门户",
-      "xAgent: Turn your to-do list into deliverables",
+      "xAgent：面向持续工作的 Agentic 平台",
+      "xAgent: An Agentic platform for ongoing work",
     ),
     description = text(
-      "xAgent 是可私有化部署的多用户智能体平台：按任务组合模型、技能与工具，用工作记录、跨轮等待和受控协作持续推进工作，留下可检查的交付。",
-      "xAgent is a self-hosted, multi-user agent platform. Combine models, Skills, and tools for each task, then use work records, cross-turn waits, and governed collaboration to deliver checkable results.",
+      "xAgent 是面向持续工作的 Agentic 平台，通过 Agentic Loop、Tool Calling、Context Engineering、Agent Memory 与多智能体协作，把目标推进到可检查的交付。",
+      "xAgent is an Agentic platform for ongoing work. Combine Agentic Loop, Tool Calling, Context Engineering, Agent Memory, and multi-agent collaboration to produce results you can review.",
     ),
     canonicalUrl = `${siteUrl}${en ? "/en" : ""}/`,
     demoMarkdown = `# ${scenario.documentTitle}
@@ -780,8 +780,8 @@ ${text("这是官网交互演示的预设示例，不是实际 AI 执行结果�
             <div className="xagent-home-hero-topline">
               <span className="xagent-home-live-dot" />
               {text(
-                "你的服务器，你的 AI 工作台",
-                "YOUR SERVER. YOUR AI WORKSPACE.",
+                "从目标出发，让 AI 持续工作",
+                "GOAL-DRIVEN AI. ONGOING WORK.",
               )}
               <a href={localize("/docs/changelog/")}>
                 {`v${productRelease.version} `}
@@ -790,21 +790,21 @@ ${text("这是官网交互演示的预设示例，不是实际 AI 执行结果�
             </div>
             <div className="xagent-home-hero-layout">
               <div className="xagent-home-hero-copy">
-                <p className={eyebrowClass}>{"FROM TO-DO TO DONE"}</p>
+                <p className={eyebrowClass}>{text("面向持续工作的 Agentic 平台", "AN AGENTIC PLATFORM FOR ONGOING WORK")}</p>
                 <Heading as="h1" id="hero-title" className="xagent-home-title">
-                  {text("把待办，", "From to-do.")}
+                  {text("让 AI，", "Let AI")}
                   <br />
-                  <span>{text("变成交付。", "To delivered.")}</span>
+                  <span>{text("持续工作。", "keep working.")}</span>
                 </Heading>
                 <p className="xagent-home-subtitle">
                   {text(
-                    "一个可私有化部署的多用户智能体平台。",
-                    "A self-hosted, multi-user agent platform.",
+                    "从目标出发，调用工具、协作执行，交付可检查的结果。",
+                    "Turn goals into results with tool use and collaborating agents.",
                   )}
                   <br />
                   {text(
-                    "按任务组合模型、技能与工具，让工作持续推进。",
-                    "Bring models, Skills, and tools together to keep work moving.",
+                    "保留工作上下文，在等待反馈后继续，而不止于一次回答。",
+                    "Keep context and resume after feedback, beyond a single answer.",
                   )}
                 </p>
                 <div className="xagent-home-actions">
@@ -822,8 +822,8 @@ ${text("这是官网交互演示的预设示例，不是实际 AI 执行结果�
                 </div>
                 <p className="xagent-home-hero-note">
                   {text(
-                    "可私有化部署 · 多用户工作区 · 按策略审批",
-                    "Self-hosted · Multi-user workspaces · Policy-based approvals",
+                    "Agentic Loop · 上下文工程 · 多智能体协作",
+                    "Agentic Loop · Context Engineering · Multi-agent Collaboration",
                   )}
                 </p>
               </div>
@@ -958,6 +958,63 @@ ${text("这是官网交互演示的预设示例，不是实际 AI 执行结果�
                   <strong>{s}</strong>
                 </div>
               ))}
+            </div>
+          </div>
+        </section>
+        <section className="xagent-home-agentic-section" aria-labelledby="agentic-title">
+          <div className={containerClass}>
+            <div className={sectionHeaderClass}>
+              <div>
+                <p className={eyebrowClass}>{text("从一次回答，到持续执行", "BEYOND A SINGLE RESPONSE")}</p>
+                <Heading as="h2" id="agentic-title">{text("Agent Harness：支撑持续执行", "Agent Harness: support for ongoing execution")}</Heading>
+              </div>
+              <p>{text("模型负责判断下一步，Agent Harness 运行体系连接工具、上下文、记忆、任务恢复、协作与人工审批，让执行有状态可接续、有结果可检查。", "The model decides what to do next. The Agent Harness connects tools, context, memory, task recovery, collaboration, and human review so work has state to resume and results to inspect.")}</p>
+            </div>
+            <div className="xagent-home-control-grid xagent-home-agentic-grid">
+              {[
+                {
+                  icon: "branch",
+                  terms: "Agentic Loop · Tool Calling",
+                  title: text("从目标到行动 · Agentic Loop", "From goals to actions · Agentic Loop"),
+                  body: text("模型根据任务选择工具，读取执行反馈，再决定下一步。结果是否完成，要看文件与实际执行证据，而不只看一条回复。", "The model chooses tools, reads execution feedback, and decides the next step. Completion is checked against files and execution evidence, not just a reply."),
+                  href: "/docs/user-guide/agent-session",
+                },
+                {
+                  icon: "notes",
+                  terms: "Context Engineering · Resumable Execution",
+                  title: text("保持任务连续 · 上下文工程", "Keep work in context · Context Engineering"),
+                  body: text("按需加载 Skills 与工具，结合上下文压缩和任务记录，支持长任务恢复，在等待反馈后继续处理。", "Load Skills and tools on demand. Context compaction and task records support resumable work and continuation after feedback."),
+                  href: "/docs/guides/long-running-agent-task",
+                },
+                {
+                  icon: "file",
+                  terms: "Agent Memory · Long-term Memory",
+                  title: text("复用经验 · 长期记忆（实验性）", "Reuse experience · Long-term Memory (experimental)"),
+                  body: text("跨会话保留偏好、决策与经验，通过关键词检索找回相关记忆与产物，保留来源供复核。", "Retain preferences, decisions, and experience across sessions. Find relevant memories and artifacts with keyword search, keeping sources available for review."),
+                  href: "/docs/user-guide/memory",
+                },
+                {
+                  icon: "shield",
+                  terms: "Multi-agent Collaboration · HITL",
+                  title: text("分工与把关 · 多智能体协作", "Delegate and review · Multi-agent Collaboration"),
+                  body: text("主 Agent 把任务交给独立子会话，汇总文件与结果。结合人工介入（HITL）和执行记录检查关键步骤；审批范围取决于实际策略与外部权限。", "A parent agent delegates to independent child sessions and collects their files and results. Human-in-the-loop (HITL) review and execution records support oversight; approval coverage depends on configured policies and external permissions."),
+                  href: "/docs/guides/multi-agent-session-event-collaboration",
+                },
+              ].map((item) => (
+                <a className="xagent-home-control-card" href={localize(item.href)} key={item.href}>
+                  <Icon name={item.icon} /><h3>{item.title}</h3><small className="xagent-home-capability-terms">{item.terms}</small><p>{item.body}</p>
+                  <span>{text("了解能力与边界", "Explore capabilities and limits")} <Icon name="arrow" /></span>
+                </a>
+              ))}
+            </div>
+            <div className="xagent-home-integrations">
+              <h3>{text("连接工具、方法与外部 Agent", "Connect tools, methods, and remote agents")}</h3>
+              <p>{text("三种扩展方式，各自承担不同角色。", "Three extensions, each with a distinct role.")}</p>
+              <ul>
+                <li><a href={localize("/docs/user-guide/tool")}>MCP</a>{text("：连接外部工具与服务，按已配置的权限调用。", ": connect external tools and services under configured permissions.")}</li>
+                <li><a href={localize("/docs/user-guide/skill")}>Skills</a>{text("：复用任务方法与操作规范，按需加载。", ": reuse task methods and operating instructions, loaded on demand.")}</li>
+                <li><a href={localize("/docs/user-guide/a2a")}>A2A Client</a>{text("：连接远端 Agent、跟踪任务并接收结果；不代表提供 A2A Server。", ": connect remote agents, track tasks, and receive results; this does not imply an A2A server.")}</li>
+              </ul>
             </div>
           </div>
         </section>
@@ -1408,16 +1465,17 @@ ${text("这是官网交互演示的预设示例，不是实际 AI 执行结果�
             <div className="xagent-home-control-intro">
               <p className={eyebrowClass}>
                 {text(
-                  "能力交给 AI，边界由你来定",
-                  "CAPABLE BY DESIGN. BOUNDED BY YOUR CHOICES.",
+                  "管理与部署扩展",
+                  "ADMINISTRATION AND DEPLOYMENT EXTENSIONS",
                 )}
               </p>
               <Heading as="h2" id="control-title">
                 {text(
-                  "放手做事，保留把关。",
-                  "Delegate the work. Keep a hand on the controls.",
+                  "为持续执行，配置管理边界。",
+                  "Configure the boundaries around execution.",
                 )}
               </Heading>
+              <p>{text("个人使用同样适用。先验证 Agent 能否完成你的工作；多用户管理与私有化部署承接额外的团队和数据管理需求，个人与团队都可以使用同样的核心执行能力。", "The same core capabilities serve individuals and teams. First test the agent on your work; multi-user administration and self-hosting address additional team and data-management needs.")}</p>
             </div>
             <div className="xagent-home-control-grid">
               {[
@@ -1433,8 +1491,8 @@ ${text("这是官网交互演示的预设示例，不是实际 AI 执行结果�
                 {
                   icon: "shield",
                   title: text(
-                    "关键动作，按策略确认",
-                    "Review actions under your policy",
+                    "人工介入 · Human-in-the-loop",
+                    "Human-in-the-loop",
                   ),
                   text: text(
                     "为发送、修改等操作设置审批规则。查看请求、允许或拒绝，让执行边界有据可查。",
@@ -1444,10 +1502,10 @@ ${text("这是官网交互演示的预设示例，不是实际 AI 执行结果�
                 },
                 {
                   icon: "chart",
-                  title: text("看看能力用在了哪里", "Understand usage"),
+                  title: text("运行可观测性 · Observability", "Observability"),
                   text: text(
-                    "查看个人模型、Token 与工具使用情况；管理员可查看更大范围的统计。",
-                    "Review personal model, token, and tool usage. Administrators can access broader usage statistics.",
+                    "查看执行记录、模型、Token 与工具使用情况，检查结果与成本。管理员可查看更大范围的统计。",
+                    "Inspect execution records, model, token, and tool usage to review results and costs. Admins can access broader statistics.",
                   ),
                   href: "/docs/manual/analytics",
                 },
@@ -1584,8 +1642,8 @@ ${text("这是官网交互演示的预设示例，不是实际 AI 执行结果�
                   [
                     text("周期任务怎样接着做？", "How does recurring work continue?"),
                     text(
-                      "xAgent 用工作记录保留阶段判断与过程条目，支持跨轮等待和外部结果接续。同一定时任务上一轮未结束时不会启动下一轮；归档会停止执行与相关调度，恢复后仍需明确续跑。操作步骤见使用手册。",
-                      "xAgent keeps assessments and incremental entries in work records, supports cross-turn waits, and continues from external results. A timer will not start its next round while the previous one is unfinished. Archiving stops execution and related schedules; restoring still requires an explicit resume action. See the manual for the workflow.",
+                      "xAgent 支持可恢复的长任务（Resumable Tasks）：记录阶段进展，等待反馈或外部结果后继续。同一定时任务上一轮未结束时不会启动下一轮；归档会停止执行与相关调度，恢复后仍需明确续跑。操作步骤见使用手册。",
+                      "xAgent supports resumable tasks: it records progress and continues after feedback or external results arrive. A timer will not start its next round while the previous one is unfinished. Archiving stops execution and related schedules; restoring still requires an explicit resume action. See the manual for the workflow.",
                     ),
                   ],
                   [

@@ -19,9 +19,9 @@
     "message": "Community",
     "description": "Navbar item with label 社区讨论"
   },
-  "item.label.产品体验": {
-    "message": "Product experience",
-    "description": "Navbar item with label 产品体验"
+  "item.label.任务案例": {
+    "message": "Task examples",
+    "description": "Navbar item with label 任务案例"
   },
   "item.label.更多资源": {
     "message": "Resources",
