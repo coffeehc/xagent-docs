@@ -2,7 +2,7 @@
 title: "xAgent Documentation Guide and User Manual"
 description: "Find a path through product basics, first use, everyday work, advanced workflows, deployment, and troubleshooting, with a full role and console-page index."
 status: beta
-updated: 2026-10-19
+updated: 2026-10-23
 schemaType: CollectionPage
 ---
 
@@ -18,7 +18,7 @@ Start with the work you want to do; you do not need to read every concept first.
 
 **Match the documentation to your version**
 
-The public binary release is now `v0.1.0` (2026-10-18). The additions in this revision follow the 0.1.0 release notes; older technical pages retain their own source-review dates. A documentation date does not establish that your deployment includes it. Run `xagent version` or check Software License, then consult the [Changelog](/docs/changelog). Actual pages, roles, installed tools, and external authorizations depend on your deployment.
+The public binary release is now `v0.1.1` (2026-10-23). Release additions follow the 0.1.0 and 0.1.1 release notes; older technical pages retain their own source-review dates. A documentation date does not establish that your deployment includes it. Run `xagent version` or check Software License, then consult the [Changelog](/docs/changelog). Actual pages, roles, installed tools, and external authorizations depend on your deployment.
 
 </div>
 

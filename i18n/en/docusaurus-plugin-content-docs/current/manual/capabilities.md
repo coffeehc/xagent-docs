@@ -2,14 +2,14 @@
 title: "Supported Agent Capabilities"
 description: "Choose xAgent capabilities by task, distinguish version inventories from deployed availability, and understand file upload, parsing, preview, and Word, Excel, and PowerPoint output boundaries."
 status: beta
-updated: 2026-10-19
+updated: 2026-10-23
 ---
 
 # Supported Agent Capabilities
 
 This page preserves the **54 built-in Skills** inventory from `v0.0.20.beta` for task lookup and version comparison. They are not isolated chatbots. They are reusable task methods that xAgent can discover and load dynamically. One task may combine several Skills and then use Tools, MCP, or AgentPlugins for file processing, computation, and external actions.
 
-The current public Server release is [v0.1.0](https://github.com/coffeehc/xagent-releases/releases/tag/v0.1.0). Since 0.0.21.beta, the public Skill catalog uses individual artifacts: each Skill has an immutable ZIP and `skill.json`, replacing the full public Skill bundle and old startup migration. The 54-item inventory below is a version-specific reference, not a fixed-count promise for newer deployments.
+The current public Server release is [v0.1.1](https://github.com/coffeehc/xagent-releases/releases/tag/v0.1.1). Since 0.0.21.beta, the public Skill catalog uses individual artifacts: each Skill has an immutable ZIP and `skill.json`, replacing the full public Skill bundle and old startup migration. The 54-item inventory below is a version-specific reference, not a fixed-count promise for newer deployments.
 
 Use **Operations → Skills** as the source for a specific deployment. Administrators can disable bundled Skills and add personal or shared Skills. Card counts also depend on installed sources and visibility, so they cannot establish the number bundled in a release.
 

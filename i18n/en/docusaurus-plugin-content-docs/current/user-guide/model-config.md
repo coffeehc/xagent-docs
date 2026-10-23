@@ -2,12 +2,14 @@
 title: "xAgent Model Configuration: Providers, Tool Calling, and Task Routing"
 description: "Learn about xAgent Provider integration, tool-calling capabilities, connection testing, hot switching, and the future direction of unified task routing."
 status: stable
-updated: 2026-10-01
+updated: 2026-10-23
 ---
 
 # xAgent Model Configuration: Providers, Tool Calling, and Task Routing
 
 > Version scope: current-field and behavior corrections below were checked against source `43d2698` on 2026-10-01. Older public binaries may differ; verify your installed version before following a changed UI or operation.
+
+Version 0.1.1 update: saving a model configuration automatically tests the connection and shows its result. New models default to a configurable 16K maximum output. Failed configurations can still be saved, but fix the connection before using them for tasks. If an existing model is missing from selection lists after upgrading, complete its connection test in model management. These changes follow the [official release notes](https://github.com/coffeehc/xagent-releases/releases/tag/v0.1.1); older field descriptions and screenshots below retain their original review scope.
 
 ## Who This Is For {/* #who-this-is-for */}
 
@@ -84,8 +86,8 @@ Vision input and image generation are different capabilities. A model’s abilit
 4. Select the Provider type.
 5. Enter the Base URL and API Key.
 6. Select the capabilities the model actually supports.
-7. Select **Test Connection**.
-8. Select **Create** after the test succeeds, or **Save current model** when editing an existing model.
+7. Review the parameters; optionally select **Test Connection** first.
+8. Select **Create** or **Save current model**. In `v0.1.1`, saving automatically tests the connection and displays the result. Failed configurations can still be saved; fix the connection before using them for tasks.
 
 Name models by their use case, such as “General Writing Model,” “Code and Tool Model,” or “Lightweight Fast Model.” Avoid internal abbreviations that ordinary users cannot understand.
 
@@ -93,7 +95,7 @@ Since `v0.0.18.beta`, OpenAI-compatible Providers can list upstream model candid
 
 ### Test the Connection {/* #test-the-connection */}
 
-Test before saving. If it fails, check:
+In `v0.1.1`, saving automatically tests the connection; you can also check it before saving. If it fails, check:
 
 - Whether the Base URL is correct.
 - Whether the API Key is valid.
@@ -102,7 +104,7 @@ Test before saving. If it fails, check:
 - Whether the current server can reach the model service.
 - Whether the request timeout is too short.
 
-Connection testing sends a request using the current draft. It does not mean the draft has been saved or every declared capability has been verified. After saving, test a normal chat, one controlled Tool call, and any required image/file input separately; test image generation separately as well.
+A manual connection test sends a request using the current draft; that action alone does not save it. Neither a manual test nor the test on save verifies every declared capability. After saving, test a normal chat, one controlled Tool call, and any required image/file input separately; test image generation separately as well.
 
 ### Configure Capability Switches {/* #configure-capability-switches */}
 

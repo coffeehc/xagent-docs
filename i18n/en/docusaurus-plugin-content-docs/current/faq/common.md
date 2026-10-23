@@ -2,7 +2,7 @@
 title: "Common Questions"
 description: "Answers to common questions about xAgent installation, usage, models, data safety, Skills, AgentPlugins, maintenance, and release status."
 status: stable
-updated: 2026-10-19
+updated: 2026-10-23
 schemaType: WebPage
 toc_max_heading_level: 2
 ---
@@ -59,7 +59,7 @@ No. The documentation site is a static manual.
 
 ### Is the current release stable? {/* #is-the-current-release-stable */}
 
-As of 2026-10-19, the latest public binary is `v0.1.0` (2026-10-18), still intended for evaluation, scenario validation, and feedback. Newer source behavior is dated where discussed; a public release, source snapshot, and deployed instance are not the same state.
+As of 2026-10-23, the latest public binary is `v0.1.1` (2026-10-23), still intended for evaluation, scenario validation, and feedback. Newer source behavior is dated where discussed; a public release, source snapshot, and deployed instance are not the same state.
 
 ### Must I create an Agent before starting? {/* #must-i-create-an-agent-before-starting */}
 
@@ -83,7 +83,7 @@ Not by default. xAgent can continuously optimize a specific Skill through prompt
 
 ### What does the free binary release mean? {/* #what-does-the-free-binary-release-mean */}
 
-The free binary release is currently the `v0.1.0` release, published on 2026-10-18, and serves as an entry point for understanding and evaluating xAgent. Users can deploy the standard version first and experience core capabilities such as Task submission, the file Workspace, Tools, Skills, and external connections.
+The free binary release is currently the `v0.1.1` release, published on 2026-10-23, and serves as an entry point for understanding and evaluating xAgent. Users can deploy the standard version first and experience core capabilities such as Task submission, the file Workspace, Tools, Skills, and external connections.
 
 A free binary release is not the same as an open-source release. xAgent will evaluate whether to open the source or expand ecosystem collaboration based on product maturity, community feedback, security boundaries, and commercial sustainability.
 
