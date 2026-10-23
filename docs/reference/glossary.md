@@ -31,6 +31,8 @@ xAgent 的产品定位是**面向持续工作的 Agentic 平台**。Agentic 能�
 | Context Compaction（上下文压缩） | 压缩当前会话历史，保留目标、约束、进度和关键结果以便继续执行；不等于长期记忆、无限上下文或无损保存 |
 | Agent Memory / Long-term Memory（长期记忆） | 在同一用户的多个会话间复用稳定偏好、已确认决策和背景的实验性能力；结合来源证据、时间与当前事实核对，不保存所有聊天 |
 | Resumable Execution / Tasks（可恢复执行 / 任务） | 结合会话状态、恢复快照和工作产物，在等待或中断后继续任务；不保证外部操作恰好执行一次 |
+| Agent Teams（智能体团队） | 通过专用经理、成员会话树、岗位复用、经理委托、所有者指导和共享资料组织多个 Agent；对应产品“虚拟团队”，不是多用户账号管理 |
+| Multi-agent Orchestration（多智能体编排） | 组织 Agent 角色、任务分工、委托与协作过程；xAgent 通过团队和会话机制执行，WorkGroup 保存编排配置，配置发布不等于任务完成 |
 | Multi-agent Collaboration（多智能体协作） | 多个独立 Agent 会话通过明确任务、消息和产物引用协作；包括主 Agent 与子 Agent 分工，不等于共享全部上下文或跨用户授权 |
 | MCP（Model Context Protocol） | 连接外部工具和能力的协议；工具能否使用仍取决于连接、配置和授权 |
 | A2A Client（Agent2Agent 客户端） | 在用户范围内连接远端 Agent、跟踪远端任务并接收结果；当前客户端能力不等于对外提供 A2A 服务端 |
@@ -51,7 +53,7 @@ xAgent 的产品定位是**面向持续工作的 Agentic 平台**。Agentic 能�
 | Runtime Assets | 由 xAgent 独立安装和校验、以只读方式提供给 ProcessSandbox 的执行依赖 |
 | Execution Lease | WorkspaceFileService 为一次进程执行提供的最小文件视图、重叠写入协调和文件变化提交能力 |
 | 触发器 | 把未来时间或外部事件转换成 Session 任务的机制 |
-| 虚拟团队 | Server 0.1.0 提供的专用经理、成员会话树、共享业务目录与整体归档能力 |
+| 虚拟团队 | Agent Teams 的产品名称；Server 0.1.0 提供专用经理、成员会话树、岗位复用、经理委托、所有者指导、共享业务目录与整体归档 |
 | WorkGroup（工作编排） | 已实现的智能体及通信关系编排配置，支持草稿与发布版本；实际任务由各 Session 执行 |
 | 工作记录（Work Record） | 会话范围的主题记录、修订与增量，用于核对连续性与阶段证据 |
 | Model Profile ID | 模型配置的稳定引用，区别于显示名和 Provider 的真实模型 ID |

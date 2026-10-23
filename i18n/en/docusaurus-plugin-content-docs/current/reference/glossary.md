@@ -31,6 +31,8 @@ xAgent is an **agentic platform for ongoing work**. Agentic capabilities are the
 | Context Compaction | Reducing session history while retaining goals, constraints, progress, and key results for continued execution; not long-term memory, infinite context, or lossless retention |
 | Agent Memory / Long-term Memory | Experimental reuse of stable preferences, accepted decisions, and background across one user's sessions, checked against source evidence, time, and current facts; not storage of every conversation |
 | Resumable Execution / Tasks | Continuing tasks after waiting or interruption using session state, recovery snapshots, and work artifacts; not a guarantee of exactly-once external actions |
+| Agent Teams | Multiple agents organized through dedicated managers, member session trees, role reuse, manager delegation, owner guidance, and shared materials; the product's Virtual Teams, not multi-user account administration |
+| Multi-agent Orchestration | Organization of agent roles, task delegation, and collaboration; xAgent executes through teams and sessions, while WorkGroup stores orchestration configuration. Publishing configuration is not task completion |
 | Multi-agent Collaboration | Independent Agent sessions collaborating through explicit tasks, messages, and artifact references, including parent-child delegation; not shared full context or cross-user authorization |
 | MCP (Model Context Protocol) | A protocol for connecting external tools and capabilities; usability still depends on connection state, configuration, and authorization |
 | A2A Client (Agent2Agent Client) | User-scoped connections to remote Agents, remote task tracking, and result delivery; current client support does not mean xAgent exposes an A2A server |
@@ -51,7 +53,7 @@ xAgent is an **agentic platform for ongoing work**. Agentic capabilities are the
 | Runtime Assets | Execution dependencies independently installed and verified by xAgent, then provided read-only to ProcessSandbox |
 | Execution Lease | The minimal file view, overlapping-write coordination, and file-change commit capability that WorkspaceFileService provides for one process execution |
 | Trigger | A mechanism that turns a future time or external event into a Session Task |
-| Virtual team | Server 0.1.0 team with a dedicated manager, member Session tree, shared business directory, and whole-team archiving |
+| Virtual team | Product name for Agent Teams; Server 0.1.0 provides dedicated managers, member session trees, role reuse, manager delegation, owner guidance, shared materials, and whole-team archiving |
 | WorkGroup | Implemented orchestration configuration for Agents and communication links, with drafts and published versions; Sessions execute the actual tasks |
 | Work Record | Session-scoped topic records, revisions, and deltas used to inspect continuity and evidence |
 | Model Profile ID | Stable reference to a model configuration; distinct from its display name or the Provider's model ID |

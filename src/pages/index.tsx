@@ -822,8 +822,8 @@ ${text("这是官网交互演示的预设示例，不是实际 AI 执行结果�
                 </div>
                 <p className="xagent-home-hero-note">
                   {text(
-                    "Agentic Loop · 上下文工程 · 多智能体协作",
-                    "Agentic Loop · Context Engineering · Multi-agent Collaboration",
+                    "Agentic Loop · 上下文工程 · Agent Teams",
+                    "Agentic Loop · Context Engineering · Agent Teams",
                   )}
                 </p>
               </div>
@@ -995,10 +995,10 @@ ${text("这是官网交互演示的预设示例，不是实际 AI 执行结果�
                 },
                 {
                   icon: "shield",
-                  terms: "Multi-agent Collaboration · HITL",
-                  title: text("分工与把关 · 多智能体协作", "Delegate and review · Multi-agent Collaboration"),
-                  body: text("主 Agent 把任务交给独立子会话，汇总文件与结果。结合人工介入（HITL）和执行记录检查关键步骤；审批范围取决于实际策略与外部权限。", "A parent agent delegates to independent child sessions and collects their files and results. Human-in-the-loop (HITL) review and execution records support oversight; approval coverage depends on configured policies and external permissions."),
-                  href: "/docs/guides/multi-agent-session-event-collaboration",
+                  terms: "Agent Teams · Multi-agent Orchestration",
+                  title: text("组织 Agent 团队，协同完成任务", "Organize agent teams around the work"),
+                  body: text("创建由专用经理组织的 Agent 团队，复用岗位模板、查看成员会话树，通过经理委托与共享资料目录推进协作。你可以指导经理、检查成员结果；团队协作不扩大原有权限。", "Create agent teams with dedicated managers, reusable role templates, and member session trees. Coordinate through manager delegation and shared team materials, with owner guidance and review of member results. Collaboration does not expand existing permissions."),
+                  href: "/docs/user-guide/virtual-teams",
                 },
               ].map((item) => (
                 <a className="xagent-home-control-card" href={localize(item.href)} key={item.href}>
@@ -1491,8 +1491,8 @@ ${text("这是官网交互演示的预设示例，不是实际 AI 执行结果�
                 {
                   icon: "shield",
                   title: text(
-                    "人工介入 · Human-in-the-loop",
-                    "Human-in-the-loop",
+                    "人工介入 · Human-in-the-loop（HITL）",
+                    "Human-in-the-loop (HITL)",
                   ),
                   text: text(
                     "为发送、修改等操作设置审批规则。查看请求、允许或拒绝，让执行边界有据可查。",
