@@ -6,7 +6,7 @@ xAgent is a server-side, multi-user AI work portal designed for task completion.
 
 ## Beta Notice
 
-xAgent's public beta release reviewed on 2026-10-01 is [`v0.0.21.beta`](https://github.com/coffeehc/xagent-releases/releases/tag/v0.0.21.beta). Newer source behavior and the version installed in a particular environment may differ. Features, built-in Skills, and documentation are still being refined.
+xAgent's current public release, verified on 2026-10-23, is [`v0.1.1`](https://github.com/coffeehc/xagent-releases/releases/tag/v0.1.1). Newer source behavior and the version installed in a particular environment may differ. Features, built-in Skills, and documentation are still being refined.
 
 If you find a problem, use the public feedback page:
 

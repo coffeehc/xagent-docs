@@ -3,13 +3,24 @@ title: "Changelog"
 description: "Review important user-facing changes, binary release contents, and upgrade notes for each xAgent release."
 image: "/img/share/en/xagent-overview.png"
 status: stable
-updated: 2026-10-19
+updated: 2026-10-23
 schemaType: CollectionPage
 ---
 
 # Changelog
 
-This page records important installation, usage, and safety-governance changes in xAgent binary releases. Version 0.1.0 is a formal release; verify the installed version and applicable scope for each deployment.
+This page records important installation, usage, and safety-governance changes in xAgent binary releases. Version 0.1.1 is a formal release; verify the installed version and applicable scope for each deployment.
+
+## `v0.1.1` - 2026-10-23 {/* #v011---2026-10-23 */}
+
+[GitHub Release and checksums](https://github.com/coffeehc/xagent-releases/releases/tag/v0.1.1) · [Model configuration](/docs/user-guide/model-config)
+
+- **Model configuration**: saving automatically tests the connection and displays the result. New models default to a 16K maximum output, which remains configurable. Failed configurations can still be saved; fix the connection before using them for tasks.
+- **Recovery and retries**: temporary network or model-service failures trigger a retry countdown with stop and continue controls. Session status after restart or continuation is corrected.
+- **Sessions and administration**: faster Session-list loading after login, smoother long Sessions, clearer approval results, and execution history for triggers.
+- **Interface fixes**: business-table data columns are resizable while action columns remain fixed. Card and icon backgrounds are unified; lingering notices, narrow-screen table overflow, and the scroll-to-bottom button are fixed.
+
+Back up configuration and data before upgrading. If an existing model disappears from selection lists, complete its connection test in model management. This release updates only the Server; desktop clients, independent AgentPlugins, and runtime assets retain their own versions.
 
 ## `v0.1.0` - 2026-10-18 {/* #v010---2026-10-18 */}
 
