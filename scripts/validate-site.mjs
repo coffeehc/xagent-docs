@@ -405,8 +405,8 @@ for (const locale of ['', 'en/']) {
     }
   }
   const home = pages.get(`/${locale}`);
-  if (!home?.$('footer a[href="https://www.reddit.com/r/xAgent/"]').length) {
-    errors.push(`/${locale}: missing official Reddit community footer link`);
+  if (home?.$('footer a[href="https://www.reddit.com/r/xAgent/"]').length) {
+    errors.push(`/${locale}: Reddit community link must not appear in the footer`);
   }
   // Keep the public capability vocabulary and real-demo evidence in both locales.
   for (const term of ['Agentic', 'Agent Harness', 'Agentic Loop', 'Tool Calling', 'Context Engineering', 'Resumable Execution', 'Agent Memory', 'Agent Teams', 'Multi-agent Orchestration', 'Observability', 'MCP', 'Skills', 'A2A Client', 'HITL']) {
