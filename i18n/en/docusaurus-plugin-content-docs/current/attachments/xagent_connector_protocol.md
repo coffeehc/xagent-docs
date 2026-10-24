@@ -1,12 +1,12 @@
 ---
-title: xAgent Connector Common Protocol
-description: Connection, authentication, channel, message, file transfer, Tool invocation, and error protocol for xAgent Connector Protocol 3.0.
+title: "Legacy: xAgent Connector Common Protocol"
+description: "Historical Connector reference, not the current AgentPlugin contract. Connection, authentication, channel, message, file transfer, Tool invocation, and error protocol for xAgent Connector Protocol 3.0."
 updated: 2026-10-01
 ---
 
 # xAgent Connector Common Protocol
 
-> Historical reference: this page documents the old Connector protocol `3.0`, not the AgentPlugin integration contract in `v0.0.20.beta`. The current public protocol is `4.4`; start with the [AgentPlugin guide](/docs/user-guide/connector#public-protocol-and-capabilities).
+> Historical reference: this page documents the old Connector protocol `3.0`, not the AgentPlugin integration contract for the current release. The current public protocol is `4.4`; start with the [AgentPlugin guide](/docs/user-guide/connector#public-protocol-and-capabilities).
 
 This document defines the xAgent Connector common protocol. Third-party Connector Server implementations should treat it as the wire contract.
 

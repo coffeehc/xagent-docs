@@ -1,6 +1,6 @@
 ---
-title: "xAgent Connector Architecture"
-description: "xAgent Connector 的架构边界、事实归属、生命周期、事件投递和工具投影设计。"
+title: "历史资料：xAgent Connector Architecture"
+description: "旧版 Connector 兼容性参考，不是当前 AgentPlugin 合同。xAgent Connector 的架构边界、事实归属、生命周期、事件投递和工具投影设计。"
 updated: 2026-10-01
 ---
 

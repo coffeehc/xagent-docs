@@ -1,6 +1,6 @@
 ---
-title: "xAgent IM Profile v2"
-description: "xAgent IM Profile v2 的双向消息、文件传输、文本增量、接收确认和活动状态规范。"
+title: "历史资料：xAgent IM Profile v2"
+description: "旧版 Connector 兼容性参考，不是当前 AgentPlugin 合同。xAgent IM Profile v2 的双向消息、文件传输、文本增量、接收确认和活动状态规范。"
 updated: 2026-10-01
 ---
 

@@ -2,7 +2,7 @@
 slug: xagent-agent-teams-field-test
 title: "From a Goal to an Agent Team: An xAgent Field Test"
 date: 2026-10-23
-updated: 2026-10-23
+updated: 2026-10-24
 description: "A real xAgent team-creation test, with screenshots of the manager, task scope, human intervention and observable results, separating configuration from execution."
 authors: [xagent]
 tags: [ai-agent, multi-agent, case-study]
@@ -14,6 +14,14 @@ Giving a goal to multiple Agents raises practical questions: who owns the goal, 
 On October 23, 2026, we created a separate demo team on the [xAgent demo site](https://xagent.51apis.com) for a small task using three product facts observed in this UI. This article keeps the real UI evidence and human interventions visible, separating team configuration, task execution and result verification.
 
 {/* truncate */}
+
+## Evidence at a glance
+
+- **Task and input:** turn three supplied UI facts into a short explanation, with a researcher, an editor, and a manager checking the result.
+- **Observed output:** a 117-character Chinese explanation and a manager's final text response; member replies and screenshots are included below.
+- **Human involvement and failures:** two interventions, a wait-reference failure, an out-of-scope file, and an invalid attachment reference are retained in the record.
+- **What was not measured:** parallel speedup, cost advantage, unattended success rate, and successful file-reference delivery.
+- **Try it yourself:** the [first-team brief exercise](/docs/getting-started/first-task#first-success-agent-team-brief) is a separate bounded practice task, not a replay of this run. Team operation details are in the [Virtual Teams guide](/docs/user-guide/virtual-teams).
 
 ## Agent Teams: multiple independent executors around one goal
 

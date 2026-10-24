@@ -1,6 +1,6 @@
 ---
-title: "xAgent Device Profile v1"
-description: "Device binding, capability declarations, operation boundaries, and media result delivery for xAgent Device Profile v1."
+title: "Legacy: xAgent Device Profile v1"
+description: "Historical Connector reference, not the current AgentPlugin contract. Device binding, capability declarations, operation boundaries, and media result delivery for xAgent Device Profile v1."
 updated: 2026-10-01
 ---
 

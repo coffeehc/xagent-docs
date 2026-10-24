@@ -2,7 +2,7 @@
 slug: xagent-agent-teams-field-test
 title: "从一个目标到一个 Agent 团队：xAgent Agent Teams 实测"
 date: 2026-10-23
-updated: 2026-10-23
+updated: 2026-10-24
 description: "在真实 xAgent 界面创建独立演示团队，记录经理、任务分工、人工介入与可核对结果，区分团队配置和实际执行。"
 authors: [xagent]
 tags: [ai-agent, multi-agent, case-study]
@@ -14,6 +14,14 @@ image: /img/manual/agent-teams-20261023/02-team-created.png
 2026 年 10 月 23 日，我们在 [xAgent 演示站](https://xagent.51apis.com) 新建了一个独立演示团队，用本次界面中观察到的三条产品事实做了一次小任务。本文保留真实界面和人工介入过程，把团队配置、任务执行和结果核对分开记录。
 
 {/* truncate */}
+
+## 证据摘要
+
+- **需求与输入：** 将三条给定的界面事实整理成短说明，由研究员、编辑和经理分工核对。
+- **实际交付：** 117 字符的中文说明及经理的最终文字回复；下文保留成员回报与截图。
+- **人工介入与失败：** 两次人工介入、等待引用失败、越界写文件和无效附件引用均保留在记录中。
+- **未测量：** 并行加速、成本优势、无人值守成功率，以及成功的文件引用交付。
+- **自己试一次：** [首次团队短文练习](/docs/getting-started/first-task#first-success-agent-team-brief)是独立的有边界练习，不是本次实测回放；团队操作见[虚拟团队手册](/docs/user-guide/virtual-teams)。
 
 ## Agent Teams：把一个目标分给多个独立执行者
 

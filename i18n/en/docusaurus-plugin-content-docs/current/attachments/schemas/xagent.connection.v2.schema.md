@@ -1,6 +1,6 @@
 ---
-title: "Connection Descriptor JSON Schema"
-description: "Complete JSON Schema for the xAgent Connection Descriptor xagent.connection/v2."
+title: "Legacy: Connection Descriptor JSON Schema"
+description: "Historical Connector reference, not the current AgentPlugin contract. Complete JSON Schema for the xAgent Connection Descriptor xagent.connection/v2."
 updated: 2026-10-01
 ---
 

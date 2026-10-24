@@ -1,6 +1,6 @@
 ---
-title: "Connector Card JSON Schema"
-description: "xAgent Connector Card xagent.connector/v1 的完整 JSON Schema。"
+title: "历史资料：Connector Card JSON Schema"
+description: "旧版 Connector 兼容性参考，不是当前 AgentPlugin 合同。xAgent Connector Card xagent.connector/v1 的完整 JSON Schema。"
 updated: 2026-10-01
 ---
 

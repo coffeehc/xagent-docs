@@ -3028,3 +3028,8 @@
 }
 
 .xagent-home-capability-terms { grid-column: 2; margin: 0 0 .6rem; color: var(--ifm-color-emphasis-700); font-size: .75rem; line-height: 1.5; overflow-wrap: anywhere; }
+
+/* Static case links remain available without interacting with the demo tabs. */
+.xagent-home-case-paths { margin: 3rem 0 2rem; }
+.xagent-home-case-paths > p { max-width: 76ch; color: var(--ifm-color-emphasis-700); }
+.xagent-home-case-paths h4 { grid-column: 2; font-size: 1.15rem; line-height: 1.5; }

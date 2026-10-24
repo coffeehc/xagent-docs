@@ -1,6 +1,6 @@
 ---
-title: xAgent Connector Architecture
-description: Architecture boundaries, fact ownership, lifecycle, event delivery, and Tool projection for xAgent Connectors.
+title: "Legacy: xAgent Connector Architecture"
+description: "Historical Connector reference, not the current AgentPlugin contract. Architecture boundaries, fact ownership, lifecycle, event delivery, and Tool projection for xAgent Connectors."
 updated: 2026-10-01
 ---
 

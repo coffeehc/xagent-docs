@@ -430,6 +430,33 @@ for (const locale of ['', 'en/']) {
   if (!home?.$('a[href="/demo/launch/xagent-launch-demo.zip"]').length || !home?.$('#recorded-demo').length) {
     errors.push(`/${locale}: real launch demo and evidence disclosure must remain available`);
   }
+  // Acquisition paths must be present in static HTML, not only in interactive tabs.
+  for (const route of ['blog/xagent-agent-teams-field-test/', 'blog/xagent-moltbook-continuous-operations/', 'docs/getting-started/first-task/#first-success-agent-team-brief']) {
+    if (!home?.$(`.xagent-home-case-paths a[href="/${locale}${route}"]`).length) {
+      errors.push(`/${locale}: missing static case-to-practice link ${route}`);
+    }
+  }
+  if (!home?.$(`.xagent-home-actions a[href="/${locale}docs/getting-started/first-task/#first-success-agent-team-brief"]`).length) {
+    errors.push(`/${locale}: the hero must offer a first task for users with an instance`);
+  }
+  const teamGuide = pages.get(`/${locale}docs/user-guide/virtual-teams/`);
+  for (const anchor of ['when-to-use-a-team', 'first-team-task', 'check-the-result', 'team-recovery']) {
+    if (!teamGuide?.$(`[id="${anchor}"]`).length) errors.push(`/${locale}docs/user-guide/virtual-teams/: missing practical section ${anchor}`);
+  }
+  for (const route of ['blog/xagent-agent-teams-field-test/', 'blog/xagent-moltbook-continuous-operations/']) {
+    const article = pages.get(`/${locale}${route}`);
+    if (!article?.$(`main a[href="/${locale}docs/getting-started/first-task/#first-success-agent-team-brief"]`).length) {
+      errors.push(`/${locale}${route}: missing bounded first-task next step`);
+    }
+  }
+  for (const page of pages.values()) {
+    if (page.route.startsWith(`/${locale}docs/attachments/`)) {
+      const marker = locale ? 'Legacy:' : '历史资料：';
+      if (!page.title.includes(marker)) errors.push(`${page.route}: historical contract title must identify legacy scope`);
+      const disclosure = locale ? 'not the current AgentPlugin contract' : '不是当前 AgentPlugin 合同';
+      if (!page.description.includes(disclosure)) errors.push(`${page.route}: historical contract description must distinguish current AgentPlugin`);
+    }
+  }
   if (sitemapDates.get(`/${locale}`) !== contentDates.homepage.modified) {
     errors.push(`/${locale}: homepage lastmod must match its documented content revision`);
   }

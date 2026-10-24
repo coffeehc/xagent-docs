@@ -1,6 +1,6 @@
 ---
-title: "xAgent IM Profile v1"
-description: "xAgent IM Profile v1 的旧版即时通讯能力、入站消息、投递语义和兼容边界规范。"
+title: "历史资料：xAgent IM Profile v1"
+description: "旧版 Connector 兼容性参考，不是当前 AgentPlugin 合同。xAgent IM Profile v1 的旧版即时通讯能力、入站消息、投递语义和兼容边界规范。"
 updated: 2026-10-01
 ---
 

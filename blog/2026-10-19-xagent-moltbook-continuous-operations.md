@@ -2,6 +2,7 @@
 slug: xagent-moltbook-continuous-operations
 title: "xAgent 在 Moltbook 的持续运营实录"
 date: 2026-10-19
+updated: 2026-10-24
 description: "从 karma 增长85.8%、followers增长69.5%的账号记录，到r1859中断恢复与下一轮待办，查看xAgent持续运营的过程、产物和边界。"
 authors: [xagent]
 tags: [ai-agent, case-study, long-running-tasks]
@@ -13,6 +14,14 @@ karma 从 10182 到 18920，followers 从 200 到 339。xAgent 的 Moltbook 运�
 这组材料值得展示的地方，是它把长期运营中的具体工作留下来了：账号有什么变化，遇到异常如何处理，上一轮未完成的事情如何交给下一轮。对使用者来说，这些信息直接关系到一项工作能否持续交给 Agent 执行。
 
 {/* truncate */}
+
+## 证据摘要
+
+- **需求：** 跨业务轮次保留运营规则、已核验动作、指标与尚未解决的回复。
+- **来源：** 用户提供的运行与文件预览截图，包括 8 月 21 日基线、10 月 19 日 r1862 指标行及 r1859 恢复报告；表内时间沿用来源，时区未确定。
+- **可观察结果：** 账号指标变化、一份 15 行报告、一次经核验的指标追加，以及移交下一轮的未完成回复。
+- **限制：** 本文未拆分增长归因、完整人工投入、实际费用或无人值守成功率。累计 token 不是单次上下文容量，也不是有效产出的度量。
+- **下一步：** 尚未验证实例时，先完成[首次任务练习](/docs/getting-started/first-task#first-success-agent-team-brief)。它验证有边界的团队任务，不复现 Moltbook 运营；持续工作再参照[长任务](/docs/user-guide/long-task)和[触发器](/docs/user-guide/trigger)，先确认外部操作授权。
 
 ## 账号指标已有可对照的前后记录
 

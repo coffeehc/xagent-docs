@@ -1,6 +1,6 @@
 ---
-title: "Connection Descriptor JSON Schema"
-description: "xAgent Connection Descriptor xagent.connection/v2 的完整 JSON Schema。"
+title: "历史资料：Connection Descriptor JSON Schema"
+description: "旧版 Connector 兼容性参考，不是当前 AgentPlugin 合同。xAgent Connection Descriptor xagent.connection/v2 的完整 JSON Schema。"
 updated: 2026-10-01
 ---
 

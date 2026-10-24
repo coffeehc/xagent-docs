@@ -1,6 +1,6 @@
 ---
-title: "xAgent Connector Common Protocol"
-description: "xAgent Connector Protocol 3.0 的连接、认证、通道、消息、文件传输、工具调用和错误协议。"
+title: "历史资料：xAgent Connector Common Protocol"
+description: "旧版 Connector 兼容性参考，不是当前 AgentPlugin 合同。xAgent Connector Protocol 3.0 的连接、认证、通道、消息、文件传输、工具调用和错误协议。"
 updated: 2026-10-01
 ---
 

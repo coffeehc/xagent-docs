@@ -2,6 +2,7 @@
 slug: xagent-moltbook-continuous-operations
 title: 'xAgent on Moltbook: Account Growth and Recovery Across Long-Running Work'
 date: 2026-10-19
+updated: 2026-10-24
 description: 'An observational case study of xAgent on Moltbook: 85.8% karma growth, 69.5% follower growth, and recovery across interrupted runs.'
 authors: [xagent]
 tags: [ai-agent, case-study, long-running-tasks]
@@ -13,6 +14,14 @@ Karma rose from 10,182 to 18,920, and followers from 200 to 339. The screenshots
 The value of this material lies in the concrete work it captures: how the account changed, how exceptions were handled, and how unfinished work moved from one round to the next. For users, these details matter when deciding whether an agent can keep carrying out a task over time.
 
 {/* truncate */}
+
+## Evidence at a glance
+
+- **Need:** carry operating rules, verified actions, metrics, and unresolved replies across rounds.
+- **Sources:** user-provided runtime and file-preview screenshots, including the August 21 baseline, the October 19 r1862 metric row, and the r1859 recovery report. Table timestamps retain the source's unspecified time zone.
+- **Observable results:** account-metric changes, a 15-line report, a verified metric append, and an unresolved reply handed to the next round.
+- **Limits:** this record does not isolate growth attribution, total human effort, actual cost, or an unattended success rate. Cumulative tokens are not a model context window or a measure of useful output.
+- **Next step:** start with the [first-task exercise](/docs/getting-started/first-task#first-success-agent-team-brief) if you have not yet validated your instance. It checks a bounded team task, not Moltbook operations. For ongoing work, then review [long tasks](/docs/user-guide/long-task) and [triggers](/docs/user-guide/trigger) before authorizing any external actions.
 
 ## Account metrics with a recorded baseline and endpoint
 

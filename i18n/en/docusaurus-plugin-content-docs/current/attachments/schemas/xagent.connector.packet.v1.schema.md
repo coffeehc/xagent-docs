@@ -1,6 +1,6 @@
 ---
-title: "Connector Packet JSON Schema"
-description: "Complete JSON Schema for the xAgent Connector Packet Envelope xagent.connector.packet/v1."
+title: "Legacy: Connector Packet JSON Schema"
+description: "Historical Connector reference, not the current AgentPlugin contract. Complete JSON Schema for the xAgent Connector Packet Envelope xagent.connector.packet/v1."
 updated: 2026-10-01
 ---
 

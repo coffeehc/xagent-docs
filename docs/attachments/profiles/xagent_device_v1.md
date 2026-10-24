@@ -1,6 +1,6 @@
 ---
-title: "xAgent Device Profile v1"
-description: "xAgent Device Profile v1 的设备绑定、能力声明、操作边界和媒体结果交付规范。"
+title: "历史资料：xAgent Device Profile v1"
+description: "旧版 Connector 兼容性参考，不是当前 AgentPlugin 合同。xAgent Device Profile v1 的设备绑定、能力声明、操作边界和媒体结果交付规范。"
 updated: 2026-10-01
 ---
 

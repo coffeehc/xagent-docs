@@ -154,8 +154,8 @@ const scenarios = {
             body: "把需要补充讨论的问题单独列出，作为下一次跟进的起点。",
           },
         ],
-        relatedLabel: "从第一个任务开始",
-        relatedHref: "/docs/getting-started/first-task",
+        relatedLabel: "练习提取会议待办",
+        relatedHref: "/docs/getting-started/first-task#完整案例整理会议记录",
       },
     ],
     en: [
@@ -312,8 +312,8 @@ const scenarios = {
             body: "Keep unresolved questions together as a starting point for the next follow-up.",
           },
         ],
-        relatedLabel: "Try your first task",
-        relatedHref: "/docs/getting-started/first-task",
+        relatedLabel: "Practice extracting meeting actions",
+        relatedHref: "/docs/getting-started/first-task#complete-example-organize-meeting-notes",
       },
     ],
   },
@@ -696,8 +696,8 @@ function Home() {
       "xAgent: An Agentic platform for ongoing work",
     ),
     description = text(
-      "xAgent 是面向持续工作的 Agentic 平台，通过 Agentic Loop、Tool Calling、Context Engineering、Agent Memory 与多智能体协作，把目标推进到可检查的交付。",
-      "xAgent is an Agentic platform for ongoing work. Combine Agentic Loop, Tool Calling, Context Engineering, Agent Memory, and multi-agent collaboration to produce results you can review.",
+      "xAgent 是面向持续工作的 Agentic 平台：组织 Agent 团队、调用工具并保留任务进展，把材料整理和多步骤工作推进到可检查的结果。查看真实案例，跟着教程完成首个任务。",
+      "Use xAgent to coordinate agent teams, call tools, and retain progress on multi-step work. Explore real results and follow a guide to your first task.",
     ),
     canonicalUrl = `${siteUrl}${en ? "/en" : ""}/`,
     demoMarkdown = `# ${scenario.documentTitle}
@@ -808,15 +808,15 @@ ${text("这是官网交互演示的预设示例，不是实际 AI 执行结果�
                   )}
                 </p>
                 <div className="xagent-home-actions">
-                  <a className={primaryClass} href="#demo">
-                    {text("看看它怎么做", "See it in action")}
+                  <a className={primaryClass} href={localize("/docs/getting-started/first-task/#first-success-agent-team-brief")}>
+                    {text("已有实例，完成第一个任务", "Have an instance? Try one task")}
                     <Icon name="arrow" />
                   </a>
                   <a
                     className="xagent-home-hero-secondary"
-                    href={localize("/docs/getting-started/install/")}
+                    href="#demo"
                   >
-                    {text("开始部署", "Start deploying")}{" "}
+                    {text("先看演示与真实案例", "See demos and real cases")}{" "}
                     <span aria-hidden="true">{"↗"}</span>
                   </a>
                 </div>
@@ -1343,6 +1343,32 @@ ${text("这是官网交互演示的预设示例，不是实际 AI 执行结果�
                 </div>
               </div>
             </details>
+            <div className="xagent-home-case-paths" aria-labelledby="case-paths-title">
+              <Heading as="h3" id="case-paths-title">
+                {text("从真实结果开始，再试自己的任务", "Start with real results, then try your own task")}
+              </Heading>
+              <p>{text("上面的首发包是独立子会话演示。下面两篇案例分别记录 Agent Teams 与持续运营，不混用运行数据。", "The launch kit above uses independent child sessions. These separate cases document Agent Teams and ongoing operations without mixing their run data.")}</p>
+              <div className="xagent-home-start-grid">
+                <a className="xagent-home-start-card" href={localize("/blog/xagent-agent-teams-field-test/")}>
+                  <span>01</span>
+                  <h4>{text("把给定事实整理成短说明", "Turn supplied facts into a short brief")}</h4>
+                  <p>{text("经理、研究员和编辑完成分阶段交接；保留实际结果、等待失败和两次人工介入。没有测量并行加速。", "A manager, researcher, and editor handed off work in stages. Inspect the output, a wait failure, and two human interventions. Parallel speedup was not measured.")}</p>
+                  <strong>{text("查看 Agent Teams 实测", "Read the Agent Teams field test")} <Icon name="arrow" /></strong>
+                </a>
+                <a className="xagent-home-start-card" href={localize("/blog/xagent-moltbook-continuous-operations/")}>
+                  <span>02</span>
+                  <h4>{text("让持续运营保留结果与待办", "Keep results and next steps across operating rounds")}</h4>
+                  <p>{text("查看账号指标记录、一次中断恢复和未完成事项移交。数据来自运行截图，不构成增长归因或成本收益证明。", "Inspect account records, an interrupted round's recovery, and an unfinished reply handed forward. Screenshot-based observations do not establish growth attribution or ROI.")}</p>
+                  <strong>{text("查看持续运营案例", "Read the ongoing-operations case")} <Icon name="arrow" /></strong>
+                </a>
+                <a className="xagent-home-start-card" href={localize("/docs/getting-started/first-task/#first-success-agent-team-brief")}>
+                  <span>03</span>
+                  <h4>{text("用非敏感材料验证第一次交付", "Verify your first result with non-sensitive input")}</h4>
+                  <p>{text("已有实例可直接跟着团队短文练习开始：使用给定事实、查看成员回复、核对经理汇总。练习与实测独立，不保证复现相同过程。", "On an authorized instance, try the team brief exercise: use supplied facts, inspect member replies, and check the manager's summary. This separate exercise does not guarantee the same execution path.")}</p>
+                  <strong>{text("开始首次任务教程", "Follow the first-task guide")} <Icon name="arrow" /></strong>
+                </a>
+              </div>
+            </div>
           </div>
         </section>
         <section
@@ -1566,7 +1592,7 @@ ${text("这是官网交互演示的预设示例，不是实际 AI 执行结果�
               {[
                 {
                   n: "01",
-                  title: text("准备运行环境", "Prepare the environment"),
+                  title: text("管理员：准备运行环境", "Admins: prepare the environment"),
                   body: text(
                     "安装服务端，接入可用模型，检查工作区与基础安全配置。",
                     "Install the server, connect a model, and check workspace and security settings.",
@@ -1576,13 +1602,13 @@ ${text("这是官网交互演示的预设示例，不是实际 AI 执行结果�
                 },
                 {
                   n: "02",
-                  title: text("完成第一个任务", "Complete one task"),
+                  title: text("已有实例：完成第一个任务", "Have an instance? Complete one task"),
                   body: text(
-                    "带上目标、材料和交付要求。从一份能检查的文件开始。",
-                    "Bring a clear goal, sources, and output requirements. Start with a file you can inspect.",
+                    "使用教程给定的三条事实，检查研究、编辑与经理的回复。无需上传文件。",
+                    "Use three supplied facts and inspect researcher, editor, and manager replies. No file upload is needed.",
                   ),
                   action: text("跟着示例开始", "First-task guide"),
-                  href: "/docs/getting-started/first-task/",
+                  href: "/docs/getting-started/first-task/#first-success-agent-team-brief",
                 },
                 {
                   n: "03",

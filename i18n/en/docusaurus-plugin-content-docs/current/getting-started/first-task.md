@@ -2,10 +2,17 @@
 title: "How to Complete Your First AI Agent Task with xAgent"
 description: "Learn how to describe a task, provide source material, confirm tool actions, and review generated results through a clear, verifiable xAgent example."
 status: stable
-updated: 2026-10-23
+updated: 2026-10-24
 ---
 
 # Complete Your First Task with xAgent
+
+## Choose an outcome {/* #choose-an-outcome */}
+
+- **Check team collaboration without files:** [turn three supplied facts into a short brief](#first-success-agent-team-brief), then inspect research, editing, and the manager's acceptance check.
+- **Extract meeting decisions and action items into files:** use the [fictional meeting-notes exercise](#complete-example-organize-meeting-notes) below to check Markdown and CSV outputs. The sample output is illustrative, not a recorded production result.
+
+The [Agent Teams field test](/blog/xagent-agent-teams-field-test) shows a separate observed run, including failures and human corrections. Use it to understand what to inspect, not as a guarantee of your exercise's outcome.
 
 ## Before You Start {/* #before-you-start */}
 
@@ -121,7 +128,7 @@ After submitting the task, watch for three things:
 
 If the result does not meet expectations, continue in the same page with requirements such as "keep the original wording," "add a risk column," or "save the result as CSV."
 
-## Complete Example: Organize Meeting Notes {/* #complete-example-organize-meeting-notes */}
+## Practice: Extract Meeting Decisions and Action Items {/* #complete-example-organize-meeting-notes */}
 
 ### Input {/* #input */}
 

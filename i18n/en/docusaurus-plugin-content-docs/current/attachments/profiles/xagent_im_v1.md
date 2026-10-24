@@ -1,6 +1,6 @@
 ---
-title: "xAgent IM Profile v1"
-description: "Legacy instant-messaging capabilities, inbound messages, delivery semantics, and compatibility boundaries for xAgent IM Profile v1."
+title: "Legacy: xAgent IM Profile v1"
+description: "Historical Connector reference, not the current AgentPlugin contract. Legacy instant-messaging capabilities, inbound messages, delivery semantics, and compatibility boundaries for xAgent IM Profile v1."
 updated: 2026-10-01
 ---
 
