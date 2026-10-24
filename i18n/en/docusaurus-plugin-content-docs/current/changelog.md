@@ -3,7 +3,7 @@ title: "Changelog"
 description: "Review important user-facing changes, binary release contents, and upgrade notes for each xAgent release."
 image: "/img/share/en/xagent-overview.png"
 status: stable
-updated: 2026-10-23
+updated: 2026-10-24
 schemaType: CollectionPage
 ---
 
@@ -13,12 +13,15 @@ This page records important installation, usage, and safety-governance changes i
 
 ## `v0.1.1` - 2026-10-23 {/* #v011---2026-10-23 */}
 
+This entry includes the October 23 republished build, which retains version `0.1.1`; it is not limited to the initial release.
+
 [GitHub Release and checksums](https://github.com/coffeehc/xagent-releases/releases/tag/v0.1.1) · [Model configuration](/docs/user-guide/model-config)
 
 - **Model configuration**: saving automatically tests the connection and displays the result. New models default to a 16K maximum output, which remains configurable. Failed configurations can still be saved; fix the connection before using them for tasks.
-- **Recovery and retries**: temporary network or model-service failures trigger a retry countdown with stop and continue controls. Session status after restart or continuation is corrected.
+- **Recovery and retries**: temporary network or model-service failures trigger a retry countdown that can be stopped and explicitly continued. Session status after restart, continuation, or waiting is corrected.
 - **Sessions and administration**: faster Session-list loading after login, smoother long Sessions, clearer approval results, and execution history for triggers.
 - **Interface fixes**: business-table data columns are resizable while action columns remain fixed. Card and icon backgrounds are unified; lingering notices, narrow-screen table overflow, and the scroll-to-bottom button are fixed.
+- **Republished-build fixes**: invalid model configurations no longer prevent service startup; theme colors are restored when accessing the service through a domain name.
 
 Back up configuration and data before upgrading. If an existing model disappears from selection lists, complete its connection test in model management. This release updates only the Server; desktop clients, independent AgentPlugins, and runtime assets retain their own versions.
 

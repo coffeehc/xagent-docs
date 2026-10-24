@@ -2,7 +2,7 @@
 title: "xAgent Triggers: Scheduled and Event-Driven Tasks"
 description: "Learn how to use xAgent Triggers to submit tasks on a schedule or in response to events, including creation, testing, enabling, and run-state checks."
 status: experimental
-updated: 2026-10-03
+updated: 2026-10-24
 ---
 
 # xAgent Triggers: Scheduled and Event-Driven Tasks
@@ -113,6 +113,18 @@ External Triggers have no next scheduled time. They submit a message only after 
 ### Disable a Trigger {/* #disable-a-trigger */}
 
 Disable a Trigger when it is no longer needed, its external connection is failing, its policy needs adjustment, or it might run repeatedly. Disabling is better than deleting when you only need to pause it temporarily.
+
+## View Execution History {/* #execution-history */}
+
+Server `v0.1.1` adds execution history. Find the target row in the trigger list and select **Execution history** (the clock-arrow icon) in its action column to open that trigger's records.
+
+1. Read records in reverse trigger-time order. Check the trigger source (scheduled, manual, or external), scheduling outcome, and reason. The next trigger time appears when available.
+2. Distinguish **Triggered**, **Deferred**, **Trigger error**, **Submitting**, **Unconfirmed**, and **Skipped**. Triggered does not mean business completion: inspect the target Session for messages, artifacts, and pending actions.
+3. Use previous/next pages to browse 20 records at a time. Select **Refresh** for the latest records; refreshing from a later page returns to the first page. Retry a failed read with Refresh rather than interpreting an error as an empty history.
+
+Only actual scheduling after the feature is enabled is recorded; older records are not backfilled. An empty history does not prove the trigger never ran before.
+
+This section was checked against source `6d7a85d`, the 0.1.1 republished build. Older sections retain their stated version scope.
 
 ## Recurring Tasks: Waiting and Completing a Run {/* #business-rounds */}
 

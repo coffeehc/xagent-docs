@@ -2,7 +2,7 @@
 title: "xAgent Agent Sessions: Submit Tasks, Files, and Approvals"
 description: "Learn how to submit tasks, upload materials, follow execution, handle approvals, use sub-agents, and continuously adjust work in an xAgent Agent Session."
 status: stable
-updated: 2026-10-19
+updated: 2026-10-24
 ---
 
 # xAgent Agent Sessions: Submit Tasks, Files, and Approvals
@@ -136,6 +136,17 @@ Several kinds of content may appear in a Session:
 | Failure notice | One step did not succeed | Add materials, authorize access, adjust the requirement, or retry based on the message |
 
 The top toolbar includes a **Show Tool Calls** switch. When it is off, completed Tool calls are hidden and the timeline is easier to read. Turn it on when troubleshooting or confirming what a particular step did.
+
+## Retry Countdown, Stop, and Continue {/* #retry-stop-continue */}
+
+Server `v0.1.1` shows an automatic retry wait for temporary network or model-service failures. Read the failure notice, remaining seconds, and visible round/attempt counts in the Session. The countdown means another attempt is pending, not that the task is complete or the external service will recover.
+
+1. You can wait for automatic retries without resending the original task.
+2. To stop, select the square button in the input area labeled **Stop current run**. It is available during retry waits too. Confirm the Session has left its running state before choosing the next step.
+3. Before resuming, check the model connection, last result, and whether external actions already took effect. Then send **Continue** in the **same Session**. This is a message, not a separate Continue button. Continuing starts another attempt; it does not establish that the previous action never happened.
+4. If retries are exhausted, task progress is retained. Resolve the failure before explicitly continuing. For persistent failures, ask an administrator to check model configuration rather than repeatedly resubmitting the task.
+
+This section was checked against the composer implementation and Session regression cases in source `6d7a85d`, the 0.1.1 republished build. The update also fixes status display after restart, continuation, or waiting; verify actual outcomes rather than relying on status alone.
 
 ## Input and Attachments {/* #input-and-attachments */}
 
