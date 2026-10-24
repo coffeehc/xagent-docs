@@ -152,3 +152,5 @@ This test does not measure speed, cost or success rate relative to a single Agen
 - [How multiple Agents collaborate through session events](/docs/guides/multi-agent-session-event-collaboration)
 - [Agent sessions: tasks, work records and archiving](/docs/user-guide/agent-session)
 - [Approval policies](/docs/user-guide/approval-policy)
+
+- [English editorial handoffs and factual acceptance](/blog/ai-agent-editorial-handoff-acceptance-test): a separate Writer–Reviewer test distinguishing workflow completion, word counts, and factual constraints.

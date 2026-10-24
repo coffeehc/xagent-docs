@@ -151,3 +151,5 @@ Agent Harness（智能体运行体系）是更大的范围：工具调用、上�
 - [多 Agent 如何通过会话事件协作](/docs/guides/multi-agent-session-event-collaboration)
 - [Agent 会话：任务、工作记录与归档](/docs/user-guide/agent-session)
 - [审批策略](/docs/user-guide/approval-policy)
+
+- [英文写作交接与事实验收实测](/blog/ai-agent-editorial-handoff-acceptance-test)：另一轮 Writer–Reviewer 任务，区分流程完成、词数核对与事实约束。
